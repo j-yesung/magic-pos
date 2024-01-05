@@ -1,3 +1,35 @@
+// {
+//   "extends": "next/core-web-vitals"
+// }
 {
-  "extends": "next/core-web-vitals"
+  "env": {
+    // 전역 객체를 eslint가 인식하게 해줍니다.
+    "browser": true, // 브라우저의 전역 객체를 사용하겠다는 의미입니다.
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended", // eslint에서 권장하는 규칙들을 사용하겠다는 의미입니다.
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "next/core-web-vitals" // next.js에서 권장하는 규칙들을 사용하겠다는 의미입니다.
+  ],
+  "parser": "@typescript-eslint/parser", // eslint가 typescript를 이해할 수 있게 해줍니다.
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true // eslint가 jsx를 이해할 수 있게 해줍니다.
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": ["react", "@typescript-eslint", "react-hooks"], // eslint가 사용할 플러그인을 설정합니다.
+  "rules": {
+    // 프로젝트의 규칙을 설정합니다.
+  },
+  "settings": {
+    "react": {
+      "version": "detect" // eslint가 react의 버전을 자동으로 인식하게 합니다.
+    }
+  }
 }
