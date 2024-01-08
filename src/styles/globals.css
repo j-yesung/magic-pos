@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --main-color: #5200ff;
+}
+
 html,
 body,
 div,
