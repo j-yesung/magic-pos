@@ -12,7 +12,7 @@ const Layout = (props: { children: ReactElement }) => {
       <Head>
         <title>MAGIC-POS : 주문</title>
       </Head>
-      <div className="mx-auto max-w-screen-md h-screen p-4 md:p-30">
+      <div className="mx-auto max-w-screen-md h-screen pt-5 pb-5">
         <div className="flex h-full">{props.children}</div>
       </div>
     </>
