@@ -1,5 +1,4 @@
-import { loginHandler, signUpHandler } from '@/pages/auth/supabase-api';
-import { loginHandler, logoutHandler, signUpHandler } from '@/pages/auth/supabase-api';
+import { loginHandler, logoutHandler, signUpHandler } from '@/pages/api/auth';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 
@@ -35,7 +34,6 @@ export const useAuth = () => {
     },
   });
 
-  return { signup: signupMutation.mutate, login: loginMutation.mutate };
   // 로그아웃
   const logoutMutation = useMutation({
     mutationFn: logoutHandler,
@@ -47,4 +45,6 @@ export const useAuth = () => {
       console.error(error);
     },
   });
+
+  return { signup: signupMutation.mutate, login: loginMutation.mutate, logout: logoutMutation.mutate };
 };
