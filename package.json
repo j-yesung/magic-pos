@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.39.2",
     "@tanstack/react-query": "^5.17.1",
     "@tanstack/react-query-devtools": "^5.17.1",
     "chart.js": "^4.4.1",
