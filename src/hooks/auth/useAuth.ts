@@ -1,10 +1,12 @@
 import { loginHandler, signUpHandler } from '@/pages/auth/supabase-api';
+import { loginHandler, logoutHandler, signUpHandler } from '@/pages/auth/supabase-api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 
 const enum QUERY_KEY {
   LOGIN = 'login',
   SIGNUP = 'signup',
+  LOGOUT = 'logout',
 }
 
 export const useAuth = () => {
@@ -34,4 +36,15 @@ export const useAuth = () => {
   });
 
   return { signup: signupMutation.mutate, login: loginMutation.mutate };
+  // 로그아웃
+  const logoutMutation = useMutation({
+    mutationFn: logoutHandler,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.LOGOUT] });
+      router.push('/');
+    },
+    onError: error => {
+      console.error(error);
+    },
+  });
 };

@@ -21,7 +21,6 @@ export const signUpHandler = async (values: values) => {
  * @param values 이메일, 비밀번호
  */
 export const loginHandler = async (values: values) => {
-  console.log('values: ', values);
   const { email, password } = values;
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
@@ -29,4 +28,9 @@ export const loginHandler = async (values: values) => {
   });
   if (error) throw error;
   return data;
+};
+
+export const logoutHandler = async () => {
+  const { error } = await supabase.auth.signOut();
+  if (error) throw error;
 };
