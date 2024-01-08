@@ -80,5 +80,5 @@
   display: flex;
   margin-top: 2rem;
   font-size: 0.8rem;
-  justify-content: end;
+  justify-content: flex-end;
 }
