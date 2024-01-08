@@ -10,7 +10,7 @@ import styles from './styles/Auth.module.css';
 const Form = () => {
   const path = useRouter().pathname;
   const { signup, login } = useAuth();
-  const { value, onChange } = useInput({
+  const { value, onChangeHandler } = useInput({
     email: '',
     password: '',
     passwordConfirm: '',
@@ -36,14 +36,20 @@ const Form = () => {
       </div>
       <div className={styles['form-wrapper']}>
         <form className={styles['form']}>
-          <Input name="email" value={value.email} onChange={onChange} type="text" placeholder="이메일" />
-          <Input name="password" value={value.password} onChange={onChange} type="password" placeholder="비밀번호" />
+          <Input name="email" value={value.email} onChangeHandler={onChangeHandler} type="text" placeholder="이메일" />
+          <Input
+            name="password"
+            value={value.password}
+            onChangeHandler={onChangeHandler}
+            type="password"
+            placeholder="비밀번호"
+          />
           {path === '/auth/signup' && (
             <>
               <Input
                 name="passwordCheck"
                 value={value.passwordCheck}
-                onChange={onChange}
+                onChangeHandler={onChangeHandler}
                 type="password"
                 placeholder="비밀번호 확인"
               />
@@ -51,7 +57,7 @@ const Form = () => {
                 <Input
                   name="businessNumber"
                   value={value.businessNumber}
-                  onChange={onChange}
+                  onChangeHandler={onChangeHandler}
                   minLength={11}
                   maxLength={11}
                   type="number"

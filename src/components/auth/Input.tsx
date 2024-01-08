@@ -1,24 +1,24 @@
 import styles from './styles/Auth.module.css';
 
-type InputProps = {
+interface InputProps {
   className?: string;
   name: string;
   value: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeHandler?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   minLength?: number;
   maxLength?: number;
   type: string;
   placeholder: string;
-};
+}
 
-const Input = ({ name, value, type, onChange, placeholder }: InputProps) => {
+const Input = ({ name, value, type, onChangeHandler, placeholder }: InputProps) => {
   return (
     <input
       className={styles['input']}
       type={type}
       name={name}
       value={value}
-      onChange={onChange}
+      onChange={onChangeHandler}
       placeholder={placeholder}
     />
   );
