@@ -1,15 +1,12 @@
 import React from 'react';
 import ButtonContainer from '@/components/order/step1/ButtonContainer';
-import { useSwiper } from 'swiper/react';
+import styles from './styles/step-one-container.module.css';
 
 const StepOneContainer = () => {
-  const swiper = useSwiper();
-
   return (
-    <div className="w-screen">
-      <h1 className="absolute top-1/4">포장 하시나요 드시고 가시나요?</h1>
+    <div className={styles.container}>
+      <h1>포장 하시나요 드시고 가시나요?</h1>
       <ButtonContainer />
-      <button onClick={() => swiper.slideNext()}>Slide to the next slide</button>
     </div>
   );
 };

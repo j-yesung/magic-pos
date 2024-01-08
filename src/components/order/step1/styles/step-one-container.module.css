@@ -1,0 +1,10 @@
+.container {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container h1 {
+    position: absolute;
+    top: 25%;
+}
