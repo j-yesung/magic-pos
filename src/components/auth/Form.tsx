@@ -1,6 +1,5 @@
 import { useAuth } from '@/hooks/auth/useAuth';
 import { useInput } from '@/hooks/auth/useInput';
-import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Button from './Button';
@@ -9,24 +8,13 @@ import styles from './styles/Auth.module.css';
 
 const Form = () => {
   const path = useRouter().pathname;
-  const { signup, login } = useAuth();
+  const { signup, login, businessNumberCheck } = useAuth();
   const { value, onChangeHandler } = useInput({
     email: '',
     password: '',
     passwordConfirm: '',
     businessNumber: '',
   });
-
-  const businessNumberCheckHandler = async () => {
-    const data = { value: value.businessNumber };
-
-    try {
-      const res = await axios.post('/api/auth', data);
-      return alert(res.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   return (
     <div className={styles['wrapper']}>
@@ -63,7 +51,11 @@ const Form = () => {
                   type="number"
                   placeholder="사업자등록번호 (11자리)"
                 />
-                <Button className={styles['auth-button']} type="button" onClick={businessNumberCheckHandler}>
+                <Button
+                  className={styles['auth-button']}
+                  type="button"
+                  onClick={() => businessNumberCheck(value.businessNumber)}
+                >
                   인증
                 </Button>
               </div>

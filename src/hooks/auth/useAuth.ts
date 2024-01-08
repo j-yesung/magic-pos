@@ -1,4 +1,4 @@
-import { loginHandler, logoutHandler, signUpHandler } from '@/pages/api/auth';
+import { businessNumberCheckHandler, loginHandler, logoutHandler, signUpHandler } from '@/pages/api/auth/auth';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 
@@ -6,6 +6,7 @@ const enum QUERY_KEY {
   LOGIN = 'login',
   SIGNUP = 'signup',
   LOGOUT = 'logout',
+  BUSINESS = 'business',
 }
 
 export const useAuth = () => {
@@ -34,7 +35,6 @@ export const useAuth = () => {
     },
   });
 
-  // 로그아웃
   const logoutMutation = useMutation({
     mutationFn: logoutHandler,
     onSuccess: () => {
@@ -46,5 +46,21 @@ export const useAuth = () => {
     },
   });
 
-  return { signup: signupMutation.mutate, login: loginMutation.mutate, logout: logoutMutation.mutate };
+  const businessNumberCheckMutation = useMutation({
+    mutationFn: businessNumberCheckHandler,
+    onSuccess: data => {
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.BUSINESS] });
+      alert(data);
+    },
+    onError: error => {
+      console.error(error);
+    },
+  });
+
+  return {
+    signup: signupMutation.mutate,
+    login: loginMutation.mutate,
+    logout: logoutMutation.mutate,
+    businessNumberCheck: businessNumberCheckMutation.mutate,
+  };
 };
