@@ -12,7 +12,7 @@ import Input from './Input';
  */
 const Form = () => {
   const path = useRouter().pathname;
-  const { signup } = useAuth();
+  const { signup, login } = useAuth();
   const { value, onChange } = useInput({
     email: '',
     password: '',
@@ -32,9 +32,13 @@ const Form = () => {
     }
   };
 
-  const signupHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const clickSignuUpHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     signup(value);
+  };
+  const clickLoginHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    login(value);
   };
 
   return (
@@ -74,7 +78,7 @@ const Form = () => {
         <div className="flex flex-col">
           {path === '/auth/signup' ? (
             <Fragment>
-              <Button type="submit" onClick={signupHandler}>
+              <Button type="submit" onClick={clickSignuUpHandler}>
                 회원가입
               </Button>
               <Link className="" href="/auth/login">
@@ -83,7 +87,9 @@ const Form = () => {
             </Fragment>
           ) : (
             <Fragment>
-              <Button type="button">로그인</Button>
+              <Button type="button" onClick={clickLoginHandler}>
+                로그인
+              </Button>
               <div className="flex justify-between text-xs text-center">
                 <Link href="#">비밀번호를 잊으셨나요?</Link>
                 <Link className="" href="/auth/signup">
