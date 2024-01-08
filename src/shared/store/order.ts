@@ -12,6 +12,7 @@ interface OrderState {
 }
 
 const useOrderStore = create<OrderState>()(set => ({
+  //  현재 주문 단계를 나타냅니다.
   step: 0,
   maxStep: 4,
   goNextStep: () => set(state => ({ step: Math.min(state.step + 1, state.maxStep) })),
