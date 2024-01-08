@@ -16,6 +16,9 @@ export default async function businessNumberCheck(req: NextApiRequest, res: Next
         },
       },
     );
-    return res.status(200).json(response.data);
+
+    return response.status === 200 && response.data.data[0].tax_type_cd === '01'
+      ? res.status(200).json('인증되었습니다.')
+      : res.status(200).json(response.data.data[0].tax_type);
   }
 }
