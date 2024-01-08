@@ -1,3 +1,5 @@
+import styles from './styles/Auth.module.css';
+
 type InputProps = {
   className?: string;
   name: string;
@@ -12,7 +14,7 @@ type InputProps = {
 const Input = ({ name, value, type, onChange, placeholder }: InputProps) => {
   return (
     <input
-      className="p-1 border-zinc-300 border-2 rounded-md outline-none focus:border-purple-500"
+      className={styles['input']}
       type={type}
       name={name}
       value={value}

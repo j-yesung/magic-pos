@@ -1,18 +1,16 @@
 import React from 'react';
+import styles from './styles/Auth.module.css';
 
-type BurrtonProps = {
+interface BurrtonProps {
   type: 'submit' | 'button';
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   children: React.ReactNode;
-};
+  className?: string;
+}
 
-const Button = ({ type, onClick, children }: BurrtonProps) => {
+const Button = ({ type, onClick, children, className }: BurrtonProps) => {
   return (
-    <button
-      className="p-3 mt-5 mb-5 rounded-md text-white bg-purple-500 hover:bg-purple-600"
-      type={type}
-      onClick={onClick}
-    >
+    <button className={`${styles['button']} ${className}`} type={type} onClick={onClick}>
       {children}
     </button>
   );

@@ -3,13 +3,10 @@ import { useInput } from '@/hooks/auth/useInput';
 import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Fragment } from 'react';
 import Button from './Button';
 import Input from './Input';
+import styles from './styles/Auth.module.css';
 
-/**
- * @description 유효성 검사해야 합니다.
- */
 const Form = () => {
   const path = useRouter().pathname;
   const { signup, login } = useAuth();
@@ -20,8 +17,7 @@ const Form = () => {
     businessNumber: '',
   });
 
-  const businessNumberCheckHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const businessNumberCheckHandler = async () => {
     const data = { value: value.businessNumber };
 
     try {
@@ -32,24 +28,18 @@ const Form = () => {
     }
   };
 
-  const clickSignuUpHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    signup(value);
-  };
-  const clickLoginHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    login(value);
-  };
-
   return (
-    <div className="flex justify-center items-center min-h-screen flex-col">
-      <h1 className="text-2xl font-bold mb-5">편리함의 시작, Magic Pos</h1>
-      <div className="p-6 w-1/4">
-        <form className="flex flex-col gap-5">
+    <div className={styles['wrapper']}>
+      <div className={styles['title-wrapper']}>
+        <h1 className={styles['title']}>편리함의 시작</h1>
+        <h2 className={styles['sub-title']}>Magic Pos</h2>
+      </div>
+      <div className={styles['form-wrapper']}>
+        <form className={styles['form']}>
           <Input name="email" value={value.email} onChange={onChange} type="text" placeholder="이메일" />
           <Input name="password" value={value.password} onChange={onChange} type="password" placeholder="비밀번호" />
           {path === '/auth/signup' && (
-            <Fragment>
+            <>
               <Input
                 name="passwordCheck"
                 value={value.passwordCheck}
@@ -57,7 +47,7 @@ const Form = () => {
                 type="password"
                 placeholder="비밀번호 확인"
               />
-              <div>
+              <div className={styles['business-number-wrapper']}>
                 <Input
                   name="businessNumber"
                   value={value.businessNumber}
@@ -67,36 +57,38 @@ const Form = () => {
                   type="number"
                   placeholder="사업자등록번호 (11자리)"
                 />
-                <Button type="button" onClick={businessNumberCheckHandler}>
+                <Button className={styles['auth-button']} type="button" onClick={businessNumberCheckHandler}>
                   인증
                 </Button>
               </div>
-            </Fragment>
+            </>
           )}
         </form>
 
-        <div className="flex flex-col">
+        <div className={styles['bottom-wrapper']}>
           {path === '/auth/signup' ? (
-            <Fragment>
-              <Button type="submit" onClick={clickSignuUpHandler}>
+            <>
+              <Button type="button" onClick={() => signup(value)}>
                 회원가입
               </Button>
-              <Link className="" href="/auth/login">
+              <Link className={styles['caption']} href="/auth/login">
                 로그인하러 가기
               </Link>
-            </Fragment>
+            </>
           ) : (
-            <Fragment>
-              <Button type="button" onClick={clickLoginHandler}>
+            <>
+              <Button type="button" onClick={() => login(value)}>
                 로그인
               </Button>
-              <div className="flex justify-between text-xs text-center">
-                <Link href="#">비밀번호를 잊으셨나요?</Link>
-                <Link className="" href="/auth/signup">
-                  회원가입하러 가기
+              <div className={styles['caption-wrapper']}>
+                <Link className={styles['caption']} href="#">
+                  비밀번호를 잊으셨나요?
+                </Link>
+                <Link className={styles['caption']} href="/auth/signup">
+                  회원가입하기
                 </Link>
               </div>
-            </Fragment>
+            </>
           )}
         </div>
       </div>
