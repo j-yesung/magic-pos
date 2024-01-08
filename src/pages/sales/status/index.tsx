@@ -1,5 +1,4 @@
-const statusPage = () => {
-  return <div>asdf</div>;
-};
+import Status from '@/components/sales/status/Status';
+const statusPage = () => <Status />;
 
 export default statusPage;
