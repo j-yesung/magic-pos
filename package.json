@@ -9,19 +9,35 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.17.1",
+    "@tanstack/react-query-devtools": "^5.17.1",
+    "chart.js": "^4.4.1",
+    "moment": "^2.30.1",
+    "nanoid": "^5.0.4",
     "next": "14.0.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-chartjs-2": "^5.2.0",
+    "react-dom": "^18",
+    "react-i18next": "^14.0.0",
+    "supabase": "1.127.4",
+    "swiper": "^11.0.5",
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "@typescript-eslint/parser": "^6.17.0",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
-    "eslint-config-next": "14.0.4",
+    "eslint-config-next": "13.4.8",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
-  }
+  },
+  "packageManager": "yarn@4.0.2"
 }
