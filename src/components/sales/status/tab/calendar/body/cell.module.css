@@ -2,6 +2,9 @@
   padding: 1rem;
 }
 
+/*
+month 관련 class css 입니다.
+*/
 .prev-month {
   background-color: #caad44;
 }
@@ -13,6 +16,10 @@
 .after-month {
   background-color: blue;
 }
+
+/*
+ date 관련 class css 입니다.
+*/
 .prev-date {
   opacity: 1;
 }
@@ -24,4 +31,20 @@
 
 .after-date {
   opacity: 0.4;
+}
+
+/*
+day 관련 class css 입니다.
+*/
+
+.saturaday {
+  color: blue;
+}
+
+.sunday {
+  color: red;
+}
+
+.day {
+  color: #fff;
 }

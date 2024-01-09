@@ -21,6 +21,16 @@ const Cell = ({ currentMonth }: { currentMonth: Moment }) => {
       },
     },
   });
+
+  const dayVariant = cva([styles['day-base']], {
+    variants: {
+      dayType: {
+        saturaday: styles['saturaday'],
+        sunday: styles['sunday'],
+        day: styles['day'],
+      },
+    },
+  });
   function getMonthType(Month: Moment) {
     const today = moment();
     return Month.isSame(today, 'M') ? 'current' : Month.isBefore(today, 'M') ? 'prev' : 'after';
@@ -30,11 +40,12 @@ const Cell = ({ currentMonth }: { currentMonth: Moment }) => {
     const today = moment();
     return day.isSame(today, 'D') ? 'current' : day.isBefore(today, 'D') ? 'prev' : 'after';
   }
+
   const row = [];
   let days = [];
   let day = startDay;
   let formatDate = '';
-
+  console.log(moment().clone().day());
   const today = moment(); // 유저의 현재 달입니다.
 
   while (day <= endDay) {
@@ -48,7 +59,13 @@ const Cell = ({ currentMonth }: { currentMonth: Moment }) => {
             dateType: getDateType(day),
           })}
         >
-          <span style={{ color: '#fff' }}>{day.isSame(today, 'D') ? 'today' : formatDate}</span>
+          <span
+            className={dayVariant({
+              dayType: day.day() === 6 ? 'saturaday' : day.day() === 0 ? 'sunday' : 'day',
+            })}
+          >
+            {day.isSame(today, 'D') ? 'today' : formatDate}
+          </span>
         </div>,
       );
       day = day.add(1, 'day').clone();
