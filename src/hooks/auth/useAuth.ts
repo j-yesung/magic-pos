@@ -1,4 +1,11 @@
-import { businessNumberCheckHandler, loginHandler, logoutHandler, signUpHandler } from '@/pages/api/auth/auth';
+import {
+  businessNumberCheckHandler,
+  loginHandler,
+  logoutHandler,
+  resetPasswordHandler,
+  signUpHandler,
+  updatePasswordHandler,
+} from '@/pages/api/auth/auth';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 
@@ -7,6 +14,7 @@ const enum QUERY_KEY {
   SIGNUP = 'signup',
   LOGOUT = 'logout',
   BUSINESS = 'business',
+  UPDATE_PASSWORD = 'updatePassword',
 }
 
 export const useAuth = () => {
@@ -57,10 +65,34 @@ export const useAuth = () => {
     },
   });
 
+  const sendResetPasswordEmailMutation = useMutation({
+    mutationFn: resetPasswordHandler,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.LOGIN] });
+      router.push('/auth/reset');
+    },
+    onError: error => {
+      console.error(error);
+    },
+  });
+
+  const updatePasswordMutation = useMutation({
+    mutationFn: updatePasswordHandler,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.UPDATE_PASSWORD] });
+      router.push('/');
+    },
+    onError: error => {
+      console.error(error);
+    },
+  });
+
   return {
     signup: signupMutation.mutate,
     login: loginMutation.mutate,
     logout: logoutMutation.mutate,
     businessNumberCheck: businessNumberCheckMutation.mutate,
+    updatePassword: updatePasswordMutation.mutate,
+    sendResetPasswordEmail: sendResetPasswordEmailMutation.mutate,
   };
 };
