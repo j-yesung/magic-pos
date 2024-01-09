@@ -341,7 +341,7 @@ export interface Database {
           is_disabled?: boolean | null;
           max_guest?: number | null;
           position?: number | null;
-          store_id: string;
+          store_id?: string;
         };
         Update: {
           id?: string;
@@ -447,6 +447,10 @@ export type Enums<
   : PublicEnumNameOrOptions extends keyof Database['public']['Enums']
   ? Database['public']['Enums'][PublicEnumNameOrOptions]
   : never;
+
+export interface StoreWithStoreTable extends Tables<'store'> {
+  store_table: Tables<'store_table'>[];
+}
 
 interface CategoryWithMenuItem extends Tables<'menu_category'> {
   menu_item: Tables<'menu_item'>[];

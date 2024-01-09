@@ -1,0 +1,22 @@
+.side-bar-button-box {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.side-bar-button {
+  width: 80%;
+  height: 25%;
+  border-radius: 0.5em;
+  background-color: #fff;
+  font-size: 1.4em;
+  transition: 0.2s;
+  margin: 3% 0;
+}
+
+.side-bar-button:hover {
+  background-color: #000;
+  color: #fff;
+}
