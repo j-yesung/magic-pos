@@ -12,7 +12,8 @@ const MenuCard = ({ menu }: MenuCardProps) => {
   const { MagicModal } = useModal();
 
   const handleClickCard = () => {
-    MagicModal.fire(<div>test</div>);
+    MagicModal.alert({ content: '안녕하세요' });
+    // MagicModal.fire(<div>test</div>);
   };
 
   return (
