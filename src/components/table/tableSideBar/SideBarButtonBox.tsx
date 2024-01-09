@@ -1,4 +1,4 @@
-import styles from "@/styles/SideBarButtonBox.module.css"
+import styles from "./styles/SideBarButtonBox.module.css"
 
 const SideBarButtonBox = () => {
   return (

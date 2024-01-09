@@ -1,7 +1,7 @@
 import useSetTable from "@/hooks/table/useSetTable";
-import styles from "@/styles/TableContainer.module.css";
 import { StoreWithStoreTable, Tables, TablesInsert } from "@/types/supabase";
 import TableListItem from "./TableListItem";
+import styles from "./styles/TableContainer.module.css";
 
 const TableContainer = ({ storeData }: { storeData?: StoreWithStoreTable[] }) => {
   const { addTableMutate } = useSetTable();

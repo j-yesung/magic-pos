@@ -1,6 +1,6 @@
-import styles from "@/styles/TableSideBar.module.css"
 import SideBarButtonBox from "./SideBarButtonBox"
 import SideBarContainer from "./SideBarContainer"
+import styles from "./styles/TableSideBar.module.css"
 
 const TableSideBar = () => {
   return (

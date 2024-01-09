@@ -1,5 +1,5 @@
-import styles from "@/styles/TableListItem.module.css";
 import { Tables } from "@/types/supabase";
+import styles from "./styles/TableListItem.module.css";
 
 const TableListItem = ({ storeTableData }: { storeTableData: Tables<'store_table'> }) => {
   return (
