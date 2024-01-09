@@ -1,27 +1,27 @@
-.dateBase {
+.date-base {
   padding: 1rem;
 }
 
-.prevMonth {
+.prev-month {
   background-color: #caad44;
 }
 
-.currentMonth {
+.current-month {
   background-color: red;
 }
 
-.afterMonth {
+.after-month {
   background-color: blue;
 }
-.prevDate {
+.prev-date {
   opacity: 1;
 }
 
-.currentDate {
+.current-date {
   opacity: 1;
   background-color: orange;
 }
 
-.afterDate {
+.after-date {
   opacity: 0.4;
 }
