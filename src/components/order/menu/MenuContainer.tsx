@@ -3,7 +3,7 @@ import useOrderStore from '@/shared/store/order';
 import MenuCategoryContainer from '@/components/order/menu/MenuCategoryContainer';
 import styles from './styles/MenuContainer.module.css';
 import MenuCard from '@/components/order/menu/MenuCard';
-import { CategoryWithMenuItem, Tables } from '@/types/supabase';
+import { Tables } from '@/types/supabase';
 
 /**
  * STEP2: 메뉴 탐색 및 선택
@@ -28,15 +28,16 @@ const MenuContainer = () => {
   }, []);
 
   // TODO: 에러 어떻게 띄울까?
-  if (!menuData) return <div>에러</div>;
 
   return (
     <div>
-      <MenuCategoryContainer
-        menuData={menuData}
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-      />
+      {menuData && (
+        <MenuCategoryContainer
+          menuData={menuData}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
+      )}
       <section className={styles.section}>
         {menuItemList.map(menu => (
           <MenuCard key={menu.id} menu={menu} />
