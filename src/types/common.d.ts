@@ -5,3 +5,18 @@ import { NextPage } from 'next';
 type NextPageWithLayout<P = NonNullable<unknown>, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
+
+interface ModalAlertTypeOption {
+  content: string;
+  showButton?: boolean;
+  buttonText?: string;
+  timeout?: number;
+}
+
+interface ModalConfirmTypeOption {
+  content: string;
+  confirmButtonText?: string;
+  cancelButtonText?: string;
+  confirmButtonCallback?: (() => void) | null;
+  cancelButtonCallback?: (() => void) | null;
+}

@@ -23,7 +23,7 @@ const MenuCategoryContainer = ({ menuData, selectedCategory, setSelectedCategory
         centeredSlidesBounds={true}
         slideToClickedSlide={true}
       >
-        {isEmptyObject(menuData) &&
+        {!isEmptyObject(menuData) &&
           menuData?.map((category, index) => (
             <SwiperSlide key={category.id} virtualIndex={index}>
               <MenuCategory
