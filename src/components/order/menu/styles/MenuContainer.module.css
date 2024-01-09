@@ -1,0 +1,15 @@
+.section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 15px;
+    padding: 0 15px 0 15px;
+    justify-items: center;
+    align-items: flex-start;
+    max-height: calc(100vh - var(--kiosk-footer-height) - var(--kiosk-header-height) - var(--kiosk-container-padding)*2 - 10px);
+    overflow-y: auto;
+
+    @media screen and (min-width: 768px) {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(4, 195px);
+    }
+}
