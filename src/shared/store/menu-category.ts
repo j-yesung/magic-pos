@@ -8,7 +8,6 @@ interface CategoriesStoreType {
   category: CategoryType;
   setCategory: (item: CategoryType) => void;
   categories: CategoryType[];
-  // setCategories: (item: CategoryType[]) => void;
   setCategories: (item: CategoryType[]) => void;
   addCategoryStore: (item: CategoryType) => void;
   removeCategoryStore: (item: CategoryType) => void;
@@ -25,13 +24,6 @@ const useCategoriesStore = create<CategoriesStoreType>(set => ({
   },
   setCategory: (item: CategoryType) => set(prev => ({ category: { ...prev.category, ...item } })),
   categories: [],
-  // setCategories: (newCategory: CategoryType[]) =>
-  //   set(prev => ({
-  //     categories: {
-  //       ...prev.categories,
-  //       newCategory,
-  //     },
-  //   })),
   setCategories: (item: CategoryType[]) => set({ categories: item }),
   addCategoryStore: (item: CategoryType) =>
     set(state => ({ categories: [...state.categories, { ...state.category, item }] })),

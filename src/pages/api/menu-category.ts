@@ -1,14 +1,20 @@
 import { supabase } from '@/shared/supabase';
 import { CategoryWithMenuItem } from '@/types/supabase';
 /**
- * 카테고리 목록 가져오기 - DB에 저장되어있는 카테고리 목록
- * @returns 리뷰 목록
+ * 특정 가게에 대한 카테고리만 가져온다
+ * @param store_id 가게 고유 아이디
  */
-export const fetchCategories = async () => {
-  const { data, error } = await supabase.from('menu_category').select('*').order('position', { ascending: true });
+export const fetchCategories = async (store_id: string) => {
+  const { data, error } = await supabase
+    .from('menu_category')
+    .select('*')
+    .eq('store_id', store_id)
+    .order('position', { ascending: true })
+    .returns<CategoryType[]>();
   if (error) throw error;
   return { data, error };
 };
+
 /**
  * 카테고리 추가하기
  * @param values 가게 id, 카테고리 name, 카테고리 순서
