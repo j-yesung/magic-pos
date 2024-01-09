@@ -41,6 +41,10 @@ const Cell = ({ currentMonth }: { currentMonth: Moment }) => {
     return day.isSame(today, 'D') ? 'current' : day.isBefore(today, 'D') ? 'prev' : 'after';
   }
 
+  function getDayType(day: Moment) {
+    return day.day() === 6 ? 'saturaday' : day.day() === 0 ? 'sunday' : 'day';
+  }
+
   const row = [];
   let days = [];
   let day = startDay;
@@ -61,7 +65,7 @@ const Cell = ({ currentMonth }: { currentMonth: Moment }) => {
         >
           <span
             className={dayVariant({
-              dayType: day.day() === 6 ? 'saturaday' : day.day() === 0 ? 'sunday' : 'day',
+              dayType: getDayType(day),
             })}
           >
             {day.isSame(today, 'D') ? 'today' : formatDate}
