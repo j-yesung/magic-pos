@@ -1,13 +1,13 @@
 import useFetchTable from "@/hooks/table/useFetchTable";
-import { useRouter } from "next/router";
 import TableContainer from "./TableContainer";
 import styles from "./styles/Table.module.css";
 import TableSideBar from "./tableSideBar/TableSideBar";
 
 const Table = () => {
-  const { query } = useRouter();
-  const { storeId } = query;
-  const { data } = useFetchTable(storeId);
+  const token = typeof window !== 'undefined' && localStorage.getItem('sb-lajnysuklrkrhdyqhotr-auth-token');
+  const { user } = typeof window !== 'undefined' && token && JSON.parse(token);
+  const { id } = typeof window !== 'undefined' && user;
+  const { data } = useFetchTable(id);
   return (
     <div className={styles['table-wrapper']}>
       <div className={styles['main-dummy-sideBar']}></div>

@@ -1,4 +1,5 @@
 :root {
+  --main-color: #864af9;
   --kiosk-header-height: 80px;
   --kiosk-footer-height: 80px;
   --kiosk-container-padding: 1.25rem;
