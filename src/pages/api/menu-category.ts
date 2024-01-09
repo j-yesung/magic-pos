@@ -1,21 +1,30 @@
 import { supabase } from '@/shared/supabase';
 import { CategoryWithMenuItem } from '@/types/supabase';
 /**
- * 카테고리 목록 가져오기 - DB에 저장되어있는 카테고리 목록
- * @returns 리뷰 목록
+ * 특정 가게에 대한 카테고리만 가져온다
+ * @param store_id 가게 고유 아이디
  */
-export const fetchCategories = async () => {
-  const { data, error } = await supabase.from('menu_category').select('*');
+export const fetchCategories = async (store_id: string) => {
+  const { data, error } = await supabase
+    .from('menu_category')
+    .select('*')
+    .eq('store_id', store_id)
+    .order('position', { ascending: true })
+    .returns<CategoryType[]>();
   if (error) throw error;
   return { data, error };
 };
+
 /**
  * 카테고리 추가하기
  * @param values 가게 id, 카테고리 name, 카테고리 순서
  * @returns data
  */
-export const addCategory = async (storeId: string, name: string, position: number) => {
-  const { data, error } = await supabase.from('menu_category').insert([{ store_id: storeId, name, position }]);
+export const addCategory = async (store_id: string, name: string, position: number) => {
+  const { data, error } = await supabase
+    .from('menu_category')
+    .insert([{ store_id: store_id, name, position }])
+    .select();
   if (error) throw error;
   return { data, error };
 };
@@ -32,21 +41,32 @@ export const removeCategory = async (categoryId: string) => {
  * @param values 카테고리 id, 카테고리 name
  * @returns data
  */
-export const updateCategory = async (categoryId: string, name: string) => {
+export const updateCategoryName = async (categoryId: string, name: string) => {
   const { data, error } = await supabase.from('menu_category').update({ name }).eq('id', categoryId);
   if (error) throw error;
   return data;
 };
 
 /**
- * 특정 가게에 대한 카테고리와 메뉴아이템을 전부 가져온다
- * @param storeId 가게 고유 아이디
+ * 카테고리 이름 수정하기
+ * @param values 카테고리 id, 카테고리 position
+ * @returns data
  */
-export const fetchCategoriesWithMenuItemByStoreId = async (storeId: string) => {
+export const updateCategoryPosition = async (categoryId: string, position: number) => {
+  const { data, error } = await supabase.from('menu_category').update({ position }).eq('id', categoryId);
+  if (error) throw error;
+  return data;
+};
+
+/**
+ * 특정 가게에 대한 카테고리와 메뉴아이템을 전부 가져온다
+ * @param store_id 가게 고유 아이디
+ */
+export const fetchCategoriesWithMenuItemBystore_id = async (store_id: string) => {
   const { data, error } = await supabase
     .from('menu_category')
     .select('*, menu_item(*)')
-    .eq('store_id', storeId)
+    .eq('store_id', store_id)
     .returns<CategoryWithMenuItem[]>();
   if (error) {
     return { data: {}, error };
