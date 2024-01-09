@@ -21,7 +21,7 @@ const SignForm = ({ data }: FormProps) => {
   const { url, subName, caption, buttonName } = data;
   const { signup, login, businessNumberCheck } = useAuth();
   const { value, onChangeHandler, onKeyDownHandler } = useInput();
-  const { validateCheck } = useValid(value);
+  const { validateCheck, isBusinessNumberValid } = useValid(value);
 
   const signUpClickHandler = () => {
     if (validateCheck()) {
@@ -46,7 +46,11 @@ const SignForm = ({ data }: FormProps) => {
         </div>
         <div className={styles['form-button-wrapper']}>
           {path === '/auth/signup' && (
-            <Button type="button" onClick={() => businessNumberCheck(value.businessNumber)}>
+            <Button
+              type="button"
+              onClick={() => businessNumberCheck(value.businessNumber)}
+              disabled={!isBusinessNumberValid}
+            >
               사업자등록번호 인증
             </Button>
           )}

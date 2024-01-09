@@ -53,6 +53,11 @@
   color: white;
   background-color: #864af9;
 }
+.disabledButton {
+  padding: 1rem;
+  color: #191919;
+  background-color: #dcdcdc;
+}
 
 .input {
   width: 100%;

@@ -38,5 +38,7 @@ export const useValid = (value: Values) => {
     return true;
   };
 
-  return { validateCheck };
+  const isBusinessNumberValid = value.businessNumber.length === 11;
+
+  return { validateCheck, isBusinessNumberValid };
 };
