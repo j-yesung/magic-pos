@@ -3,6 +3,7 @@ import moment, { Moment } from 'moment';
 import 'moment/locale/ko';
 import { useState } from 'react';
 import styles from './Calendar.module.css';
+import Header from './header/Header';
 
 /**
  *
@@ -10,10 +11,10 @@ import styles from './Calendar.module.css';
  */
 const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(moment());
-  const preMonth = () => {
+  const clickPreMonth = () => {
     setCurrentMonth(currentMonth.clone().subtract(1, 'month'));
   };
-  const nextMonth = () => {
+  const clickNextMonth = () => {
     setCurrentMonth(currentMonth.clone().add(1, 'month'));
   };
   const 요일 = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
@@ -75,23 +76,7 @@ const Calendar = () => {
 
   return (
     <div style={{ display: 'grid', gap: '1rem', padding: '1rem' }}>
-      <div className="header" style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <div className="wrapper">
-          <span className="text" style={{ display: 'flex', gap: '1rem' }}>
-            <span className="text-year">{currentMonth.clone().format('YYYY')}</span>
-            {currentMonth.clone().format('MMMM')}
-          </span>
-        </div>
-        <div className="btn-group">
-          <span className="left-btn" style={{ display: 'inline-block', marginRight: '10px' }} onClick={preMonth}>
-            이전
-          </span>
-          <span className="right-btn" onClick={nextMonth}>
-            다음
-          </span>
-        </div>
-      </div>
-
+      <Header currentMonth={currentMonth} clickPreMonth={clickPreMonth} clickNextMonth={clickNextMonth} />
       <div className="days" style={{ display: 'grid', gridTemplateColumns: 'repeat(7,1fr)', gap: '1rem' }}>
         {요일.map(day => (
           <span key={day} className="day">
