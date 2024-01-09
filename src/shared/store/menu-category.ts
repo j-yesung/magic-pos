@@ -5,7 +5,7 @@ import { create } from 'zustand';
  */
 
 interface CategoriesStoreType {
-  show: boolean;
+  isShow: boolean;
   toggleShow: (item: boolean) => void;
   category: CategoryType;
   setCategory: (item: CategoryType) => void;
@@ -18,8 +18,8 @@ interface CategoriesStoreType {
 }
 
 const useCategoriesStore = create<CategoriesStoreType>(set => ({
-  show: false,
-  toggleShow: item => set({ show: item }),
+  isShow: false,
+  toggleShow: item => set({ isShow: item }),
   category: {
     id: '',
     store_id: '',

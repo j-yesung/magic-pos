@@ -32,29 +32,29 @@ const CategoryComponentPage = () => {
   };
 
   // 드래그 이벤트
-  const dragItem = useRef(0); // 드래그할 아이템의 인덱스
-  const dragOverItem = useRef(0); // 드랍할 위치의 아이템의 인덱스
+  const dragItemRef = useRef(0); // 드래그할 아이템의 인덱스
+  const dragOverRef = useRef(0); // 드랍할 위치의 아이템의 인덱스
 
   // 드래그 시작될 때 실행
-  const dragStart = (e: React.DragEvent<HTMLButtonElement>, index: number) => {
-    dragItem.current = index;
+  const dragStartHandler = (e: React.DragEvent<HTMLButtonElement>, index: number) => {
+    dragItemRef.current = index;
   };
 
   // 드래그중인 대상이 위로 포개졌을 때
-  const dragEnter = (e: React.DragEvent<HTMLButtonElement>, index: number) => {
-    dragOverItem.current = index;
+  const dragEnterHandler = (e: React.DragEvent<HTMLButtonElement>, index: number) => {
+    dragOverRef.current = index;
   };
 
   // 드랍 (커서 뗐을 때)
-  const drop = async () => {
+  const dropHandler = async () => {
     const newList = [...categories];
-    const dragItemValue = newList[dragItem.current];
-    const dragOverValue = newList[dragOverItem.current];
+    const dragItemValue = newList[dragItemRef.current];
+    const dragOverValue = newList[dragOverRef.current];
     dragCategoryStore(dragItemValue, dragOverValue);
     await updateCategoryPosition(dragItemValue.id, dragOverValue.position);
     await updateCategoryPosition(dragOverValue.id, dragItemValue.position);
-    dragItem.current = 0;
-    dragOverItem.current = 0;
+    dragItemRef.current = 0;
+    dragOverRef.current = 0;
   };
 
   return (
@@ -67,9 +67,9 @@ const CategoryComponentPage = () => {
                 type="button"
                 onClick={() => clickChoiceCategoryHandler(category)}
                 draggable
-                onDragStart={e => dragStart(e, idx)}
-                onDragEnter={e => dragEnter(e, idx)}
-                onDragEnd={drop}
+                onDragStart={e => dragStartHandler(e, idx)}
+                onDragEnter={e => dragEnterHandler(e, idx)}
+                onDragEnd={dropHandler}
                 onDragOver={e => e.preventDefault()}
               >
                 {category.name}
