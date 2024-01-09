@@ -1,4 +1,5 @@
 import { supabase } from '@/shared/supabase';
+import { CategoryWithMenuItem } from '@/types/supabase';
 /**
  * 카테고리 목록 가져오기 - DB에 저장되어있는 카테고리 목록
  * @returns 리뷰 목록
@@ -42,7 +43,11 @@ export const updateCategory = async (categoryId: string, name: string) => {
  * @param storeId 가게 고유 아이디
  */
 export const fetchCategoriesWithMenuItemByStoreId = async (storeId: string) => {
-  const { data, error } = await supabase.from('menu_category').select('*, menu_item(*)').eq('store_id', storeId);
+  const { data, error } = await supabase
+    .from('menu_category')
+    .select('*, menu_item(*)')
+    .eq('store_id', storeId)
+    .returns<CategoryWithMenuItem>();
   if (error) {
     return { data: {}, error };
   }

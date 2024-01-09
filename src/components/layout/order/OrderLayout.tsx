@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { ReactElement, useRef } from 'react';
+import React, { useRef } from 'react';
 import styles from './styles/layout.module.css';
 import Footer from '@/components/layout/order/Footer/Footer';
 import OrderTypeContainer from '@/components/order/order-type/OrderTypeContainer';

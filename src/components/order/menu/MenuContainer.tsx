@@ -12,6 +12,7 @@ const MenuContainer = () => {
 
   useEffect(() => {
     if (menuData && menuData.length > 0) setSelectedCategory(menuData[0].id);
+    console.log(menuData);
   }, []);
 
   // TODO: 에러 어떻게 띄울까?
