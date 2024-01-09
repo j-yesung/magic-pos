@@ -1,4 +1,5 @@
 :root {
   --kiosk-header-height: 80px;
-  --kiosk-footer-height: 100px;
+  --kiosk-footer-height: 80px;
+  --kiosk-container-padding: 1.25rem;
 }

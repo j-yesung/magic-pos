@@ -8,10 +8,10 @@ import { CategoryWithMenuItem } from '@/types/supabase';
 interface OrderState {
   step: number;
   readonly maxStep: number;
-  menuData: CategoryWithMenuItem | null;
+  menuData: CategoryWithMenuItem[] | null;
   goNextStep: () => void;
   goPrevStep: () => void;
-  setMenuData: (data: CategoryWithMenuItem) => void;
+  setMenuData: (data: CategoryWithMenuItem[]) => void;
 }
 
 const useOrderStore = create<OrderState>()(set => ({
@@ -21,7 +21,7 @@ const useOrderStore = create<OrderState>()(set => ({
   menuData: null,
   goNextStep: () => set(state => ({ step: Math.min(state.step + 1, state.maxStep) })),
   goPrevStep: () => set(state => ({ step: Math.max(state.step - 1, 0) })),
-  setMenuData: (data: CategoryWithMenuItem) =>
+  setMenuData: (data: CategoryWithMenuItem[]) =>
     set(state => {
       if (state.menuData === null) {
         return { menuData: data };

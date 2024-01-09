@@ -448,4 +448,6 @@ export type Enums<
     ? Database['public']['Enums'][PublicEnumNameOrOptions]
     : never;
 
-type CategoryWithMenuItem = Tables<'menu_category'>[] & { menuItem: Tables<'menu_item'>[] };
+interface CategoryWithMenuItem extends Tables<'menu_category'> {
+  menu_item: Tables<'menu_item'>[];
+}

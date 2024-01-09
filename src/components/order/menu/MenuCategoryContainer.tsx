@@ -4,9 +4,10 @@ import styles from './styles/MenuCategoryContainer.module.css';
 import MenuCategory from '@/components/order/menu/MenuCategory';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Virtual } from 'swiper/modules';
+import { isEmptyObject } from '@/shared/helper';
 
 interface MenCategoryContainerProps {
-  menuData: CategoryWithMenuItem;
+  menuData: CategoryWithMenuItem[];
   setSelectedCategory: Dispatch<SetStateAction<string | null>>;
   selectedCategory: string | null;
 }
@@ -22,16 +23,17 @@ const MenuCategoryContainer = ({ menuData, selectedCategory, setSelectedCategory
         centeredSlidesBounds={true}
         slideToClickedSlide={true}
       >
-        {menuData.map((category, index) => (
-          <SwiperSlide key={category.id} virtualIndex={index}>
-            <MenuCategory
-              key={category.id}
-              category={category}
-              selectedCategory={selectedCategory}
-              setSelectedCategory={setSelectedCategory}
-            />
-          </SwiperSlide>
-        ))}
+        {isEmptyObject(menuData) &&
+          menuData?.map((category, index) => (
+            <SwiperSlide key={category.id} virtualIndex={index}>
+              <MenuCategory
+                key={category.id}
+                category={category}
+                selectedCategory={selectedCategory}
+                setSelectedCategory={setSelectedCategory}
+              />
+            </SwiperSlide>
+          ))}
       </Swiper>
     </div>
   );

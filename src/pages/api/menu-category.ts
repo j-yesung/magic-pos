@@ -47,7 +47,7 @@ export const fetchCategoriesWithMenuItemByStoreId = async (storeId: string) => {
     .from('menu_category')
     .select('*, menu_item(*)')
     .eq('store_id', storeId)
-    .returns<CategoryWithMenuItem>();
+    .returns<CategoryWithMenuItem[]>();
   if (error) {
     return { data: {}, error };
   }
