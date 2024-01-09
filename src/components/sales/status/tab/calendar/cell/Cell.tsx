@@ -1,6 +1,6 @@
 import { cva } from 'class-variance-authority';
 import moment, { Moment } from 'moment';
-import styles from './cell.module.css';
+import styles from '../styles/calendar.module.css';
 
 interface Props {
   currentMonth: Moment;
@@ -11,8 +11,8 @@ interface Props {
 }
 
 const Cell = ({ currentMonth, setCurrentMonth, setIsShow, setSelectedDate, selectedDate }: Props) => {
-  const monthStart = currentMonth.clone().startOf('month'); // 오늘이 속한 달의 시작일
-  const monthEnd = currentMonth.clone().endOf('month'); // 오늘이 속한 달의 마지막 일
+  // const monthStart = currentMonth.clone().startOf('month'); // 오늘이 속한 달의 시작일
+  // const monthEnd = currentMonth.clone().endOf('month'); // 오늘이 속한 달의 마지막 일
   const startDay = currentMonth.clone().startOf('month').startOf('week'); // monthStart가 속한 주의 시작 주
   const endDay = currentMonth.clone().endOf('month').endOf('week'); // monthStart가 속한 마지막 주
 
