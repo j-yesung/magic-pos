@@ -62,7 +62,7 @@ const CategoryComponentPage = () => {
       <ul>
         {categories.map((category, idx) => {
           return (
-            <li key={idx}>
+            <li key={category.id}>
               <button
                 type="button"
                 onClick={() => clickChoiceCategoryHandler(category)}
