@@ -17,7 +17,12 @@ const Tab = () => {
         <span>이번 달</span>
 
         {isShow ? (
-          <Calendar isShow={isShow} setCurrentMonth={setCurrentMonth} currentMonth={currentMonth} />
+          <Calendar
+            isShow={isShow}
+            setCurrentMonth={setCurrentMonth}
+            currentMonth={currentMonth}
+            setIsShow={setIsShow}
+          />
         ) : (
           <span onClick={clickShowCalendar}>{currentMonth.format('YYYY-MMMM-DD')}</span>
         )}
