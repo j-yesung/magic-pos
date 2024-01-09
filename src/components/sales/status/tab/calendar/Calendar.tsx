@@ -14,8 +14,10 @@ interface Props {
   currentMonth: Moment;
   setCurrentMonth: React.Dispatch<React.SetStateAction<Moment>>;
   setIsShow: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectedDate: React.Dispatch<React.SetStateAction<Moment>>;
+  selectedDate: Moment;
 }
-const Calendar = ({ isShow, currentMonth, setCurrentMonth, setIsShow }: Props) => {
+const Calendar = ({ isShow, currentMonth, setCurrentMonth, setIsShow, selectedDate, setSelectedDate }: Props) => {
   const clickPreMonth = () => {
     setCurrentMonth(currentMonth.clone().subtract(1, 'month'));
   };
@@ -27,7 +29,13 @@ const Calendar = ({ isShow, currentMonth, setCurrentMonth, setIsShow }: Props) =
     <div style={{ display: isShow ? 'grid' : 'none', gap: '1rem', padding: '1rem' }}>
       <Header currentMonth={currentMonth} clickPreMonth={clickPreMonth} clickNextMonth={clickNextMonth} />
       <Days />
-      <Cell currentMonth={currentMonth} setCurrentMonth={setCurrentMonth} setIsShow={setIsShow} />
+      <Cell
+        currentMonth={currentMonth}
+        setCurrentMonth={setCurrentMonth}
+        setIsShow={setIsShow}
+        selectedDate={selectedDate}
+        setSelectedDate={setSelectedDate}
+      />
     </div>
   );
 };

@@ -33,6 +33,10 @@ month 관련 class css 입니다.
   opacity: 0.4;
 }
 
+.point-date {
+  background-color: cadetblue;
+}
+
 /*
 day 관련 class css 입니다.
 */

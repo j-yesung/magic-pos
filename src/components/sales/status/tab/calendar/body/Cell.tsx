@@ -6,9 +6,11 @@ interface Props {
   currentMonth: Moment;
   setCurrentMonth: React.Dispatch<React.SetStateAction<Moment>>;
   setIsShow: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectedDate: React.Dispatch<React.SetStateAction<Moment>>;
+  selectedDate: Moment;
 }
 
-const Cell = ({ currentMonth, setCurrentMonth, setIsShow }: Props) => {
+const Cell = ({ currentMonth, setCurrentMonth, setIsShow, setSelectedDate, selectedDate }: Props) => {
   const monthStart = currentMonth.clone().startOf('month'); // 오늘이 속한 달의 시작일
   const monthEnd = currentMonth.clone().endOf('month'); // 오늘이 속한 달의 마지막 일
   const startDay = currentMonth.clone().startOf('month').startOf('week'); // monthStart가 속한 주의 시작 주
@@ -17,6 +19,7 @@ const Cell = ({ currentMonth, setCurrentMonth, setIsShow }: Props) => {
   const clickShowDate = (day: Moment) => () => {
     setIsShow(false);
     setCurrentMonth(day);
+    setSelectedDate(day);
   };
   const dateVariant = cva([styles['date-base']], {
     variants: {
@@ -29,6 +32,9 @@ const Cell = ({ currentMonth, setCurrentMonth, setIsShow }: Props) => {
         prev: styles['prev-date'],
         current: styles['current-date'],
         after: styles['after-date'],
+      },
+      pointDateType: {
+        point: styles['point-date'],
       },
     },
   });
@@ -46,7 +52,7 @@ const Cell = ({ currentMonth, setCurrentMonth, setIsShow }: Props) => {
     const today = moment();
     return Month.isSame(today, 'M') ? 'current' : Month.isBefore(today, 'M') ? 'prev' : 'after';
   }
-
+  console.log(selectedDate);
   function getDateType(day: Moment) {
     const today = moment();
     return day.isSame(today, 'D') ? 'current' : day.isBefore(today, 'D') ? 'prev' : 'after';
@@ -65,13 +71,14 @@ const Cell = ({ currentMonth, setCurrentMonth, setIsShow }: Props) => {
   while (day <= endDay) {
     for (let i = 0; i < 7; i++) {
       formatDate = day.clone().format('D');
-      console.log(day);
+
       days.push(
         <div
           key={formatDate}
           className={dateVariant({
             monthType: getMonthType(day),
             dateType: getDateType(day),
+            pointDateType: day.isSame(selectedDate, 'day') ? 'point' : undefined,
           })}
           onClick={day.isSame(today, 'D') || day.isBefore(today, 'D') ? clickShowDate(day.clone()) : undefined}
         >

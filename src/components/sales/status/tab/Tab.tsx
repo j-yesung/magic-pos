@@ -5,13 +5,13 @@ import Calendar from './calendar/Calendar';
 
 const Tab = () => {
   const [currentMonth, setCurrentMonth] = useState(moment());
+  const [selectedDate, setSelectedDate] = useState(currentMonth);
   const [isShow, setIsShow] = useState(false);
   const clickShowCalendar = () => setIsShow(true);
 
   const today = moment();
   const yesterDay = today.clone().subtract(1, 'day');
-  const currentWeek = today.clone().weekday(7);
-  console.log(currentWeek);
+
   const clickMoveYesterday = () => {
     if (yesterDay === currentMonth) return;
     setCurrentMonth(yesterDay);
@@ -35,6 +35,8 @@ const Tab = () => {
             setCurrentMonth={setCurrentMonth}
             currentMonth={currentMonth}
             setIsShow={setIsShow}
+            selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
           />
         ) : (
           <span onClick={clickShowCalendar}>{currentMonth.format('YYYY-MMMM-DD')}</span>
