@@ -24,28 +24,34 @@ const Calendar = () => {
   let days = [];
   let day = startDay;
   let formatDate = '';
-  // console.log(monthStart);
-  // console.log(monthEnd);
-  // console.log(startDay);
-  // console.log(endDay);
 
-  while (day.clone().format('YY-MM-DD') <= endDay.clone().format('YY-MM-DD')) {
+  const today = moment(); // 유저의 현재 달입니다.
+
+  while (day <= endDay) {
     for (let i = 0; i < 7; i++) {
       formatDate = day.clone().format('D');
-
+      // 유저의 현재 달을 기준으로 이전 달이면 회색 배경, 현재 달이면 저희 main color, 다음 달은 #d95959로 표현 했습니다.
       days.push(
-        <div>
-          <span>{formatDate}</span>
+        <div
+          style={
+            day.isSame(today, 'M')
+              ? { backgroundColor: ' #5200FF', padding: '1rem' }
+              : day.isBefore(today, 'M')
+              ? { backgroundColor: '#ccc', padding: '1rem' }
+              : { backgroundColor: '#d95959', padding: '1rem' }
+          }
+        >
+          <span style={{ color: '#fff' }}>{formatDate}</span>
         </div>,
       );
       day = day.add(1, 'day').clone();
     }
-    row.push(<div>{days}</div>);
+    row.push(<div style={{ display: 'grid', gridTemplateColumns: 'repeat(7,1fr)', gap: '1rem' }}>{days}</div>);
     days = [];
   }
 
   return (
-    <div style={{ display: 'grid', gap: '1rem' }}>
+    <div style={{ display: 'grid', gap: '1rem', padding: '1rem' }}>
       <div className="header" style={{ display: 'flex', justifyContent: 'space-between' }}>
         <div className="wrapper">
           <span className="text" style={{ display: 'flex', gap: '1rem' }}>
@@ -62,14 +68,24 @@ const Calendar = () => {
           </span>
         </div>
       </div>
-      <div className="days" style={{ display: 'flex', gap: '1rem' }}>
+
+      <div className="days" style={{ display: 'grid', gridTemplateColumns: 'repeat(7,1fr)', gap: '1rem' }}>
         {요일.map(day => (
           <span key={day} className="day">
             {day}
           </span>
         ))}
       </div>
-      <div className="body">{row}</div>
+      <div
+        className="body"
+        style={{
+          display: 'grid',
+          gap: '1rem',
+          textAlign: 'center',
+        }}
+      >
+        {row}
+      </div>
     </div>
   );
 };
