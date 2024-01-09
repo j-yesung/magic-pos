@@ -5,7 +5,6 @@ export const fetchStoreTable = async (id: string) => {
   if (id) {
     const { data: store, error } = await supabase.from('store').select('*, store_table(*)').eq('business_id', id);
     if (error) throw new Error(error.message);
-    console.log(store);
     return store;
   }
 };
