@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useOrderStore from '@/shared/store/order';
 import MenuCategoryContainer from '@/components/order/menu/MenuCategoryContainer';
+import styles from './styles/MenuContainer.module.css';
 
 /**
  * STEP2: 메뉴 탐색 및 선택
@@ -25,6 +26,7 @@ const MenuContainer = () => {
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
       />
+      <section className={styles.section}></section>
     </div>
   );
 };

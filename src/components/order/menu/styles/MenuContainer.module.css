@@ -1,0 +1,5 @@
+.section {
+    display: grid;
+    background: red;
+    height: calc(100vh - 180px - 2.5rem)
+}
