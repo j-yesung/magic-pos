@@ -3,8 +3,8 @@ import styles from './styles/Auth.module.css';
 
 interface InputProps {
   value: Record<string, string>;
-  onChangeHandler?: () => void;
-  onKeyDownHandler?: () => void;
+  onChangeHandler?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyDownHandler?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 interface InputType {
@@ -14,7 +14,7 @@ interface InputType {
   placeholder: string;
   minLength?: number;
   maxLength?: number;
-  onKeyDown?: () => void;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const Input = ({ value, onChangeHandler, onKeyDownHandler }: InputProps) => {
@@ -31,14 +31,14 @@ const Input = ({ value, onChangeHandler, onKeyDownHandler }: InputProps) => {
     id: 2,
     name: 'password',
     type: 'password',
-    placeholder: '비밀번호: 최소 8자리 이상 25자리 이하 (알파벳, 특수문자 포함)',
+    placeholder: '비밀번호',
   };
 
   const passwordSignUpInput = {
     id: 2,
     name: 'password',
     type: 'password',
-    placeholder: '비밀번호',
+    placeholder: '비밀번호: 최소 8자리 이상 25자리 이하 (알파벳, 특수문자 포함)',
   };
 
   const passwordConfirmInput = {
