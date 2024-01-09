@@ -8,11 +8,24 @@ const Tab = () => {
   const [isShow, setIsShow] = useState(false);
   const clickShowCalendar = () => setIsShow(true);
 
+  const today = moment();
+  const yesterDay = today.clone().subtract(1, 'day');
+  const currentWeek = today.clone().weekday(7);
+  console.log(currentWeek);
+  const clickMoveYesterday = () => {
+    if (yesterDay === currentMonth) return;
+    setCurrentMonth(yesterDay);
+  };
+
+  const clickMoveToday = () => {
+    if (today === currentMonth) return;
+    setCurrentMonth(today);
+  };
   return (
     <div>
       <div>
-        <span>어제</span>
-        <span>오늘</span>
+        <span onClick={clickMoveYesterday}>어제</span>
+        <span onClick={clickMoveToday}>오늘</span>
         <span>이번 주</span>
         <span>이번 달</span>
 
