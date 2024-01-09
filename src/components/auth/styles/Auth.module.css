@@ -1,0 +1,84 @@
+.wrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.title-wrapper {
+  gap: 0.5rem;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin-bottom: 2.5rem;
+}
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(to right top, #ad3aff, #2f75ff);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+.sub-title {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.form-wrapper {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+}
+.form {
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.business-number-wrapper {
+  gap: 1rem;
+  display: flex;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
+.button {
+  padding: 1rem;
+  color: white;
+  background-color: #864af9;
+}
+.auth-button {
+  width: 25%;
+}
+
+.input {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+}
+.input:focus {
+  outline: none;
+  border: 2px solid #864af9;
+}
+
+.bottom-wrapper {
+  display: flex;
+  margin-top: 1.5rem;
+  flex-direction: column;
+}
+
+.caption-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.caption {
+  display: flex;
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  justify-content: flex-end;
+}

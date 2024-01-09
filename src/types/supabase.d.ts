@@ -147,6 +147,7 @@ export interface Database {
           id: string;
           image_url: string | null;
           name: string | null;
+          price: number | null;
           remain_ea: number | null;
         };
         Insert: {
@@ -154,6 +155,7 @@ export interface Database {
           id?: string;
           image_url?: string | null;
           name?: string | null;
+          price?: number | null;
           remain_ea?: number | null;
         };
         Update: {
@@ -161,6 +163,7 @@ export interface Database {
           id?: string;
           image_url?: string | null;
           name?: string | null;
+          price?: number | null;
           remain_ea?: number | null;
         };
         Relationships: [
@@ -223,21 +226,21 @@ export interface Database {
       profiles: {
         Row: {
           created_at: string;
+          email: string | null;
           id: string;
           is_disabled: boolean | null;
-          name: string | null;
         };
         Insert: {
           created_at?: string;
+          email?: string | null;
           id: string;
           is_disabled?: boolean | null;
-          name?: string | null;
         };
         Update: {
           created_at?: string;
+          email?: string | null;
           id?: string;
           is_disabled?: boolean | null;
-          name?: string | null;
         };
         Relationships: [
           {
@@ -330,7 +333,6 @@ export interface Database {
           id: string;
           is_disabled: boolean | null;
           max_guest: number | null;
-          name: string | null;
           position: number | null;
           store_id: string;
         };
@@ -338,7 +340,6 @@ export interface Database {
           id?: string;
           is_disabled?: boolean | null;
           max_guest?: number | null;
-          name?: string | null;
           position?: number | null;
           store_id: string;
         };
@@ -346,7 +347,6 @@ export interface Database {
           id?: string;
           is_disabled?: boolean | null;
           max_guest?: number | null;
-          name?: string | null;
           position?: number | null;
           store_id?: string;
         };
@@ -447,3 +447,7 @@ export type Enums<
   : PublicEnumNameOrOptions extends keyof Database['public']['Enums']
     ? Database['public']['Enums'][PublicEnumNameOrOptions]
     : never;
+
+interface CategoryWithMenuItem extends Tables<'menu_category'> {
+  menu_item: Tables<'menu_item'>[];
+}

@@ -8,12 +8,5 @@
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "editor.codeActionsOnSave": {
     "source.organizeImports": "explicit"
-  },
-  "files.associations": {
-    "*html": "html",
-    "*.css": "tailwindcss"
-  },
-  "editor.quickSuggestions": {
-    "strings": true
   }
 }
