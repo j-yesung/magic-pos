@@ -16,7 +16,6 @@ import { Swiper, SwiperSlide, SwiperRef } from 'swiper/react';
  */
 const OrderLayout = () => {
   // slide에 사용될 컴포넌트를 담습니다.
-  const slides = [OrderTypeContainer, MenuContainer, CartContainer, PaymentContainer, CompleteContainer];
   const sliderRef = useRef<SwiperRef>(null);
 
   return (
@@ -34,11 +33,21 @@ const OrderLayout = () => {
             allowTouchMove={false}
             ref={sliderRef}
           >
-            {slides.map((slideContent, index) => (
-              <SwiperSlide key={OrderTypeContainer.name} virtualIndex={index}>
-                {slideContent}
-              </SwiperSlide>
-            ))}
+            <SwiperSlide>
+              <OrderTypeContainer />
+            </SwiperSlide>
+            <SwiperSlide>
+              <MenuContainer />
+            </SwiperSlide>
+            <SwiperSlide>
+              <CartContainer />
+            </SwiperSlide>
+            <SwiperSlide>
+              <PaymentContainer />
+            </SwiperSlide>
+            <SwiperSlide>
+              <CompleteContainer />
+            </SwiperSlide>
           </Swiper>
         </article>
         <Footer sliderRef={sliderRef} />
