@@ -3,8 +3,8 @@ import styles from './styles/Auth.module.css';
 
 interface InputProps {
   value: Record<string, string>;
-  onChangeHandler?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onKeyDownHandler?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onChangeHandler?: () => void;
+  onKeyDownHandler?: () => void;
 }
 
 interface InputType {
@@ -14,7 +14,7 @@ interface InputType {
   placeholder: string;
   minLength?: number;
   maxLength?: number;
-  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onKeyDown?: () => void;
 }
 
 const Input = ({ value, onChangeHandler, onKeyDownHandler }: InputProps) => {
@@ -32,6 +32,13 @@ const Input = ({ value, onChangeHandler, onKeyDownHandler }: InputProps) => {
     name: 'password',
     type: 'password',
     placeholder: '비밀번호: 최소 8자리 이상 25자리 이하 (알파벳, 특수문자 포함)',
+  };
+
+  const passwordSignUpInput = {
+    id: 2,
+    name: 'password',
+    type: 'password',
+    placeholder: '비밀번호',
   };
 
   const passwordConfirmInput = {
@@ -53,7 +60,7 @@ const Input = ({ value, onChangeHandler, onKeyDownHandler }: InputProps) => {
 
   const inputOptions: Record<string, InputType[]> = {
     '/auth/login': [emailInput, passwordInput],
-    '/auth/signup': [emailInput, passwordInput, passwordConfirmInput, businessNumberInput],
+    '/auth/signup': [emailInput, passwordSignUpInput, passwordConfirmInput, businessNumberInput],
     '/auth/findPassword': [emailInput],
     '/auth/reset': [passwordInput, passwordConfirmInput],
   };
