@@ -27,30 +27,31 @@
 }
 
 .form-wrapper {
-  width: 20%;
   display: flex;
   flex-direction: column;
 }
 .form {
+  width: 20%;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.form-inner-wrapper {
   gap: 1rem;
   display: flex;
   flex-direction: column;
 }
 
-.business-number-wrapper {
+.form-button-wrapper {
   gap: 1rem;
   display: flex;
-  margin-bottom: 1rem;
-  align-items: center;
+  flex-direction: column;
 }
 
 .button {
   padding: 1rem;
   color: white;
   background-color: #864af9;
-}
-.auth-button {
-  width: 25%;
 }
 
 .input {
@@ -64,16 +65,10 @@
   border: 2px solid #864af9;
 }
 
-.bottom-wrapper {
-  display: flex;
-  margin-top: 1.5rem;
-  flex-direction: column;
-}
-
 .caption-wrapper {
   display: flex;
   align-items: center;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
 }
 .caption {
@@ -81,4 +76,5 @@
   margin-top: 2rem;
   font-size: 0.8rem;
   justify-content: flex-end;
+  text-decoration: underline;
 }

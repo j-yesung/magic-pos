@@ -1,26 +1,73 @@
+import { useRouter } from 'next/router';
 import styles from './styles/Auth.module.css';
 
 interface InputProps {
-  className?: string;
-  name: string;
-  value: string;
+  value: Record<string, string>;
   onChangeHandler?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  minLength?: number;
-  maxLength?: number;
-  type: string;
-  placeholder: string;
 }
 
-const Input = ({ name, value, type, onChangeHandler, placeholder }: InputProps) => {
+interface InputType {
+  id: number;
+  name: string;
+  type: string;
+  placeholder: string;
+  minLength?: number;
+  maxLength?: number;
+}
+
+const Input = ({ value, onChangeHandler }: InputProps) => {
+  const path = useRouter().pathname;
+  const inputs = [
+    {
+      id: 1,
+      name: 'email',
+      type: 'text',
+      placeholder: '이메일',
+    },
+    {
+      id: 2,
+      name: 'password',
+      type: 'password',
+      placeholder: '비밀번호',
+    },
+    path === '/auth/signup' && {
+      id: 3,
+      name: 'passwordConfirm',
+      type: 'password',
+      placeholder: '비밀번호 확인',
+    },
+    path === '/auth/signup' && {
+      id: 4,
+      name: 'businessNumber',
+      type: 'number',
+      placeholder: '사업자등록번호 (11자리)',
+      minLength: 11,
+      maxLength: 11,
+    },
+  ] as InputType[];
+
   return (
-    <input
-      className={styles['input']}
-      type={type}
-      name={name}
-      value={value}
-      onChange={onChangeHandler}
-      placeholder={placeholder}
-    />
+    <>
+      {inputs.map((input: InputType) => {
+        const key = input.name as keyof typeof value;
+
+        if (input) {
+          return (
+            <input
+              key={input.id}
+              className={styles['input']}
+              name={input.name}
+              value={value[key]}
+              onChange={onChangeHandler}
+              type={input.type}
+              placeholder={input.placeholder}
+              minLength={input.minLength}
+              maxLength={input.maxLength}
+            />
+          );
+        }
+      })}
+    </>
   );
 };
 
