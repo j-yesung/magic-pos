@@ -7,9 +7,16 @@ export const useInput = () => {
     passwordConfirm: '',
     businessNumber: '',
   });
+
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setValue(prev => ({ ...prev, [name]: value }));
   };
-  return { value, onChangeHandler };
+  const onKeyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!/^[0-9]+$/.test(e.key) && e.key.length === 1) {
+      return e.preventDefault();
+    }
+  };
+
+  return { value, onChangeHandler, onKeyDownHandler };
 };

@@ -4,6 +4,7 @@ import styles from './styles/Auth.module.css';
 interface InputProps {
   value: Record<string, string>;
   onChangeHandler?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyDownHandler?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 interface InputType {
@@ -13,9 +14,10 @@ interface InputType {
   placeholder: string;
   minLength?: number;
   maxLength?: number;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
-const Input = ({ value, onChangeHandler }: InputProps) => {
+const Input = ({ value, onChangeHandler, onKeyDownHandler }: InputProps) => {
   const path = useRouter().pathname;
   const inputs = [
     {
@@ -39,10 +41,11 @@ const Input = ({ value, onChangeHandler }: InputProps) => {
     path === '/auth/signup' && {
       id: 4,
       name: 'businessNumber',
-      type: 'number',
+      type: 'text',
       placeholder: '사업자등록번호 (11자리)',
       minLength: 11,
       maxLength: 11,
+      onKeyDown: onKeyDownHandler,
     },
   ] as InputType[];
 
@@ -50,7 +53,6 @@ const Input = ({ value, onChangeHandler }: InputProps) => {
     <>
       {inputs.map((input: InputType) => {
         const key = input.name as keyof typeof value;
-
         if (input) {
           return (
             <input
@@ -63,6 +65,8 @@ const Input = ({ value, onChangeHandler }: InputProps) => {
               placeholder={input.placeholder}
               minLength={input.minLength}
               maxLength={input.maxLength}
+              onKeyDown={input.onKeyDown}
+              required
             />
           );
         }

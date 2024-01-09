@@ -20,7 +20,7 @@ const SignForm = ({ data }: FormProps) => {
   const path = useRouter().pathname;
   const { url, subName, caption, buttonName } = data;
   const { signup, login, businessNumberCheck } = useAuth();
-  const { value, onChangeHandler } = useInput();
+  const { value, onChangeHandler, onKeyDownHandler } = useInput();
   const { validateCheck } = useValid(value);
 
   const signUpClickHandler = () => {
@@ -42,7 +42,7 @@ const SignForm = ({ data }: FormProps) => {
       </div>
       <form className={styles['form']}>
         <div className={styles['form-inner-wrapper']}>
-          <Input value={value} onChangeHandler={onChangeHandler} />
+          <Input value={value} onChangeHandler={onChangeHandler} onKeyDownHandler={onKeyDownHandler} />
         </div>
         <div className={styles['form-button-wrapper']}>
           {path === '/auth/signup' && (
