@@ -11,8 +11,6 @@ export const fetchStoreTable = async (id: string) => {
 };
 
 export const addStoreTable = async (storeTableData: TablesInsert<'store_table'>) => {
-  const { data, error } = await supabase.from('store_table').insert([storeTableData]).select();
-  // if (error) throw new Error(error.message);
-  console.log(data);
-  console.log(error);
+  const { error } = await supabase.from('store_table').insert([storeTableData]).select();
+  if (error) throw new Error(error.message);
 };
