@@ -1,6 +1,9 @@
+import { cva } from 'class-variance-authority';
 import moment from 'moment';
 import 'moment/locale/ko';
 import { useState } from 'react';
+import styles from './Calendar.module.css';
+
 /**
  *
  * @example clone()을 해준 이유는 원본을 훼손하지 않기 위해서입니다.
@@ -20,6 +23,21 @@ const Calendar = () => {
   const startDay = currentMonth.clone().startOf('month').startOf('week'); // monthStart가 속한 주의 시작 주
   const endDay = currentMonth.clone().endOf('month').endOf('week'); // monthStart가 속한 마지막 주
 
+  const dateVariant = cva([styles.dateBase], {
+    variants: {
+      monthType: {
+        prev: styles.prevMonth,
+        current: styles.currentMonth,
+        after: styles.afterMonth,
+      },
+      dateType: {
+        prev: styles.prevDate,
+        current: styles.currentDate,
+        after: styles.afterDate,
+      },
+    },
+  });
+
   const row = [];
   let days = [];
   let day = startDay;
@@ -30,18 +48,15 @@ const Calendar = () => {
   while (day <= endDay) {
     for (let i = 0; i < 7; i++) {
       formatDate = day.clone().format('D');
-      // 유저의 현재 달을 기준으로 이전 달이면 회색 배경, 현재 달이면 저희 main color, 다음 달은 #d95959로 표현 했습니다.
+
       days.push(
         <div
-          style={
-            day.isSame(today, 'M')
-              ? { backgroundColor: ' #5200FF', padding: '1rem' }
-              : day.isBefore(today, 'M')
-              ? { backgroundColor: '#ccc', padding: '1rem' }
-              : { backgroundColor: '#d95959', padding: '1rem' }
-          }
+          className={dateVariant({
+            monthType: getMonthType(day),
+            dateType: day.isSame(today, 'D') ? 'current' : day.isBefore(today, 'D') ? 'prev' : 'after',
+          })}
         >
-          <span style={{ color: '#fff' }}>{formatDate}</span>
+          <span style={{ color: '#fff' }}>{day.isSame(today, 'D') ? 'today' : formatDate}</span>
         </div>,
       );
       day = day.add(1, 'day').clone();
@@ -91,3 +106,8 @@ const Calendar = () => {
 };
 
 export default Calendar;
+
+function getMonthType(day) {
+  const today = moment();
+  return day.isSame(today, 'M') ? 'current' : day.isBefore(today, 'M') ? 'prev' : 'after';
+}
