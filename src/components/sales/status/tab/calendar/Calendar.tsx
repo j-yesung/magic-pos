@@ -1,5 +1,5 @@
 import { cva } from 'class-variance-authority';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import 'moment/locale/ko';
 import { useState } from 'react';
 import styles from './Calendar.module.css';
@@ -37,7 +37,15 @@ const Calendar = () => {
       },
     },
   });
+  function getMonthType(Month: Moment) {
+    const today = moment();
+    return Month.isSame(today, 'M') ? 'current' : Month.isBefore(today, 'M') ? 'prev' : 'after';
+  }
 
+  function getDateType(day: Moment) {
+    const today = moment();
+    return day.isSame(today, 'D') ? 'current' : day.isBefore(today, 'D') ? 'prev' : 'after';
+  }
   const row = [];
   let days = [];
   let day = startDay;
@@ -53,7 +61,7 @@ const Calendar = () => {
         <div
           className={dateVariant({
             monthType: getMonthType(day),
-            dateType: day.isSame(today, 'D') ? 'current' : day.isBefore(today, 'D') ? 'prev' : 'after',
+            dateType: getDateType(day),
           })}
         >
           <span style={{ color: '#fff' }}>{day.isSame(today, 'D') ? 'today' : formatDate}</span>
@@ -106,8 +114,3 @@ const Calendar = () => {
 };
 
 export default Calendar;
-
-function getMonthType(day) {
-  const today = moment();
-  return day.isSame(today, 'M') ? 'current' : day.isBefore(today, 'M') ? 'prev' : 'after';
-}
