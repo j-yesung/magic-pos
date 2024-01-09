@@ -1,5 +1,6 @@
 import { useAuth } from '@/hooks/auth/useAuth';
 import { useInput } from '@/hooks/auth/useInput';
+import { useValid } from '@/hooks/auth/useValid';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Button from './Button';
@@ -20,9 +21,18 @@ const SignForm = ({ data }: FormProps) => {
   const { url, subName, caption, buttonName } = data;
   const { signup, login, businessNumberCheck } = useAuth();
   const { value, onChangeHandler } = useInput();
+  const { validateCheck } = useValid(value);
 
-  const signUpClickHandler = () => signup(value);
-  const loginClickHandler = () => login(value);
+  const signUpClickHandler = () => {
+    if (validateCheck()) {
+      signup(value);
+    }
+  };
+  const loginClickHandler = () => {
+    if (validateCheck()) {
+      login(value);
+    }
+  };
 
   return (
     <div className={styles['wrapper']}>
