@@ -16,7 +16,7 @@ const TableContainer = ({ storeData }: { storeData?: StoreWithStoreTable[] }) =>
   /**
    * store_table에 insert할때 필요한 데이터
    */
-  const newStoreTableData: TablesInsert<"store_table"> = {
+  const newStoreTableData: TablesInsert<'store_table'> = {
     is_disabled: false,
     max_guest: 4,
     position: maxPosition === 0 ? 1 : maxPosition?.position && maxPosition.position + 1,
@@ -40,7 +40,7 @@ const TableContainer = ({ storeData }: { storeData?: StoreWithStoreTable[] }) =>
             return <TableListItem key={item.id} storeTableData={item} />
           })
         }
-        <li className={styles["table-list-button"]} onClick={clickAddStoreTableHandler}>+</li>
+        <li className={styles['table-list-button']} onClick={clickAddStoreTableHandler}>+</li>
       </ul>
     </div>
   )

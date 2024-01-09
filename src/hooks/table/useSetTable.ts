@@ -18,18 +18,18 @@ export const useSetTable = () => {
   });
 
   useEffect(() => {
-    if (didMount.current)
+    if (didMount.current) {
       () => {
         if (isPending === false) {
           console.log('로딩중');
         }
       };
-    else didMount.current = true;
+    } else didMount.current = true;
   }, [isPending]);
 
   useEffect(() => {
     if (isError) {
-      console.log(error);
+      console.error(error.message);
     }
   }, [isError, error]);
   return { addTableMutate };

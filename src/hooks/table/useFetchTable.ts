@@ -15,7 +15,7 @@ const useFetchTable = (id: string) => {
 
   useEffect(() => {
     if (isError) {
-      console.log(error.message);
+      console.error(error.message);
     }
   }, [isError, error]);
 
