@@ -21,17 +21,30 @@ export const businessNumberCheckHandler = async (bno: string) => {
 };
 
 /**
- * 회원가입
- * @param values 이메일, 비밀번호
+ * 회원가입 시 유저 정보 & 사업자등록번호 store 테이블에 저장
+ * @param values 이메일, 비밀번호, 사업자등록번호
+ * @returns
  */
 export const signUpHandler = async (values: values) => {
-  const { email, password } = values;
-  const { data, error } = await supabase.auth.signUp({
+  const { email, password, businessNumber } = values;
+  const { data: authData, error: authError } = await supabase.auth.signUp({
     email,
     password,
   });
-  if (error) throw error;
-  return data;
+
+  // undefined 체크
+  if (authData.session?.user?.id === undefined) {
+    throw new Error('User ID is undefined');
+  }
+
+  // 사업자등록번호 store 테이블에 저장
+  const { data: bnoData, error: bnoError } = await supabase
+    .from('store')
+    .insert([{ business_number: businessNumber, business_id: authData.session?.user?.id }])
+    .select('*');
+  if (authError) throw authError;
+  if (bnoError) throw bnoError;
+  return { authData, bnoData };
 };
 
 /**
