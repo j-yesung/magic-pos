@@ -3,7 +3,7 @@ import useCategoriesStore from '@/shared/store/menu-category';
 import styles from './styles/form.module.css';
 
 const CategoryFormPage = () => {
-  const { show, toggleShow, category, setCategory, removeCategoryStore, updateCategoryStore } = useCategoriesStore();
+  const { isShow, toggleShow, category, setCategory, removeCategoryStore, updateCategoryStore } = useCategoriesStore();
 
   // 카테고리 input handler
   const changeCategoryHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,7 +31,7 @@ const CategoryFormPage = () => {
   return (
     <form
       onSubmit={submitupdateCategoryNameHandler}
-      className={show ? `${styles['wrap']} ${styles['active']}` : `${styles['wrap']}`}
+      className={isShow ? `${styles['wrap']} ${styles['active']}` : `${styles['wrap']}`}
     >
       <h3>카테고리명</h3>
       <input
