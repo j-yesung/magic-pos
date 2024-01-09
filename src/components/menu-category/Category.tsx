@@ -1,13 +1,14 @@
 import { addCategory, updateCategoryPosition } from '@/pages/api/menu-category';
 import useCategoriesStore from '@/shared/store/menu-category';
 import { useRef } from 'react';
-import styles from './styles/categories.module.css';
+import styles from './styles/category.module.css';
 
 const CategoryComponentPage = () => {
-  const { category, setCategory, categories, addCategoryStore, dragCategoryStore } = useCategoriesStore();
+  const { toggleShow, category, setCategory, categories, addCategoryStore, dragCategoryStore } = useCategoriesStore();
 
   // 카테고리 플러스
   const clickAddCategoryHandler = async () => {
+    toggleShow(true);
     const emptyValue = `카테고리를 수정해주세요 ${categories.length}`;
     const { data } = await addCategory(category.store_id, emptyValue, categories.length);
     setCategory({
@@ -21,6 +22,7 @@ const CategoryComponentPage = () => {
 
   // 카테고리 선택
   const clickChoiceCategoryHandler = (item: CategoryType) => {
+    toggleShow(true);
     setCategory({
       id: item.id,
       name: item.name,
@@ -56,14 +58,11 @@ const CategoryComponentPage = () => {
   };
 
   return (
-    <>
-      <button type="button" onClick={clickAddCategoryHandler}>
-        +
-      </button>
+    <div className={styles['wrap']}>
       <ul>
         {categories.map((category, idx) => {
           return (
-            <li key={idx} className={styles['category-li']}>
+            <li key={idx}>
               <button
                 type="button"
                 onClick={() => clickChoiceCategoryHandler(category)}
@@ -73,13 +72,18 @@ const CategoryComponentPage = () => {
                 onDragEnd={drop}
                 onDragOver={e => e.preventDefault()}
               >
-                index: {idx}, id: {category.id}, {category.name}, position: {category.position}
+                {category.name}
               </button>
             </li>
           );
         })}
+        <li>
+          <button type="button" onClick={clickAddCategoryHandler}>
+            +
+          </button>
+        </li>
       </ul>
-    </>
+    </div>
   );
 };
 

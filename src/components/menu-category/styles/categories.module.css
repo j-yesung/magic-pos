@@ -1,3 +1,13 @@
-.category-li {
-  /* cursor: pointer; */
+.wrap {
+  height: 100vh;
+  padding: 40px 40px 500px 40px;
+}
+.category-h2 {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.category-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
 }

@@ -2,4 +2,5 @@
   --kiosk-header-height: 80px;
   --kiosk-footer-height: 80px;
   --kiosk-container-padding: 1.25rem;
+  --main-color: hsl(259, 100%, 50%);
 }
