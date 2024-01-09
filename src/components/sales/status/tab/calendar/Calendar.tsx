@@ -1,6 +1,6 @@
 import { Moment } from 'moment';
 import 'moment/locale/ko';
-import Cell from './body/Cell';
+import Cell from './cell/Cell';
 import Days from './days/Days';
 import Header from './header/Header';
 

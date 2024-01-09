@@ -15,11 +15,13 @@ const Tab = () => {
   const clickMoveYesterday = () => {
     if (yesterDay === currentMonth) return;
     setCurrentMonth(yesterDay);
+    setSelectedDate(yesterDay);
   };
 
   const clickMoveToday = () => {
     if (today === currentMonth) return;
     setCurrentMonth(today);
+    setSelectedDate(today);
   };
   return (
     <div>

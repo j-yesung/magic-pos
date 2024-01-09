@@ -52,7 +52,7 @@ const Cell = ({ currentMonth, setCurrentMonth, setIsShow, setSelectedDate, selec
     const today = moment();
     return Month.isSame(today, 'M') ? 'current' : Month.isBefore(today, 'M') ? 'prev' : 'after';
   }
-  console.log(selectedDate);
+
   function getDateType(day: Moment) {
     const today = moment();
     return day.isSame(today, 'D') ? 'current' : day.isBefore(today, 'D') ? 'prev' : 'after';
