@@ -12,10 +12,11 @@ interface FormProps {
 }
 
 const AuthForm = ({ data }: FormProps) => {
-  const path = useRouter().pathname;
+  const router = useRouter();
+  const path = router.pathname;
   const { url, subUrl, title, subTitle, subName, caption, buttonName, subButtonName, description } = data;
   const { login, signup, businessNumberCheck, sendResetPasswordEmail, updatePassword } = useAuth();
-  const { value, onChangeHandler, onKeyDownHandler } = useInput();
+  const { value, changeHandler, keyDownHandler } = useInput();
   const { validateCheck, isBusinessNumberValid } = useValid(value);
 
   const signUpClickHandler = () => {
@@ -31,7 +32,7 @@ const AuthForm = ({ data }: FormProps) => {
 
   return (
     <div className={styles['wrapper']}>
-      <div className={styles['title-wrapper']}>
+      <div className={styles['title-wrapper']} onClick={() => router.push('/')}>
         <h1 className={styles['title']}>{title}</h1>
         <h2 className={styles['sub-title']}>{subTitle}</h2>
       </div>
@@ -40,7 +41,7 @@ const AuthForm = ({ data }: FormProps) => {
       ) : null}
       <form className={styles['form']}>
         <div className={styles['form-inner-wrapper']}>
-          <Input value={value} onChangeHandler={onChangeHandler} onKeyDownHandler={onKeyDownHandler} />
+          <Input value={value} onChangeHandler={changeHandler} onKeyDownHandler={keyDownHandler} />
         </div>
         <div className={styles['form-button-wrapper']}>
           {path === '/auth/signup' && (

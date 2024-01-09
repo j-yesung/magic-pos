@@ -62,7 +62,7 @@ export const logoutHandler = async () => {
  */
 export const resetPasswordHandler = async (email: string) => {
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `http://localhost:3000/auth/reset`,
+    redirectTo: `${process.env.NEXT_PUBLIC_AUTH_REDIRECT_TO}/auth/reset`,
   });
   if (!error) {
     alert('메일이 전송되었습니다.\n메일을 확인해 주세요.');

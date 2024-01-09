@@ -2,6 +2,8 @@ import { useRouter } from 'next/router';
 
 type Values = Record<string, string>;
 
+const MAX_BUSINESS_NUM_LENGTH = 11;
+
 export const useValid = (value: Values) => {
   const path = useRouter().pathname;
   const { email, password, passwordConfirm, businessNumber } = value;
@@ -48,7 +50,7 @@ export const useValid = (value: Values) => {
     return true;
   };
 
-  const isBusinessNumberValid = value.businessNumber.length === 11;
+  const isBusinessNumberValid = value.businessNumber.length === MAX_BUSINESS_NUM_LENGTH;
 
   return { validateCheck, isBusinessNumberValid };
 };
