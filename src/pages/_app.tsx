@@ -1,3 +1,4 @@
+import Modal from '@/components/modal/Modal';
 import '@/styles/globals.css';
 import '@/styles/reset.css';
 import { NextPageWithLayout } from '@/types/common';
@@ -12,5 +13,10 @@ type AppPropsWithLayout = AppProps & {
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? (page => page);
-  return <QueryClientProvider client={queryClient}>{getLayout(<Component {...pageProps} />)}</QueryClientProvider>;
+  return (
+    <QueryClientProvider client={queryClient}>
+      {getLayout(<Component {...pageProps} />)}
+      <Modal />
+    </QueryClientProvider>
+  );
 }

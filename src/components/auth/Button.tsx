@@ -6,11 +6,17 @@ interface BurrtonProps {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   children: React.ReactNode;
   className?: string;
+  disabled?: boolean;
 }
 
-const Button = ({ type, onClick, children, className }: BurrtonProps) => {
+const Button = ({ type, onClick, children, className, disabled }: BurrtonProps) => {
   return (
-    <button className={`${styles['button']} ${className}`} type={type} onClick={onClick}>
+    <button
+      className={!disabled ? `${styles['button']} ${className}` : styles['disabledButton']}
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+    >
       {children}
     </button>
   );
