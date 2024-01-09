@@ -1,0 +1,3 @@
+.container {
+    height: var(--kiosk-footer-height);
+}

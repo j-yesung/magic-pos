@@ -1,32 +1,24 @@
-// import { supabase } from '@/shared/supabase';
 import { supabase } from '@/shared/supabase';
 import axios from 'axios';
-import { NextApiRequest, NextApiResponse } from 'next';
 
 type values = Record<string, string>;
 
 /**
- * 사업자등록번호 인증
- * @param req 요청
- * @param res 응답
- * @returns 메세지
+ * 사업자등록번호 조회
+ * @param bno 사업자등록번호
+ * @returns 인증 메세지
  */
-export default async function businessNumberCheckHandler(req: NextApiRequest, res: NextApiResponse) {
-  const { method } = req;
-  console.log('>>>>', process.env.NEXT_PUBLIC_PUBLIC_DATA_API_KEY);
+export const businessNumberCheckHandler = async (bno: string) => {
+  const data = { b_no: [bno] };
+  const response = await axios.post(
+    `https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=${process.env.NEXT_PUBLIC_PUBLIC_DATA_API_KEY}`,
+    data,
+  );
 
-  if (method === 'POST') {
-    const data = { b_no: [req.body.value] };
-    const response = await axios.post(
-      `https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=${process.env.NEXT_PUBLIC_PUBLIC_DATA_API_KEY}`,
-      data,
-    );
-
-    return response.status === 200 && response.data.data[0].tax_type_cd === '01'
-      ? res.status(200).json('인증되었습니다.')
-      : res.status(200).json(response.data.data[0].tax_type);
-  }
-}
+  return response.status === 200 && response.data.data[0].tax_type_cd === '01'
+    ? '인증되었습니다.'
+    : response.data.data[0].tax_type;
+};
 
 /**
  * 회원가입

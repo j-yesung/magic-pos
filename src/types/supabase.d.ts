@@ -451,3 +451,7 @@ export type Enums<
 export interface StoreWithStoreTable extends Tables<'store'> {
   store_table: Tables<'store_table'>[];
 }
+
+interface CategoryWithMenuItem extends Tables<'menu_category'> {
+  menu_item: Tables<'menu_item'>[];
+}
