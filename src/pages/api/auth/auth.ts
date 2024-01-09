@@ -62,19 +62,22 @@ export const logoutHandler = async () => {
  */
 export const resetPasswordHandler = async (email: string) => {
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${process.env.NEXT_PUBLIC_SUPACE_REDIRECT_TO}/auth/reset`,
+    redirectTo: `http://localhost:3000/auth/reset`,
   });
   if (!error) {
-    alert('메일이 전송되었습니다.');
+    alert('메일이 전송되었습니다.\n메일을 확인해 주세요.');
   }
 };
 
 /**
  * 비밀번호 재설정
- * @param email 이메일
+ * @param password 비밀번호
  */
 export const updatePasswordHandler = async (password: string) => {
   const { data, error } = await supabase.auth.updateUser({ password });
+  if (data) {
+    alert('비밀번호 변경이 완료되었습니다.');
+  }
   if (error) throw error;
   return data;
 };

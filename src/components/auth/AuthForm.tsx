@@ -11,10 +11,10 @@ interface FormProps {
   data: Record<string, string>;
 }
 
-const SignForm = ({ data }: FormProps) => {
+const AuthForm = ({ data }: FormProps) => {
   const path = useRouter().pathname;
-  const { url, subUrl, title, subTitle, subName, caption, buttonName, description } = data;
-  const { login, signup, businessNumberCheck, sendResetPasswordEmail } = useAuth();
+  const { url, subUrl, title, subTitle, subName, caption, buttonName, subButtonName, description } = data;
+  const { login, signup, businessNumberCheck, sendResetPasswordEmail, updatePassword } = useAuth();
   const { value, onChangeHandler, onKeyDownHandler } = useInput();
   const { validateCheck, isBusinessNumberValid } = useValid(value);
 
@@ -35,20 +35,12 @@ const SignForm = ({ data }: FormProps) => {
         <h1 className={styles['title']}>{title}</h1>
         <h2 className={styles['sub-title']}>{subTitle}</h2>
       </div>
-      {path === '/auth/findPassword' && <p className={styles['description']}>{description}</p>}
+      {path === '/auth/findPassword' || path === '/auth/reset' ? (
+        <p className={styles['description']}>{description}</p>
+      ) : null}
       <form className={styles['form']}>
         <div className={styles['form-inner-wrapper']}>
-          {path !== '/auth/findPassword' ? (
-            <Input value={value} onChangeHandler={onChangeHandler} onKeyDownHandler={onKeyDownHandler} />
-          ) : (
-            <input
-              className={styles['input']}
-              name="email"
-              value={value.email}
-              onChange={onChangeHandler}
-              placeholder="이메일"
-            />
-          )}
+          <Input value={value} onChangeHandler={onChangeHandler} onKeyDownHandler={onKeyDownHandler} />
         </div>
         <div className={styles['form-button-wrapper']}>
           {path === '/auth/signup' && (
@@ -57,15 +49,21 @@ const SignForm = ({ data }: FormProps) => {
               onClick={() => businessNumberCheck(value.businessNumber)}
               disabled={!isBusinessNumberValid}
             >
-              사업자등록번호 인증
+              {subButtonName}
             </Button>
           )}
-          {path !== '/auth/findPassword' ? (
+          {path === '/auth/signup' || path === '/auth/login' ? (
             <Button type="button" onClick={path === '/auth/signup' ? signUpClickHandler : loginClickHandler}>
               {buttonName}
             </Button>
-          ) : (
+          ) : null}
+          {path === '/auth/findPassword' && (
             <Button type="button" onClick={() => sendResetPasswordEmail(value.email)}>
+              {buttonName}
+            </Button>
+          )}
+          {path === '/auth/reset' && (
+            <Button type="button" onClick={() => updatePassword(value.password)}>
               {buttonName}
             </Button>
           )}
@@ -84,4 +82,4 @@ const SignForm = ({ data }: FormProps) => {
   );
 };
 
-export default SignForm;
+export default AuthForm;

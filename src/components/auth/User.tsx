@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import SignForm from './SignForm';
+import SignForm from './AuthForm';
 
 const User = () => {
   const path = useRouter().pathname;
@@ -12,7 +12,6 @@ const User = () => {
     subName: '비밀번호를 잊으셨나요?',
     caption: '아직 회원이 아니신가요? 회원가입하러 가기',
     buttonName: '로그인',
-    onClickFn: () => {},
   };
   const SIGNUP_DATA = {
     url: '/auth/login',
@@ -20,7 +19,7 @@ const User = () => {
     subTitle: 'Magic Pos',
     caption: '이미 가입을 하셨나요? 로그인하러 가기',
     buttonName: '회원가입',
-    onClickFn: () => {},
+    subButtonName: '사업자등록번호 인증',
   };
   const FIND_PASSWORD_DATA = {
     title: '편리함의 시작',
@@ -29,8 +28,10 @@ const User = () => {
     buttonName: '링크 전송',
   };
   const UPDATE_PASSWORD_DATA = {
+    title: '편리함의 시작',
+    subTitle: 'Magic Pos',
     buttonName: '비밀번호 변경',
-    title: '새로운 비밀번호를 입력해 주세요.',
+    description: '새로운 비밀번호를 입력해 주세요.',
   };
 
   let formData;
@@ -44,7 +45,7 @@ const User = () => {
     case '/auth/findPassword':
       formData = FIND_PASSWORD_DATA;
       break;
-    case '/auth/updatePassword':
+    case '/auth/reset':
       formData = UPDATE_PASSWORD_DATA;
       break;
     default:

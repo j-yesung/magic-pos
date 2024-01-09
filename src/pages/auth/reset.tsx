@@ -1,3 +1,5 @@
-const ResetPage = () => <div>비번 초기화 페이지</div>;
+import User from '@/components/auth/User';
+
+const ResetPage = () => <User />;
 
 export default ResetPage;

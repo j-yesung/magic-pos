@@ -20,24 +20,30 @@ interface InputType {
 const Input = ({ value, onChangeHandler, onKeyDownHandler }: InputProps) => {
   const path = useRouter().pathname;
   const inputs = [
-    {
-      id: 1,
-      name: 'email',
-      type: 'text',
-      placeholder: '이메일',
-    },
-    {
-      id: 2,
-      name: 'password',
-      type: 'password',
-      placeholder: '비밀번호: 최소 8자리 이상 25자리 이하 (알파벳, 특수문자 포함)',
-    },
-    path === '/auth/signup' && {
-      id: 3,
-      name: 'passwordConfirm',
-      type: 'password',
-      placeholder: '비밀번호 확인',
-    },
+    path === '/auth/login' || path === '/auth/signup' || path === '/auth/findPassword'
+      ? {
+          id: 1,
+          name: 'email',
+          type: 'text',
+          placeholder: '이메일',
+        }
+      : false,
+    path === '/auth/login' || path === '/auth/signup' || path === '/auth/reset'
+      ? {
+          id: 2,
+          name: 'password',
+          type: 'password',
+          placeholder: '비밀번호: 최소 8자리 이상 25자리 이하 (알파벳, 특수문자 포함)',
+        }
+      : false,
+    path === '/auth/signup' || path === '/auth/reset'
+      ? {
+          id: 3,
+          name: 'passwordConfirm',
+          type: 'password',
+          placeholder: '비밀번호 확인',
+        }
+      : false,
     path === '/auth/signup' && {
       id: 4,
       name: 'businessNumber',
@@ -46,12 +52,6 @@ const Input = ({ value, onChangeHandler, onKeyDownHandler }: InputProps) => {
       minLength: 11,
       maxLength: 11,
       onKeyDown: onKeyDownHandler,
-    },
-    path === '/auth/findPassword' && {
-      id: 5,
-      name: 'findPassword',
-      type: 'text',
-      placeholder: '이메일',
     },
   ] as InputType[];
 
