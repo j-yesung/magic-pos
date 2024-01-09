@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import useModalStore from '@/shared/store/modal';
-import styles from './styles/AlertModal.module.css';
+import styles from './styles/DefaultModal.module.css';
 
 const AlertModal = () => {
   const { hideModal, alertTypeOption } = useModalStore();

@@ -1,10 +1,9 @@
 import useModalStore from '@/shared/store/modal';
 import { ReactElement } from 'react';
-import { ModalAlertTypeOption } from '@/types/common';
-import AlertModal from '@/components/modal/default/AlertModal';
+import { ModalAlertTypeOption, ModalConfirmTypeOption } from '@/types/common';
 
 export const useModal = () => {
-  const { showModal, hideModal, setChildElem, setAlertTypeOption } = useModalStore();
+  const { showModal, hideModal, setChildElem, setAlertTypeOption, setConfirmTypeOption } = useModalStore();
 
   class MagicModal {
     /**
@@ -24,8 +23,24 @@ export const useModal = () => {
       hideModal();
     }
 
+    /**
+     * 일반 알림 모달을 출력합니다.
+     * usage: MagicModal.alert({content: '안녕하세요'});
+     * usage: MagicModal.alert({content: '안녕하세요', showButton: false, timeout: 2000});
+     * @param option
+     */
     static alert(option: ModalAlertTypeOption) {
       setAlertTypeOption(option);
+      showModal();
+    }
+
+    /**
+     * 확인 모달을 출력합니다.
+     * usage: MagicModal.confirm({ content: '안녕하세요', confirmButtonCallback: () => {alert('yes!!')} });
+     * @param option
+     */
+    static confirm(option: ModalConfirmTypeOption) {
+      setConfirmTypeOption(option);
       showModal();
     }
   }

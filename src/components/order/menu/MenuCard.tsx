@@ -12,7 +12,12 @@ const MenuCard = ({ menu }: MenuCardProps) => {
   const { MagicModal } = useModal();
 
   const handleClickCard = () => {
-    MagicModal.alert({ content: '안녕하세요' });
+    MagicModal.confirm({
+      content: '안녕하세요',
+      confirmButtonCallback: () => {
+        alert('yes!!');
+      },
+    });
     // MagicModal.fire(<div>test</div>);
   };
 

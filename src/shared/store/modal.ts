@@ -1,16 +1,23 @@
 import { create } from 'zustand';
 import { ReactElement } from 'react';
-import { ModalAlertTypeOption } from '@/types/common';
+import { ModalAlertTypeOption, ModalConfirmTypeOption } from '@/types/common';
 
 /**
  * 모달의 상태를 관리합니다.
  */
 
 const DEFAULT_ALERT_TYPE_OPTION: ModalAlertTypeOption = { content: '', showButton: true, buttonText: '확인' };
+const DEFAULT_CONFIRM_TYPE_OPTION: ModalConfirmTypeOption = {
+  content: '',
+  confirmButtonText: '확인',
+  cancelButtonText: '취소',
+  confirmButtonCallback: null,
+  cancelButtonCallback: null,
+};
 
 interface ModalState {
   show: boolean;
-  type: 'component' | 'alert';
+  type: 'component' | 'alert' | 'confirm';
   childElem?: ReactElement | null;
   setChildElem: (elem: ReactElement | null) => void;
   showModal: () => void;
@@ -18,6 +25,8 @@ interface ModalState {
   toggleModal: () => void;
   alertTypeOption: ModalAlertTypeOption;
   setAlertTypeOption: (option: ModalAlertTypeOption) => void;
+  confirmTypeOption: ModalConfirmTypeOption;
+  setConfirmTypeOption: (option: ModalConfirmTypeOption) => void;
 }
 
 const useModalStore = create<ModalState>()(set => ({
@@ -32,6 +41,10 @@ const useModalStore = create<ModalState>()(set => ({
   alertTypeOption: DEFAULT_ALERT_TYPE_OPTION,
   setAlertTypeOption: (option: ModalAlertTypeOption) =>
     set(() => ({ alertTypeOption: { ...DEFAULT_ALERT_TYPE_OPTION, ...option }, type: 'alert' })),
+  // 모달 확인 창 관련
+  confirmTypeOption: DEFAULT_CONFIRM_TYPE_OPTION,
+  setConfirmTypeOption: (option: ModalConfirmTypeOption) =>
+    set(() => ({ confirmTypeOption: { ...DEFAULT_CONFIRM_TYPE_OPTION, ...option }, type: 'confirm' })),
 }));
 
 export default useModalStore;

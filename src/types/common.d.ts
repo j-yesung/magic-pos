@@ -12,3 +12,11 @@ interface ModalAlertTypeOption {
   buttonText?: string;
   timeout?: number;
 }
+
+interface ModalConfirmTypeOption {
+  content: string;
+  confirmButtonText?: string;
+  cancelButtonText?: string;
+  confirmButtonCallback?: (() => void) | null;
+  cancelButtonCallback?: (() => void) | null;
+}

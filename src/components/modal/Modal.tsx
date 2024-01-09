@@ -3,6 +3,7 @@ import styles from './styles/Modal.module.css';
 import clsx from 'clsx';
 import useModalStore from '@/shared/store/modal';
 import AlertModal from '@/components/modal/default/AlertModal';
+import ConfirmModal from '@/components/modal/default/ConfirmModal';
 
 const Modal = () => {
   const { show, childElem, hideModal, type } = useModalStore();
@@ -21,6 +22,8 @@ const Modal = () => {
     case 'alert':
       child = <AlertModal />;
       break;
+    case 'confirm':
+      child = <ConfirmModal />;
   }
 
   return (
