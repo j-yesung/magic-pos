@@ -49,7 +49,7 @@ const Cell = ({ currentMonth }: { currentMonth: Moment }) => {
   let days = [];
   let day = startDay;
   let formatDate = '';
-  console.log(moment().clone().day());
+
   const today = moment(); // 유저의 현재 달입니다.
 
   while (day <= endDay) {
@@ -58,6 +58,7 @@ const Cell = ({ currentMonth }: { currentMonth: Moment }) => {
 
       days.push(
         <div
+          key={formatDate}
           className={dateVariant({
             monthType: getMonthType(day),
             dateType: getDateType(day),
@@ -74,7 +75,11 @@ const Cell = ({ currentMonth }: { currentMonth: Moment }) => {
       );
       day = day.add(1, 'day').clone();
     }
-    row.push(<div style={{ display: 'grid', gridTemplateColumns: 'repeat(7,1fr)', gap: '1rem' }}>{days}</div>);
+    row.push(
+      <div key={days[0].key} style={{ display: 'grid', gridTemplateColumns: 'repeat(7,1fr)', gap: '1rem' }}>
+        {days}
+      </div>,
+    );
     days = [];
   }
   return (
