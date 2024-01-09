@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
-import SignForm from './AuthForm';
+import AuthForm from './AuthForm';
+
+type AuthObjectType = Record<string, string>;
 
 const User = () => {
   const path = useRouter().pathname;
@@ -34,29 +36,14 @@ const User = () => {
     description: '새로운 비밀번호를 입력해 주세요.',
   };
 
-  let formData;
-  switch (path) {
-    case '/auth/login':
-      formData = LOGIN_DATA;
-      break;
-    case '/auth/signup':
-      formData = SIGNUP_DATA;
-      break;
-    case '/auth/findPassword':
-      formData = FIND_PASSWORD_DATA;
-      break;
-    case '/auth/reset':
-      formData = UPDATE_PASSWORD_DATA;
-      break;
-    default:
-      break;
-  }
+  const AuthData: Record<string, AuthObjectType> = {
+    '/auth/login': LOGIN_DATA,
+    '/auth/signup': SIGNUP_DATA,
+    '/auth/findPassword': FIND_PASSWORD_DATA,
+    '/auth/reset': UPDATE_PASSWORD_DATA,
+  };
 
-  return (
-    <>
-      <SignForm data={formData!} />
-    </>
-  );
+  return <AuthForm data={AuthData[path]} />;
 };
 
 export default User;
