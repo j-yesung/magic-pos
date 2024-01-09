@@ -2,7 +2,7 @@ import React from 'react';
 import StepButton from '@/components/layout/order/Footer/StepButton';
 import styles from './styles/step-button-container.module.css';
 import useOrderStore from '@/shared/store/order';
-import { useSwiper, SwiperRef } from 'swiper/react';
+import { SwiperRef } from 'swiper/react';
 
 interface StepButtonContainerProps {
   step: number;
@@ -16,7 +16,7 @@ const BUTTON_OPTIONS: { [key: number]: { prev: string; next?: string } } = {
   },
   2: {
     prev: '메뉴 선택',
-    next: '결제 하기',
+    next: '결제하기',
   },
   3: {
     prev: '담은 메뉴 확인',
@@ -25,7 +25,6 @@ const BUTTON_OPTIONS: { [key: number]: { prev: string; next?: string } } = {
 
 const StepButtonContainer = ({ step, sliderRef }: StepButtonContainerProps) => {
   const { goNextStep, goPrevStep } = useOrderStore.getState();
-  const swiper = useSwiper();
 
   const prev = BUTTON_OPTIONS[step]?.prev;
   const next = BUTTON_OPTIONS[step]?.next;
