@@ -1,24 +1,25 @@
-.setTable-list-item {
-  width: 8em;
-  height: 8em;
+.table-list-item {
+  width: 9em;
+  height: 7em;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 3%;
+  margin: 5% 0;
   font-size: 1.5em;
   border-radius: 0.5em;
   transition: 0.2s;
   background-color: var(--main-color);
   cursor: pointer;
+  color: #fff;
 }
 
-.setTable-list-item:hover {
+.table-list-item:hover {
   background-color: #ccf;
 }
-.setTable-list-item:hover > .list-text {
+.table-list-item:hover > .list-text {
   display: none;
 }
-.setTable-list-item:hover > .list-text-hover {
+.table-list-item:hover > .list-text-hover {
   display: block;
 }
 .list-text-hover {

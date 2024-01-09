@@ -1,0 +1,18 @@
+.table-wrapper {
+  display: flex;
+  width: 100%;
+  height: auto;
+  font-size: 15px;
+}
+
+/* 더미 사이드 바 (left) */
+.main-dummy-sideBar {
+  width: 9%;
+  height: 100vh;
+  background-color: #ccc;
+}
+
+/* 더미 사이드 바 (right) */
+.table-dummy-side-bar {
+  width: 18%;
+}

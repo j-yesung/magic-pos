@@ -147,6 +147,7 @@ export interface Database {
           id: string;
           image_url: string | null;
           name: string | null;
+          price: number | null;
           remain_ea: number | null;
         };
         Insert: {
@@ -154,6 +155,7 @@ export interface Database {
           id?: string;
           image_url?: string | null;
           name?: string | null;
+          price?: number | null;
           remain_ea?: number | null;
         };
         Update: {
@@ -161,6 +163,7 @@ export interface Database {
           id?: string;
           image_url?: string | null;
           name?: string | null;
+          price?: number | null;
           remain_ea?: number | null;
         };
         Relationships: [
@@ -223,21 +226,21 @@ export interface Database {
       profiles: {
         Row: {
           created_at: string;
+          email: string | null;
           id: string;
           is_disabled: boolean | null;
-          email: string | null;
         };
         Insert: {
           created_at?: string;
+          email?: string | null;
           id: string;
           is_disabled?: boolean | null;
-          email?: string | null;
         };
         Update: {
           created_at?: string;
+          email?: string | null;
           id?: string;
           is_disabled?: boolean | null;
-          email?: string | null;
         };
         Relationships: [
           {
@@ -330,7 +333,6 @@ export interface Database {
           id: string;
           is_disabled: boolean | null;
           max_guest: number | null;
-          name: string | null;
           position: number | null;
           store_id: string;
         };
@@ -338,15 +340,13 @@ export interface Database {
           id?: string;
           is_disabled?: boolean | null;
           max_guest?: number | null;
-          name?: string | null;
           position?: number | null;
-          store_id: string;
+          store_id?: string;
         };
         Update: {
           id?: string;
           is_disabled?: boolean | null;
           max_guest?: number | null;
-          name?: string | null;
           position?: number | null;
           store_id?: string;
         };
@@ -447,3 +447,7 @@ export type Enums<
   : PublicEnumNameOrOptions extends keyof Database['public']['Enums']
   ? Database['public']['Enums'][PublicEnumNameOrOptions]
   : never;
+
+export interface StoreWithStoreTable extends Tables<'store'> {
+  store_table: Tables<'store_table'>[];
+}
