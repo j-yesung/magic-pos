@@ -14,7 +14,14 @@ interface MenCategoryContainerProps {
 const MenuCategoryContainer = ({ menuData, selectedCategory, setSelectedCategory }: MenCategoryContainerProps) => {
   return (
     <div className={styles.container}>
-      <Swiper modules={[Virtual]} spaceBetween={20} slidesPerView={3.5}>
+      <Swiper
+        modules={[Virtual]}
+        spaceBetween={20}
+        slidesPerView={3.5}
+        centeredSlides={true}
+        centeredSlidesBounds={true}
+        slideToClickedSlide={true}
+      >
         {menuData.map((category, index) => (
           <SwiperSlide key={category.id} virtualIndex={index}>
             <MenuCategory
