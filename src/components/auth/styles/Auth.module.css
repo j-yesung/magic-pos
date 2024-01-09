@@ -9,6 +9,7 @@
 .title-wrapper {
   gap: 0.5rem;
   display: flex;
+  cursor: pointer;
   align-items: center;
   flex-direction: row;
   margin-bottom: 2.5rem;
@@ -82,4 +83,10 @@
   font-size: 0.8rem;
   justify-content: flex-end;
   text-decoration: underline;
+}
+
+.description {
+  font-size: 1rem;
+  color: #191919;
+  margin-bottom: 1rem;
 }

@@ -47,6 +47,12 @@ const Input = ({ value, onChangeHandler, onKeyDownHandler }: InputProps) => {
       maxLength: 11,
       onKeyDown: onKeyDownHandler,
     },
+    path === '/auth/findPassword' && {
+      id: 5,
+      name: 'findPassword',
+      type: 'text',
+      placeholder: '이메일',
+    },
   ] as InputType[];
 
   return (

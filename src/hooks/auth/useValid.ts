@@ -15,8 +15,18 @@ export const useValid = (value: Values) => {
       if (!email || !password) {
         return alert('필수 입력값을 입력해 주세요.');
       }
-    } else if (!email || !password || !passwordConfirm || !businessNumber) {
-      return alert('필수 입력값을 입력해 주세요.');
+    }
+
+    if (path === '/auth/signup') {
+      if (!email || !password || !passwordConfirm || !businessNumber) {
+        return alert('필수 입력값을 입력해 주세요.');
+      }
+    }
+
+    if (path === '/auth/findPassword') {
+      if (!email) {
+        return alert('필수 입력값을 입력해 주세요.');
+      }
     }
 
     if (!emailRegex.test(email)) {
@@ -26,7 +36,7 @@ export const useValid = (value: Values) => {
     //   return alert('비밀번호 형식이 올바르지 않습니다.');
     // }
 
-    if (path === '/auth/signup') {
+    if (path === '/auth/signup' || path === '/auth/reset') {
       if (password !== passwordConfirm) {
         return alert('비밀번호가 일치하지 않습니다.');
       }
