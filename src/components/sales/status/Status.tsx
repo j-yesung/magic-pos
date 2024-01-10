@@ -4,7 +4,12 @@ import moment from 'moment';
 import { useEffect, useState } from 'react';
 import ChartBar from './chart/ChartBar';
 import Tab from './tab/Tab';
-
+interface SalesType {
+  y: number;
+  x: string;
+  ea: number;
+  category: string[];
+}
 const TIME_FORMAT = 'YYYY-MM-DD HH:00';
 
 const momentToString = (date: moment.Moment, format: string) => {
@@ -12,12 +17,36 @@ const momentToString = (date: moment.Moment, format: string) => {
 };
 
 const Status = () => {
-  const [sample, setSample] = useState<Tables<'sales'>[]>([]);
+  const [data, setData] = useState<Tables<'sales'>[]>([]);
   // const today = moment().hour(0).subtract(9, 'hour').format('YYYY-MM-DD HH:00');
   // const tomorrow = moment().hour(0).subtract(9, 'hour').add(1, 'day').format('YYYY-MM-DD HH:00');
 
   const today = moment().hour(0).subtract(9, 'hour');
   const cloneToday = today.clone();
+
+  const saleFormatData: SalesType[] = [];
+  if (data) {
+    const weekSales = data.reduce((acc, day) => {
+      const date = moment(day.sales_date).format('dddd');
+      const check = acc.findIndex(a => a.x === moment(day.sales_date).format('dddd'));
+
+      if (check !== -1) {
+        acc[check].y += day.product_price! * day.product_ea!;
+        acc[check].ea += day.product_ea!;
+        acc[check].category.push(day.product_category!);
+      } else {
+        const obj = {
+          y: day.product_price! * day.product_ea! || 0,
+          x: date || '',
+          ea: day.product_ea || 0,
+          category: [day.product_category] || [],
+        };
+        acc.push(obj as SalesType);
+      }
+
+      return acc;
+    }, saleFormatData);
+  }
 
   const getTodaySales = async () => {
     const { data: sales, error } = await supabase
@@ -47,7 +76,7 @@ const Status = () => {
   const getWeekSales = async () => {
     const { data: sales, error } = await supabase
       .from('sales')
-      .select('product_ea,product_name,product_price,sales_date')
+      .select('product_ea,product_name,product_price,sales_date,product_category')
       .gte('sales_date', momentToString(cloneToday.subtract(7, 'day'), TIME_FORMAT))
       .lt('sales_date', momentToString(today, TIME_FORMAT));
     if (error) {
@@ -69,16 +98,15 @@ const Status = () => {
   };
 
   useEffect(() => {
-    getMonthSales().then(result => {
-      console.log(result);
-      setSample(result.sales as typeof sample);
+    getWeekSales().then(result => {
+      setData(result.sales as typeof data);
     });
   }, []);
 
   return (
     <div>
       <Tab />
-      <ChartBar sample={sample} />
+      <ChartBar data={data} />
     </div>
   );
 };

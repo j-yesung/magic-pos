@@ -34,7 +34,7 @@ const data = [
   { x: '2016-12-25', y: 20 },
   { x: '2016-12-26', y: 10 },
 ];
-const ChartBar = ({ sample }: { sample: Tables<'sales'>[] }) => {
+const ChartBar = ({ data }: { data: Tables<'sales'>[] }) => {
   return (
     <div style={{ width: '800px', height: '800px', margin: '120px' }}>
       <Bar
@@ -42,7 +42,10 @@ const ChartBar = ({ sample }: { sample: Tables<'sales'>[] }) => {
           labels: ['red', 'blue', 'yellow'],
           datasets: [
             {
-              data,
+              data: [
+                { x: '2016-12-25', y: 20 },
+                { x: '2016-12-26', y: 10 },
+              ],
               backgroundColor: data.map((d, i) => {
                 const bgColor = i === data.length - 1 ? 'hsl(259, 100%, 50%)' : '#ccc';
                 return bgColor;
