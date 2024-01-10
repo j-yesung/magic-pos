@@ -1,0 +1,14 @@
+.container {
+    --row-container-height: 90%;
+    --price-container-height: 10%;
+    height: 100%;
+}
+
+.row-container {
+    height: var(--row-container-height);
+    overflow-y: auto;
+}
+
+.price-container {
+    height: var(--price-container-height);
+}

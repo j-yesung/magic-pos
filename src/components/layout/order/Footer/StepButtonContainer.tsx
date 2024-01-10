@@ -24,7 +24,7 @@ const BUTTON_OPTIONS: { [key: number]: { prev: string; next?: string } } = {
 };
 
 const StepButtonContainer = ({ step, sliderRef }: StepButtonContainerProps) => {
-  const { goNextStep, goPrevStep } = useOrderStore.getState();
+  const { goNextStep, goPrevStep, orderList } = useOrderStore.getState();
 
   const prev = BUTTON_OPTIONS[step]?.prev;
   const next = BUTTON_OPTIONS[step]?.next;
@@ -42,7 +42,7 @@ const StepButtonContainer = ({ step, sliderRef }: StepButtonContainerProps) => {
   return (
     <div className={styles.container}>
       {prev && <StepButton text={prev} handler={prevClickHandler} />}
-      {next && <StepButton text={next} handler={nextClickHandler} />}
+      {next && <StepButton text={next} handler={nextClickHandler} disabled={orderList.length === 0} />}
     </div>
   );
 };

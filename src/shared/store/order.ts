@@ -14,6 +14,7 @@ interface OrderState {
   setMenuData: (data: CategoryWithMenuItem[]) => void;
   orderList: Tables<'menu_item'>[];
   addOrderList: (menu: Tables<'menu_item'>[]) => void;
+  subtractOrderList: (menu: Tables<'menu_item'>) => void;
 }
 
 const useOrderStore = create<OrderState>()(set => ({
@@ -32,6 +33,12 @@ const useOrderStore = create<OrderState>()(set => ({
     }),
   orderList: [],
   addOrderList: (menu: Tables<'menu_item'>[]) => set(state => ({ orderList: [...state.orderList, ...menu] })),
+  subtractOrderList: (menu: Tables<'menu_item'>) =>
+    set(state => {
+      const findIndex = state.orderList.findIndex(o => o.id === menu.id);
+      state.orderList.splice(findIndex, 1);
+      return { orderList: state.orderList };
+    }),
 }));
 
 export default useOrderStore;

@@ -1,8 +1,14 @@
-.section {
-    --message-box-height: 30px;
+.container {
+    --category-header-height: 10%;
+    --menu-container-height: 80%;
+    --message-box-height: 10%;
+    height: 100%;
+}
 
+.section {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: max-content;
     column-gap: 15px;
     padding: 0 15px 0 15px;
     justify-items: center;
@@ -12,14 +18,10 @@
 
     @media screen and (min-width: 768px) {
         grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(4, 195px);
+        row-gap: 10px;
     }
 }
 
 .message-box {
     height: var(--message-box-height);
-    font-size: 1.2rem;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 30px 0 30px;
 }
