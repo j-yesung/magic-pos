@@ -15,8 +15,8 @@ interface ChartProps {
  * chart component의 어디서든 재사용 가능하도록 하는것이 plugin 같습니다.
  */
 
-const chartAreaBackground = {
-  id: 'chartAreaBackground',
+const chartXAxisBorder = {
+  id: 'chartXAxisBorder',
   beforeDatasetsDraw({ ctx, chartArea }: ChartProps) {
     ctx.save(); //이해가 안됨 일딴 넘어가자
     ctx.beginPath(); // 선그리기 시작
@@ -29,7 +29,6 @@ const chartAreaBackground = {
     ctx.restore();
   },
 };
-// hsl(259, 100%, 50%)
 
 const data = [
   { x: '2016-12-25', y: 20 },
@@ -47,8 +46,8 @@ const ChartBar = ({ sample }: { sample: Tables<'sales'>[] }) => {
             {
               data,
               backgroundColor: data.map((d, i) => {
-                const color = i === data.length - 1 ? 'black' : 'red';
-                return color;
+                const bgColor = i === data.length - 1 ? 'hsl(259, 100%, 50%)' : '#ccc';
+                return bgColor;
               }),
             },
           ],
@@ -87,18 +86,22 @@ const ChartBar = ({ sample }: { sample: Tables<'sales'>[] }) => {
               display: false,
             },
             datalabels: {
-              color: '#000',
+              color: value => {
+                const color = value.dataset.data.length - 1 === value.dataIndex ? 'black' : ' red';
+                return color;
+              }, // 바 위에 뜬 value에 대한 color 조절 입니다.
               anchor: 'end',
               align: 'end',
               offset: 3,
               clamp: true,
               formatter(value) {
+                value.color = 'red';
                 return value.y;
               },
             },
           },
         }}
-        plugins={[chartAreaBackground]}
+        plugins={[chartXAxisBorder]}
       />
     </div>
   );
