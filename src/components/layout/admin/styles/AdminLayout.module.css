@@ -2,7 +2,7 @@
 .admin-wrapper {
   display: grid;
   transition: all 0.4s;
-  grid-template-columns: 20rem repeat(5, 1fr);
+  grid-template-columns: 15rem repeat(5, 1fr);
   grid-template-rows: 6rem calc(100vh - 6rem);
   grid-template-areas: 'header header header header header header' 'aside main main main main main';
 }
@@ -10,13 +10,15 @@
 .admin-wrapper-toggle {
   display: grid;
   transition: all 0.4s;
-  grid-template-columns: 0 repeat(5, 1fr);
+  grid-template-columns: 15rem repeat(5, 1fr);
   grid-template-areas: 'header header header header header header' 'aside main main main main main';
 }
 .admin-wrapper-toggle .nav-wrapper {
-  visibility: hidden;
   transform: translateX(-100%);
   transition: transform 0.3s ease-in-out;
+}
+.admin-wrapper-toggle .main-wrapper {
+  grid-column: 1 / 7;
 }
 
 /* 헤더 영역입니다. */
@@ -27,6 +29,10 @@
   display: flex;
   flex-direction: column;
   background-color: #212121;
+}
+
+.header-wrapper input {
+  display: none;
 }
 
 .header-wrapper div {
@@ -98,9 +104,8 @@
 .nav-wrapper {
   padding: 3rem;
   grid-area: aside;
-  border-radius: 0 2rem 2rem 0;
   transition: all 0.4s;
-  /* box-shadow: 0.5rem 0.5rem rgba(0, 0, 0, 0.1); */
+  border-radius: 0 2rem 2rem 0;
   box-shadow: 0 0.4rem 0.8rem 0 rgba(0, 0, 0, 0.5);
 }
 
@@ -108,7 +113,7 @@
   gap: 3rem;
   display: flex;
   list-style: none;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   align-items: center;
   flex-direction: column;
   justify-content: center;
@@ -140,4 +145,5 @@
   grid-area: main;
   border-radius: 2rem;
   height: calc(100vh - 6rem);
+  border: 2px solid #ad3aff;
 }
