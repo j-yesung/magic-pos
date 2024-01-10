@@ -147,7 +147,7 @@ export interface Database {
           id: string;
           image_url: string | null;
           name: string | null;
-          price: number | null;
+          price: number;
           remain_ea: number | null;
         };
         Insert: {

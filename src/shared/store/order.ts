@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { CategoryWithMenuItem } from '@/types/supabase';
+import { CategoryWithMenuItem, Tables } from '@/types/supabase';
 
 /**
  * 일반고객의 주문과 관련된 전역 상태를 관리하는 store 입니다.
@@ -12,6 +12,8 @@ interface OrderState {
   goNextStep: () => void;
   goPrevStep: () => void;
   setMenuData: (data: CategoryWithMenuItem[]) => void;
+  orderList: Tables<'menu_item'>[];
+  addOrderList: (menu: Tables<'menu_item'>[]) => void;
 }
 
 const useOrderStore = create<OrderState>()(set => ({
@@ -28,6 +30,8 @@ const useOrderStore = create<OrderState>()(set => ({
       }
       return { menuData: state.menuData };
     }),
+  orderList: [],
+  addOrderList: (menu: Tables<'menu_item'>[]) => set(state => ({ orderList: [...state.orderList, ...menu] })),
 }));
 
 export default useOrderStore;
