@@ -15,7 +15,7 @@ const MenuModal = ({ menu }: { menu: Tables<'menu_item'> }) => {
     setQuantity(prev => ++prev);
   };
 
-  const handleCLickDownQuantity = () => {
+  const handleClickDownQuantity = () => {
     setQuantity(prev => Math.max(prev - 1, 1));
   };
 
@@ -30,7 +30,7 @@ const MenuModal = ({ menu }: { menu: Tables<'menu_item'> }) => {
       <span className={styles.name}>{menu.name}</span>
       <span className={styles.price}>{convertNumberToWon(menu.price ?? 0)}</span>
       <div className={styles.quantity}>
-        <button onClick={handleCLickDownQuantity}>-</button>
+        <button onClick={handleClickDownQuantity}>-</button>
         <span>{quantity}</span>
         <button onClick={handleClickUpQuantity}>+</button>
       </div>
