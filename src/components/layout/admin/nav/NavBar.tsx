@@ -21,11 +21,7 @@ const NavBar = () => {
     <aside className={styles.navWrapper}>
       <ul>
         {navList.map(list => (
-          <li
-            className={`${list.active ? styles.active : ''}`}
-            key={list.id}
-            onClick={() => clickNavListHandler(list.id)}
-          >
+          <li className={list.active ? styles.active : ''} key={list.id} onClick={() => clickNavListHandler(list.id)}>
             <span>{list.name}</span>
           </li>
         ))}

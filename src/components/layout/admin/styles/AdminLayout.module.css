@@ -2,6 +2,7 @@
 .admin-wrapper {
   display: grid;
   grid-template-columns: 20rem repeat(5, 1fr);
+  grid-template-rows: 6rem calc(100vh - 6rem);
   grid-template-areas: 'header header header header header header' 'aside main main main main main';
 }
 /* 운영 모드 레이아웃 */
@@ -95,7 +96,6 @@
 .nav-wrapper {
   margin: 1rem;
   padding: 3rem;
-  height: 100vh;
   grid-area: aside;
   border-radius: 2rem;
   transition: all 0.4s;
@@ -137,7 +137,6 @@
 .main-wrapper {
   margin: 1rem;
   padding: 3rem;
-  height: 100vh;
   grid-area: main;
   border-radius: 2rem;
   border: 2px solid #191919;
