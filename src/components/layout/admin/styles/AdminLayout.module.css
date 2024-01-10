@@ -1,6 +1,7 @@
 /* 관리자 모드 레이아웃 */
 .admin-wrapper {
   display: grid;
+  transition: all 0.4s;
   grid-template-columns: 20rem repeat(5, 1fr);
   grid-template-rows: 6rem calc(100vh - 6rem);
   grid-template-areas: 'header header header header header header' 'aside main main main main main';
@@ -8,6 +9,7 @@
 /* 운영 모드 레이아웃 */
 .admin-wrapper-toggle {
   display: grid;
+  transition: all 0.4s;
   grid-template-columns: 0 repeat(5, 1fr);
   grid-template-areas: 'header header header header header header' 'aside main main main main main';
 }
@@ -94,12 +96,12 @@
 
 /* 사이드바 영역입니다. */
 .nav-wrapper {
-  margin: 1rem;
   padding: 3rem;
   grid-area: aside;
-  border-radius: 2rem;
+  border-radius: 0 2rem 2rem 0;
   transition: all 0.4s;
-  border: 2px solid #191919;
+  /* box-shadow: 0.5rem 0.5rem rgba(0, 0, 0, 0.1); */
+  box-shadow: 0 0.4rem 0.8rem 0 rgba(0, 0, 0, 0.5);
 }
 
 .nav-wrapper ul {
@@ -124,7 +126,6 @@
 .nav-wrapper ul li:hover {
   color: #fff;
   cursor: pointer;
-  transition: all 0.4s;
   background-color: #ad3aff;
 }
 
@@ -135,9 +136,8 @@
 
 /* 메인 영역입니다. */
 .main-wrapper {
-  margin: 1rem;
   padding: 3rem;
   grid-area: main;
   border-radius: 2rem;
-  border: 2px solid #191919;
+  height: calc(100vh - 6rem);
 }
