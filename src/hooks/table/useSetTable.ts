@@ -1,4 +1,4 @@
-import { addStoreTable } from '@/pages/api/store-table';
+import { addStoreTable, updateStoreTable } from '@/pages/api/store-table';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useRef } from 'react';
 
@@ -6,10 +6,10 @@ export const useSetTable = () => {
   const didMount = useRef(false);
   const queryClient = useQueryClient();
   const {
-    mutate: addTableMutate,
-    isError,
-    error,
-    isPending,
+    mutate: addMutate,
+    isError: addIsError,
+    error: addError,
+    isPending: addIsPending,
   } = useMutation({
     mutationFn: addStoreTable,
     onSuccess: () => {
@@ -17,22 +17,36 @@ export const useSetTable = () => {
     },
   });
 
+  const {
+    mutate: updateMutate,
+    isError: updateIsError,
+    error: updateError,
+    isPending: updateIsPending,
+  } = useMutation({
+    mutationFn: updateStoreTable,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['table'] });
+    },
+  });
+
+
+
   useEffect(() => {
     if (didMount.current) {
       () => {
-        if (isPending === false) {
+        if (addIsPending || updateIsPending) {
           console.log('로딩중');
         }
       };
     } else didMount.current = true;
-  }, [isPending]);
+  }, [addIsPending, updateIsPending]);
 
   useEffect(() => {
-    if (isError) {
-      console.error(error.message);
-    }
-  }, [isError, error]);
-  return { addTableMutate };
+    if (addIsError) {
+      console.error(addError.message || updateError?.message);
+    } updateError
+  }, [addIsError, updateIsError, addError, updateError]);
+  return { addMutate, updateMutate };
 };
 
 export default useSetTable;
