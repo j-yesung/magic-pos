@@ -7,8 +7,8 @@ import axios from 'axios';
  * 결제 성공 페이지
  * @constructor
  */
-const OrderSuccessPage = () => {
-  return <SuccessContainer />;
+const OrderSuccessPage = ({ payment }: { payment: Payment }) => {
+  return <SuccessContainer payment={payment} />;
 };
 
 export default OrderSuccessPage;
@@ -38,18 +38,16 @@ export const getServerSideProps: GetServerSideProps = async context => {
       },
     );
 
-    console.log(payment);
-
     return {
       props: { payment },
     };
-  } catch (err: any) {
-    // console.error('err', err.response.data);
+  } catch (err: unknown) {
+    const error = err as ErrorResponse;
 
     return {
       redirect: {
-        destination: `/order/fail?code=${err.response.data.code}&message=${encodeURIComponent(
-          err.response.data.message,
+        destination: `/order/fail?code=${error.response.data.code}&message=${encodeURIComponent(
+          error.response.data.message,
         )}`,
         permanent: false,
       },

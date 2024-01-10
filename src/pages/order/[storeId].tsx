@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/virtual';
 import OrderLayout from '@/components/layout/order/OrderLayout';
@@ -8,19 +8,29 @@ import { CategoryWithMenuItem } from '@/types/supabase';
 import useOrderStore from '@/shared/store/order';
 import { isEmptyObject } from '@/shared/helper';
 
-const OrderIndexPage = ({ menuData }: { menuData: CategoryWithMenuItem[] }) => {
-  const { setMenuData } = useOrderStore();
+const OrderIndexPage = ({ menuData, storeId }: { menuData: CategoryWithMenuItem[]; storeId: string }) => {
+  const { setMenuData, setStoreId } = useOrderStore();
+  const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     // window.history.replaceState({}, '/order', '/order');
     // TODO: 에러 처리
     if (isEmptyObject(menuData)) console.error('something wrong');
     else setMenuData(menuData);
+
+    setStoreId(storeId);
+    useOrderStore.persist.clearStorage();
+    setIsLoaded(true);
   }, []);
 
   return (
-    <main>
-      <OrderLayout />
-    </main>
+    <>
+      {isLoaded && (
+        <main>
+          <OrderLayout />
+        </main>
+      )}
+    </>
   );
 };
 
@@ -33,6 +43,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
   return {
     props: {
       menuData: data,
+      storeId,
     },
   };
 };

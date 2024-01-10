@@ -147,7 +147,7 @@ export interface Database {
           id: string;
           image_url: string | null;
           name: string | null;
-          price: number | null;
+          price: number;
           remain_ea: number | null;
         };
         Insert: {
@@ -155,7 +155,7 @@ export interface Database {
           id?: string;
           image_url?: string | null;
           name?: string | null;
-          price?: number | null;
+          price?: number;
           remain_ea?: number | null;
         };
         Update: {
@@ -163,7 +163,7 @@ export interface Database {
           id?: string;
           image_url?: string | null;
           name?: string | null;
-          price?: number | null;
+          price?: number;
           remain_ea?: number | null;
         };
         Relationships: [
@@ -447,3 +447,11 @@ export type Enums<
   : PublicEnumNameOrOptions extends keyof Database['public']['Enums']
     ? Database['public']['Enums'][PublicEnumNameOrOptions]
     : never;
+
+interface StoreWithStoreTable extends Tables<'store'> {
+  store_table: Tables<'store_table'>[];
+}
+
+interface CategoryWithMenuItem extends Tables<'menu_category'> {
+  menu_item: Tables<'menu_item'>[];
+}
