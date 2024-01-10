@@ -9,6 +9,7 @@ export interface SalesType {
   x: string;
   ea: number;
   category: string[];
+  date: string;
 }
 const TIME_FORMAT = 'YYYY-MM-DD HH:00';
 
@@ -24,25 +25,28 @@ const Status = () => {
 
   const today = moment().hour(0).subtract(9, 'hour');
   const cloneToday = today.clone();
-
+  console.log(data);
   const saleFormatData: SalesType[] = [];
 
   const formatData = (data: Tables<'sales'>[]) => {
     if (data) {
-      const weekSales = data.reduce((acc, day) => {
-        const date = moment(day.sales_date).format('dddd');
-        const check = acc.findIndex(a => a.x === moment(day.sales_date).format('dddd'));
+      const weekSales = data.reduce((acc, sales) => {
+        const day = moment(sales.sales_date).format('dddd');
+        const date = moment(sales.sales_date).format('YYYY-MMMM-dddd');
+
+        const check = acc.findIndex(a => a.x === moment(sales.sales_date).format('dddd'));
 
         if (check !== -1) {
-          acc[check].y += day.product_price! * day.product_ea!;
-          acc[check].ea += day.product_ea!;
-          acc[check].category.push(day.product_category!);
+          acc[check].y += sales.product_price! * sales.product_ea!;
+          acc[check].ea += sales.product_ea!;
+          acc[check].category.push(sales.product_category!);
         } else {
           const obj = {
-            y: day.product_price! * day.product_ea! || 0,
-            x: date || '',
-            ea: day.product_ea || 0,
-            category: [day.product_category] || [],
+            y: sales.product_price! * sales.product_ea! || 0,
+            x: day || '',
+            ea: sales.product_ea || 0,
+            category: [sales.product_category] || [],
+            date,
           };
           acc.push(obj as SalesType);
         }
