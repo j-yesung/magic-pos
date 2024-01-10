@@ -1,9 +1,16 @@
-.wrapper {
-  display: flex;
+/* 관리자 페이지 전체 레이아웃입니다. */
+.admin-wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-areas: 'header header header header' 'aside main main main';
+}
+
+/* 헤더 영역입니다. */
+.header-wrapper {
+  height: 6rem;
   padding: 1rem;
-  align-items: center;
-  justify-content: flex-end;
-  background-color: #6f6f6f;
+  grid-area: header;
+  background-color: #bebebe;
 }
 
 .label {
@@ -55,4 +62,18 @@
   content: '운영';
   color: #fff;
   left: 0.9375rem;
+}
+
+/* 사이드바 영역입니다. */
+.nav-wrapper {
+  height: 100vh;
+  grid-area: aside;
+  background-color: antiquewhite;
+}
+
+/* 메인 영역입니다. */
+.main-wrapper {
+  height: 100vh;
+  grid-area: main;
+  background-color: aquamarine;
 }
