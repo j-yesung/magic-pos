@@ -3,10 +3,10 @@ import { useState } from 'react';
 
 const NavBar = () => {
   const [navList, setNavList] = useState([
-    { id: 1, name: '주문 내역 확인', active: true },
+    { id: 1, name: '주문 내역 확인', active: false },
     { id: 2, name: '매출 관리', active: false },
     { id: 3, name: '플랫폼 관리', active: false },
-    { id: 4, name: '테이블 관리', active: false },
+    { id: 4, name: '테이블 관리', active: true },
     { id: 5, name: '메뉴 관리', active: false },
     { id: 6, name: '가게 설정', active: false },
   ]);
