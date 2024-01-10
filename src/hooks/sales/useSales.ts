@@ -3,6 +3,9 @@ import { addSales } from '@/server/api/supabase/sales';
 
 const QUERY_KEY = 'sales';
 
+/**
+ * sales table CRUD hook
+ */
 export const useSales = () => {
   const addSalesMutation = useMutation({
     mutationFn: addSales,

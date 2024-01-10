@@ -9,6 +9,7 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const { addSales } = useSales();
 
   useEffect(() => {
+    // 결제 승인시 sales테이블에 담아놓은 데이터를 업로드 한다.
     if (payment?.status === 'DONE') {
       const group = groupByKey<Tables<'menu_item'>>(orderList, 'id');
       const insertDataList = [...group].map(([, value]) => ({
@@ -20,6 +21,7 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
         product_price: value[0].price,
       })) as Omit<Tables<'sales'>, 'id'>[];
 
+      // saels 업로드!
       addSales(insertDataList);
     }
   }, [orderList]);

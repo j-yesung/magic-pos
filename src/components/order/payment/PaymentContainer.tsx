@@ -7,6 +7,12 @@ interface PaymentContainerProps {
   paymentWidget: PaymentWidgetInstance | undefined;
 }
 
+/**
+ * STEP4: 토스 결제 화면
+ * 화면 렌더링과 결제 실행 버튼이 다른 레벨에 있기 때문에 paymentWidget에 대해 state lifting을 사용했다.
+ * @param paymentWidget
+ * @constructor
+ */
 const PaymentContainer = ({ paymentWidget }: PaymentContainerProps) => {
   const paymentMethodsWidgetRef = useRef<PaymentMethodsWidget>();
   const { getTotalPrice } = useOrderStore.getState();
