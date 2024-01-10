@@ -1,5 +1,5 @@
-import styles from '@/components/layout/admin/styles/AdminLayout.module.css';
 import useToggleStore from '@/shared/store/toggle';
+import styles from '../styles/AdminLayout.module.css';
 
 const HeaderToggleButton = () => {
   const { isToggle, changeToggle } = useToggleStore();

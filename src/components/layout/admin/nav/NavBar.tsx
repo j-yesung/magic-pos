@@ -1,5 +1,5 @@
-import styles from '@/components/layout/admin/styles/AdminLayout.module.css';
 import { useState } from 'react';
+import styles from '../styles/AdminLayout.module.css';
 
 const NavBar = () => {
   const [navList, setNavList] = useState([
