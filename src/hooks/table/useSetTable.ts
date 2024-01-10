@@ -1,4 +1,4 @@
-import { addStoreTable, updateStoreTable } from '@/pages/api/store-table';
+import { addStoreTable, updateStoreTable } from '@/server/api/supabase/store-table';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useRef } from 'react';
 
