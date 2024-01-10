@@ -1,4 +1,4 @@
-import { fetchStoreTable } from '@/pages/api/store-table';
+import { fetchStoreTable } from '@/server/api/supabase/store-table';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 

@@ -1,12 +1,12 @@
-import OrderLayout from '@/components/layout/order/OrderLayout';
-import { fetchCategoriesWithMenuItemByStoreId } from '@/server/api/menu-category';
-import { isEmptyObject } from '@/shared/helper';
-import useOrderStore from '@/shared/store/order';
-import { CategoryWithMenuItem } from '@/types/supabase';
-import { GetServerSideProps } from 'next';
 import { useEffect } from 'react';
 import 'swiper/css';
 import 'swiper/css/virtual';
+import OrderLayout from '@/components/layout/order/OrderLayout';
+import { fetchCategoriesWithMenuItemByStoreId } from '@/server/api/supabase/menu-category';
+import { GetServerSideProps } from 'next';
+import { CategoryWithMenuItem } from '@/types/supabase';
+import useOrderStore from '@/shared/store/order';
+import { isEmptyObject } from '@/shared/helper';
 
 const OrderIndexPage = ({ menuData }: { menuData: CategoryWithMenuItem[] }) => {
   const { setMenuData } = useOrderStore();

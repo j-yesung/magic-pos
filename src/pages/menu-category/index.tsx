@@ -1,7 +1,7 @@
 import CategoriesComponentPage from '@/components/menu-category/Categories';
 import useCategoriesStore from '@/shared/store/menu-category';
 import { useEffect } from 'react';
-import { fetchCategories } from '../../server/api/menu-category';
+import { fetchCategories } from '@/server/api/supabase/menu-category';
 
 interface PropsType {
   data: CategoryType[];

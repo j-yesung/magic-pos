@@ -1,4 +1,4 @@
-import { removeCategory, updateCategoryName } from '@/server/api/menu-category';
+import { removeCategory, updateCategoryName } from '@/server/api/supabase/menu-category';
 import useCategoriesStore from '@/shared/store/menu-category';
 import styles from './styles/form.module.css';
 

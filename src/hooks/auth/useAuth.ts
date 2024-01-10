@@ -1,13 +1,13 @@
 import {
-  businessNumberCheckHandler,
   loginHandler,
   logoutHandler,
   resetPasswordHandler,
   signUpHandler,
   updatePasswordHandler,
-} from '@/pages/api/auth/auth';
+} from '@/server/api/supabase/auth';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
+import { businessNumberCheckHandler } from '@/server/api/external/business';
 
 const enum QUERY_KEY {
   LOGIN = 'login',

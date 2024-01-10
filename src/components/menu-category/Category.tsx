@@ -1,4 +1,4 @@
-import { addCategory, updateCategoryPosition } from '@/server/api/menu-category';
+import { addCategory, updateCategoryPosition } from '@/server/api/supabase/menu-category';
 import useCategoriesStore from '@/shared/store/menu-category';
 import { useRef } from 'react';
 import styles from './styles/category.module.css';
