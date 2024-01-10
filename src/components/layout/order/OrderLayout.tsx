@@ -1,7 +1,7 @@
 import Head from 'next/head';
-import React, { useRef, useState } from 'react';
-import styles from './styles/layout.module.css';
-import Footer from '@/components/layout/order/Footer/Footer';
+import React, { useRef } from 'react';
+import styles from './styles/OrderLayout.module.css';
+import Footer from '@/components/layout/order/footer/Footer';
 import OrderTypeContainer from '@/components/order/order-type/OrderTypeContainer';
 import MenuContainer from '@/components/order/menu/MenuContainer';
 import CartContainer from '@/components/order/cart/CartContainer';

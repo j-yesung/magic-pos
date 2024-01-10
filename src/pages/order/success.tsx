@@ -1,8 +1,12 @@
 import React from 'react';
 import SuccessContainer from '@/components/order/success/SuccessContainer';
 
-const SuccessPage = () => {
+/**
+ * 결제 성공 페이지
+ * @constructor
+ */
+const OrderSuccessPage = () => {
   return <SuccessContainer />;
 };
 
-export default SuccessPage;
+export default OrderSuccessPage;

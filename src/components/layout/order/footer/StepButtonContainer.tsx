@@ -1,7 +1,7 @@
 import React from 'react';
-import StepButton from '@/components/layout/order/Footer/StepButton';
-import styles from './styles/step-button-container.module.css';
-import useOrderStore from '@/shared/store/order';
+import StepButton from '@/components/layout/order/footer/StepButton';
+import styles from './styles/StepButtonContainer.module.css';
+import useOrderStore, { ORDER_STEP } from '@/shared/store/order';
 import { SwiperRef } from 'swiper/react';
 import { PaymentWidgetInstance } from '@tosspayments/payment-widget-sdk';
 import { nanoid } from 'nanoid';
@@ -39,9 +39,9 @@ const StepButtonContainer = ({ step, sliderRef, paymentWidget }: StepButtonConta
   };
 
   const nextClickHandler = async () => {
-    if (step === 3 && paymentWidget) {
+    if (step === ORDER_STEP.PAYMENT && paymentWidget) {
       const handlePaymentRequest = async () => {
-        // 결제를 요청하기 전에 orderId, amount를 서버에 저장하세요.
+        // 결제를 요청하기 전에 orderId, amount를 서버(토스)에 저장하세요.
         // 결제 과정에서 악의적으로 결제 금액이 바뀌는 것을 확인하는 용도입니다.
         try {
           await paymentWidget?.requestPayment({
