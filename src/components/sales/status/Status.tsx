@@ -65,10 +65,11 @@ const Status = () => {
       .from('sales')
       .select('*')
       .gte('sales_date', momentToString(cloneToday.subtract(6, 'day'), TIME_FORMAT))
-      .lt('sales_date', momentToString(cloneToday.add(1, 'day'), TIME_FORMAT));
+      .lt('sales_date', momentToString(today.clone().add(1, 'day'), TIME_FORMAT));
     if (error) {
       return { sales: {}, error };
     }
+
     return { sales, error };
   };
 
@@ -77,7 +78,7 @@ const Status = () => {
       .from('sales')
       .select('product_ea,product_name,product_price,sales_date')
       .gte('sales_date', momentToString(cloneToday.subtract(7, 'day'), TIME_FORMAT))
-      .lt('sales_date', momentToString(cloneToday, TIME_FORMAT))
+      .lt('sales_date', momentToString(today, TIME_FORMAT))
       .order('sales_date');
     if (error) {
       return { sales: {}, error };
@@ -90,7 +91,7 @@ const Status = () => {
       .from('sales')
       .select('product_ea,product_name,product_price,sales_date,product_category')
       .gte('sales_date', momentToString(cloneToday.subtract(6, 'week'), TIME_FORMAT))
-      .lt('sales_date', momentToString(cloneToday, TIME_FORMAT));
+      .lt('sales_date', momentToString(today, TIME_FORMAT));
     if (error) {
       return { sales: {}, error };
     }
@@ -117,7 +118,7 @@ const Status = () => {
       }
     });
   }, []);
-  console.log(data);
+
   return (
     <div>
       <Tab />
