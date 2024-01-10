@@ -6,36 +6,39 @@ export interface Database {
       cart: {
         Row: {
           id: string;
-          is_togo: boolean | null;
+          is_done: boolean;
           menu_list: Json[] | null;
           order_id: string | null;
-          order_number: number | null;
-          order_time: string | null;
+          order_number: number;
+          order_time: string;
           payment_method_id: number | null;
-          store_id: string;
-          total_fee: number | null;
+          '\bstore_id': string;
+          table_id: string | null;
+          total_price: number;
         };
         Insert: {
           id?: string;
-          is_togo?: boolean | null;
+          is_done?: boolean;
           menu_list?: Json[] | null;
           order_id?: string | null;
-          order_number?: number | null;
-          order_time?: string | null;
+          order_number?: number;
+          order_time?: string;
           payment_method_id?: number | null;
-          store_id: string;
-          total_fee?: number | null;
+          '\bstore_id': string;
+          table_id?: string | null;
+          total_price?: number;
         };
         Update: {
           id?: string;
-          is_togo?: boolean | null;
+          is_done?: boolean;
           menu_list?: Json[] | null;
           order_id?: string | null;
-          order_number?: number | null;
-          order_time?: string | null;
+          order_number?: number;
+          order_time?: string;
           payment_method_id?: number | null;
-          store_id?: string;
-          total_fee?: number | null;
+          '\bstore_id'?: string;
+          table_id?: string | null;
+          total_price?: number;
         };
         Relationships: [
           {
@@ -46,10 +49,17 @@ export interface Database {
             referencedColumns: ['id'];
           },
           {
-            foreignKeyName: 'cart_store_id_fkey';
-            columns: ['store_id'];
+            foreignKeyName: 'cart_\bstore_id_fkey';
+            columns: ['\bstore_id'];
             isOneToOne: false;
             referencedRelation: 'store';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'cart_table_id_fkey';
+            columns: ['table_id'];
+            isOneToOne: false;
+            referencedRelation: 'store_table';
             referencedColumns: ['id'];
           },
         ];
@@ -297,7 +307,7 @@ export interface Database {
           business_number: string | null;
           end_time: string | null;
           id: string;
-          order_number: number | null;
+          order_number: number;
           start_time: string | null;
         };
         Insert: {
@@ -306,7 +316,7 @@ export interface Database {
           business_number?: string | null;
           end_time?: string | null;
           id?: string;
-          order_number?: number | null;
+          order_number?: number;
           start_time?: string | null;
         };
         Update: {
@@ -315,7 +325,7 @@ export interface Database {
           business_number?: string | null;
           end_time?: string | null;
           id?: string;
-          order_number?: number | null;
+          order_number?: number;
           start_time?: string | null;
         };
         Relationships: [
@@ -365,7 +375,12 @@ export interface Database {
       [_ in never]: never;
     };
     Functions: {
-      [_ in never]: never;
+      increment_order_number: {
+        Args: {
+          row_id: string;
+        };
+        Returns: undefined;
+      };
     };
     Enums: {
       [_ in never]: never;

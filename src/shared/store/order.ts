@@ -26,6 +26,8 @@ interface OrderState {
   getTotalPrice: () => number;
   storeId: string | null;
   setStoreId: (storeId: string) => void;
+  orderNumber: number;
+  setOrderNumber: (orderNumber: number) => void;
 }
 
 export const useOrderStore = create<OrderState>()(
@@ -53,8 +55,12 @@ export const useOrderStore = create<OrderState>()(
           return { orderList: state.orderList };
         }),
       getTotalPrice: () => get()?.orderList.reduce((acc, cur) => acc + cur.price, 0),
+      // 가게 ID
       storeId: null,
       setStoreId: (storeId: string) => set(() => ({ storeId })),
+      // 주문 번호
+      orderNumber: 0,
+      setOrderNumber: (orderNumber: number) => set(() => ({ orderNumber })),
     }),
     {
       name: 'order-storage', // name of the item in the storage (must be unique)
