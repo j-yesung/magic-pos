@@ -3,23 +3,6 @@ import { PaymentWidgetInstance } from '@tosspayments/payment-widget-sdk';
 import styles from './styles/PaymentContainer.module.css';
 import useOrderStore from '@/shared/store/order';
 
-interface PaymentMethodsWidget {
-  updateAmount: (amount: number, reason?: string | string[]) => void;
-  UPDATE_REASON: {
-    COUPON: string;
-    POINT: string;
-  };
-  on: (eventName: string, callback: (selectedPaymentMethod: string) => unknown) => void;
-  getSelectedPaymentMethod: () => {
-    type: 'NORMAL' | 'BRANDPAY' | 'KEYIN' | 'CUSTOM';
-    method?: string;
-    easyPay?: {
-      provider: string;
-    };
-    paymentMethodKey?: string;
-  };
-}
-
 interface PaymentContainerProps {
   paymentWidget: PaymentWidgetInstance | undefined;
 }
