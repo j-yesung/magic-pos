@@ -76,8 +76,8 @@ const Status = () => {
     const { data: sales, error } = await supabase
       .from('sales')
       .select('product_ea,product_name,product_price,sales_date')
-      .gte('sales_date', momentToString(cloneToday.subtract(1, 'day'), TIME_FORMAT))
-      .lt('sales_date', momentToString(today, TIME_FORMAT))
+      .gte('sales_date', momentToString(cloneToday.subtract(7, 'day'), TIME_FORMAT))
+      .lt('sales_date', momentToString(cloneToday, TIME_FORMAT))
       .order('sales_date');
     if (error) {
       return { sales: {}, error };
