@@ -8,7 +8,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
   return (
     <>
       <Header />
-      {children}
+      <main>{children}</main>
     </>
   );
 };
