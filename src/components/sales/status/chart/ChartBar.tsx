@@ -1,4 +1,3 @@
-import { Tables } from '@/types/supabase';
 import { BarElement, CategoryScale, ChartArea, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';
@@ -34,7 +33,7 @@ const data = [
   { x: '2016-12-25', y: 20 },
   { x: '2016-12-26', y: 10 },
 ];
-const ChartBar = ({ data }: { data: Tables<'sales'>[] }) => {
+const ChartBar = () => {
   return (
     <div style={{ width: '800px', height: '800px', margin: '120px' }}>
       <Bar
