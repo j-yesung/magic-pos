@@ -19,14 +19,29 @@
 /* 헤더 영역입니다. */
 .header-wrapper {
   height: 6rem;
-  padding: 1rem;
+  padding: 1.5rem;
   grid-area: header;
+  display: flex;
+  flex-direction: column;
   background-color: #212121;
+}
+
+.header-wrapper div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-wrapper span {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .label {
   float: right;
-  width: 6rem;
+  width: 7rem;
   height: 3rem;
   display: block;
   position: relative;
@@ -51,7 +66,7 @@
 
 .label::before {
   top: 50%;
-  left: 3rem;
+  left: 3.5rem;
   content: '관리';
   font-weight: 700;
   font-size: 1.25rem;
@@ -73,7 +88,7 @@
 .toggle:checked + .label::before {
   content: '운영';
   color: #fff;
-  left: 0.9375rem;
+  left: 1rem;
 }
 
 /* 사이드바 영역입니다. */

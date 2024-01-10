@@ -5,10 +5,10 @@ const HeaderToggleButton = () => {
   const { changeToggle } = useToggleStore();
 
   return (
-    <div>
+    <>
       <input className={styles.toggle} type="checkbox" id="toggle" onChange={changeToggle} hidden />
       <label className={styles.label} htmlFor="toggle" />
-    </div>
+    </>
   );
 };
 
