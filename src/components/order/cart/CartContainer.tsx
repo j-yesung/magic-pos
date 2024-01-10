@@ -5,6 +5,7 @@ import styles from './styles/CartContainer.module.css';
 import { groupByKey } from '@/shared/helper';
 import MessageBox from '@/components/order/cart/MessageBox';
 import { Tables } from '@/types/supabase';
+import WarningNoMenu from '@/components/order/cart/WarningNoMenu';
 
 const CartContainer = () => {
   const { orderList } = useOrderStore();
@@ -14,6 +15,7 @@ const CartContainer = () => {
   return (
     <div className={styles.container}>
       <div className={styles.rowContainer}>
+        {group.size === 0 && <WarningNoMenu />}
         {[...group].map(([key, value]) => (
           <CartRow key={key} itemList={value} />
         ))}
