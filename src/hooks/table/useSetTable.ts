@@ -44,7 +44,7 @@ export const useSetTable = () => {
   useEffect(() => {
     if (addIsError) {
       console.error(addError.message || updateError?.message);
-    } updateError
+    }
   }, [addIsError, updateIsError, addError, updateError]);
   return { addMutate, updateMutate };
 };
