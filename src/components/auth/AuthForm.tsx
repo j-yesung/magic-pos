@@ -31,15 +31,15 @@ const AuthForm = ({ data }: FormProps) => {
   };
 
   return (
-    <div className={styles['wrapper']}>
+    <div className={styles.wrapper}>
       <div className={styles['title-wrapper']} onClick={() => router.push('/')}>
-        <h1 className={styles['title']}>{title}</h1>
+        <h1 className={styles.title}>{title}</h1>
         <h2 className={styles['sub-title']}>{subTitle}</h2>
       </div>
       {path === '/auth/findPassword' || path === '/auth/reset' ? (
         <p className={styles['description']}>{description}</p>
       ) : null}
-      <form className={styles['form']}>
+      <form className={styles.form}>
         <div className={styles['form-inner-wrapper']}>
           <Input value={value} onChangeHandler={changeHandler} onKeyDownHandler={keyDownHandler} />
         </div>
@@ -72,10 +72,10 @@ const AuthForm = ({ data }: FormProps) => {
       </form>
 
       <div className={styles['caption-wrapper']}>
-        <Link className={styles['caption']} href={url || ''}>
+        <Link className={styles.caption} href={url || ''}>
           {caption}
         </Link>
-        <Link className={styles['caption']} href={subUrl || ''}>
+        <Link className={styles.caption} href={subUrl || ''}>
           {subName}
         </Link>
       </div>

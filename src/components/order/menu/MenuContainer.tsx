@@ -4,6 +4,7 @@ import MenuCategoryContainer from '@/components/order/menu/MenuCategoryContainer
 import styles from './styles/MenuContainer.module.css';
 import MenuCard from '@/components/order/menu/MenuCard';
 import { Tables } from '@/types/supabase';
+import MessageBox from '@/components/order/cart/MessageBox';
 
 /**
  * STEP2: 메뉴 탐색 및 선택
@@ -27,10 +28,8 @@ const MenuContainer = () => {
     }
   }, []);
 
-  // TODO: 에러 어떻게 띄울까?
-
   return (
-    <div>
+    <div className={styles.container}>
       {menuData && (
         <MenuCategoryContainer
           menuData={menuData}
@@ -43,6 +42,9 @@ const MenuContainer = () => {
           <MenuCard key={menu.id} menu={menu} />
         ))}
       </section>
+      <div className={styles.messageBox}>
+        <MessageBox />
+      </div>
     </div>
   );
 };

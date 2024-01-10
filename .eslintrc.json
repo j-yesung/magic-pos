@@ -22,7 +22,8 @@
   },
   "plugins": ["react", "@typescript-eslint", "react-hooks"], // eslint가 사용할 플러그인을 설정합니다.
   "rules": {
-    // 프로젝트의 규칙을 설정합니다.
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "warn"
   },
   "settings": {
     "react": {
