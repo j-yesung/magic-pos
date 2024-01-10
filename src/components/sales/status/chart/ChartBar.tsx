@@ -35,8 +35,6 @@ const data = [
   { x: '2016-12-26', y: 10 },
 ];
 const ChartBar = ({ sample }: { sample: Tables<'sales'>[] }) => {
-  console.log(sample);
-
   return (
     <div style={{ width: '800px', height: '800px', margin: '120px' }}>
       <Bar

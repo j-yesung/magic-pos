@@ -17,20 +17,59 @@ const Status = () => {
   // const tomorrow = moment().hour(0).subtract(9, 'hour').add(1, 'day').format('YYYY-MM-DD HH:00');
 
   const today = moment().hour(0).subtract(9, 'hour');
+  const cloneToday = today.clone();
 
-  const test = async () => {
+  const getTodaySales = async () => {
     const { data: sales, error } = await supabase
       .from('sales')
       .select('*')
-      .gte('sales_date', momentToString(today, TIME_FORMAT))
-      .lt('sales_date', momentToString(today.add(1, 'day'), TIME_FORMAT));
+      .gte('sales_date', momentToString(cloneToday, TIME_FORMAT))
+      .lt('sales_date', momentToString(cloneToday.add(1, 'day'), TIME_FORMAT));
     if (error) {
       return { sales: {}, error };
     }
     return { sales, error };
   };
+
+  const getYesterdaySales = async () => {
+    const { data: sales, error } = await supabase
+      .from('sales')
+      .select('product_ea,product_name,product_price,sales_date')
+      .gte('sales_date', momentToString(cloneToday.subtract(1, 'day'), TIME_FORMAT))
+      .lt('sales_date', momentToString(today, TIME_FORMAT))
+      .order('sales_date');
+    if (error) {
+      return { sales: {}, error };
+    }
+    return { sales, error };
+  };
+
+  const getWeekSales = async () => {
+    const { data: sales, error } = await supabase
+      .from('sales')
+      .select('product_ea,product_name,product_price,sales_date')
+      .gte('sales_date', momentToString(cloneToday.subtract(7, 'day'), TIME_FORMAT))
+      .lt('sales_date', momentToString(today, TIME_FORMAT));
+    if (error) {
+      return { sales: {}, error };
+    }
+    return { sales, error };
+  };
+
+  const getMonthSales = async () => {
+    const { data: sales, error } = await supabase
+      .from('sales')
+      .select('product_ea,product_name,product_price,sales_date')
+      .gte('sales_date', momentToString(cloneToday.startOf('month'), TIME_FORMAT))
+      .lt('sales_date', momentToString(today, TIME_FORMAT));
+    if (error) {
+      return { sales: {}, error };
+    }
+    return { sales, error };
+  };
+
   useEffect(() => {
-    test().then(result => {
+    getMonthSales().then(result => {
       console.log(result);
       setSample(result.sales as typeof sample);
     });
