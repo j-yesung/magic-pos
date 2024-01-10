@@ -1,16 +1,12 @@
 import styles from '@/components/layout/admin/styles/AdminLayout.module.css';
-import { useState } from 'react';
+import useToggleStore from '@/shared/store/toggle';
 
 const HeaderToggleButton = () => {
-  const [, setIsToggle] = useState(false);
-
-  const clickToggleHandler = () => {
-    setIsToggle(prev => !prev);
-  };
+  const { changeToggle } = useToggleStore();
 
   return (
     <div>
-      <input className={styles.toggle} type="checkbox" id="toggle" onChange={clickToggleHandler} hidden />
+      <input className={styles.toggle} type="checkbox" id="toggle" onChange={changeToggle} hidden />
       <label className={styles.label} htmlFor="toggle" />
     </div>
   );

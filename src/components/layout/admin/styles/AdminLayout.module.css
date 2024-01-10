@@ -1,8 +1,19 @@
-/* 관리자 페이지 전체 레이아웃입니다. */
+/* 관리자 모드 레이아웃 */
 .admin-wrapper {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-areas: 'header header header header' 'aside main main main';
+  grid-template-columns: 20rem repeat(5, 1fr);
+  grid-template-areas: 'header header header header header header' 'aside main main main main main';
+}
+/* 운영 모드 레이아웃 */
+.admin-wrapper-toggle {
+  display: grid;
+  grid-template-columns: 0 repeat(5, 1fr);
+  grid-template-areas: 'header header header header header header' 'aside main main main main main';
+}
+.admin-wrapper-toggle .nav-wrapper {
+  visibility: hidden;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
 }
 
 /* 헤더 영역입니다. */
@@ -10,14 +21,15 @@
   height: 6rem;
   padding: 1rem;
   grid-area: header;
-  background-color: #bebebe;
+  background-color: #212121;
 }
 
 .label {
-  display: block;
-  position: relative;
+  float: right;
   width: 6rem;
   height: 3rem;
+  display: block;
+  position: relative;
   background: #d3d3d3;
   border-radius: 3rem;
   transition: background 0.4s;
@@ -66,14 +78,52 @@
 
 /* 사이드바 영역입니다. */
 .nav-wrapper {
+  margin: 1rem;
+  padding: 3rem;
   height: 100vh;
   grid-area: aside;
-  background-color: antiquewhite;
+  border-radius: 2rem;
+  transition: all 0.4s;
+  border: 2px solid #191919;
+}
+
+.nav-wrapper ul {
+  gap: 3rem;
+  display: flex;
+  list-style: none;
+  font-size: 1.5rem;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.nav-wrapper ul li {
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  border-radius: 1rem;
+  justify-content: center;
+}
+
+.nav-wrapper ul li:hover {
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.4s;
+  background-color: #ad3aff;
+}
+
+.nav-wrapper ul li.active {
+  color: #fff;
+  background-color: #ad3aff;
 }
 
 /* 메인 영역입니다. */
 .main-wrapper {
+  margin: 1rem;
+  padding: 3rem;
   height: 100vh;
   grid-area: main;
-  background-color: aquamarine;
+  border-radius: 2rem;
+  border: 2px solid #191919;
 }
