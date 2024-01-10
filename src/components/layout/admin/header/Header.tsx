@@ -1,5 +1,5 @@
-import HeaderToggleButton from '@/components/layout/admin/header/HeaderToggleButton';
-import styles from '@/components/layout/admin/styles/AdminLayout.module.css';
+import styles from '../styles/AdminLayout.module.css';
+import HeaderToggleButton from './HeaderToggleButton';
 
 const Header = () => {
   return (
