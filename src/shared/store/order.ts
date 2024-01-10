@@ -15,9 +15,10 @@ interface OrderState {
   orderList: Tables<'menu_item'>[];
   addOrderList: (menu: Tables<'menu_item'>[]) => void;
   subtractOrderList: (menu: Tables<'menu_item'>) => void;
+  getTotalPrice: () => number;
 }
 
-const useOrderStore = create<OrderState>()(set => ({
+const useOrderStore = create<OrderState>()((set, get) => ({
   //  현재 주문 단계를 나타냅니다.
   step: 0,
   maxStep: 4,
@@ -39,6 +40,7 @@ const useOrderStore = create<OrderState>()(set => ({
       state.orderList.splice(findIndex, 1);
       return { orderList: state.orderList };
     }),
+  getTotalPrice: () => get()?.orderList.reduce((acc, cur) => acc + cur.price, 0),
 }));
 
 export default useOrderStore;

@@ -4,7 +4,7 @@ import { convertNumberToWon } from '@/shared/helper';
 import useOrderStore from '@/shared/store/order';
 
 const MessageBox = () => {
-  const { orderList } = useOrderStore();
+  const { orderList, getTotalPrice } = useOrderStore();
 
   return (
     <div className={styles.messageBox}>
@@ -13,7 +13,7 @@ const MessageBox = () => {
           <span>
             {orderList[0].name} {orderList.length > 1 && `외 ${orderList.length - 1}개`}
           </span>
-          <span>{convertNumberToWon(orderList.reduce((acc, cur) => acc + cur.price, 0))}</span>
+          <span>{convertNumberToWon(getTotalPrice())}</span>
         </>
       )}
     </div>
