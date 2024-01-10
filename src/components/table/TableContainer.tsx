@@ -36,7 +36,11 @@ const TableContainer = ({ storeData }: { storeData?: StoreWithStoreTable[] }) =>
 
       <ul className={styles['table-list']}>
         {
-          storeData?.[0]?.store_table.map((item: Tables<'store_table'>) => {
+          storeData?.[0]?.store_table.sort((a, b) => {
+            if (a.position && b.position) {
+              return a.position < b.position ? -1 : 1up
+            }
+          }).map((item: Tables<'store_table'>) => {
             return <TableListItem key={item.id} storeTableData={item} />
           })
         }

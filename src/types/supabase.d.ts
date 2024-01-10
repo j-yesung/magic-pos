@@ -341,7 +341,7 @@ export interface Database {
           is_disabled?: number | null;
           max_guest?: number | null;
           position?: number | null;
-          store_id: string;
+          store_id?: string;
         };
         Update: {
           id?: string;
