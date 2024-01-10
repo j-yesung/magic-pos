@@ -29,9 +29,15 @@ const chartAreaBackground = {
     ctx.restore();
   },
 };
+// hsl(259, 100%, 50%)
 
+const data = [
+  { x: '2016-12-25', y: 20 },
+  { x: '2016-12-26', y: 10 },
+];
 const ChartBar = ({ sample }: { sample: Tables<'sales'>[] }) => {
   console.log(sample);
+
   return (
     <div style={{ width: '800px', height: '800px', margin: '120px' }}>
       <Bar
@@ -39,11 +45,11 @@ const ChartBar = ({ sample }: { sample: Tables<'sales'>[] }) => {
           labels: ['red', 'blue', 'yellow'],
           datasets: [
             {
-              data: [
-                { x: '2016-12-25', y: 20 },
-                { x: '2016-12-26', y: 10 },
-              ],
-              backgroundColor: ['hsl(259, 100%, 50%)'],
+              data,
+              backgroundColor: data.map((d, i) => {
+                const color = i === data.length - 1 ? 'black' : 'red';
+                return color;
+              }),
             },
           ],
         }}
@@ -86,8 +92,7 @@ const ChartBar = ({ sample }: { sample: Tables<'sales'>[] }) => {
               align: 'end',
               offset: 3,
               clamp: true,
-              formatter(value, context) {
-                console.log(context.dataIndex);
+              formatter(value) {
                 return value.y;
               },
             },
