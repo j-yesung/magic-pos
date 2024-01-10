@@ -1,6 +1,6 @@
 import React from 'react';
 import ButtonContainer from '@/components/order/order-type/ButtonContainer';
-import styles from './styles/step-one-container.module.css';
+import styles from './styles/OrderTypeContainer.module.css';
 
 /**
  * 포장 / 매장 선택
