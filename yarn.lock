@@ -1183,6 +1183,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chartjs-plugin-datalabels@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "chartjs-plugin-datalabels@npm:2.2.0"
+  peerDependencies:
+    chart.js: ">=3.0.0"
+  checksum: de4855a795e4eef34869a16db1a8a0f905b6dfed0258c733338f472625361eb56fb899214b18651c1c1064cd343a78285ba576576693a40ec51285a84f022ea0
+  languageName: node
+  linkType: hard
+
 "chokidar@npm:^3.5.3":
   version: 3.5.3
   resolution: "chokidar@npm:3.5.3"
@@ -2936,6 +2945,7 @@ __metadata:
     autoprefixer: "npm:^10.0.1"
     axios: "npm:^1.6.5"
     chart.js: "npm:^4.4.1"
+    chartjs-plugin-datalabels: "npm:^2.2.0"
     class-variance-authority: "npm:^0.7.0"
     clsx: "npm:^2.1.0"
     eslint: "npm:^8"
