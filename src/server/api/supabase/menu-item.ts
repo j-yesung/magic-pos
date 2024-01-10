@@ -31,20 +31,19 @@ export const removeMenuItem = async (menuId: string) => {
 
 /**
  * 메뉴 물품 이름 수정하기
- * @param values 메뉴 id, 메뉴 name
+ * @param values 메뉴의 items
  * @returns data
  */
-export const updateCategoryName = async (
-  categoryId: string,
-  name: string,
-  image_url: string,
-  price: number,
-  remain_ea: number,
-) => {
+export const updateMenuItem = async (menuItem: MenuItemType) => {
   const { data, error } = await supabase
     .from('menu_item')
-    .update({ name, image_url, price, remain_ea })
-    .eq('id', categoryId);
+    .update({
+      name: menuItem.name,
+      image_url: menuItem.image_url,
+      price: menuItem.price,
+      remain_ea: menuItem.remain_ea,
+    })
+    .eq('id', menuItem.id);
   if (error) throw error;
   return data;
 };

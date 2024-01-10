@@ -445,5 +445,13 @@ export type Enums<
 > = PublicEnumNameOrOptions extends { schema: keyof Database }
   ? Database[PublicEnumNameOrOptions['schema']]['Enums'][EnumName]
   : PublicEnumNameOrOptions extends keyof Database['public']['Enums']
-    ? Database['public']['Enums'][PublicEnumNameOrOptions]
-    : never;
+  ? Database['public']['Enums'][PublicEnumNameOrOptions]
+  : never;
+
+export interface StoreWithStoreTable extends Tables<'store'> {
+  store_table: Tables<'store_table'>[];
+}
+
+interface CategoryWithMenuItem extends Tables<'menu_category'> {
+  menu_item: Tables<'menu_item'>[];
+}

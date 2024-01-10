@@ -1,23 +1,11 @@
-import useCategoriesStore from '@/shared/store/menu-category';
 import useMenuItemStore from '@/shared/store/menu-item';
 import styles from './styles/menu-item-category.module.css';
 
 const MenuItemCategoryPage = () => {
-  const { category, setCategory, categories, setCategories } = useCategoriesStore();
-  const {
-    menuItem,
-    setMenuItem,
-    menuItemList,
-    setMenuItemList,
-    categoryWithMenuItem,
-    setCategoryWithMenuItem,
-    categoryWithMenuItemList,
-    setCategoryWithMenuItemList,
-  } = useMenuItemStore();
+  const { categoryWithMenuItem, setCategoryWithMenuItem, categoryWithMenuItemList } = useMenuItemStore();
 
   // 카테고리 선택
   const clickChoiceCategoryHandler = (item: CategoryWithItemType) => {
-    // setMenuItemList(item.menu_item);
     setCategoryWithMenuItem({
       ...categoryWithMenuItem,
       id: item.id,

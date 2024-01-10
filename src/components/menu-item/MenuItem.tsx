@@ -1,51 +1,33 @@
-import { addMenuItem } from '@/server/api/menu-item';
-import useCategoriesStore from '@/shared/store/menu-category';
+import { addMenuItem } from '@/server/api/supabase/menu-item';
 import useMenuItemStore from '@/shared/store/menu-item';
 import Image from 'next/image';
 import styles from './styles/menu-item.module.css';
 
 const MenuItemPage = () => {
-  const { category, setCategory, categories, setCategories } = useCategoriesStore();
-  const {
-    menuItem,
-    setMenuItem,
-    menuItemList,
-    setMenuItemList,
-    categoryWithMenuItem,
-    setCategoryWithMenuItem,
-    categoryWithMenuItemList,
-    setCategoryWithMenuItemList,
-    addMenuItemStore,
-  } = useMenuItemStore();
+  const { toggleShow, menuItem, setMenuItem, categoryWithMenuItem, categoryWithMenuItemList, addMenuItemStore } =
+    useMenuItemStore();
 
   // 메뉴 플러스
   const clickAddMenuItemHandler = async () => {
-    // toggleShow(true);
+    toggleShow(true);
     const emptyValue = `임시 메뉴명`;
-    const { data } = await addMenuItem(
-      categoryWithMenuItem.id,
-      emptyValue,
-      'https://th.bing.com/th/id/R.a46e29755e91c233f9836e36c3c57677?rik=bGne%2fYEBDDFQzg&pid=ImgRaw&r=0',
-      0,
-      0,
-    );
-    const newMenuItem = {
+    const sampleImage = 'https://lajnysuklrkrhdyqhotr.supabase.co/storage/v1/object/public/images/menu_sample.png';
+    const { data } = await addMenuItem(categoryWithMenuItem.id, emptyValue, sampleImage, 0, 0);
+    const newMenuItem: MenuItemType = {
       id: data[0].id,
       image_url: data[0].image_url || '',
       category_id: data[0].category_id,
       name: data[0].name || '',
-      price: data[0].price,
+      price: data[0].price || 0,
       remain_ea: data[0].remain_ea || 0,
     };
-
     setMenuItem(newMenuItem);
     addMenuItemStore(newMenuItem);
-    // setCategoryWithMenuItemList((prevList) => [...prevList, newMenuItem]);
-    console.log(categoryWithMenuItemList);
   };
 
   // 메뉴 선택
   const clickChoiceCategoryHandler = (item: MenuItemType) => {
+    toggleShow(true);
     setMenuItem({
       id: item.id,
       category_id: item.category_id,
@@ -54,6 +36,7 @@ const MenuItemPage = () => {
       price: item.price,
       remain_ea: item.remain_ea,
     });
+    console.log(menuItem);
   };
 
   return (

@@ -5,6 +5,8 @@ import { create } from 'zustand';
  */
 
 interface MenuItemStoreType {
+  isShow: boolean;
+  toggleShow: (item: boolean) => void;
   menuItem: MenuItemType;
   setMenuItem: (item: MenuItemType) => void;
   menuItemList: MenuItemType[];
@@ -14,11 +16,13 @@ interface MenuItemStoreType {
   categoryWithMenuItemList: CategoryWithItemType[];
   setCategoryWithMenuItemList: (item: CategoryWithItemType[]) => void;
   addMenuItemStore: (item: MenuItemType) => void;
-  // removeMenuItemStore: (item: MenuItemType) => void;
-  // updateMenuItemStore: (item: MenuItemType) => void;
+  removeMenuItemStore: (item: MenuItemType) => void;
+  updateMenuItemStore: (item: MenuItemType) => void;
 }
 
 const useMenuItemStore = create<MenuItemStoreType>(set => ({
+  isShow: false,
+  toggleShow: item => set({ isShow: item }),
   menuItem: {
     id: '',
     category_id: '',
@@ -41,75 +45,44 @@ const useMenuItemStore = create<MenuItemStoreType>(set => ({
     set(prev => ({ categoryWithMenuItem: { ...prev.categoryWithMenuItem, ...item } })),
   categoryWithMenuItemList: [],
   setCategoryWithMenuItemList: (item: CategoryWithItemType[]) => set({ categoryWithMenuItemList: item }),
-  // addMenuItemStore: (item: MenuItemType) =>
-  //   set(state => {
-  //     const updatedCategoryList = state.categoryWithMenuItemList.map(category => {
-  //       if (category.id === item.category_id) {
-  //         const updatedMenuItems = category.menu_item.map(it => {
-  //           if (it.id === item.id) {
-  //             return {
-  //               ...it,
-  //               name: item.name,
-  //               price: item.price,
-  //             };
-  //           }
-  //           return it;
-  //         });
-
-  //         return {
-  //           ...category,
-  //           menu_item: updatedMenuItems,
-  //         };
-  //       }
-  //       return category;
-  //     });
-
-  //     return {
-  //       categoryWithMenuItemList: updatedCategoryList,
-  //     };
-  //   }),
-  addMenuItemStore: newMenuItem =>
-    set(state => {
-      const { categoryWithMenuItemList } = state;
-      const categoryIndex = categoryWithMenuItemList.findIndex(category => category.id === newMenuItem.category_id);
-
-      if (categoryIndex !== -1) {
-        const category = categoryWithMenuItemList[categoryIndex];
-        const menuItemIndex = category.menu_item.findIndex(item => item.id === newMenuItem.id);
-
-        if (menuItemIndex !== -1) {
-          // Update existing menu item
-          const updatedCategoryList = [...categoryWithMenuItemList];
-          updatedCategoryList[categoryIndex] = {
-            ...category,
-            menu_item: [
-              ...category.menu_item.slice(0, menuItemIndex),
-              { ...category.menu_item[menuItemIndex], ...newMenuItem },
-              ...category.menu_item.slice(menuItemIndex + 1),
-            ],
-          };
-
-          console.log('Updated categoryWithMenuItemList:', updatedCategoryList);
-
-          return {
-            categoryWithMenuItemList: updatedCategoryList,
-          };
-        }
-      }
-
-      // If the category or menu item does not exist, handle accordingly (e.g., add a new category or throw an error)
-      return state;
-    }),
-  // addMenuItemStore: (item: MenuItemType) =>
-  // set(state => ({ categoryWithMenuItemList: state.categoryWithMenuItemList, [ ...state.categoryWithMenuItemList, { ...state.menuItem, item }] })),
-  // removeMenuItemStore: (item: MenuItemType) =>
-  //   set(state => ({ categories: state.categories.filter(it => it.id !== item.id) })),
-  // updateMenuItemStore: (item: MenuItemType) =>
-  //   set(state => ({
-  //     categoryWithMenuItemList: state.categoryWithMenuItemList.map(it =>
-  //       it.id === item.id ? { ...it, name: item.name, price: item.price } : it,
-  //     ),
-  //   })),
+  addMenuItemStore: (newMenuItem: MenuItemType) =>
+    set(state => ({
+      ...state,
+      categoryWithMenuItemList: state.categoryWithMenuItemList.map(category =>
+        category.id === newMenuItem.category_id
+          ? {
+              ...category,
+              menu_item: [...category.menu_item, newMenuItem],
+            }
+          : category,
+      ),
+    })),
+  removeMenuItemStore: (removeMenuItem: MenuItemType) =>
+    set(state => ({
+      ...state,
+      categoryWithMenuItemList: state.categoryWithMenuItemList.map(category =>
+        category.id === removeMenuItem.category_id
+          ? {
+              ...category,
+              menu_item: category.menu_item.filter(item => item.id !== removeMenuItem.id),
+            }
+          : category,
+      ),
+    })),
+  updateMenuItemStore: (updatedMenuItem: MenuItemType) =>
+    set(state => ({
+      ...state,
+      categoryWithMenuItemList: state.categoryWithMenuItemList.map(category =>
+        category.id === updatedMenuItem.category_id
+          ? {
+              ...category,
+              menu_item: category.menu_item.map(item =>
+                item.id === updatedMenuItem.id ? { ...item, ...updatedMenuItem } : item,
+              ),
+            }
+          : category,
+      ),
+    })),
 }));
 
 export default useMenuItemStore;

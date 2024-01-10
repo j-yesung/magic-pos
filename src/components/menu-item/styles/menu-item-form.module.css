@@ -6,14 +6,13 @@
   position: fixed;
   width: 300px;
   height: 100%;
-  /* right: -300px; */
-  right: 0;
+  right: -300px;
   top: 0;
   transition: all 0.3s;
 }
 
 .wrap.active {
-  /* right: 0; */
+  right: 0;
 }
 
 .wrap h3 {

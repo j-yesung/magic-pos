@@ -1,9 +1,19 @@
+import { removeMenuItem, updateMenuItem } from '@/server/api/supabase/menu-item';
 import useMenuItemStore from '@/shared/store/menu-item';
 import Image from 'next/image';
 import styles from './styles/menu-item-form.module.css';
 
 const MenuItemFormPage = () => {
-  const { menuItem, setMenuItem, menuItemList, setMenuItemList, updateMenuItemStore } = useMenuItemStore();
+  const {
+    isShow,
+    toggleShow,
+    menuItem,
+    setMenuItem,
+    menuItemList,
+    setMenuItemList,
+    updateMenuItemStore,
+    removeMenuItemStore,
+  } = useMenuItemStore();
 
   // 메뉴 input handler
   const changeMenuItemHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,20 +25,24 @@ const MenuItemFormPage = () => {
   const submitupdateMenuItemHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     updateMenuItemStore(menuItem);
-    console.log(menuItem);
-    // await updateCategoryName(category.id, category.name);
-    // setCategory({ ...category, name: '' });
+    await updateMenuItem(menuItem);
+    setMenuItem(menuItem);
+    toggleShow(false);
   };
 
   // 메뉴 삭제
   const clickRemoveCategoryHandler = async () => {
-    // removeCategoryStore(category);
-    // setCategory({ ...category, id: '', name: '' });
-    // await removeCategory(category.id);
+    removeMenuItemStore(menuItem);
+    setMenuItem({ ...menuItem, id: '', name: '', price: 0, remain_ea: 0 });
+    await removeMenuItem(menuItem.id);
+    toggleShow(false);
   };
 
   return (
-    <form onSubmit={submitupdateMenuItemHandler} className={styles['wrap']}>
+    <form
+      onSubmit={submitupdateMenuItemHandler}
+      className={isShow ? `${styles['wrap']} ${styles['active']}` : `${styles['wrap']}`}
+    >
       <h3>메뉴 사진</h3>
       <Image src={menuItem.image_url} alt={menuItem.name} width={200} height={200} />
       <input

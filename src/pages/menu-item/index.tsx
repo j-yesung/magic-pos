@@ -1,5 +1,5 @@
 import MenuItemsComponentPage from '@/components/menu-item/MenuItemContainer';
-import { fetchCategoriesWithMenuItemBystore_id } from '@/server/api/menu-category';
+import { fetchCategoriesWithMenuItemByStoreId } from '@/server/api/supabase//menu-category';
 import useCategoriesStore from '@/shared/store/menu-category';
 import useMenuItemStore from '@/shared/store/menu-item';
 import { useEffect } from 'react';
@@ -45,7 +45,7 @@ export default CategoryPage;
 
 export async function getStaticProps() {
   const storeId = '0c4b3064-7983-42a7-9e92-207373b019ad';
-  const { data: categoryWithMenuData } = await fetchCategoriesWithMenuItemBystore_id(storeId);
+  const { data: categoryWithMenuData } = await fetchCategoriesWithMenuItemByStoreId(storeId);
 
   return {
     props: {
