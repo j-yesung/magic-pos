@@ -41,7 +41,7 @@
   justify-content: space-between;
 }
 
-.header-wrapper span {
+.header-wrapper a {
   color: #fff;
   font-size: 2rem;
   font-weight: 700;
@@ -141,7 +141,6 @@
 
 /* 메인 영역입니다. */
 .main-wrapper {
-  padding: 3rem;
   grid-area: main;
   border-radius: 2rem;
   height: calc(100vh - 6rem);
