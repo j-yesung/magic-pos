@@ -11,7 +11,7 @@
   },
   "files.associations": {
     "*html": "html",
-    "*.css": "tailwindcss"
+    "*.css": "css"
   },
   "editor.quickSuggestions": {
     "strings": true

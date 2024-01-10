@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSwiper } from 'swiper/react';
 import useOrderStore from '@/shared/store/order';
-import styles from './styles/order-type-button.module.css';
+import styles from './styles/OrderTypeButton.module.css';
 
 const OrderTypeButton = ({ order }: { order: OrderType }) => {
   const { goNextStep } = useOrderStore.getState();

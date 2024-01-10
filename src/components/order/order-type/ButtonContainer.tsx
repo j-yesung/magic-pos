@@ -1,6 +1,6 @@
 import React from 'react';
 import OrderTypeButton from '@/components/order/order-type/OrderTypeButton';
-import styles from './styles/button-container.module.css';
+import styles from './styles/ButtonContainer.module.css';
 
 const ButtonContainer = () => {
   return (

@@ -1,0 +1,143 @@
+/* 관리자 모드 레이아웃 */
+.admin-wrapper {
+  display: grid;
+  grid-template-columns: 20rem repeat(5, 1fr);
+  grid-template-rows: 6rem calc(100vh - 6rem);
+  grid-template-areas: 'header header header header header header' 'aside main main main main main';
+}
+/* 운영 모드 레이아웃 */
+.admin-wrapper-toggle {
+  display: grid;
+  grid-template-columns: 0 repeat(5, 1fr);
+  grid-template-areas: 'header header header header header header' 'aside main main main main main';
+}
+.admin-wrapper-toggle .nav-wrapper {
+  visibility: hidden;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* 헤더 영역입니다. */
+.header-wrapper {
+  height: 6rem;
+  padding: 1.5rem;
+  grid-area: header;
+  display: flex;
+  flex-direction: column;
+  background-color: #212121;
+}
+
+.header-wrapper div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-wrapper span {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.label {
+  float: right;
+  width: 7rem;
+  height: 3rem;
+  display: block;
+  position: relative;
+  background: #d3d3d3;
+  border-radius: 3rem;
+  transition: background 0.4s;
+}
+
+.label::after {
+  top: 50%;
+  width: 2.5rem;
+  left: 0.25rem;
+  height: 2.5rem;
+  content: '';
+  position: absolute;
+  border-radius: 100%;
+  transition: all 0.4s;
+  background-color: #fff;
+  transform: translateY(-50%);
+  box-shadow: 0.0625rem 0.1875rem 0.25rem rgba(0, 0, 0, 0.1);
+}
+
+.label::before {
+  top: 50%;
+  left: 3.5rem;
+  content: '관리';
+  font-weight: 700;
+  font-size: 1.25rem;
+  position: absolute;
+  transition: all 0.4s;
+  transform: translateY(-50%);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.toggle:checked + .label {
+  background: #ad3aff;
+  font-weight: 700;
+}
+
+.toggle:checked + .label::after {
+  left: calc(100% - 2.65625rem);
+}
+
+.toggle:checked + .label::before {
+  content: '운영';
+  color: #fff;
+  left: 1rem;
+}
+
+/* 사이드바 영역입니다. */
+.nav-wrapper {
+  margin: 1rem;
+  padding: 3rem;
+  grid-area: aside;
+  border-radius: 2rem;
+  transition: all 0.4s;
+  border: 2px solid #191919;
+}
+
+.nav-wrapper ul {
+  gap: 3rem;
+  display: flex;
+  list-style: none;
+  font-size: 1.5rem;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.nav-wrapper ul li {
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  border-radius: 1rem;
+  justify-content: center;
+}
+
+.nav-wrapper ul li:hover {
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.4s;
+  background-color: #ad3aff;
+}
+
+.nav-wrapper ul li.active {
+  color: #fff;
+  background-color: #ad3aff;
+}
+
+/* 메인 영역입니다. */
+.main-wrapper {
+  margin: 1rem;
+  padding: 3rem;
+  grid-area: main;
+  border-radius: 2rem;
+  border: 2px solid #191919;
+}

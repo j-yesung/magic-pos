@@ -4,14 +4,14 @@ import MenuCategoryContainer from '@/components/order/menu/MenuCategoryContainer
 import styles from './styles/MenuContainer.module.css';
 import MenuCard from '@/components/order/menu/MenuCard';
 import { Tables } from '@/types/supabase';
-import { convertNumberToWon } from '@/shared/helper';
+import MessageBox from '@/components/order/cart/MessageBox';
 
 /**
  * STEP2: 메뉴 탐색 및 선택
  * @constructor
  */
 const MenuContainer = () => {
-  const { menuData, orderList } = useOrderStore();
+  const { menuData } = useOrderStore();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [menuItemList, setMenuItemList] = useState<Tables<'menu_item'>[]>([]);
 
@@ -29,7 +29,7 @@ const MenuContainer = () => {
   }, []);
 
   return (
-    <div>
+    <div className={styles.container}>
       {menuData && (
         <MenuCategoryContainer
           menuData={menuData}
@@ -43,14 +43,7 @@ const MenuContainer = () => {
         ))}
       </section>
       <div className={styles.messageBox}>
-        {orderList.length > 0 && (
-          <>
-            <span>
-              {orderList[0].name} {orderList.length > 1 && `외 ${orderList.length - 1}개`}
-            </span>
-            <span>{convertNumberToWon(orderList.reduce((acc, cur) => acc + cur.price, 0))}</span>
-          </>
-        )}
+        <MessageBox />
       </div>
     </div>
   );

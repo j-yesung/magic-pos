@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import 'swiper/css';
 import 'swiper/css/virtual';
 import OrderLayout from '@/components/layout/order/OrderLayout';
-import { fetchCategoriesWithMenuItemByStoreId } from '@/pages/api/menu-category';
+import { fetchCategoriesWithMenuItemByStoreId } from '@/server/api/supabase/menu-category';
 import { GetServerSideProps } from 'next';
 import { CategoryWithMenuItem } from '@/types/supabase';
 import useOrderStore from '@/shared/store/order';
