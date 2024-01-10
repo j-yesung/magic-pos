@@ -1,0 +1,33 @@
+.wrap {
+}
+.wrap ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.wrap ul li {
+  width: 200px;
+  min-height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ccc;
+  transition: all 0.3s;
+}
+.wrap ul li:hover {
+  background-color: #666;
+}
+.wrap ul li.active {
+  background-color: var(--main-color);
+}
+.wrap ul li.active:hover {
+  background-color: #1e0491;
+}
+.wrap ul li button {
+  width: 100%;
+  height: 100%;
+  padding: 10px 0;
+}
+.wrap ul li button span {
+  display: block;
+}

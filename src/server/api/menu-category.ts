@@ -48,7 +48,7 @@ export const updateCategoryName = async (categoryId: string, name: string) => {
 };
 
 /**
- * 카테고리 이름 수정하기
+ * 카테고리 위치 수정하기
  * @param values 카테고리 id, 카테고리 position
  * @returns data
  */
@@ -67,6 +67,7 @@ export const fetchCategoriesWithMenuItemBystore_id = async (store_id: string) =>
     .from('menu_category')
     .select('*, menu_item(*)')
     .eq('store_id', store_id)
+    .order('position', { ascending: true })
     .returns<CategoryWithMenuItem[]>();
   if (error) {
     return { data: {}, error };
