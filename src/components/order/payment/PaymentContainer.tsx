@@ -1,20 +1,16 @@
 import React, { useEffect, useRef } from 'react';
-import { PaymentWidgetInstance } from '@tosspayments/payment-widget-sdk';
 import styles from './styles/PaymentContainer.module.css';
 import useOrderStore from '@/shared/store/order';
-
-interface PaymentContainerProps {
-  paymentWidget: PaymentWidgetInstance | undefined;
-}
+import { TOSS_WIDGET_CLIENT_KEY, usePaymentWidget } from '@/hooks/order/usePaymentWidget';
+import { ANONYMOUS } from '@tosspayments/payment-widget-sdk';
 
 /**
  * STEP4: 토스 결제 화면
- * 화면 렌더링과 결제 실행 버튼이 다른 레벨에 있기 때문에 paymentWidget에 대해 state lifting을 사용했다.
- * @param paymentWidget
  * @constructor
  */
-const PaymentContainer = ({ paymentWidget }: PaymentContainerProps) => {
+const PaymentContainer = () => {
   const paymentMethodsWidgetRef = useRef<PaymentMethodsWidget>();
+  const { paymentWidget } = usePaymentWidget(TOSS_WIDGET_CLIENT_KEY, ANONYMOUS);
   const { getTotalPrice } = useOrderStore.getState();
 
   useEffect(() => {
