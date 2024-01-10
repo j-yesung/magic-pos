@@ -62,7 +62,7 @@ export const updateCategoryPosition = async (categoryId: string, position: numbe
  * 특정 가게에 대한 카테고리와 메뉴아이템을 전부 가져온다
  * @param store_id 가게 고유 아이디
  */
-export const fetchCategoriesWithMenuItemBystore_id = async (store_id: string) => {
+export const fetchCategoriesWithMenuItemByStoreId = async (store_id: string) => {
   const { data, error } = await supabase
     .from('menu_category')
     .select('*, menu_item(*)')
