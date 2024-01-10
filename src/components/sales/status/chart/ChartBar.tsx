@@ -1,7 +1,9 @@
 import { Tables } from '@/types/supabase';
 import { BarElement, CategoryScale, ChartArea, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+// Chart.js를 사용하려면 먼저 library 등록을 해야합니다.
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels);
 
 interface ChartProps {
   ctx: CanvasRenderingContext2D;
@@ -25,7 +27,6 @@ const chartAreaBackground = {
     ctx.lineTo(chartArea.right, chartArea.bottom); // 선의 끝점으로 이동
     ctx.stroke(); // 선을 그린다.
     ctx.restore();
-    console.log(ctx);
   },
 };
 
@@ -52,6 +53,9 @@ const ChartBar = ({ sample }: { sample: Tables<'sales'>[] }) => {
               borderRadius: 12,
             },
           },
+          layout: {
+            padding: 20,
+          },
           scales: {
             x: {
               border: {
@@ -65,10 +69,7 @@ const ChartBar = ({ sample }: { sample: Tables<'sales'>[] }) => {
             },
             y: {
               display: false,
-              stacked: true,
-              beforeTickToLabelConversion(axis) {
-                console.log(axis);
-              },
+              beginAtZero: true,
             },
           },
 
@@ -78,6 +79,17 @@ const ChartBar = ({ sample }: { sample: Tables<'sales'>[] }) => {
             },
             legend: {
               display: false,
+            },
+            datalabels: {
+              color: '#000',
+              anchor: 'end',
+              align: 'end',
+              offset: 3,
+              clamp: true,
+              formatter(value, context) {
+                console.log(context.dataIndex);
+                return value.y;
+              },
             },
           },
         }}
