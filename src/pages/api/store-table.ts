@@ -1,20 +1,23 @@
 import { supabase } from '@/shared/supabase';
-import { TablesInsert, TablesUpdate } from '@/types/supabase';
+import { TablesInsert } from '@/types/supabase';
+import { StoreTableOmit } from '@/types/table';
 
 export const fetchStoreTable = async (id: string) => {
   if (id) {
-    const { data: store, error } = await supabase.from('store').select('*, store_table(*)').eq('business_id', id);
+    const { data: store, error } = await supabase.from('store')
+      .select('*, store_table(*)')
+      .eq('business_id', id)
     if (error) throw new Error(error.message);
     return store;
   }
 };
 
 export const addStoreTable = async (storeTableData: TablesInsert<'store_table'>) => {
-  const { error } = await supabase.from('store_table').insert([storeTableData]).select();
+  const { error } = await supabase.from('store_table').insert([storeTableData]).select()
   if (error) throw new Error(error.message);
 };
 
-type StoreTableOmit = Omit<TablesUpdate<'store_table'>, 'store_id | position'>;
+
 export const updateStoreTable = async (storeTableData: StoreTableOmit) => {
   const { id, is_disabled, max_guest } = storeTableData;
   if (id) {

@@ -1,7 +1,7 @@
-import Header from '@/components/layout/admin/header/Header';
-import NavBar from '@/components/layout/admin/nav/NavBar';
-import styles from '@/components/layout/admin/styles/AdminLayout.module.css';
 import useToggleStore from '@/shared/store/toggle';
+import Header from './header/Header';
+import NavBar from './nav/NavBar';
+import styles from './styles/AdminLayout.module.css';
 
 type AdminLayoutProps = {
   children: React.ReactNode;
