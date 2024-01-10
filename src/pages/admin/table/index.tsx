@@ -1,5 +1,11 @@
+import AdminLayout from "@/components/layout/admin/AdminLayout";
 import Table from "@/components/table/Table";
+import { ReactNode } from "react";
 
-const tablePage = () => <Table />
 
-export default tablePage
+const TablePage = () => <Table />
+
+TablePage.getLayout = (page: ReactNode) => {
+  return <AdminLayout>{page}</AdminLayout>;
+};
+export default TablePage

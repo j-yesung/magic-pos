@@ -1,4 +1,6 @@
 import useFetchTable from "@/hooks/table/useFetchTable";
+import useTableStore from "@/shared/store/table";
+import { useEffect, useRef } from "react";
 import TableContainer from "./TableContainer";
 import styles from "./styles/Table.module.css";
 import TableSideBar from "./tableSideBar/TableSideBar";
@@ -8,11 +10,16 @@ const Table = () => {
   const { user } = typeof window !== 'undefined' && token && JSON.parse(token);
   const { id } = typeof window !== 'undefined' && user;
   const { data } = useFetchTable(id);
+  const dummySideBarRef = useRef<HTMLDivElement>(null)
+  const { setDummyideBarRef } = useTableStore();
+
+  useEffect(() => { 
+    setDummyideBarRef(dummySideBarRef)
+  },[])
   return (
     <div className={styles['table-wrapper']}>
-      <div className={styles['main-dummy-sideBar']}></div>
       <TableContainer storeData={data} />
-      <div className={styles['table-dummy-side-bar']}></div>
+      <div className={styles['table-dummy-side-bar']} ref={dummySideBarRef}></div>
       <TableSideBar />
     </div>
   )

@@ -3,7 +3,7 @@ import { Tables } from "@/types/supabase";
 import styles from "./styles/TableListItem.module.css";
 
 const TableListItem = ({ storeTableData }: { storeTableData: Tables<'store_table'> }) => {
-  const { TableItemClick } = useTableStore();
+  const { TableItemClick, refSideBar, refDummySideBar, refSideBarBg } = useTableStore();
 
   const clickTableItemHandler = () => {
     if (storeTableData) {
@@ -13,6 +13,10 @@ const TableListItem = ({ storeTableData }: { storeTableData: Tables<'store_table
         maxGuest: storeTableData.max_guest,
         isDisabled: storeTableData.is_disabled,
       })
+      refSideBar?.current?.style.setProperty('right', '0')
+      refDummySideBar?.current?.style.setProperty('width', '19.4%')
+      refSideBarBg?.current?.style.setProperty('visibility', 'visible')
+      refSideBarBg?.current?.style.setProperty('opacity', '50%')
     }
   }
   return (
