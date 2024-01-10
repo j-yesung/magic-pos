@@ -11,7 +11,6 @@ const SideBarButtonBox = () => {
   const data = client.getQueryData<StoreWithStoreTable[]>(["table"]);
   const storeData = data?.[0].store_table
   const tableData = storeData?.filter((x) => x.id === tableId)
-  console.log(tableData)
 
   const updateStoreTableData = {
     id: tableId,
