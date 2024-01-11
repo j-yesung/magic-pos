@@ -1,6 +1,6 @@
 import Footer from './footer/Footer';
 import Header from './header/Header';
-import Content from './main/Content';
+import Contents from './main/Contents';
 import styles from './styles/Home.module.css';
 
 interface HomeLayoutProps {
@@ -12,7 +12,7 @@ const HomeLayout = ({ children }: HomeLayoutProps) => {
     <div className={styles.wrapper}>
       <Header />
       <main className={styles.mainWrapper}>
-        <Content />
+        <Contents />
         {children}
       </main>
       <Footer />
