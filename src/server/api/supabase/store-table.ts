@@ -26,3 +26,13 @@ export const updateStoreTable = async (storeTableData: StoreTableOmit) => {
     if (error) throw new Error(error.message);
   }
 };
+
+export const deleteStoreTable = async (id: string | undefined) => { 
+  if (id) {
+    const { error } = await supabase
+      .from('store_table')
+      .delete()
+      .eq('id', id)
+    if (error) throw new Error(error.message);
+  }
+}
