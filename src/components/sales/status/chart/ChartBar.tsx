@@ -43,6 +43,8 @@ const ChartBar = ({ data }: { data: { x: string; y: number }[] }) => {
                   const bgColor = i === data.length - 1 ? 'hsl(259, 100%, 50%)' : '#ccc';
                   return bgColor;
                 }),
+                barThickness: 90,
+                maxBarThickness: 120,
               },
             ],
           }}

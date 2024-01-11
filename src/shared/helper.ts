@@ -47,7 +47,12 @@ const getStartWeeks = (year: number) => {
 };
 
 type DateFormatType = 'days' | 'weeks' | 'months';
-
+/**
+ *
+ * @param salesData salesTable에서 조건부로 받아온 데이터
+ * @param formatType 'days', 'weeks' , 'months' 를 받습니다.
+ * @returns  { x: string, y: number}[]
+ */
 export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormatType) => {
   if (salesData && formatType) {
     if (formatType === 'days') {
@@ -91,7 +96,7 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
             y: value.reduce((acc, cur) => acc + cur.product_price!, 0),
           };
         })
-        .sort((a, b) => (moment(a.moment).isAfter(moment(b.moment)) ? 1 : -1));
+        .toSorted((a, b) => (moment(a.moment).isAfter(moment(b.moment)) ? 1 : -1));
 
       return result;
     } else if (formatType === 'months') {
@@ -106,7 +111,7 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
         .map(([key, value]) => {
           return { x: key, y: value.reduce((acc, cur) => acc + cur.product_price!, 0) };
         })
-        .sort((a, b) => (moment(a.x).isAfter(moment(b.x)) ? 1 : -1));
+        .toSorted((a, b) => (moment(a.x).isAfter(moment(b.x)) ? 1 : -1));
 
       return result;
     }
