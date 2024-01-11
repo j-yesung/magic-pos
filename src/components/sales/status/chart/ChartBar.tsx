@@ -1,3 +1,4 @@
+import { convertNumberToWon } from '@/shared/helper';
 import { BarElement, CategoryScale, ChartArea, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';
@@ -29,80 +30,75 @@ const chartXAxisBorder = {
   },
 };
 
-const data = [
-  { x: '2016-12-25', y: 20 },
-  { x: '2016-12-26', y: 10 },
-];
-const ChartBar = () => {
+const ChartBar = ({ data }: { data: { x: string; y: number }[] }) => {
   return (
     <div style={{ width: '800px', height: '800px', margin: '120px' }}>
-      <Bar
-        data={{
-          labels: ['red', 'blue', 'yellow'],
-          datasets: [
-            {
-              data: [
-                { x: '2016-12-28', y: 20 },
-                { x: '2016-12-26', y: 10 },
-              ],
-              backgroundColor: data.map((d, i) => {
-                const bgColor = i === data.length - 1 ? 'hsl(259, 100%, 50%)' : '#ccc';
-                return bgColor;
-              }),
-            },
-          ],
-        }}
-        options={{
-          elements: {
-            bar: {
-              borderRadius: 12,
-            },
-          },
-          layout: {
-            padding: 20,
-          },
-          scales: {
-            x: {
-              border: {
-                width: 3,
-                color: '#ccc',
-                display: false, // chartBackgrounArea의 x축 border
+      {data.length !== 0 && (
+        <Bar
+          data={{
+            datasets: [
+              {
+                data,
+                backgroundColor: data.map((_, i) => {
+                  const bgColor = i === data.length - 1 ? 'hsl(259, 100%, 50%)' : '#ccc';
+                  return bgColor;
+                }),
               },
-              grid: {
-                display: false, // chartBackgroundArea의 세로선
+            ],
+          }}
+          options={{
+            elements: {
+              bar: {
+                borderRadius: 12,
               },
             },
-            y: {
-              display: false,
-              beginAtZero: true,
+            animation: {},
+            layout: {
+              padding: 20,
             },
-          },
+            scales: {
+              x: {
+                border: {
+                  width: 3,
+                  color: '#ccc',
+                  display: false, // chartBackgrounArea의 x축 border
+                },
+                grid: {
+                  display: false, // chartBackgroundArea의 세로선
+                },
+              },
+              y: {
+                display: false,
+                beginAtZero: true,
+              },
+            },
 
-          plugins: {
-            tooltip: {
-              enabled: false, // 차트 hover시 보이는 label 없애기
-            },
-            legend: {
-              display: false,
-            },
-            datalabels: {
-              color: value => {
-                const color = value.dataset.data.length - 1 === value.dataIndex ? 'black' : ' red';
-                return color;
-              }, // 바 위에 뜬 value에 대한 color 조절 입니다.
-              anchor: 'end',
-              align: 'end',
-              offset: 3,
-              clamp: true,
-              formatter(value) {
-                value.color = 'red';
-                return value.y;
+            plugins: {
+              tooltip: {
+                enabled: false, // 차트 hover시 보이는 label 없애기
+              },
+              legend: {
+                display: false,
+              },
+              datalabels: {
+                color: value => {
+                  const color = value.dataset.data.length - 1 === value.dataIndex ? 'black' : ' red';
+                  return color;
+                }, // 바 위에 뜬 value에 대한 color 조절 입니다.
+                anchor: 'end',
+                align: 'end',
+                offset: 3,
+                clamp: true,
+                formatter(value) {
+                  const koWon = convertNumberToWon(value.y);
+                  return koWon;
+                },
               },
             },
-          },
-        }}
-        plugins={[chartXAxisBorder]}
-      />
+          }}
+          plugins={[chartXAxisBorder]}
+        />
+      )}
     </div>
   );
 };
