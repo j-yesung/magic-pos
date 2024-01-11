@@ -1,6 +1,7 @@
 .wrap {
   background-color: #ccc;
   display: flex;
+  z-index: 1;
   flex-direction: column;
   padding: 20px;
   position: fixed;
@@ -9,8 +10,13 @@
   right: -300px;
   top: 0;
   transition: all 0.3s;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
 }
-
+.wrap input::-webkit-inner-spin-button {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
 .wrap.active {
   right: 0;
 }

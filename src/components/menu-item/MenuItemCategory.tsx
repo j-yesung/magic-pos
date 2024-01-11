@@ -1,4 +1,9 @@
 import useMenuItemStore from '@/shared/store/menu-item';
+import clsx from 'clsx';
+import 'swiper/css';
+import 'swiper/css/virtual';
+import { Virtual } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import styles from './styles/menu-item-category.module.css';
 
 const MenuItemCategoryPage = () => {
@@ -11,21 +16,33 @@ const MenuItemCategoryPage = () => {
       id: item.id,
       menu_item: item.menu_item,
     });
-    console.log(categoryWithMenuItem);
   };
   return (
     <div className={styles['wrap']}>
-      <ul>
-        {categoryWithMenuItemList.map(item => {
+      <Swiper
+        modules={[Virtual]}
+        slidesPerView={3.5}
+        centeredSlides={true}
+        centeredSlidesBounds={true}
+        slideToClickedSlide={true}
+        className={styles['swiper']}
+      >
+        {categoryWithMenuItemList.map((item, index) => {
           return (
-            <li key={item.id} className={item.id === categoryWithMenuItem.id ? styles['active'] : ''}>
+            <SwiperSlide
+              key={item.id}
+              className={
+                item.id === categoryWithMenuItem.id ? clsx(styles['slide'], styles['active']) : styles['slide']
+              }
+              virtualIndex={index}
+            >
               <button type="button" onClick={() => clickChoiceCategoryHandler(item)}>
                 {item.name}
               </button>
-            </li>
+            </SwiperSlide>
           );
         })}
-      </ul>
+      </Swiper>
     </div>
   );
 };

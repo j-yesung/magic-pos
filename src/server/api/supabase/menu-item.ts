@@ -47,3 +47,40 @@ export const updateMenuItem = async (menuItem: MenuItemType) => {
   if (error) throw error;
   return data;
 };
+
+/**
+ * 메뉴 물품 이미지 삭제
+ * @param values 메뉴의 items
+ * @returns data
+ */
+export const uploadMenuItem = async (menuItem: MenuItemType, createAt: string, selectedFile: File) => {
+  const { error, data } = await supabase.storage
+    .from('images')
+    .upload(`menu/${menuItem.category_id}/${menuItem.id}/${createAt}`, selectedFile, {
+      // cacheControl: '3600',
+      // upsert: false,
+    });
+  if (error) throw error;
+  return { data, error };
+};
+
+export const downloadMenuItemUrl = async (menuItem: MenuItemType, createAt: string) => {
+  try {
+    const { data } = await supabase.storage
+      .from('images')
+      .getPublicUrl(`menu/${menuItem.category_id}/${menuItem.id}/${createAt}`);
+
+    return data.publicUrl;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const removeMenuItemFromStorage = async (menuItem: MenuItemType) => {
+  const { data: list } = await supabase.storage.from('images').list(`menu/${menuItem.category_id}/${menuItem.id}`);
+  const filesToRemove = list?.map(x => `menu/${menuItem.category_id}/${menuItem.id}/${x.name}`);
+
+  const { error } = await supabase.storage.from('images').remove(filesToRemove!);
+  if (error) console.error(error);
+};

@@ -1,13 +1,9 @@
 .wrap {
-  height: 100vh;
-  padding: 40px 40px 500px 40px;
-}
-.menu-h2 {
-  font-weight: bold;
-  font-size: 24px;
+  /* height: 100vh; */
+  /* padding: 40px 40px 500px 40px; */
 }
 
 .menu-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  /* display: grid;
+  grid-template-columns: 1fr 1fr; */
 }

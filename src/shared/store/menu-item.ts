@@ -5,6 +5,7 @@ import { create } from 'zustand';
  */
 
 interface MenuItemStoreType {
+  sampleImage: string;
   isShow: boolean;
   toggleShow: (item: boolean) => void;
   menuItem: MenuItemType;
@@ -18,9 +19,14 @@ interface MenuItemStoreType {
   addMenuItemStore: (item: MenuItemType) => void;
   removeMenuItemStore: (item: MenuItemType) => void;
   updateMenuItemStore: (item: MenuItemType) => void;
+  menuItemImgFile: File | null;
+  setMenuItemImgFile: (item: File | null) => void;
+  menuItemSampleImg: string;
+  setMenuItemSampleImg: (item: string) => void;
 }
 
 const useMenuItemStore = create<MenuItemStoreType>(set => ({
+  sampleImage: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/menu_sample.png`,
   isShow: false,
   toggleShow: item => set({ isShow: item }),
   menuItem: {
@@ -83,6 +89,10 @@ const useMenuItemStore = create<MenuItemStoreType>(set => ({
           : category,
       ),
     })),
+  menuItemImgFile: null,
+  setMenuItemImgFile: item => set({ menuItemImgFile: item }),
+  menuItemSampleImg: '',
+  setMenuItemSampleImg: item => set({ menuItemSampleImg: item }),
 }));
 
 export default useMenuItemStore;

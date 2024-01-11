@@ -4,14 +4,21 @@ import Image from 'next/image';
 import styles from './styles/menu-item.module.css';
 
 const MenuItemPage = () => {
-  const { toggleShow, menuItem, setMenuItem, categoryWithMenuItem, categoryWithMenuItemList, addMenuItemStore } =
-    useMenuItemStore();
+  const {
+    sampleImage,
+    toggleShow,
+    menuItem,
+    setMenuItem,
+    categoryWithMenuItem,
+    categoryWithMenuItemList,
+    addMenuItemStore,
+    setMenuItemSampleImg,
+  } = useMenuItemStore();
 
   // 메뉴 플러스
   const clickAddMenuItemHandler = async () => {
     toggleShow(true);
     const emptyValue = `임시 메뉴명`;
-    const sampleImage = 'https://lajnysuklrkrhdyqhotr.supabase.co/storage/v1/object/public/images/menu_sample.png';
     const { data } = await addMenuItem(categoryWithMenuItem.id, emptyValue, sampleImage, 0, 0);
     const newMenuItem: MenuItemType = {
       id: data[0].id,
@@ -23,6 +30,7 @@ const MenuItemPage = () => {
     };
     setMenuItem(newMenuItem);
     addMenuItemStore(newMenuItem);
+    setMenuItemSampleImg(newMenuItem.image_url);
   };
 
   // 메뉴 선택
@@ -36,7 +44,7 @@ const MenuItemPage = () => {
       price: item.price,
       remain_ea: item.remain_ea,
     });
-    console.log(menuItem);
+    setMenuItemSampleImg(item.image_url);
   };
 
   return (

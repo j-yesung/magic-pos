@@ -1,11 +1,40 @@
+import useMenuItemStore from '@/shared/store/menu-item';
+import { useEffect } from 'react';
 import MenuItemFormPage from './MenuItemForm';
 import MenuItemListPage from './MenuItemList';
 import styles from './styles/menu-item-container.module.css';
 
-const MenuItemsComponentPage = () => {
+interface PropsType {
+  categoryWithMenuData: CategoryWithItemType[];
+  storeId: string;
+}
+
+const MenuItemsComponentPage = (props: PropsType) => {
+  const { categoryWithMenuData, storeId } = props;
+
+  const {
+    setMenuItemList,
+    categoryWithMenuItem,
+    setCategoryWithMenuItem,
+    categoryWithMenuItemList,
+    setCategoryWithMenuItemList,
+  } = useMenuItemStore();
+
+  useEffect(() => {
+    setCategoryWithMenuItemList(categoryWithMenuData);
+    setCategoryWithMenuItem({
+      ...categoryWithMenuItem,
+      id: categoryWithMenuData[0].id, // 초기값 첫 카테고리 선택
+      store_id: storeId,
+      position: categoryWithMenuData.length,
+      menu_item: categoryWithMenuData[0].menu_item, // 초기값 첫 카테고리 선택
+    });
+    setMenuItemList(categoryWithMenuData[0].menu_item);
+    console.log(categoryWithMenuItemList);
+  }, [categoryWithMenuData]);
+
   return (
     <div className={styles['wrap']}>
-      <h2 className={styles['menu-h2']}>메뉴 등록하기</h2>
       <div className={styles['menu-container']}>
         <MenuItemListPage />
         <MenuItemFormPage />

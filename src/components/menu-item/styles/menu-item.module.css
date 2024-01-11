@@ -1,13 +1,14 @@
 .wrap {
+  margin-top: 50px;
 }
 .wrap ul {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 10px;
 }
 .wrap ul li {
-  width: 200px;
-  min-height: 40px;
+  width: calc(50% - 5px);
+  min-height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
