@@ -7,6 +7,10 @@ import MessageBox from '@/components/order/cart/MessageBox';
 import { Tables } from '@/types/supabase';
 import WarningNoOrderList from '@/components/order/cart/WarningNoOrderList';
 
+/**
+ * STEP3: 담은 메뉴 보기
+ * @constructor
+ */
 const CartContainer = () => {
   const { orderList } = useOrderStore();
 

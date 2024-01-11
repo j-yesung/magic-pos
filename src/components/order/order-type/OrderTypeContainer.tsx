@@ -3,7 +3,7 @@ import ButtonContainer from '@/components/order/order-type/ButtonContainer';
 import styles from './styles/OrderTypeContainer.module.css';
 
 /**
- * 포장 / 매장 선택
+ * STEP1: 포장 / 매장 선택
  * @constructor
  */
 const OrderTypeContainer = () => {
