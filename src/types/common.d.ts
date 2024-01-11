@@ -20,3 +20,8 @@ interface ModalConfirmTypeOption {
   confirmButtonCallback?: (() => void) | null;
   cancelButtonCallback?: (() => void) | null;
 }
+
+interface AuthState {
+  session: Record<string, string | number> | null;
+  setSession: (session) => void;
+}

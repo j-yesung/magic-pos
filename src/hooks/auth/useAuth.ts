@@ -1,13 +1,15 @@
+import { businessNumberCheckHandler } from '@/server/api/external/business';
 import {
+  getUserSession,
   loginHandler,
   logoutHandler,
   resetPasswordHandler,
   signUpHandler,
   updatePasswordHandler,
 } from '@/server/api/supabase/auth';
+import useAuthStore from '@/shared/store/auth';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-import { businessNumberCheckHandler } from '@/server/api/external/business';
 
 const enum QUERY_KEY {
   LOGIN = 'login',
@@ -15,11 +17,14 @@ const enum QUERY_KEY {
   LOGOUT = 'logout',
   BUSINESS = 'business',
   UPDATE_PASSWORD = 'updatePassword',
+  SESSION = 'session',
 }
 
 export const useAuth = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
+  const { setSession } = useAuthStore();
+  console.log('렌더링');
 
   const signupMutation = useMutation({
     mutationFn: signUpHandler,
@@ -47,6 +52,7 @@ export const useAuth = () => {
     mutationFn: logoutHandler,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.LOGOUT] });
+      setSession(null);
       router.push('/');
     },
     onError: error => {
@@ -87,6 +93,17 @@ export const useAuth = () => {
     },
   });
 
+  const getUserSessionMutation = useMutation({
+    mutationFn: getUserSession,
+    onSuccess: data => {
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.SESSION] });
+      setSession(data);
+    },
+    onError: error => {
+      console.error(error);
+    },
+  });
+
   return {
     signup: signupMutation.mutate,
     login: loginMutation.mutate,
@@ -94,5 +111,6 @@ export const useAuth = () => {
     businessNumberCheck: businessNumberCheckMutation.mutate,
     updatePassword: updatePasswordMutation.mutate,
     sendResetPasswordEmail: sendResetPasswordEmailMutation.mutate,
+    getUserSession: getUserSessionMutation.mutate,
   };
 };
