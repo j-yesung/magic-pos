@@ -1,6 +1,6 @@
 import { supabase } from '@/shared/supabase';
 import { Tables } from '@/types/supabase';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import { useEffect, useState } from 'react';
 import ChartBar from './chart/ChartBar';
 import Tab from './tab/Tab';
@@ -25,15 +25,58 @@ const Status = () => {
 
   const today = moment().hour(0).subtract(9, 'hour');
   const cloneToday = today.clone();
-  console.log(data);
+
   const saleFormatData: SalesType[] = [];
 
-  const formatData = (data: Tables<'sales'>[]) => {
+  const getCurrentDate = (data: Tables<'sales'>, current: string) => {
+    const date = moment(data.sales_date).format('YYYY MMMM DD');
+
+    if ('오늘' === current) {
+      const day = moment(data.sales_date).format('dddd');
+
+      return { day, date };
+    }
+    if ('어제' === current) {
+      const day = moment(data.sales_date).format('MMMM DDD');
+      console.log('adf');
+      return { day, date };
+    }
+    if ('요번주' === current) {
+      const day = `${moment(data.sales_date).format('MMMM')} ${
+        moment(data.sales_date).week() - moment(today).startOf('month').week() + 1
+      }주차`; // 몇 월 몇주차
+      const date = moment(data.sales_date).format('MMMM DDDD');
+
+      return { day, date };
+    }
+    if ('요번달' === current) {
+      const day = moment(data.sales_date).format('');
+      const date = moment(data.sales_date);
+    }
+    return null;
+  };
+
+  const formatData = (data: Tables<'sales'>[], currentDay: Moment) => {
     if (data) {
       const weekSales = data.reduce((acc, sales) => {
-        const day = moment(sales.sales_date).format('dddd');
-        const date = moment(sales.sales_date).format('YYYY-MMMM-dddd');
+        const day = moment(sales.sales_date).format('MMMM');
+        const date = moment(sales.sales_date).format('YYYY-MMMM');
+        const test = getCurrentDate(sales, '오늘');
+        console.log(test);
+        // const arr = data.map(d => {
+        //   return { ...d, sales_date: moment(d.sales_date).format('YYYY-MMMM') };
+        // });
 
+        // const group = groupByKey(arr, 'sales_date');
+        // console.log(
+        //   group.forEach(value => {
+        //     console.log(value);
+        //   }),
+        // );
+
+        // console.log(moment(sales.sales_date).month()); //0 : 1월 ~ 11: 12월로 표기
+        // // console;
+        // // console.log(moment(sales.sales_date).week());
         const check = acc.findIndex(a => a.x === moment(sales.sales_date).format('dddd'));
 
         if (check !== -1) {
@@ -41,14 +84,14 @@ const Status = () => {
           acc[check].ea += sales.product_ea!;
           acc[check].category.push(sales.product_category!);
         } else {
-          const obj = {
+          const refineSales = {
             y: sales.product_price! * sales.product_ea! || 0,
-            x: day || '',
+            x: day,
             ea: sales.product_ea || 0,
             category: [sales.product_category] || [],
             date,
           };
-          acc.push(obj as SalesType);
+          acc.push(refineSales as SalesType);
         }
 
         return acc;
@@ -60,7 +103,7 @@ const Status = () => {
         return 0;
       });
 
-      return sortWeekSales;
+      return weekSales;
     }
   };
 
@@ -81,7 +124,7 @@ const Status = () => {
     const { data: sales, error } = await supabase
       .from('sales')
       .select('product_ea,product_name,product_price,sales_date')
-      .gte('sales_date', momentToString(cloneToday.subtract(7, 'day'), TIME_FORMAT))
+      .gte('sales_date', momentToString(cloneToday.subtract(6, 'day'), TIME_FORMAT))
       .lt('sales_date', momentToString(today, TIME_FORMAT))
       .order('sales_date');
     if (error) {
@@ -106,18 +149,19 @@ const Status = () => {
     const { data: sales, error } = await supabase
       .from('sales')
       .select('product_ea,product_name,product_price,sales_date')
-      .gte('sales_date', momentToString(cloneToday.startOf('month').subtract(7, 'month'), TIME_FORMAT))
-      .lt('sales_date', momentToString(cloneToday.startOf('month'), TIME_FORMAT));
+      .gte('sales_date', momentToString(today.clone().startOf('month').subtract(6, 'month'), TIME_FORMAT))
+      .lt('sales_date', momentToString(cloneToday, TIME_FORMAT));
     if (error) {
       return { sales: {}, error };
     }
+    console.log(sales);
     return { sales, error };
   };
 
   useEffect(() => {
-    getTodaySales().then(result => {
+    getMonthSales().then(result => {
       if (result.sales !== 0) {
-        const refineData = formatData(result.sales as Tables<'sales'>[]);
+        const refineData = formatData(result.sales as Tables<'sales'>[], cloneToday.subtract(6, 'month'));
         setData(refineData!);
       }
     });

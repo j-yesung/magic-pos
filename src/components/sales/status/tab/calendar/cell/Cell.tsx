@@ -27,6 +27,9 @@ const Cell = ({ currentMonth, setCurrentMonth, setIsShow, setSelectedDate, selec
         prev: styles['prev-month'],
         current: styles['current-month'],
         after: styles['after-month'],
+        currentCalendar: styles['current'],
+        prevCalendar: styles['prev'],
+        afterCalendar: styles['after'],
       },
       dateType: {
         prev: styles['prev-date'],
@@ -50,7 +53,11 @@ const Cell = ({ currentMonth, setCurrentMonth, setIsShow, setSelectedDate, selec
   });
   function getMonthType(Month: Moment) {
     const today = moment();
-    return Month.isSame(today, 'M') ? 'current' : Month.isBefore(today, 'M') ? 'prev' : 'after';
+    if (currentMonth.isSame(today, 'M')) {
+      return Month.isSame(today, 'M') ? 'current' : Month.isBefore(today, 'M') ? 'prev' : 'after';
+    } else {
+      return Month.isSame(currentMonth, 'M') ? 'currentCalendar' : 'prevCalendar';
+    }
   }
 
   function getDateType(day: Moment) {

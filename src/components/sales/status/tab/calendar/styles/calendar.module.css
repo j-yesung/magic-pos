@@ -1,5 +1,6 @@
 .date-base {
   padding: 1rem;
+  border: 1px solid #000;
 }
 
 /*
@@ -51,4 +52,18 @@ day 관련 class css 입니다.
 
 .day {
   color: #fff;
+}
+
+.current {
+  background-color: #fff;
+}
+
+.current span {
+  color: #000;
+}
+
+.prev,
+.after {
+  background-color: #ccc;
+  color: #000;
 }
