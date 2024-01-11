@@ -1,6 +1,6 @@
 import useFetchTable from "@/hooks/table/useFetchTable";
-import styles from "@/styles/Table.module.css";
 import TableContainer from "./TableContainer";
+import styles from "./styles/Table.module.css";
 import TableSideBar from "./tableSideBar/TableSideBar";
 
 const Table = () => {
