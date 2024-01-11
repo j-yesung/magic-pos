@@ -16,9 +16,7 @@ export interface SalesType {
 
 const Status = () => {
   const [data, setData] = useState<{ x: string; y: number }[]>([]);
-
   const today = moment().hour(0).subtract(9, 'hour');
-  const cloneToday = today.clone();
 
   useEffect(() => {
     getTodaySales(today.clone(), today.clone()).then(result => {
