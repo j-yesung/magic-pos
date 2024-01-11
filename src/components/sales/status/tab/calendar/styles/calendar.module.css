@@ -51,15 +51,11 @@ day 관련 class css 입니다.
 }
 
 .day {
-  color: #fff;
+  color: #000;
 }
 
 .current {
   background-color: #fff;
-}
-
-.current span {
-  color: #000;
 }
 
 .prev,
