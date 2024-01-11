@@ -18,20 +18,23 @@ const OrderIndexPage = ({
   storeId: string;
   tableId: string;
 }) => {
-  const { setMenuData, setStoreId, setTableId } = useOrderStore();
+  const { setMenuData, setStoreId, setTableId, orderNumber } = useOrderStore();
   const [isLoaded, setIsLoaded] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    // window.history.replaceState({}, '/order', '/order');
+    if (orderNumber !== 0) {
+      router.push('/order/receipt');
+      return;
+    }
+    // 주소창에 uuid가 노출되는 것을 막기 위해 주소창의 URL만을 변경한다. (페이지 이동X)
+    window.history.replaceState({}, '/order', '/order');
     // TODO: 에러 처리
     if (isEmptyObject(menuData)) console.error('something wrong');
     else setMenuData(menuData);
 
     if (storeId) setStoreId(storeId);
     if (tableId) setTableId(tableId);
-
-    // if (orderNumber)
 
     useOrderStore.persist.clearStorage();
     setIsLoaded(true);

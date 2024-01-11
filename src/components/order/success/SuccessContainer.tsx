@@ -16,7 +16,6 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const [isPageLoading, setIsPageLoading] = useState(false);
 
   useEffect(() => {
-    // 결제 승인시 sales테이블에 담아놓은 데이터를 업로드 한다.
     if (payment?.status === 'DONE') {
       if (!orderType) {
         console.error('주문 타입이 없습니다.');
@@ -28,6 +27,8 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
         return;
       }
 
+      // 전역 store에 저장된 orderNumber가 0 (초기값)일 때만 실행된다.
+      // 결제 승인시 sales테이블에 담아놓은 orderList 데이터를 insert 한다.
       if (orderNumber === 0) {
         const group = groupByKey<Tables<'menu_item'>>(orderList, 'id');
         const salesData = [...group].map(([, value]) => ({
@@ -45,6 +46,8 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
     }
   }, [orderList]);
 
+  // sales 테이블에 데이터 업로드시 orderNumber가 바뀐다. orderNumber가 바뀌면
+  // 주문내역 테이블 (order_store, order_number)에 insert 한다.
   useEffect(() => {
     if (payment?.status === 'DONE' && storeId && orderNumber > 0) {
       const orderData = {
