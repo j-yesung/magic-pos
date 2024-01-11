@@ -34,7 +34,7 @@ const TableContainer = ({ storeData }: { storeData?: StoreWithStoreTable[] }) =>
     <div className={styles['table-container']}>
       <div className={styles['table-title']}>테이블 관리</div>
       <ul className={styles['table-list']}>
-        {storeData?.[0]?.store_table &&
+        {
           storeData?.[0]?.store_table.sort((a, b) => {
             if (a.position && b.position) {
               return a.position < b.position ? -1 : 1

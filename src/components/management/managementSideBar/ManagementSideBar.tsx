@@ -1,10 +1,17 @@
 import React from "react"
+import SideBarButtonBox from "./SideBarButtonBox"
+import SideBarContainer from "./SideBarContainer"
 import styles from "./styles/ManagementSideBar.module.css"
+
 
 const ManagementSideBar = () => {
   return (
-    <div className={styles['sideBarWrapper']}>
-      
+    <div className={styles['side-bar-wrapper']}>
+      <div className={styles['side-bar-title']}>
+        테이블 1
+      </div>
+      <SideBarContainer />
+      <SideBarButtonBox />
     </div>
   )
 }
