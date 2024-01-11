@@ -1,3 +1,5 @@
+import { getTodaySales } from '@/server/api/supabase/sales';
+import { formatData } from '@/shared/helper';
 import { cva } from 'class-variance-authority';
 import moment, { Moment } from 'moment';
 import styles from '../styles/calendar.module.css';
@@ -8,18 +10,29 @@ interface Props {
   setIsShow: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedDate: React.Dispatch<React.SetStateAction<Moment>>;
   selectedDate: Moment;
+  setData: React.Dispatch<React.SetStateAction<{ x: string; y: number }[]>>;
 }
 
-const Cell = ({ currentMonth, setCurrentMonth, setIsShow, setSelectedDate, selectedDate }: Props) => {
+const Cell = ({ currentMonth, setCurrentMonth, setIsShow, setSelectedDate, selectedDate, setData }: Props) => {
   // const monthStart = currentMonth.clone().startOf('month'); // 오늘이 속한 달의 시작일
   // const monthEnd = currentMonth.clone().endOf('month'); // 오늘이 속한 달의 마지막 일
   const startDay = currentMonth.clone().startOf('month').startOf('week'); // monthStart가 속한 주의 시작 주
   const endDay = currentMonth.clone().endOf('month').endOf('week'); // monthStart가 속한 마지막 주
 
-  const clickShowDate = (day: Moment) => () => {
+  const clickShowDate = (day: Moment) => async () => {
+    const { sales, formatType } = await getTodaySales(
+      day.clone().hour(0).subtract(9, 'hour'),
+      day.clone().hour(0).subtract(9, 'hour'),
+    );
+    if (sales.length !== 0) {
+      const refineData = formatData(sales, formatType);
+      setData(refineData!);
+    } else {
+      setData([]);
+    }
     setIsShow(false);
-    setCurrentMonth(day);
-    setSelectedDate(day);
+    setCurrentMonth(day.clone());
+    setSelectedDate(day.clone());
   };
   const dateVariant = cva([styles['date-base']], {
     variants: {

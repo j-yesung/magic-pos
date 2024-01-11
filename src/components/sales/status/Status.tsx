@@ -25,6 +25,7 @@ interface SalesDataReturnType {
 const TIME_FORMAT = 'YYYY-MM-DD HH:00';
 
 const momentToString = (date: moment.Moment, format: string) => {
+  console.log('momentString', date.format(format));
   return date.format(format);
 };
 
@@ -56,7 +57,10 @@ const Status = () => {
             return { x: key, y: value.reduce((acc, cur) => acc + cur.product_price!, 0) };
           })
           .toSorted((a, b) => (moment(a.x).isAfter(moment(b.x)) ? 1 : -1));
-        result[result.length - 2].x = '어제';
+
+        if (result[result.length - 2]) {
+          result[result.length - 2].x = '어제';
+        }
         result[result.length - 1].x = '오늘';
 
         return result;
@@ -108,9 +112,11 @@ const Status = () => {
 
         console.log('group >> ', group);
 
-        const result = [...group.entries()].map(([key, value]) => {
-          return { x: key, y: value.reduce((acc, cur) => acc + cur.product_price!, 0) };
-        });
+        const result = [...group.entries()]
+          .map(([key, value]) => {
+            return { x: key, y: value.reduce((acc, cur) => acc + cur.product_price!, 0) };
+          })
+          .sort((a, b) => (moment(a.x).isAfter(moment(b.x)) ? 1 : -1));
 
         return result;
       }
@@ -122,7 +128,7 @@ const Status = () => {
     const { data: sales, error } = await supabase
       .from('sales')
       .select('*')
-      .gte('sales_date', momentToString(cloneToday.subtract(6, 'day'), TIME_FORMAT))
+      .gte('sales_date', momentToString(today.clone().subtract(6, 'day'), TIME_FORMAT))
       .lt('sales_date', momentToString(today.clone().add(1, 'day'), TIME_FORMAT));
     if (error) {
       return { sales: [], error };
@@ -170,17 +176,16 @@ const Status = () => {
   };
 
   useEffect(() => {
-    getTodaySales().then(result => {
+    getMonthSales().then(result => {
       if (result.sales.length !== 0) {
         const refineData = formatData(result.sales as Tables<'sales'>[], result.formatType);
         setData(refineData!);
       }
     });
   }, []);
-  console.log(data);
   return (
     <div>
-      <Tab />
+      <Tab setData={setData} />
       <ChartBar data={data} />
     </div>
   );

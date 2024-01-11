@@ -4,6 +4,19 @@
 }
 
 /*
+기본 calendar css 입니다.
+*/
+.current {
+  background-color: #fff;
+}
+
+.prev,
+.after {
+  background-color: #ccc;
+  color: #000;
+}
+
+/*
 month 관련 class css 입니다.
 */
 .prev-month {
@@ -51,15 +64,5 @@ day 관련 class css 입니다.
 }
 
 .day {
-  color: #000;
-}
-
-.current {
-  background-color: #fff;
-}
-
-.prev,
-.after {
-  background-color: #ccc;
   color: #000;
 }

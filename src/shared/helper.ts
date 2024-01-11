@@ -1,3 +1,6 @@
+import { Tables } from '@/types/supabase';
+import moment, { Moment } from 'moment';
+
 /**
  * 해당 객체가 빈 객체인지 판단
  * @param obj
@@ -27,4 +30,86 @@ export const groupByKey = <T extends { [key: string | number]: unknown }>(arr: T
     else acc.set(stringKey, [cur]);
     return acc;
   }, new Map<string, T[]>());
+};
+
+/**
+ *
+ * @param date moment객체
+ * @param format 변형하고싶은 년도,월,일
+ * @returns
+ */
+export const momentToString = (date: moment.Moment, format: string) => {
+  return date.format(format);
+};
+
+const getStartWeeks = (year: number) => {
+  return new Array(12).fill(false).map((_, index) => moment().year(year).month(index).startOf('months').week());
+};
+
+type DateFormatType = 'days' | 'weeks' | 'months';
+
+export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormatType) => {
+  if (salesData && formatType) {
+    if (formatType === 'days') {
+      // 일별로 데이터를 추출
+      const group = groupByKey<Tables<'sales'>>(
+        salesData.map(data => ({ ...data, sales_date: moment(data.sales_date).format('YYYY-MM-DD') })),
+        'sales_date',
+      );
+
+      const result = [...group.entries()]
+        .map(([key, value]) => {
+          return { x: key, y: value.reduce((acc, cur) => acc + cur.product_price!, 0) };
+        })
+        .toSorted((a, b) => (moment(a.x).isAfter(moment(b.x)) ? 1 : -1));
+
+      return result;
+    } else if (formatType === 'weeks') {
+      // 주별로 데이터를 추출
+
+      const newData = salesData.map(sales => {
+        const momentDate = moment(sales.sales_date).hour(0).minute(0).second(0).add(9, 'hours'); // sales_date는 utc기준시간이므로  우리나라 시간으로 바꾸려면 // 9를 더해준다.
+        const weeksInfoByYear = getStartWeeks(momentDate.year()); // 전년도 이번년도에서 시작하는 주차가 다르니까
+        const weeksNumber = +momentDate.format('W'); // w는 일요일기준, W는 월요일기준으로 주차를 결정한다.
+        const month = momentDate.month(); // 몇월인지
+        const startWeeksNumber = weeksInfoByYear[month]; // 각 년도별 월별 주차시작이 들어있는 배열입니다.
+
+        return {
+          ...sales,
+          original_sales_date: momentDate,
+          sales_date: momentDate.format(`YYYY년 MM월 ${weeksNumber - startWeeksNumber + 1} 주차`),
+        };
+      });
+
+      const group = groupByKey<Tables<'sales'> & { original_sales_date: Moment }>(newData, 'sales_date');
+
+      const result = [...group.entries()]
+        .map(([key, value]) => {
+          return {
+            moment: value[0].original_sales_date,
+            x: key,
+            y: value.reduce((acc, cur) => acc + cur.product_price!, 0),
+          };
+        })
+        .sort((a, b) => (moment(a.moment).isAfter(moment(b.moment)) ? 1 : -1));
+
+      return result;
+    } else if (formatType === 'months') {
+      // 월별로 데이터를 추출
+
+      const group = groupByKey<Tables<'sales'>>(
+        salesData.map(data => ({ ...data, sales_date: moment(data.sales_date).format('YYYY-MM') })),
+        'sales_date',
+      );
+
+      const result = [...group.entries()]
+        .map(([key, value]) => {
+          return { x: key, y: value.reduce((acc, cur) => acc + cur.product_price!, 0) };
+        })
+        .sort((a, b) => (moment(a.x).isAfter(moment(b.x)) ? 1 : -1));
+
+      return result;
+    }
+    return [];
+  }
 };
