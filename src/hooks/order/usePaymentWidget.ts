@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { loadPaymentWidget } from '@tosspayments/payment-widget-sdk';
+import { ANONYMOUS, loadPaymentWidget } from '@tosspayments/payment-widget-sdk';
 import { Tables } from '@/types/supabase';
 import { nanoid } from 'nanoid';
 
@@ -13,11 +13,11 @@ import { nanoid } from 'nanoid';
 // 이메일・전화번호와 같이 유추가 가능한 값은 안전하지 않습니다.
 export const TOSS_WIDGET_CLIENT_KEY = process.env.NEXT_PUBLIC_TOSS_WIDGET_CLIENT_KEY as string;
 
-export const usePaymentWidget = (clientKey: string, customerKey: string) => {
+export const usePaymentWidget = () => {
   const { data: paymentWidget } = useQuery({
-    queryKey: ['payment-widget', clientKey, customerKey],
+    queryKey: ['payment-widget', TOSS_WIDGET_CLIENT_KEY, ANONYMOUS],
     queryFn: () => {
-      return loadPaymentWidget(clientKey, customerKey);
+      return loadPaymentWidget(TOSS_WIDGET_CLIENT_KEY, ANONYMOUS);
     },
   });
 

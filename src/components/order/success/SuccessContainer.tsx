@@ -6,6 +6,9 @@ import { Tables } from '@/types/supabase';
 import { useStoreQuery } from '@/hooks/store/useStoreQuery';
 import { useStoreOrderQuery } from '@/hooks/order/useStoreOrderQuery';
 import { useTogoOrderQuery } from '@/hooks/order/useTogoOrderQuery';
+import styles from './styles/SuccessContainer.module.css';
+import Image from 'next/image';
+import image from '@/../public/images/image-success.png';
 
 const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const { orderList, storeId, tableId, menuData, orderNumber, getTotalPrice, orderType } = useOrderStore();
@@ -79,7 +82,21 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
     setIsPageLoading(true);
   }, []);
 
-  return <>{isPageLoading && <div>주문 성공 고객님의 주문 번호는 {orderNumber}</div>}</>;
+  return (
+    <>
+      {isPageLoading && (
+        <div className={styles.container}>
+          <Image src={image} alt={'성공 이미지'} width={200} height={200} />
+          <div className={styles.textBox}>
+            <span>주문이 완료되었습니다!</span>
+            <em>
+              주문 번호는 <strong>{orderNumber}</strong> 입니다.
+            </em>
+          </div>
+        </div>
+      )}
+    </>
+  );
 };
 
 export default SuccessContainer;
