@@ -22,11 +22,9 @@ export const convertNumberToWon = (num: number) => {
  */
 export const groupByKey = <T extends { [key: string | number]: unknown }>(arr: T[], key: keyof T) => {
   return arr.reduce((acc, cur) => {
-    if (acc.has(cur[key])) {
-      acc.get(cur[key]).push(cur);
-    } else {
-      acc.set(cur[key], [cur]);
-    }
+    const stringKey = String(cur[key]);
+    if (acc.get(stringKey)) acc.get(stringKey)?.push(cur);
+    else acc.set(stringKey, [cur]);
     return acc;
-  }, new Map());
+  }, new Map<string, T[]>());
 };

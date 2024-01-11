@@ -1,3 +1,3 @@
 interface OrderType {
-  type: 'togo' | 'store';
+  type: 'togo' | 'store' | null;
 }
