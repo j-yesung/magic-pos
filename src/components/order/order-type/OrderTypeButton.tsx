@@ -4,10 +4,11 @@ import useOrderStore from '@/shared/store/order';
 import styles from './styles/OrderTypeButton.module.css';
 
 const OrderTypeButton = ({ order }: { order: OrderType }) => {
-  const { goNextStep } = useOrderStore.getState();
+  const { goNextStep, setOrderType } = useOrderStore.getState();
   const swiper = useSwiper();
 
   const clickButtonHandler = () => {
+    setOrderType(order);
     swiper.slideNext();
     goNextStep();
   };

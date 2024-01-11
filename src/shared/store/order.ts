@@ -28,6 +28,10 @@ interface OrderState {
   setStoreId: (storeId: string) => void;
   orderNumber: number;
   setOrderNumber: (orderNumber: number) => void;
+  tableId: string | null;
+  setTableId: (tableId: string) => void;
+  orderType: OrderType;
+  setOrderType: (orderType: OrderType) => void;
 }
 
 export const useOrderStore = create<OrderState>()(
@@ -61,6 +65,10 @@ export const useOrderStore = create<OrderState>()(
       // 주문 번호
       orderNumber: 0,
       setOrderNumber: (orderNumber: number) => set(() => ({ orderNumber })),
+      tableId: null,
+      setTableId: (tableId: string) => set(() => ({ tableId })),
+      orderType: { type: null },
+      setOrderType: (orderType: OrderType) => set(() => ({ orderType })),
     }),
     {
       name: 'order-storage', // name of the item in the storage (must be unique)

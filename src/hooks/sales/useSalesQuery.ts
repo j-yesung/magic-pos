@@ -6,7 +6,7 @@ const QUERY_KEY = 'sales';
 /**
  * sales table CRUD hook
  */
-export const useSales = () => {
+export const useSalesQuery = () => {
   const addSalesMutation = useMutation({
     mutationFn: addSales,
     onSuccess: async () => {},

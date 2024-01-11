@@ -2,6 +2,9 @@ import { useMutation } from '@tanstack/react-query';
 import { incrementOrderNumber } from '@/server/api/supabase/store';
 import useOrderStore from '@/shared/store/order';
 
+/**
+ * supabase store table CRUD hook
+ */
 export const useStoreQuery = () => {
   const { setOrderNumber } = useOrderStore();
 
