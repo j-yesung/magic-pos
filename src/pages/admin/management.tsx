@@ -1,9 +1,8 @@
 import AdminLayout from '@/components/layout/admin/AdminLayout';
+import Management from '@/components/management/Management';
 import { ReactNode } from 'react';
 
-const ManagementPage = () => {
-  return <div>테이블 관리 페이지입니다.</div>;
-};
+const ManagementPage = () => <Management />
 
 ManagementPage.getLayout = (page: ReactNode) => <AdminLayout>{page}</AdminLayout>;
 

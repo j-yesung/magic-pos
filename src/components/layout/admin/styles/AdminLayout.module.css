@@ -144,6 +144,9 @@
   grid-area: main;
   border-radius: 2rem;
   height: calc(100vh - 6rem);
+  border: 2px solid #ad3aff;
+  transition: all 0.4s;
+  overflow-y: scroll;
 }
 .main-wrapper::-webkit-scrollbar {
   display: none;

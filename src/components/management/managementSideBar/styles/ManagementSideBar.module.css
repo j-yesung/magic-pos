@@ -1,0 +1,7 @@
+.sideBarWrapper{
+  width: 18%;
+  height: calc(100vh - 6rem - 4px);
+  background-color: #ccc;
+  transition: all 0.4s;
+  box-shadow: 0 0.4rem 0.8rem 0 rgba(0, 0, 0, 0.5);
+} 
