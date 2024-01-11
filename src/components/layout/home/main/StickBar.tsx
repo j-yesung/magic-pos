@@ -3,7 +3,7 @@ import styles from '../styles/StickBar.module.css';
 
 const StickBar = () => {
   return (
-    <div className={styles.fixedWrapper}>
+    <div className={styles.wrapper}>
       <Link className={styles.logo} href="/">
         Magic pos
       </Link>
