@@ -42,7 +42,7 @@ const ChartBar = () => {
           datasets: [
             {
               data: [
-                { x: '2016-12-25', y: 20 },
+                { x: '2016-12-28', y: 20 },
                 { x: '2016-12-26', y: 10 },
               ],
               backgroundColor: data.map((d, i) => {
