@@ -1,0 +1,26 @@
+.fixed-wrapper {
+  z-index: 1;
+  width: 60%;
+  display: flex;
+  bottom: 2.5rem;
+  position: fixed;
+  align-items: center;
+  padding: 2rem 2.5rem;
+  border-radius: 1.7rem;
+  background-color: #ffffff;
+  justify-content: space-between;
+  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.2);
+}
+.fixed-wrapper .logo {
+  cursor: pointer;
+  color: #8f00ff;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+.fixed-wrapper .tab-area {
+  gap: 2.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
