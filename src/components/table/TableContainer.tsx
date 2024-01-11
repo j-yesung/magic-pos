@@ -37,7 +37,7 @@ const TableContainer = ({ storeData }: { storeData?: StoreWithStoreTable[] }) =>
         {storeData?.[0]?.store_table &&
           storeData?.[0]?.store_table.sort((a, b) => {
             if (a.position && b.position) {
-              return a.position < b.position ? -1 : 1 as number
+              return a.position < b.position ? -1 : 1
             }
             return 0
           }).map((item: Tables<'store_table'>) => {

@@ -1,41 +1,43 @@
 export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
-
 export interface Database {
   public: {
     Tables: {
       cart: {
         Row: {
           id: string;
-          is_togo: boolean | null;
+          is_done: boolean;
           menu_list: Json[] | null;
           order_id: string | null;
-          order_number: number | null;
-          order_time: string | null;
+          order_number: number;
+          order_time: string;
           payment_method_id: number | null;
-          store_id: string;
-          total_fee: number | null;
+          '\bstore_id': string;
+          table_id: string | null;
+          total_price: number;
         };
         Insert: {
           id?: string;
-          is_togo?: boolean | null;
+          is_done?: boolean;
           menu_list?: Json[] | null;
           order_id?: string | null;
-          order_number?: number | null;
-          order_time?: string | null;
+          order_number?: number;
+          order_time?: string;
           payment_method_id?: number | null;
-          store_id: string;
-          total_fee?: number | null;
+          '\bstore_id': string;
+          table_id?: string | null;
+          total_price?: number;
         };
         Update: {
           id?: string;
-          is_togo?: boolean | null;
+          is_done?: boolean;
           menu_list?: Json[] | null;
           order_id?: string | null;
-          order_number?: number | null;
-          order_time?: string | null;
+          order_number?: number;
+          order_time?: string;
           payment_method_id?: number | null;
-          store_id?: string;
-          total_fee?: number | null;
+          '\bstore_id'?: string;
+          table_id?: string | null;
+          total_price?: number;
         };
         Relationships: [
           {
@@ -46,10 +48,17 @@ export interface Database {
             referencedColumns: ['id'];
           },
           {
-            foreignKeyName: 'cart_store_id_fkey';
-            columns: ['store_id'];
+            foreignKeyName: 'cart_\bstore_id_fkey';
+            columns: ['\bstore_id'];
             isOneToOne: false;
             referencedRelation: 'store';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'cart_table_id_fkey';
+            columns: ['table_id'];
+            isOneToOne: false;
+            referencedRelation: 'store_table';
             referencedColumns: ['id'];
           },
         ];
@@ -147,7 +156,7 @@ export interface Database {
           id: string;
           image_url: string | null;
           name: string | null;
-          price: number | null;
+          price: number;
           remain_ea: number | null;
         };
         Insert: {
@@ -155,7 +164,7 @@ export interface Database {
           id?: string;
           image_url?: string | null;
           name?: string | null;
-          price?: number | null;
+          price?: number;
           remain_ea?: number | null;
         };
         Update: {
@@ -163,7 +172,7 @@ export interface Database {
           id?: string;
           image_url?: string | null;
           name?: string | null;
-          price?: number | null;
+          price?: number;
           remain_ea?: number | null;
         };
         Relationships: [
@@ -297,7 +306,7 @@ export interface Database {
           business_number: string | null;
           end_time: string | null;
           id: string;
-          order_number: number | null;
+          order_number: number;
           start_time: string | null;
         };
         Insert: {
@@ -306,7 +315,7 @@ export interface Database {
           business_number?: string | null;
           end_time?: string | null;
           id?: string;
-          order_number?: number | null;
+          order_number?: number;
           start_time?: string | null;
         };
         Update: {
@@ -315,7 +324,7 @@ export interface Database {
           business_number?: string | null;
           end_time?: string | null;
           id?: string;
-          order_number?: number | null;
+          order_number?: number;
           start_time?: string | null;
         };
         Relationships: [
@@ -365,7 +374,12 @@ export interface Database {
       [_ in never]: never;
     };
     Functions: {
-      [_ in never]: never;
+      increment_order_number: {
+        Args: {
+          row_id: string;
+        };
+        Returns: undefined;
+      };
     };
     Enums: {
       [_ in never]: never;
@@ -375,83 +389,79 @@ export interface Database {
     };
   };
 }
-
 export type Tables<
   PublicTableNameOrOptions extends
-  | keyof (Database['public']['Tables'] & Database['public']['Views'])
-  | { schema: keyof Database },
+    | keyof (Database['public']['Tables'] & Database['public']['Views'])
+    | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-  ? keyof (Database[PublicTableNameOrOptions['schema']]['Tables'] &
-    Database[PublicTableNameOrOptions['schema']]['Views'])
-  : never = never,
+    ? keyof (Database[PublicTableNameOrOptions['schema']]['Tables'] &
+        Database[PublicTableNameOrOptions['schema']]['Views'])
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? (Database[PublicTableNameOrOptions['schema']]['Tables'] &
-    Database[PublicTableNameOrOptions['schema']]['Views'])[TableName] extends {
+      Database[PublicTableNameOrOptions['schema']]['Views'])[TableName] extends {
       Row: infer R;
     }
-  ? R
-  : never
+    ? R
+    : never
   : PublicTableNameOrOptions extends keyof (Database['public']['Tables'] & Database['public']['Views'])
-  ? (Database['public']['Tables'] & Database['public']['Views'])[PublicTableNameOrOptions] extends {
-    Row: infer R;
-  }
-  ? R
-  : never
-  : never;
-
+    ? (Database['public']['Tables'] & Database['public']['Views'])[PublicTableNameOrOptions] extends {
+        Row: infer R;
+      }
+      ? R
+      : never
+    : never;
 export type TablesInsert<
   PublicTableNameOrOptions extends keyof Database['public']['Tables'] | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-  ? keyof Database[PublicTableNameOrOptions['schema']]['Tables']
-  : never = never,
+    ? keyof Database[PublicTableNameOrOptions['schema']]['Tables']
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions['schema']]['Tables'][TableName] extends {
-    Insert: infer I;
-  }
-  ? I
-  : never
+      Insert: infer I;
+    }
+    ? I
+    : never
   : PublicTableNameOrOptions extends keyof Database['public']['Tables']
-  ? Database['public']['Tables'][PublicTableNameOrOptions] extends {
-    Insert: infer I;
-  }
-  ? I
-  : never
-  : never;
-
+    ? Database['public']['Tables'][PublicTableNameOrOptions] extends {
+        Insert: infer I;
+      }
+      ? I
+      : never
+    : never;
 export type TablesUpdate<
   PublicTableNameOrOptions extends keyof Database['public']['Tables'] | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-  ? keyof Database[PublicTableNameOrOptions['schema']]['Tables']
-  : never = never,
+    ? keyof Database[PublicTableNameOrOptions['schema']]['Tables']
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions['schema']]['Tables'][TableName] extends {
-    Update: infer U;
-  }
-  ? U
-  : never
+      Update: infer U;
+    }
+    ? U
+    : never
   : PublicTableNameOrOptions extends keyof Database['public']['Tables']
-  ? Database['public']['Tables'][PublicTableNameOrOptions] extends {
-    Update: infer U;
-  }
-  ? U
-  : never
-  : never;
-
+    ? Database['public']['Tables'][PublicTableNameOrOptions] extends {
+        Update: infer U;
+      }
+      ? U
+      : never
+    : never;
 export type Enums<
   PublicEnumNameOrOptions extends keyof Database['public']['Enums'] | { schema: keyof Database },
   EnumName extends PublicEnumNameOrOptions extends { schema: keyof Database }
-  ? keyof Database[PublicEnumNameOrOptions['schema']]['Enums']
-  : never = never,
+    ? keyof Database[PublicEnumNameOrOptions['schema']]['Enums']
+    : never = never,
 > = PublicEnumNameOrOptions extends { schema: keyof Database }
   ? Database[PublicEnumNameOrOptions['schema']]['Enums'][EnumName]
   : PublicEnumNameOrOptions extends keyof Database['public']['Enums']
-  ? Database['public']['Enums'][PublicEnumNameOrOptions]
-  : never;
+    ? Database['public']['Enums'][PublicEnumNameOrOptions]
+    : never;
 
-export interface StoreWithStoreTable extends Tables<'store'> {
+
+interface StoreWithStoreTable extends Tables<'store'> {
   store_table: Tables<'store_table'>[];
 }
-
 interface CategoryWithMenuItem extends Tables<'menu_category'> {
   menu_item: Tables<'menu_item'>[];
 }
