@@ -34,6 +34,14 @@ const Content = () => {
       {/* 슬라이더 */}
       <SliderArea />
 
+      {/* 더미 박스 - 나중에 지울 것들 */}
+      <div className={styles.dummyBox}>
+        <div className={styles.dummyBorder}></div>
+        <div className={styles.dummyBorder}></div>
+        <div className={styles.dummyBorder}></div>
+        <div className={styles.dummyBorder}></div>
+        <div className={styles.dummyBorder}></div>
+      </div>
 
       {/* 고정 탭 메뉴 */}
       <StickBar />
