@@ -157,6 +157,107 @@ export interface Database {
           },
         ];
       };
+      order_number: {
+        Row: {
+          id: string;
+          is_done: boolean;
+          is_togo: boolean;
+          menu_list: Json[];
+          order_id: string;
+          order_number: number;
+          order_time: string;
+          payment_method: string;
+          store_id: string;
+          total_price: number;
+        };
+        Insert: {
+          id?: string;
+          is_done?: boolean;
+          is_togo?: boolean;
+          menu_list: Json[];
+          order_id?: string;
+          order_number?: number;
+          order_time?: string;
+          payment_method?: string;
+          store_id: string;
+          total_price?: number;
+        };
+        Update: {
+          id?: string;
+          is_done?: boolean;
+          is_togo?: boolean;
+          menu_list?: Json[];
+          order_id?: string;
+          order_number?: number;
+          order_time?: string;
+          payment_method?: string;
+          store_id?: string;
+          total_price?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'order_number_store_id_fkey';
+            columns: ['store_id'];
+            isOneToOne: false;
+            referencedRelation: 'store';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      order_store: {
+        Row: {
+          id: string;
+          is_done: boolean;
+          menu_list: Json[];
+          order_id: string;
+          order_number: number;
+          order_time: string;
+          payment_method: string;
+          store_id: string;
+          table_id: string;
+          total_price: number;
+        };
+        Insert: {
+          id?: string;
+          is_done?: boolean;
+          menu_list: Json[];
+          order_id?: string;
+          order_number?: number;
+          order_time?: string;
+          payment_method?: string;
+          store_id: string;
+          table_id: string;
+          total_price?: number;
+        };
+        Update: {
+          id?: string;
+          is_done?: boolean;
+          menu_list?: Json[];
+          order_id?: string;
+          order_number?: number;
+          order_time?: string;
+          payment_method?: string;
+          store_id?: string;
+          table_id?: string;
+          total_price?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'order_store_store_id_fkey';
+            columns: ['store_id'];
+            isOneToOne: false;
+            referencedRelation: 'store';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'order_store_table_id_fkey';
+            columns: ['table_id'];
+            isOneToOne: false;
+            referencedRelation: 'store_table';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       order_store: {
         Row: {
           id: string;
@@ -303,27 +404,27 @@ export interface Database {
         Row: {
           id: string;
           product_category: string | null;
-          product_ea: number | null;
+          product_ea: number;
           product_name: string | null;
-          product_price: number | null;
+          product_price: number;
           sales_date: string | null;
           store_id: string;
         };
         Insert: {
           id?: string;
           product_category?: string | null;
-          product_ea?: number | null;
+          product_ea?: number;
           product_name?: string | null;
-          product_price?: number | null;
+          product_price?: number;
           sales_date?: string | null;
           store_id: string;
         };
         Update: {
           id?: string;
           product_category?: string | null;
-          product_ea?: number | null;
+          product_ea?: number;
           product_name?: string | null;
-          product_price?: number | null;
+          product_price?: number;
           sales_date?: string | null;
           store_id?: string;
         };
@@ -345,7 +446,9 @@ export interface Database {
           end_time: string | null;
           id: string;
           order_number: number;
+          order_number: number;
           start_time: string | null;
+          use_table: boolean;
         };
         Insert: {
           business_id: string;
@@ -355,6 +458,7 @@ export interface Database {
           id?: string;
           order_number?: number;
           start_time?: string | null;
+          use_table?: boolean;
         };
         Update: {
           business_id?: string;
@@ -364,6 +468,7 @@ export interface Database {
           id?: string;
           order_number?: number;
           start_time?: string | null;
+          use_table?: boolean;
         };
         Relationships: [
           {
@@ -500,7 +605,7 @@ export type Enums<
   ? Database['public']['Enums'][PublicEnumNameOrOptions]
   : never;
 
-interface StoreWithStoreTable extends Tables<'store'> {
+export interface StoreWithStoreTable extends Tables<'store'> {
   store_table: Tables<'store_table'>[];
 }
 

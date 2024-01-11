@@ -8,6 +8,15 @@ interface Payment {
   method: '카드' | '가상계좌' | '계좌이체';
   paymentKey: string;
   orderId: string;
+  status:
+    | 'READY'
+    | 'IN_PROGRESS'
+    | 'WAITING_FOR_DEPOSIT'
+    | 'DONE'
+    | 'CANCELED'
+    | 'PARTIAL_CANCELED'
+    | 'ABORTED'
+    | 'EXPIRED';
 }
 
 interface PaymentMethodsWidget {
@@ -24,5 +33,14 @@ interface PaymentMethodsWidget {
       provider: string;
     };
     paymentMethodKey?: string;
+  };
+}
+
+interface ErrorResponse {
+  response: {
+    data: {
+      message: string;
+      code: string;
+    };
   };
 }

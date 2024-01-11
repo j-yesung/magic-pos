@@ -11,10 +11,12 @@ const MenuModal = ({ menu }: { menu: Tables<'menu_item'> }) => {
   const [quantity, setQuantity] = useState(1);
   const { addOrderList } = useOrderStore();
 
+  // 수량 증가
   const handleClickUpQuantity = () => {
     setQuantity(prev => ++prev);
   };
 
+  // 수량 감소
   const handleClickDownQuantity = () => {
     setQuantity(prev => Math.max(prev - 1, 1));
   };

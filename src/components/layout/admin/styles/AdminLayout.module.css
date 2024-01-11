@@ -1,20 +1,24 @@
 /* 관리자 모드 레이아웃 */
 .admin-wrapper {
   display: grid;
-  grid-template-columns: 20rem repeat(5, 1fr);
+  transition: all 0.4s;
+  grid-template-columns: 15rem repeat(5, 1fr);
   grid-template-rows: 6rem calc(100vh - 6rem);
   grid-template-areas: 'header header header header header header' 'aside main main main main main';
 }
 /* 운영 모드 레이아웃 */
 .admin-wrapper-toggle {
   display: grid;
-  grid-template-columns: 0 repeat(5, 1fr);
+  transition: all 0.4s;
+  grid-template-columns: 15rem repeat(5, 1fr);
   grid-template-areas: 'header header header header header header' 'aside main main main main main';
 }
 .admin-wrapper-toggle .nav-wrapper {
-  visibility: hidden;
   transform: translateX(-100%);
   transition: transform 0.3s ease-in-out;
+}
+.admin-wrapper-toggle .main-wrapper {
+  grid-column: 1 / 7;
 }
 
 /* 헤더 영역입니다. */
@@ -27,13 +31,17 @@
   background-color: #212121;
 }
 
+.header-wrapper input {
+  display: none;
+}
+
 .header-wrapper div {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.header-wrapper span {
+.header-wrapper a {
   color: #fff;
   font-size: 2rem;
   font-weight: 700;
@@ -94,19 +102,18 @@
 
 /* 사이드바 영역입니다. */
 .nav-wrapper {
-  margin: 1rem;
   padding: 3rem;
   grid-area: aside;
-  border-radius: 2rem;
   transition: all 0.4s;
-  border: 2px solid #191919;
+  border-radius: 0 2rem 2rem 0;
+  box-shadow: 0 0.4rem 0.8rem 0 rgba(0, 0, 0, 0.5);
 }
 
 .nav-wrapper ul {
   gap: 3rem;
   display: flex;
   list-style: none;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   align-items: center;
   flex-direction: column;
   justify-content: center;
@@ -124,7 +131,6 @@
 .nav-wrapper ul li:hover {
   color: #fff;
   cursor: pointer;
-  transition: all 0.4s;
   background-color: #ad3aff;
 }
 
@@ -135,9 +141,13 @@
 
 /* 메인 영역입니다. */
 .main-wrapper {
-  margin: 1rem;
-  padding: 3rem;
   grid-area: main;
   border-radius: 2rem;
-  border: 2px solid #191919;
+  height: calc(100vh - 6rem);
+  border: 2px solid #ad3aff;
+  transition: all 0.4s;
+  overflow-y: scroll;
+}
+.main-wrapper::-webkit-scrollbar {
+  display: none;
 }

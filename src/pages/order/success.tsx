@@ -5,10 +5,14 @@ import axios from 'axios';
 
 /**
  * 결제 성공 페이지
+ * order -> toss widget을 통한 결제 성공시 이 페이지로 넘어오게 된다.
+ * 서버사이드에서 toss 데이터베이스에 데이터를 업로드 시켜야 하기 때문에 getServerSideProps를 사용한다.
+ * 성공적으로 업로드 되었을 때 결제승인이 난다..!!
+ * 실패할 경우 fail 페이지로 이동한다.
  * @constructor
  */
-const OrderSuccessPage = () => {
-  return <SuccessContainer />;
+const OrderSuccessPage = ({ payment }: { payment: Payment }) => {
+  return <SuccessContainer payment={payment} />;
 };
 
 export default OrderSuccessPage;
@@ -38,18 +42,16 @@ export const getServerSideProps: GetServerSideProps = async context => {
       },
     );
 
-    console.log(payment);
-
     return {
       props: { payment },
     };
-  } catch (err: any) {
-    // console.error('err', err.response.data);
+  } catch (err: unknown) {
+    const error = err as ErrorResponse;
 
     return {
       redirect: {
-        destination: `/order/fail?code=${err.response.data.code}&message=${encodeURIComponent(
-          err.response.data.message,
+        destination: `/order/fail?code=${error.response.data.code}&message=${encodeURIComponent(
+          error.response.data.message,
         )}`,
         permanent: false,
       },

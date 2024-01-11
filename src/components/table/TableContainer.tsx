@@ -1,10 +1,10 @@
 import useSetTable from "@/hooks/table/useSetTable";
-import styles from "@/styles/TableContainer.module.css";
 import { StoreWithStoreTable, Tables, TablesInsert } from "@/types/supabase";
 import TableListItem from "./TableListItem";
+import styles from "./styles/TableContainer.module.css";
 
 const TableContainer = ({ storeData }: { storeData?: StoreWithStoreTable[] }) => {
-  const { addTableMutate } = useSetTable();
+  const { addMutate } = useSetTable();
   /**
    * position값중 가장 큰수 추출
    */
@@ -17,14 +17,14 @@ const TableContainer = ({ storeData }: { storeData?: StoreWithStoreTable[] }) =>
    * store_table에 insert할때 필요한 데이터
    */
   const newStoreTableData: TablesInsert<'store_table'> = {
-    is_disabled: false,
+    is_disabled: 0,
     max_guest: 4,
     position: maxPosition === 0 ? 1 : maxPosition?.position && maxPosition.position + 1,
     store_id: storeData?.[0]?.id
   };
   const clickAddStoreTableHandler = () => {
     if (storeData?.[0]?.id) {
-      addTableMutate(newStoreTableData)
+      addMutate(newStoreTableData)
     }
   };
 
@@ -33,10 +33,14 @@ const TableContainer = ({ storeData }: { storeData?: StoreWithStoreTable[] }) =>
   return (
     <div className={styles['table-container']}>
       <div className={styles['table-title']}>테이블 관리</div>
-
       <ul className={styles['table-list']}>
-        {
-          storeData?.[0]?.store_table.map((item: Tables<'store_table'>) => {
+        {storeData?.[0]?.store_table &&
+          storeData?.[0]?.store_table.sort((a, b) => {
+            if (a.position && b.position) {
+              return a.position < b.position ? -1 : 1
+            }
+            return 0
+          }).map((item: Tables<'store_table'>) => {
             return <TableListItem key={item.id} storeTableData={item} />
           })
         }

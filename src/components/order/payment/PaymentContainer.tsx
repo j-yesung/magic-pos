@@ -1,14 +1,16 @@
 import React, { useEffect, useRef } from 'react';
-import { PaymentWidgetInstance } from '@tosspayments/payment-widget-sdk';
 import styles from './styles/PaymentContainer.module.css';
 import useOrderStore from '@/shared/store/order';
+import { TOSS_WIDGET_CLIENT_KEY, usePaymentWidget } from '@/hooks/order/usePaymentWidget';
+import { ANONYMOUS } from '@tosspayments/payment-widget-sdk';
 
-interface PaymentContainerProps {
-  paymentWidget: PaymentWidgetInstance | undefined;
-}
-
-const PaymentContainer = ({ paymentWidget }: PaymentContainerProps) => {
+/**
+ * STEP4: 토스 결제 화면
+ * @constructor
+ */
+const PaymentContainer = () => {
   const paymentMethodsWidgetRef = useRef<PaymentMethodsWidget>();
+  const { paymentWidget } = usePaymentWidget(TOSS_WIDGET_CLIENT_KEY, ANONYMOUS);
   const { getTotalPrice } = useOrderStore.getState();
 
   useEffect(() => {
