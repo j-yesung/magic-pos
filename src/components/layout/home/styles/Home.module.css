@@ -112,7 +112,7 @@
   width: 620px;
   height: 100%;
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   border-radius: 1rem;
   justify-content: center;
   flex-direction: column;
