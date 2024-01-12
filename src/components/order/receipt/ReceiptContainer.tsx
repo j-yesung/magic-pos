@@ -15,6 +15,7 @@ const ReceiptContainer = () => {
   const { numberOrderData } = useNumberOrderQuery(orderId ?? '');
   const [orderData, setOrderData] = useState<Tables<'order_store'> | Tables<'order_number'> | null>(null);
   const [groupData, setGroupData] = useState<Map<string, Tables<'menu_item'>[]>>(new Map());
+  const [orderType, setOrderType] = useState<OrderType>({ type: 'togo' });
 
   useEffect(() => {
     if (orderData) {
@@ -26,19 +27,27 @@ const ReceiptContainer = () => {
   useEffect(() => {
     if (storeOrderData?.data) {
       setOrderData(storeOrderData.data);
+      setOrderType({ type: 'store' });
     }
     if (numberOrderData?.data) {
       setOrderData(numberOrderData.data);
+      if (!numberOrderData.data.is_togo) setOrderType({ type: 'store' });
     }
   }, [storeOrderData, numberOrderData]);
 
   return (
     <div className={styles.container}>
-      <div className={styles.rowWrapper}>
-        <ReceiptHeader />
-        {groupData && [...groupData].map(([key, value]) => <ReceiptRow key={key} itemList={value} />)}
-      </div>
-      {orderData && <ReceiptFooter allItemList={orderData?.menu_list as Tables<'menu_item'>[]} />}
+      {orderData && groupData && (
+        <>
+          <div className={styles.rowWrapper}>
+            <ReceiptHeader orderNumber={orderData.order_number} orderName={orderData.store_id} orderType={orderType} />
+            {[...groupData].map(([key, value]) => (
+              <ReceiptRow key={key} itemList={value} />
+            ))}
+          </div>
+          <ReceiptFooter allItemList={orderData?.menu_list as Tables<'menu_item'>[]} />
+        </>
+      )}
     </div>
   );
 };
