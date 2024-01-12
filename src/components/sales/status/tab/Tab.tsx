@@ -14,7 +14,7 @@ const Tab = () => {
     setSelectedDate,
   } = useManagementState();
 
-  const clickShowCalendar = () => setIsShow(true);
+  const clickShowCalendarHandler = () => setIsShow(true);
 
   const today = moment();
   const yesterDay = today.clone().subtract(1, 'day');
@@ -25,7 +25,7 @@ const Tab = () => {
     setSelectedDate(yesterDay);
   };
 
-  const clickMoveToday = () => {
+  const clickMoveTodayHandler = () => {
     if (today === currentDate) return;
     setCurrentDate(today);
     setSelectedDate(today);
@@ -42,7 +42,7 @@ const Tab = () => {
               const refineData = formatData(sales, formatType);
               setData(refineData!);
             }
-            clickMoveToday();
+            clickMoveTodayHandler();
           }}
         >
           오늘
@@ -70,7 +70,11 @@ const Tab = () => {
           이번 달
         </span>
 
-        {isShow ? <Calendar /> : <span onClick={clickShowCalendar}>{currentDate.format('YYYY년 MM월 DD일')}</span>}
+        {isShow ? (
+          <Calendar />
+        ) : (
+          <span onClick={clickShowCalendarHandler}>{currentDate.format('YYYY년 MM월 DD일')}</span>
+        )}
       </div>
     </div>
   );
