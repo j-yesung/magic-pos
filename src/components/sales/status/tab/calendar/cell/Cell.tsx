@@ -103,7 +103,7 @@ const Cell = () => {
               dayType: getDayType(day.clone()),
             })}
           >
-            {day.isSame(today, 'D') ? 'today' : formatDate}
+            {day.isSame(today, 'D') ? 'today' : formatDate.substring(6)}
           </span>
         </div>,
       );
