@@ -1,5 +1,4 @@
-import styles from '../styles/Home.module.css';
-import { SliderArea, StartButton, StickBar, Title, WateMark } from './module-export';
+import { Analysis, SliderArea, StartButton, StickBar, Title, Video, WateMark } from '../module-export';
 
 const Contents = () => {
   return (
@@ -10,6 +9,7 @@ const Contents = () => {
       <StartButton />
       <SliderArea />
       <Video />
+      <Analysis />
     </>
   );
 };
