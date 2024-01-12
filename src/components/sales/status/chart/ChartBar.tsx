@@ -96,8 +96,7 @@ const ChartBar = () => {
                 offset: 3,
                 clamp: true,
                 formatter(value) {
-                  const koWon = convertNumberToWon(value.y);
-                  return koWon;
+                  return convertNumberToWon(value.y);
                 },
               },
             },
