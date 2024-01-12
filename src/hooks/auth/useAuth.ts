@@ -58,7 +58,8 @@ export const useAuth = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.LOGOUT] });
       setSession(null);
-      localStorage.removeItem('auth');
+      setStoreId(null!);
+      useAuthStore.persist.clearStorage();
       router.push('/');
     },
     onError: error => {
