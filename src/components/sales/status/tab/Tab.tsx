@@ -19,7 +19,7 @@ const Tab = () => {
   const today = moment();
   const yesterDay = today.clone().subtract(1, 'day');
 
-  const clickMoveYesterday = () => {
+  const clickMoveYesterdayHandler = () => {
     if (yesterDay === currentDate) return;
     setCurrentDate(yesterDay);
     setSelectedDate(yesterDay);
@@ -34,7 +34,7 @@ const Tab = () => {
   return (
     <div>
       <div>
-        <span onClick={clickMoveYesterday}>어제</span>
+        <span onClick={clickMoveYesterdayHandler}>어제</span>
         <span
           onClick={async () => {
             const { sales, formatType } = await getTodaySales(utcStandardDate.clone());
