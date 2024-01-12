@@ -3,7 +3,7 @@ import styles from './styles/ReceiptHeader.module.css';
 
 interface ReceiptHeaderProps {
   orderNumber: number;
-  orderName: string;
+  orderName: string | null;
   orderType: OrderType;
 }
 

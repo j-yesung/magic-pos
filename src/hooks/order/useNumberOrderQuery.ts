@@ -1,6 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { addNumberOrder, fetchNumberOrderByOrderId } from '@/server/api/supabase/order-togo';
-import { fetchStoreOrderByOrderId } from '@/server/api/supabase/order-store';
+import { addNumberOrder, fetchNumberOrderByOrderIdWithStoreName } from '@/server/api/supabase/order-togo';
 
 const QUERY_KEY = 'number-order';
 
@@ -11,7 +10,7 @@ export const useNumberOrderQuery = (orderId?: string) => {
   const { data: numberOrderData } = useQuery({
     queryKey: [QUERY_KEY, orderId],
     queryFn: () => {
-      return fetchNumberOrderByOrderId(orderId ?? '');
+      return fetchNumberOrderByOrderIdWithStoreName(orderId ?? '');
     },
   });
 

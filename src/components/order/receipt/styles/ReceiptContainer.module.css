@@ -3,8 +3,8 @@
     flex-direction: column;
     height: 100%;
     width: 100%;
-    margin: 15px;
-    gap: 20px;
+    margin: 1.5rem  /* 15/10 */;
+    gap: 2rem  /* 20/10 */;
 }
 
 .row-wrapper {

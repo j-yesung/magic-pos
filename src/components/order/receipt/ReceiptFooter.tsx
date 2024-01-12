@@ -4,7 +4,6 @@ import { Tables } from '@/types/supabase';
 import { convertNumberToWon } from '@/shared/helper';
 
 const ReceiptFooter = ({ allItemList }: { allItemList: Tables<'menu_item'>[] }) => {
-  console.log(allItemList);
   return (
     <div className={styles.container}>
       <span>총 결제금액</span>

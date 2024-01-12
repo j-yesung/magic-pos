@@ -83,7 +83,12 @@ export const useOrderStore = create<OrderState>()(
     {
       name: 'order-storage',
       storage: createJSONStorage(() => sessionStorage),
-      partialize: state => Object.fromEntries(Object.entries(state).filter(([key]) => !['swiperRef'].includes(key))),
+      partialize: state => ({
+        orderId: state.orderId,
+        orderType: state.orderType,
+        storeId: state.storeId,
+        orderNumber: state.orderNumber,
+      }),
     },
   ),
 );
