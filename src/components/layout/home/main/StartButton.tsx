@@ -1,12 +1,13 @@
+import useAuthStore from '@/shared/store/auth';
 import { useRouter } from 'next/router';
 import styles from '../styles/Home.module.css';
 
 const StartButton = () => {
   const router = useRouter();
+  const { session } = useAuthStore();
 
   const clickStartHandler = () => {
-    // 로그인 세션 확인하고 관리자 페이지로 이동 or 로그인 페이지로 이동
-    router.push('/auth/admin/');
+    session ? router.push('/admin/management') : router.push('/auth/login/');
   };
 
   return (

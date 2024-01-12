@@ -1,3 +1,5 @@
+import { useAuth } from '@/hooks/auth/useAuth';
+import { useEffect } from 'react';
 import Footer from './footer/Footer';
 import Header from './header/Header';
 import Contents from './main/Contents';
@@ -8,6 +10,12 @@ interface HomeLayoutProps {
 }
 
 const HomeLayout = ({ children }: HomeLayoutProps) => {
+  const { getUserSession } = useAuth();
+
+  useEffect(() => {
+    getUserSession();
+  }, []);
+
   return (
     <div className={styles.wrapper}>
       <Header />
