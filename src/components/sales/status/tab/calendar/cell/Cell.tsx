@@ -61,26 +61,26 @@ const Cell = () => {
   });
 
   const MONTH = {
-    CURRENT: 'CURRENT' as string,
+    CURRENT: 'CURRENT',
     PREV: 'PREV',
     AFTER: 'AFTER',
-  };
+  } as const;
   // default calendar 날의 css
   const CALENDARTYPE = {
     CURRENTCALENDAR: 'CURRENTCALENDAR',
     PREVCALENDAR: 'PREVCALENDAR',
-  };
+  } as const;
 
   const DATE = {
     CURRENT: 'CURRENT',
     PREV: 'PREV',
     AFTER: 'AFTER',
-  };
+  } as const;
   const DAY = {
     SATURADAY: 'SATURADAY',
     SUNDAY: 'SUNDAY',
     DAY: 'DAY', // 일반 날
-  };
+  } as const;
 
   function getMonthType(Month: Moment) {
     const today = moment();
