@@ -7,7 +7,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import styles from './styles/menu-item-category.module.css';
 
 const MenuItemCategoryPage = () => {
-  const { categoryWithMenuItem, setCategoryWithMenuItem, categoryWithMenuItemList } = useMenuItemStore();
+  const { setMenuItemList, categoryWithMenuItem, setCategoryWithMenuItem, categoryWithMenuItemList } =
+    useMenuItemStore();
 
   // 카테고리 선택
   const clickChoiceCategoryHandler = (item: CategoryWithItemType) => {
@@ -16,6 +17,7 @@ const MenuItemCategoryPage = () => {
       id: item.id,
       menu_item: item.menu_item,
     });
+    setMenuItemList(item.menu_item);
   };
   return (
     <div className={styles['wrap']}>

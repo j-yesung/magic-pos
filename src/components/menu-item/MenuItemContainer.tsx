@@ -30,7 +30,6 @@ const MenuItemsComponentPage = (props: PropsType) => {
       menu_item: categoryWithMenuData[0].menu_item, // 초기값 첫 카테고리 선택
     });
     setMenuItemList(categoryWithMenuData[0].menu_item);
-    console.log(categoryWithMenuItemList);
   }, [categoryWithMenuData]);
 
   return (

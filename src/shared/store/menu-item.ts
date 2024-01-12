@@ -23,10 +23,11 @@ interface MenuItemStoreType {
   setMenuItemImgFile: (item: File | null) => void;
   menuItemSampleImg: string;
   setMenuItemSampleImg: (item: string) => void;
+  dragMenuItemStore: (dragItem: MenuItemType, dragOver: MenuItemType) => void;
 }
 
 const useMenuItemStore = create<MenuItemStoreType>(set => ({
-  sampleImage: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/menu_sample.png`,
+  sampleImage: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/menu_sample/2024-01-12T07:53:35.815Z`,
   isShow: false,
   toggleShow: item => set({ isShow: item }),
   menuItem: {
@@ -36,6 +37,8 @@ const useMenuItemStore = create<MenuItemStoreType>(set => ({
     name: '',
     price: 0,
     remain_ea: 0,
+    recommended: false,
+    position: 0,
   },
   setMenuItem: (item: MenuItemType) => set(prev => ({ menuItem: { ...prev.menuItem, ...item } })),
   menuItemList: [],
@@ -62,6 +65,10 @@ const useMenuItemStore = create<MenuItemStoreType>(set => ({
             }
           : category,
       ),
+      categoryWithMenuItem: {
+        ...state.categoryWithMenuItem,
+        menu_item: [...state.categoryWithMenuItem.menu_item, newMenuItem],
+      },
     })),
   removeMenuItemStore: (removeMenuItem: MenuItemType) =>
     set(state => ({
@@ -74,6 +81,10 @@ const useMenuItemStore = create<MenuItemStoreType>(set => ({
             }
           : category,
       ),
+      categoryWithMenuItem: {
+        ...state.categoryWithMenuItem,
+        menu_item: state.categoryWithMenuItem.menu_item.filter(item => item.id !== removeMenuItem.id),
+      },
     })),
   updateMenuItemStore: (updatedMenuItem: MenuItemType) =>
     set(state => ({
@@ -88,11 +99,81 @@ const useMenuItemStore = create<MenuItemStoreType>(set => ({
             }
           : category,
       ),
+      categoryWithMenuItem: {
+        ...state.categoryWithMenuItem,
+        menu_item: state.categoryWithMenuItem.menu_item.map(item =>
+          item.id === updatedMenuItem.id ? { ...item, ...updatedMenuItem } : item,
+        ),
+      },
     })),
   menuItemImgFile: null,
   setMenuItemImgFile: item => set({ menuItemImgFile: item }),
   menuItemSampleImg: '',
   setMenuItemSampleImg: item => set({ menuItemSampleImg: item }),
+  dragMenuItemStore: (dragItem: MenuItemType, dragOver: MenuItemType) =>
+    set(state => ({
+      ...state,
+      categoryWithMenuItemList: state.categoryWithMenuItemList.map(category =>
+        category.id === dragItem.category_id
+          ? {
+              ...category,
+              menu_item: category.menu_item.map(it =>
+                it.id === dragItem.id
+                  ? {
+                      ...it,
+                      id: dragOver.id,
+                      name: dragOver.name,
+                      price: dragOver.price,
+                      remain_ea: dragOver.remain_ea,
+                      image_url: dragOver.image_url,
+                      recommended: dragOver.recommended,
+                      position: dragItem.position,
+                    }
+                  : it.id === dragOver.id
+                  ? {
+                      ...it,
+                      id: dragItem.id,
+                      name: dragItem.name,
+                      price: dragItem.price,
+                      remain_ea: dragItem.remain_ea,
+                      image_url: dragItem.image_url,
+                      recommended: dragItem.recommended,
+                      position: dragOver.position,
+                    }
+                  : it,
+              ),
+            }
+          : category,
+      ),
+      categoryWithMenuItem: {
+        ...state.categoryWithMenuItem,
+        menu_item: state.categoryWithMenuItem.menu_item.map(it =>
+          it.id === dragItem.id
+            ? {
+                ...it,
+                id: dragOver.id,
+                name: dragOver.name,
+                price: dragOver.price,
+                remain_ea: dragOver.remain_ea,
+                image_url: dragOver.image_url,
+                recommended: dragOver.recommended,
+                position: dragItem.position,
+              }
+            : it.id === dragOver.id
+            ? {
+                ...it,
+                id: dragItem.id,
+                name: dragItem.name,
+                price: dragItem.price,
+                remain_ea: dragItem.remain_ea,
+                image_url: dragItem.image_url,
+                recommended: dragItem.recommended,
+                position: dragOver.position,
+              }
+            : it,
+        ),
+      },
+    })),
 }));
 
 export default useMenuItemStore;

@@ -72,5 +72,12 @@ export const fetchCategoriesWithMenuItemByStoreId = async (store_id: string) => 
   if (error) {
     return { data: {}, error };
   }
-  return { data, error };
+
+  // 각 카테고리의 menu_item을 position 값에 따라 정렬
+  const dataWithSortedMenuItems = data.map(category => ({
+    ...category,
+    menu_item: category.menu_item.sort((a, b) => a.position - b.position),
+  }));
+
+  return { data: dataWithSortedMenuItems, error };
 };

@@ -12,8 +12,10 @@ declare type CategoryWithItemType = CategoryType & {
 declare type MenuItemType = {
   id: string;
   category_id: string;
-  image_url: string;
-  name: string;
-  price: number;
-  remain_ea: number;
+  image_url: string | null;
+  name: string | null;
+  price: number | null;
+  remain_ea: number | null;
+  recommended: boolean;
+  position: number;
 };

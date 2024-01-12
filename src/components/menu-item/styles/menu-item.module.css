@@ -32,3 +32,6 @@
 .wrap ul li button span {
   display: block;
 }
+.wrap ul li.recommended {
+  border: 2px solid #666;
+}

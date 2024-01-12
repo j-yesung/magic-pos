@@ -11,10 +11,12 @@ export const addMenuItem = async (
   image_url: string,
   price: number,
   remain_ea: number,
+  recommended: boolean,
+  position: number,
 ) => {
   const { data, error } = await supabase
     .from('menu_item')
-    .insert([{ category_id, name, image_url, price, remain_ea }])
+    .insert([{ category_id, name, image_url, price, remain_ea, recommended, position }])
     .select();
   if (error) throw error;
   return { data, error };
@@ -35,15 +37,7 @@ export const removeMenuItem = async (menuId: string) => {
  * @returns data
  */
 export const updateMenuItem = async (menuItem: MenuItemType) => {
-  const { data, error } = await supabase
-    .from('menu_item')
-    .update({
-      name: menuItem.name,
-      image_url: menuItem.image_url,
-      price: menuItem.price,
-      remain_ea: menuItem.remain_ea,
-    })
-    .eq('id', menuItem.id);
+  const { data, error } = await supabase.from('menu_item').update(menuItem).eq('id', menuItem.id);
   if (error) throw error;
   return data;
 };
@@ -83,4 +77,15 @@ export const removeMenuItemFromStorage = async (menuItem: MenuItemType) => {
 
   const { error } = await supabase.storage.from('images').remove(filesToRemove!);
   if (error) console.error(error);
+};
+
+/**
+ * 메뉴 위치 수정하기
+ * @param values 메뉴 id, 메뉴 position
+ * @returns data
+ */
+export const updateMenuItemPosition = async (menuItemId: string, position: number) => {
+  const { data, error } = await supabase.from('menu_item').update({ position }).eq('id', menuItemId);
+  if (error) throw error;
+  return data;
 };
