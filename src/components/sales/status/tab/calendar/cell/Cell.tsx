@@ -13,12 +13,11 @@ const Cell = () => {
     setSelectedDate,
     setData,
   } = useManagementState();
-  // const monthStart = currentMonth.clone().startOf('month'); // 오늘이 속한 달의 시작일
-  // const monthEnd = currentMonth.clone().endOf('month'); // 오늘이 속한 달의 마지막 일
+
   const startDay = currentDate.clone().startOf('month').startOf('week'); // monthStart가 속한 주의 시작 주
   const endDay = currentDate.clone().endOf('month').endOf('week'); // monthStart가 속한 마지막 주
 
-  const clickShowDate = (day: Moment) => async () => {
+  const clickShowDateHandler = (day: Moment) => async () => {
     const { sales, formatType } = await getTodaySales(day.clone().hour(0).subtract(9, 'hour'));
     if (sales.length !== 0) {
       const refineData = formatData(sales, formatType);
@@ -96,7 +95,7 @@ const Cell = () => {
             dateType: getDateType(day),
             pointDateType: day.isSame(selectedDate, 'day') ? 'point' : undefined,
           })}
-          onClick={day.isSame(today, 'D') || day.isBefore(today, 'D') ? clickShowDate(day.clone()) : undefined}
+          onClick={day.isSame(today, 'D') || day.isBefore(today, 'D') ? clickShowDateHandler(day.clone()) : undefined}
         >
           <span
             className={dayVariant({
