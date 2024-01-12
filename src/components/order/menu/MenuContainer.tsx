@@ -11,7 +11,7 @@ import MessageBox from '@/components/order/cart/MessageBox';
  * @constructor
  */
 const MenuContainer = () => {
-  const { menuData } = useOrderStore();
+  const { menuData, orderType } = useOrderStore();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [menuItemList, setMenuItemList] = useState<Tables<'menu_item'>[]>([]);
 
@@ -37,6 +37,12 @@ const MenuContainer = () => {
           setSelectedCategory={setSelectedCategory}
         />
       )}
+      <div className={styles.storeInfo}>
+        <div className={styles.orderType}>
+          <span>{orderType.type === 'togo' ? '포장' : '매장'}</span>
+        </div>
+        <span className={styles.storeName}>어쩌구카페 가산그레이트점</span>
+      </div>
       <section className={styles.section}>
         {menuItemList.map(menu => (
           <MenuCard key={menu.id} menu={menu} />

@@ -23,6 +23,14 @@
 }
 
 .card span {
+    color: #000;
+    font-family: Pretendard, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 1rem  /* 10/10 */;
+
     display: flex;
     align-items: center;
     height: var(--span-height);

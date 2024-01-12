@@ -24,6 +24,8 @@ const BUTTON_OPTIONS: { [key: number]: { prev: string; next?: string } } = {
   },
 };
 
+const SLIDE_MOVE_SPEED = 600;
+
 const StepButtonContainer = ({ sliderRef }: StepButtonContainerProps) => {
   const { goNextStep, goPrevStep, orderList, step } = useOrderStore.getState();
   const { paymentWidget, handlePaymentRequest } = usePaymentWidget();
@@ -32,7 +34,7 @@ const StepButtonContainer = ({ sliderRef }: StepButtonContainerProps) => {
   const next = BUTTON_OPTIONS[step]?.next;
 
   const prevClickHandler = () => {
-    sliderRef.current!.swiper.slidePrev();
+    sliderRef.current!.swiper.slidePrev(SLIDE_MOVE_SPEED);
     goPrevStep();
   };
 
@@ -40,7 +42,7 @@ const StepButtonContainer = ({ sliderRef }: StepButtonContainerProps) => {
     if (step === ORDER_STEP.PAYMENT && paymentWidget) {
       await handlePaymentRequest(orderList);
     } else {
-      sliderRef.current!.swiper.slideNext(600);
+      sliderRef.current!.swiper.slideNext(SLIDE_MOVE_SPEED);
       goNextStep();
     }
   };
