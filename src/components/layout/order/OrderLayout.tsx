@@ -5,6 +5,7 @@ import Footer from '@/components/layout/order/footer/Footer';
 
 import { SwiperRef } from 'swiper/react';
 import useOrderStore from '@/shared/store/order';
+import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButtonContainer';
 
 /**
  * 일반인 KIOSK 레이아웃
@@ -12,8 +13,13 @@ import useOrderStore from '@/shared/store/order';
  */
 const OrderLayout = ({ children }: { children: React.ReactNode }) => {
   // slide에 사용될 컴포넌트를 담습니다.
-  const setSwiperRef = useOrderStore(state => state.setSwiperRef);
+  const { setSwiperRef, step, goPrevStep } = useOrderStore();
   const sliderRef = useRef<SwiperRef>(null);
+
+  const clickPrevButtonHandler = () => {
+    sliderRef!.current?.swiper.slidePrev(SLIDE_MOVE_SPEED);
+    goPrevStep();
+  };
 
   useEffect(() => {
     setSwiperRef(sliderRef);
@@ -25,7 +31,14 @@ const OrderLayout = ({ children }: { children: React.ReactNode }) => {
         <title>MAGIC-POS : 주문</title>
       </Head>
       <section className={styles.container}>
-        <article className={styles.children}>{children}</article>
+        <article className={styles.children}>
+          {step > 0 && (
+            <button className={styles.prevButton} onClick={clickPrevButtonHandler}>
+              ⬅️{' '}
+            </button>
+          )}
+          {children}
+        </article>
         <Footer sliderRef={sliderRef} />
       </section>
     </>
