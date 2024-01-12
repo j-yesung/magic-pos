@@ -23,7 +23,7 @@
 
 .header-wrapper a {
   cursor: pointer;
-  color: #8f00ff;
+  color: var(--main-color);
   font-weight: 700;
   font-size: 1.5rem;
 }
@@ -39,7 +39,7 @@
 }
 
 .main-title {
-  background: linear-gradient(to right, #8f00ff, #ffa800);
+  background: linear-gradient(to right, var(--main-color), #ffa800);
   font-size: 4rem;
   font-weight: 700;
   color: transparent;
@@ -75,15 +75,15 @@
   box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem rgba(0.1, 0.1, 0.1, 0.1);
 }
 
-.main-background {
+.main-watemark {
   z-index: -1;
   opacity: 0.1;
-  position: fixed;
-  color: #8f00ff;
+  position: absolute;
+  color: var(--main-color);
   font-weight: 700;
   font-size: 10rem;
-  margin-top: 60rem;
-  background-position: center;
+  bottom: 52%;
+  /* background-position: center; */
 }
 
 /* 메인 - 카드 영역 */

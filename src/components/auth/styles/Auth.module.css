@@ -17,7 +17,7 @@
 .title {
   font-size: 2rem;
   font-weight: 700;
-  background: linear-gradient(to right, #8f00ff, #ffa800);
+  background: var(--signature-color);
   color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
