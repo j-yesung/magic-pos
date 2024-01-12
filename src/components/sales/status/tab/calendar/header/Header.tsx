@@ -5,10 +5,10 @@ const Header = () => {
     date: { currentDate },
     setCurrentDate,
   } = useManagementState();
-  const clickPreMonth = () => {
+  const clickPreMonthHandler = () => {
     setCurrentDate(currentDate.clone().subtract(1, 'month'));
   };
-  const clickNextMonth = () => {
+  const clickNextMonthHandler = () => {
     setCurrentDate(currentDate.clone().add(1, 'month'));
   };
 
@@ -21,8 +21,8 @@ const Header = () => {
         </span>
       </div>
       <div className={styles['btn-group']}>
-        <span onClick={clickPreMonth}>이전</span>
-        <span onClick={clickNextMonth}>다음</span>
+        <span onClick={clickPreMonthHandler}>이전</span>
+        <span onClick={clickNextMonthHandler}>다음</span>
       </div>
     </div>
   );
