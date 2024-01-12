@@ -1,3 +1,4 @@
+import { DateFormatType } from '@/server/api/supabase/sales';
 import { Tables } from '@/types/supabase';
 import moment, { Moment } from 'moment';
 
@@ -46,7 +47,6 @@ const getStartWeeks = (year: number) => {
   return new Array(12).fill(false).map((_, index) => moment().year(year).month(index).startOf('months').week());
 };
 
-type DateFormatType = 'days' | 'weeks' | 'months';
 /**
  *
  * @param salesData salesTable에서 조건부로 받아온 데이터

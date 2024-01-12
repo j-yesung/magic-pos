@@ -4,6 +4,17 @@ import { Tables } from '@/types/supabase';
 import { PostgrestError } from '@supabase/supabase-js';
 import { Moment } from 'moment';
 
+/**
+ * DateFormatType은 helper에서 데이터를 가공할 때 사용합니다.
+ */
+export type DateFormatType = 'days' | 'weeks' | 'months';
+export interface SalesDataReturnType {
+  sales: Tables<'sales'>[];
+  error?: PostgrestError;
+  formatType?: DateFormatType;
+}
+type getSalesReturnType = (date: Moment) => Promise<SalesDataReturnType>;
+
 export const addSales = async (sales: Omit<Tables<'sales'>, 'id'>[]) => {
   const { error } = await supabase.from('sales').insert(sales).select();
 
@@ -87,12 +98,3 @@ export const getMonthSales: getSalesReturnType = async month => {
   }
   return { sales, formatType: 'months' };
 };
-
-type DateFormatType = 'days' | 'weeks' | 'months';
-export interface SalesDataReturnType {
-  sales: Tables<'sales'>[];
-  error?: PostgrestError;
-  formatType?: DateFormatType;
-}
-
-type getSalesReturnType = (date: Moment) => Promise<SalesDataReturnType>;
