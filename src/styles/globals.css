@@ -1,7 +1,10 @@
 :root {
-  --kiosk-header-height: 80px;
-  --kiosk-footer-height: 80px;
+  --kiosk-header-height: 8rem  /* 80/10 */;
+  --kiosk-footer-height: 8rem  /* 80/10 */;
   --kiosk-container-padding: 1.25rem;
 
-  --main-color: hsl(259, 100%, 50%);
+  --main-color: #8f00ff;
+
+  /* 그라데이션 컬러 */
+  --signature-color: linear-gradient(to right, var(--main-color), #ffa800);
 }

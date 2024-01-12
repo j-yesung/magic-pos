@@ -96,6 +96,7 @@ export interface Database {
           id: string;
           image_url: string | null;
           name: string | null;
+          position: number;
           price: number;
           recommended: boolean;
           remain_ea: number | null;
@@ -105,6 +106,7 @@ export interface Database {
           id?: string;
           image_url?: string | null;
           name?: string | null;
+          position?: number;
           price?: number;
           recommended?: boolean;
           remain_ea?: number | null;
@@ -114,6 +116,7 @@ export interface Database {
           id?: string;
           image_url?: string | null;
           name?: string | null;
+          position?: number;
           price?: number;
           recommended?: boolean;
           remain_ea?: number | null;
@@ -512,12 +515,17 @@ export type Enums<
 interface StoreWithStoreTable extends Tables<'store'> {
   store_table: Tables<'store_table'>[];
 }
-interface StoreWithOrderInfo extends Tables<'store'> {
-  store_table: Tables<'store_table'>[];
-  order_store: Tables<'order_store'>[];
-  order_number: Tables<'order_number'>[];
-}
 
 interface CategoryWithMenuItem extends Tables<'menu_category'> {
   menu_item: Tables<'menu_item'>[];
 }
+
+type StoreOrderWithStoreName = Tables<'order_store'>['Row'] & {
+  store: Pick<Tables<'store'>, 'business_name'>;
+};
+
+type NumberOrderWithStoreName = Tables<'order_number'>['Row'] & {
+  store: Pick<Tables<'store'>, 'business_name'>;
+};
+
+type OrderDataWithStoreName = NumberOrderWithStoreName & StoreOrderWithStoreName;

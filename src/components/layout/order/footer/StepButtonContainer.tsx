@@ -3,11 +3,9 @@ import StepButton from '@/components/layout/order/footer/StepButton';
 import styles from './styles/StepButtonContainer.module.css';
 import useOrderStore, { ORDER_STEP } from '@/shared/store/order';
 import { SwiperRef } from 'swiper/react';
-import { ANONYMOUS } from '@tosspayments/payment-widget-sdk';
-import { TOSS_WIDGET_CLIENT_KEY, usePaymentWidget } from '@/hooks/order/usePaymentWidget';
+import { usePaymentWidget } from '@/hooks/order/usePaymentWidget';
 
 interface StepButtonContainerProps {
-  step: number;
   sliderRef: React.RefObject<SwiperRef>;
 }
 
@@ -26,8 +24,8 @@ const BUTTON_OPTIONS: { [key: number]: { prev: string; next?: string } } = {
   },
 };
 
-const StepButtonContainer = ({ step, sliderRef }: StepButtonContainerProps) => {
-  const { goNextStep, goPrevStep, orderList } = useOrderStore.getState();
+const StepButtonContainer = ({ sliderRef }: StepButtonContainerProps) => {
+  const { goNextStep, goPrevStep, orderList, step } = useOrderStore.getState();
   const { paymentWidget, handlePaymentRequest } = usePaymentWidget();
 
   const prev = BUTTON_OPTIONS[step]?.prev;

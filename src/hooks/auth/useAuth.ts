@@ -32,18 +32,20 @@ export const useAuth = () => {
       router.push('/auth/login');
     },
     onError: error => {
-      console.error(error);
+      console.log(error);
     },
   });
 
   const loginMutation = useMutation({
     mutationFn: loginHandler,
-    onSuccess: () => {
+    onSuccess: async () => {
+      const session = await getUserSession();
+      setSession(session);
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.LOGIN] });
       router.push('/');
     },
     onError: error => {
-      console.error(error);
+      console.log(error);
     },
   });
 
@@ -52,10 +54,11 @@ export const useAuth = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.LOGOUT] });
       setSession(null);
+      localStorage.removeItem('session-status');
       router.push('/');
     },
     onError: error => {
-      console.error(error);
+      throw error;
     },
   });
 
@@ -66,7 +69,7 @@ export const useAuth = () => {
       alert(data);
     },
     onError: error => {
-      console.error(error);
+      console.log(error);
     },
   });
 
@@ -77,7 +80,7 @@ export const useAuth = () => {
       router.push('/auth/reset');
     },
     onError: error => {
-      console.error(error);
+      console.log(error);
     },
   });
 
@@ -88,7 +91,7 @@ export const useAuth = () => {
       router.push('/');
     },
     onError: error => {
-      console.error(error);
+      console.log(error);
     },
   });
 
@@ -99,7 +102,7 @@ export const useAuth = () => {
       setSession(data);
     },
     onError: error => {
-      console.error(error);
+      console.log(error);
     },
   });
 
@@ -111,5 +114,6 @@ export const useAuth = () => {
     updatePassword: updatePasswordMutation.mutate,
     sendResetPasswordEmail: sendResetPasswordEmailMutation.mutate,
     getUserSession: getUserSessionMutation.mutate,
+    status: businessNumberCheckMutation,
   };
 };

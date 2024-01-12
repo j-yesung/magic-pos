@@ -12,12 +12,12 @@ interface BurrtonProps {
 const Button = ({ type, onClick, children, className, disabled }: BurrtonProps) => {
   return (
     <button
-      className={!disabled ? `${styles['button']} ${className}` : styles['disabledButton']}
+      className={!disabled ? `${styles.button} ${className}` : styles.disabledButton}
       type={type}
       onClick={onClick}
       disabled={disabled}
     >
-      {children}
+      <p>{children}</p>
     </button>
   );
 };

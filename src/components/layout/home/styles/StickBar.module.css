@@ -1,11 +1,11 @@
 .wrapper {
-  z-index: 1;
+  z-index: 10;
   width: 60%;
   display: flex;
   bottom: 2.5rem;
   position: fixed;
   align-items: center;
-  padding: 2rem 2.5rem;
+  padding: 2.7rem;
   border-radius: 1.7rem;
   background-color: #ffffff;
   justify-content: space-between;
@@ -13,9 +13,9 @@
 }
 .wrapper .logo {
   cursor: pointer;
-  color: #8f00ff;
+  color: var(--main-color);
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
 }
 .wrapper .tab-area {
   gap: 2.5rem;
@@ -23,4 +23,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+.wrapper .tab-area a {
+  font-size: 1.5rem;
 }
