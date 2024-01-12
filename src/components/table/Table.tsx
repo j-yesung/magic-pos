@@ -18,7 +18,7 @@ const Table = () => {
   },[])
   return (
     <div className={styles['table-wrapper']}>
-      <TableContainer storeData={data} />
+      {data && <TableContainer storeData={data} />}
       <div className={styles['table-dummy-side-bar']} ref={dummySideBarRef}></div>
       <TableSideBar />
     </div>

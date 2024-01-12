@@ -1,10 +1,11 @@
+import { StoreWithOrderInfo } from "@/types/supabase"
 import React from "react"
 import SideBarButtonBox from "./SideBarButtonBox"
 import SideBarContainer from "./SideBarContainer"
 import styles from "./styles/ManagementSideBar.module.css"
 
 
-const ManagementSideBar = () => {
+const ManagementSideBar = ({ managementData }: {managementData?: StoreWithOrderInfo[]}) => {
   return (
     <div className={styles['side-bar-wrapper']}>
       <div className={styles['side-bar-title']}>

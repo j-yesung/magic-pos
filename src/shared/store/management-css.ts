@@ -11,28 +11,21 @@ type ClickMenuListType = {
 interface ManagementCssType {
   refItemOrderList: RefObject<HTMLUListElement> | null;
   refItemOrderListItem: RefObject<HTMLLIElement[]> | null;
-  refitemOrderListItemSpan: RefObject<HTMLSpanElement[]> | null;
+  refItemOrderListItemSpan: RefObject<HTMLSpanElement[]> | null;
     setClickMenuList: (value: ClickMenuListType) => void
 }
 
-// const useManagementCssStore = create<ManagementCssType>((set) => ({
-//   // state영역
-//   refItemOrderList: null,
-//   refItemOrderListItem: null,
-//   refitemOrderListItemSpan: null,
-// })
- 
 const useManagementCssStore = create<ManagementCssType>(set => ({
   // state영역
   refItemOrderList: null,
   refItemOrderListItem: null,
-  refitemOrderListItemSpan: null,
+  refItemOrderListItemSpan: null,
   // setState함수 영역
   setClickMenuList : (value) => set(state=>({
     ...state,
     refItemOrderList: value.itemOrderListRef,
     refItemOrderListItem:value.itemOrderListItemRef,
-    refitemOrderListItemSpan: value.itemOrderListItemSpanRef
+    refItemOrderListItemSpan: value.itemOrderListItemSpanRef
   }))
 }))
 

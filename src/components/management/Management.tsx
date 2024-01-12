@@ -12,7 +12,7 @@ const Management = () => {
   return (
     <div className={styles['managementWrapper']}>
       <ManagementContainer managementData={data} />
-      <ManagementSideBar />
+      <ManagementSideBar managementData={data} />
     </div>
   )
 }
