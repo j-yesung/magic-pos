@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import SuccessContainer from '@/components/order/success/SuccessContainer';
 import { GetServerSideProps } from 'next';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import useOrderStore from '@/shared/store/order';
 import Waiting from '@/components/order/success/Waiting';
+import OrderLayout from '@/components/layout/order/OrderLayout';
 
 /**
  * 결제 성공 페이지
@@ -41,6 +42,8 @@ const OrderSuccessPage = ({ payment, isError }: { payment: Payment; isError: boo
 
   return <>{isLoaded && (isPaymentDone ? <SuccessContainer payment={payment} /> : <Waiting />)}</>;
 };
+
+OrderSuccessPage.getLayout = (page: ReactNode) => <OrderLayout>{page}</OrderLayout>;
 
 export default OrderSuccessPage;
 
