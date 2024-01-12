@@ -64,7 +64,7 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
 
       const result = [...group.entries()]
         .map(([key, value]) => {
-          return { x: key, y: value.reduce((acc, cur) => acc + cur.product_price!, 0) };
+          return { x: key, y: value.reduce((acc, cur) => acc + cur.product_price * cur.product_ea, 0) };
         })
         .toSorted((a, b) => (moment(a.x).isAfter(moment(b.x)) ? 1 : -1));
 
@@ -93,7 +93,7 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
           return {
             moment: value[0].original_sales_date,
             x: key,
-            y: value.reduce((acc, cur) => acc + cur.product_price!, 0),
+            y: value.reduce((acc, cur) => acc + cur.product_price * cur.product_ea, 0),
           };
         })
         .toSorted((a, b) => (moment(a.moment).isAfter(moment(b.moment)) ? 1 : -1));
@@ -109,7 +109,7 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
 
       const result = [...group.entries()]
         .map(([key, value]) => {
-          return { x: key, y: value.reduce((acc, cur) => acc + cur.product_price!, 0) };
+          return { x: key, y: value.reduce((acc, cur) => acc + cur.product_price * cur.product_ea, 0) };
         })
         .toSorted((a, b) => (moment(a.x).isAfter(moment(b.x)) ? 1 : -1));
 
