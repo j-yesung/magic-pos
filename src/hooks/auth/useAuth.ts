@@ -38,7 +38,9 @@ export const useAuth = () => {
 
   const loginMutation = useMutation({
     mutationFn: loginHandler,
-    onSuccess: () => {
+    onSuccess: async () => {
+      const session = await getUserSession();
+      setSession(session);
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.LOGIN] });
       router.push('/');
     },
@@ -52,6 +54,7 @@ export const useAuth = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.LOGOUT] });
       setSession(null);
+      localStorage.removeItem('session-status');
       router.push('/');
     },
     onError: error => {
