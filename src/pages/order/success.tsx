@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import SuccessContainer from '@/components/order/success/SuccessContainer';
 import { GetServerSideProps } from 'next';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import useOrderStore from '@/shared/store/order';
 import Waiting from '@/components/order/success/Waiting';
+import OrderLayout from '@/components/layout/order/OrderLayout';
 
 /**
  * 결제 성공 페이지
@@ -16,6 +17,7 @@ import Waiting from '@/components/order/success/Waiting';
  */
 const OrderSuccessPage = ({ payment, isError }: { payment: Payment; isError: boolean }) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isPaymentDone, setIsPaymentDone] = useState(false);
   const { orderNumber } = useOrderStore();
   const router = useRouter();
 
@@ -31,11 +33,16 @@ const OrderSuccessPage = ({ payment, isError }: { payment: Payment; isError: boo
     }
 
     // payment의 상태가 DONE일 때만 완료 화면을 보여줍니다.
-    if (payment && payment.status === 'DONE') setIsLoaded(true);
+    if (payment && payment.status === 'DONE') {
+      setIsPaymentDone(true);
+    }
+    setIsLoaded(true);
   }, []);
 
-  return <>{isLoaded ? <SuccessContainer payment={payment} /> : <Waiting />}</>;
+  return <>{isLoaded && (isPaymentDone ? <SuccessContainer payment={payment} /> : <Waiting />)}</>;
 };
+
+OrderSuccessPage.getLayout = (page: ReactNode) => <OrderLayout>{page}</OrderLayout>;
 
 export default OrderSuccessPage;
 

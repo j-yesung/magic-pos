@@ -2,10 +2,10 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    height: 50px;
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 10px;
+    height: 5rem  /* 50/10 */;
+    border: 0.1rem  /* 1/10 */ solid black;
+    border-radius: 0.5rem  /* 5/10 */;
+    padding: 1rem  /* 10/10 */;
     width: 100%;
     cursor: pointer;
 }

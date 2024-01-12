@@ -12,6 +12,6 @@
 }
 
 .container p {
-    margin-top: 40px;
+    margin-top: 4rem  /* 40/10 */;
     font-size: 1.2rem;
 }
