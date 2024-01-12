@@ -16,7 +16,8 @@ import Waiting from '@/components/order/success/Waiting';
  */
 const OrderSuccessPage = ({ payment, isError }: { payment: Payment; isError: boolean }) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const { orderNumber } = useOrderStore();
+  const [isPaymentDone, setIsPaymentDone] = useState(false);
+  const { orderNumber, setOrderId } = useOrderStore();
   const router = useRouter();
 
   useEffect(() => {
@@ -31,10 +32,14 @@ const OrderSuccessPage = ({ payment, isError }: { payment: Payment; isError: boo
     }
 
     // payment의 상태가 DONE일 때만 완료 화면을 보여줍니다.
-    if (payment && payment.status === 'DONE') setIsLoaded(true);
+    if (payment && payment.status === 'DONE') {
+      setIsPaymentDone(true);
+    }
+    setOrderId(payment.orderId);
+    setIsLoaded(true);
   }, []);
 
-  return <>{isLoaded ? <SuccessContainer payment={payment} /> : <Waiting />}</>;
+  return <>{isLoaded && (isPaymentDone ? <SuccessContainer payment={payment} /> : <Waiting />)}</>;
 };
 
 export default OrderSuccessPage;
