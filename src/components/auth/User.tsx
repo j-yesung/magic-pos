@@ -1,10 +1,15 @@
+import useAuthStore from '@/shared/store/auth';
 import { useRouter } from 'next/router';
 import AuthForm from './AuthForm';
 
 type AuthObjectType = Record<string, string>;
 
 const User = () => {
+  const { session } = useAuthStore();
   const path = useRouter().pathname;
+  const router = useRouter();
+
+  if (session?.session) router.push('/');
 
   const LOGIN_DATA = {
     url: '/auth/signup',

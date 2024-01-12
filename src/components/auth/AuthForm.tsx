@@ -15,7 +15,8 @@ const AuthForm = ({ data }: FormProps) => {
   const router = useRouter();
   const path = router.pathname;
   const { url, subUrl, title, subTitle, subName, caption, buttonName, subButtonName, description } = data;
-  const { login, signup, businessNumberCheck, sendResetPasswordEmail, updatePassword } = useAuth();
+  const { login, signup, businessNumberCheck, sendResetPasswordEmail, updatePassword, status } = useAuth();
+  const isSuccess = status.data === '인증되었습니다.' ? false : true;
   const { value, changeHandler, keyDownHandler } = useInput();
   const { validateCheck, isBusinessNumberValid } = useValid(value);
 
@@ -32,29 +33,34 @@ const AuthForm = ({ data }: FormProps) => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles['title-wrapper']} onClick={() => router.push('/')}>
+      <div className={styles.titleWrapper} onClick={() => router.push('/')}>
         <h1 className={styles.title}>{title}</h1>
-        <h2 className={styles['sub-title']}>{subTitle}</h2>
+        <h2 className={styles.subTitle}>{subTitle}</h2>
       </div>
       {path === '/auth/findPassword' || path === '/auth/reset' ? (
-        <p className={styles['description']}>{description}</p>
+        <p className={styles.description}>{description}</p>
       ) : null}
       <form className={styles.form}>
-        <div className={styles['form-inner-wrapper']}>
+        <div className={styles.formInnerWrapper}>
           <Input value={value} onChangeHandler={changeHandler} onKeyDownHandler={keyDownHandler} />
         </div>
-        <div className={styles['form-button-wrapper']}>
+        <div className={styles.formButtonWrapper}>
           {path === '/auth/signup' && (
-            <Button
-              type="button"
-              onClick={() => businessNumberCheck(value.businessNumber)}
-              disabled={!isBusinessNumberValid}
-            >
-              {subButtonName}
-            </Button>
+            <>
+              <Button
+                type="button"
+                onClick={() => businessNumberCheck(value.businessNumber)}
+                disabled={!isBusinessNumberValid}
+              >
+                {subButtonName}
+              </Button>
+              <Button type="button" onClick={signUpClickHandler} disabled={isSuccess}>
+                {buttonName}
+              </Button>
+            </>
           )}
-          {path === '/auth/signup' || path === '/auth/login' ? (
-            <Button type="button" onClick={path === '/auth/signup' ? signUpClickHandler : loginClickHandler}>
+          {path === '/auth/login' ? (
+            <Button type="button" onClick={loginClickHandler}>
               {buttonName}
             </Button>
           ) : null}
@@ -71,7 +77,7 @@ const AuthForm = ({ data }: FormProps) => {
         </div>
       </form>
 
-      <div className={styles['caption-wrapper']}>
+      <div className={styles.captionWrapper}>
         <Link className={styles.caption} href={url || ''}>
           {caption}
         </Link>

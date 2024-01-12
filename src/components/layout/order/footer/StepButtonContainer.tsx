@@ -28,7 +28,7 @@ const BUTTON_OPTIONS: { [key: number]: { prev: string; next?: string } } = {
 
 const StepButtonContainer = ({ step, sliderRef }: StepButtonContainerProps) => {
   const { goNextStep, goPrevStep, orderList } = useOrderStore.getState();
-  const { paymentWidget, handlePaymentRequest } = usePaymentWidget(TOSS_WIDGET_CLIENT_KEY, ANONYMOUS);
+  const { paymentWidget, handlePaymentRequest } = usePaymentWidget();
 
   const prev = BUTTON_OPTIONS[step]?.prev;
   const next = BUTTON_OPTIONS[step]?.next;

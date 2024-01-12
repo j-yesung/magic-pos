@@ -38,7 +38,10 @@ export const loginHandler = async (values: values) => {
     email,
     password,
   });
-  if (error) throw error;
+  if (error && error.status === 400) {
+    alert('비밀번호가 일치하지 않습니다.');
+    throw error;
+  }
   return data;
 };
 
@@ -72,6 +75,15 @@ export const updatePasswordHandler = async (password: string) => {
   if (data) {
     alert('비밀번호 변경이 완료되었습니다.');
   }
+  if (error) throw error;
+  return data;
+};
+
+/**
+ * 유저 세션 정보 가져오기
+ */
+export const getUserSession = async () => {
+  const { data, error } = await supabase.auth.getSession();
   if (error) throw error;
   return data;
 };
