@@ -8,5 +8,5 @@
 
 .children {
     display: flex;
-    height: calc(100vh - var(--kiosk-container-padding)*2 - var(--kiosk-footer-height));
+    height: calc(100vh - var(--kiosk-container-padding)*2);
 }

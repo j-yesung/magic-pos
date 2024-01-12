@@ -1,3 +1,5 @@
 .container {
+    position: fixed;
     height: var(--kiosk-footer-height);
+    bottom: 0;
 }

@@ -3,8 +3,7 @@ import StepButton from '@/components/layout/order/footer/StepButton';
 import styles from './styles/StepButtonContainer.module.css';
 import useOrderStore, { ORDER_STEP } from '@/shared/store/order';
 import { SwiperRef } from 'swiper/react';
-import { ANONYMOUS } from '@tosspayments/payment-widget-sdk';
-import { TOSS_WIDGET_CLIENT_KEY, usePaymentWidget } from '@/hooks/order/usePaymentWidget';
+import { usePaymentWidget } from '@/hooks/order/usePaymentWidget';
 
 interface StepButtonContainerProps {
   step: number;
@@ -42,7 +41,7 @@ const StepButtonContainer = ({ step, sliderRef }: StepButtonContainerProps) => {
     if (step === ORDER_STEP.PAYMENT && paymentWidget) {
       await handlePaymentRequest(orderList);
     } else {
-      sliderRef.current!.swiper.slideNext();
+      sliderRef.current!.swiper.slideNext(600);
       goNextStep();
     }
   };
