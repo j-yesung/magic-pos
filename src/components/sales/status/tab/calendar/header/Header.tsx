@@ -1,17 +1,23 @@
-import { Moment } from 'moment';
+import useManagementState from '@/shared/store/management';
 
-interface Props {
-  currentMonth: Moment;
-  clickPreMonth: () => void;
-  clickNextMonth: () => void;
-}
-const Header = ({ currentMonth, clickPreMonth, clickNextMonth }: Props) => {
+const Header = () => {
+  const {
+    date: { currentDate },
+    setCurrentDate,
+  } = useManagementState();
+  const clickPreMonth = () => {
+    setCurrentDate(currentDate.clone().subtract(1, 'month'));
+  };
+  const clickNextMonth = () => {
+    setCurrentDate(currentDate.clone().add(1, 'month'));
+  };
+
   return (
     <div className="header" style={{ display: 'flex', justifyContent: 'space-between' }}>
       <div className="wrapper">
         <span className="text" style={{ display: 'flex', gap: '1rem' }}>
-          <span className="text-year">{currentMonth.clone().format('YYYY')}</span>
-          {currentMonth.clone().format('MMMM')}
+          <span className="text-year">{currentDate.clone().format('YYYY')}</span>
+          {currentDate.clone().format('MMMM')}
         </span>
       </div>
       <div className="btn-group">

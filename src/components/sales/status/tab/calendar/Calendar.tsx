@@ -1,51 +1,21 @@
-import { Moment } from 'moment';
+import useManagementState from '@/shared/store/management';
 import 'moment/locale/ko';
 import Cell from './cell/Cell';
 import Days from './days/Days';
 import Header from './header/Header';
 
 /**
- *
  * @example clone()을 해준 이유는 원본을 훼손하지 않기 위해서입니다.
  */
 
-interface Props {
-  isShow: boolean;
-  currentMonth: Moment;
-  setCurrentMonth: React.Dispatch<React.SetStateAction<Moment>>;
-  setIsShow: React.Dispatch<React.SetStateAction<boolean>>;
-  setSelectedDate: React.Dispatch<React.SetStateAction<Moment>>;
-  selectedDate: Moment;
-  setData: React.Dispatch<React.SetStateAction<{ x: string; y: number }[]>>;
-}
-const Calendar = ({
-  isShow,
-  currentMonth,
-  setCurrentMonth,
-  setIsShow,
-  selectedDate,
-  setSelectedDate,
-  setData,
-}: Props) => {
-  const clickPreMonth = () => {
-    setCurrentMonth(currentMonth.clone().subtract(1, 'month'));
-  };
-  const clickNextMonth = () => {
-    setCurrentMonth(currentMonth.clone().add(1, 'month'));
-  };
+const Calendar = () => {
+  const { isShow } = useManagementState();
 
   return (
     <div style={{ display: isShow ? 'grid' : 'none', gap: '1rem', padding: '1rem' }}>
-      <Header currentMonth={currentMonth} clickPreMonth={clickPreMonth} clickNextMonth={clickNextMonth} />
+      <Header />
       <Days />
-      <Cell
-        setData={setData}
-        currentMonth={currentMonth}
-        setCurrentMonth={setCurrentMonth}
-        setIsShow={setIsShow}
-        selectedDate={selectedDate}
-        setSelectedDate={setSelectedDate}
-      />
+      <Cell />
     </div>
   );
 };

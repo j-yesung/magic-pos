@@ -1,4 +1,5 @@
 import { convertNumberToWon } from '@/shared/helper';
+import useManagementState from '@/shared/store/management';
 import { BarElement, CategoryScale, ChartArea, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';
@@ -30,7 +31,9 @@ const chartXAxisBorder = {
   },
 };
 
-const ChartBar = ({ data }: { data: { x: string; y: number }[] }) => {
+const ChartBar = () => {
+  const { data } = useManagementState();
+
   return (
     <div style={{ width: '800px', height: '800px', margin: '120px' }}>
       {data.length !== 0 && (
@@ -54,7 +57,6 @@ const ChartBar = ({ data }: { data: { x: string; y: number }[] }) => {
                 borderRadius: 12,
               },
             },
-            animation: {},
             layout: {
               padding: 20,
             },

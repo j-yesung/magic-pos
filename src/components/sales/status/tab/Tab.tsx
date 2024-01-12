@@ -1,43 +1,46 @@
 import { getMonthSales, getTodaySales, getWeekSales } from '@/server/api/supabase/sales';
 import { formatData } from '@/shared/helper';
+import useManagementState from '@/shared/store/management';
 import moment from 'moment';
-import { useState } from 'react';
-import 'react-calendar/dist/Calendar.css'; // 초기 더러운 UI를 그나마 달력답게 바꿔주는 css
 import Calendar from './calendar/Calendar';
 
-const Tab = ({ setData }: { setData: React.Dispatch<React.SetStateAction<{ x: string; y: number }[]>> }) => {
-  const [currentMonth, setCurrentMonth] = useState(moment());
-  const [selectedDate, setSelectedDate] = useState(currentMonth.clone());
-  const [isShow, setIsShow] = useState(false);
+const Tab = () => {
+  const {
+    date: { currentDate, utcStandardDate },
+    isShow,
+    setData,
+    setIsShow,
+    setCurrentDate,
+    setSelectedDate,
+  } = useManagementState();
+
   const clickShowCalendar = () => setIsShow(true);
 
   const today = moment();
   const yesterDay = today.clone().subtract(1, 'day');
 
   const clickMoveYesterday = () => {
-    if (yesterDay === currentMonth) return;
-    setCurrentMonth(yesterDay);
+    if (yesterDay === currentDate) return;
+    setCurrentDate(yesterDay);
     setSelectedDate(yesterDay);
   };
 
   const clickMoveToday = () => {
-    if (today === currentMonth) return;
-    setCurrentMonth(today);
+    if (today === currentDate) return;
+    setCurrentDate(today);
     setSelectedDate(today);
   };
+
   return (
     <div>
       <div>
         <span onClick={clickMoveYesterday}>어제</span>
         <span
           onClick={async () => {
-            const { sales, formatType } = await getTodaySales(
-              today.clone().hour(0).subtract(9, 'hour'),
-              today.clone().hour(0).subtract(9, 'hour'),
-            );
+            const { sales, formatType } = await getTodaySales(utcStandardDate.clone(), utcStandardDate.clone());
             if (sales.length !== 0) {
               const refineData = formatData(sales, formatType);
-              setData(pre => [...refineData!]);
+              setData(refineData!);
             }
             clickMoveToday();
           }}
@@ -46,13 +49,10 @@ const Tab = ({ setData }: { setData: React.Dispatch<React.SetStateAction<{ x: st
         </span>
         <span
           onClick={async () => {
-            const { sales, formatType } = await getWeekSales(
-              today.clone().hour(0).subtract(9, 'hour'),
-              today.clone().hour(0).subtract(9, 'hour'),
-            );
+            const { sales, formatType } = await getWeekSales(utcStandardDate.clone(), utcStandardDate.clone());
             if (sales.length !== 0) {
               const refineData = formatData(sales, formatType);
-              setData(pre => [...refineData!]);
+              setData(refineData!);
             }
           }}
         >
@@ -61,31 +61,19 @@ const Tab = ({ setData }: { setData: React.Dispatch<React.SetStateAction<{ x: st
         <span
           onClick={async () => {
             const { sales, formatType } = await getMonthSales(
-              today.clone(),
-              today.clone().startOf('month').subtract(6, 'month'),
+              currentDate.clone(),
+              currentDate.clone().startOf('month').subtract(6, 'month'),
             );
             if (sales.length !== 0) {
               const refineData = formatData(sales, formatType);
-              setData(pre => [...refineData!]);
+              setData(refineData!);
             }
           }}
         >
           이번 달
         </span>
 
-        {isShow ? (
-          <Calendar
-            setData={setData}
-            isShow={isShow}
-            setCurrentMonth={setCurrentMonth}
-            currentMonth={currentMonth}
-            setIsShow={setIsShow}
-            selectedDate={selectedDate}
-            setSelectedDate={setSelectedDate}
-          />
-        ) : (
-          <span onClick={clickShowCalendar}>{currentMonth.format('YYYY-MMMM-DD')}</span>
-        )}
+        {isShow ? <Calendar /> : <span onClick={clickShowCalendar}>{currentDate.format('YYYY년 MM월 DD일')}</span>}
       </div>
     </div>
   );
