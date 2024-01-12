@@ -96,9 +96,7 @@ export const getUserSession = async () => {
 export const getStoreId = async () => {
   const session = await getUserSession();
   const userId = session.session?.user.id;
-  console.log('userId: ', userId);
   const { data, error } = await supabase.from('store').select('id').eq('business_id', userId!);
   if (error) throw error;
-  console.log('data: ', data);
   return data;
 };
