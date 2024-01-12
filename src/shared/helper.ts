@@ -53,8 +53,13 @@ const getStartWeeks = (year: number) => {
  * @param formatType 'days', 'weeks' , 'months' 를 받습니다.
  * @returns  { x: string, y: number}[]
  */
-export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormatType) => {
+
+export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormatType, selectedType?: Moment) => {
   if (salesData && formatType) {
+    const recordData = {
+      currentSales: 0,
+      dateType: '',
+    };
     if (formatType === 'days') {
       // 일별로 데이터를 추출
       const group = groupByKey<Tables<'sales'>>(
@@ -62,13 +67,21 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
         'sales_date',
       );
 
+      for (const [key, value] of group) {
+        if (selectedType?.format('YYYY-MM-DD') === key) {
+          console.log('value');
+          recordData.currentSales = value.reduce((acc, cur) => acc + cur.product_ea * cur.product_price, 0);
+        }
+      }
+      console.log('sldifjdiasjfoijigfoeio;rghaergi');
+      recordData.dateType = 'days';
       const result = [...group.entries()]
         .map(([key, value]) => {
           return { x: key, y: value.reduce((acc, cur) => acc + cur.product_price * cur.product_ea, 0) };
         })
         .toSorted((a, b) => (moment(a.x).isAfter(moment(b.x)) ? 1 : -1));
-
-      return { result, dateType: formatType };
+      console.log(recordData);
+      return { result, recordData };
     } else if (formatType === 'weeks') {
       // 주별로 데이터를 추출
 
@@ -88,6 +101,15 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
 
       const group = groupByKey<Tables<'sales'> & { original_sales_date: Moment }>(newData, 'sales_date');
 
+      for (const [, value] of group) {
+        if (moment().isSame(value[0].original_sales_date, 'week')) {
+          recordData.currentSales = value.reduce((acc, cur) => acc + cur.product_ea * cur.product_price, 0);
+          recordData.dateType = 'weeks';
+
+          break;
+        }
+      }
+
       const result = [...group.entries()]
         .map(([key, value]) => {
           return {
@@ -98,7 +120,7 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
         })
         .toSorted((a, b) => (moment(a.moment).isAfter(moment(b.moment)) ? 1 : -1));
 
-      return { result, dateType: formatType };
+      return { result, recordData };
     } else if (formatType === 'months') {
       // 월별로 데이터를 추출
 
@@ -107,14 +129,21 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
         'sales_date',
       );
 
+      for (const [key, value] of group) {
+        if (moment().format('YYYY-MM') === key) {
+          recordData.currentSales = value.reduce((acc, cur) => acc + cur.product_ea * cur.product_price, 0);
+          recordData.dateType = 'month';
+        }
+      }
+
       const result = [...group.entries()]
         .map(([key, value]) => {
           return { x: key, y: value.reduce((acc, cur) => acc + cur.product_price * cur.product_ea, 0) };
         })
         .toSorted((a, b) => (moment(a.x).isAfter(moment(b.x)) ? 1 : -1));
 
-      return { result, dateType: formatType };
+      return { result, recordData };
     }
   }
-  return { result: null, dateType: null };
+  return { result: null, recordData: null };
 };

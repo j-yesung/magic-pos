@@ -12,7 +12,7 @@ const Tab = () => {
     setIsShow,
     setCurrentDate,
     setSelectedDate,
-    setRecordType,
+    setRecord,
   } = useManagementState();
 
   const clickShowCalendarHandler = () => setIsShow(true);
@@ -30,10 +30,10 @@ const Tab = () => {
     if (today === currentDate) return;
     const { sales, formatType } = await getTodaySales(utcStandardDate.clone());
     if (sales.length !== 0) {
-      const { result, dateType } = formatData(sales, formatType);
-      if (result && dateType) {
+      const { result, recordData } = formatData(sales, formatType);
+      if (result && recordData) {
         setData(result);
-        setRecordType(dateType);
+        setRecord(recordData);
       }
     }
     setCurrentDate(today);
@@ -43,10 +43,10 @@ const Tab = () => {
   const clickWeeksChartHandler = async () => {
     const { sales, formatType } = await getWeekSales(utcStandardDate.clone());
     if (sales.length !== 0) {
-      const { result, dateType } = formatData(sales, formatType);
-      if (result && dateType) {
+      const { result, recordData } = formatData(sales, formatType);
+      if (result && recordData) {
         setData(result);
-        setRecordType(dateType);
+        setRecord(recordData);
       }
     }
   };
@@ -54,9 +54,10 @@ const Tab = () => {
   const clickMonthsChartHandler = async () => {
     const { sales, formatType } = await getMonthSales(utcStandardDate.clone());
     if (sales.length !== 0) {
-      const { result, dateType } = formatData(sales, formatType);
-      if (result && dateType) {
+      const { result, recordData } = formatData(sales, formatType);
+      if (result && recordData) {
         setData(result);
+        setRecord(recordData);
       }
     }
   };

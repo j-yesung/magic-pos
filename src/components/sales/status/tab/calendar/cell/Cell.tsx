@@ -12,7 +12,7 @@ const Cell = () => {
     setIsShow,
     setSelectedDate,
     setData,
-    setRecordType,
+    setRecord,
   } = useManagementState();
 
   const startDay = currentDate.clone().startOf('month').startOf('week'); // monthStart가 속한 주의 시작 주
@@ -21,10 +21,11 @@ const Cell = () => {
   const clickShowDateHandler = (day: Moment) => async () => {
     const { sales, formatType } = await getTodaySales(day.clone().hour(0).subtract(9, 'hour'));
     if (sales.length !== 0) {
-      const { result, dateType } = formatData(sales, formatType);
-      if (result && dateType) {
+      const { result, recordData } = formatData(sales, formatType, day.clone());
+      if (result && recordData) {
+        console.log(recordData);
+        setRecord(recordData);
         setData(result);
-        setRecordType(dateType);
       }
     } else {
       setData([]);

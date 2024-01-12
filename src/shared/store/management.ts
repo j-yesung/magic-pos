@@ -5,7 +5,7 @@ interface ManagementState {
   isShow: boolean;
   record: {
     currentSales: number;
-    date: string;
+    dateType: string;
   };
   date: {
     currentDate: Moment;
@@ -20,7 +20,7 @@ interface ManagementState {
   setData: (sales: { x: string; y: number }[]) => void;
   setCurrentDate: (day: Moment) => void;
   setSelectedDate: (day: Moment) => void;
-  setRecord: (sales: Pick<ManagementState, 'record'>) => void;
+  setRecord: (sales: { currentSales: number; dateType: string }) => void;
 }
 
 const useManagementState = create<ManagementState>()(set => ({
@@ -28,7 +28,7 @@ const useManagementState = create<ManagementState>()(set => ({
   isShow: false,
   record: {
     currentSales: 0,
-    date: '',
+    dateType: '',
   },
   date: {
     currentDate: moment(),
@@ -44,7 +44,7 @@ const useManagementState = create<ManagementState>()(set => ({
       ...state,
       record: {
         ...state.record,
-        prop,
+        ...prop,
       },
     })),
   setData: prop =>
