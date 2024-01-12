@@ -24,7 +24,6 @@ export const useAuth = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
   const { setSession } = useAuthStore();
-  console.log('렌더링');
 
   const signupMutation = useMutation({
     mutationFn: signUpHandler,
