@@ -12,13 +12,8 @@ interface PropsType {
 const MenuItemsComponentPage = (props: PropsType) => {
   const { categoryWithMenuData, storeId } = props;
 
-  const {
-    setMenuItemList,
-    categoryWithMenuItem,
-    setCategoryWithMenuItem,
-    categoryWithMenuItemList,
-    setCategoryWithMenuItemList,
-  } = useMenuItemStore();
+  const { setMenuItemList, categoryWithMenuItem, setCategoryWithMenuItem, setCategoryWithMenuItemList } =
+    useMenuItemStore();
 
   useEffect(() => {
     setCategoryWithMenuItemList(categoryWithMenuData);
@@ -30,6 +25,7 @@ const MenuItemsComponentPage = (props: PropsType) => {
       menu_item: categoryWithMenuData[0].menu_item, // 초기값 첫 카테고리 선택
     });
     setMenuItemList(categoryWithMenuData[0].menu_item);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryWithMenuData]);
 
   return (

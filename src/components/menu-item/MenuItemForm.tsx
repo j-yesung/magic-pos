@@ -16,6 +16,7 @@ const MenuItemFormPage = () => {
     toggleShow,
     menuItem,
     setMenuItem,
+    categoryWithMenuItem,
     updateMenuItemStore,
     removeMenuItemStore,
     menuItemImgFile,
@@ -27,8 +28,22 @@ const MenuItemFormPage = () => {
   // 메뉴 input handler
   const changeMenuItemHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, maxLength, name } = e.target;
-    if (name === 'recommended') setMenuItem({ ...menuItem, recommended: !menuItem.recommended });
-    else setMenuItem({ ...menuItem, [name]: value.slice(0, maxLength) });
+    if (name === 'recommended') {
+      let recommendedNum: number = 0;
+      let isCheckRecommended: boolean = false;
+
+      if (!menuItem.recommended) {
+        for (let i = 0; i < categoryWithMenuItem.menu_item.length; i++) {
+          if (categoryWithMenuItem.menu_item[i].recommended) recommendedNum++;
+          if (recommendedNum > 4) {
+            alert('추천 메뉴는 최대 5개입니다.');
+            return (isCheckRecommended = true);
+          }
+        }
+      }
+
+      if (!isCheckRecommended) setMenuItem({ ...menuItem, recommended: !menuItem.recommended });
+    } else setMenuItem({ ...menuItem, [name]: value.slice(0, maxLength) });
   };
 
   // 메뉴 수정
@@ -70,7 +85,7 @@ const MenuItemFormPage = () => {
       } else {
         e.target.value = '';
         setMenuItemImgFile(null);
-        setMenuItemSampleImg(menuItem.image_url!);
+        setMenuItemSampleImg(menuItem.image_url ?? '');
       }
     }
   };
@@ -95,7 +110,7 @@ const MenuItemFormPage = () => {
       className={isShow ? `${styles['wrap']} ${styles['active']}` : `${styles['wrap']}`}
     >
       <h3>메뉴 사진</h3>
-      <Image src={menuItemSampleImg} alt={menuItem.name!} width={200} height={200} />
+      <Image src={menuItemSampleImg} alt={menuItem.name ?? ''} width={200} height={200} />
       <label htmlFor="menuImg" className="writeLable"></label>
       <input
         type="file"
@@ -108,7 +123,7 @@ const MenuItemFormPage = () => {
         type="text"
         onChange={changeMenuItemHandler}
         name="name"
-        value={menuItem.image_url!}
+        value={menuItem.image_url ?? ''}
         minLength={2}
         maxLength={20}
       />
@@ -118,7 +133,7 @@ const MenuItemFormPage = () => {
         type="text"
         onChange={changeMenuItemHandler}
         name="name"
-        value={menuItem.name!}
+        value={menuItem.name ?? ''}
         minLength={2}
         maxLength={20}
       />
@@ -127,7 +142,7 @@ const MenuItemFormPage = () => {
         type="number"
         onChange={changeMenuItemHandler}
         name="price"
-        value={menuItem.price!}
+        value={menuItem.price ?? ''}
         minLength={2}
         maxLength={20}
       />
@@ -136,7 +151,7 @@ const MenuItemFormPage = () => {
         type="number"
         onChange={changeMenuItemHandler}
         name="remain_ea"
-        value={menuItem.remain_ea!}
+        value={menuItem.remain_ea ?? ''}
         minLength={2}
         maxLength={20}
       />

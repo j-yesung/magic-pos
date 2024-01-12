@@ -11,11 +11,8 @@ const MenuItemPage = () => {
     toggleShow,
     menuItem,
     setMenuItem,
-    menuItemList,
-    setMenuItemList,
     categoryWithMenuItem,
     categoryWithMenuItemList,
-    setCategoryWithMenuItemList,
     addMenuItemStore,
     setMenuItemSampleImg,
     dragMenuItemStore,
@@ -46,14 +43,14 @@ const MenuItemPage = () => {
     };
     setMenuItem(newMenuItem);
     addMenuItemStore(newMenuItem);
-    setMenuItemSampleImg(newMenuItem.image_url!);
+    setMenuItemSampleImg(newMenuItem.image_url ?? '');
   };
 
   // 메뉴 선택
   const clickChoiceCategoryHandler = (item: MenuItemType) => {
     toggleShow(true);
     setMenuItem(item);
-    setMenuItemSampleImg(item.image_url!);
+    setMenuItemSampleImg(item.image_url ?? '');
   };
 
   // 드래그 이벤트
@@ -108,7 +105,7 @@ const MenuItemPage = () => {
                   onDragOver={e => e.preventDefault()}
                 >
                   <span>
-                    <Image src={item.image_url!} alt={item.name!} width={50} height={50} />
+                    <Image src={item.image_url ?? ''} alt={item.name ?? ''} width={50} height={50} />
                   </span>
                   <span>name: {item.name}</span>
                   <span>price: {item.price}</span>
