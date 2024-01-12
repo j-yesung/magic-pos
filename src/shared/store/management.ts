@@ -3,7 +3,10 @@ import { create } from 'zustand';
 
 interface ManagementState {
   isShow: boolean;
-  recordType: string;
+  record: {
+    currentSales: number;
+    date: string;
+  };
   date: {
     currentDate: Moment;
     utcStandardDate: Moment;
@@ -17,13 +20,16 @@ interface ManagementState {
   setData: (sales: { x: string; y: number }[]) => void;
   setCurrentDate: (day: Moment) => void;
   setSelectedDate: (day: Moment) => void;
-  setRecordType: (date: string) => void;
+  setRecord: (sales: Pick<ManagementState, 'record'>) => void;
 }
 
 const useManagementState = create<ManagementState>()(set => ({
   data: [],
   isShow: false,
-  recordType: '',
+  record: {
+    currentSales: 0,
+    date: '',
+  },
   date: {
     currentDate: moment(),
     selectedDate: moment().clone(),
@@ -33,10 +39,13 @@ const useManagementState = create<ManagementState>()(set => ({
 
   /**
    */
-  setRecordType: prop =>
+  setRecord: prop =>
     set(state => ({
       ...state,
-      recordType: prop,
+      record: {
+        ...state.record,
+        prop,
+      },
     })),
   setData: prop =>
     set(state => ({
