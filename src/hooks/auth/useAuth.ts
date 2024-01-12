@@ -111,5 +111,6 @@ export const useAuth = () => {
     updatePassword: updatePasswordMutation.mutate,
     sendResetPasswordEmail: sendResetPasswordEmailMutation.mutate,
     getUserSession: getUserSessionMutation.mutate,
+    status: businessNumberCheckMutation,
   };
 };
