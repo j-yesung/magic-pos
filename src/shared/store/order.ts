@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
 import { CategoryWithMenuItem, Tables } from '@/types/supabase';
 
 /**
@@ -23,31 +24,57 @@ interface OrderState {
   addOrderList: (menu: Tables<'menu_item'>[]) => void;
   subtractOrderList: (menu: Tables<'menu_item'>) => void;
   getTotalPrice: () => number;
+  storeId: string | null;
+  setStoreId: (storeId: string) => void;
+  orderNumber: number;
+  setOrderNumber: (orderNumber: number) => void;
+  tableId: string | null;
+  setTableId: (tableId: string) => void;
+  orderType: OrderType;
+  setOrderType: (orderType: OrderType) => void;
 }
 
-const useOrderStore = create<OrderState>()((set, get) => ({
-  //  현재 주문 단계를 나타냅니다.
-  step: ORDER_STEP.CHOOSE_ORDER_TYPE,
-  maxStep: ORDER_STEP.PAYMENT,
-  menuData: null,
-  goNextStep: () => set(state => ({ step: Math.min(state.step + 1, state.maxStep) })),
-  goPrevStep: () => set(state => ({ step: Math.max(state.step - 1, 0) })),
-  setMenuData: (data: CategoryWithMenuItem[]) =>
-    set(state => {
-      if (state.menuData === null) {
-        return { menuData: data };
-      }
-      return { menuData: state.menuData };
+export const useOrderStore = create<OrderState>()(
+  persist(
+    (set, get) => ({
+      //  현재 주문 단계를 나타냅니다.
+      step: ORDER_STEP.CHOOSE_ORDER_TYPE,
+      maxStep: ORDER_STEP.PAYMENT,
+      menuData: null,
+      goNextStep: () => set(state => ({ step: Math.min(state.step + 1, state.maxStep) })),
+      goPrevStep: () => set(state => ({ step: Math.max(state.step - 1, 0) })),
+      setMenuData: (data: CategoryWithMenuItem[]) =>
+        set(state => {
+          if (state.menuData === null) {
+            return { menuData: data };
+          }
+          return { menuData: state.menuData };
+        }),
+      orderList: [],
+      addOrderList: (menu: Tables<'menu_item'>[]) => set(state => ({ orderList: [...state.orderList, ...menu] })),
+      subtractOrderList: (menu: Tables<'menu_item'>) =>
+        set(state => {
+          const findIndex = state.orderList.findLastIndex(o => o.id === menu.id);
+          state.orderList.splice(findIndex, 1);
+          return { orderList: state.orderList };
+        }),
+      getTotalPrice: () => get()?.orderList.reduce((acc, cur) => acc + cur.price, 0),
+      // 가게 ID
+      storeId: null,
+      setStoreId: (storeId: string) => set(() => ({ storeId })),
+      // 주문 번호
+      orderNumber: 0,
+      setOrderNumber: (orderNumber: number) => set(() => ({ orderNumber })),
+      tableId: null,
+      setTableId: (tableId: string) => set(() => ({ tableId })),
+      orderType: { type: null },
+      setOrderType: (orderType: OrderType) => set(() => ({ orderType })),
     }),
-  orderList: [],
-  addOrderList: (menu: Tables<'menu_item'>[]) => set(state => ({ orderList: [...state.orderList, ...menu] })),
-  subtractOrderList: (menu: Tables<'menu_item'>) =>
-    set(state => {
-      const findIndex = state.orderList.findIndex(o => o.id === menu.id);
-      state.orderList.splice(findIndex, 1);
-      return { orderList: state.orderList };
-    }),
-  getTotalPrice: () => get()?.orderList.reduce((acc, cur) => acc + cur.price, 0),
-}));
+    {
+      name: 'order-storage', // name of the item in the storage (must be unique)
+      storage: createJSONStorage(() => sessionStorage), // (optional) by default, 'localStorage' is used
+    },
+  ),
+);
 
 export default useOrderStore;

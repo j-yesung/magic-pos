@@ -1,12 +1,15 @@
+import { AuthState } from '@/types/common';
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
-// 예시 store 입니다.
-interface AuthState {
-  id: string;
-}
-
-const useAuthStore = create<AuthState>()(() => ({
-  id: '',
-}));
+const useAuthStore = create<AuthState>()(
+  persist(
+    set => ({
+      session: null,
+      setSession: session => set({ session }),
+    }),
+    { name: 'session-status' },
+  ),
+);
 
 export default useAuthStore;

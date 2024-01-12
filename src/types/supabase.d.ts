@@ -3,57 +3,6 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export interface Database {
   public: {
     Tables: {
-      cart: {
-        Row: {
-          id: string;
-          is_togo: boolean | null;
-          menu_list: Json[] | null;
-          order_id: string | null;
-          order_number: number | null;
-          order_time: string | null;
-          payment_method_id: number | null;
-          store_id: string;
-          total_fee: number | null;
-        };
-        Insert: {
-          id?: string;
-          is_togo?: boolean | null;
-          menu_list?: Json[] | null;
-          order_id?: string | null;
-          order_number?: number | null;
-          order_time?: string | null;
-          payment_method_id?: number | null;
-          store_id: string;
-          total_fee?: number | null;
-        };
-        Update: {
-          id?: string;
-          is_togo?: boolean | null;
-          menu_list?: Json[] | null;
-          order_id?: string | null;
-          order_number?: number | null;
-          order_time?: string | null;
-          payment_method_id?: number | null;
-          store_id?: string;
-          total_fee?: number | null;
-        };
-        Relationships: [
-          {
-            foreignKeyName: 'cart_payment_method_id_fkey';
-            columns: ['payment_method_id'];
-            isOneToOne: false;
-            referencedRelation: 'payment_method';
-            referencedColumns: ['id'];
-          },
-          {
-            foreignKeyName: 'cart_store_id_fkey';
-            columns: ['store_id'];
-            isOneToOne: false;
-            referencedRelation: 'store';
-            referencedColumns: ['id'];
-          },
-        ];
-      };
       distribution: {
         Row: {
           company_name: string | null;
@@ -208,6 +157,107 @@ export interface Database {
           },
         ];
       };
+      order_number: {
+        Row: {
+          id: string;
+          is_done: boolean;
+          is_togo: boolean;
+          menu_list: Json[];
+          order_id: string;
+          order_number: number;
+          order_time: string;
+          payment_method: string;
+          store_id: string;
+          total_price: number;
+        };
+        Insert: {
+          id?: string;
+          is_done?: boolean;
+          is_togo?: boolean;
+          menu_list: Json[];
+          order_id?: string;
+          order_number?: number;
+          order_time?: string;
+          payment_method?: string;
+          store_id: string;
+          total_price?: number;
+        };
+        Update: {
+          id?: string;
+          is_done?: boolean;
+          is_togo?: boolean;
+          menu_list?: Json[];
+          order_id?: string;
+          order_number?: number;
+          order_time?: string;
+          payment_method?: string;
+          store_id?: string;
+          total_price?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'order_number_store_id_fkey';
+            columns: ['store_id'];
+            isOneToOne: false;
+            referencedRelation: 'store';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      order_store: {
+        Row: {
+          id: string;
+          is_done: boolean;
+          menu_list: Json[];
+          order_id: string;
+          order_number: number;
+          order_time: string;
+          payment_method: string;
+          store_id: string;
+          table_id: string;
+          total_price: number;
+        };
+        Insert: {
+          id?: string;
+          is_done?: boolean;
+          menu_list: Json[];
+          order_id?: string;
+          order_number?: number;
+          order_time?: string;
+          payment_method?: string;
+          store_id: string;
+          table_id: string;
+          total_price?: number;
+        };
+        Update: {
+          id?: string;
+          is_done?: boolean;
+          menu_list?: Json[];
+          order_id?: string;
+          order_number?: number;
+          order_time?: string;
+          payment_method?: string;
+          store_id?: string;
+          table_id?: string;
+          total_price?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'order_store_store_id_fkey';
+            columns: ['store_id'];
+            isOneToOne: false;
+            referencedRelation: 'store';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'order_store_table_id_fkey';
+            columns: ['table_id'];
+            isOneToOne: false;
+            referencedRelation: 'store_table';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       payment_method: {
         Row: {
           id: number;
@@ -256,27 +306,27 @@ export interface Database {
         Row: {
           id: string;
           product_category: string | null;
-          product_ea: number | null;
+          product_ea: number;
           product_name: string | null;
-          product_price: number | null;
+          product_price: number;
           sales_date: string | null;
           store_id: string;
         };
         Insert: {
           id?: string;
           product_category?: string | null;
-          product_ea?: number | null;
+          product_ea?: number;
           product_name?: string | null;
-          product_price?: number | null;
+          product_price?: number;
           sales_date?: string | null;
           store_id: string;
         };
         Update: {
           id?: string;
           product_category?: string | null;
-          product_ea?: number | null;
+          product_ea?: number;
           product_name?: string | null;
-          product_price?: number | null;
+          product_price?: number;
           sales_date?: string | null;
           store_id?: string;
         };
@@ -297,8 +347,9 @@ export interface Database {
           business_number: string | null;
           end_time: string | null;
           id: string;
-          order_number: number | null;
+          order_number: number;
           start_time: string | null;
+          use_table: boolean;
         };
         Insert: {
           business_id: string;
@@ -306,8 +357,9 @@ export interface Database {
           business_number?: string | null;
           end_time?: string | null;
           id?: string;
-          order_number?: number | null;
+          order_number?: number;
           start_time?: string | null;
+          use_table?: boolean;
         };
         Update: {
           business_id?: string;
@@ -315,8 +367,9 @@ export interface Database {
           business_number?: string | null;
           end_time?: string | null;
           id?: string;
-          order_number?: number | null;
+          order_number?: number;
           start_time?: string | null;
+          use_table?: boolean;
         };
         Relationships: [
           {
@@ -341,7 +394,7 @@ export interface Database {
           is_disabled?: number | null;
           max_guest?: number | null;
           position?: number | null;
-          store_id?: string;
+          store_id: string;
         };
         Update: {
           id?: string;
@@ -378,19 +431,19 @@ export interface Database {
 
 export type Tables<
   PublicTableNameOrOptions extends
-  | keyof (Database['public']['Tables'] & Database['public']['Views'])
-  | { schema: keyof Database },
+    | keyof (Database['public']['Tables'] & Database['public']['Views'])
+    | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-  ? keyof (Database[PublicTableNameOrOptions['schema']]['Tables'] &
-    Database[PublicTableNameOrOptions['schema']]['Views'])
-  : never = never,
+    ? keyof (Database[PublicTableNameOrOptions['schema']]['Tables'] &
+        Database[PublicTableNameOrOptions['schema']]['Views'])
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? (Database[PublicTableNameOrOptions['schema']]['Tables'] &
-    Database[PublicTableNameOrOptions['schema']]['Views'])[TableName] extends {
+      Database[PublicTableNameOrOptions['schema']]['Views'])[TableName] extends {
       Row: infer R;
     }
-  ? R
-  : never
+    ? R
+    : never
   : PublicTableNameOrOptions extends keyof (Database['public']['Tables'] & Database['public']['Views'])
   ? (Database['public']['Tables'] & Database['public']['Views'])[PublicTableNameOrOptions] extends {
     Row: infer R;
@@ -402,14 +455,14 @@ export type Tables<
 export type TablesInsert<
   PublicTableNameOrOptions extends keyof Database['public']['Tables'] | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-  ? keyof Database[PublicTableNameOrOptions['schema']]['Tables']
-  : never = never,
+    ? keyof Database[PublicTableNameOrOptions['schema']]['Tables']
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions['schema']]['Tables'][TableName] extends {
-    Insert: infer I;
-  }
-  ? I
-  : never
+      Insert: infer I;
+    }
+    ? I
+    : never
   : PublicTableNameOrOptions extends keyof Database['public']['Tables']
   ? Database['public']['Tables'][PublicTableNameOrOptions] extends {
     Insert: infer I;
@@ -421,14 +474,14 @@ export type TablesInsert<
 export type TablesUpdate<
   PublicTableNameOrOptions extends keyof Database['public']['Tables'] | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-  ? keyof Database[PublicTableNameOrOptions['schema']]['Tables']
-  : never = never,
+    ? keyof Database[PublicTableNameOrOptions['schema']]['Tables']
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions['schema']]['Tables'][TableName] extends {
-    Update: infer U;
-  }
-  ? U
-  : never
+      Update: infer U;
+    }
+    ? U
+    : never
   : PublicTableNameOrOptions extends keyof Database['public']['Tables']
   ? Database['public']['Tables'][PublicTableNameOrOptions] extends {
     Update: infer U;
@@ -440,13 +493,13 @@ export type TablesUpdate<
 export type Enums<
   PublicEnumNameOrOptions extends keyof Database['public']['Enums'] | { schema: keyof Database },
   EnumName extends PublicEnumNameOrOptions extends { schema: keyof Database }
-  ? keyof Database[PublicEnumNameOrOptions['schema']]['Enums']
-  : never = never,
+    ? keyof Database[PublicEnumNameOrOptions['schema']]['Enums']
+    : never = never,
 > = PublicEnumNameOrOptions extends { schema: keyof Database }
   ? Database[PublicEnumNameOrOptions['schema']]['Enums'][EnumName]
   : PublicEnumNameOrOptions extends keyof Database['public']['Enums']
-  ? Database['public']['Enums'][PublicEnumNameOrOptions]
-  : never;
+    ? Database['public']['Enums'][PublicEnumNameOrOptions]
+    : never;
 
 export interface StoreWithStoreTable extends Tables<'store'> {
   store_table: Tables<'store_table'>[];

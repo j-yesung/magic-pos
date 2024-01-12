@@ -52,9 +52,9 @@ const Input = ({ value, onChangeHandler, onKeyDownHandler }: InputProps) => {
     id: 4,
     name: 'businessNumber',
     type: 'text',
-    placeholder: '사업자등록번호 (11자리)',
-    minLength: 11,
-    maxLength: 11,
+    placeholder: '사업자등록번호 (10자리)',
+    minLength: 10,
+    maxLength: 10,
     onKeyDown: onKeyDownHandler,
   };
 

@@ -3,18 +3,16 @@ import useOrderStore from '@/shared/store/order';
 import styles from './styles/Footer.module.css';
 import StepButtonContainer from '@/components/layout/order/footer/StepButtonContainer';
 import { SwiperRef } from 'swiper/react';
-import { PaymentWidgetInstance } from '@tosspayments/payment-widget-sdk';
 
 interface FooterProps {
   sliderRef: React.RefObject<SwiperRef>;
-  paymentWidget: PaymentWidgetInstance | undefined;
 }
 
-const Footer = ({ sliderRef, paymentWidget }: FooterProps) => {
+const Footer = ({ sliderRef }: FooterProps) => {
   const { step } = useOrderStore();
   return (
     <footer className={styles.container}>
-      <StepButtonContainer step={step} sliderRef={sliderRef} paymentWidget={paymentWidget} />
+      <StepButtonContainer step={step} sliderRef={sliderRef} />
     </footer>
   );
 };

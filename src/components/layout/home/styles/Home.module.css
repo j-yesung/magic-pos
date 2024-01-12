@@ -1,0 +1,192 @@
+/* 전체 영역 */
+.wrapper {
+  display: flex;
+  overflow-x: hidden;
+  transition: all 0.4s;
+  flex-direction: column;
+}
+
+/* 메인 영역 */
+.main-wrapper {
+  display: flex;
+  margin-top: 15rem;
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.main-title {
+  background: linear-gradient(to right, var(--main-color), #ffa800);
+  font-size: 6rem;
+  font-weight: 700;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.main-description {
+  gap: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 3rem;
+  font-size: 1.7rem;
+  font-weight: 400;
+}
+
+/* 시작하기 */
+.start-wrapper {
+  margin-bottom: 4rem;
+}
+.start-wrapper button {
+  width: 15rem;
+  height: 5rem;
+  display: flex;
+  padding: 2rem;
+  cursor: pointer;
+  border-radius: 2rem;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem rgba(0.1, 0.1, 0.1, 0.1);
+}
+.start-wrapper button:hover {
+  background-color: #f8f5ff;
+}
+.start-wrapper p {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.main-watemark {
+  z-index: -1;
+  opacity: 0.1;
+  position: absolute;
+  font-weight: 700;
+  font-size: 20rem;
+  bottom: 52%;
+  color: var(--main-color);
+}
+
+/* 메인 - 카드 영역 */
+.card-wrapper {
+  margin: 0.7rem;
+  position: relative;
+  width: 1400px;
+  height: 200px;
+  overflow: hidden;
+  filter: drop-shadow(rgba(50, 83, 198, 0.34) 0px 18px 40px);
+}
+
+.card-list,
+.card-list-dynamic {
+  gap: 1rem;
+  right: 0px;
+  height: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  position: absolute;
+  flex-direction: row;
+}
+
+.card-wrapper li {
+  padding: 2rem;
+  width: 620px;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  border-radius: 1rem;
+  justify-content: center;
+  flex-direction: column;
+  border: 2px solid #d6d6d6;
+  box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem rgba(0.1, 0.1, 0.1, 0.1);
+}
+.card-wrapper span {
+  font-size: 4rem;
+}
+.card-wrapper h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+.card-wrapper h6 {
+  font-size: 1.7rem;
+  font-weight: 400;
+}
+
+.card-list,
+.card-list-dynamic {
+  animation-duration: 20s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.card-list {
+  animation-name: slidedown;
+}
+.card-list-dynamic {
+  animation-name: slideup;
+}
+
+@keyframes slidedown {
+  0% {
+    transform: translateX(50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideup {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(50%);
+  }
+}
+
+/* 비디오 영역 */
+.video-wrapper {
+  gap: 26rem;
+  width: 100%;
+  margin: 24rem;
+  height: 60rem;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  background-color: #f8f5ff;
+}
+.video-text-area {
+  gap: 3rem;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+}
+.video-text-area h1 {
+  width: 35rem;
+  font-size: 4.2rem;
+  font-weight: 700;
+}
+.video-text-area div {
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.video-wrapper p {
+  width: 27rem;
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+.video-section {
+  width: 100rem;
+  height: 50rem;
+  border-radius: 1.5rem;
+  border: 2px solid #ec9a9a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

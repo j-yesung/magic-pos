@@ -1,4 +1,5 @@
 .wrapper {
+  width: 100%;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -7,7 +8,7 @@
 }
 
 .title-wrapper {
-  gap: 0.5rem;
+  gap: 0.8rem;
   display: flex;
   cursor: pointer;
   align-items: center;
@@ -15,15 +16,15 @@
   margin-bottom: 2.5rem;
 }
 .title {
-  font-size: 2rem;
+  font-size: 3.7rem;
   font-weight: 700;
-  background: linear-gradient(to right top, #ad3aff, #2f75ff);
+  background: var(--signature-color);
   color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
 }
 .sub-title {
-  font-size: 2rem;
+  font-size: 3.7rem;
   font-weight: 700;
 }
 
@@ -32,7 +33,7 @@
   flex-direction: column;
 }
 .form {
-  width: 20%;
+  width: 40rem;
   gap: 1rem;
   display: flex;
   flex-direction: column;
@@ -50,25 +51,36 @@
 }
 
 .button {
-  padding: 1rem;
+  padding: 2rem;
   color: white;
   background-color: #864af9;
 }
+.button p {
+  font-size: 1.4rem;
+}
 .disabledButton {
-  padding: 1rem;
+  padding: 2rem;
   color: #191919;
   background-color: #dcdcdc;
+}
+.disabledButton p {
+  font-size: 1.4rem;
 }
 
 .input {
   width: 100%;
-  padding: 1rem;
+  padding: 2rem;
+  font-size: 1.5rem;
   border-radius: 5px;
   border: 2px solid #ccc;
 }
 .input:focus {
   outline: none;
   border: 2px solid #864af9;
+}
+.input::placeholder {
+  color: #ccc;
+  font-size: 1.3rem;
 }
 
 .caption-wrapper {
@@ -80,13 +92,13 @@
 .caption {
   display: flex;
   margin-top: 2rem;
-  font-size: 0.8rem;
+  font-size: 1.2rem;
   justify-content: flex-end;
   text-decoration: underline;
 }
 
 .description {
-  font-size: 1rem;
+  font-size: 1.5rem;
   color: #191919;
   margin-bottom: 1rem;
 }
