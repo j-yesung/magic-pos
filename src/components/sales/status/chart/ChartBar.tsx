@@ -3,6 +3,7 @@ import useManagementState from '@/shared/store/management';
 import { BarElement, CategoryScale, ChartArea, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';
+import styles from './styles/ChartBar.module.css';
 // Chart.js를 사용하려면 먼저 library 등록을 해야합니다.
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels);
 
@@ -37,7 +38,7 @@ const ChartBar = () => {
   const { data } = useManagementState();
 
   return (
-    <div style={{ width: '800px', height: '800px', margin: '120px' }}>
+    <div className={styles['bar-wrapper']}>
       {data.length !== 0 && (
         <Bar
           data={{
