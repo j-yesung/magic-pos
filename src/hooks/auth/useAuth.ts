@@ -32,7 +32,7 @@ export const useAuth = () => {
       router.push('/auth/login');
     },
     onError: error => {
-      console.error(error);
+      console.log(error);
     },
   });
 
@@ -45,7 +45,7 @@ export const useAuth = () => {
       router.push('/');
     },
     onError: error => {
-      console.error(error);
+      console.log(error);
     },
   });
 
@@ -58,7 +58,7 @@ export const useAuth = () => {
       router.push('/');
     },
     onError: error => {
-      console.error(error);
+      throw error;
     },
   });
 
@@ -69,7 +69,7 @@ export const useAuth = () => {
       alert(data);
     },
     onError: error => {
-      console.error(error);
+      console.log(error);
     },
   });
 
@@ -80,7 +80,7 @@ export const useAuth = () => {
       router.push('/auth/reset');
     },
     onError: error => {
-      console.error(error);
+      console.log(error);
     },
   });
 
@@ -91,7 +91,7 @@ export const useAuth = () => {
       router.push('/');
     },
     onError: error => {
-      console.error(error);
+      console.log(error);
     },
   });
 
@@ -102,7 +102,7 @@ export const useAuth = () => {
       setSession(data);
     },
     onError: error => {
-      console.error(error);
+      console.log(error);
     },
   });
 
