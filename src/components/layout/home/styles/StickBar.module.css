@@ -1,5 +1,5 @@
 .wrapper {
-  z-index: 1;
+  z-index: 10;
   width: 60%;
   display: flex;
   bottom: 2.5rem;
@@ -13,7 +13,7 @@
 }
 .wrapper .logo {
   cursor: pointer;
-  color: #8f00ff;
+  color: var(--main-color);
   font-weight: 700;
   font-size: 1.5rem;
 }

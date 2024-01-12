@@ -13,7 +13,7 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 .wrapper a {
-  color: #8f00ff;
+  color: var(--main-color);
   font-weight: 700;
   font-size: 1.5rem;
 }
@@ -28,6 +28,6 @@
   flex-direction: row;
 }
 .text-area .bold {
-  color: #8f00ff;
+  color: var(--main-color);
   font-weight: 700;
 }
