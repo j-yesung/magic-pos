@@ -31,7 +31,7 @@ calendar component를 감싸는 div의 class css입니다.
 }
 
 /*
-month 관련 class css 입니다.
+month 관련(현재 달) class css 입니다.
 */
 .prev-month {
   background-color: #caad44;
@@ -42,7 +42,7 @@ month 관련 class css 입니다.
 }
 
 .after-month {
-  background-color: blue;
+  background-color: rgb(17, 175, 44);
 }
 
 /*
@@ -58,7 +58,7 @@ month 관련 class css 입니다.
 }
 
 .after-date {
-  opacity: 0.4;
+  opacity: 0.8;
 }
 
 .point-date {
@@ -79,4 +79,20 @@ day 관련 class css 입니다.
 
 .day {
   color: #000;
+}
+
+/*
+달력 한 줄의 css
+*/
+
+.calendar-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1rem;
+}
+
+.calendar-body {
+  display: grid;
+  gap: 1rem;
+  text-align: center;
 }

@@ -142,24 +142,13 @@ const Cell = () => {
       day = day.add(1, 'day').clone();
     }
     row.push(
-      <div key={days[0].key} style={{ display: 'grid', gridTemplateColumns: 'repeat(7,1fr)', gap: '1rem' }}>
+      <div key={days[0].key} className={styles['calendar-row']}>
         {days}
       </div>,
     );
     days = [];
   }
-  return (
-    <div
-      className="body"
-      style={{
-        display: 'grid',
-        gap: '1rem',
-        textAlign: 'center',
-      }}
-    >
-      {row}
-    </div>
-  );
+  return <div className={styles['calendar-body']}>{row}</div>;
 };
 
 export default Cell;
