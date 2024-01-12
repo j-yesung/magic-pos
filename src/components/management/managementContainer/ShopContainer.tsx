@@ -3,7 +3,7 @@ import ShopListItem from "./ShopListItem"
 import styles from "./styles/ShopContainer.module.css"
 
 
-const ShopContainer = ({ managementData }: { managementData?: StoreWithStoreTable }) => {
+const ShopContainer = ({ managementData }: { managementData?: StoreWithStoreTable[] }) => {
   
   return (
     <div className={styles['shop-container']}>

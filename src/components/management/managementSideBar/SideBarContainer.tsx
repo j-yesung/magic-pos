@@ -6,7 +6,11 @@ const SideBarContainer = () => {
     <div className={styles['sideBar-container']}>
       <ul className={styles['order_list']}>
         <OrderItem />
+        <OrderItem />
+        <OrderItem />
+        <OrderItem />
       </ul>
+      
     </div>
   )
 }
