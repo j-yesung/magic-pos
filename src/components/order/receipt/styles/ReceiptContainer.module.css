@@ -1,5 +1,12 @@
 .container {
+    display: flex;
+    flex-direction: column;
     height: 100%;
     width: 100%;
-    border: 1px solid  black;
+    margin: 15px;
+    gap: 20px;
+}
+
+.row-wrapper {
+    overflow-y: auto;
 }
