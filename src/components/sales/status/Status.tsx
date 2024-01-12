@@ -14,10 +14,12 @@ const Status = () => {
   } = useManagementState();
 
   useEffect(() => {
-    getTodaySales(utcStandardDate.clone()).then(result => {
-      if (result.sales.length !== 0) {
-        const refineData = formatData(result.sales as Tables<'sales'>[], result.formatType);
-        setData(refineData!);
+    getTodaySales(utcStandardDate.clone()).then(data => {
+      if (data.sales.length !== 0) {
+        const { result, dateType } = formatData(data.sales as Tables<'sales'>[], data.formatType);
+        if (result && dateType) {
+          setData(result!);
+        }
       }
     });
   }, []);

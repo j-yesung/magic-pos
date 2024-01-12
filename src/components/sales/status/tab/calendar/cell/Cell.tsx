@@ -20,8 +20,10 @@ const Cell = () => {
   const clickShowDateHandler = (day: Moment) => async () => {
     const { sales, formatType } = await getTodaySales(day.clone().hour(0).subtract(9, 'hour'));
     if (sales.length !== 0) {
-      const refineData = formatData(sales, formatType);
-      setData(refineData!);
+      const { result, dateType } = formatData(sales, formatType);
+      if (result && dateType) {
+        setData(result);
+      }
     } else {
       setData([]);
     }

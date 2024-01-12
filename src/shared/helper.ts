@@ -68,7 +68,7 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
         })
         .toSorted((a, b) => (moment(a.x).isAfter(moment(b.x)) ? 1 : -1));
 
-      return result;
+      return { result, dateType: formatType };
     } else if (formatType === 'weeks') {
       // 주별로 데이터를 추출
 
@@ -98,7 +98,7 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
         })
         .toSorted((a, b) => (moment(a.moment).isAfter(moment(b.moment)) ? 1 : -1));
 
-      return result;
+      return { result, dateType: formatType };
     } else if (formatType === 'months') {
       // 월별로 데이터를 추출
 
@@ -113,8 +113,8 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
         })
         .toSorted((a, b) => (moment(a.x).isAfter(moment(b.x)) ? 1 : -1));
 
-      return result;
+      return { result, dateType: formatType };
     }
-    return [];
   }
+  return { result: null, dateType: null };
 };
