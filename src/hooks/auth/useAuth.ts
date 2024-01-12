@@ -1,5 +1,6 @@
 import { businessNumberCheckHandler } from '@/server/api/external/business';
 import {
+  getStoreId,
   getUserSession,
   loginHandler,
   logoutHandler,
@@ -23,7 +24,7 @@ const enum QUERY_KEY {
 export const useAuth = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
-  const { setSession } = useAuthStore();
+  const { setSession, setStoreId } = useAuthStore();
 
   const signupMutation = useMutation({
     mutationFn: signUpHandler,
@@ -39,9 +40,12 @@ export const useAuth = () => {
   const loginMutation = useMutation({
     mutationFn: loginHandler,
     onSuccess: async () => {
-      const session = await getUserSession();
-      setSession(session);
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.LOGIN] });
+      const auth = await getUserSession();
+      const storeId = await getStoreId();
+
+      setSession(auth.session);
+      storeId.length !== 0 ? setStoreId(storeId[0].id) : setStoreId(null!);
       router.push('/');
     },
     onError: error => {
@@ -54,7 +58,8 @@ export const useAuth = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.LOGOUT] });
       setSession(null);
-      localStorage.removeItem('session-status');
+      setStoreId(null!);
+      useAuthStore.persist.clearStorage();
       router.push('/');
     },
     onError: error => {
