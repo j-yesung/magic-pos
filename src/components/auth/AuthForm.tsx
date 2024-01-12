@@ -15,7 +15,8 @@ const AuthForm = ({ data }: FormProps) => {
   const router = useRouter();
   const path = router.pathname;
   const { url, subUrl, title, subTitle, subName, caption, buttonName, subButtonName, description } = data;
-  const { login, signup, businessNumberCheck, sendResetPasswordEmail, updatePassword } = useAuth();
+  const { login, signup, businessNumberCheck, sendResetPasswordEmail, updatePassword, status } = useAuth();
+  const isSuccess = status.data === '인증되었습니다.' ? false : true;
   const { value, changeHandler, keyDownHandler } = useInput();
   const { validateCheck, isBusinessNumberValid } = useValid(value);
 
@@ -45,16 +46,21 @@ const AuthForm = ({ data }: FormProps) => {
         </div>
         <div className={styles['form-button-wrapper']}>
           {path === '/auth/signup' && (
-            <Button
-              type="button"
-              onClick={() => businessNumberCheck(value.businessNumber)}
-              disabled={!isBusinessNumberValid}
-            >
-              {subButtonName}
-            </Button>
+            <>
+              <Button
+                type="button"
+                onClick={() => businessNumberCheck(value.businessNumber)}
+                disabled={!isBusinessNumberValid}
+              >
+                {subButtonName}
+              </Button>
+              <Button type="button" onClick={signUpClickHandler} disabled={isSuccess}>
+                {buttonName}
+              </Button>
+            </>
           )}
-          {path === '/auth/signup' || path === '/auth/login' ? (
-            <Button type="button" onClick={path === '/auth/signup' ? signUpClickHandler : loginClickHandler}>
+          {path === '/auth/login' ? (
+            <Button type="button" onClick={loginClickHandler}>
               {buttonName}
             </Button>
           ) : null}
