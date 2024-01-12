@@ -3,7 +3,7 @@ import { formatData } from '@/shared/helper';
 import useManagementState from '@/shared/store/management';
 import moment from 'moment';
 import Calendar from './calendar/Calendar';
-
+import styles from './styles/tab.module.css';
 const Tab = () => {
   const {
     date: { currentDate, utcStandardDate },
@@ -53,19 +53,21 @@ const Tab = () => {
   };
 
   return (
-    <div>
-      <div>
+    <div className={styles['wrapper']}>
+      <div className={styles['date']}>
         <span onClick={clickMoveYesterdayHandler}>어제</span>
         <span onClick={clickMoveTodayHandler}>오늘</span>
         <span onClick={clickWeeksChartHandler}>이번 주</span>
         <span onClick={clickMonthsChartHandler}>이번 달</span>
-
-        {isShow ? (
-          <Calendar />
-        ) : (
-          <span onClick={clickShowCalendarHandler}>{currentDate.format('YYYY년 MM월 DD일')}</span>
-        )}
       </div>
+
+      {isShow ? (
+        <Calendar />
+      ) : (
+        <span className={styles['calendar']} onClick={clickShowCalendarHandler}>
+          {currentDate.format('YYYY년 MM월 DD일')}
+        </span>
+      )}
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import useManagementState from '@/shared/store/management';
-
+import styles from './styles/header.module.css';
 const Header = () => {
   const {
     date: { currentDate },
@@ -13,20 +13,16 @@ const Header = () => {
   };
 
   return (
-    <div className="header" style={{ display: 'flex', justifyContent: 'space-between' }}>
+    <div className={styles['header']}>
       <div className="wrapper">
-        <span className="text" style={{ display: 'flex', gap: '1rem' }}>
-          <span className="text-year">{currentDate.clone().format('YYYY')}</span>
-          {currentDate.clone().format('MMMM')}
+        <span className={styles['header-text']}>
+          <span className="text-year">{currentDate.clone().format('YYYY년')}</span>
+          {currentDate.clone().format('MM월')}
         </span>
       </div>
-      <div className="btn-group">
-        <span className="left-btn" style={{ display: 'inline-block', marginRight: '10px' }} onClick={clickPreMonth}>
-          이전
-        </span>
-        <span className="right-btn" onClick={clickNextMonth}>
-          다음
-        </span>
+      <div className={styles['btn-group']}>
+        <span onClick={clickPreMonth}>이전</span>
+        <span onClick={clickNextMonth}>다음</span>
       </div>
     </div>
   );
