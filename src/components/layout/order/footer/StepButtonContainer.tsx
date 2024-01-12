@@ -3,13 +3,12 @@ import StepButton from '@/components/layout/order/footer/StepButton';
 import styles from './styles/StepButtonContainer.module.css';
 import useOrderStore, { ORDER_STEP } from '@/shared/store/order';
 import { SwiperRef } from 'swiper/react';
-import { PaymentWidgetInstance } from '@tosspayments/payment-widget-sdk';
-import { nanoid } from 'nanoid';
+import { ANONYMOUS } from '@tosspayments/payment-widget-sdk';
+import { TOSS_WIDGET_CLIENT_KEY, usePaymentWidget } from '@/hooks/order/usePaymentWidget';
 
 interface StepButtonContainerProps {
   step: number;
   sliderRef: React.RefObject<SwiperRef>;
-  paymentWidget: PaymentWidgetInstance | undefined;
 }
 
 const BUTTON_OPTIONS: { [key: number]: { prev: string; next?: string } } = {
@@ -27,8 +26,9 @@ const BUTTON_OPTIONS: { [key: number]: { prev: string; next?: string } } = {
   },
 };
 
-const StepButtonContainer = ({ step, sliderRef, paymentWidget }: StepButtonContainerProps) => {
+const StepButtonContainer = ({ step, sliderRef }: StepButtonContainerProps) => {
   const { goNextStep, goPrevStep, orderList } = useOrderStore.getState();
+  const { paymentWidget, handlePaymentRequest } = usePaymentWidget();
 
   const prev = BUTTON_OPTIONS[step]?.prev;
   const next = BUTTON_OPTIONS[step]?.next;
@@ -40,23 +40,7 @@ const StepButtonContainer = ({ step, sliderRef, paymentWidget }: StepButtonConta
 
   const nextClickHandler = async () => {
     if (step === ORDER_STEP.PAYMENT && paymentWidget) {
-      const handlePaymentRequest = async () => {
-        // 결제를 요청하기 전에 orderId, amount를 서버(토스)에 저장하세요.
-        // 결제 과정에서 악의적으로 결제 금액이 바뀌는 것을 확인하는 용도입니다.
-        try {
-          await paymentWidget?.requestPayment({
-            orderId: nanoid(),
-            orderName:
-              orderList.length > 1 ? `${orderList[0].name} 외 ${orderList.length - 1}개` : `${orderList[0].name}`,
-            successUrl: `${window.location.origin}/order/success`,
-            failUrl: `${window.location.origin}/order/fail`,
-          });
-        } catch (error) {
-          console.error('Error requesting payment:', error);
-        }
-      };
-
-      await handlePaymentRequest();
+      await handlePaymentRequest(orderList);
     } else {
       sliderRef.current!.swiper.slideNext();
       goNextStep();

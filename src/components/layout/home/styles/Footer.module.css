@@ -1,0 +1,33 @@
+.wrapper {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  padding: 2rem 10rem 10rem 10rem;
+  position: fixed;
+  position: relative;
+  text-align: center;
+  align-items: center;
+  background-color: #ffffff;
+  justify-content: space-between;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+.wrapper a {
+  color: #8f00ff;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+.info {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+}
+.info .text-area {
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: row;
+}
+.text-area .bold {
+  color: #8f00ff;
+  font-weight: 700;
+}

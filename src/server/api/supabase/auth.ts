@@ -75,3 +75,12 @@ export const updatePasswordHandler = async (password: string) => {
   if (error) throw error;
   return data;
 };
+
+/**
+ * 유저 세션 정보 가져오기
+ */
+export const getUserSession = async () => {
+  const { data, error } = await supabase.auth.getSession();
+  if (error) throw error;
+  return data;
+};

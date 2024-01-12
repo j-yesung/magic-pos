@@ -97,6 +97,7 @@ export interface Database {
           image_url: string | null;
           name: string | null;
           price: number;
+          recommended: boolean;
           remain_ea: number | null;
         };
         Insert: {
@@ -105,6 +106,7 @@ export interface Database {
           image_url?: string | null;
           name?: string | null;
           price?: number;
+          recommended?: boolean;
           remain_ea?: number | null;
         };
         Update: {
@@ -113,6 +115,7 @@ export interface Database {
           image_url?: string | null;
           name?: string | null;
           price?: number;
+          recommended?: boolean;
           remain_ea?: number | null;
         };
         Relationships: [
@@ -153,6 +156,53 @@ export interface Database {
             columns: ['menu_id'];
             isOneToOne: false;
             referencedRelation: 'menu_item';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      order_number: {
+        Row: {
+          id: string;
+          is_done: boolean;
+          is_togo: boolean;
+          menu_list: Json[];
+          order_id: string;
+          order_number: number;
+          order_time: string;
+          payment_method: string;
+          store_id: string;
+          total_price: number;
+        };
+        Insert: {
+          id?: string;
+          is_done?: boolean;
+          is_togo?: boolean;
+          menu_list: Json[];
+          order_id?: string;
+          order_number?: number;
+          order_time?: string;
+          payment_method?: string;
+          store_id: string;
+          total_price?: number;
+        };
+        Update: {
+          id?: string;
+          is_done?: boolean;
+          is_togo?: boolean;
+          menu_list?: Json[];
+          order_id?: string;
+          order_number?: number;
+          order_time?: string;
+          payment_method?: string;
+          store_id?: string;
+          total_price?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'order_number_store_id_fkey';
+            columns: ['store_id'];
+            isOneToOne: false;
+            referencedRelation: 'store';
             referencedColumns: ['id'];
           },
         ];
@@ -211,50 +261,6 @@ export interface Database {
           },
         ];
       };
-      order_togo: {
-        Row: {
-          id: string;
-          is_done: boolean;
-          menu_list: Json[];
-          order_id: string;
-          order_number: number;
-          order_time: string;
-          payment_method: string;
-          store_id: string;
-          total_price: number;
-        };
-        Insert: {
-          id?: string;
-          is_done?: boolean;
-          menu_list: Json[];
-          order_id?: string;
-          order_number?: number;
-          order_time?: string;
-          payment_method?: string;
-          store_id: string;
-          total_price?: number;
-        };
-        Update: {
-          id?: string;
-          is_done?: boolean;
-          menu_list?: Json[];
-          order_id?: string;
-          order_number?: number;
-          order_time?: string;
-          payment_method?: string;
-          store_id?: string;
-          total_price?: number;
-        };
-        Relationships: [
-          {
-            foreignKeyName: 'order_togo_store_id_fkey';
-            columns: ['store_id'];
-            isOneToOne: false;
-            referencedRelation: 'store';
-            referencedColumns: ['id'];
-          },
-        ];
-      };
       payment_method: {
         Row: {
           id: number;
@@ -303,27 +309,27 @@ export interface Database {
         Row: {
           id: string;
           product_category: string | null;
-          product_ea: number | null;
+          product_ea: number;
           product_name: string | null;
-          product_price: number | null;
+          product_price: number;
           sales_date: string | null;
           store_id: string;
         };
         Insert: {
           id?: string;
           product_category?: string | null;
-          product_ea?: number | null;
+          product_ea?: number;
           product_name?: string | null;
-          product_price?: number | null;
+          product_price?: number;
           sales_date?: string | null;
           store_id: string;
         };
         Update: {
           id?: string;
           product_category?: string | null;
-          product_ea?: number | null;
+          product_ea?: number;
           product_name?: string | null;
-          product_price?: number | null;
+          product_price?: number;
           sales_date?: string | null;
           store_id?: string;
         };
@@ -346,6 +352,7 @@ export interface Database {
           id: string;
           order_number: number;
           start_time: string | null;
+          use_table: boolean;
         };
         Insert: {
           business_id: string;
@@ -355,6 +362,7 @@ export interface Database {
           id?: string;
           order_number?: number;
           start_time?: string | null;
+          use_table?: boolean;
         };
         Update: {
           business_id?: string;
@@ -364,6 +372,7 @@ export interface Database {
           id?: string;
           order_number?: number;
           start_time?: string | null;
+          use_table?: boolean;
         };
         Relationships: [
           {
