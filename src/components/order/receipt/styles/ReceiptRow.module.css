@@ -1,0 +1,68 @@
+.container {
+    position: relative;
+    display: flex;
+    height: 16.5rem  /* 165/10 */;
+    padding: 1.5rem  /* 15/10 */;
+    align-items: center;
+    gap: 1rem  /* 10/10 */;
+    flex-shrink: 0;
+    border-bottom: 0.1rem  /* 1/10 */ solid #666;
+    background: #F2F2F2;
+}
+
+.container img{
+    display: flex;
+    width: 10rem  /* 100/10 */;
+    height: 10rem  /* 100/10 */;
+    padding: 1rem  /* 10/10 */;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem  /* 10/10 */;
+    flex-shrink: 0;
+    background: #CEB7FF;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem  /* 20/10 */;
+}
+
+.gap-10 {
+    gap: 1rem  /* 10/10 */;
+}
+
+.product-name {
+    color: #000;
+    font-family: Pretendard, sans-serif;
+    font-size: 1.4rem  /* 14/10 */;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.product-option {
+    color: #999;
+    font-family: Pretendard, sans-serif;
+    font-size: 1.2rem  /* 12/10 */;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.2rem  /* 12/10 */; /* 100% */
+}
+
+.product-price {
+    color: #000;
+    font-family: Pretendard, sans-serif;
+    font-size: 1.4rem  /* 14/10 */;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.product-ea {
+    position: absolute;
+    bottom: 2rem  /* 20/10 */;
+    right: 10%;
+}

@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { CategoryWithMenuItem, Tables } from '@/types/supabase';
+import { SwiperRef } from 'swiper/react';
+import React from 'react';
 
 /**
  * 일반고객의 주문과 관련된 전역 상태를 관리하는 store 입니다.
@@ -32,6 +34,10 @@ interface OrderState {
   setTableId: (tableId: string) => void;
   orderType: OrderType;
   setOrderType: (orderType: OrderType) => void;
+  swiperRef: React.RefObject<SwiperRef> | null;
+  setSwiperRef: (ref: React.RefObject<SwiperRef>) => void;
+  orderId: string | null;
+  setOrderId: (orderId: string) => void;
 }
 
 export const useOrderStore = create<OrderState>()(
@@ -69,10 +75,20 @@ export const useOrderStore = create<OrderState>()(
       setTableId: (tableId: string) => set(() => ({ tableId })),
       orderType: { type: null },
       setOrderType: (orderType: OrderType) => set(() => ({ orderType })),
+      swiperRef: null,
+      setSwiperRef: (swiperRef: React.RefObject<SwiperRef>) => set(() => ({ swiperRef })),
+      orderId: null,
+      setOrderId: (orderId: string) => set(() => ({ orderId })),
     }),
     {
-      name: 'order-storage', // name of the item in the storage (must be unique)
-      storage: createJSONStorage(() => sessionStorage), // (optional) by default, 'localStorage' is used
+      name: 'order-storage',
+      storage: createJSONStorage(() => sessionStorage),
+      partialize: state => ({
+        orderId: state.orderId,
+        orderType: state.orderType,
+        storeId: state.storeId,
+        orderNumber: state.orderNumber,
+      }),
     },
   ),
 );
