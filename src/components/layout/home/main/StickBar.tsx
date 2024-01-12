@@ -6,9 +6,8 @@ import styles from '../styles/StickBar.module.css';
 
 const StickBar = () => {
   const { logout } = useAuth();
-  const { session } = useAuthStore(session => session);
+  const { auth } = useAuthStore();
   const [isLoaded, setIsLoaded] = useState(false);
-  const actualSession = session?.session;
 
   useEffect(() => {
     setIsLoaded(true);
@@ -23,7 +22,7 @@ const StickBar = () => {
           </Link>
 
           <div className={styles.tabArea}>
-            {actualSession === undefined ? (
+            {auth === null ? (
               <>
                 <Link href="/auth/signup">회원가입</Link>
                 <Link href="/auth/login">로그인</Link>

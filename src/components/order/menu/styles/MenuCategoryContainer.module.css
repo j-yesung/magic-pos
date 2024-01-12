@@ -1,4 +1,4 @@
 .container {
-    padding: 0 10px 0 10px;
+    padding: 0 1rem  /* 10/10 */ 0 1rem  /* 10/10 */;
     height: var(--kiosk-header-height);
 }

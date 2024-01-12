@@ -6,7 +6,6 @@ import { SwiperRef } from 'swiper/react';
 import { usePaymentWidget } from '@/hooks/order/usePaymentWidget';
 
 interface StepButtonContainerProps {
-  step: number;
   sliderRef: React.RefObject<SwiperRef>;
 }
 
@@ -25,8 +24,8 @@ const BUTTON_OPTIONS: { [key: number]: { prev: string; next?: string } } = {
   },
 };
 
-const StepButtonContainer = ({ step, sliderRef }: StepButtonContainerProps) => {
-  const { goNextStep, goPrevStep, orderList } = useOrderStore.getState();
+const StepButtonContainer = ({ sliderRef }: StepButtonContainerProps) => {
+  const { goNextStep, goPrevStep, orderList, step } = useOrderStore.getState();
   const { paymentWidget, handlePaymentRequest } = usePaymentWidget();
 
   const prev = BUTTON_OPTIONS[step]?.prev;

@@ -10,7 +10,7 @@
     flex-direction: column;
     align-items: center;
     gap: 5rem  /* 50/10 */;
-    margin: 50% 6rem /* 60/10 */;
+    margin: 21.6rem  /* 216/10 */ 6rem /* 60/10 */;
 }
 
 .container h1 {
@@ -24,22 +24,22 @@
 
 .language-wrapper {
     position: fixed;
-    bottom: 20px;
-    left: 20px;
+    bottom: 2rem  /* 20/10 */;
+    left: 2rem  /* 20/10 */;
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 1rem  /* 10/10 */;
 }
 .language-wrapper img {
-    width: 23px;
-    height: 23px;
+    width: 2.3rem  /* 23/10 */;
+    height: 2.3rem  /* 23/10 */;
 }
 
 .language-wrapper span {
     color: var(--main-color);
     font-family: Pretendard, sans-serif;
-    font-size: 14px;
+    font-size: 1.4rem  /* 14/10 */;
     font-style: normal;
     font-weight: 600;
-    line-height: 14px; /* 100% */
+    line-height: 1.4rem  /* 14/10 */; /* 100% */
 }

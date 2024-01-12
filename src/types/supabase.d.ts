@@ -96,9 +96,7 @@ export interface Database {
           id: string;
           image_url: string | null;
           name: string | null;
-          position: number;
-          price: number;
-          recommended: boolean;
+          price: number | null;
           remain_ea: number | null;
         };
         Insert: {
@@ -106,9 +104,7 @@ export interface Database {
           id?: string;
           image_url?: string | null;
           name?: string | null;
-          position?: number;
-          price?: number;
-          recommended?: boolean;
+          price?: number | null;
           remain_ea?: number | null;
         };
         Update: {
@@ -116,9 +112,7 @@ export interface Database {
           id?: string;
           image_url?: string | null;
           name?: string | null;
-          position?: number;
-          price?: number;
-          recommended?: boolean;
+          price?: number | null;
           remain_ea?: number | null;
         };
         Relationships: [
