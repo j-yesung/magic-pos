@@ -4,6 +4,7 @@ import useManagementState from '@/shared/store/management';
 import { Tables } from '@/types/supabase';
 import { useEffect } from 'react';
 import ChartBar from './chart/ChartBar';
+import Record from './record/Record';
 import Tab from './tab/Tab';
 
 const Status = () => {
@@ -24,6 +25,7 @@ const Status = () => {
   return (
     <div>
       <Tab />
+      <Record />
       <ChartBar />
     </div>
   );
