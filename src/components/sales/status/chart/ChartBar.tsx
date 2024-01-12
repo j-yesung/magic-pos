@@ -89,8 +89,7 @@ const ChartBar = () => {
               },
               datalabels: {
                 color: value => {
-                  const color = value.dataset.data.length - 1 === value.dataIndex ? 'black' : ' red';
-                  return color;
+                  return value.dataset.data.length - 1 === value.dataIndex ? 'black' : ' red';
                 }, // 바 위에 뜬 value에 대한 color 조절 입니다.
                 anchor: 'end',
                 align: 'end',
