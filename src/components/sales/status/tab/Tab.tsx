@@ -25,50 +25,40 @@ const Tab = () => {
     setSelectedDate(yesterDay);
   };
 
-  const clickMoveTodayHandler = () => {
+  const clickMoveTodayHandler = async () => {
     if (today === currentDate) return;
+    const { sales, formatType } = await getTodaySales(utcStandardDate.clone());
+    if (sales.length !== 0) {
+      const refineData = formatData(sales, formatType);
+      setData(refineData!);
+    }
     setCurrentDate(today);
     setSelectedDate(today);
+  };
+
+  const clickWeeksChartHandler = async () => {
+    const { sales, formatType } = await getWeekSales(utcStandardDate.clone());
+    if (sales.length !== 0) {
+      const refineData = formatData(sales, formatType);
+      setData(refineData!);
+    }
+  };
+
+  const clickMonthsChartHandler = async () => {
+    const { sales, formatType } = await getMonthSales(utcStandardDate.clone());
+    if (sales.length !== 0) {
+      const refineData = formatData(sales, formatType);
+      setData(refineData!);
+    }
   };
 
   return (
     <div>
       <div>
         <span onClick={clickMoveYesterdayHandler}>어제</span>
-        <span
-          onClick={async () => {
-            const { sales, formatType } = await getTodaySales(utcStandardDate.clone());
-            if (sales.length !== 0) {
-              const refineData = formatData(sales, formatType);
-              setData(refineData!);
-            }
-            clickMoveTodayHandler();
-          }}
-        >
-          오늘
-        </span>
-        <span
-          onClick={async () => {
-            const { sales, formatType } = await getWeekSales(utcStandardDate.clone());
-            if (sales.length !== 0) {
-              const refineData = formatData(sales, formatType);
-              setData(refineData!);
-            }
-          }}
-        >
-          이번 주
-        </span>
-        <span
-          onClick={async () => {
-            const { sales, formatType } = await getMonthSales(utcStandardDate.clone());
-            if (sales.length !== 0) {
-              const refineData = formatData(sales, formatType);
-              setData(refineData!);
-            }
-          }}
-        >
-          이번 달
-        </span>
+        <span onClick={clickMoveTodayHandler}>오늘</span>
+        <span onClick={clickWeeksChartHandler}>이번 주</span>
+        <span onClick={clickMonthsChartHandler}>이번 달</span>
 
         {isShow ? (
           <Calendar />
