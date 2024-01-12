@@ -16,12 +16,14 @@ interface ChartProps {
  * chart component의 어디서든 재사용 가능하도록 하는것이 plugin 같습니다.
  */
 
+const CHART_MAIN_COLOR = 'hsl(259, 100%, 50%)';
+
 const chartXAxisBorder = {
   id: 'chartXAxisBorder',
   beforeDatasetsDraw({ ctx, chartArea }: ChartProps) {
     ctx.save(); //이해가 안됨 일딴 넘어가자
     ctx.beginPath(); // 선그리기 시작
-    ctx.strokeStyle = 'hsl(259, 100%, 50%)'; // 선 색상
+    ctx.strokeStyle = CHART_MAIN_COLOR; // 선 색상
     ctx.lineWidth = 3; // 선 간격
     ctx.setLineDash([5, 5]); // 선의 길이: 5 ,선의 간격 : 5
     ctx.moveTo(chartArea.left, chartArea.bottom); // 시작점으로 이동
@@ -43,7 +45,7 @@ const ChartBar = () => {
               {
                 data,
                 backgroundColor: data.map((_, i) => {
-                  const bgColor = i === data.length - 1 ? 'hsl(259, 100%, 50%)' : '#ccc';
+                  const bgColor = i === data.length - 1 ? CHART_MAIN_COLOR : '#ccc';
                   return bgColor;
                 }),
                 barThickness: 90,
