@@ -1,17 +1,17 @@
 .card {
     --image-height: 30vw;
-    --span-height: 30px;
+    --span-height: 3rem  /* 30/10 */;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     height: var(--image-height) + var(--span-height);
-    border-radius: 10px;
+    border-radius: 1rem  /* 10/10 */;
     cursor: pointer;
 
-    @media screen and (min-width: 768px) {
-        --image-height: 150px;
-        --span-height: 30px;
+    @media screen and (min-width: 76.8rem  /* 768/10 */) {
+        --image-height: 15rem  /* 150/10 */;
+        --span-height: 3rem  /* 30/10 */;
     }
 }
 
@@ -19,7 +19,7 @@
     object-fit: cover;
     width: 100%;
     height: var(--image-height);
-    border-radius: 10px;
+    border-radius: 1rem  /* 10/10 */;
 }
 
 .card span {

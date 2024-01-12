@@ -1,4 +1,4 @@
-/* 전체 영역 */
+/* 전체 */
 .wrapper {
   display: flex;
   overflow-x: hidden;
@@ -6,7 +6,28 @@
   flex-direction: column;
 }
 
-/* 메인 영역 */
+/* 로고 */
+.logo {
+  cursor: pointer;
+  /* width: 12rem; */
+}
+
+/* 헤더 */
+.header-wrapper {
+  height: 8rem;
+  position: relative;
+  top: 0;
+  width: 100%;
+  display: flex;
+  padding: 0 25rem;
+  z-index: 10;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.2);
+}
+
+/* 메인 */
 .main-wrapper {
   display: flex;
   margin-top: 15rem;
@@ -70,11 +91,11 @@
   color: var(--main-color);
 }
 
-/* 메인 - 카드 영역 */
+/* 카드 영역 */
 .card-wrapper {
   margin: 0.7rem;
   position: relative;
-  width: 1400px;
+  width: 2100px;
   height: 200px;
   overflow: hidden;
   filter: drop-shadow(rgba(50, 83, 198, 0.34) 0px 18px 40px);
@@ -100,6 +121,7 @@
   border-radius: 1rem;
   justify-content: center;
   flex-direction: column;
+  background-color: #ffffff;
   border: 2px solid #d6d6d6;
   box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem rgba(0.1, 0.1, 0.1, 0.1);
 }
@@ -117,7 +139,7 @@
 
 .card-list,
 .card-list-dynamic {
-  animation-duration: 20s;
+  animation-duration: 35s;
   animation-fill-mode: forwards;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
@@ -147,7 +169,7 @@
   }
 }
 
-/* 비디오 영역 */
+/* 비디오 */
 .video-wrapper {
   gap: 26rem;
   width: 100%;
@@ -161,13 +183,14 @@
 }
 .video-text-area {
   gap: 3rem;
+  width: 38rem;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   justify-content: center;
 }
 .video-text-area h1 {
-  width: 35rem;
+  /* width: 35rem; */
   font-size: 4.2rem;
   font-weight: 700;
 }

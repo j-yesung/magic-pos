@@ -1,5 +1,5 @@
-import { ReactElement, ReactNode } from 'react';
 import { NextPage } from 'next';
+import { ReactElement, ReactNode } from 'react';
 
 // NextJS 중첩 레이아웃을 위한 타입
 type NextPageWithLayout<P = NonNullable<unknown>, IP = P> = NextPage<P, IP> & {
@@ -22,6 +22,8 @@ interface ModalConfirmTypeOption {
 }
 
 interface AuthState {
-  session: Record<string, string | number> | null;
-  setSession: (session) => void;
+  auth: Record<string, string | number> | null;
+  storeId: string | null;
+  setSession: (auth) => void;
+  setStoreId: (id: string) => void;
 }
