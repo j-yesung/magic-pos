@@ -12,6 +12,7 @@ const Tab = () => {
     setIsShow,
     setCurrentDate,
     setSelectedDate,
+    setRecordType,
   } = useManagementState();
 
   const clickShowCalendarHandler = () => setIsShow(true);
@@ -32,6 +33,7 @@ const Tab = () => {
       const { result, dateType } = formatData(sales, formatType);
       if (result && dateType) {
         setData(result);
+        setRecordType(dateType);
       }
     }
     setCurrentDate(today);
@@ -44,6 +46,7 @@ const Tab = () => {
       const { result, dateType } = formatData(sales, formatType);
       if (result && dateType) {
         setData(result);
+        setRecordType(dateType);
       }
     }
   };

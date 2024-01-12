@@ -12,6 +12,7 @@ const Cell = () => {
     setIsShow,
     setSelectedDate,
     setData,
+    setRecordType,
   } = useManagementState();
 
   const startDay = currentDate.clone().startOf('month').startOf('week'); // monthStart가 속한 주의 시작 주
@@ -23,6 +24,7 @@ const Cell = () => {
       const { result, dateType } = formatData(sales, formatType);
       if (result && dateType) {
         setData(result);
+        setRecordType(dateType);
       }
     } else {
       setData([]);

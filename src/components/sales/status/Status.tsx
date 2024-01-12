@@ -11,6 +11,7 @@ const Status = () => {
   const {
     date: { utcStandardDate },
     setData,
+    setRecordType,
   } = useManagementState();
 
   useEffect(() => {
@@ -18,6 +19,7 @@ const Status = () => {
       if (data.sales.length !== 0) {
         const { result, dateType } = formatData(data.sales as Tables<'sales'>[], data.formatType);
         if (result && dateType) {
+          setRecordType(dateType);
           setData(result!);
         }
       }
