@@ -1,4 +1,4 @@
-import { Analysis, SliderArea, StartButton, StickBar, Title, Video, WateMark } from '../module-export';
+import { Analysis, KioskVideo, SliderArea, StartButton, StickBar, Title, WateMark } from '../module-export';
 
 const Contents = () => {
   return (
@@ -8,7 +8,7 @@ const Contents = () => {
       <WateMark />
       <StartButton />
       <SliderArea />
-      <Video />
+      <KioskVideo />
       <Analysis />
     </>
   );

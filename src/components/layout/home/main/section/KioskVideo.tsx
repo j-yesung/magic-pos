@@ -1,6 +1,6 @@
 import styles from '../../styles/Section.module.css';
 
-const Video = () => {
+const KioskVideo = () => {
   return (
     <section className={styles.videoWrapper}>
       <div className={styles.videoTextArea}>
@@ -18,4 +18,4 @@ const Video = () => {
   );
 };
 
-export default Video;
+export default KioskVideo;

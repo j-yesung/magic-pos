@@ -4,5 +4,5 @@ import StickBar from './main/StickBar';
 import Title from './main/Title';
 import WateMark from './main/WateMark';
 import Analysis from './main/section/Analysis';
-import Video from './main/section/Video';
-export { Analysis, SliderArea, StartButton, StickBar, Title, Video, WateMark };
+import KioskVideo from './main/section/KioskVideo';
+export { Analysis, KioskVideo, SliderArea, StartButton, StickBar, Title, WateMark };
