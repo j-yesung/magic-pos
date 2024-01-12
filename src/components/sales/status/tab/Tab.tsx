@@ -37,7 +37,7 @@ const Tab = () => {
         <span onClick={clickMoveYesterday}>어제</span>
         <span
           onClick={async () => {
-            const { sales, formatType } = await getTodaySales(utcStandardDate.clone(), utcStandardDate.clone());
+            const { sales, formatType } = await getTodaySales(utcStandardDate.clone());
             if (sales.length !== 0) {
               const refineData = formatData(sales, formatType);
               setData(refineData!);
@@ -49,7 +49,7 @@ const Tab = () => {
         </span>
         <span
           onClick={async () => {
-            const { sales, formatType } = await getWeekSales(utcStandardDate.clone(), utcStandardDate.clone());
+            const { sales, formatType } = await getWeekSales(utcStandardDate.clone());
             if (sales.length !== 0) {
               const refineData = formatData(sales, formatType);
               setData(refineData!);
@@ -60,10 +60,7 @@ const Tab = () => {
         </span>
         <span
           onClick={async () => {
-            const { sales, formatType } = await getMonthSales(
-              currentDate.clone(),
-              currentDate.clone().startOf('month').subtract(6, 'month'),
-            );
+            const { sales, formatType } = await getMonthSales(utcStandardDate.clone());
             if (sales.length !== 0) {
               const refineData = formatData(sales, formatType);
               setData(refineData!);

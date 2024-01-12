@@ -13,7 +13,7 @@ const Status = () => {
   } = useManagementState();
 
   useEffect(() => {
-    getTodaySales(utcStandardDate.clone(), utcStandardDate.clone()).then(result => {
+    getTodaySales(utcStandardDate.clone()).then(result => {
       if (result.sales.length !== 0) {
         const refineData = formatData(result.sales as Tables<'sales'>[], result.formatType);
         setData(refineData!);
