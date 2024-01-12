@@ -1,3 +1,17 @@
+/*
+calendar component를 감싸는 div의 class css입니다.
+*/
+.show-calendar {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.hidden-calendar {
+  display: none;
+}
+
+/*default calendar에 들어갈 class css*/
 .date-base {
   padding: 1rem;
   border: 1px solid #000;
