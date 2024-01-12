@@ -19,10 +19,7 @@ const Cell = () => {
   const endDay = currentDate.clone().endOf('month').endOf('week'); // monthStart가 속한 마지막 주
 
   const clickShowDate = (day: Moment) => async () => {
-    const { sales, formatType } = await getTodaySales(
-      day.clone().hour(0).subtract(9, 'hour'),
-      day.clone().hour(0).subtract(9, 'hour'),
-    );
+    const { sales, formatType } = await getTodaySales(day.clone().hour(0).subtract(9, 'hour'));
     if (sales.length !== 0) {
       const refineData = formatData(sales, formatType);
       setData(refineData!);
@@ -89,7 +86,7 @@ const Cell = () => {
 
   while (day <= endDay) {
     for (let i = 0; i < 7; i++) {
-      formatDate = day.clone().format('D');
+      formatDate = day.clone().format('YY MM D');
 
       days.push(
         <div
