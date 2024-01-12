@@ -6,10 +6,6 @@ import ReceiptRow from '@/components/order/receipt/ReceiptRow';
 import ReceiptFooter from '@/components/order/receipt/ReceiptFooter';
 
 const ReceiptContainer = () => {
-  const { orderList } = useOrderStore();
-
-  console.log(orderList);
-
   return (
     <div className={styles.container}>
       <div className={styles.rowWrapper}>

@@ -18,7 +18,7 @@ import OrderLayout from '@/components/layout/order/OrderLayout';
 const OrderSuccessPage = ({ payment, isError }: { payment: Payment; isError: boolean }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isPaymentDone, setIsPaymentDone] = useState(false);
-  const { orderNumber, setOrderId } = useOrderStore();
+  const { orderNumber } = useOrderStore();
   const router = useRouter();
 
   useEffect(() => {
@@ -36,7 +36,6 @@ const OrderSuccessPage = ({ payment, isError }: { payment: Payment; isError: boo
     if (payment && payment.status === 'DONE') {
       setIsPaymentDone(true);
     }
-    setOrderId(payment.orderId);
     setIsLoaded(true);
   }, []);
 

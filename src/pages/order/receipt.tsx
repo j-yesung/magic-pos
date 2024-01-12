@@ -15,7 +15,6 @@ const OrderReceiptPage = () => {
 
   useEffect(() => {
     // orderId가 null이면 에러 페이지!
-    console.log(orderId);
     if (orderId === null) {
       // router.push('/error');
       // return;
