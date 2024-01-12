@@ -33,18 +33,18 @@ const AuthForm = ({ data }: FormProps) => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles['title-wrapper']} onClick={() => router.push('/')}>
+      <div className={styles.titleWrapper} onClick={() => router.push('/')}>
         <h1 className={styles.title}>{title}</h1>
-        <h2 className={styles['sub-title']}>{subTitle}</h2>
+        <h2 className={styles.subTitle}>{subTitle}</h2>
       </div>
       {path === '/auth/findPassword' || path === '/auth/reset' ? (
-        <p className={styles['description']}>{description}</p>
+        <p className={styles.description}>{description}</p>
       ) : null}
       <form className={styles.form}>
-        <div className={styles['form-inner-wrapper']}>
+        <div className={styles.formInnerWrapper}>
           <Input value={value} onChangeHandler={changeHandler} onKeyDownHandler={keyDownHandler} />
         </div>
-        <div className={styles['form-button-wrapper']}>
+        <div className={styles.formButtonWrapper}>
           {path === '/auth/signup' && (
             <>
               <Button
@@ -77,7 +77,7 @@ const AuthForm = ({ data }: FormProps) => {
         </div>
       </form>
 
-      <div className={styles['caption-wrapper']}>
+      <div className={styles.captionWrapper}>
         <Link className={styles.caption} href={url || ''}>
           {caption}
         </Link>

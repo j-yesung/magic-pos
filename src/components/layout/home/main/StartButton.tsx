@@ -13,7 +13,7 @@ const StartButton = () => {
   return (
     <div className={styles.startWrapper}>
       <button className={styles.startButton} onClick={clickStartHandler}>
-        시작하기
+        <p>시작하기</p>
       </button>
     </div>
   );

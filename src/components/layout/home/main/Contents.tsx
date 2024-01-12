@@ -10,14 +10,19 @@ const Contents = () => {
       <StartButton />
       <SliderArea />
 
-      {/* 더미 박스 - 나중에 지울 것들 */}
-      <div className={styles.dummyBox}>
-        <div className={styles.dummyBorder}></div>
-        <div className={styles.dummyBorder}></div>
-        <div className={styles.dummyBorder}></div>
-        <div className={styles.dummyBorder}></div>
-        <div className={styles.dummyBorder}></div>
-      </div>
+      <section className={styles.videoWrapper}>
+        <div className={styles.videoTextArea}>
+          <h1>번거로운 키오스크는 이제 안녕! 👋</h1>
+          <div>
+            <p>매직 포스에서 메뉴 선택부터 주문까지</p>
+            <p>그리고 점주분들은 매장 관리까지! 🖥️</p>
+          </div>
+        </div>
+
+        <div className={styles.videoSection}>
+          <div>비디오</div>
+        </div>
+      </section>
     </>
   );
 };
