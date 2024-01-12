@@ -32,20 +32,20 @@ const Cell = () => {
   const dateVariant = cva([styles['date-base']], {
     variants: {
       monthType: {
-        prev: styles['prev-month'],
-        current: styles['current-month'],
-        after: styles['after-month'],
-        currentCalendar: styles['current'],
-        prevCalendar: styles['prev'],
-        afterCalendar: styles['after'],
+        PREV: styles['prev-month'],
+        CURRENT: styles['current-month'],
+        AFTER: styles['after-month'],
+        CURRENTCALENDAR: styles['current'],
+        PREVCALENDAR: styles['prev'],
+        AFTERCALENDAR: styles['after'],
       },
       dateType: {
-        prev: styles['prev-date'],
-        current: styles['current-date'],
-        after: styles['after-date'],
+        PREV: styles['prev-date'],
+        CURRENT: styles['current-date'],
+        AFTER: styles['after-date'],
       },
-      pointDateType: {
-        point: styles['point-date'],
+      selectedDateType: {
+        SELECTEDTYPE: styles['point-date'],
       },
     },
   });
@@ -53,30 +53,53 @@ const Cell = () => {
   const dayVariant = cva([styles['day-base']], {
     variants: {
       dayType: {
-        saturaday: styles['saturaday'],
-        sunday: styles['sunday'],
-        day: styles['day'],
+        SATURADAY: styles['saturaday'],
+        SUNDAY: styles['sunday'],
+        DAY: styles['day'],
       },
     },
   });
+
+  const MONTH = {
+    CURRENT: 'CURRENT' as string,
+    PREV: 'PREV',
+    AFTER: 'AFTER',
+  };
+  // default calendar 날의 css
+  const CALENDARTYPE = {
+    CURRENTCALENDAR: 'CURRENTCALENDAR',
+    PREVCALENDAR: 'PREVCALENDAR',
+  };
+
+  const DATE = {
+    CURRENT: 'CURRENT',
+    PREV: 'PREV',
+    AFTER: 'AFTER',
+  };
+  const DAY = {
+    SATURADAY: 'SATURADAY',
+    SUNDAY: 'SUNDAY',
+    DAY: 'DAY', // 일반 날
+  };
+
   function getMonthType(Month: Moment) {
     const today = moment();
     if (currentDate.isSame(today, 'M')) {
-      return Month.isSame(today, 'M') ? 'current' : Month.isBefore(today, 'M') ? 'prev' : 'after';
+      return Month.isSame(today, 'M') ? MONTH['CURRENT'] : Month.isBefore(today, 'M') ? MONTH['PREV'] : MONTH['AFTER'];
     } else {
-      return Month.isSame(currentDate, 'M') ? 'currentCalendar' : 'prevCalendar';
+      return Month.isSame(currentDate, 'M') ? CALENDARTYPE['CURRENTCALENDAR'] : CALENDARTYPE['PREVCALENDAR'];
     }
   }
 
   function getDateType(day: Moment) {
     const today = moment();
-    return day.isSame(today, 'D') ? 'current' : day.isBefore(today, 'D') ? 'prev' : 'after';
+    return day.isSame(today, 'D') ? DATE['CURRENT'] : day.isBefore(today, 'D') ? DATE['PREV'] : DATE['AFTER'];
   }
 
   function getDayType(day: Moment) {
-    return day.day() === 6 ? 'saturaday' : day.day() === 0 ? 'sunday' : 'day';
+    return day.day() === 6 ? DAY['SATURADAY'] : day.day() === 0 ? DAY['SUNDAY'] : DAY['DAY']!;
   }
-
+  const POINT = 'SELECTEDTYPE';
   const today = moment(); // 유저의 현재 달입니다.
   const row = [];
   let days = [];
@@ -93,7 +116,7 @@ const Cell = () => {
           className={dateVariant({
             monthType: getMonthType(day),
             dateType: getDateType(day),
-            pointDateType: day.isSame(selectedDate, 'day') ? 'point' : undefined,
+            selectedDateType: day.isSame(selectedDate, 'day') ? POINT : undefined,
           })}
           onClick={day.isSame(today, 'D') || day.isBefore(today, 'D') ? clickShowDateHandler(day.clone()) : undefined}
         >
