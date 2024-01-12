@@ -5,13 +5,17 @@ import { groupByKey } from '@/shared/helper';
 import { Tables } from '@/types/supabase';
 import { useStoreQuery } from '@/hooks/store/useStoreQuery';
 import { useStoreOrderQuery } from '@/hooks/order/useStoreOrderQuery';
-import { useTogoOrderQuery } from '@/hooks/order/useTogoOrderQuery';
+import { useNumberOrderQuery } from '@/hooks/order/useNumberOrderQuery';
+import styles from './styles/SuccessContainer.module.css';
+import Image from 'next/image';
+import image from '@/../public/images/image-success.png';
 
 const SuccessContainer = ({ payment }: { payment?: Payment }) => {
-  const { orderList, storeId, tableId, menuData, orderNumber, getTotalPrice, orderType } = useOrderStore();
+  const { orderList, storeId, tableId, menuData, orderNumber, getTotalPrice, orderType, orderId, setOrderId } =
+    useOrderStore();
   const { addSales } = useSalesQuery();
   const { addStoreOrder } = useStoreOrderQuery();
-  const { addNumberOrder } = useTogoOrderQuery();
+  const { addNumberOrder } = useNumberOrderQuery();
   const { incrementOrderNumber } = useStoreQuery();
   const [isPageLoading, setIsPageLoading] = useState(false);
 
@@ -27,9 +31,9 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
         return;
       }
 
-      // 전역 store에 저장된 orderNumber가 0 (초기값)일 때만 실행된다.
+      // 전역값에 담긴 orderId가 null일때만 insert한다.
       // 결제 승인시 sales테이블에 담아놓은 orderList 데이터를 insert 한다.
-      if (orderNumber === 0) {
+      if (orderId === null) {
         const group = groupByKey<Tables<'menu_item'>>(orderList, 'id');
         const salesData = [...group].map(([, value]) => ({
           store_id: storeId,
@@ -42,6 +46,7 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
 
         addSales(salesData);
         incrementOrderNumber(storeId);
+        setOrderId(payment.orderId);
       }
     }
   }, [orderList]);
@@ -79,7 +84,21 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
     setIsPageLoading(true);
   }, []);
 
-  return <>{isPageLoading && <div>주문 성공 고객님의 주문 번호는 {orderNumber}</div>}</>;
+  return (
+    <>
+      {isPageLoading && (
+        <div className={styles.container}>
+          <Image src={image} alt={'성공 이미지'} width={200} height={200} />
+          <div className={styles.textBox}>
+            <span>주문이 완료되었습니다!</span>
+            <em>
+              주문 번호는 <strong>{orderNumber}</strong> 입니다.
+            </em>
+          </div>
+        </div>
+      )}
+    </>
+  );
 };
 
 export default SuccessContainer;

@@ -1,0 +1,49 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+.container img {
+    margin-top: 16.5rem  /* 165/10 */;
+    margin-bottom: 3rem  /* 30/10 */;
+    border-radius: 50%;
+    width: 22rem  /* 220/10 */;
+    height: 22rem  /* 220/10 */;
+    animation: linear 1s shake;
+}
+
+.text-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.text-box span {
+    color: #000;
+    text-align: center;
+    font-size: 1.4rem  /* 14/10 */;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 2.2rem  /* 22/10 */; /* 157.143% */
+}
+
+.text-box strong {
+    color: #000;
+    font-size: 1.8rem  /* 18/10 */;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.8rem  /* 18/10 */;
+}
+
+@keyframes shake {
+    25% {
+        transform: scale(1.3) rotate(15deg);
+    }
+    50% {
+        transform: scale(1) rotate(0);
+    }
+    75% {
+        transform: scale(.9) rotate(-15deg);
+    }
+}

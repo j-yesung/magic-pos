@@ -3,11 +3,11 @@
     flex-direction: column;
     justify-content: space-between;
     font-size: 1.3rem;
-    height: 100px;
-    border: 1px solid #864AF9;
-    margin: 15px 25px 15px 25px;
-    padding: 12px;
-    border-radius: 10px;
+    height: 10rem  /* 100/10 */;
+    border: 0.1rem  /* 1/10 */ solid #864AF9;
+    margin: 1.5rem  /* 15/10 */ 2.5rem  /* 25/10 */ 1.5rem  /* 15/10 */ 2.5rem  /* 25/10 */;
+    padding: 1.2rem  /* 12/10 */;
+    border-radius: 1rem  /* 10/10 */;
 }
 
 .menu-name {
@@ -18,16 +18,16 @@
 
 .menu-name button {
     background: #864AF9;
-    padding: 5px 10px 5px 10px;
+    padding: 0.5rem  /* 5/10 */ 1rem  /* 10/10 */ 0.5rem  /* 5/10 */ 1rem  /* 10/10 */;
     color: white;
-    border-radius: 10px;
-    margin: 0 10px 0 10px;
+    border-radius: 1rem  /* 10/10 */;
+    margin: 0 1rem  /* 10/10 */ 0 1rem  /* 10/10 */;
     cursor: pointer;
 }
 
 .quantity {
     display: inline-block;
     text-align: center;
-    width: 10px;
+    width: 1rem  /* 10/10 */;
     margin: 0;
 }

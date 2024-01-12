@@ -11,9 +11,9 @@ const SliderArea = () => {
           <ul className={chunkIndex === 0 ? styles.cardList : styles.cardListDynamic}>
             {chunk.map(list => (
               <li key={list.id + chunkIndex * 10}>
-                <p>{list.icon}</p>
-                <p>{list.title}</p>
-                <p>{list.description}</p>
+                <span>{list.icon}</span>
+                <h1>{list.title}</h1>
+                <h6>{list.description}</h6>
               </li>
             ))}
           </ul>

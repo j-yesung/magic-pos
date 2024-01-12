@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 
 type Values = Record<string, string>;
 
-const MAX_BUSINESS_NUM_LENGTH = 11;
+const MAX_BUSINESS_NUM_LENGTH = 10;
 
 export const useValid = (value: Values) => {
   const path = useRouter().pathname;
@@ -11,7 +11,7 @@ export const useValid = (value: Values) => {
   const validateCheck = () => {
     const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
     // const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/g;
-    const businessNumberRegex = /^\d{11}$/g;
+    const businessNumberRegex = /^\d{10}$/g;
 
     if (path === '/auth/login') {
       if (!email || !password) {

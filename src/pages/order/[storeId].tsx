@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/virtual';
 import OrderLayout from '@/components/layout/order/OrderLayout';
@@ -8,6 +8,7 @@ import { CategoryWithMenuItem } from '@/types/supabase';
 import useOrderStore from '@/shared/store/order';
 import { isEmptyObject } from '@/shared/helper';
 import { useRouter } from 'next/router';
+import OrderContainer from '@/components/order/OrderContainer';
 
 const OrderIndexPage = ({
   menuData,
@@ -18,7 +19,7 @@ const OrderIndexPage = ({
   storeId: string;
   tableId: string;
 }) => {
-  const { setMenuData, setStoreId, setTableId, orderNumber } = useOrderStore();
+  const { setMenuData, setStoreId, setTableId, orderNumber, orderType } = useOrderStore();
   const [isLoaded, setIsLoaded] = useState(false);
   const router = useRouter();
 
@@ -28,7 +29,7 @@ const OrderIndexPage = ({
       return;
     }
     // 주소창에 uuid가 노출되는 것을 막기 위해 주소창의 URL만을 변경한다. (페이지 이동X)
-    window.history.replaceState({}, '/order', '/order');
+    // window.history.replaceState({}, '/order', '/order');
     // TODO: 에러 처리
     if (isEmptyObject(menuData)) console.error('something wrong');
     else setMenuData(menuData);
@@ -36,20 +37,13 @@ const OrderIndexPage = ({
     if (storeId) setStoreId(storeId);
     if (tableId) setTableId(tableId);
 
-    useOrderStore.persist.clearStorage();
     setIsLoaded(true);
   }, []);
 
-  return (
-    <>
-      {isLoaded && (
-        <main>
-          <OrderLayout />
-        </main>
-      )}
-    </>
-  );
+  return <>{isLoaded && <OrderContainer />}</>;
 };
+
+OrderIndexPage.getLayout = (page: ReactNode) => <OrderLayout>{page}</OrderLayout>;
 
 export default OrderIndexPage;
 
