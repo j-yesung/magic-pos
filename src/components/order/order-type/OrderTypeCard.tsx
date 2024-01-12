@@ -3,6 +3,7 @@ import { useSwiper } from 'swiper/react';
 import useOrderStore from '@/shared/store/order';
 import styles from './styles/OrderTypeButton.module.css';
 import Image from 'next/image';
+import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButtonContainer';
 
 const OrderTypeCard = ({ order }: { order: OrderType }) => {
   const { goNextStep, setOrderType } = useOrderStore.getState();
@@ -10,8 +11,8 @@ const OrderTypeCard = ({ order }: { order: OrderType }) => {
 
   const clickButtonHandler = () => {
     setOrderType(order);
-    swiper.slideNext(600);
     goNextStep();
+    swiper.slideNext(SLIDE_MOVE_SPEED);
   };
 
   return (

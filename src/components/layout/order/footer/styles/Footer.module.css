@@ -3,4 +3,5 @@
     width: 100%;
     height: var(--kiosk-footer-height);
     bottom: 0;
+    z-index: var(--level-1-z-index);
 }

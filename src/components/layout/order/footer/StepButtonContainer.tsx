@@ -24,10 +24,10 @@ const BUTTON_OPTIONS: { [key: number]: { prev: string; next?: string } } = {
   },
 };
 
-const SLIDE_MOVE_SPEED = 600;
+export const SLIDE_MOVE_SPEED = 600;
 
 const StepButtonContainer = ({ sliderRef }: StepButtonContainerProps) => {
-  const { goNextStep, goPrevStep, orderList, step } = useOrderStore.getState();
+  const { goNextStep, goPrevStep, orderList, step } = useOrderStore();
   const { paymentWidget, handlePaymentRequest } = usePaymentWidget();
 
   const prev = BUTTON_OPTIONS[step]?.prev;
