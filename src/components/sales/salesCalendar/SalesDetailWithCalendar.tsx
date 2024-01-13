@@ -1,13 +1,9 @@
-import Cell from '../calendar/cell/Cell';
-import Days from '../calendar/days/Days';
-import Header from '../calendar/header/Header';
+import Calendar from '../calendar/Calendar';
 
 const SalesDeatilWithCalendar = () => {
   return (
     <div>
-      <Header />
-      <Days />
-      <Cell />
+      <Calendar />
     </div>
   );
 };
