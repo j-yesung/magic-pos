@@ -1,4 +1,4 @@
-import { getMonthSales, getTodaySales, getWeekSales } from '@/server/api/supabase/sales';
+import { getMonthsSales, getTodaySales, getWeekSales } from '@/server/api/supabase/sales';
 import { formatData } from '@/shared/helper';
 import useManagementState from '@/shared/store/management';
 import moment from 'moment';
@@ -52,7 +52,7 @@ const Tab = () => {
   };
 
   const clickMonthsChartHandler = async () => {
-    const { sales, formatType } = await getMonthSales(utcStandardDate.clone());
+    const { sales, formatType } = await getMonthsSales(utcStandardDate.clone());
     if (sales.length !== 0) {
       const { result, recordData } = formatData(sales, formatType);
       if (result && recordData) {

@@ -84,7 +84,7 @@ export const getWeekSales: getSalesReturnType = async week => {
  * @returns
  */
 
-export const getMonthSales: getSalesReturnType = async month => {
+export const getMonthsSales: getSalesReturnType = async month => {
   const { data: sales, error } = await supabase
     .from('sales')
     .select('*')

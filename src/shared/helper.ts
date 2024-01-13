@@ -62,6 +62,15 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
     };
     if (formatType === 'days') {
       // 일별로 데이터를 추출
+      const test = [];
+      for (let i = 0; i < 7; i++) {
+        test.push(selectedType?.clone().subtract(i, 'day').format('YYYY-MM-DD'));
+      }
+      const m = new Map();
+      test.forEach(a => m.set(a, []));
+
+      console.log(salesData);
+
       const group = groupByKey<Tables<'sales'>>(
         salesData.map(data => ({ ...data, sales_date: moment(data.sales_date).format('YYYY-MM-DD') })),
         'sales_date',
@@ -73,14 +82,14 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
           recordData.currentSales = value.reduce((acc, cur) => acc + cur.product_ea * cur.product_price, 0);
         }
       }
-      console.log('sldifjdiasjfoijigfoeio;rghaergi');
       recordData.dateType = 'days';
+
       const result = [...group.entries()]
         .map(([key, value]) => {
           return { x: key, y: value.reduce((acc, cur) => acc + cur.product_price * cur.product_ea, 0) };
         })
         .toSorted((a, b) => (moment(a.x).isAfter(moment(b.x)) ? 1 : -1));
-      console.log(recordData);
+
       return { result, recordData };
     } else if (formatType === 'weeks') {
       // 주별로 데이터를 추출
@@ -128,6 +137,7 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
         salesData.map(data => ({ ...data, sales_date: moment(data.sales_date).format('YYYY-MM') })),
         'sales_date',
       );
+      console.log(group);
 
       for (const [key, value] of group) {
         if (moment().format('YYYY-MM') === key) {
