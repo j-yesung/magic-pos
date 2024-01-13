@@ -15,27 +15,32 @@ const ReceiptContainer = () => {
   const { numberOrderData } = useNumberOrderQuery(orderId ?? '');
   const [orderData, setOrderData] = useState<OrderDataWithStoreName>(null);
   const [groupData, setGroupData] = useState<Map<string, Tables<'menu_item'>[]>>(new Map());
-  const [orderType, setOrderType] = useState<OrderType>({ type: 'togo' });
+  const [orderType, setOrderType] = useState<OrderType>({ type: 'store' });
 
+  // 주문 데이터가 있다면 그룹화 합니다.
   useEffect(() => {
     if (orderData) {
       const group = groupByKey<Tables<'menu_item'>>(orderData?.menu_list as Tables<'menu_item'>[], 'id');
       setGroupData(group);
     }
-    console.log(orderData);
   }, [orderData]);
 
+  // order_store 테이블과 order_togo 테이블에서 주문 내역 데이터를 가져온다.
   useEffect(() => {
+    // 매장 주문
     if (storeOrderData?.data) {
       setOrderData(storeOrderData.data);
-      setOrderType({ type: 'store' });
     }
+
+    // 번호표 주문 (포장, 홀)
     if (numberOrderData?.data) {
-      // numberOrderData.data.
       setOrderData(numberOrderData.data);
-      if (!numberOrderData.data.is_togo) setOrderType({ type: 'store' });
+
+      // 포장 주문일 경우
+      if (numberOrderData.data.is_togo) setOrderType({ type: 'togo' });
     }
-  }, [storeOrderData, numberOrderData]);
+  }, [storeOrderData]);
+
   return (
     <div className={styles.container}>
       {orderData && groupData && (

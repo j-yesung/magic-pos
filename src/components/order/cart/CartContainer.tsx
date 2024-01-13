@@ -3,12 +3,10 @@ import useOrderStore from '@/shared/store/order';
 import CartRow from '@/components/order/cart/CartRow';
 import styles from './styles/CartContainer.module.css';
 import { groupByKey } from '@/shared/helper';
-import MessageBox from '@/components/order/cart/MessageBox';
 import { Tables } from '@/types/supabase';
 import WarningNoOrderList from '@/components/order/cart/WarningNoOrderList';
 import StoreInfo from '@/components/order/common/StoreInfo';
 import TotalPrice from '@/components/order/common/TotalPrice';
-import ReceiptHeader from '@/components/order/receipt/ReceiptHeader';
 
 /**
  * STEP3: 담은 메뉴 보기
