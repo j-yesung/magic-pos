@@ -2,14 +2,19 @@ import { getMonthSales } from '@/server/api/supabase/sales';
 import { groupByKey } from '@/shared/helper';
 import useSalesStore from '@/shared/store/sales';
 import { Tables } from '@/types/supabase';
-import moment, { Moment } from 'moment';
+import moment from 'moment';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import styles from '../styles/calendar.module.css';
 import CellItem from './CellItem';
 
-type getCalendarReturnType = (data: Map<string, Tables<'sales'>[]>) => { sales: number; date: Moment }[] | null;
-
+type FormatCalendarReturnType = (data: Map<string, Tables<'sales'>[]>) => { sales: number; date: string }[];
+type SortMinMaxDataReturnType = (target: { sales: number; date: string; min?: boolean; max?: boolean }[]) => {
+  sales: number;
+  date: string;
+  min?: boolean;
+  max?: boolean;
+}[];
 const Cell = () => {
   const {
     date: { currentDate },
@@ -17,7 +22,8 @@ const Cell = () => {
   const path = useRouter().pathname;
   const startDay = currentDate.clone().startOf('month').startOf('week'); // monthStart가 속한 주의 시작 주
   const endDay = currentDate.clone().endOf('month').endOf('week'); // monthStart가 속한 마지막 주
-  const formatToCalendarData: getCalendarReturnType = data => {
+
+  const formatToCalendarData: FormatCalendarReturnType = data => {
     const refinedData = [...data.entries()].map(([key, value]) => {
       const data = {
         sales: value.reduce((acc, cur) => acc + cur.product_ea * cur.product_price, 0),
@@ -25,10 +31,9 @@ const Cell = () => {
       };
       return data;
     });
-    console.log(refinedData);
-
-    return null;
+    return refinedData;
   };
+
   useEffect(() => {
     if (path === '/admin/sales/calendar')
       getMonthSales(currentDate.clone()).then(result => {
@@ -40,11 +45,9 @@ const Cell = () => {
             })),
             'sales_date',
           );
-          formatToCalendarData(group);
+          const formattedData = formatToCalendarData(group);
         }
       });
-
-    return () => {};
   }, [currentDate]);
 
   const row = [];
