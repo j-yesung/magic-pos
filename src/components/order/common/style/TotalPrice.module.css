@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container span {
+    color: #000;
+    font-family: Pretendard, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.total-price {
+    font-size: 20px !important;
+    line-height: 20px !important; /* 100% */
+}

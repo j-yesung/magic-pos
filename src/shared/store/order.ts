@@ -88,6 +88,7 @@ export const useOrderStore = create<OrderState>()(
         orderType: state.orderType,
         storeId: state.storeId,
         orderNumber: state.orderNumber,
+        orderList: state.orderList,
       }),
     },
   ),
