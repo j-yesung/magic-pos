@@ -112,7 +112,6 @@ const CellItem = ({ day }: { day: Moment }) => {
   const formatDate = day.clone().format('YY MM D');
   return (
     <div
-      key={formatDate}
       className={dateVariant({
         calendarType: getCalendarType(day),
         monthType: getMonthType(day),

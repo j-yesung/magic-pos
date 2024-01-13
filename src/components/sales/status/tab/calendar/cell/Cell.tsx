@@ -16,7 +16,7 @@ const Cell = () => {
 
   while (day <= endDay) {
     for (let i = 0; i < 7; i++) {
-      days.push(<CellItem day={day} />);
+      days.push(<CellItem key={day.format('YY MM DD')} day={day} />);
       day = day.add(1, 'day').clone();
     }
     row.push(
