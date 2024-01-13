@@ -1,5 +1,5 @@
 import { getTodaySales } from '@/server/api/supabase/sales';
-import { formatData } from '@/shared/helper';
+import { formatData, getCalendarType, getDateType, getDayType, getMonthType } from '@/shared/helper';
 import useManagementState from '@/shared/store/management';
 import { cva } from 'class-variance-authority';
 import moment, { Moment } from 'moment';
@@ -61,60 +61,15 @@ const CellItem = ({ day }: { day: Moment }) => {
       },
     },
   });
-
-  const MONTH = {
-    CURRENT: 'CURRENT',
-    PREV: 'PREV',
-    AFTER: 'AFTER',
-  } as const;
-
-  // default calendar 날의 css
-  const CALENDARTYPE = {
-    CURRENTCALENDAR: 'CURRENTCALENDAR',
-    PREVCALENDAR: 'PREVCALENDAR',
-  } as const;
-
-  const DATE = {
-    CURRENT: 'CURRENT',
-    PREV: 'PREV',
-    AFTER: 'AFTER',
-  } as const;
-
-  const DAY = {
-    SATURADAY: 'SATURADAY',
-    SUNDAY: 'SUNDAY',
-    DAY: 'DAY', // 일반 날
-  } as const;
-
-  function getMonthType(Month: Moment) {
-    const today = moment();
-    if (currentDate.isSame(today, 'M') && Month.isSame(currentDate, 'M')) return MONTH['CURRENT'];
-    if (!Month.isSame(currentDate, 'M') && currentDate.isSame(today, 'M'))
-      return Month.isBefore(today, 'M') ? MONTH['PREV'] : MONTH['AFTER'];
-  }
-  function getCalendarType(Month: Moment) {
-    if (Month.isSame(currentDate, 'M')) return CALENDARTYPE['CURRENTCALENDAR'];
-
-    if (!Month.isSame(currentDate, 'M')) return CALENDARTYPE['PREVCALENDAR'];
-  }
-
-  function getDateType(day: Moment) {
-    const today = moment();
-    if (day.isSame(today, 'D')) return DATE['CURRENT'];
-    return day.isBefore(today, 'D') ? DATE['PREV'] : DATE['AFTER'];
-  }
-
-  function getDayType(day: Moment) {
-    if (day.day() === 6) return DAY['SATURADAY'];
-    return day.day() === 0 ? DAY['SUNDAY'] : DAY['DAY']!;
-  }
+  const test = moment();
+  console.log(test.day());
   const POINT = 'SELECTEDTYPE';
   const formatDate = day.clone().format('YY MM D');
   return (
     <div
       className={dateVariant({
-        calendarType: getCalendarType(day),
-        monthType: getMonthType(day),
+        calendarType: getCalendarType(day, currentDate),
+        monthType: getMonthType(day, currentDate),
         dateType: getDateType(day),
         selectedDateType: day.isSame(selectedDate, 'day') ? POINT : undefined,
       })}

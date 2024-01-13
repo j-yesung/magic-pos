@@ -16,8 +16,8 @@ const Cell = () => {
 
   while (day <= endDay) {
     for (let i = 0; i < 7; i++) {
-      days.push(<CellItem key={day.format('YY MM DD')} day={day} />);
-      day = day.add(1, 'day').clone();
+      days.push(<CellItem key={day.clone().format('YY MM DD')} day={day} />);
+      day = day.clone().add(1, 'day');
     }
     row.push(
       <div key={days[0].key} className={styles['calendar-row']}>
