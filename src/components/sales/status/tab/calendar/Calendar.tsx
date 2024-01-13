@@ -1,4 +1,4 @@
-import useManagementState from '@/shared/store/management';
+import useSalesStore from '@/shared/store/sales';
 import 'moment/locale/ko';
 import Cell from './cell/Cell';
 import Days from './days/Days';
@@ -9,7 +9,7 @@ import styles from './styles/calendar.module.css';
  */
 
 const Calendar = () => {
-  const { isShow } = useManagementState();
+  const { isShow } = useSalesStore();
 
   return (
     <div className={isShow ? styles['show-calendar'] : styles['hidden-calendar']}>

@@ -1,6 +1,6 @@
 import { getTodaySales } from '@/server/api/supabase/sales';
 import { formatData } from '@/shared/helper';
-import useManagementState from '@/shared/store/management';
+import useSalesStore from '@/shared/store/sales';
 import { Tables } from '@/types/supabase';
 import moment from 'moment';
 import { useEffect } from 'react';
@@ -13,7 +13,7 @@ const Status = () => {
     date: { utcStandardDate },
     setData,
     setRecord,
-  } = useManagementState();
+  } = useSalesStore();
 
   useEffect(() => {
     getTodaySales(utcStandardDate.clone()).then(data => {

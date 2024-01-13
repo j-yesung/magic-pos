@@ -1,6 +1,6 @@
 import { getMonthsSales, getTodaySales, getWeekSales } from '@/server/api/supabase/sales';
 import { formatData } from '@/shared/helper';
-import useManagementState from '@/shared/store/management';
+import useSalesStore from '@/shared/store/sales';
 import moment from 'moment';
 import Calendar from './calendar/Calendar';
 import styles from './styles/tab.module.css';
@@ -13,7 +13,7 @@ const Tab = () => {
     setCurrentDate,
     setSelectedDate,
     setRecord,
-  } = useManagementState();
+  } = useSalesStore();
 
   const clickShowCalendarHandler = () => setIsShow(true);
 

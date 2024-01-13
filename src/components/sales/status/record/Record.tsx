@@ -1,5 +1,5 @@
 import { convertNumberToWon } from '@/shared/helper';
-import useManagementState from '@/shared/store/management';
+import useSalesStore from '@/shared/store/sales';
 import moment from 'moment';
 import styles from './styles/Record.module.css';
 
@@ -7,7 +7,7 @@ const Record = () => {
   const {
     record,
     date: { currentDate },
-  } = useManagementState();
+  } = useSalesStore();
   console.log(record);
   const SALES_TYPE = {
     days: moment().isSame(currentDate, 'date') ? '오늘' : currentDate.format('MM월 DD일'),

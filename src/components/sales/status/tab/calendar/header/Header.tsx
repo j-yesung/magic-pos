@@ -1,10 +1,10 @@
-import useManagementState from '@/shared/store/management';
+import useSalesStore from '@/shared/store/sales';
 import styles from './styles/header.module.css';
 const Header = () => {
   const {
     date: { currentDate },
     setCurrentDate,
-  } = useManagementState();
+  } = useSalesStore();
   const clickPreMonthHandler = () => {
     setCurrentDate(currentDate.clone().subtract(1, 'month'));
   };

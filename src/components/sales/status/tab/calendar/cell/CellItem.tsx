@@ -1,14 +1,15 @@
 import { useCalendar } from '@/hooks/sales/useCalendar';
 import { getCalendarType, getDateType, getDayType, getMonthType } from '@/shared/helper';
-import useManagementState from '@/shared/store/management';
+import useSalesStore from '@/shared/store/sales';
 import { cva } from 'class-variance-authority';
 import { Moment } from 'moment';
+import { useRouter } from 'next/router';
 import styles from '../styles/calendar.module.css';
+
 const CellItem = ({ day }: { day: Moment }) => {
   const {
     date: { currentDate, selectedDate, today },
-  } = useManagementState();
-
+  } = useSalesStore();
   const { clickShowDataOfDateHandler } = useCalendar();
 
   const dateVariant = cva([styles['date-base']], {
@@ -46,25 +47,54 @@ const CellItem = ({ day }: { day: Moment }) => {
 
   const POINT = 'SELECTEDTYPE';
   const formatDate = day.clone().format('YY MM D');
-  return (
-    <div
-      className={dateVariant({
-        calendarType: getCalendarType(day, currentDate),
-        monthType: getMonthType(day, currentDate),
-        dateType: getDateType(day),
-        selectedDateType: day.isSame(selectedDate, 'day') ? POINT : undefined,
-      })}
-      onClick={day.isSame(today, 'D') || day.isBefore(today, 'D') ? clickShowDataOfDateHandler(day.clone()) : undefined}
-    >
-      <span
-        className={dayVariant({
-          dayType: getDayType(day.clone()),
+
+  const path = useRouter().pathname;
+
+  if (path === '/admin/sales/calendar') {
+    return (
+      <div
+        className={dateVariant({
+          calendarType: getCalendarType(day, currentDate),
+          monthType: getMonthType(day, currentDate),
+          dateType: getDateType(day),
+          selectedDateType: day.isSame(selectedDate, 'day') ? POINT : undefined,
         })}
+        // onClick={
+        //   day.isSame(today, 'D') || day.isBefore(today, 'D') ? clickShowDataOfDateHandler(day.clone()) : undefined
+        // }
       >
-        {day.isSame(today, 'D') ? 'today' : formatDate.substring(6)}
-      </span>
-    </div>
-  );
+        <span
+          className={dayVariant({
+            dayType: getDayType(day.clone()),
+          })}
+        >
+          {day.isSame(today, 'D') ? 'today' : formatDate.substring(6)}
+        </span>
+      </div>
+    );
+  } else {
+    return (
+      <div
+        className={dateVariant({
+          calendarType: getCalendarType(day, currentDate),
+          monthType: getMonthType(day, currentDate),
+          dateType: getDateType(day),
+          selectedDateType: day.isSame(selectedDate, 'day') ? POINT : undefined,
+        })}
+        onClick={
+          day.isSame(today, 'D') || day.isBefore(today, 'D') ? clickShowDataOfDateHandler(day.clone()) : undefined
+        }
+      >
+        <span
+          className={dayVariant({
+            dayType: getDayType(day.clone()),
+          })}
+        >
+          {day.isSame(today, 'D') ? 'today' : formatDate.substring(6)}
+        </span>
+      </div>
+    );
+  }
 };
 
 export default CellItem;

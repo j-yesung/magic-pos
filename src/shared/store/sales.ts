@@ -1,7 +1,7 @@
 import moment, { Moment } from 'moment';
 import { create } from 'zustand';
 
-interface ManagementState {
+interface SalesStore {
   isShow: boolean;
   record: {
     currentSales: number;
@@ -17,17 +17,17 @@ interface ManagementState {
     x: string;
     y: number;
   }[];
-  calendarData: { sales: number; date: Moment; min?: boolean; max?: boolean }[];
+  calendarData: { sales: number; date: string; min?: boolean; max?: boolean }[];
 
   setIsShow: (param?: boolean) => void;
   setData: (sales: { x: string; y: number }[]) => void;
   setCurrentDate: (day: Moment) => void;
   setSelectedDate: (day: Moment) => void;
   setRecord: (sales: { currentSales: number; dateType: string }) => void;
-  setCalendarData: <T extends { sales: number; date: Moment; min?: boolean; max?: boolean }[]>(param: T) => void;
+  setCalendarData: <T extends { sales: number; date: string; min?: boolean; max?: boolean }[]>(param: T) => void;
 }
 
-const useManagementState = create<ManagementState>()(set => ({
+const useSalesStore = create<SalesStore>()(set => ({
   data: [],
   isShow: false,
   record: {
@@ -89,4 +89,4 @@ const useManagementState = create<ManagementState>()(set => ({
     })),
 }));
 
-export default useManagementState;
+export default useSalesStore;

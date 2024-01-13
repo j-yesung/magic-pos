@@ -1,10 +1,10 @@
 import { getTodaySales } from '@/server/api/supabase/sales';
 import { formatData } from '@/shared/helper';
-import useManagementState from '@/shared/store/management';
+import useSalesStore from '@/shared/store/sales';
 import { Moment } from 'moment';
 
 export const useCalendar = () => {
-  const { setCurrentDate, setIsShow, setSelectedDate, setData, setRecord } = useManagementState();
+  const { setCurrentDate, setIsShow, setSelectedDate, setData, setRecord } = useSalesStore();
 
   /**
    * 날짜 클릭하면 그 날짜를 기준으로 1주일 전꺼 까지 Data를 불러오는 함수입니다.
