@@ -21,14 +21,13 @@ const OrderIndexPage = ({
   storeId: string;
   tableId: string;
 }) => {
-  const { setMenuData, setStoreId, setTableId, orderId, setOrderId, resetOrderList } = useOrderStore();
+  const { setMenuData, setStoreId, setTableId, orderId, resetOrderList, setStoreName } = useOrderStore();
   const { storeOrderData } = useStoreOrderQuery(orderId ?? '');
   const { numberOrderData } = useNumberOrderQuery(orderId ?? '');
   const [isLoaded, setIsLoaded] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    console.log(orderId);
     if (orderId) {
       (async () => {
         if (storeOrderData?.data && !storeOrderData.data?.is_done) {
@@ -50,7 +49,10 @@ const OrderIndexPage = ({
     // window.history.replaceState({}, '/order', '/order');
     // TODO: 에러 처리
     if (isEmptyObject(menuData)) console.error('something wrong');
-    else setMenuData(menuData);
+    else {
+      setMenuData(menuData);
+      setStoreName(menuData[0].store.business_name ?? '');
+    }
 
     if (storeId) setStoreId(storeId);
     if (tableId) setTableId(tableId);

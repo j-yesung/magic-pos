@@ -37,6 +37,8 @@ interface OrderState {
   setOrderType: (orderType: OrderType) => void;
   swiperRef: React.RefObject<SwiperRef> | null;
   setSwiperRef: (ref: React.RefObject<SwiperRef>) => void;
+  storeName: string;
+  setStoreName: (storeName: string) => void;
   orderId: string | null;
   setOrderId: (orderId: string) => void;
 }
@@ -85,6 +87,9 @@ export const useOrderStore = create<OrderState>()(
       // 결제 승인시 토스에서 발급되는 orderId
       orderId: null,
       setOrderId: (orderId: string) => set(() => ({ orderId })),
+      // 가게 이름
+      storeName: '',
+      setStoreName: (storeName: string) => set(() => ({ storeName })),
       swiperRef: null,
       setSwiperRef: (swiperRef: React.RefObject<SwiperRef>) => set(() => ({ swiperRef })),
     }),

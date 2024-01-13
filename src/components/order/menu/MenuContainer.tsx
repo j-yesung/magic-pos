@@ -11,7 +11,7 @@ import StoreInfo from '@/components/order/common/StoreInfo';
  * @constructor
  */
 const MenuContainer = () => {
-  const { menuData, orderType } = useOrderStore();
+  const { menuData, orderType, storeName } = useOrderStore();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [menuItemList, setMenuItemList] = useState<Tables<'menu_item'>[]>([]);
 
@@ -37,7 +37,7 @@ const MenuContainer = () => {
           setSelectedCategory={setSelectedCategory}
         />
       )}
-      <StoreInfo orderType={orderType} storeName={'어쩌구 카페'} />
+      <StoreInfo orderType={orderType} storeName={storeName} />
       <section className={styles.section}>
         {menuItemList.map(menu => (
           <MenuCard key={menu.id} menu={menu} />
