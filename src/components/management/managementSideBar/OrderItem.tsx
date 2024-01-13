@@ -1,22 +1,22 @@
 import useManagementCssStore from "@/shared/store/management-css"
 import { Tables } from "@/types/supabase"
 import Image from "next/image"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 import styles from "./styles/OrderItem.module.css"
 
 
 const OrderItem = ({ orderData }: { orderData: Tables<'order_store'> }) => {
   const { order_number, menu_list } = orderData;
   const menuList: Tables<'menu_item'>[] = JSON.parse(JSON.stringify(menu_list))
-  const [isListClick, setIsListClick] = useState(false)
   const itemOrderListRef = useRef<HTMLUListElement>(null)
   const itemOrderListItemRef = useRef<HTMLLIElement[]>([])
   const itemOrderListItemImageRef = useRef<HTMLSpanElement[]>([])
   const itemOrderListItemNameRef = useRef<HTMLSpanElement[]>([])
   const itemOrderListItemPriceRef = useRef<HTMLSpanElement[]>([])
-  const { refItemOrderList, refItemOrderListItem, refItemOrderListItemImage, refItemOrderListItemName, refItemOrderListItemPrice, setClickMenuList } = useManagementCssStore();
+  const { refItemOrderList, refItemOrderListItem, refItemOrderListItemImage, refItemOrderListItemName, refItemOrderListItemPrice, isListClick, setClickMenuList, setIsListClick } = useManagementCssStore();
 
   const clickListStyleHandler = () => {
+    setIsListClick(true)
     setIsListClick(!isListClick)
     setClickMenuList({
       itemOrderListRef,

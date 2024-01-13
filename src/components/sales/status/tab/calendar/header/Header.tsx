@@ -1,4 +1,4 @@
-import useManagementState from '@/shared/store/management';
+import useManagementState from '@/shared/store/sales';
 import styles from './styles/header.module.css';
 const Header = () => {
   const {

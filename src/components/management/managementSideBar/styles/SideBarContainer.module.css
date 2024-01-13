@@ -1,6 +1,7 @@
 .sideBar-container{
   width: 100%;
   height: 65%;
+  position: relative;
 }
 
 
@@ -17,4 +18,17 @@
 
 .order_list::-webkit-scrollbar {
   display: none;
+}
+
+.total-price{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-bottom: 5%;
+  font-size: 2.5rem;
 }

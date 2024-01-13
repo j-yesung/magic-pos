@@ -1,6 +1,6 @@
 import { getTodaySales } from '@/server/api/supabase/sales';
 import { formatData } from '@/shared/helper';
-import useManagementState from '@/shared/store/management';
+import useManagementState from '@/shared/store/sales';
 import { Tables } from '@/types/supabase';
 import { useEffect } from 'react';
 import ChartBar from './chart/ChartBar';

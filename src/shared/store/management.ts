@@ -1,61 +1,23 @@
-import moment, { Moment } from 'moment';
-import { create } from 'zustand';
+import create from "zustand";
 
-interface ManagementState {
-  isShow: boolean;
-  date: {
-    currentDate: Moment;
-    utcStandardDate: Moment;
-    selectedDate: Moment;
-  };
-  data: {
-    x: string;
-    y: number;
-  }[];
-  setIsShow: (param?: boolean) => void;
-  setData: (param: { x: string; y: number }[]) => void;
-  setCurrentDate: (day: Moment) => void;
-  setSelectedDate: (day: Moment) => void;
+interface managementType {
+  orderId: string[];
+  orderStatus: string;
+  tableNumber: string;
+  setOrderId: (value: { id: string[], status: string, number: string }) => void
 }
 
-const useManagementState = create<ManagementState>()(set => ({
-  data: [],
-  isShow: false,
-  date: {
-    currentDate: moment(),
-    selectedDate: moment().clone(),
-    // utcStandardDate는 supabase의 Sales에서 데이터를 가져올 때 사용합니다.
-    utcStandardDate: moment().hour(0).subtract(9, 'hour'),
-  },
+const useManagementStore = create<managementType>((set) => ({
+  orderId: [],
+  orderStatus: '',
+  tableNumber: '',
+  setOrderId: (value) =>
+    set(() => ({
+      orderId: value.id,
+      orderStatus: value.status,
+      tableNumber: value.number
+    }))
+}))
 
-  /**
-   */
-  setData: prop =>
-    set(state => ({
-      ...state,
-      data: prop,
-    })),
-  setIsShow: prop =>
-    set(state => ({
-      ...state,
-      isShow: prop ? prop : !state.isShow,
-    })),
-  setCurrentDate: prop =>
-    set(state => ({
-      ...state,
-      date: {
-        ...state.date,
-        currentDate: prop,
-      },
-    })),
-  setSelectedDate: prop =>
-    set(state => ({
-      ...state,
-      date: {
-        ...state.date,
-        selectedDate: prop,
-      },
-    })),
-}));
 
-export default useManagementState;
+export default useManagementStore

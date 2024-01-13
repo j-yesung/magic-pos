@@ -1,4 +1,4 @@
-import useManagementState from '@/shared/store/management';
+import useManagementState from '@/shared/store/sales';
 import 'moment/locale/ko';
 import Cell from './cell/Cell';
 import Days from './days/Days';

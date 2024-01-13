@@ -15,6 +15,7 @@ const ShopContainer = ({ managementData }: { managementData?: StoreWithOrderInfo
     .sort((a, b) => (a.order_number[0] < b.order_number[0] ? 1 : -1))
 
 
+
   return (
     <div className={styles['shop-container']}>
       <div className={styles['shop-title']}>매장 주문</div>

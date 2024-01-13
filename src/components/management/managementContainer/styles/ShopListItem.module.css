@@ -37,20 +37,14 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.item-order-number > span > span:last-child > span{
+  display: none;
+}
+
 
 .item-status {
   justify-content: flex-end;
 }
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -1,5 +1,5 @@
 import { convertNumberToWon } from '@/shared/helper';
-import useManagementState from '@/shared/store/management';
+import useManagementState from '@/shared/store/sales';
 import { BarElement, CategoryScale, ChartArea, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';

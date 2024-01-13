@@ -16,7 +16,9 @@ interface ManagementCssType {
   refItemOrderListItemImage: RefObject<HTMLSpanElement[]> | null;
   refItemOrderListItemName: RefObject<HTMLSpanElement[]> | null;
   refItemOrderListItemPrice: RefObject<HTMLSpanElement[]> | null;
-  setClickMenuList: (value: ClickMenuListType) => void
+  isListClick: boolean;
+  setClickMenuList: (value: ClickMenuListType) => void;
+  setIsListClick: (value: boolean) => void;
 }
 
 const useManagementCssStore = create<ManagementCssType>(set => ({
@@ -26,6 +28,7 @@ const useManagementCssStore = create<ManagementCssType>(set => ({
   refItemOrderListItemImage: null,
   refItemOrderListItemName: null,
   refItemOrderListItemPrice: null,
+  isListClick: false,
   // setState함수 영역
   setClickMenuList: (value) => set(state => ({
     ...state,
@@ -34,6 +37,9 @@ const useManagementCssStore = create<ManagementCssType>(set => ({
     refItemOrderListItemImage: value.itemOrderListItemImageRef,
     refItemOrderListItemName: value.itemOrderListItemNameRef,
     refItemOrderListItemPrice: value.itemOrderListItemPriceRef
+  })),
+  setIsListClick: (value) => set(() => ({
+    isListClick: value
   }))
 }))
 

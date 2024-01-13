@@ -1,6 +1,6 @@
 import { getTodaySales } from '@/server/api/supabase/sales';
 import { formatData } from '@/shared/helper';
-import useManagementState from '@/shared/store/management';
+import useManagementState from '@/shared/store/sales';
 import { cva } from 'class-variance-authority';
 import moment, { Moment } from 'moment';
 import styles from '../styles/calendar.module.css';

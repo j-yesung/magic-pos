@@ -1,6 +1,6 @@
 import { getMonthSales, getTodaySales, getWeekSales } from '@/server/api/supabase/sales';
 import { formatData } from '@/shared/helper';
-import useManagementState from '@/shared/store/management';
+import useManagementState from '@/shared/store/sales';
 import moment from 'moment';
 import Calendar from './calendar/Calendar';
 import styles from './styles/tab.module.css';
