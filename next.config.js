@@ -18,6 +18,10 @@ const nextConfig = {
           options.modules.exportLocalsConvention = 'camelCase';
         }
       });
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+    });
 
     return config;
   },

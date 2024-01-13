@@ -1,0 +1,25 @@
+.wrapper {
+  position: relative;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.date {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.date span {
+  cursor: pointer;
+  padding: 1rem;
+  border: 1px solid orange;
+}
+
+.calendar {
+  display: inline-block;
+  margin: 1rem;
+  padding: 1rem;
+  cursor: pointer;
+  border: 1px solid var(--main-color);
+}
