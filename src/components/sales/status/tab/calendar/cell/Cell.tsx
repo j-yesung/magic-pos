@@ -50,24 +50,31 @@ const Cell = () => {
     return sortedData;
   };
   useEffect(() => {
-    if (path === '/admin/sales/calendar')
-      getMonthSales(currentDate.clone()).then(result => {
-        if (result.sales.length !== 0) {
-          const group = groupByKey<Tables<'sales'>>(
-            result.sales.map(data => ({
-              ...data,
-              sales_date: moment(data.sales_date).format('YY MM DD'),
-            })),
-            'sales_date',
-          );
+    if (path === '/admin/sales/calendar') console.log(currentDate);
+    getMonthSales(currentDate.clone()).then(result => {
+      if (result.sales.length !== 0) {
+        const group = groupByKey<Tables<'sales'>>(
+          result.sales.map(data => ({
+            ...data,
+            sales_date: moment(data.sales_date).format('YY MM DD'),
+          })),
+          'sales_date',
+        );
 
-          const formattedData = formatToCalendarData(group);
-          const minMaxData = sortMinMaxData(formattedData);
-          setCalendarData(minMaxData);
-        }
-      });
+        const formattedData = formatToCalendarData(group);
+        const minMaxData = sortMinMaxData(formattedData);
+        setCalendarData(minMaxData);
+      }
+    });
+
+    return () => {
+      if (calendarData.length !== 0) {
+        console.log('asdflkjsadjfi');
+        setCalendarData([]);
+      }
+    };
   }, [currentDate]);
-  console.log(calendarData);
+
   const row = [];
   let days = [];
   let day = startDay;
