@@ -1,10 +1,13 @@
 import { useAuth } from '@/hooks/auth/useAuth';
 import useAuthStore from '@/shared/store/auth';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styles from '../styles/StickBar.module.css';
+import Logo from '/public/logo.svg';
 
 const StickBar = () => {
+  const router = useRouter();
   const { logout } = useAuth();
   const { auth } = useAuthStore();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -17,9 +20,7 @@ const StickBar = () => {
     <>
       {isLoaded && (
         <div className={styles.wrapper}>
-          <Link className={styles.logo} href="/">
-            Magic pos
-          </Link>
+          <Logo className={styles.logo} width={200} height={20} onClick={() => router.push('/')} />
 
           <div className={styles.tabArea}>
             {auth === null ? (
