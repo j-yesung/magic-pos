@@ -5,7 +5,7 @@ import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import styles from '../../styles/Section.module.css';
 
-const swiperDummy = [
+const SWIPER_DUMMY = [
   { id: 1, title: '첫 번째 이미지' },
   { id: 2, title: '두 번째 이미지' },
   { id: 3, title: '세 번째 이미지' },
@@ -24,7 +24,7 @@ const OtherFeature = () => {
           pagination={{ clickable: true }}
           loop={true}
         >
-          {swiperDummy.map(item => (
+          {SWIPER_DUMMY.map(item => (
             <SwiperSlide className={styles.sliderItem} key={item.id}>
               <h1>{item.title}</h1>
             </SwiperSlide>
