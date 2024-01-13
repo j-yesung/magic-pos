@@ -1,4 +1,7 @@
 .container {
-    padding: 0 1rem  /* 10/10 */ 0 1rem  /* 10/10 */;
     height: var(--kiosk-header-height);
+}
+
+.container > div {
+    height: 100%;
 }

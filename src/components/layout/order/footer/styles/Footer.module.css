@@ -1,3 +1,10 @@
 .container {
+    position: fixed;
+    width: 100%;
     height: var(--kiosk-footer-height);
+    max-width: 76.8rem  /* 768/10 */;
+    bottom: 0;
+    z-index: var(--level-1-z-index);
+    padding: 0 1.25rem;
+    margin-bottom: 1.5rem  /* 15/10 */;
 }

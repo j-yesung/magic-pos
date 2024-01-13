@@ -3,6 +3,7 @@
     --menu-container-height: 80%;
     --message-box-height: 10%;
     height: 100%;
+    padding: 0 1.5rem  /* 15/10 */
 }
 
 .section {
@@ -10,11 +11,12 @@
     grid-template-columns: repeat(2, 1fr);
     grid-auto-rows: max-content;
     column-gap: 1.5rem  /* 15/10 */;
-    padding: 0 1.5rem  /* 15/10 */ 0 1.5rem  /* 15/10 */;
+    row-gap: 2rem;
     justify-items: center;
     align-items: flex-start;
-    min-height: calc(100vh - var(--kiosk-footer-height) - var(--kiosk-header-height) - var(--kiosk-container-padding)*2 - var(--message-box-height));
+    max-height: calc(100vh - var(--kiosk-footer-height) - var(--kiosk-header-height) - var(--kiosk-container-padding)*2);
     overflow-y: auto;
+    padding-bottom: 10rem;
 
     @media screen and (min-width: 76.8rem  /* 768/10 */) {
         grid-template-columns: repeat(3, 1fr);

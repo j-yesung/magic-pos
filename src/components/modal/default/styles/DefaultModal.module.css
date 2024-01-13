@@ -4,15 +4,15 @@
     justify-content: space-evenly;
     align-items: center;
     width: 100%;
-    height: 150px;
+    height: 15rem  /* 150/10 */;
 }
 
 .container button {
     background: #864AF9;
     color: white;
-    padding: 10px;
-    border-radius: 10px;
-    margin-top: 20px;
+    padding: 1rem  /* 10/10 */;
+    border-radius: 1rem  /* 10/10 */;
+    margin-top: 2rem  /* 20/10 */;
     cursor: pointer;
 }
 
@@ -23,9 +23,9 @@
 }
 
 .confirm-button-container button {
-    margin: 20px 20px 0 20px;
-    height: 50px;
-    width: 100px;
+    margin: 2rem  /* 20/10 */ 2rem  /* 20/10 */ 0 2rem  /* 20/10 */;
+    height: 5rem  /* 50/10 */;
+    width: 10rem  /* 100/10 */;
 }
 
 .confirm-button-container .cancel {
