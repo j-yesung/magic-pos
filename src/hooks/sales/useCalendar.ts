@@ -24,7 +24,12 @@ export const useCalendar = () => {
     setCurrentDate(currentDate.clone().add(1, 'month'));
   };
 
-  // sales/status에 있는 calendar에서 날짜를 클릭하면 그 날 기준 7일 데이터를 받아옵니다.
+  //sales/status에 있는 calendar에서 날짜를 클릭하면 그 날 기준 7일 데이터를 받아옵니다.
+  /**
+   *
+   * @param day 날짜가 들어오면 그 날짜 기준으로 1주일치 매출을 가져옵니다.
+   * @returns salesStore의 state값 변경으로 void 입니다.
+   */
   const clickShowDataOfDateHandler = (day: Moment) => async () => {
     const { sales, formatType } = await getTodaySales(day.clone().hour(0).subtract(9, 'hour'));
     if (sales.length !== 0) {
