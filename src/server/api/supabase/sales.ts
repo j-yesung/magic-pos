@@ -7,7 +7,7 @@ import { Moment } from 'moment';
 /**
  * DateFormatType은 helper에서 데이터를 가공할 때 사용합니다.
  */
-export type DateFormatType = 'days' | 'weeks' | 'months';
+export type DateFormatType = 'days' | 'weeks' | 'months' | 'month';
 export interface SalesDataReturnType {
   sales: Tables<'sales'>[];
   error?: PostgrestError;
@@ -114,5 +114,5 @@ export const getMonthSales: getSalesReturnType = async month => {
   if (error) {
     return { sales: [], error };
   }
-  return { sales, formatType: 'months' };
+  return { sales, formatType: 'month' };
 };
