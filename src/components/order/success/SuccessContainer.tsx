@@ -9,7 +9,6 @@ import { useNumberOrderQuery } from '@/hooks/order/useNumberOrderQuery';
 import styles from './styles/SuccessContainer.module.css';
 import Image from 'next/image';
 import image from '@/../public/images/image-success.png';
-import Footer from '@/components/layout/order/footer/Footer';
 import { useRouter } from 'next/router';
 
 const SuccessContainer = ({ payment }: { payment?: Payment }) => {
