@@ -2,6 +2,7 @@ import { getMonthsSales, getTodaySales, getWeekSales } from '@/server/api/supaba
 import { formatData } from '@/shared/helper';
 import useManagementState from '@/shared/store/management';
 import moment from 'moment';
+import { useEffect } from 'react';
 import Calendar from './calendar/Calendar';
 import styles from './styles/tab.module.css';
 const Tab = () => {
@@ -62,6 +63,7 @@ const Tab = () => {
     }
   };
 
+  useEffect(() => {}, []);
   return (
     <div className={styles['wrapper']}>
       <div className={styles['date']}>

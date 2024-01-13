@@ -3,7 +3,7 @@ import useManagementState from '@/shared/store/management';
 import { useEffect } from 'react';
 import Header from '../status/tab/calendar/header/Header';
 
-const SalesCalendar = () => {
+const SalesDeatilWithCalendar = () => {
   const {
     date: { currentDate },
   } = useManagementState();
@@ -15,9 +15,9 @@ const SalesCalendar = () => {
 
   return (
     <div>
-      <Header />
+      <Header />{' '}
     </div>
   );
 };
 
-export default SalesCalendar;
+export default SalesDeatilWithCalendar;

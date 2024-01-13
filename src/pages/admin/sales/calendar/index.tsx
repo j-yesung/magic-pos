@@ -1,5 +1,5 @@
-import SalesCalendar from '@/components/sales/salesCalendar/SalesCalendar';
+import SalesDeatilWithCalendar from '@/components/sales/salesCalendar/SalesDetailWithCalendar';
 
-const Calendar = () => <SalesCalendar />;
+const SalesCalendar = () => <SalesDeatilWithCalendar />;
 
-export default Calendar;
+export default SalesCalendar;
