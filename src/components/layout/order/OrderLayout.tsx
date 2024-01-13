@@ -17,8 +17,7 @@ const OrderLayout = ({ children }: { children: React.ReactNode }) => {
   // slide에 사용될 컴포넌트를 담습니다.
   const { setSwiperRef, step, goPrevStep } = useOrderStore();
   const sliderRef = useRef<SwiperRef>(null);
-  const { asPath, pathname } = useRouter();
-  console.log(pathname);
+  const { pathname } = useRouter();
 
   const clickPrevButtonHandler = () => {
     sliderRef!.current?.swiper.slidePrev(SLIDE_MOVE_SPEED);

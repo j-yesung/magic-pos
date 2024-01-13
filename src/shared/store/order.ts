@@ -23,6 +23,7 @@ interface OrderState {
   goPrevStep: () => void;
   setMenuData: (data: CategoryWithMenuItem[]) => void;
   orderList: Tables<'menu_item'>[];
+  resetOrderList: () => void;
   addOrderList: (menu: Tables<'menu_item'>[]) => void;
   subtractOrderList: (menu: Tables<'menu_item'>) => void;
   getTotalPrice: () => number;
@@ -59,6 +60,7 @@ export const useOrderStore = create<OrderState>()(
         }),
       // 주문에 담은 메뉴 목록을 나타냅니다.
       orderList: [],
+      resetOrderList: () => set(() => ({ orderList: [] })),
       addOrderList: (menu: Tables<'menu_item'>[]) => set(state => ({ orderList: [...state.orderList, ...menu] })),
       subtractOrderList: (menu: Tables<'menu_item'>) =>
         set(state => {

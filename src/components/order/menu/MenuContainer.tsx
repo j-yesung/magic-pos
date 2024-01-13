@@ -5,7 +5,6 @@ import styles from './styles/MenuContainer.module.css';
 import MenuCard from '@/components/order/menu/MenuCard';
 import { Tables } from '@/types/supabase';
 import StoreInfo from '@/components/order/common/StoreInfo';
-import order from '@/shared/store/order';
 
 /**
  * STEP2: 메뉴 탐색 및 선택
