@@ -82,10 +82,7 @@ const useSalesStore = create<SalesStore>()(set => ({
   setCalendarData: prop =>
     set(state => ({
       ...state,
-      calendarData: {
-        ...state.calendarData,
-        calendarData: prop,
-      },
+      calendarData: prop,
     })),
 }));
 

@@ -1,12 +1,20 @@
 import { useCalendar } from '@/hooks/sales/useCalendar';
-import { getCalendarType, getDateType, getDayType, getMonthType } from '@/shared/helper';
+import {
+  convertNumberToWon,
+  getCalendarType,
+  getDateType,
+  getDayType,
+  getMinMaxSalesType,
+  getMonthType,
+} from '@/shared/helper';
 import useSalesStore from '@/shared/store/sales';
 import { cva } from 'class-variance-authority';
 import { Moment } from 'moment';
 import { useRouter } from 'next/router';
 import styles from '../styles/calendar.module.css';
+import { CalendarDataType } from './Cell';
 
-const CellItem = ({ day }: { day: Moment }) => {
+const CellItem = ({ day, salesData }: { day: Moment; salesData?: CalendarDataType }) => {
   const {
     date: { currentDate, selectedDate, today },
   } = useSalesStore();
@@ -45,8 +53,17 @@ const CellItem = ({ day }: { day: Moment }) => {
     },
   });
 
+  const salesVariant = cva([styles['sales-base']], {
+    variants: {
+      sales: {
+        MAX: styles['sales-max'],
+        MIN: styles['sales-min'],
+      },
+    },
+  });
+
   const POINT = 'SELECTEDTYPE';
-  const formatDate = day.clone().format('YY MM D');
+  const formatDate = day.clone().format('YY MM D').substring(6);
 
   const path = useRouter().pathname;
 
@@ -59,16 +76,20 @@ const CellItem = ({ day }: { day: Moment }) => {
           dateType: getDateType(day),
           selectedDateType: day.isSame(selectedDate, 'day') ? POINT : undefined,
         })}
-        // onClick={
-        //   day.isSame(today, 'D') || day.isBefore(today, 'D') ? clickShowDataOfDateHandler(day.clone()) : undefined
-        // }
       >
         <span
           className={dayVariant({
             dayType: getDayType(day.clone()),
           })}
         >
-          {day.isSame(today, 'D') ? 'today' : formatDate.substring(6)}
+          {day.isSame(today, 'D') ? 'today' : formatDate}
+        </span>
+        <span
+          className={salesVariant({
+            sales: getMinMaxSalesType(salesData!),
+          })}
+        >
+          {salesData?.sales && convertNumberToWon(salesData.sales)}
         </span>
       </div>
     );
@@ -90,7 +111,7 @@ const CellItem = ({ day }: { day: Moment }) => {
             dayType: getDayType(day.clone()),
           })}
         >
-          {day.isSame(today, 'D') ? 'today' : formatDate.substring(6)}
+          {day.isSame(today, 'D') ? 'today' : formatDate}
         </span>
       </div>
     );

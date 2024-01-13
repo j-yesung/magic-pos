@@ -1,3 +1,4 @@
+import { CalendarDataType } from '@/components/sales/status/tab/calendar/cell/Cell';
 import { DateFormatType } from '@/server/api/supabase/sales';
 import { Tables } from '@/types/supabase';
 import moment, { Moment } from 'moment';
@@ -185,6 +186,12 @@ const DAY = {
   DAY: 'DAY', // 일반 날
 } as const;
 
+const SALES = {
+  MAX: 'MAX',
+  MIN: 'MIN',
+  BASE: 'BASE',
+} as const;
+
 export function getMonthType(Month: Moment, CurrentDate: Moment) {
   const today = moment();
   if (CurrentDate.isSame(today, 'M') && Month.isSame(CurrentDate, 'M')) return MONTH['CURRENT'];
@@ -211,6 +218,12 @@ export function getDateType(Date: Moment) {
  */
 export function getDayType(Day: Moment) {
   if (Day.day() === 6) return DAY['SATURADAY'];
-
   return Day.day() === 0 ? DAY['SUNDAY'] : DAY['DAY']!;
+}
+
+export function getMinMaxSalesType(salesData: CalendarDataType) {
+  if (salesData?.min) return SALES['MIN'];
+  if (salesData?.max) return SALES['MAX'];
+
+  return undefined;
 }

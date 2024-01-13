@@ -9,15 +9,19 @@ import styles from '../styles/calendar.module.css';
 import CellItem from './CellItem';
 
 type FormatCalendarReturnType = (data: Map<string, Tables<'sales'>[]>) => { sales: number; date: string }[];
-type SortMinMaxDataReturnType = (target: { sales: number; date: string; min?: boolean; max?: boolean }[]) => {
+export interface CalendarDataType {
   sales: number;
   date: string;
   min?: boolean;
   max?: boolean;
-}[];
+}
+
+type SortMinMaxDataReturnType = (target: CalendarDataType[]) => CalendarDataType[];
 const Cell = () => {
   const {
     date: { currentDate },
+    setCalendarData,
+    calendarData,
   } = useSalesStore();
   const path = useRouter().pathname;
   const startDay = currentDate.clone().startOf('month').startOf('week'); // monthStart가 속한 주의 시작 주
@@ -59,19 +63,20 @@ const Cell = () => {
 
           const formattedData = formatToCalendarData(group);
           const minMaxData = sortMinMaxData(formattedData);
+          setCalendarData(minMaxData);
         }
       });
   }, [currentDate]);
-
+  console.log(calendarData);
   const row = [];
   let days = [];
   let day = startDay;
-
   while (day <= endDay) {
     for (let i = 0; i < 7; i++) {
       const itemKey = day.clone().format('YY MM DD');
+      const salesData = calendarData?.filter(target => target.date === itemKey);
 
-      days.push(<CellItem key={itemKey} day={day} />);
+      days.push(<CellItem key={itemKey} day={day} salesData={salesData[0]} />);
       day = day.clone().add(1, 'day');
     }
     row.push(
