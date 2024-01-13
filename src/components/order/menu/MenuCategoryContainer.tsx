@@ -17,7 +17,8 @@ const MenuCategoryContainer = ({ menuData, selectedCategory, setSelectedCategory
     <div className={styles.container}>
       <Swiper
         modules={[Virtual]}
-        spaceBetween={20}
+        spaceBetween={0}
+        height={200}
         slidesPerView={3.5}
         centeredSlides={true}
         centeredSlidesBounds={true}

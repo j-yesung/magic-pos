@@ -1,14 +1,12 @@
 import React from 'react';
-import OrderTypeButton from '@/components/order/order-type/OrderTypeButton';
+import OrderTypeCard from '@/components/order/order-type/OrderTypeCard';
 import styles from './styles/ButtonContainer.module.css';
 
 const ButtonContainer = () => {
   return (
     <div className={styles.container}>
-      <div>
-        <OrderTypeButton order={{ type: 'togo' }} />
-        <OrderTypeButton order={{ type: 'store' }} />
-      </div>
+      <OrderTypeCard order={{ type: 'togo' }} />
+      <OrderTypeCard order={{ type: 'store' }} />
     </div>
   );
 };
