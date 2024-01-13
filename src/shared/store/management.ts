@@ -17,11 +17,14 @@ interface ManagementState {
     x: string;
     y: number;
   }[];
+  calendarData: { sales: number; date: Moment; min?: boolean; max?: boolean }[];
+
   setIsShow: (param?: boolean) => void;
   setData: (sales: { x: string; y: number }[]) => void;
   setCurrentDate: (day: Moment) => void;
   setSelectedDate: (day: Moment) => void;
   setRecord: (sales: { currentSales: number; dateType: string }) => void;
+  setCalendarData: <T extends { sales: number; date: Moment; min?: boolean; max?: boolean }[]>(param: T) => void;
 }
 
 const useManagementState = create<ManagementState>()(set => ({
@@ -38,6 +41,7 @@ const useManagementState = create<ManagementState>()(set => ({
     // utcStandardDate는 supabase의 Sales에서 데이터를 가져올 때 사용합니다.
     utcStandardDate: moment().hour(0).subtract(9, 'hour'),
   },
+  calendarData: [],
 
   /**
    */
@@ -73,6 +77,14 @@ const useManagementState = create<ManagementState>()(set => ({
       date: {
         ...state.date,
         selectedDate: prop,
+      },
+    })),
+  setCalendarData: prop =>
+    set(state => ({
+      ...state,
+      calendarData: {
+        ...state.calendarData,
+        calendarData: prop,
       },
     })),
 }));
