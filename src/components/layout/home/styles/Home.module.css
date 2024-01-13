@@ -132,8 +132,9 @@
   margin: 0.7rem;
   position: relative;
   width: 2100px;
-  height: 200px;
+  height: 20rem;
   overflow: hidden;
+  border-radius: 3rem;
   filter: drop-shadow(rgba(50, 83, 198, 0.34) 0px 18px 40px);
 }
 
@@ -150,7 +151,7 @@
 
 .card-wrapper li {
   padding: 2rem;
-  width: 620px;
+  width: 40rem;
   height: 100%;
   display: flex;
   align-items: flex-start;
@@ -202,5 +203,30 @@
   }
   100% {
     transform: translateX(50%);
+  }
+}
+
+.fade-wrapper {
+  margin: 10rem;
+  display: flex;
+  height: 50vh;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.fade-wrapper h1 {
+  font-size: 10rem;
+  opacity: 1;
+}
+
+.fade-in {
+  animation: fade-in 2s ease-in-out;
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
