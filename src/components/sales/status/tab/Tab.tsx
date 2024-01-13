@@ -1,6 +1,6 @@
 import { useCalendar } from '@/hooks/sales/useCalendar';
 import useSalesStore from '@/shared/store/sales';
-import Calendar from './calendar/Calendar';
+import Calendar from '../../calendar/Calendar';
 import styles from './styles/tab.module.css';
 
 const Tab = () => {

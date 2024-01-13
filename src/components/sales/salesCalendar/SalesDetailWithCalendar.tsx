@@ -1,6 +1,6 @@
-import Cell from '../status/tab/calendar/cell/Cell';
-import Days from '../status/tab/calendar/days/Days';
-import Header from '../status/tab/calendar/header/Header';
+import Cell from '../calendar/cell/Cell';
+import Days from '../calendar/days/Days';
+import Header from '../calendar/header/Header';
 
 const SalesDeatilWithCalendar = () => {
   return (

@@ -1,4 +1,4 @@
-import { CalendarDataType } from '@/components/sales/status/tab/calendar/cell/Cell';
+import { CalendarDataType } from '@/components/sales/calendar/cell/Cell';
 import { DateFormatType } from '@/server/api/supabase/sales';
 import { Tables } from '@/types/supabase';
 import moment, { Moment } from 'moment';
