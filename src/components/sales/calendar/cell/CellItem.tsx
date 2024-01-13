@@ -92,6 +92,8 @@ const CellItem = ({
       >
         {day.isSame(today, 'D') ? 'today' : formatDate}
       </span>
+
+      {/* sales/calendar에서 보여줄 날짜별 매출과 최저 최고 매출 CSS class입니다. */}
       <span
         className={salesVariant({
           sales: salesData && getMinMaxSalesType?.(salesData),
