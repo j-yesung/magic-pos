@@ -1,10 +1,13 @@
-import Link from 'next/link';
-import styles from '../styles/Footer.module.css';
+import { useRouter } from 'next/router';
+import styles from '../styles/Home.module.css';
+import Logo from '/public/logo.svg';
 
 const Footer = () => {
+  const router = useRouter();
+
   return (
-    <footer className={styles.wrapper}>
-      <Link href="/">Magic Pos</Link>
+    <footer className={styles.footerWrapper}>
+      <Logo className={styles.logo} width={200} height={30} onClick={() => router.push('/')} />
       <div className={styles.info}>
         <p>사업자등록번호: 123-45-678910 서울시 강남구 역삼동 대표: OOO</p>
         <p>E-MAIL: hisung-ah@kakao.com</p>

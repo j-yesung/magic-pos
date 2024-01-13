@@ -1,14 +1,16 @@
 import { useAuth } from '@/hooks/auth/useAuth';
 import useAuthStore from '@/shared/store/auth';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styles from '../styles/StickBar.module.css';
+import Logo from '/public/logo.svg';
 
 const StickBar = () => {
+  const router = useRouter();
   const { logout } = useAuth();
-  const { session } = useAuthStore(session => session);
+  const { auth } = useAuthStore();
   const [isLoaded, setIsLoaded] = useState(false);
-  const actualSession = session?.session;
 
   useEffect(() => {
     setIsLoaded(true);
@@ -18,12 +20,10 @@ const StickBar = () => {
     <>
       {isLoaded && (
         <div className={styles.wrapper}>
-          <Link className={styles.logo} href="/">
-            Magic pos
-          </Link>
+          <Logo className={styles.logo} width={200} height={20} onClick={() => router.push('/')} />
 
           <div className={styles.tabArea}>
-            {actualSession === undefined ? (
+            {auth === null ? (
               <>
                 <Link href="/auth/signup">회원가입</Link>
                 <Link href="/auth/login">로그인</Link>

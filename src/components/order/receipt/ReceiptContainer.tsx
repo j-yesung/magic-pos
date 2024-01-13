@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import styles from './styles/ReceiptContainer.module.css';
 import ReceiptHeader from '@/components/order/receipt/ReceiptHeader';
 import ReceiptRow from '@/components/order/receipt/ReceiptRow';
-import ReceiptFooter from '@/components/order/receipt/ReceiptFooter';
 import { useStoreOrderQuery } from '@/hooks/order/useStoreOrderQuery';
 import { useNumberOrderQuery } from '@/hooks/order/useNumberOrderQuery';
 import useOrderStore from '@/shared/store/order';
 import { OrderDataWithStoreName, Tables } from '@/types/supabase';
 import { groupByKey } from '@/shared/helper';
+import TotalPrice from '@/components/order/common/TotalPrice';
 
 const ReceiptContainer = () => {
   const { orderId } = useOrderStore();
@@ -15,8 +15,9 @@ const ReceiptContainer = () => {
   const { numberOrderData } = useNumberOrderQuery(orderId ?? '');
   const [orderData, setOrderData] = useState<OrderDataWithStoreName>(null);
   const [groupData, setGroupData] = useState<Map<string, Tables<'menu_item'>[]>>(new Map());
-  const [orderType, setOrderType] = useState<OrderType>({ type: 'togo' });
+  const [orderType, setOrderType] = useState<OrderType>({ type: 'store' });
 
+  // 주문 데이터가 있다면 그룹화 합니다.
   useEffect(() => {
     if (orderData) {
       const group = groupByKey<Tables<'menu_item'>>(orderData?.menu_list as Tables<'menu_item'>[], 'id');
@@ -24,18 +25,22 @@ const ReceiptContainer = () => {
     }
   }, [orderData]);
 
+  // order_store 테이블과 order_togo 테이블에서 주문 내역 데이터를 가져온다.
   useEffect(() => {
+    // 매장 주문
     if (storeOrderData?.data) {
-      console.log(storeOrderData);
       setOrderData(storeOrderData.data);
-      setOrderType({ type: 'store' });
     }
+
+    // 번호표 주문 (포장, 홀)
     if (numberOrderData?.data) {
-      // numberOrderData.data.
       setOrderData(numberOrderData.data);
-      if (!numberOrderData.data.is_togo) setOrderType({ type: 'store' });
+
+      // 포장 주문일 경우
+      if (numberOrderData.data.is_togo) setOrderType({ type: 'togo' });
     }
-  }, [storeOrderData, numberOrderData]);
+  }, [storeOrderData]);
+
   return (
     <div className={styles.container}>
       {orderData && groupData && (
@@ -50,7 +55,7 @@ const ReceiptContainer = () => {
               <ReceiptRow key={key} itemList={value} />
             ))}
           </div>
-          <ReceiptFooter allItemList={orderData?.menu_list as Tables<'menu_item'>[]} />
+          <TotalPrice allItemList={orderData?.menu_list as Tables<'menu_item'>[]} />
         </>
       )}
     </div>

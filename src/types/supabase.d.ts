@@ -96,6 +96,7 @@ export interface Database {
           id: string;
           image_url: string | null;
           name: string | null;
+          position: number;
           price: number;
           recommended: boolean;
           remain_ea: number | null;
@@ -105,7 +106,9 @@ export interface Database {
           id?: string;
           image_url?: string | null;
           name?: string | null;
-          price?: number | null;
+          position?: number;
+          price?: number;
+          recommended?: boolean;
           remain_ea?: number | null;
         };
         Update: {
@@ -113,7 +116,9 @@ export interface Database {
           id?: string;
           image_url?: string | null;
           name?: string | null;
-          price?: number | null;
+          position?: number;
+          price?: number;
+          recommended?: boolean;
           remain_ea?: number | null;
         };
         Relationships: [
@@ -259,104 +264,6 @@ export interface Database {
           },
         ];
       };
-      order_store: {
-        Row: {
-          id: string;
-          is_done: boolean;
-          menu_list: Json[];
-          order_id: string;
-          order_number: number;
-          order_time: string;
-          payment_method: string;
-          store_id: string;
-          table_id: string;
-          total_price: number;
-        };
-        Insert: {
-          id?: string;
-          is_done?: boolean;
-          menu_list: Json[];
-          order_id?: string;
-          order_number?: number;
-          order_time?: string;
-          payment_method?: string;
-          store_id: string;
-          table_id: string;
-          total_price?: number;
-        };
-        Update: {
-          id?: string;
-          is_done?: boolean;
-          menu_list?: Json[];
-          order_id?: string;
-          order_number?: number;
-          order_time?: string;
-          payment_method?: string;
-          store_id?: string;
-          table_id?: string;
-          total_price?: number;
-        };
-        Relationships: [
-          {
-            foreignKeyName: 'order_store_store_id_fkey';
-            columns: ['store_id'];
-            isOneToOne: false;
-            referencedRelation: 'store';
-            referencedColumns: ['id'];
-          },
-          {
-            foreignKeyName: 'order_store_table_id_fkey';
-            columns: ['table_id'];
-            isOneToOne: false;
-            referencedRelation: 'store_table';
-            referencedColumns: ['id'];
-          },
-        ];
-      };
-      order_togo: {
-        Row: {
-          id: string;
-          is_done: boolean;
-          menu_list: Json[];
-          order_id: string;
-          order_number: number;
-          order_time: string;
-          payment_method: string;
-          store_id: string;
-          total_price: number;
-        };
-        Insert: {
-          id?: string;
-          is_done?: boolean;
-          menu_list: Json[];
-          order_id?: string;
-          order_number?: number;
-          order_time?: string;
-          payment_method?: string;
-          store_id: string;
-          total_price?: number;
-        };
-        Update: {
-          id?: string;
-          is_done?: boolean;
-          menu_list?: Json[];
-          order_id?: string;
-          order_number?: number;
-          order_time?: string;
-          payment_method?: string;
-          store_id?: string;
-          total_price?: number;
-        };
-        Relationships: [
-          {
-            foreignKeyName: 'order_togo_store_id_fkey';
-            columns: ['store_id'];
-            isOneToOne: false;
-            referencedRelation: 'store';
-            referencedColumns: ['id'];
-          },
-        ];
-      };
       payment_method: {
         Row: {
           id: number;
@@ -446,7 +353,6 @@ export interface Database {
           business_number: string | null;
           end_time: string | null;
           id: string;
-          order_number: number;
           order_number: number;
           start_time: string | null;
           use_table: boolean;
