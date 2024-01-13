@@ -26,7 +26,6 @@ const ReceiptContainer = () => {
 
   useEffect(() => {
     if (storeOrderData?.data) {
-      console.log(storeOrderData);
       setOrderData(storeOrderData.data);
       setOrderType({ type: 'store' });
     }
