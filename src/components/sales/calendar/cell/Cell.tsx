@@ -1,5 +1,6 @@
+import { useCalendar } from '@/hooks/sales/useCalendar';
 import { getMonthSales } from '@/server/api/supabase/sales';
-import { groupByKey } from '@/shared/helper';
+import { getMinMaxSalesType, groupByKey } from '@/shared/helper';
 import useSalesStore from '@/shared/store/sales';
 import { Tables } from '@/types/supabase';
 import moment from 'moment';
@@ -23,10 +24,14 @@ const Cell = () => {
     setCalendarData,
     calendarData,
   } = useSalesStore();
+  const { clickShowDataOfDateHandler } = useCalendar();
+
+  const CALENDAL_KEY = '/admin/sales/calendar';
+  const path = useRouter().pathname;
 
   const startDay = currentDate.clone().startOf('month').startOf('week'); // monthStart가 속한 주의 시작 주
   const endDay = currentDate.clone().endOf('month').endOf('week'); // monthStart가 속한 마지막 주
-  const path = useRouter().pathname;
+
   const formatToCalendarData: FormatCalendarReturnType = data => {
     const refinedData = [...data.entries()].map(([key, value]) => {
       const data = {
@@ -50,7 +55,6 @@ const Cell = () => {
     return sortedData;
   };
 
-  const CALENDAL_KEY = '/admin/sales/calendar';
   useEffect(() => {
     if (path === CALENDAL_KEY)
       getMonthSales(currentDate.clone()).then(result => {
@@ -76,6 +80,11 @@ const Cell = () => {
     };
   }, [currentDate]);
 
+  const option = {
+    '/admin/sales/status': clickShowDataOfDateHandler,
+    '/admin/sales/calendar': getMinMaxSalesType,
+  };
+
   const row = [];
   let days = [];
   let day = startDay;
@@ -84,7 +93,15 @@ const Cell = () => {
       const itemKey = day.clone().format('YY MM DD');
       const salesData = calendarData?.filter(target => target.date === itemKey);
 
-      days.push(<CellItem key={itemKey} day={day} salesData={salesData[0]} />);
+      days.push(
+        <CellItem
+          key={itemKey}
+          day={day}
+          salesData={salesData[0]}
+          getMinMaxSalesType={option[path as '/admin/sales/calendar']}
+          clickShowDataOfDateHandler={option[path as '/admin/sales/status']}
+        />,
+      );
       day = day.clone().add(1, 'day');
     }
     row.push(
