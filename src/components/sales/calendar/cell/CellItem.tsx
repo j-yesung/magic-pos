@@ -73,57 +73,6 @@ const CellItem = ({
   const POINT = 'SELECTEDTYPE';
   const formatDate = day.clone().format('YY MM D').substring(6);
 
-  // if (path === '/admin/sales/calendar') {
-  //   return (
-  //     <div
-  //       className={dateVariant({
-  //         calendarType: getCalendarType(day, currentDate),
-  //         monthType: getMonthType(day, currentDate),
-  //         dateType: getDateType(day),
-  //         selectedDateType: day.isSame(selectedDate, 'day') ? POINT : undefined,
-  //       })}
-
-  //     >
-  //       <span
-  //         className={dayVariant({
-  //           dayType: getDayType(day.clone()),
-  //         })}
-  //       >
-  //         {day.isSame(today, 'D') ? 'today' : formatDate}
-  //       </span>
-  //       <span
-  //         className={salesVariant({
-  //           sales: salesData && getMinMaxSalesType?.(salesData),
-  //         })}
-  //       >
-  //         {salesData?.sales && convertNumberToWon(salesData.sales)}
-  //       </span>
-  //     </div>
-  //   );
-  // } else {
-  //   return (
-  //     <div
-  //       className={dateVariant({
-  //         calendarType: getCalendarType(day, currentDate),
-  //         monthType: getMonthType(day, currentDate),
-  //         dateType: getDateType(day),
-  //         selectedDateType: day.isSame(selectedDate, 'day') ? POINT : undefined,
-  //       })}
-  //       onClick={
-  //         day.isSame(today, 'D') || day.isBefore(today, 'D') ? clickShowDataOfDateHandler?.(day.clone()) : undefined
-  //       }
-  //     >
-  //       <span
-  //         className={dayVariant({
-  //           dayType: getDayType(day.clone()),
-  //         })}
-  //       >
-  //         {day.isSame(today, 'D') ? 'today' : formatDate}
-  //       </span>
-  //     </div>
-  //   );
-  // }
-
   return (
     <div
       className={dateVariant({
