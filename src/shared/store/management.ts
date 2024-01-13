@@ -8,6 +8,7 @@ interface ManagementState {
     dateType: string;
   };
   date: {
+    today: Moment;
     currentDate: Moment;
     utcStandardDate: Moment;
     selectedDate: Moment;
@@ -31,6 +32,7 @@ const useManagementState = create<ManagementState>()(set => ({
     dateType: '',
   },
   date: {
+    today: moment(),
     currentDate: moment(),
     selectedDate: moment().clone(),
     // utcStandardDate는 supabase의 Sales에서 데이터를 가져올 때 사용합니다.
