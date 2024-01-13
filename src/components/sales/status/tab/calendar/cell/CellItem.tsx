@@ -1,34 +1,16 @@
-import { getTodaySales } from '@/server/api/supabase/sales';
-import { formatData, getCalendarType, getDateType, getDayType, getMonthType } from '@/shared/helper';
+import { useCalendar } from '@/hooks/sales/useCalendar';
+import { getCalendarType, getDateType, getDayType, getMonthType } from '@/shared/helper';
 import useManagementState from '@/shared/store/management';
 import { cva } from 'class-variance-authority';
-import moment, { Moment } from 'moment';
+import { Moment } from 'moment';
 import styles from '../styles/calendar.module.css';
 const CellItem = ({ day }: { day: Moment }) => {
   const {
     date: { currentDate, selectedDate, today },
-    setCurrentDate,
-    setIsShow,
-    setSelectedDate,
-    setData,
-    setRecord,
   } = useManagementState();
-  const clickShowDateHandler = (day: Moment) => async () => {
-    const { sales, formatType } = await getTodaySales(day.clone().hour(0).subtract(9, 'hour'));
-    if (sales.length !== 0) {
-      const { result, recordData } = formatData(sales, formatType, day.clone());
-      if (result && recordData) {
-        console.log(recordData);
-        setRecord(recordData);
-        setData(result);
-      }
-    } else {
-      setData([]);
-    }
-    setIsShow(false);
-    setCurrentDate(day.clone());
-    setSelectedDate(day.clone());
-  };
+
+  const { clickShowDataOfDateHandler } = useCalendar();
+
   const dateVariant = cva([styles['date-base']], {
     variants: {
       monthType: {
@@ -61,8 +43,7 @@ const CellItem = ({ day }: { day: Moment }) => {
       },
     },
   });
-  const test = moment();
-  console.log(test.day());
+
   const POINT = 'SELECTEDTYPE';
   const formatDate = day.clone().format('YY MM D');
   return (
@@ -73,7 +54,7 @@ const CellItem = ({ day }: { day: Moment }) => {
         dateType: getDateType(day),
         selectedDateType: day.isSame(selectedDate, 'day') ? POINT : undefined,
       })}
-      onClick={day.isSame(today, 'D') || day.isBefore(today, 'D') ? clickShowDateHandler(day.clone()) : undefined}
+      onClick={day.isSame(today, 'D') || day.isBefore(today, 'D') ? clickShowDataOfDateHandler(day.clone()) : undefined}
     >
       <span
         className={dayVariant({
