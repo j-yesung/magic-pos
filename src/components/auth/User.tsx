@@ -5,11 +5,11 @@ import AuthForm from './AuthForm';
 type AuthObjectType = Record<string, string>;
 
 const User = () => {
-  const { session } = useAuthStore();
+  const { auth } = useAuthStore();
   const path = useRouter().pathname;
   const router = useRouter();
 
-  if (session?.session) router.push('/');
+  if (auth) router.push('/');
 
   const LOGIN_DATA = {
     url: '/auth/signup',

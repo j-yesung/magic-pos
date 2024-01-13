@@ -4,10 +4,10 @@ import styles from '../styles/Home.module.css';
 
 const StartButton = () => {
   const router = useRouter();
-  const { session } = useAuthStore();
+  const { auth } = useAuthStore();
 
   const clickStartHandler = () => {
-    session ? router.push('/admin/management') : router.push('/auth/login/');
+    auth ? router.push('/admin/management') : router.push('/auth/login/');
   };
 
   return (
