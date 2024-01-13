@@ -221,6 +221,8 @@ export function getDayType(Day: Moment) {
   return Day.day() === 0 ? DAY['SUNDAY'] : DAY['DAY']!;
 }
 
+export type GetMinMaxSalesReturnType = 'MAX' | 'MIN' | undefined;
+
 export function getMinMaxSalesType(salesData: CalendarDataType) {
   if (salesData?.min) return SALES['MIN'];
   if (salesData?.max) return SALES['MAX'];

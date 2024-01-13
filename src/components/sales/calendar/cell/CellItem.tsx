@@ -1,24 +1,31 @@
-import { useCalendar } from '@/hooks/sales/useCalendar';
 import {
+  GetMinMaxSalesReturnType,
   convertNumberToWon,
   getCalendarType,
   getDateType,
   getDayType,
-  getMinMaxSalesType,
   getMonthType,
 } from '@/shared/helper';
 import useSalesStore from '@/shared/store/sales';
 import { cva } from 'class-variance-authority';
 import { Moment } from 'moment';
-import { useRouter } from 'next/router';
 import styles from '../styles/calendar.module.css';
 import { CalendarDataType } from './Cell';
 
-const CellItem = ({ day, salesData }: { day: Moment; salesData?: CalendarDataType }) => {
+const CellItem = ({
+  day,
+  salesData,
+  getMinMaxSalesType,
+  clickShowDataOfDateHandler,
+}: {
+  day: Moment;
+  salesData?: CalendarDataType;
+  getMinMaxSalesType?: (param: CalendarDataType) => GetMinMaxSalesReturnType;
+  clickShowDataOfDateHandler?: (param: Moment) => () => Promise<void>;
+}) => {
   const {
     date: { currentDate, selectedDate, today },
   } = useSalesStore();
-  const { clickShowDataOfDateHandler } = useCalendar();
 
   const dateVariant = cva([styles['date-base']], {
     variants: {
@@ -61,61 +68,90 @@ const CellItem = ({ day, salesData }: { day: Moment; salesData?: CalendarDataTyp
       },
     },
   });
+  // path '/admin/sales/calendar' , '/admin/sales/status'
 
   const POINT = 'SELECTEDTYPE';
   const formatDate = day.clone().format('YY MM D').substring(6);
 
-  const path = useRouter().pathname;
+  // if (path === '/admin/sales/calendar') {
+  //   return (
+  //     <div
+  //       className={dateVariant({
+  //         calendarType: getCalendarType(day, currentDate),
+  //         monthType: getMonthType(day, currentDate),
+  //         dateType: getDateType(day),
+  //         selectedDateType: day.isSame(selectedDate, 'day') ? POINT : undefined,
+  //       })}
 
-  if (path === '/admin/sales/calendar') {
-    return (
-      <div
-        className={dateVariant({
-          calendarType: getCalendarType(day, currentDate),
-          monthType: getMonthType(day, currentDate),
-          dateType: getDateType(day),
-          selectedDateType: day.isSame(selectedDate, 'day') ? POINT : undefined,
+  //     >
+  //       <span
+  //         className={dayVariant({
+  //           dayType: getDayType(day.clone()),
+  //         })}
+  //       >
+  //         {day.isSame(today, 'D') ? 'today' : formatDate}
+  //       </span>
+  //       <span
+  //         className={salesVariant({
+  //           sales: salesData && getMinMaxSalesType?.(salesData),
+  //         })}
+  //       >
+  //         {salesData?.sales && convertNumberToWon(salesData.sales)}
+  //       </span>
+  //     </div>
+  //   );
+  // } else {
+  //   return (
+  //     <div
+  //       className={dateVariant({
+  //         calendarType: getCalendarType(day, currentDate),
+  //         monthType: getMonthType(day, currentDate),
+  //         dateType: getDateType(day),
+  //         selectedDateType: day.isSame(selectedDate, 'day') ? POINT : undefined,
+  //       })}
+  //       onClick={
+  //         day.isSame(today, 'D') || day.isBefore(today, 'D') ? clickShowDataOfDateHandler?.(day.clone()) : undefined
+  //       }
+  //     >
+  //       <span
+  //         className={dayVariant({
+  //           dayType: getDayType(day.clone()),
+  //         })}
+  //       >
+  //         {day.isSame(today, 'D') ? 'today' : formatDate}
+  //       </span>
+  //     </div>
+  //   );
+  // }
+
+  return (
+    <div
+      className={dateVariant({
+        calendarType: getCalendarType(day, currentDate),
+        monthType: getMonthType(day, currentDate),
+        dateType: getDateType(day),
+        selectedDateType: day.isSame(selectedDate, 'day') ? POINT : undefined,
+      })}
+      onClick={
+        day.isSame(today, 'D') || day.isBefore(today, 'D') ? clickShowDataOfDateHandler?.(day.clone()) : undefined
+      }
+    >
+      <span
+        className={dayVariant({
+          dayType: getDayType(day.clone()),
         })}
       >
-        <span
-          className={dayVariant({
-            dayType: getDayType(day.clone()),
-          })}
-        >
-          {day.isSame(today, 'D') ? 'today' : formatDate}
-        </span>
-        <span
-          className={salesVariant({
-            sales: getMinMaxSalesType(salesData!),
-          })}
-        >
-          {salesData?.sales && convertNumberToWon(salesData.sales)}
-        </span>
-      </div>
-    );
-  } else {
-    return (
-      <div
-        className={dateVariant({
-          calendarType: getCalendarType(day, currentDate),
-          monthType: getMonthType(day, currentDate),
-          dateType: getDateType(day),
-          selectedDateType: day.isSame(selectedDate, 'day') ? POINT : undefined,
+        {day.isSame(today, 'D') ? 'today' : formatDate}
+      </span>
+      <span
+        className={salesVariant({
+          sales: salesData && getMinMaxSalesType?.(salesData),
         })}
-        onClick={
-          day.isSame(today, 'D') || day.isBefore(today, 'D') ? clickShowDataOfDateHandler(day.clone()) : undefined
-        }
       >
-        <span
-          className={dayVariant({
-            dayType: getDayType(day.clone()),
-          })}
-        >
-          {day.isSame(today, 'D') ? 'today' : formatDate}
-        </span>
-      </div>
-    );
-  }
+        {salesData?.sales && convertNumberToWon(salesData.sales)}
+      </span>
+    </div>
+  );
 };
 
 export default CellItem;

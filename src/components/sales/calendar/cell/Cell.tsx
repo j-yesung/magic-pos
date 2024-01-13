@@ -1,5 +1,6 @@
+import { useCalendar } from '@/hooks/sales/useCalendar';
 import { getMonthSales } from '@/server/api/supabase/sales';
-import { groupByKey } from '@/shared/helper';
+import { getMinMaxSalesType, groupByKey } from '@/shared/helper';
 import useSalesStore from '@/shared/store/sales';
 import { Tables } from '@/types/supabase';
 import moment from 'moment';
@@ -23,7 +24,8 @@ const Cell = () => {
     setCalendarData,
     calendarData,
   } = useSalesStore();
-  const path = useRouter().pathname;
+  const { clickShowDataOfDateHandler } = useCalendar();
+
   const startDay = currentDate.clone().startOf('month').startOf('week'); // monthStart가 속한 주의 시작 주
   const endDay = currentDate.clone().endOf('month').endOf('week'); // monthStart가 속한 마지막 주
 
@@ -73,6 +75,12 @@ const Cell = () => {
       }
     };
   }, [currentDate]);
+  const path = useRouter().pathname;
+
+  const option = {
+    '/admin/sales/status': clickShowDataOfDateHandler,
+    '/admin/sales/calendar': getMinMaxSalesType,
+  };
 
   const row = [];
   let days = [];
@@ -82,7 +90,15 @@ const Cell = () => {
       const itemKey = day.clone().format('YY MM DD');
       const salesData = calendarData?.filter(target => target.date === itemKey);
 
-      days.push(<CellItem key={itemKey} day={day} salesData={salesData[0]} />);
+      days.push(
+        <CellItem
+          key={itemKey}
+          day={day}
+          salesData={salesData[0]}
+          getMinMaxSalesType={option[path as '/admin/sales/calendar']}
+          clickShowDataOfDateHandler={option[path as '/admin/sales/status']}
+        />,
+      );
       day = day.clone().add(1, 'day');
     }
     row.push(
