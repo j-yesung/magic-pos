@@ -1,4 +1,4 @@
-import { FetchManagement } from '@/server/api/supabase/management';
+import { fetchManagement } from '@/server/api/supabase/management';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 
@@ -9,7 +9,7 @@ const enum QUERY_KEY {
 const useFetchManagement = (id: string) => {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: [QUERY_KEY.TABLE],
-    queryFn: () => FetchManagement(id),
+    queryFn: () => fetchManagement(id),
     enabled: !!id,
   });
 

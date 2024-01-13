@@ -11,10 +11,10 @@ const Table = () => {
   const { id } = typeof window !== 'undefined' && user;
   const { data } = useFetchTable(id);
   const dummySideBarRef = useRef<HTMLDivElement>(null)
-  const { setDummyideBarRef } = useTableStore();
+  const { setDummySideBarRef } = useTableStore();
 
   useEffect(() => { 
-    setDummyideBarRef(dummySideBarRef)
+    setDummySideBarRef(dummySideBarRef)
   },[])
   return (
     <div className={styles['table-wrapper']}>

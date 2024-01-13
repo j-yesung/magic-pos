@@ -5,7 +5,7 @@ import SideBarContainer from "./SideBarContainer";
 import styles from "./styles/TableSideBar.module.css";
 
 const TableSideBar = () => {
-  const { tableNumber, refSideBar, refDummySideBar, refSideBarBg, setsideBarRef, setideBarBgRef } = useTableStore();
+  const { tableNumber, refSideBar, refDummySideBar, refSideBarBg, setSideBarRef, setSideBarBgRef } = useTableStore();
   const sideBarRef = useRef<HTMLDivElement>(null)
   const sideBarBgRef = useRef<HTMLDivElement>(null)
 
@@ -17,8 +17,8 @@ const TableSideBar = () => {
   }
 
   useEffect(() => {
-    setsideBarRef(sideBarRef)
-    setideBarBgRef(sideBarBgRef)
+    setSideBarRef(sideBarRef)
+    setSideBarBgRef(sideBarBgRef)
   },[])
 
   return (

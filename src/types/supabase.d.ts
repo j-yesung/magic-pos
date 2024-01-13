@@ -516,6 +516,12 @@ interface StoreWithStoreTable extends Tables<'store'> {
   store_table: Tables<'store_table'>[];
 }
 
+interface StoreWithOrderInfo extends Tables<'store'> {
+  store_table: Tables<'store_table'>[];
+  order_store: Tables<'order_store'>[];
+  order_number: Tables<'order_number'>[];
+}
+
 interface CategoryWithMenuItem extends Tables<'menu_category'> {
   menu_item: Tables<'menu_item'>[];
 }
