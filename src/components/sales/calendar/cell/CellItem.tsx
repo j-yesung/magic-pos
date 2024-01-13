@@ -1,32 +1,24 @@
+import { useCalendar } from '@/hooks/sales/useCalendar';
 import {
-  GetMinMaxSalesReturnType,
   convertNumberToWon,
   getCalendarType,
   getDateType,
   getDayType,
+  getMinMaxSalesType,
   getMonthType,
 } from '@/shared/helper';
 import useSalesStore from '@/shared/store/sales';
 import { cva } from 'class-variance-authority';
 import { Moment } from 'moment';
+import { useRouter } from 'next/router';
 import styles from '../styles/calendar.module.css';
 import { CalendarDataType } from './Cell';
 
-const CellItem = ({
-  day,
-  salesData,
-  getMinMaxSalesType,
-  clickShowDataOfDateHandler,
-}: {
-  day: Moment;
-  salesData?: CalendarDataType;
-  getMinMaxSalesType?: (param: CalendarDataType) => GetMinMaxSalesReturnType;
-  clickShowDataOfDateHandler?: (param: Moment) => () => Promise<void>;
-}) => {
+const CellItem = ({ day, salesData }: { day: Moment; salesData?: CalendarDataType }) => {
   const {
     date: { currentDate, selectedDate, today },
   } = useSalesStore();
-
+  const { clickShowDataOfDateHandler } = useCalendar();
   const dateVariant = cva([styles['date-base']], {
     variants: {
       monthType: {
@@ -72,7 +64,9 @@ const CellItem = ({
 
   const POINT = 'SELECTEDTYPE';
   const formatDate = day.clone().format('YY MM D').substring(6);
+  const STATUS_KEY = '/admin/sales/status';
 
+  const path = useRouter().pathname;
   return (
     <div
       className={dateVariant({
@@ -82,7 +76,11 @@ const CellItem = ({
         selectedDateType: day.isSame(selectedDate, 'day') ? POINT : undefined,
       })}
       onClick={
-        day.isSame(today, 'D') || day.isBefore(today, 'D') ? clickShowDataOfDateHandler?.(day.clone()) : undefined
+        path === STATUS_KEY
+          ? day.isSame(today, 'D') || day.isBefore(today, 'D')
+            ? clickShowDataOfDateHandler?.(day.clone())
+            : undefined
+          : undefined
       }
     >
       <span
