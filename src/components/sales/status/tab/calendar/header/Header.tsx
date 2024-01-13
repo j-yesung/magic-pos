@@ -1,16 +1,11 @@
+import { useCalendar } from '@/hooks/sales/useCalendar';
 import useSalesStore from '@/shared/store/sales';
 import styles from './styles/header.module.css';
 const Header = () => {
   const {
     date: { currentDate },
-    setCurrentDate,
   } = useSalesStore();
-  const clickPreMonthHandler = () => {
-    setCurrentDate(currentDate.clone().subtract(1, 'month'));
-  };
-  const clickNextMonthHandler = () => {
-    setCurrentDate(currentDate.clone().add(1, 'month'));
-  };
+  const { clickPreMonthHandler, clickNextMonthHandler } = useCalendar();
 
   return (
     <div className={styles['header']}>

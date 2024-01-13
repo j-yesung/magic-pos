@@ -9,6 +9,7 @@ interface SalesStore {
   };
   date: {
     today: Moment;
+    yesterday: Moment;
     currentDate: Moment;
     utcStandardDate: Moment;
     selectedDate: Moment;
@@ -36,6 +37,7 @@ const useSalesStore = create<SalesStore>()(set => ({
   },
   date: {
     today: moment(),
+    yesterday: moment().subtract(1, 'day'),
     currentDate: moment(),
     selectedDate: moment().clone(),
     // utcStandardDate는 supabase의 Sales에서 데이터를 가져올 때 사용합니다.
