@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './styles/Footer.module.css';
-import StepButtonContainer from '@/components/layout/order/footer/StepButtonContainer';
 import { SwiperRef } from 'swiper/react';
+import StepButton from '@/components/layout/order/footer/StepButton';
 
 interface FooterProps {
   sliderRef: React.RefObject<SwiperRef>;
@@ -15,7 +15,8 @@ const Footer = ({ sliderRef }: FooterProps) => {
   }, []);
 
   return (
-    <footer className={styles.container}>{!isPageLoading && <StepButtonContainer sliderRef={sliderRef} />}</footer>
+    // <footer className={styles.container}>{!isPageLoading && <StepButtonContainer sliderRef={sliderRef} />}</footer>
+    <footer className={styles.container}>{!isPageLoading && <StepButton sliderRef={sliderRef} />}</footer>
   );
 };
 

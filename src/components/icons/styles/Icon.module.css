@@ -1,0 +1,16 @@
+.black-color {
+  color: #000000;
+}
+
+.cart-icon {
+    position: absolute;
+    top: 35%;
+
+    color: #666;
+    text-align: center;
+    font-family: Pretendard, sans-serif;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 10px; /* 100% */
+}

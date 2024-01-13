@@ -5,7 +5,7 @@ import Footer from '@/components/layout/order/footer/Footer';
 
 import { SwiperRef } from 'swiper/react';
 import useOrderStore from '@/shared/store/order';
-import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButtonContainer';
+import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButton';
 
 /**
  * 일반인 KIOSK 레이아웃

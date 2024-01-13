@@ -48,9 +48,9 @@ const MenuContainer = () => {
           <MenuCard key={menu.id} menu={menu} />
         ))}
       </section>
-      <div className={styles.messageBox}>
-        <MessageBox />
-      </div>
+      {/*<div className={styles.messageBox}>*/}
+      {/*  <MessageBox />*/}
+      {/*</div>*/}
     </div>
   );
 };
