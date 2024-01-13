@@ -6,7 +6,9 @@ import Footer from '@/components/layout/order/footer/Footer';
 import { SwiperRef } from 'swiper/react';
 import useOrderStore from '@/shared/store/order';
 import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButton';
+import { useRouter } from 'next/router';
 
+const DONT_RENDER_FOOTER_PATH_LIST = ['success', 'receipt', 'fail'];
 /**
  * 일반인 KIOSK 레이아웃
  * @constructor
@@ -15,6 +17,8 @@ const OrderLayout = ({ children }: { children: React.ReactNode }) => {
   // slide에 사용될 컴포넌트를 담습니다.
   const { setSwiperRef, step, goPrevStep } = useOrderStore();
   const sliderRef = useRef<SwiperRef>(null);
+  const { asPath, pathname } = useRouter();
+  console.log(asPath);
 
   const clickPrevButtonHandler = () => {
     sliderRef!.current?.swiper.slidePrev(SLIDE_MOVE_SPEED);
@@ -39,7 +43,7 @@ const OrderLayout = ({ children }: { children: React.ReactNode }) => {
           )}
           {children}
         </article>
-        <Footer sliderRef={sliderRef} />
+        {!DONT_RENDER_FOOTER_PATH_LIST.includes('success') && <Footer sliderRef={sliderRef} />}
       </section>
     </>
   );

@@ -14,10 +14,7 @@ const Footer = ({ sliderRef }: FooterProps) => {
     setIsPageLoading(false);
   }, []);
 
-  return (
-    // <footer className={styles.container}>{!isPageLoading && <StepButtonContainer sliderRef={sliderRef} />}</footer>
-    <footer className={styles.container}>{!isPageLoading && <StepButton sliderRef={sliderRef} />}</footer>
-  );
+  return <footer className={styles.container}>{!isPageLoading && <StepButton sliderRef={sliderRef} />}</footer>;
 };
 
 export default Footer;

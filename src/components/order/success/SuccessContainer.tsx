@@ -9,6 +9,8 @@ import { useNumberOrderQuery } from '@/hooks/order/useNumberOrderQuery';
 import styles from './styles/SuccessContainer.module.css';
 import Image from 'next/image';
 import image from '@/../public/images/image-success.png';
+import Footer from '@/components/layout/order/footer/Footer';
+import { useRouter } from 'next/router';
 
 const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const { orderList, storeId, tableId, menuData, orderNumber, getTotalPrice, orderType, orderId, setOrderId } =
@@ -18,6 +20,11 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const { addNumberOrder } = useNumberOrderQuery();
   const { incrementOrderNumber } = useStoreQuery();
   const [isPageLoading, setIsPageLoading] = useState(false);
+  const router = useRouter();
+
+  const clickCheckOrderHandler = () => {
+    router.push('/order/receipt');
+  };
 
   useEffect(() => {
     if (payment?.status === 'DONE') {
@@ -94,6 +101,9 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
             <em>
               주문 번호는 <strong>{orderNumber}</strong> 입니다.
             </em>
+          </div>
+          <div className={styles.checkOrder} onClick={clickCheckOrderHandler}>
+            주문 확인하기
           </div>
         </div>
       )}

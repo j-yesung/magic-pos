@@ -1,5 +1,5 @@
 .container {
     display: flex;
     align-items: flex-start;
-    gap: 20px;
+    gap: 2rem  /* 20/10 */;
 }

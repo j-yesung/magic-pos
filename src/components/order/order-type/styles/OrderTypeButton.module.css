@@ -28,8 +28,8 @@
 .wrapper span {
     color: #000;
     font-family: Pretendard, sans-serif;
-    font-size: 12px;
+    font-size: 1.2rem  /* 12/10 */;
     font-style: normal;
     font-weight: 400;
-    line-height: 12px; /* 100% */
+    line-height: 1.2rem  /* 12/10 */; /* 100% */
 }
