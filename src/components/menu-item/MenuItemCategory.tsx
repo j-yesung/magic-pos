@@ -1,7 +1,7 @@
 import useMenuItemStore from '@/shared/store/menu-item';
+// import { Navigation, Pagination, Scrollbar } from 'swiper';
 import clsx from 'clsx';
 import 'swiper/css';
-import 'swiper/css/virtual';
 import { Virtual } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import styles from './styles/menu-item-category.module.css';
@@ -19,31 +19,20 @@ const MenuItemCategoryPage = () => {
     });
     setMenuItemList(item.menu_item);
   };
+
   return (
     <div className={styles['wrap']}>
-      <Swiper
-        modules={[Virtual]}
-        slidesPerView={3.5}
-        centeredSlides={true}
-        centeredSlidesBounds={true}
-        slideToClickedSlide={true}
-        className={styles['swiper']}
-      >
-        {categoryWithMenuItemList.map((item, index) => {
-          return (
-            <SwiperSlide
-              key={item.id}
-              className={
-                item.id === categoryWithMenuItem.id ? clsx(styles['slide'], styles['active']) : styles['slide']
-              }
-              virtualIndex={index}
-            >
-              <button type="button" onClick={() => clickChoiceCategoryHandler(item)}>
-                {item.name}
-              </button>
-            </SwiperSlide>
-          );
-        })}
+      <Swiper modules={[Virtual]} spaceBetween={50} slidesPerView={3.5}>
+        {categoryWithMenuItemList.map((item, index) => (
+          <SwiperSlide
+            key={item.id}
+            virtualIndex={index}
+            className={item.id === categoryWithMenuItem.id ? clsx(styles['slide'], styles['active']) : styles['slide']}
+          >
+            {/* 버튼으로 하면 슬라이드 기능이 에러 발생해서 p태그로 대체 */}
+            <p onClick={() => clickChoiceCategoryHandler(item)}>{item.name}</p>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );
