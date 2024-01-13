@@ -34,6 +34,17 @@ const Cell = () => {
     return refinedData;
   };
 
+  const sortMinMaxData: SortMinMaxDataReturnType = target => {
+    const sortedData = target.toSorted((min, max) => (min.sales < max.sales ? 1 : -1));
+    if (sortedData.length > 1) {
+      sortedData[0].max = true;
+      sortedData[target.length - 1].min = true;
+    }
+    if (sortedData.length === 1) {
+      sortedData[0].max = true;
+    }
+    return sortedData;
+  };
   useEffect(() => {
     if (path === '/admin/sales/calendar')
       getMonthSales(currentDate.clone()).then(result => {
@@ -45,7 +56,9 @@ const Cell = () => {
             })),
             'sales_date',
           );
+
           const formattedData = formatToCalendarData(group);
+          const minMaxData = sortMinMaxData(formattedData);
         }
       });
   }, [currentDate]);
