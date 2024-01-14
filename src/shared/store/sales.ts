@@ -19,6 +19,7 @@ interface SalesStore {
     y: number;
   }[];
   calendarData: { sales: number; date: string; min?: boolean; max?: boolean }[];
+  salesSum: number | null;
 
   setIsShow: (param?: boolean) => void;
   setData: (sales: { x: string; y: number }[]) => void;
@@ -26,6 +27,7 @@ interface SalesStore {
   setSelectedDate: (day: Moment) => void;
   setRecord: (sales: { currentSales: number; dateType: string }) => void;
   setCalendarData: <T extends { sales: number; date: string; min?: boolean; max?: boolean }[]>(param: T) => void;
+  setSalesSum: (sales: number | null) => void;
 }
 
 const useSalesStore = create<SalesStore>()(set => ({
@@ -44,7 +46,7 @@ const useSalesStore = create<SalesStore>()(set => ({
     utcStandardDate: moment().hour(0).subtract(9, 'hour'),
   },
   calendarData: [],
-
+  salesSum: null,
   /**
    */
   setRecord: prop =>
@@ -85,6 +87,11 @@ const useSalesStore = create<SalesStore>()(set => ({
     set(state => ({
       ...state,
       calendarData: prop,
+    })),
+  setSalesSum: prop =>
+    set(state => ({
+      ...state,
+      salesSum: prop,
     })),
 }));
 

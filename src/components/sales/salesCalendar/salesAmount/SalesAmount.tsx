@@ -1,5 +1,5 @@
 const SalesAmount = () => {
-  return <div></div>;
+  return <div>ㅁㄴㅇㄹ</div>;
 };
 
 export default SalesAmount;
