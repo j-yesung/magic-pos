@@ -15,7 +15,6 @@ const MenuItemPage = () => {
     categoryWithMenuItemList,
     addMenuItemStore,
     setMenuItemSampleImg,
-    dragMenuItemStore,
   } = useMenuItemStore();
 
   // 메뉴 플러스

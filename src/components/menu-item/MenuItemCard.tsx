@@ -13,13 +13,11 @@ interface PropsType {
 
 const MenuItemCard = ({ item, idx }: PropsType) => {
   const {
-    sampleImage,
     toggleShow,
     menuItem,
     setMenuItem,
     categoryWithMenuItem,
     categoryWithMenuItemList,
-    addMenuItemStore,
     setMenuItemSampleImg,
     dragMenuItemStore,
   } = useMenuItemStore();
