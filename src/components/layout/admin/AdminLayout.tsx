@@ -23,8 +23,11 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
   return (
     <div className={isToggle ? styles.adminWrapperToggle : styles.adminWrapper}>
       <Header />
-      <main className={styles.mainWrapper}>{children}</main>
       <NavBar adminCategories={adminCategories} />
+      <main className={styles.mainWrapper}>
+        <CategoryTitle adminCategories={adminCategories} />
+        {children}
+      </main>
     </div>
   );
 };
