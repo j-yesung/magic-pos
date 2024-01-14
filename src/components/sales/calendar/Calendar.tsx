@@ -6,10 +6,12 @@ import Header from './header/Header';
  * @example clone()을 해준 이유는 원본을 훼손하지 않기 위해서입니다.
  */
 
-const Calendar = () => {
+const Calendar = ({ children }: { children?: React.ReactNode }) => {
+  console.log(children);
   return (
     <>
       <Header />
+      {children}
       <Days />
       <Cell />
     </>

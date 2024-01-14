@@ -1,9 +1,12 @@
 import Calendar from '../calendar/Calendar';
+import SalesAmount from './salesAmount/SalesAmount';
 
 const SalesDeatilWithCalendar = () => {
   return (
     <div>
-      <Calendar />
+      <Calendar>
+        <SalesAmount />
+      </Calendar>
     </div>
   );
 };
