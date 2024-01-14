@@ -2,9 +2,8 @@ import Head from 'next/head';
 import React, { useEffect, useRef } from 'react';
 import styles from './styles/OrderLayout.module.css';
 import Footer from '@/components/layout/order/footer/Footer';
-
 import { SwiperRef } from 'swiper/react';
-import useOrderStore from '@/shared/store/order';
+import useOrderStore, { ORDER_STEP } from '@/shared/store/order';
 import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButton';
 import { useRouter } from 'next/router';
 
@@ -35,7 +34,7 @@ const OrderLayout = ({ children }: { children: React.ReactNode }) => {
       </Head>
       <section className={styles.container}>
         <article className={styles.children}>
-          {step > 0 && (
+          {step > ORDER_STEP.CHOOSE_ORDER_TYPE && (
             <button className={styles.prevButton} onClick={clickPrevButtonHandler}>
               ⬅️{' '}
             </button>

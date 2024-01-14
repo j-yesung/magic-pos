@@ -10,8 +10,8 @@ export const addStoreOrder = async (item: Omit<Tables<'order_store'>, 'id'>) => 
 
 export const fetchStoreOrderByOrderIdWithStoreName = async (orderId: string) => {
   const { data, error } = await supabase
-    .from('order_store, store(business_name)')
-    .select('*')
+    .from('order_store')
+    .select('*, store(business_name)')
     .eq('order_id', orderId)
     .single();
 

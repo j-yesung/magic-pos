@@ -68,7 +68,11 @@ const ReceiptContainer = () => {
               <ReceiptRow key={key} itemList={value} />
             ))}
           </div>
-          {isOrderDone && <button onClick={clickOrderMoreHandler}>메뉴가 준비 되었습니다! 더 담으러 가기</button>}
+          {isOrderDone ? (
+            <button onClick={clickOrderMoreHandler}>메뉴가 준비 되었습니다! 더 담으러 가기</button>
+          ) : (
+            <p>현재 메뉴가 준비 중 입니다...</p>
+          )}
           <TotalPrice allItemList={orderData?.menu_list as Tables<'menu_item'>[]} />
         </>
       )}
