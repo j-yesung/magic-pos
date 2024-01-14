@@ -50,7 +50,28 @@ const OrderIndexPage = ({
     // TODO: 에러 처리
     if (isEmptyObject(menuData)) console.error('something wrong');
     else {
-      setMenuData(menuData);
+      const recommendedList = menuData
+        .map(menu => menu.menu_item.flat())
+        .flat()
+        .filter(menu => menu.recommended);
+
+      const menuList = [];
+
+      // 추천 메뉴가 있을시 추천 메뉴 추가
+      if (recommendedList.length > 0) {
+        menuList.push({
+          id: 'recommended',
+          name: '추천 메뉴',
+          position: 0,
+          store: menuData[0].store,
+          store_id: storeId,
+          menu_item: recommendedList,
+        });
+      }
+
+      menuList.push(...menuData);
+
+      setMenuData(menuList);
       setStoreName(menuData[0].store.business_name ?? '');
     }
 

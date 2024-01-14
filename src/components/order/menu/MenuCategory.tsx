@@ -4,7 +4,7 @@ import { Tables } from '@/types/supabase';
 import clsx from 'clsx';
 
 interface MenuCategoryProps {
-  category: Tables<'menu_category'>;
+  category: Pick<Tables<'menu_category'>, 'id' | 'name'>;
   setSelectedCategory: Dispatch<SetStateAction<string | null>>;
   selectedCategory: string | null;
 }
