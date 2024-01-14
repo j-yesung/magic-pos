@@ -3,11 +3,9 @@ import SalesAmount from './salesAmount/SalesAmount';
 
 const SalesDeatilWithCalendar = () => {
   return (
-    <div>
-      <Calendar>
-        <SalesAmount />
-      </Calendar>
-    </div>
+    <Calendar>
+      <SalesAmount />
+    </Calendar>
   );
 };
 

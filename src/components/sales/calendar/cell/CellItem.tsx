@@ -20,7 +20,9 @@ interface CellItemProps {
   clickShowDataOfDateHandler?: (param: Moment) => () => Promise<void>;
 }
 
-const CellItem = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDateHandler }: CellItemProps) => {
+type Cell = (param: CellItemProps) => JSX.Element;
+
+const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDateHandler }) => {
   const {
     date: { currentDate, selectedDate, today },
   } = useSalesStore();
