@@ -82,7 +82,7 @@ const MenuItemPage = () => {
   };
 
   return (
-    <div className={styles['wrap']}>
+    <div className={menuItem.id !== '' ? clsx(styles['wrap'], styles['active']) : styles['wrap']}>
       <ul>
         {categoryWithMenuItemList
           .filter(list => list.id === categoryWithMenuItem.id)
@@ -104,19 +104,29 @@ const MenuItemPage = () => {
                   onDragEnd={dropHandler}
                   onDragOver={e => e.preventDefault()}
                 >
-                  <span>
+                  <span className={styles['img']}>
                     <Image src={item.image_url ?? ''} alt={item.name ?? ''} width={50} height={50} />
                   </span>
-                  <span>name: {item.name}</span>
-                  <span>price: {item.price}</span>
-                  <span>remain_ea: {item.remain_ea}</span>
-                  <span>position: {item.position}</span>
+                  <span className={styles['txt']}>
+                    <span className={styles['name']}>
+                      <span>메뉴명: </span>
+                      <strong>{item.name}</strong>
+                    </span>
+                    <span className={styles['price']}>
+                      <span>가격: </span>
+                      <strong>{item.price}원</strong>
+                    </span>
+                    <span className={styles['remain-ea']}>
+                      <span>남은 갯수: </span>
+                      <strong>{item.remain_ea}</strong>
+                    </span>
+                  </span>
                 </button>
               </li>
             )),
           )}
         <li>
-          <button type="button" onClick={clickAddMenuItemHandler}>
+          <button className={styles['plus']} type="button" onClick={clickAddMenuItemHandler}>
             +
           </button>
         </li>

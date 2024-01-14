@@ -1,9 +1,14 @@
 .wrap {
-  /* height: 100vh; */
-  /* padding: 40px 40px 500px 40px; */
+  height: 100%;
+  position: relative;
 }
 
 .menu-container {
-  /* display: grid;
-  grid-template-columns: 1fr 1fr; */
+  height: 100%;
+}
+
+.menu-container h2 {
+  padding: 10rem 10rem 3rem 10rem;
+  font-size: 4rem;
+  font-weight: 500;
 }

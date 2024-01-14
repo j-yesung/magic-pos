@@ -104,60 +104,78 @@ const MenuItemFormPage = () => {
     return formattedDate;
   };
 
+  // 입력창 숨기기
+  const clickFormHideHandler = () => {
+    toggleShow(false);
+    setMenuItem({ ...menuItem, id: '' });
+  };
+
   return (
     <form
       onSubmit={submitupdateMenuItemHandler}
       className={isShow ? `${styles['wrap']} ${styles['active']}` : `${styles['wrap']}`}
     >
-      <h3>메뉴 사진</h3>
-      <Image src={menuItemSampleImg} alt={menuItem.name ?? ''} width={200} height={200} />
-      <label htmlFor="menuImg" className="writeLable"></label>
-      <input
-        type="file"
-        accept="image/png, image/jpeg, image/jpg"
-        id="menuImg"
-        name="menuImg"
-        onChange={handleChangeImg}
-      />
-      <input
-        type="text"
-        onChange={changeMenuItemHandler}
-        name="name"
-        value={menuItem.image_url ?? ''}
-        minLength={2}
-        maxLength={20}
-      />
-      <button onClick={fetchNewMenuItemImgUrl}>사진 업로드</button>
-      <h3>메뉴 명</h3>
-      <input
-        type="text"
-        onChange={changeMenuItemHandler}
-        name="name"
-        value={menuItem.name ?? ''}
-        minLength={2}
-        maxLength={20}
-      />
-      <h3>메뉴 가격</h3>
-      <input
-        type="number"
-        onChange={changeMenuItemHandler}
-        name="price"
-        value={menuItem.price ?? ''}
-        minLength={2}
-        maxLength={20}
-      />
-      <h3>메뉴 수량</h3>
-      <input
-        type="number"
-        onChange={changeMenuItemHandler}
-        name="remain_ea"
-        value={menuItem.remain_ea ?? ''}
-        minLength={2}
-        maxLength={20}
-      />
-      <h3>추천 메뉴</h3>
-      <input type="checkbox" onChange={changeMenuItemHandler} name="recommended" checked={menuItem.recommended} />
-      <div>
+      <div className={styles['img-wrap']}>
+        <label htmlFor="sampleImg"></label>
+        <Image src={menuItemSampleImg} alt={menuItem.name ?? ''} width={220} height={220} />
+        <input
+          type="file"
+          accept="image/png, image/jpeg, image/jpg"
+          id="sampleImg"
+          name="sampleImg"
+          onChange={handleChangeImg}
+        />
+        <input
+          type="text"
+          onChange={changeMenuItemHandler}
+          name="name"
+          value={menuItem.image_url ?? ''}
+          minLength={2}
+          maxLength={20}
+        />
+      </div>
+      <div className={styles['txt-wrap']}>
+        <div className={styles['checkbox-wrap']}>
+          <label htmlFor="recommended">추천메뉴</label>
+          <input
+            type="checkbox"
+            onChange={changeMenuItemHandler}
+            id="recommended"
+            name="recommended"
+            checked={menuItem.recommended}
+          />
+        </div>
+        <div className={styles['input-wrap']}>
+          <input
+            type="text"
+            onChange={changeMenuItemHandler}
+            name="name"
+            value={menuItem.name ?? ''}
+            minLength={2}
+            maxLength={20}
+            placeholder="메뉴명"
+          />
+          <input
+            type="number"
+            onChange={changeMenuItemHandler}
+            name="price"
+            value={menuItem.price ?? ''}
+            minLength={2}
+            maxLength={20}
+            placeholder="가격"
+          />
+          <input
+            type="number"
+            onChange={changeMenuItemHandler}
+            name="remain_ea"
+            value={menuItem.remain_ea ?? ''}
+            minLength={2}
+            maxLength={20}
+            placeholder="수량"
+          />
+        </div>
+      </div>
+      <div className={styles['btn-wrap']}>
         <button className={styles['update-btn']} type="submit">
           수정 완료
         </button>
@@ -165,6 +183,28 @@ const MenuItemFormPage = () => {
           메뉴 삭제
         </button>
       </div>
+      <button className={styles['x-wrap']} type="button" onClick={clickFormHideHandler}>
+        <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M24.9998 45.8337C36.5058 45.8337 45.8332 36.5063 45.8332 25.0003C45.8332 13.4944 36.5058 4.16699 24.9998 4.16699C13.4939 4.16699 4.1665 13.4944 4.1665 25.0003C4.1665 36.5063 13.4939 45.8337 24.9998 45.8337Z"
+            fill="#CEB7FF"
+          />
+          <path
+            d="M31.25 18.75L18.75 31.25"
+            stroke="white"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M18.75 18.75L31.25 31.25"
+            stroke="white"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
     </form>
   );
 };

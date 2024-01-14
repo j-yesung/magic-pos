@@ -22,15 +22,16 @@ const MenuItemCategoryPage = () => {
 
   return (
     <div className={styles['wrap']}>
-      <Swiper modules={[Virtual]} spaceBetween={50} slidesPerView={3.5}>
+      <Swiper modules={[Virtual]} spaceBetween={10} slidesPerView={'auto'} className={styles['swiper']}>
         {categoryWithMenuItemList.map((item, index) => (
           <SwiperSlide
             key={item.id}
             virtualIndex={index}
             className={item.id === categoryWithMenuItem.id ? clsx(styles['slide'], styles['active']) : styles['slide']}
+            onClick={() => clickChoiceCategoryHandler(item)}
           >
             {/* 버튼으로 하면 슬라이드 기능이 에러 발생해서 p태그로 대체 */}
-            <p onClick={() => clickChoiceCategoryHandler(item)}>{item.name}</p>
+            <p>{item.name}</p>
           </SwiperSlide>
         ))}
       </Swiper>

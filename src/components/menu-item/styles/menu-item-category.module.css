@@ -1,31 +1,36 @@
+.swiper {
+  padding-left: 10rem;
+  padding-right: 10rem;
+}
 .slide {
-  width: 100%;
-  height: 60px;
+  width: 20rem;
+  height: 4rem;
+  padding: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ccc;
   transition: all 0.3s;
+  font-size: 2rem;
+  background-color: #f2f2f2;
+  cursor: pointer;
 }
 .slide p {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .slide:hover {
-  background-color: #666;
+  background-color: #d1d1d1;
 }
 
 .slide.active {
   background-color: var(--main-color);
+  color: #fff;
 }
 
 .slide.active:hover {
-  background-color: #1e0491;
+  background-color: var(--main-color-hover);
 }
 
 .slide button {
