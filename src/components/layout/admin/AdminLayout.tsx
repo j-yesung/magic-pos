@@ -13,7 +13,7 @@ const adminCategories = [
   { id: 2, name: '매출 관리', url: '/admin/sales/status', active: false },
   { id: 3, name: '플랫폼 관리', url: '#3', active: false },
   { id: 4, name: '테이블 관리', url: '/admin/table', active: true },
-  { id: 5, name: '메뉴 관리', url: '#5', active: false },
+  { id: 5, name: '메뉴 관리', url: '/admin/menu-item', active: false },
   { id: 6, name: '가게 설정', url: '/admin/store', active: false },
 ];
 

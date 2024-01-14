@@ -48,7 +48,7 @@ export const updateCategoryName = async (categoryId: string, name: string) => {
 };
 
 /**
- * 카테고리 이름 수정하기
+ * 카테고리 위치 수정하기
  * @param values 카테고리 id, 카테고리 position
  * @returns data
  */
@@ -67,9 +67,17 @@ export const fetchCategoriesWithMenuItemByStoreId = async (store_id: string) => 
     .from('menu_category')
     .select('*, menu_item(*)')
     .eq('store_id', store_id)
+    .order('position', { ascending: true })
     .returns<CategoryWithMenuItem[]>();
   if (error) {
     return { data: {}, error };
   }
-  return { data, error };
+
+  // 각 카테고리의 menu_item을 position 값에 따라 정렬
+  const dataWithSortedMenuItems = data.map(category => ({
+    ...category,
+    menu_item: category.menu_item.sort((a, b) => a.position - b.position),
+  }));
+
+  return { data: dataWithSortedMenuItems, error };
 };
