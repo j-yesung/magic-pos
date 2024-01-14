@@ -5165,6 +5165,7 @@ __metadata:
     react-chartjs-2: "npm:^5.2.0"
     react-dom: "npm:^18"
     react-i18next: "npm:^14.0.0"
+    react-intersection-observer: "npm:^9.5.3"
     styled-components: "npm:^6.1.6"
     supabase: "npm:1.127.4"
     swiper: "npm:^11.0.5"
@@ -6087,6 +6088,15 @@ __metadata:
     react-native:
       optional: true
   checksum: 923990e941cdc9ca73bb34fca8a408f850c6ce7ca490661d83c808c5a91f33997882d40e0d2da64664c91a064e12002164c8dd843d75542a7e7e261a3d4198d8
+  languageName: node
+  linkType: hard
+
+"react-intersection-observer@npm:^9.5.3":
+  version: 9.5.3
+  resolution: "react-intersection-observer@npm:9.5.3"
+  peerDependencies:
+    react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+  checksum: 0a4be6262e5944c6f72448029dc28dd14c8b59142f8f24a0c33997ef39c98e9b10f069c2789de0cb79b8a2995f22ba043ce48403a565f6556de982fde456d0f6
   languageName: node
   linkType: hard
 

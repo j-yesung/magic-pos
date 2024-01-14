@@ -46,6 +46,11 @@ OrderSuccessPage.getLayout = (page: ReactNode) => <OrderLayout>{page}</OrderLayo
 
 export default OrderSuccessPage;
 
+/**
+ * 토스 결제 위젯을 통해 결제 요청후 결제 승인이되면 해당 페이지로 이동됩니다.
+ * parma으로 넘어오는 paymentKey를 통해 결제가 승인되고 돌아오는 payment 객체 안에 승인, 실패여부를 알려줍니다.
+ * @param context
+ */
 export const getServerSideProps: GetServerSideProps = async context => {
   const {
     query: { paymentKey, orderId, amount },

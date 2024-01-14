@@ -512,8 +512,6 @@ export type Enums<
   ? Database['public']['Enums'][PublicEnumNameOrOptions]
   : never;
 
-
-
 interface StoreWithStoreTable extends Tables<'store'> {
   store_table: Tables<'store_table'>[];
 }

@@ -28,7 +28,8 @@
   grid-area: header;
   display: flex;
   flex-direction: column;
-  background-color: #212121;
+  background-color: #ffffff;
+  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.2);
 }
 
 .header-wrapper input {
@@ -105,7 +106,6 @@
   padding: 3rem;
   grid-area: aside;
   transition: all 0.4s;
-  border-radius: 0 2rem 2rem 0;
   box-shadow: 0 0.4rem 0.8rem 0 rgba(0, 0, 0, 0.5);
 }
 
@@ -141,13 +141,20 @@
 
 /* 메인 영역입니다. */
 .main-wrapper {
+  padding: 8rem;
   grid-area: main;
   border-radius: 2rem;
   height: calc(100vh - 6rem);
-  border: 2px solid #ad3aff;
   transition: all 0.4s;
   overflow-y: scroll;
 }
 .main-wrapper::-webkit-scrollbar {
   display: none;
+}
+
+/* 페이지 제목 */
+.category-title {
+  margin-bottom: 8rem;
+  font-size: 5rem;
+  font-weight: 600;
 }

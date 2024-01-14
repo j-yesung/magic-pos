@@ -96,3 +96,25 @@ day 관련 class css 입니다.
   gap: 1rem;
   text-align: center;
 }
+
+/*
+sales/calendar에서 매출 CSS 입니다.
+*/
+
+.sales-base {
+  display: block;
+  margin-top: 0.5rem;
+  color: #000;
+  font-size: 1rem;
+  height: 3rem;
+}
+
+.sales-max {
+  color: rgb(150, 185, 20);
+  font-size: 1.4rem;
+}
+
+.sales-min {
+  color: rgb(24, 77, 224);
+  font-size: 1.4rem;
+}

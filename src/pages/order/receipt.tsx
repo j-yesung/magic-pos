@@ -4,6 +4,10 @@ import { useRouter } from 'next/router';
 import ReceiptContainer from '@/components/order/receipt/ReceiptContainer';
 import OrderLayout from '@/components/layout/order/OrderLayout';
 
+/**
+ * 결제 후 주문 내역 확인 페이지
+ * @constructor
+ */
 const OrderReceiptPage = () => {
   const { orderId } = useOrderStore();
   const [isLoaded, setIsLoaded] = useState(false);

@@ -1,0 +1,155 @@
+/* 비디오 */
+.video-wrapper {
+  gap: 26rem;
+  width: 100%;
+  margin: 24rem;
+  height: 60rem;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  background-color: #f8f5ff;
+}
+.video-text-area {
+  gap: 3rem;
+  width: 38rem;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+}
+.video-text-area h1 {
+  font-size: 4.2rem;
+  font-weight: 700;
+}
+.video-text-area div {
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.video-wrapper p {
+  width: 27rem;
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+.video-section {
+  width: 100rem;
+  height: 50rem;
+  border-radius: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem rgba(0.1, 0.1, 0.1, 0.1);
+}
+
+/* 매출 분석 */
+.sales-wrapper {
+  width: 100%;
+  margin: 14rem;
+  height: 100rem;
+  padding: 10rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.sales-text-area {
+  gap: 1.8rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.sales-text-area h1 {
+  font-size: 4.2rem;
+  font-weight: 700;
+}
+.sales-text-area span {
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+
+.salse-pictrue-area {
+  gap: 10rem;
+  width: 90rem;
+  height: 100%;
+  margin: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.salse-pictrue-area .sales-contents-container {
+  gap: 7rem;
+  width: 80rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.salse-pictrue-area .sales-contents {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  border-radius: 1.5rem;
+  box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem rgba(0.1, 0.1, 0.1, 0.1);
+}
+.salse-pictrue-area h1 {
+  width: 15rem;
+  height: 5rem;
+  display: flex;
+  font-size: 2rem;
+  border-radius: 2rem;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem rgba(0.1, 0.1, 0.1, 0.1);
+}
+
+.swiper-wrapper {
+  height: 100%;
+}
+.slider-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 타이틀 애니메이션 */
+.fade-wrapper {
+  display: flex;
+  height: 140rem;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: sticky;
+}
+.fada-container {
+  position: sticky;
+  top: 50%;
+}
+.fade-wrapper h1 {
+  font-size: 10rem;
+  font-weight: 700;
+  background: var(--signature-color);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.fade-in {
+  animation: fade-in 2s ease-in-out;
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

@@ -19,11 +19,11 @@
     flex-direction: column;
     width: 32em;
     background-color: white;
-    border-radius: 15px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
-    padding: 10px 40px 10px 40px;
+    border-radius: 1.5rem  /* 15/10 */;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 0.5rem  /* 5/10 */ 1.5rem  /* 15/10 */;
+    padding: 1rem  /* 10/10 */ 4rem  /* 40/10 */ 1rem  /* 10/10 */ 4rem  /* 40/10 */;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 76.8rem  /* 768/10 */) {
         width: 90vw;
     }
 }
