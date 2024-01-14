@@ -23,6 +23,7 @@ const Cell = () => {
     date: { currentDate },
     setCalendarData,
     calendarData,
+    setSalesSum,
   } = useSalesStore();
   const { clickShowDataOfDateHandler } = useCalendar();
 
@@ -70,12 +71,14 @@ const Cell = () => {
           const formattedData = formatToCalendarData(group);
           const minMaxData = sortMinMaxData(formattedData);
           setCalendarData(minMaxData);
+          setSalesSum(formattedData);
         }
       });
 
     return () => {
       if (calendarData.length !== 0) {
         setCalendarData([]);
+        setSalesSum(null);
       }
     };
   }, [currentDate]);
