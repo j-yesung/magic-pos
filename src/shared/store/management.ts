@@ -24,7 +24,7 @@ const useManagementStore = create<managementType>((set) => ({
   orderConfirmData: [],
   setOrderData: (value) =>
     set(() => ({
-      orderData: [...value]
+      orderData: value
     })),
   setOrderId: (value) =>
     set(() => ({

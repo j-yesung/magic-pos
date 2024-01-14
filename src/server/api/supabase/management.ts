@@ -1,6 +1,6 @@
 import { supabase } from '@/shared/supabase';
 
-export const fetchManagement = async (id: string) => {
+export const fetchManagement = async (id: string | null) => {
   if (id) {
     const { data: store, error } = await supabase.from('store')
       .select('*, store_table(*),order_store(*),order_number(*)')

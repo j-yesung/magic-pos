@@ -6,7 +6,7 @@ const enum QUERY_KEY {
   TABLE = 'management',
 }
 
-const useFetchManagement = (id: string) => {
+const useFetchManagement = (id: string | null) => {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: [QUERY_KEY.TABLE],
     queryFn: () => fetchManagement(id),
