@@ -1,3 +1,4 @@
+import { CalendarDataType } from '@/components/sales/calendar/cell/Cell';
 import { DateFormatType } from '@/server/api/supabase/sales';
 import { Tables } from '@/types/supabase';
 import moment, { Moment } from 'moment';
@@ -53,22 +54,44 @@ const getStartWeeks = (year: number) => {
  * @param formatType 'days', 'weeks' , 'months' 를 받습니다.
  * @returns  { x: string, y: number}[]
  */
-export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormatType) => {
+
+export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormatType, selectedType?: Moment) => {
   if (salesData && formatType) {
+    const recordData = {
+      currentSales: 0,
+      dateType: '',
+    };
     if (formatType === 'days') {
       // 일별로 데이터를 추출
+      const test = [];
+      for (let i = 0; i < 7; i++) {
+        test.push(selectedType?.clone().subtract(i, 'day').format('YYYY-MM-DD'));
+      }
+      const m = new Map();
+      test.forEach(a => m.set(a, []));
+
+      console.log(salesData);
+
       const group = groupByKey<Tables<'sales'>>(
         salesData.map(data => ({ ...data, sales_date: moment(data.sales_date).format('YYYY-MM-DD') })),
         'sales_date',
       );
 
+      for (const [key, value] of group) {
+        if (selectedType?.format('YYYY-MM-DD') === key) {
+          console.log('value');
+          recordData.currentSales = value.reduce((acc, cur) => acc + cur.product_ea * cur.product_price, 0);
+        }
+      }
+      recordData.dateType = 'days';
+
       const result = [...group.entries()]
         .map(([key, value]) => {
-          return { x: key, y: value.reduce((acc, cur) => acc + cur.product_price!, 0) };
+          return { x: key, y: value.reduce((acc, cur) => acc + cur.product_price * cur.product_ea, 0) };
         })
         .toSorted((a, b) => (moment(a.x).isAfter(moment(b.x)) ? 1 : -1));
 
-      return result;
+      return { result, recordData };
     } else if (formatType === 'weeks') {
       // 주별로 데이터를 추출
 
@@ -88,17 +111,26 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
 
       const group = groupByKey<Tables<'sales'> & { original_sales_date: Moment }>(newData, 'sales_date');
 
+      for (const [, value] of group) {
+        if (moment().isSame(value[0].original_sales_date, 'week')) {
+          recordData.currentSales = value.reduce((acc, cur) => acc + cur.product_ea * cur.product_price, 0);
+          recordData.dateType = 'weeks';
+
+          break;
+        }
+      }
+
       const result = [...group.entries()]
         .map(([key, value]) => {
           return {
             moment: value[0].original_sales_date,
             x: key,
-            y: value.reduce((acc, cur) => acc + cur.product_price!, 0),
+            y: value.reduce((acc, cur) => acc + cur.product_price * cur.product_ea, 0),
           };
         })
         .toSorted((a, b) => (moment(a.moment).isAfter(moment(b.moment)) ? 1 : -1));
 
-      return result;
+      return { result, recordData };
     } else if (formatType === 'months') {
       // 월별로 데이터를 추출
 
@@ -107,14 +139,92 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
         'sales_date',
       );
 
+      for (const [key, value] of group) {
+        if (moment().format('YYYY-MM') === key) {
+          recordData.currentSales = value.reduce((acc, cur) => acc + cur.product_ea * cur.product_price, 0);
+          recordData.dateType = 'month';
+        }
+      }
+
       const result = [...group.entries()]
         .map(([key, value]) => {
-          return { x: key, y: value.reduce((acc, cur) => acc + cur.product_price!, 0) };
+          return { x: key, y: value.reduce((acc, cur) => acc + cur.product_price * cur.product_ea, 0) };
         })
         .toSorted((a, b) => (moment(a.x).isAfter(moment(b.x)) ? 1 : -1));
 
-      return result;
+      return { result, recordData };
     }
-    return [];
   }
+  return { result: null, recordData: null };
 };
+
+/**
+ * src > component > sales 폴더에 사용될 calendar helper들 입니다.
+ */
+const MONTH = {
+  CURRENT: 'CURRENT',
+  PREV: 'PREV',
+  AFTER: 'AFTER',
+} as const;
+
+// default calendar 날의 css
+const CALENDARTYPE = {
+  CURRENTCALENDAR: 'CURRENTCALENDAR',
+  PREVCALENDAR: 'PREVCALENDAR',
+} as const;
+
+const DATE = {
+  CURRENT: 'CURRENT',
+  PREV: 'PREV',
+  AFTER: 'AFTER',
+} as const;
+
+const DAY = {
+  SATURADAY: 'SATURADAY',
+  SUNDAY: 'SUNDAY',
+  DAY: 'DAY', // 일반 날
+} as const;
+
+const SALES = {
+  MAX: 'MAX',
+  MIN: 'MIN',
+  BASE: 'BASE',
+} as const;
+
+export function getMonthType(Month: Moment, CurrentDate: Moment) {
+  const today = moment();
+  if (CurrentDate.isSame(today, 'M') && Month.isSame(CurrentDate, 'M')) return MONTH['CURRENT'];
+  if (!Month.isSame(CurrentDate, 'M') && CurrentDate.isSame(today, 'M'))
+    return Month.isBefore(today, 'M') ? MONTH['PREV'] : MONTH['AFTER'];
+}
+
+export function getCalendarType(Month: Moment, CurrentDate: Moment) {
+  if (Month.isSame(CurrentDate, 'M')) return CALENDARTYPE['CURRENTCALENDAR'];
+  if (!Month.isSame(CurrentDate, 'M')) return CALENDARTYPE['PREVCALENDAR'];
+}
+
+export function getDateType(Date: Moment) {
+  const today = moment();
+  if (Date.isSame(today, 'D')) return DATE['CURRENT'];
+  return Date.isBefore(today, 'D') ? DATE['PREV'] : DATE['AFTER'];
+}
+
+/**
+ * moment().day()
+ * 일요일 -  0
+ * ...
+ * 토요일 - 6
+ */
+export function getDayType(Day: Moment) {
+  if (Day.day() === 6) return DAY['SATURADAY'];
+  return Day.day() === 0 ? DAY['SUNDAY'] : DAY['DAY']!;
+}
+
+export type GetMinMaxSalesReturnType = 'MAX' | 'MIN' | undefined;
+
+export function getMinMaxSalesType(salesData: CalendarDataType) {
+  if (salesData?.min) return SALES['MIN'];
+  if (salesData?.max) return SALES['MAX'];
+
+  return undefined;
+}

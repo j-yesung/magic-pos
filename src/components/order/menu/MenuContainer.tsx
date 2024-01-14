@@ -4,14 +4,15 @@ import MenuCategoryContainer from '@/components/order/menu/MenuCategoryContainer
 import styles from './styles/MenuContainer.module.css';
 import MenuCard from '@/components/order/menu/MenuCard';
 import { Tables } from '@/types/supabase';
-import MessageBox from '@/components/order/cart/MessageBox';
+import StoreInfo from '@/components/order/common/StoreInfo';
+import order from '@/shared/store/order';
 
 /**
  * STEP2: 메뉴 탐색 및 선택
  * @constructor
  */
 const MenuContainer = () => {
-  const { menuData } = useOrderStore();
+  const { menuData, orderType } = useOrderStore();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [menuItemList, setMenuItemList] = useState<Tables<'menu_item'>[]>([]);
 
@@ -37,14 +38,12 @@ const MenuContainer = () => {
           setSelectedCategory={setSelectedCategory}
         />
       )}
+      <StoreInfo orderType={orderType} storeName={'어쩌구 카페'} />
       <section className={styles.section}>
         {menuItemList.map(menu => (
           <MenuCard key={menu.id} menu={menu} />
         ))}
       </section>
-      <div className={styles.messageBox}>
-        <MessageBox />
-      </div>
     </div>
   );
 };

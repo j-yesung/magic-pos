@@ -7,7 +7,7 @@ import { Moment } from 'moment';
 /**
  * DateFormatType은 helper에서 데이터를 가공할 때 사용합니다.
  */
-export type DateFormatType = 'days' | 'weeks' | 'months';
+export type DateFormatType = 'days' | 'weeks' | 'months' | 'month';
 export interface SalesDataReturnType {
   sales: Tables<'sales'>[];
   error?: PostgrestError;
@@ -84,7 +84,7 @@ export const getWeekSales: getSalesReturnType = async week => {
  * @returns
  */
 
-export const getMonthSales: getSalesReturnType = async month => {
+export const getMonthsSales: getSalesReturnType = async month => {
   const { data: sales, error } = await supabase
     .from('sales')
     .select('*')
@@ -97,4 +97,22 @@ export const getMonthSales: getSalesReturnType = async month => {
     return { sales: [], error };
   }
   return { sales, formatType: 'months' };
+};
+
+/**
+ * compoent/sales/calendar 폴더에서 사용될 비동기 함수(데이터)입니다.
+ * @param month : .hour(0).subtract(9,'hour)를 해준 moment()입니다.
+ * @returns 1달치의 data가 return 됩니다.
+ */
+
+export const getMonthSales: getSalesReturnType = async month => {
+  const { data: sales, error } = await supabase
+    .from('sales')
+    .select('*')
+    .gte('sales_date', momentToString(month.clone().startOf('month'), TIME_FORMAT))
+    .lte('sales_date', momentToString(month.clone(), TIME_FORMAT));
+  if (error) {
+    return { sales: [], error };
+  }
+  return { sales, formatType: 'month' };
 };

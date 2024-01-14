@@ -5,6 +5,15 @@ declare type CategoryType = {
   position: number;
 };
 
+declare interface AdminCategories {
+  adminCategories: {
+    id: number;
+    name: string;
+    url: string;
+    active: boolean;
+  }[];
+}
+
 declare type CategoryWithItemType = CategoryType & {
   menu_item: MenuItemType[];
 };

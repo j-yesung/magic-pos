@@ -1,6 +1,6 @@
 :root {
-  --kiosk-header-height: 8rem /* 80/10 */;
-  --kiosk-footer-height: 8rem /* 80/10 */;
+  --kiosk-header-height: 6rem  /* 80/10 */;
+  --kiosk-footer-height: 50px;
   --kiosk-container-padding: 1.25rem;
 
   --main-color: #8f00ff;
@@ -9,4 +9,10 @@
 
   /* 그라데이션 컬러 */
   --signature-color: linear-gradient(to right, var(--main-color), #ffa800);
+
+  --level-1-z-index: 100;
+  --level-2-z-index: 200;
+  --level-3-z-index: 300;
+  --level-4-z-index: 400;
+  --level-5-z-index: 500;
 }
