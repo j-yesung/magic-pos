@@ -81,6 +81,7 @@ const Cell = () => {
         setSalesSum(null);
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentDate]);
 
   const option = {
