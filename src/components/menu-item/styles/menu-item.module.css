@@ -1,18 +1,19 @@
 .wrap {
-  height: calc(100% - 21rem);
+  height: calc(100% + 3rem);
   overflow-y: auto;
   transition: all 0.3s;
+  margin-top: 1rem;
 }
 .wrap.active {
-  height: calc(100% - 21rem - 30rem);
+  height: calc(100% + 3rem - 20rem);
 }
 .wrap ul {
   display: flex;
   flex-wrap: wrap;
   gap: 5rem 3rem;
-  padding: 10rem;
+  padding: 9rem 0 10rem;
 }
-.wrap ul li {
+.wrap li {
   width: calc(25% - 2.25rem);
   min-height: 14rem;
   display: flex;
@@ -21,50 +22,15 @@
   background-color: #f2f2f2;
   transition: all 0.3s;
 }
-.wrap ul li:hover {
+.wrap li:hover {
   background-color: #d1d1d1;
 }
-.wrap ul li.active {
-  background-color: var(--point-color);
-}
-.wrap ul li.active:hover {
-  background-color: var(--main-color);
-}
-.wrap ul li.recommended {
-  border: 5px solid var(--point-color);
-}
-.wrap ul li button {
+.wrap li button {
   width: 100%;
   height: 100%;
   display: flex;
   gap: 2rem;
   padding: 2rem;
-}
-.wrap ul li button > span.img {
-  width: 10rem;
-  height: 10rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.wrap ul li button > span.img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.wrap ul li button > span.txt {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  text-align: left;
-}
-.wrap ul li button > span.txt > span {
-  display: flex;
-  gap: 0.5rem;
-}
-.wrap ul li button > span.txt > span strong {
-  font-weight: bold;
 }
 .wrap .plus {
   display: flex;

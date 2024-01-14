@@ -1,5 +1,6 @@
 import useMenuItemStore from '@/shared/store/menu-item';
 // import { Navigation, Pagination, Scrollbar } from 'swiper';
+import { CategoryWithMenuItem } from '@/types/supabase';
 import clsx from 'clsx';
 import 'swiper/css';
 import { Virtual } from 'swiper/modules';
@@ -11,7 +12,7 @@ const MenuItemCategoryPage = () => {
     useMenuItemStore();
 
   // 카테고리 선택
-  const clickChoiceCategoryHandler = (item: CategoryWithItemType) => {
+  const clickChoiceCategoryHandler = (item: CategoryWithMenuItem) => {
     setCategoryWithMenuItem({
       ...categoryWithMenuItem,
       id: item.id,

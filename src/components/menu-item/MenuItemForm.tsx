@@ -1,3 +1,4 @@
+import { useModal } from '@/hooks/modal/useModal';
 import {
   downloadMenuItemUrl,
   removeMenuItem,
@@ -6,11 +7,13 @@ import {
   uploadMenuItem,
 } from '@/server/api/supabase/menu-item';
 import useMenuItemStore from '@/shared/store/menu-item';
+import moment from 'moment';
 import Image from 'next/image';
 import { ChangeEvent } from 'react';
 import styles from './styles/menu-item-form.module.css';
 
 const MenuItemFormPage = () => {
+  const { MagicModal } = useModal();
   const {
     isShow,
     toggleShow,
@@ -29,17 +32,13 @@ const MenuItemFormPage = () => {
   const changeMenuItemHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, maxLength, name } = e.target;
     if (name === 'recommended') {
-      let recommendedNum: number = 0;
       let isCheckRecommended: boolean = false;
 
-      if (!menuItem.recommended) {
-        for (let i = 0; i < categoryWithMenuItem.menu_item.length; i++) {
-          if (categoryWithMenuItem.menu_item[i].recommended) recommendedNum++;
-          if (recommendedNum > 4) {
-            alert('추천 메뉴는 최대 5개입니다.');
-            return (isCheckRecommended = true);
-          }
-        }
+      const redcommendedNum = categoryWithMenuItem.menu_item.filter(item => item.recommended).length;
+
+      if (redcommendedNum > 4) {
+        MagicModal.alert({ content: '추천 메뉴는 최대 5개입니다.' });
+        return (isCheckRecommended = true);
       }
 
       if (!isCheckRecommended) setMenuItem({ ...menuItem, recommended: !menuItem.recommended });
@@ -62,6 +61,7 @@ const MenuItemFormPage = () => {
     await updateMenuItem(updateData);
     toggleShow(false);
     setMenuItemImgFile(null);
+    setMenuItem({ ...menuItem, id: '' });
   };
 
   // 메뉴 삭제
@@ -100,8 +100,7 @@ const MenuItemFormPage = () => {
 
   // 현재 시간 계산
   const getTodayDate = (): string => {
-    const today = new Date();
-    const formattedDate = today.toISOString();
+    const formattedDate = moment().toISOString();
     return formattedDate;
   };
 

@@ -1,11 +1,12 @@
 import AdminLayout from '@/components/layout/admin/AdminLayout';
 import MenuItemsComponentPage from '@/components/menu-item/MenuItemContainer';
 import { fetchCategoriesWithMenuItemByStoreId } from '@/server/api/supabase//menu-category';
+import { CategoryWithMenuItem } from '@/types/supabase';
 import { GetStaticProps } from 'next';
 import { ReactNode } from 'react';
 
 interface PropsType {
-  categoryWithMenuData: CategoryWithItemType[];
+  categoryWithMenuData: CategoryWithMenuItem[];
   storeId: string;
 }
 

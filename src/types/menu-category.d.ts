@@ -13,18 +13,3 @@ declare interface AdminCategories {
     active: boolean;
   }[];
 }
-
-declare type CategoryWithItemType = CategoryType & {
-  menu_item: MenuItemType[];
-};
-
-declare type MenuItemType = {
-  id: string;
-  category_id: string;
-  image_url: string | null;
-  name: string | null;
-  price: number | null;
-  remain_ea: number | null;
-  recommended: boolean;
-  position: number;
-};

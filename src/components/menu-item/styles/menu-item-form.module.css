@@ -2,12 +2,12 @@
   background-color: #fff;
   z-index: 1;
   display: flex;
-  padding: 4rem;
   position: absolute;
   width: 100%;
   height: 0;
   left: 0;
-  bottom: -300px;
+  padding: 0;
+  bottom: -30rem;
   transition: all 0.3s;
   box-shadow: 0 0 1rem 0 rgb(0 0 0 / 25%);
   overflow: hidden;
@@ -20,10 +20,11 @@
   -webkit-appearance: none;
 }
 .wrap.active {
-  bottom: 0;
+  bottom: -8rem;
   height: 30rem;
   overflow: hidden;
   display: flex;
+  padding: 4rem;
 }
 .wrap .img-wrap {
   width: 22rem;

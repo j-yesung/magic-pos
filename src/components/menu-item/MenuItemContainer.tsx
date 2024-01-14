@@ -1,11 +1,12 @@
 import useMenuItemStore from '@/shared/store/menu-item';
+import { CategoryWithMenuItem } from '@/types/supabase';
 import { useEffect } from 'react';
 import MenuItemFormPage from './MenuItemForm';
 import MenuItemListPage from './MenuItemList';
 import styles from './styles/menu-item-container.module.css';
 
 interface PropsType {
-  categoryWithMenuData: CategoryWithItemType[];
+  categoryWithMenuData: CategoryWithMenuItem[];
   storeId: string;
 }
 

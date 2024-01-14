@@ -1,3 +1,4 @@
+import { CategoryWithMenuItem, Tables } from '@/types/supabase';
 import { create } from 'zustand';
 
 /**
@@ -8,23 +9,34 @@ interface MenuItemStoreType {
   sampleImage: string;
   isShow: boolean;
   toggleShow: (item: boolean) => void;
-  menuItem: MenuItemType;
-  setMenuItem: (item: MenuItemType) => void;
-  menuItemList: MenuItemType[];
-  setMenuItemList: (item: MenuItemType[]) => void;
-  categoryWithMenuItem: CategoryWithItemType;
-  setCategoryWithMenuItem: (item: CategoryWithItemType) => void;
-  categoryWithMenuItemList: CategoryWithItemType[];
-  setCategoryWithMenuItemList: (item: CategoryWithItemType[]) => void;
-  addMenuItemStore: (item: MenuItemType) => void;
-  removeMenuItemStore: (item: MenuItemType) => void;
-  updateMenuItemStore: (item: MenuItemType) => void;
+  menuItem: Tables<'menu_item'>;
+  setMenuItem: (item: Tables<'menu_item'>) => void;
+  menuItemList: Tables<'menu_item'>[];
+  setMenuItemList: (item: Tables<'menu_item'>[]) => void;
+  categoryWithMenuItem: CategoryWithMenuItem;
+  setCategoryWithMenuItem: (item: CategoryWithMenuItem) => void;
+  categoryWithMenuItemList: CategoryWithMenuItem[];
+  setCategoryWithMenuItemList: (item: CategoryWithMenuItem[]) => void;
+  addMenuItemStore: (item: Tables<'menu_item'>) => void;
+  removeMenuItemStore: (item: Tables<'menu_item'>) => void;
+  updateMenuItemStore: (item: Tables<'menu_item'>) => void;
   menuItemImgFile: File | null;
   setMenuItemImgFile: (item: File | null) => void;
   menuItemSampleImg: string;
   setMenuItemSampleImg: (item: string) => void;
-  dragMenuItemStore: (dragItem: MenuItemType, dragOver: MenuItemType) => void;
+  dragMenuItemStore: (dragItem: Tables<'menu_item'>, dragOver: Tables<'menu_item'>) => void;
 }
+
+const getDragObject = (drag: Omit<Tables<'menu_item'>, 'positon'>) => {
+  return {
+    id: drag.id,
+    name: drag.name,
+    price: drag.price,
+    remain_ea: drag.remain_ea,
+    image_url: drag.image_url,
+    recommended: drag.recommended,
+  };
+};
 
 const useMenuItemStore = create<MenuItemStoreType>(set => ({
   sampleImage: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/menu_sample/2024-01-12T07:53:35.815Z`,
@@ -110,67 +122,47 @@ const useMenuItemStore = create<MenuItemStoreType>(set => ({
   setMenuItemImgFile: item => set({ menuItemImgFile: item }),
   menuItemSampleImg: '',
   setMenuItemSampleImg: item => set({ menuItemSampleImg: item }),
-  dragMenuItemStore: (dragItem: MenuItemType, dragOver: MenuItemType) =>
+  dragMenuItemStore: (dragItem: Tables<'menu_item'>, dragOver: Tables<'menu_item'>) =>
     set(state => ({
       ...state,
       categoryWithMenuItemList: state.categoryWithMenuItemList.map(category =>
         category.id === dragItem.category_id
           ? {
               ...category,
-              menu_item: category.menu_item.map(it =>
-                it.id === dragItem.id
+              menu_item: category.menu_item.map(item =>
+                item.id === dragItem.id
                   ? {
-                      ...it,
-                      id: dragOver.id,
-                      name: dragOver.name,
-                      price: dragOver.price,
-                      remain_ea: dragOver.remain_ea,
-                      image_url: dragOver.image_url,
-                      recommended: dragOver.recommended,
+                      ...item,
+                      ...getDragObject(dragOver),
                       position: dragItem.position,
                     }
-                  : it.id === dragOver.id
+                  : item.id === dragOver.id
                   ? {
-                      ...it,
-                      id: dragItem.id,
-                      name: dragItem.name,
-                      price: dragItem.price,
-                      remain_ea: dragItem.remain_ea,
-                      image_url: dragItem.image_url,
-                      recommended: dragItem.recommended,
+                      ...item,
+                      ...getDragObject(dragItem),
                       position: dragOver.position,
                     }
-                  : it,
+                  : item,
               ),
             }
           : category,
       ),
       categoryWithMenuItem: {
         ...state.categoryWithMenuItem,
-        menu_item: state.categoryWithMenuItem.menu_item.map(it =>
-          it.id === dragItem.id
+        menu_item: state.categoryWithMenuItem.menu_item.map(item =>
+          item.id === dragItem.id
             ? {
-                ...it,
-                id: dragOver.id,
-                name: dragOver.name,
-                price: dragOver.price,
-                remain_ea: dragOver.remain_ea,
-                image_url: dragOver.image_url,
-                recommended: dragOver.recommended,
+                ...item,
+                ...getDragObject(dragOver),
                 position: dragItem.position,
               }
-            : it.id === dragOver.id
+            : item.id === dragOver.id
             ? {
-                ...it,
-                id: dragItem.id,
-                name: dragItem.name,
-                price: dragItem.price,
-                remain_ea: dragItem.remain_ea,
-                image_url: dragItem.image_url,
-                recommended: dragItem.recommended,
+                ...item,
+                ...getDragObject(dragItem),
                 position: dragOver.position,
               }
-            : it,
+            : item,
         ),
       },
     })),
