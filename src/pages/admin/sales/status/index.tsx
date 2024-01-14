@@ -1,4 +1,9 @@
+import AdminLayout from '@/components/layout/admin/AdminLayout';
 import Status from '@/components/sales/status/Status';
-const statusPage = () => <Status />;
+import { ReactNode } from 'react';
+const StatusPage = () => <Status />;
 
-export default statusPage;
+StatusPage.getLayout = (page: ReactNode) => {
+  return <AdminLayout>{page}</AdminLayout>;
+};
+export default StatusPage;

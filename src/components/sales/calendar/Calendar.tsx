@@ -1,22 +1,20 @@
-import useManagementState from '@/shared/store/management';
 import 'moment/locale/ko';
 import Cell from './cell/Cell';
 import Days from './days/Days';
 import Header from './header/Header';
-import styles from './styles/Calendar.module.css';
 /**
  * @example clone()을 해준 이유는 원본을 훼손하지 않기 위해서입니다.
  */
 
-const Calendar = () => {
-  const { isShow } = useManagementState();
-
+const Calendar = ({ children }: { children?: React.ReactNode }) => {
+  console.log(children);
   return (
-    <div className={isShow ? styles['show-calendar'] : styles['hidden-calendar']}>
+    <>
       <Header />
+      {children}
       <Days />
       <Cell />
-    </div>
+    </>
   );
 };
 

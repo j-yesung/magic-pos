@@ -1,12 +1,15 @@
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import styles from '../styles/AdminLayout.module.css';
 import HeaderToggleButton from './HeaderToggleButton';
+import Logo from '/public/logo.svg';
 
 const Header = () => {
+  const router = useRouter();
+
   return (
     <header className={styles.headerWrapper}>
       <div>
-        <Link href="/">로고</Link>
+        <Logo className={styles.logo} width={200} height={30} onClick={() => router.push('/')} />
         <HeaderToggleButton />
       </div>
     </header>

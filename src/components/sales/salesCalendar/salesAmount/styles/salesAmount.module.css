@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 1.4rem;
+  padding: 1rem;
+  background-color: #ccc;
+}
+
+.sumSales {
+  display: flex;
+  gap: 1rem;
+  width: 18rem;
+}

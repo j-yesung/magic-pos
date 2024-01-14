@@ -1,5 +1,5 @@
 import { convertNumberToWon } from '@/shared/helper';
-import useManagementState from '@/shared/store/management';
+import useSalesStore from '@/shared/store/sales';
 import { BarElement, CategoryScale, ChartArea, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';
@@ -35,7 +35,7 @@ const chartXAxisBorder = {
 };
 
 const ChartBar = () => {
-  const { data } = useManagementState();
+  const { data } = useSalesStore();
 
   return (
     <div className={styles['bar-wrapper']}>
