@@ -13,17 +13,14 @@ import { useRouter } from 'next/router';
 import styles from '../styles/calendar.module.css';
 import { CalendarDataType } from './Cell';
 
-const CellItem = ({
-  day,
-  salesData,
-  getMinMaxSalesType,
-  clickShowDataOfDateHandler,
-}: {
+interface CellItemProps {
   day: Moment;
   salesData?: CalendarDataType;
   getMinMaxSalesType?: (param: CalendarDataType) => GetMinMaxSalesReturnType;
   clickShowDataOfDateHandler?: (param: Moment) => () => Promise<void>;
-}) => {
+}
+
+const CellItem = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDateHandler }: CellItemProps) => {
   const {
     date: { currentDate, selectedDate, today },
   } = useSalesStore();
