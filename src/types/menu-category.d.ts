@@ -4,3 +4,12 @@ declare type CategoryType = {
   name: string;
   position: number;
 };
+
+declare interface AdminCategories {
+  adminCategories: {
+    id: number;
+    name: string;
+    url: string;
+    active: boolean;
+  }[];
+}
