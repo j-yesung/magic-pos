@@ -19,6 +19,12 @@ const adminCategories = [
 
 const AdminLayout = ({ children }: AdminLayoutProps) => {
   const { isToggle } = useToggleStore();
+  const { auth } = useAuthStore();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!auth) router.push('/');
+  }, []);
 
   return (
     <div className={isToggle ? styles.adminWrapperToggle : styles.adminWrapper}>
