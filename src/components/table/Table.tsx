@@ -13,9 +13,10 @@ const Table = () => {
   const dummySideBarRef = useRef<HTMLDivElement>(null)
   const { setDummySideBarRef } = useTableStore();
 
-  useEffect(() => { 
+  useEffect(() => {
     setDummySideBarRef(dummySideBarRef)
-  },[])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   return (
     <div className={styles['table-wrapper']}>
       {data && <TableContainer storeData={data} />}

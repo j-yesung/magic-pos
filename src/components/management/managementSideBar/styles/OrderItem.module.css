@@ -1,4 +1,4 @@
-.order-ilst-item {
+.order-list-item {
   width: 80%;
   height: auto;
   display: flex;
@@ -14,7 +14,7 @@
 }
 
 
-.order-ilst-item>div {
+.order-list-item>div {
   width: 100%;
   flex: 1;
   display: flex;
@@ -55,17 +55,28 @@
 .item-order-list-item{
   width: 100%;
   height: auto;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
   transition: all 0.2s;
   padding: 5% 0;
   border: 1px solid #999;
+  font-size: 1.4rem;
 }
 
 .item-image {
   border-radius: 50px;
 }
-.item-order-list-item > span {
+.item-order-list-item > div {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  padding: 3% 10%;
+}
+.item-order-list-item > div:first-child {
+  justify-content: space-between;
+}
+.item-order-list-item>div:last-child {
+  justify-content: flex-end;
+}
+.item-order-list-item > div > span {
   visibility: visible;
 }

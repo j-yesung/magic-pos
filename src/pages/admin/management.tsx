@@ -6,4 +6,5 @@ const ManagementPage = () => <Management />
 
 ManagementPage.getLayout = (page: ReactNode) => <AdminLayout>{page}</AdminLayout>;
 
+
 export default ManagementPage;

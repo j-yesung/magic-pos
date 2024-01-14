@@ -8,9 +8,9 @@ const TableContainer = ({ storeData }: { storeData: StoreWithStoreTable[] }) => 
   /**
    * position값중 가장 큰수 추출
    */
-  const maxPosition = storeData?.[0].store_table.length === 0
+  const maxPosition = storeData?.[0]?.store_table.length === 0
     ? 0
-    : storeData?.[0].store_table.reduce((prev, value) => {
+    : storeData?.[0]?.store_table.reduce((prev, value) => {
       return prev.position && value.position && prev.position >= value.position ? prev : value
     });
   /**
@@ -20,7 +20,7 @@ const TableContainer = ({ storeData }: { storeData: StoreWithStoreTable[] }) => 
     is_disabled: 0,
     max_guest: 4,
     position: maxPosition === 0 ? 1 : maxPosition?.position && maxPosition.position + 1,
-    store_id: storeData?.[0].id
+    store_id: storeData?.[0]?.id
   };
   const clickAddStoreTableHandler = () => {
     if (storeData?.[0]?.id) {

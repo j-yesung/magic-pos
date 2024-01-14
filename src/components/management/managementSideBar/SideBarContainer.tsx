@@ -1,13 +1,16 @@
+
+import { convertNumberToWon } from "@/shared/helper"
 import useManagementStore from "@/shared/store/management"
-import { OrderDataWithStoreName, StoreWithOrderInfo } from "@/types/supabase"
+import { StoreWithOrderInfo } from "@/types/supabase"
 import { useEffect, useState } from "react"
 import OrderItem from "./OrderItem"
 import styles from "./styles/SideBarContainer.module.css"
 
 const SideBarContainer = ({ managementData }: { managementData?: StoreWithOrderInfo[] }) => {
-  const [orderData, setOrderData] = useState<OrderDataWithStoreName[]>([])
+  // const [orderData, setOrderData] = useState<OrderDataWithStoreName[]>([])
   const [totalPrice, setTotalPrice] = useState(0)
   const { orderId } = useManagementStore()
+  const { orderData, setOrderData } = useManagementStore();
 
 
   useEffect(() => {
@@ -24,6 +27,7 @@ const SideBarContainer = ({ managementData }: { managementData?: StoreWithOrderI
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderId])
+  console.log(orderData)
   return (
     <div className={styles['sideBar-container']}>
       <ul className={styles['order_list']}>
@@ -31,7 +35,7 @@ const SideBarContainer = ({ managementData }: { managementData?: StoreWithOrderI
       </ul>
       <div className={styles['total-price']}>
         <div>총 금액 : </div>
-        <div>{totalPrice} 원</div>
+        <div>{convertNumberToWon(totalPrice)}</div>
       </div>
     </div>
   )

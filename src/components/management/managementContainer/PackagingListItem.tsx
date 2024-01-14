@@ -1,15 +1,14 @@
-import useManagementStore from "@/shared/store/management"
-import { Tables } from "@/types/supabase"
-import styles from "./styles/PackagingListItem.module.css"
+import useManagementStore from '@/shared/store/management';
+import { Tables } from '@/types/supabase';
+import styles from './styles/PackagingListItem.module.css';
 
 const PackagingListItem = ({ packagingData }: { packagingData: Tables<'order_number'> }) => {
-  const { setOrderId } = useManagementStore()
+  const { setOrderId } = useManagementStore();
 
 
   const clickOrderDataReFetchHandler = () => {
-    setOrderId({ id: packagingData.id, status: "포장", number: '' })
+    setOrderId({ id: [packagingData.id], status: '포장', number: '' });
   }
-
 
 
   return (
@@ -20,7 +19,7 @@ const PackagingListItem = ({ packagingData }: { packagingData: Tables<'order_num
       </div>
       <div className={styles['item-status']}>매뉴 준비중</div>
     </li>
-  )
-}
+  );
+};
 
-export default PackagingListItem
+export default PackagingListItem;

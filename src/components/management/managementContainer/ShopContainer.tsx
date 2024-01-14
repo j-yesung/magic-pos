@@ -4,8 +4,8 @@ import styles from "./styles/ShopContainer.module.css";
 
 
 const ShopContainer = ({ managementData }: { managementData?: StoreWithOrderInfo[] }) => {
-  const storeTable = managementData && managementData?.[0].store_table;// id
-  const storeOrder = managementData && managementData?.[0].order_store;// table_id
+  const storeTable = managementData && managementData?.[0]?.store_table;// id
+  const storeOrder = managementData && managementData?.[0]?.order_store;// table_id
 
   const storeTableSort = storeTable?.map((table) => {
     return storeOrder?.map((order) => { return order.table_id }).includes(table.id)

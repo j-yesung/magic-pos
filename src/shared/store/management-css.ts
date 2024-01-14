@@ -7,6 +7,7 @@ type ClickMenuListType = {
   itemOrderListItemRef: RefObject<HTMLLIElement[]> | null
   itemOrderListItemImageRef: RefObject<HTMLSpanElement[]> | null
   itemOrderListItemNameRef: RefObject<HTMLSpanElement[]> | null
+  itemOrderListItemRemainEaRef: RefObject<HTMLSpanElement[]> | null
   itemOrderListItemPriceRef: RefObject<HTMLSpanElement[]> | null
 }
 
@@ -15,6 +16,7 @@ interface ManagementCssType {
   refItemOrderListItem: RefObject<HTMLLIElement[]> | null;
   refItemOrderListItemImage: RefObject<HTMLSpanElement[]> | null;
   refItemOrderListItemName: RefObject<HTMLSpanElement[]> | null;
+  refItemOrderListItemRemainEa: RefObject<HTMLSpanElement[]> | null;
   refItemOrderListItemPrice: RefObject<HTMLSpanElement[]> | null;
   isListClick: boolean;
   setClickMenuList: (value: ClickMenuListType) => void;
@@ -27,6 +29,7 @@ const useManagementCssStore = create<ManagementCssType>(set => ({
   refItemOrderListItem: null,
   refItemOrderListItemImage: null,
   refItemOrderListItemName: null,
+  refItemOrderListItemRemainEa: null,
   refItemOrderListItemPrice: null,
   isListClick: false,
   // setState함수 영역
@@ -36,6 +39,7 @@ const useManagementCssStore = create<ManagementCssType>(set => ({
     refItemOrderListItem: value.itemOrderListItemRef,
     refItemOrderListItemImage: value.itemOrderListItemImageRef,
     refItemOrderListItemName: value.itemOrderListItemNameRef,
+    refItemOrderListItemRemainEa: value.itemOrderListItemRemainEaRef,
     refItemOrderListItemPrice: value.itemOrderListItemPriceRef
   })),
   setIsListClick: (value) => set(() => ({

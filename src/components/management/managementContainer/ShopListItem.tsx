@@ -1,3 +1,4 @@
+import { useModal } from "@/hooks/modal/useModal";
 import useManagementStore from "@/shared/store/management";
 import useManagementCssStore from "@/shared/store/management-css";
 import { Tables } from "@/types/supabase";
@@ -15,16 +16,16 @@ const ShopListItem = ({ shopData, storeOrderData }: propsType) => {
   const [storeOrderInTableById, setStoreOrderInTableById] = useState<string[]>([])
   const { setOrderId } = useManagementStore()
   const { setIsListClick } = useManagementCssStore();
+  const { MagicModal } = useModal()
 
   const clickOrderDataReFetchHandler = () => {
     if (storeOrderInTable.length === 0) {
-      alert('주문내역이 없습니다. ')
+      MagicModal.alert({ content: '주문내역이 없습니다.' });
     } else {
       setOrderId({ id: storeOrderInTableById, status: "테이블", number: `${shopData.position}` })
       setIsListClick(true)
     }
   }
-  console.log(storeOrderInTableById)
   useEffect(() => {
     if (storeOrderData && shopData) {
       const data = storeOrderData?.filter((x) => x.table_id === shopData.id)
