@@ -8,14 +8,21 @@ import useOrderStore from '@/shared/store/order';
 import { OrderDataWithStoreName, Tables } from '@/types/supabase';
 import { groupByKey } from '@/shared/helper';
 import TotalPrice from '@/components/order/common/TotalPrice';
+import { useRouter } from 'next/router';
 
 const ReceiptContainer = () => {
-  const { orderId } = useOrderStore();
+  const { orderId, storeId } = useOrderStore();
   const { storeOrderData } = useStoreOrderQuery(orderId ?? '');
   const { numberOrderData } = useNumberOrderQuery(orderId ?? '');
   const [orderData, setOrderData] = useState<OrderDataWithStoreName>(null);
   const [groupData, setGroupData] = useState<Map<string, Tables<'menu_item'>[]>>(new Map());
   const [orderType, setOrderType] = useState<OrderType>({ type: 'store' });
+  const [isOrderDone, setIsOrderDone] = useState(false);
+  const router = useRouter();
+
+  const clickOrderMoreHandler = () => {
+    router.push(`/order/${storeId}`);
+  };
 
   // 주문 데이터가 있다면 그룹화 합니다.
   useEffect(() => {
@@ -30,16 +37,22 @@ const ReceiptContainer = () => {
     // 매장 주문
     if (storeOrderData?.data) {
       setOrderData(storeOrderData.data);
+      if (storeOrderData.data?.is_done) {
+        setIsOrderDone(true);
+      }
     }
 
     // 번호표 주문 (포장, 홀)
     if (numberOrderData?.data) {
       setOrderData(numberOrderData.data);
-
       // 포장 주문일 경우
       if (numberOrderData.data.is_togo) setOrderType({ type: 'togo' });
+
+      if (numberOrderData.data?.is_done) {
+        setIsOrderDone(true);
+      }
     }
-  }, [storeOrderData]);
+  }, [storeOrderData, numberOrderData]);
 
   return (
     <div className={styles.container}>
@@ -55,6 +68,11 @@ const ReceiptContainer = () => {
               <ReceiptRow key={key} itemList={value} />
             ))}
           </div>
+          {isOrderDone ? (
+            <button onClick={clickOrderMoreHandler}>메뉴가 준비 되었습니다! 더 담으러 가기</button>
+          ) : (
+            <p>현재 메뉴가 준비 중 입니다...</p>
+          )}
           <TotalPrice allItemList={orderData?.menu_list as Tables<'menu_item'>[]} />
         </>
       )}
