@@ -11,6 +11,7 @@ import { useRouter } from 'next/router';
 import OrderContainer from '@/components/order/OrderContainer';
 import { useStoreOrderQuery } from '@/hooks/order/useStoreOrderQuery';
 import { useNumberOrderQuery } from '@/hooks/order/useNumberOrderQuery';
+import { useModal } from '@/hooks/modal/useModal';
 
 const OrderIndexPage = ({
   menuData,
@@ -25,21 +26,34 @@ const OrderIndexPage = ({
   const { storeOrderData } = useStoreOrderQuery(orderId ?? '');
   const { numberOrderData } = useNumberOrderQuery(orderId ?? '');
   const [isLoaded, setIsLoaded] = useState(false);
+  const { MagicModal } = useModal();
   const router = useRouter();
 
   useEffect(() => {
     if (orderId) {
       (async () => {
+        let isOrdered = false;
         if (storeOrderData?.data && !storeOrderData.data?.is_done) {
-          router.push('/order/receipt');
-          return;
+          isOrdered = true;
         }
 
         if (numberOrderData?.data && !numberOrderData.data?.is_done) {
-          router.push('/order/receipt');
-          return;
+          isOrdered = true;
         }
-        resetOrderList();
+
+        if (isOrdered) {
+          MagicModal.confirm({
+            content: '아직 준비 중인 메뉴가 있습니다. 추가로 주문 하시겠습니까?',
+            confirmButtonText: '추가 주문 하기',
+            confirmButtonCallback: () => {
+              resetOrderList();
+            },
+            cancelButtonText: '주문 확인 하러 가기',
+            cancelButtonCallback: () => {
+              router.push('/order/receipt');
+            },
+          });
+        }
       })();
     }
   }, [numberOrderData, storeOrderData]);
