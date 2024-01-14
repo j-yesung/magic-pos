@@ -1,7 +1,7 @@
 import { useObserver } from '@/hooks/ui/useObserver';
 import { useRef } from 'react';
 import styles from '../../styles/Section.module.css';
-import OtherFeature from './OtherFeature';
+import SliderImage from './SliderImage';
 
 const Analysis = () => {
   const target = useRef(null);
@@ -23,11 +23,11 @@ const Analysis = () => {
         <div className={styles.salsePictrueArea}>
           <div className={styles.salesContentsContainer}>
             <h1>매출 분석</h1>
-            <OtherFeature />
+            <SliderImage />
           </div>
           <div className={styles.salesContentsContainer}>
             <h1>다른 기능</h1>
-            <OtherFeature />
+            <SliderImage />
           </div>
         </div>
       </section>
