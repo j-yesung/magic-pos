@@ -1,4 +1,4 @@
 import Status from '@/components/sales/status/Status';
-const statusPage = () => <Status />;
+const StatusPage = () => <Status />;
 
-export default statusPage;
+export default StatusPage;
