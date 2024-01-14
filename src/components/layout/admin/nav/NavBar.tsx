@@ -1,29 +1,33 @@
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import styles from '../styles/AdminLayout.module.css';
 
-const NavBar = () => {
-  const [navList, setNavList] = useState([
-    { id: 1, name: '주문 내역 확인', url: '#1', active: false },
-    { id: 2, name: '매출 관리', url: '/admin/sales/status', active: true },
-    { id: 3, name: '플랫폼 관리', url: '#3', active: false },
-    { id: 4, name: '테이블 관리', url: '/admin/table', active: true },
-    { id: 5, name: '메뉴 관리', url: '#5', active: false },
-    { id: 6, name: '가게 설정', url: '/admin/store', active: false },
-  ]);
+const NavBar = (adminInfo: AdminCategories) => {
+  const [navList, setNavList] = useState(adminInfo.adminCategories);
+  const router = useRouter();
 
-  const clickNavListHandler = (id: number) => {
+  const clickNavListHandler = (id: number, url: string) => {
+    // 현재 active 상태인 list는 클릭해도 반응하지 않습니다.
+    const currentActive = navList.find(item => item.active === true);
+    if (currentActive && currentActive.id === id) return;
+
     setNavList(prevList =>
       prevList.map(item => (item.id === id ? { ...item, active: !item.active } : { ...item, active: false })),
     );
+
+    router.push(url);
   };
 
   return (
     <aside className={styles.navWrapper}>
       <ul>
         {navList.map(list => (
-          <li className={list.active ? styles.active : ''} key={list.id} onClick={() => clickNavListHandler(list.id)}>
-            <Link href={list.url}>{list.name}</Link>
+          <li
+            className={list.active ? styles.active : ''}
+            key={list.id}
+            onClick={() => clickNavListHandler(list.id, list.url)}
+          >
+            {list.name}
           </li>
         ))}
       </ul>
