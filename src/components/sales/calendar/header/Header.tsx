@@ -8,14 +8,14 @@ const Header = () => {
   const { clickPreMonthHandler, clickNextMonthHandler } = useCalendar();
 
   return (
-    <div className={styles['header']}>
+    <div className={styles.header}>
       <div className="wrapper">
-        <span className={styles['header-text']}>
+        <span className={styles.headerText}>
           <span className="text-year">{currentDate.clone().format('YYYY년')}</span>
           {currentDate.clone().format('MM월')}
         </span>
       </div>
-      <div className={styles['btn-group']}>
+      <div className={styles.btnGroup}>
         <span onClick={clickPreMonthHandler}>이전</span>
         <span onClick={clickNextMonthHandler}>다음</span>
       </div>

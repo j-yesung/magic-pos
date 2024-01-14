@@ -105,13 +105,13 @@ const Cell = () => {
       day = day.clone().add(1, 'day');
     }
     row.push(
-      <div key={days[0].key} className={styles['calendar-row']}>
+      <div key={days[0].key} className={styles.calendarRow}>
         {days}
       </div>,
     );
     days = [];
   }
-  return <div className={styles['calendar-body']}>{row}</div>;
+  return <div className={styles.calendarBody}>{row}</div>;
 };
 
 export default Cell;

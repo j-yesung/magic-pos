@@ -28,44 +28,44 @@ const CellItem = ({
     date: { currentDate, selectedDate, today },
   } = useSalesStore();
 
-  const dateVariant = cva([styles['date-base']], {
+  const dateVariant = cva([styles.dateBase], {
     variants: {
       monthType: {
-        PREV: styles['prev-month'],
-        CURRENT: styles['current-month'],
-        AFTER: styles['after-month'],
+        PREV: styles.prevMonth,
+        CURRENT: styles.currentMonth,
+        AFTER: styles.afterMonth,
       },
       calendarType: {
-        CURRENTCALENDAR: styles['current'],
-        PREVCALENDAR: styles['prev'],
-        AFTERCALENDAR: styles['after'],
+        CURRENTCALENDAR: styles.current,
+        PREVCALENDAR: styles.prev,
+        AFTERCALENDAR: styles.after,
       },
       dateType: {
-        PREV: styles['prev-date'],
-        CURRENT: styles['current-date'],
-        AFTER: styles['after-date'],
+        PREV: styles.prevDate,
+        CURRENT: styles.currentDate,
+        AFTER: styles.afterDate,
       },
       selectedDateType: {
-        SELECTEDTYPE: styles['point-date'],
+        SELECTEDTYPE: styles.pointDate,
       },
     },
   });
 
-  const dayVariant = cva([styles['day-base']], {
+  const dayVariant = cva([styles.dayBase], {
     variants: {
       dayType: {
-        SATURADAY: styles['saturaday'],
-        SUNDAY: styles['sunday'],
-        DAY: styles['day'],
+        SATURADAY: styles.saturaday,
+        SUNDAY: styles.sunday,
+        DAY: styles.day,
       },
     },
   });
 
-  const salesVariant = cva([styles['sales-base']], {
+  const salesVariant = cva([styles.salesBase], {
     variants: {
       sales: {
-        MAX: styles['sales-max'],
-        MIN: styles['sales-min'],
+        MAX: styles.salesMax,
+        MIN: styles.salesMin,
       },
     },
   });
