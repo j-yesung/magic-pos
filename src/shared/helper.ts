@@ -138,7 +138,6 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
         salesData.map(data => ({ ...data, sales_date: moment(data.sales_date).format('YYYY-MM') })),
         'sales_date',
       );
-      console.log(group);
 
       for (const [key, value] of group) {
         if (moment().format('YYYY-MM') === key) {
