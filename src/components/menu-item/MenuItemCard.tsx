@@ -90,6 +90,9 @@ const MenuItemCard = ({ item, idx }: PropsType) => {
             <span>남은 갯수: </span>
             <strong>{item.remain_ea}</strong>
           </span>
+          <span>
+            <span>옵션</span>
+          </span>
         </span>
       </button>
     </li>
