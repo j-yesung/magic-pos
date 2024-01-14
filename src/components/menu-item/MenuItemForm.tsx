@@ -72,6 +72,7 @@ const MenuItemFormPage = () => {
     toggleShow(false);
   };
 
+  // 썸네일 이미지 보여주기
   const handleChangeImg = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files !== null && e.target.files[0] !== null) {
       const file = e.target.files[0];
@@ -184,26 +185,7 @@ const MenuItemFormPage = () => {
         </button>
       </div>
       <button className={styles['x-wrap']} type="button" onClick={clickFormHideHandler}>
-        <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M24.9998 45.8337C36.5058 45.8337 45.8332 36.5063 45.8332 25.0003C45.8332 13.4944 36.5058 4.16699 24.9998 4.16699C13.4939 4.16699 4.1665 13.4944 4.1665 25.0003C4.1665 36.5063 13.4939 45.8337 24.9998 45.8337Z"
-            fill="#CEB7FF"
-          />
-          <path
-            d="M31.25 18.75L18.75 31.25"
-            stroke="white"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-          <path
-            d="M18.75 18.75L31.25 31.25"
-            stroke="white"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
+        X
       </button>
     </form>
   );

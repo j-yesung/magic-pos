@@ -12,7 +12,6 @@
   gap: 5rem 3rem;
   padding: 10rem;
 }
-
 .wrap ul li {
   width: calc(25% - 2.25rem);
   min-height: 14rem;
@@ -64,11 +63,9 @@
   display: flex;
   gap: 0.5rem;
 }
-
 .wrap ul li button > span.txt > span strong {
   font-weight: bold;
 }
-
 .wrap .plus {
   display: flex;
   justify-content: center;
