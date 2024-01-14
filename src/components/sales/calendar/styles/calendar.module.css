@@ -106,6 +106,7 @@ sales/calendar에서 매출 CSS 입니다.
   margin-top: 0.5rem;
   color: #000;
   font-size: 1rem;
+  height: 3rem;
 }
 
 .sales-max {
