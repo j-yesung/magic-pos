@@ -1,0 +1,31 @@
+.container {
+}
+
+.title-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4rem;
+}
+
+.title-wrapper h2 {
+  font-size: 5rem;
+  font-weight: bold;
+}
+
+.toggle-btn-wrapper {
+  display: flex;
+  gap: 1rem;
+}
+
+.toggle-btn-wrapper button {
+  text-align: center;
+  width: 23rem;
+  border: 1px solid #ccc;
+  padding: 1rem 1.4rem;
+}
+
+.clickedToggle {
+  background-color: #ccc;
+  color: #fff;
+  border: 2px solid var(--point-color) !important;
+}
