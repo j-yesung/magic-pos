@@ -5,6 +5,7 @@ import ToastContent from '@/components/toast/ToastContent';
 const Toast = () => {
   const { toastList } = useToastStore();
 
+  // Toast의 옵션마다 다른 위치에 렌더링 시켜야 한다.
   const topRightList = toastList.filter(toast => toast.position === 'top-right');
   const topLeftList = toastList.filter(toast => toast.position === 'top-left');
   const bottomRightList = toastList.filter(toast => toast.position === 'bottom-right');

@@ -20,7 +20,7 @@ const OrderIndexPage = ({
   storeId: string;
   tableId: string;
 }) => {
-  const { setMenuData, setStoreId, setTableId, orderNumber, orderType } = useOrderStore();
+  const { setMenuData, setStoreId, setTableId, orderNumber } = useOrderStore();
   const [isLoaded, setIsLoaded] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
@@ -49,28 +49,28 @@ const OrderIndexPage = ({
     });
 
     toast('test2', {
-      type: 'info',
+      type: 'warn',
       position: 'top-right',
       showCloseButton: false,
       autoClose: 3000,
     });
 
     toast('test3', {
-      type: 'info',
+      type: 'danger',
       position: 'top-left',
       showCloseButton: false,
       autoClose: 2000,
     });
 
     toast('test3', {
-      type: 'info',
+      type: 'success',
       position: 'top-left',
       showCloseButton: false,
       autoClose: 4000,
     });
 
     toast('bottom1', {
-      type: 'info',
+      type: 'success',
       position: 'bottom-left',
       showCloseButton: false,
       autoClose: 1000,
@@ -82,13 +82,13 @@ const OrderIndexPage = ({
       autoClose: 5000,
     });
     toast('bottom3', {
-      type: 'info',
+      type: 'warn',
       position: 'bottom-left',
       showCloseButton: false,
       autoClose: 3000,
     });
     toast('bottom3', {
-      type: 'info',
+      type: 'danger',
       position: 'bottom-left',
       showCloseButton: false,
       autoClose: 2000,
@@ -101,13 +101,13 @@ const OrderIndexPage = ({
       autoClose: 1000,
     });
     toast('bottom2', {
-      type: 'info',
+      type: 'success',
       position: 'bottom-right',
       showCloseButton: false,
       autoClose: 5000,
     });
     toast('bottom3', {
-      type: 'info',
+      type: 'danger',
       position: 'bottom-right',
       showCloseButton: false,
       autoClose: 2000,

@@ -22,11 +22,12 @@ interface ModalConfirmTypeOption {
 }
 
 type ToastAnimationType = 'hide-top-right' | 'hide-top-left' | 'hide-bottom-right' | 'hide-bottom-left' | null;
+type ToastPositionType = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
 interface ToastTypeOption {
   id: string;
   content: string;
   showCloseButton: boolean;
-  position: 'top-right' | 'top-left' | 'top-center' | 'bottom-right' | 'bottom-left' | 'bottom-center';
+  position: ToastPositionType;
   type: 'info' | 'success' | 'warn' | 'danger';
   autoClose: number;
   animation: ToastAnimationType;

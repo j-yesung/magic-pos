@@ -1,6 +1,6 @@
 .toast-container {
   position: fixed;
-  z-index: 100;
+  z-index: var(--level-1-z-index);
 }
 
 .toast-content {
@@ -9,12 +9,31 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 28rem;
+  width: 45vw;
   height: 4rem /* 40/10 */;
   background-color: white;
-  border-radius: 1.5rem /* 15/10 */;
-  box-shadow: rgba(0, 0, 0, 0.35) 0 0.5rem /* 5/10 */ 1.5rem /* 15/10 */;
+  border-radius: 1rem /* 15/10 */;
   padding: 1rem;
+
+  @media screen and (max-width: 76.8rem  /* 768/10 */) {
+    width: 25vw;
+  }
+}
+
+.danger {
+  box-shadow: rgba(0, 0, 0, 0.05) 0 0.6rem 0.24rem 0, red 0 0 0 0.1rem;
+}
+
+.info {
+  box-shadow: rgba(0, 0, 0, 0.05) 0 0.6rem 0.24rem 0, rgba(0, 0, 0, 0.08) 0 0 0 0.1rem;
+}
+
+.warn {
+  box-shadow: rgba(0, 0, 0, 0.05) 0 0.6rem 0.24rem 0, yellow 0 0 0 0.1rem;
+}
+
+.success {
+  box-shadow: rgba(0, 0, 0, 0.05) 0 0.6rem 0.24rem 0, green 0 0 0 0.1rem;
 }
 
 .top-right {
