@@ -21,6 +21,7 @@ const AuthForm = ({ data }: FormProps) => {
     email: '',
     password: '',
     passwordConfirm: '',
+    businessName: '',
     businessNumber: '',
   });
   const { validateCheck, isBusinessNumberValid } = useValid(value);
