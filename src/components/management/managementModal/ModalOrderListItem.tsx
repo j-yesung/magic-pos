@@ -31,13 +31,11 @@ const ModalOrderListItem = ({ orderData }: { orderData: OrderDataWithStoreName }
     }
 
   }
-  console.log(orderConfirmData)
   useEffect(() => {
     ModalOrderListItemRef.current?.style.setProperty('background', `${isOrderList ? 'var(--main-color)' : '#fff'}`)
     ModalOrderListItemRef.current?.style.setProperty('color', `${isOrderList ? '#fff' : '#000'}`)
   }, [isOrderList])
 
-  console.log(orderConfirmData)
   return (
     <li className={styles['modal-order-list-item']} ref={ModalOrderListItemRef} onClick={clickOrderCheckHandler}>
       <div className={styles['item-order-number-box']}>

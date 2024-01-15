@@ -44,11 +44,13 @@ const ShopListItem = ({ shopData, storeOrderData }: propsType) => {
     <div className={styles['shop-list-item']} onClick={clickOrderDataReFetchHandler}>
       <div className={styles['item-table']}>테이블 {shopData.position}</div>
       <div className={styles['item-order-number']}>
-        <span>주문 번호 {
-          storeOrderInTable?.map((item) => {
-            return <span key={item.id}>{item.order_number}<span>, </span></span>
-          })
-        }</span>
+        <span>
+          <span>주문 번호</span>
+          {
+            storeOrderInTable?.map((item) => {
+              return <span key={item.id}>{item.order_number}<span>, </span></span>
+            })
+          }</span>
       </div>
       <div className={styles['item-status']}>매뉴 준비중</div>
     </div>

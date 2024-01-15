@@ -19,7 +19,6 @@ const useSetManagement = () => {
 
   useEffect(() => {
     if (didMount.current) {
-      console.log('로딩중');
       if (!isPending) {
         setIsModal(false)
       }

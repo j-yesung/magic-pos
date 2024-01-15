@@ -9,11 +9,10 @@ const ShopContainer = ({ managementData }: { managementData?: StoreWithOrderInfo
 
   const storeTableSort = storeTable?.map((table) => {
     return storeOrder?.map((order) => { return order.table_id }).includes(table.id)
-      ? { ...table, order_number: storeOrder?.filter((order) => { return order.table_id === table.id }).map((x) => x.order_number) }
-      : { ...table, order_number: [-1] }
+      ? { ...table, order_time: storeOrder?.filter((order) => { return order.table_id === table.id }).map((x) => x.order_time) }
+      : { ...table, order_time: ['-1'] }
   }).sort((a, b) => (a.position && b.position && a.position > b.position ? -1 : 1))
-    .sort((a, b) => (a.order_number[0] < b.order_number[0] ? 1 : -1))
-
+    .sort((a, b) => (a.order_time[0] < b.order_time[0] ? 1 : -1))
 
 
   return (
