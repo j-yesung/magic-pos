@@ -115,7 +115,7 @@ const Input = ({ value, onChangeHandler, onKeyDownHandler }: InputProps) => {
         if (input) {
           return (
             <Fragment key={input.id}>
-              <label htmlFor={input.name}>{input.label}</label>
+              {path === '/admin/store' && <label htmlFor={input.name}>{input.label}</label>}
               <input
                 id={input.name}
                 className={styles['input']}
