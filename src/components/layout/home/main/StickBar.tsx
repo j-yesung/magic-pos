@@ -10,6 +10,7 @@ const StickBar = () => {
   const router = useRouter();
   const { logout } = useAuth();
   const { auth } = useAuthStore();
+  console.log('auth: ', auth);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {

@@ -63,10 +63,11 @@ export const useAuth = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.LOGOUT] });
       useAuthStore.persist.clearStorage();
+      setSession(null);
       router.push('/');
     },
     onError: error => {
-      throw error;
+      console.error(error);
     },
   });
 
