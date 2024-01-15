@@ -22,7 +22,28 @@ interface ModalConfirmTypeOption {
 }
 
 interface AuthState {
-  auth: Record<string, string | number> | null;
+  auth: {
+    access_token: string;
+    expires_in: number;
+    refresh_token: string;
+    token_type: string;
+    user: {
+      app_metadata: {
+        provider: string;
+        provider_access_token: string;
+        provider_user_id: string;
+      };
+      aud: string;
+      created_at: string;
+      email: string;
+      id: string;
+      role: string;
+      updated_at: string;
+      user_metadata: {
+        full_name: string;
+      };
+    };
+  } | null;
   storeId: string | null;
   setSession: (auth) => void;
   setStoreId: (id: string) => void;

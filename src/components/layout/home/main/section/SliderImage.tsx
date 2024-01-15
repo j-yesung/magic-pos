@@ -11,7 +11,7 @@ const SWIPER_DUMMY = [
   { id: 3, title: '세 번째 이미지' },
 ];
 
-const OtherFeature = () => {
+const SliderImage = () => {
   return (
     <>
       <div className={styles.salesContents}>
@@ -35,4 +35,4 @@ const OtherFeature = () => {
   );
 };
 
-export default OtherFeature;
+export default SliderImage;
