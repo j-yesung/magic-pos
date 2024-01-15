@@ -1,4 +1,7 @@
+import useAuthStore from '@/shared/store/auth';
 import useToggleStore from '@/shared/store/toggle';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import Header from './header/Header';
 import CategoryTitle from './main/CategoryTitle';
 import NavBar from './nav/NavBar';
@@ -19,6 +22,12 @@ const adminCategories = [
 
 const AdminLayout = ({ children }: AdminLayoutProps) => {
   const { isToggle } = useToggleStore();
+  const { auth } = useAuthStore();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!auth) router.push('/');
+  }, []);
 
   return (
     <div className={isToggle ? styles.adminWrapperToggle : styles.adminWrapper}>

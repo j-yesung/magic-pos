@@ -8,6 +8,7 @@ import {
   signUpHandler,
   updatePasswordHandler,
 } from '@/server/api/supabase/auth';
+import { getStore } from '@/server/api/supabase/store';
 import useAuthStore from '@/shared/store/auth';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
@@ -24,7 +25,7 @@ const enum QUERY_KEY {
 export const useAuth = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
-  const { setSession, setStoreId } = useAuthStore();
+  const { setSession, setStoreId, setStroeName, setStoreBno } = useAuthStore();
 
   const signupMutation = useMutation({
     mutationFn: signUpHandler,
@@ -43,8 +44,12 @@ export const useAuth = () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.LOGIN] });
       const auth = await getUserSession();
       const storeId = await getStoreId();
-
+      const store = await getStore(auth.session?.user.id!);
+      const storeName = store && store[0]?.business_name;
+      const storeBno = store && store[0]?.business_number;
       setSession(auth.session);
+      setStoreBno(storeBno!);
+      setStroeName(storeName!);
       storeId.length !== 0 ? setStoreId(storeId[0].id) : setStoreId(null!);
       router.push('/');
     },
@@ -57,8 +62,6 @@ export const useAuth = () => {
     mutationFn: logoutHandler,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.LOGOUT] });
-      setSession(null);
-      setStoreId(null!);
       useAuthStore.persist.clearStorage();
       router.push('/');
     },
