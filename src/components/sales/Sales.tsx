@@ -7,16 +7,20 @@ const Sales = () => {
   const clickShowChart = () => setToggle(pre => true);
   const clickShowCalendar = () => setToggle(pre => false);
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.titleWrapper}>
         <h2>매출관리</h2>
-        <div>
-          <button onClick={clickShowChart}>매출관리</button>
-          <button onClick={clickShowCalendar}>매출달력</button>
+        <div className={styles.toggleBtnWrapper}>
+          <button className={toggle ? styles.clickedToggle : undefined} onClick={clickShowChart}>
+            매출관리
+          </button>
+          <button className={!toggle ? styles.clickedToggle : undefined} onClick={clickShowCalendar}>
+            매출달력
+          </button>
         </div>
       </div>
 
-      {toggle ? <SalesDeatilWithCalendar /> : <Status />}
+      {toggle ? <Status /> : <SalesDeatilWithCalendar />}
     </div>
   );
 };
