@@ -45,6 +45,10 @@ interface AuthState {
     };
   } | null;
   storeId: string | null;
+  storeName: string | null;
+  storeBno: string | null;
+  setStroeName: (name: string) => void;
+  setStoreBno: (bno: string) => void;
   setSession: (auth) => void;
   setStoreId: (id: string) => void;
 }
