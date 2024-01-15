@@ -23,7 +23,6 @@ export const signUpHandler = async (values: values) => {
     .from('store')
     .insert([{ business_number: businessNumber, business_id: authData.session?.user?.id }])
     .select('*');
-  if (authError) throw authError;
   if (bnoError) throw bnoError;
   return { authData, bnoData };
 };

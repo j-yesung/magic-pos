@@ -13,7 +13,8 @@ export const incrementOrderNumber = async (storeId: string) => {
  */
 export const getStore = async (userId: string) => {
   const { data, error } = await supabase.from('store').select('*').eq('business_id', userId);
-  return { store: data, error };
+  
+  return data;
 };
 
 /**
@@ -21,6 +22,5 @@ export const getStore = async (userId: string) => {
  * @param param 현재 접속 중인 사용자의 id, 상호명
  */
 export const updateStoreInfomation = async ({ userId, businessName }: { userId: string; businessName: string }) => {
-  const { error } = await supabase.from('store').update({ business_name: businessName }).eq('business_id', userId);
-  if (error) throw error;
+  await supabase.from('store').update({ business_name: businessName }).eq('business_id', userId);
 };

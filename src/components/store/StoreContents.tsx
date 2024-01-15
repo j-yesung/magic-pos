@@ -12,11 +12,10 @@ const StoreContents = () => {
   const { auth } = useAuthStore();
   const user = auth?.user;
   const { data } = useGetQuery(user?.id || '');
-  console.log('data: ', data);
   const { value, changeHandler } = useInput({
     storeEmail: user?.email ?? '',
-    bnoNumber: data?.store?.[0].business_number ?? '',
-    storeName: data?.store?.[0].business_name ?? '',
+    bnoNumber: data?.[0].business_number ?? '',
+    storeName: data?.[0].business_name ?? '',
   });
   const { updateStoreInfomation } = useStoreQuery();
 
