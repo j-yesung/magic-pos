@@ -9,7 +9,6 @@ import useOrderStore from '@/shared/store/order';
 import { isEmptyObject } from '@/shared/helper';
 import { useRouter } from 'next/router';
 import OrderContainer from '@/components/order/OrderContainer';
-import useToast from '@/hooks/toast/useToast';
 
 const OrderIndexPage = ({
   menuData,
@@ -23,7 +22,6 @@ const OrderIndexPage = ({
   const { setMenuData, setStoreId, setTableId, orderNumber } = useOrderStore();
   const [isLoaded, setIsLoaded] = useState(false);
   const router = useRouter();
-  const { toast } = useToast();
 
   useEffect(() => {
     if (orderNumber !== 0) {
