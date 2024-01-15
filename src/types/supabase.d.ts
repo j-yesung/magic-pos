@@ -137,21 +137,18 @@ export interface Database {
           is_use: boolean | null;
           menu_id: string;
           name: string | null;
-          option_kind: string[] | null;
         };
         Insert: {
           id?: string;
           is_use?: boolean | null;
           menu_id: string;
           name?: string | null;
-          option_kind?: string[] | null;
         };
         Update: {
           id?: string;
           is_use?: boolean | null;
           menu_id?: string;
           name?: string | null;
-          option_kind?: string[] | null;
         };
         Relationships: [
           {
@@ -159,6 +156,35 @@ export interface Database {
             columns: ['menu_id'];
             isOneToOne: false;
             referencedRelation: 'menu_item';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      menu_option_detail: {
+        Row: {
+          id: string;
+          name: string;
+          option_id: string;
+          price: number;
+        };
+        Insert: {
+          id?: string;
+          name?: string;
+          option_id: string;
+          price?: number;
+        };
+        Update: {
+          id?: string;
+          name?: string;
+          option_id?: string;
+          price?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'menu_option_detail_option_id_fkey';
+            columns: ['option_id'];
+            isOneToOne: false;
+            referencedRelation: 'menu_option';
             referencedColumns: ['id'];
           },
         ];
@@ -524,7 +550,6 @@ interface StoreWithOrderInfo extends Tables<'store'> {
 
 interface CategoryWithMenuItem extends Tables<'menu_category'> {
   menu_item: Tables<'menu_item'>[];
-  store: Pick<Tables<'store'>, 'business_name'>;
 }
 
 type StoreOrderWithStoreName = Tables<'order_store'>['Row'] & {
