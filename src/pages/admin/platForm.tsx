@@ -1,7 +1,8 @@
+import AdminLayout from "@/components/layout/admin/AdminLayout"
 import PlatForm from "@/components/platform/PlatForm"
+import { ReactNode } from "react"
 
-const platFormPage = () => <PlatForm/>
+const PlatFormPage = () => <PlatForm/>
+PlatFormPage.getLayout = (page:ReactNode)=><AdminLayout>{page}</AdminLayout>
 
-
-
-export default platFormPage
+export default PlatFormPage
