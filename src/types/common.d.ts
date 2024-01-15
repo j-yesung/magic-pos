@@ -21,6 +21,18 @@ interface ModalConfirmTypeOption {
   cancelButtonCallback?: (() => void) | null;
 }
 
+type ToastAnimationType = 'hide-top-right' | 'hide-top-left' | 'hide-bottom-right' | 'hide-bottom-left' | null;
+type ToastPositionType = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
+interface ToastTypeOption {
+  id: string;
+  content: string;
+  showCloseButton: boolean;
+  position: ToastPositionType;
+  type: 'info' | 'success' | 'warn' | 'danger';
+  autoClose: number;
+  animation: ToastAnimationType;
+}
+
 interface AuthState {
   auth: {
     access_token: string;
