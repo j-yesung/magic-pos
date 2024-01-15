@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { SwiperRef } from 'swiper/react';
 import useOrderStore, { ORDER_STEP } from '@/shared/store/order';
 import { usePaymentWidget } from '@/hooks/order/usePaymentWidget';
@@ -36,7 +36,7 @@ const StepButton = ({ sliderRef }: ButtonProps) => {
     <>
       {step > ORDER_STEP.CHOOSE_ORDER_TYPE && (
         <div className={styles.container}>
-          {optionSwiperRef?.current!.swiper.realIndex !== 1 ? (
+          {optionSwiperRef?.current!.swiper?.realIndex !== 1 ? (
             <button className={styles.button} onClick={nextClickHandler} disabled={orderList.length === 0}>
               <span>{BUTTON_OPTIONS[step]}</span>
               {step === ORDER_STEP.SELECT_MENU && (
