@@ -1,10 +1,5 @@
+import Container from './container/Container';
 
-const PlatForm = () => {
-  return (
-    <div>
-      asdf
-    </div>
-  )
-}
+const PlatForm = () => <Container />;
 
-export default PlatForm
+export default PlatForm;
