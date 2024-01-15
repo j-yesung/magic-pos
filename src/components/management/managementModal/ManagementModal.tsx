@@ -1,18 +1,25 @@
+import useSetManagement from "@/hooks/management/useSetManagement";
 import { useModal } from "@/hooks/modal/useModal";
 import useManagementStore from "@/shared/store/management";
 import ModalOrderListItem from "./ModalOrderListItem";
 import styles from "./styles/ManagementModal.module.css";
 
 const ManagementModal = () => {
-  const { orderData } = useManagementStore();
+  const { orderData, orderConfirmData } = useManagementStore();
   const { MagicModal } = useModal();
+  const { mutate } = useSetManagement();
 
   const clickOrderConfirmHandler = () => {
-    MagicModal.confirm({
-      content: '주문번호 30,50 주문을 완료하시겠습니까??', confirmButtonCallback: () => { }
-    })
+    if (orderConfirmData.length === 0) {
+      MagicModal.alert({ content: '선택하신 주문이 없습니다' });
+    } else {
+      MagicModal.confirm({
+        content: `주문번호 ${orderConfirmData.map((x) => x.number + '번 ')} 주문을 완료하시겠습니까?`, confirmButtonCallback: () => {
+          mutate(orderConfirmData)
+        }
+      })
+    }
   }
-
   return (
     <div className={styles['management-modal-wrapper']}>
       <div className={styles['management-modal-background']}></div>
@@ -22,7 +29,9 @@ const ManagementModal = () => {
           {orderData.map((item) => <ModalOrderListItem key={item.id} orderData={item} />)}
         </ul>
         <div className={styles['modal-button-box']}>
-          <button onClick={clickOrderConfirmHandler}>주문완료</button>
+          <button onClick={clickOrderConfirmHandler}>{
+            orderConfirmData.map((item) => <span key={item.id}>{item.number}번&nbsp;</span>)
+          } 주문완료하기</button>
         </div>
       </div>
     </div>

@@ -25,7 +25,7 @@ const SideBarContainer = ({ managementData }: { managementData?: StoreWithOrderI
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderId])
-  console.log(orderData)
+
   return (
     <div className={styles['sideBar-container']}>
       <ul className={styles['order_list']}>

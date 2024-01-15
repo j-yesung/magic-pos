@@ -1,3 +1,4 @@
+import { OrderConfirmType } from "@/types/common";
 import { OrderDataWithStoreName } from "@/types/supabase";
 import create from "zustand";
 
@@ -7,12 +8,12 @@ interface managementType {
   orderStatus: string;
   tableNumber: string;
   isModal: boolean;
-  orderConfirmData: { id: string, number: number }[];
+  orderConfirmData: OrderConfirmType[];
   setOrderData: (value: OrderDataWithStoreName[]) => void
   setOrderId: (value: { id: string[], status: string, number: string }) => void
   setIsModal: (value: boolean) => void
-  addOrderConfirmData: (value: { id: string, number: number }) => void
-  removeOrderConfirmData: (value: { id: string, number: number }) => void
+  addOrderConfirmData: (value: OrderConfirmType) => void
+  removeOrderConfirmData: (value: string) => void
 }
 
 const useManagementStore = create<managementType>((set) => ({
@@ -42,7 +43,7 @@ const useManagementStore = create<managementType>((set) => ({
     })),
   removeOrderConfirmData: (value) =>
     set((state) => ({
-      orderConfirmData: [...state.orderConfirmData.filter((x) => x.id !== value.id)]
+      orderConfirmData: [...state.orderConfirmData.filter((x) => x.id !== value)]
     }))
 }))
 
