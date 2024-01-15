@@ -1,23 +1,14 @@
 import { supabase } from '@/shared/supabase';
+import { Tables, TablesInsert, TablesUpdate } from '@/types/supabase';
 
 /**
  * 메뉴 물품 추가하기
  * @param values 가게 id, 카테고리 name, 카테고리 순서
  * @returns data
  */
-export const addMenuItem = async (
-  category_id: string,
-  name: string,
-  image_url: string,
-  price: number,
-  remain_ea: number,
-  recommended: boolean,
-  position: number,
-) => {
-  const { data, error } = await supabase
-    .from('menu_item')
-    .insert([{ category_id, name, image_url, price, remain_ea, recommended, position }])
-    .select();
+
+export const addMenuItem = async (menuItem: TablesInsert<'menu_item'>) => {
+  const { data, error } = await supabase.from('menu_item').insert([menuItem]).select();
   if (error) throw error;
   return { data, error };
 };
@@ -36,8 +27,12 @@ export const removeMenuItem = async (menuId: string) => {
  * @param values 메뉴의 items
  * @returns data
  */
-export const updateMenuItem = async (menuItem: MenuItemType) => {
-  const { data, error } = await supabase.from('menu_item').update(menuItem).eq('id', menuItem.id);
+export const updateMenuItem = async (menuItem: TablesUpdate<'menu_item'>) => {
+  const { id, name, price, image_url, position, recommended, remain_ea } = menuItem;
+  const { data, error } = await supabase
+    .from('menu_item')
+    .update({ name, price, image_url, position, recommended, remain_ea })
+    .eq('id', id!);
   if (error) throw error;
   return data;
 };
@@ -47,7 +42,7 @@ export const updateMenuItem = async (menuItem: MenuItemType) => {
  * @param values 메뉴의 items
  * @returns data
  */
-export const uploadMenuItem = async (menuItem: MenuItemType, createAt: string, selectedFile: File) => {
+export const uploadMenuItem = async (menuItem: Tables<'menu_item'>, createAt: string, selectedFile: File) => {
   const { error, data } = await supabase.storage
     .from('images')
     .upload(`menu/${menuItem.category_id}/${menuItem.id}/${createAt}`, selectedFile, {
@@ -58,7 +53,7 @@ export const uploadMenuItem = async (menuItem: MenuItemType, createAt: string, s
   return { data, error };
 };
 
-export const downloadMenuItemUrl = async (menuItem: MenuItemType, createAt: string) => {
+export const downloadMenuItemUrl = async (menuItem: Tables<'menu_item'>, createAt: string) => {
   try {
     const { data } = await supabase.storage
       .from('images')
@@ -71,7 +66,7 @@ export const downloadMenuItemUrl = async (menuItem: MenuItemType, createAt: stri
   }
 };
 
-export const removeMenuItemFromStorage = async (menuItem: MenuItemType) => {
+export const removeMenuItemFromStorage = async (menuItem: Tables<'menu_item'>) => {
   const { data: list } = await supabase.storage.from('images').list(`menu/${menuItem.category_id}/${menuItem.id}`);
   const filesToRemove = list?.map(x => `menu/${menuItem.category_id}/${menuItem.id}/${x.name}`);
 

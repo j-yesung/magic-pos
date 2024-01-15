@@ -15,22 +15,22 @@ const MenuItemPage = () => {
     categoryWithMenuItemList,
     addMenuItemStore,
     setMenuItemSampleImg,
-    dragMenuItemStore,
   } = useMenuItemStore();
 
   // 메뉴 플러스
   const clickAddMenuItemHandler = async () => {
     toggleShow(true);
     const emptyValue = `임시 메뉴명`;
-    const { data } = await addMenuItem(
-      categoryWithMenuItem.id,
-      emptyValue,
-      sampleImage,
-      0,
-      0,
-      false,
-      categoryWithMenuItem.menu_item[categoryWithMenuItem.menu_item.length - 1].position + 1,
-    );
+    const menuItemOmit: Omit<Tables<'menu_item'>, 'id'> = {
+      category_id: categoryWithMenuItem.id,
+      name: emptyValue,
+      image_url: sampleImage,
+      price: 0,
+      remain_ea: 0,
+      recommended: false,
+      position: categoryWithMenuItem.menu_item[categoryWithMenuItem.menu_item.length - 1].position + 1,
+    };
+    const { data } = await addMenuItem(menuItemOmit);
     const newMenuItem: Tables<'menu_item'> = {
       id: data[0].id,
       image_url: data[0].image_url || '',
