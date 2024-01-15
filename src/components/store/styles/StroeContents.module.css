@@ -1,0 +1,17 @@
+.wrapper {
+  width: 40rem;
+}
+.wrapper form {
+  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+.wrapper label {
+  font-size: 2rem;
+}
+.wrapper input {
+  padding: 2rem;
+  font-size: 1.5rem;
+  border-radius: 1rem;
+  border: 2px solid #ccc;
+}
