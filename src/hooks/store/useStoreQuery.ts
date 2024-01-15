@@ -1,12 +1,13 @@
-import { useMutation } from '@tanstack/react-query';
-import { incrementOrderNumber } from '@/server/api/supabase/store';
+import { incrementOrderNumber, updateStoreInfomation } from '@/server/api/supabase/store';
 import useOrderStore from '@/shared/store/order';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 /**
  * supabase store table CRUD hook
  */
 export const useStoreQuery = () => {
   const { setOrderNumber } = useOrderStore();
+  const queryClient = useQueryClient();
 
   const incrementOrderNumberMutation = useMutation({
     mutationFn: incrementOrderNumber,
@@ -19,5 +20,16 @@ export const useStoreQuery = () => {
     },
   });
 
-  return { incrementOrderNumber: incrementOrderNumberMutation.mutate };
+  const updateStoreInfomationMutation = useMutation({
+    mutationFn: updateStoreInfomation,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['store'] });
+      alert('저장되었습니다.');
+    },
+  });
+
+  return {
+    incrementOrderNumber: incrementOrderNumberMutation.mutate,
+    updateStoreInfomation: updateStoreInfomationMutation.mutate,
+  };
 };

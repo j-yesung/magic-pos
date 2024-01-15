@@ -1,4 +1,4 @@
-import { getStoreBnoNumber } from '@/server/api/supabase/store';
+import { getStore } from '@/server/api/supabase/store';
 import { useQuery } from '@tanstack/react-query';
 
 const enum QueryKey {
@@ -9,15 +9,16 @@ interface StoreData {
   store:
     | {
         business_number: string | null;
+        business_name: string | null;
       }[]
     | null;
 }
 
 export const useGetQuery = (userId: string) => {
-  const { data: storeBnoNumber } = useQuery<StoreData>({
+  const { data } = useQuery<StoreData>({
     queryKey: [QueryKey.STORE],
-    queryFn: () => getStoreBnoNumber(userId),
+    queryFn: () => getStore(userId),
   });
 
-  return { storeBnoNumber };
+  return { data };
 };

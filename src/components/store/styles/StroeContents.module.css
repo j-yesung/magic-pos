@@ -1,6 +1,8 @@
 .wrapper {
+  width: 40rem;
+}
+.wrapper form {
   gap: 2rem;
-  width: 30%;
   display: flex;
   flex-direction: column;
 }
