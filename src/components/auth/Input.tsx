@@ -66,11 +66,44 @@ const Input = ({ value, onChangeHandler, onKeyDownHandler }: InputProps) => {
     onKeyDown: onKeyDownHandler,
   };
 
+  const storeEmailInput = {
+    id: 6,
+    name: 'storeEmail',
+    type: 'text',
+    label: '이메일',
+    disabled: true,
+  };
+
+  const bnoNumberInput = {
+    id: 7,
+    name: 'bnoNumber',
+    type: 'text',
+    label: '사업자등록번호',
+    disabled: true,
+  };
+
+  const storeNameInput = {
+    id: 8,
+    name: 'storeName',
+    type: 'text',
+    label: '상호명',
+    placeholder: '가게 이름',
+  };
+
+  const storeBusinessTimeInput = {
+    id: 9,
+    name: 'businessTime',
+    type: 'text',
+    label: '영업 시간',
+    placeholder: '영업 시간',
+  };
+
   const inputOptions: Record<string, InputType[]> = {
     '/auth/login': [emailInput, passwordInput],
     '/auth/signup': [emailInput, passwordSignUpInput, passwordConfirmInput, businessNumberInput],
     '/auth/findPassword': [emailInput],
     '/auth/reset': [passwordInput, passwordConfirmInput],
+    '/admin/store': [storeEmailInput, bnoNumberInput, storeNameInput, storeBusinessTimeInput],
   };
 
   const inputs = inputOptions[path];

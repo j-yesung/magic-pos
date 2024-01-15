@@ -1,0 +1,15 @@
+.wrapper {
+  gap: 2rem;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+}
+.wrapper label {
+  font-size: 2rem;
+}
+.wrapper input {
+  padding: 2rem;
+  font-size: 1.5rem;
+  border-radius: 1rem;
+  border: 2px solid #ccc;
+}
