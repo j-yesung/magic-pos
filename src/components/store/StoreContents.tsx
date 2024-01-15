@@ -1,6 +1,4 @@
 import { useInput } from '@/hooks/auth/useInput';
-import { useGetQuery } from '@/hooks/store/useGetQuery';
-import { useStoreQuery } from '@/hooks/store/useStoreQuery';
 import useAuthStore from '@/shared/store/auth';
 import { useEffect, useState } from 'react';
 import Button from '../auth/Button';
@@ -9,32 +7,23 @@ import styles from './styles/StroeContents.module.css';
 
 const StoreContents = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const { auth } = useAuthStore();
-  const user = auth?.user;
-  const { data } = useGetQuery(user?.id || '');
+  const { auth, storeName, storeBno} = useAuthStore();
   const { value, changeHandler } = useInput({
-    storeEmail: user?.email ?? '',
-    bnoNumber: data?.[0].business_number ?? '',
-    storeName: data?.[0].business_name ?? '',
+    storeEmail: auth?.user.email!,
+    bnoNumber: storeBno!,
+    storeName: storeName!,
   });
-  const { updateStoreInfomation } = useStoreQuery();
 
   useEffect(() => {
     setIsLoaded(true);
   }, []);
 
-  const clickStoreInfoHandler = () => {
-    const userId = user?.id ?? '';
-    const businessName = value.storeName;
-    updateStoreInfomation({ userId, businessName });
-  };
-
   return (
     <section className={styles.wrapper}>
-      {isLoaded && user && (
+      {isLoaded && auth && (
         <form>
           <Input value={value} onChangeHandler={changeHandler} />
-          <Button type="button" onClick={clickStoreInfoHandler}>
+          <Button type="button" >
             등록하기
           </Button>
         </form>
