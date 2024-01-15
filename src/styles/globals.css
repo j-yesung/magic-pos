@@ -6,9 +6,10 @@
   /* palette */
   --main-color: #8f00ff;
   --main-color-hover: #8508e6;
-  --point-color-80: #a87fff;
-  --point-color-50: #ceb7ff;
-  --potin-color2: #ffa800;
+  --point-100: #5200ff;
+  --point-80: #a87fff;
+  --point-50: #ceb7ff;
+  --potin-2: #ffa800;
 
   /* shadow */
   --shadow-color-10: #4409c2;
