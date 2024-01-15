@@ -2,18 +2,18 @@ import React from 'react';
 import styles from './styles/MenuCard.module.css';
 import { Tables } from '@/types/supabase';
 import Image from 'next/image';
-import { useModal } from '@/hooks/modal/useModal';
-import MenuModal from '@/components/order/menu/MenuModal';
+import useOrderStore from '@/shared/store/order';
+import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButton';
 
 interface MenuCardProps {
   menu: Tables<'menu_item'>;
 }
 
 const MenuCard = ({ menu }: MenuCardProps) => {
-  const { MagicModal } = useModal();
+  const { optionSwiperRef } = useOrderStore();
 
   const handleClickCard = () => {
-    MagicModal.fire(<MenuModal menu={menu} />);
+    optionSwiperRef?.current?.swiper.slideNext(SLIDE_MOVE_SPEED);
   };
 
   return (

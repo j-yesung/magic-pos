@@ -37,6 +37,8 @@ interface OrderState {
   setOrderType: (orderType: OrderType) => void;
   swiperRef: React.RefObject<SwiperRef> | null;
   setSwiperRef: (ref: React.RefObject<SwiperRef>) => void;
+  optionSwiperRef: React.RefObject<SwiperRef> | null;
+  setOptionSwiperRef: (ref: React.RefObject<SwiperRef>) => void;
   storeName: string;
   setStoreName: (storeName: string) => void;
   orderId: string | null;
@@ -92,6 +94,8 @@ export const useOrderStore = create<OrderState>()(
       setStoreName: (storeName: string) => set(() => ({ storeName })),
       swiperRef: null,
       setSwiperRef: (swiperRef: React.RefObject<SwiperRef>) => set(() => ({ swiperRef })),
+      optionSwiperRef: null,
+      setOptionSwiperRef: (optionSwiperRef: React.RefObject<SwiperRef>) => set(() => ({ optionSwiperRef })),
     }),
     {
       name: 'order-storage',

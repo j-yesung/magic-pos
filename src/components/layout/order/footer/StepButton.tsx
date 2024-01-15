@@ -13,18 +13,13 @@ interface ButtonProps {
 export const SLIDE_MOVE_SPEED = 600;
 
 const StepButton = ({ sliderRef }: ButtonProps) => {
-  const { goNextStep, goPrevStep, orderList, step, getTotalPrice } = useOrderStore();
+  const { goNextStep, orderList, step, getTotalPrice } = useOrderStore();
   const { paymentWidget, handlePaymentRequest } = usePaymentWidget();
 
   const BUTTON_OPTIONS: { [key: number]: string } = {
     1: convertNumberToWon(getTotalPrice()),
     2: '결제 하러 이동',
     3: '결제 하기',
-  };
-
-  const prevClickHandler = () => {
-    sliderRef.current!.swiper.slidePrev(SLIDE_MOVE_SPEED);
-    goPrevStep();
   };
 
   const nextClickHandler = async () => {
