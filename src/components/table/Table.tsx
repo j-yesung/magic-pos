@@ -11,14 +11,15 @@ const Table = () => {
   const { id } = typeof window !== 'undefined' && user;
   const { data } = useFetchTable(id);
   const dummySideBarRef = useRef<HTMLDivElement>(null)
-  const { setDummyideBarRef } = useTableStore();
+  const { setDummySideBarRef } = useTableStore();
 
-  useEffect(() => { 
-    setDummyideBarRef(dummySideBarRef)
-  },[])
+  useEffect(() => {
+    setDummySideBarRef(dummySideBarRef)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   return (
     <div className={styles['table-wrapper']}>
-      <TableContainer storeData={data} />
+      {data && <TableContainer storeData={data} />}
       <div className={styles['table-dummy-side-bar']} ref={dummySideBarRef}></div>
       <TableSideBar />
     </div>

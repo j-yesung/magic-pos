@@ -48,3 +48,9 @@ interface AuthState {
   setSession: (auth) => void;
   setStoreId: (id: string) => void;
 }
+
+interface OrderConfirmType {
+  id: string;
+  number: number;
+  isTogo: boolean;
+}

@@ -21,9 +21,9 @@ interface TableStoreType {
   TableItemClick: (value: valueType) => void;
   setMaxGuest: (value: number) => void;
   setIsDisabled: (value: number) => void;
-  setsideBarRef: (value: RefObject<HTMLDivElement>) => void;
-  setDummyideBarRef: (value: RefObject<HTMLDivElement>) => void;
-  setideBarBgRef: (value: RefObject<HTMLDivElement>) => void;
+  setSideBarRef: (value: RefObject<HTMLDivElement>) => void;
+  setDummySideBarRef: (value: RefObject<HTMLDivElement>) => void;
+  setSideBarBgRef: (value: RefObject<HTMLDivElement>) => void;
 }
 
 const useTableStore = create<TableStoreType>(set => ({
@@ -54,15 +54,15 @@ const useTableStore = create<TableStoreType>(set => ({
     set(() => ({
       isDisabled: value,
     })),
-  setsideBarRef: value =>
+  setSideBarRef: value =>
     set(() => ({
       refSideBar: value,
     })),
-  setDummyideBarRef: value =>
+  setDummySideBarRef: value =>
     set(() => ({
       refDummySideBar: value,
     })),
-  setideBarBgRef: value =>
+  setSideBarBgRef: value =>
     set(() => ({
       refSideBarBg: value,
     })),
