@@ -1,12 +1,9 @@
 import { useState } from 'react';
 
-export const useInput = () => {
-  const [value, setValue] = useState({
-    email: '',
-    password: '',
-    passwordConfirm: '',
-    businessNumber: '',
-  });
+type InputValues = Record<string, string>;
+
+export const useInput = (initialValue: InputValues) => {
+  const [value, setValue] = useState(initialValue);
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

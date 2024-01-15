@@ -17,7 +17,12 @@ const AuthForm = ({ data }: FormProps) => {
   const { url, subUrl, title, subTitle, subName, caption, buttonName, subButtonName, description } = data;
   const { login, signup, businessNumberCheck, sendResetPasswordEmail, updatePassword, status } = useAuth();
   const isSuccess = status.data === '인증되었습니다.' ? false : true;
-  const { value, changeHandler, keyDownHandler } = useInput();
+  const { value, changeHandler, keyDownHandler } = useInput({
+    email: '',
+    password: '',
+    passwordConfirm: '',
+    businessNumber: '',
+  });
   const { validateCheck, isBusinessNumberValid } = useValid(value);
 
   const signUpClickHandler = () => {
