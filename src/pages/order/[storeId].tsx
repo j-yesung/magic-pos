@@ -41,25 +41,76 @@ const OrderIndexPage = ({
 
     setIsLoaded(true);
 
-    toast('test222', {
+    toast('test1', {
       type: 'info',
       position: 'top-right',
       showCloseButton: false,
       autoClose: 2000,
     });
 
-    toast('test222222', {
+    toast('test2', {
       type: 'info',
       position: 'top-right',
       showCloseButton: false,
-      autoClose: 2000000,
+      autoClose: 3000,
     });
 
-    toast('test222222', {
+    toast('test3', {
       type: 'info',
-      position: 'top-right',
+      position: 'top-left',
       showCloseButton: false,
-      autoClose: 3000000,
+      autoClose: 2000,
+    });
+
+    toast('test3', {
+      type: 'info',
+      position: 'top-left',
+      showCloseButton: false,
+      autoClose: 4000,
+    });
+
+    toast('bottom1', {
+      type: 'info',
+      position: 'bottom-left',
+      showCloseButton: false,
+      autoClose: 1000,
+    });
+    toast('bottom2', {
+      type: 'info',
+      position: 'bottom-left',
+      showCloseButton: false,
+      autoClose: 5000,
+    });
+    toast('bottom3', {
+      type: 'info',
+      position: 'bottom-left',
+      showCloseButton: false,
+      autoClose: 3000,
+    });
+    toast('bottom3', {
+      type: 'info',
+      position: 'bottom-left',
+      showCloseButton: false,
+      autoClose: 2000,
+    });
+
+    toast('bottom1', {
+      type: 'info',
+      position: 'bottom-right',
+      showCloseButton: false,
+      autoClose: 1000,
+    });
+    toast('bottom2', {
+      type: 'info',
+      position: 'bottom-right',
+      showCloseButton: false,
+      autoClose: 5000,
+    });
+    toast('bottom3', {
+      type: 'info',
+      position: 'bottom-right',
+      showCloseButton: false,
+      autoClose: 2000,
     });
   }, []);
 

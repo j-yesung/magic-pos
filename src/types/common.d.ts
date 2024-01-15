@@ -21,7 +21,7 @@ interface ModalConfirmTypeOption {
   cancelButtonCallback?: (() => void) | null;
 }
 
-type ToastAnimationType = 'hide-right' | 'hide-left' | 'hide-up' | 'hide-down' | 'row-up' | null;
+type ToastAnimationType = 'hide-top-right' | 'hide-top-left' | 'hide-bottom-right' | 'hide-bottom-left' | null;
 interface ToastTypeOption {
   id: string;
   content: string;

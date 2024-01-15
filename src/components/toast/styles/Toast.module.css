@@ -1,49 +1,68 @@
-.toast-overlay {
-  grid-template-rows: repeat(3, 1fr);
-  grid-template-columns: repeat(3, 1fr);
+.toast-container {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   z-index: 100;
-  padding: 1.5rem  /* 15/10 */;
-  align-items: flex-start;
-  justify-items: flex-end;
 }
 
-.toast-container {
-  --toast-height: 4rem;
-  --toast-padding: 1rem;
+.toast-content {
+  margin: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 32rem;
-  height: var(--toast-height) /* 40/10 */;
+  width: 28rem;
+  height: 4rem /* 40/10 */;
   background-color: white;
-  margin-bottom: 20px;
-  border-radius: 1.5rem  /* 15/10 */;
-  box-shadow: rgba(0, 0, 0, 0.35) 0 0.5rem  /* 5/10 */ 1.5rem  /* 15/10 */;
-  padding: var(--toast-padding);
-
-@media screen and (max-width: 76.8rem  /* 768/10 */) {
-    width: 90vw;
-  }
+  border-radius: 1.5rem /* 15/10 */;
+  box-shadow: rgba(0, 0, 0, 0.35) 0 0.5rem /* 5/10 */ 1.5rem /* 15/10 */;
+  padding: 1rem;
 }
 
-.toast-position-top-right {
-  grid-column: 3;
-  grid-row: 1;
+.top-right {
+  top: 0;
+  right: 0;
 }
 
-.hide-right {
+.top-left {
+  top: 0;
+  left: 0;
+}
+
+.bottom-left {
+  bottom: 0;
+  left: 0;
+}
+
+.bottom-right {
+  bottom: 0;
+  right: 0;
+}
+
+/* top */
+.hide-top-right {
   animation: hide-right .5s linear 0.7s forwards;
 }
 
-.hide-right ~ div:not(.hide-right) {
-  animation: row-up 1s linear 0.7s forwards;
+.hide-top-right ~ div {
+  animation: row-up 1s linear .5s forwards;
 }
+
+.hide-top-left  {
+  animation: hide-left .5s linear 0.7s forwards;
+}
+
+.hide-top-left ~ div {
+  animation: row-up 1s linear .5s forwards;
+}
+
+/* bottom */
+.hide-bottom-right {
+  animation: hide-right .5s linear 0.7s forwards;
+}
+
+.hide-bottom-left  {
+  animation: hide-left .5s linear 0.7s forwards;
+}
+
 
 @keyframes hide-right {
   25% {
@@ -54,11 +73,35 @@
   }
 }
 
+@keyframes hide-left {
+  25% {
+    transform: translateX(10%);
+  }
+  100% {
+    transform: translateX(-200%);
+  }
+}
+
 @keyframes row-up {
   25% {
     transform: translateY(10%);
   }
+  65% {
+    transform: translateY(-5rem);
+  }
   100% {
-    transform: translateY(-6rem);
+    transform: translateY(-5rem);
+  }
+}
+
+@keyframes row-down {
+  25% {
+    transform: translateY(-10%);
+  }
+  65% {
+    transform: translateY(5rem);
+  }
+  100% {
+    transform: translateY(5rem);
   }
 }

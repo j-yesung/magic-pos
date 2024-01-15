@@ -10,7 +10,6 @@ interface ToastState {
   addToastList: (elem: ToastTypeOption) => void;
   subtractToastList: (id: string) => void;
   setAnimation: (id: string, type: ToastAnimationType) => void;
-  setAllAnimationNull: () => void;
 }
 
 const useToastStore = create<ToastState>()(set => ({
@@ -26,13 +25,6 @@ const useToastStore = create<ToastState>()(set => ({
         if (toast.id === id) return { ...toast, animation: type };
         return toast;
       }),
-    })),
-  setAllAnimationNull: () =>
-    set(state => ({
-      toastList: state.toastList.map(toast => ({
-        ...toast,
-        animation: toast.animation === 'row-up' ? null : toast.animation,
-      })),
     })),
 }));
 
