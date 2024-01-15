@@ -1,15 +1,17 @@
 import { useInput } from '@/hooks/auth/useInput';
 import useAuthStore from '@/shared/store/auth';
 import { useEffect, useState } from 'react';
-import Button from '../auth/Button';
 import Input from '../auth/Input';
+import StoreTimeSet from './StoreTimeSet';
 import styles from './styles/StroeContents.module.css';
 
 const StoreContents = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const { auth, storeName, storeBno} = useAuthStore();
+  const { auth, storeName, storeBno } = useAuthStore();
+  const userId = auth?.user.id || '';
+  const email = auth?.user.email || '';
   const { value, changeHandler } = useInput({
-    storeEmail: auth?.user.email!,
+    storeEmail: email,
     bnoNumber: storeBno!,
     storeName: storeName!,
   });
@@ -23,9 +25,7 @@ const StoreContents = () => {
       {isLoaded && auth && (
         <form>
           <Input value={value} onChangeHandler={changeHandler} />
-          <Button type="button" >
-            등록하기
-          </Button>
+          <StoreTimeSet userId={userId} />
         </form>
       )}
     </section>

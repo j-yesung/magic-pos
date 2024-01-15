@@ -44,7 +44,7 @@ export const useAuth = () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.LOGIN] });
       const auth = await getUserSession();
       const storeId = await getStoreId();
-      const store = await getStore(auth.session?.user.id!);
+      const store = await getStore(auth.session?.user.id || '');
       const storeName = store && store[0]?.business_name;
       const storeBno = store && store[0]?.business_number;
       setSession(auth.session);
@@ -63,10 +63,11 @@ export const useAuth = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.LOGOUT] });
       useAuthStore.persist.clearStorage();
+      setSession(null);
       router.push('/');
     },
     onError: error => {
-      throw error;
+      console.error(error);
     },
   });
 
