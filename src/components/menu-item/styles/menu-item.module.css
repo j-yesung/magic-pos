@@ -1,0 +1,41 @@
+.wrap {
+  height: calc(100% + 3rem);
+  overflow-y: auto;
+  transition: all 0.3s;
+  margin-top: 1rem;
+}
+.wrap.active {
+  height: calc(100% + 3rem - 20rem);
+}
+.wrap ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5rem 3rem;
+  padding: 9rem 0 10rem;
+}
+.wrap li {
+  width: calc(25% - 2.25rem);
+  min-height: 14rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f2f2f2;
+  transition: all 0.3s;
+}
+.wrap li:hover {
+  background-color: #d1d1d1;
+}
+.wrap li button {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+}
+.wrap .plus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 3rem;
+}
