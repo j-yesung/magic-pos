@@ -13,13 +13,11 @@ interface PropsType {
 
 const MenuItemCard = ({ item, idx }: PropsType) => {
   const {
-    sampleImage,
     toggleShow,
     menuItem,
     setMenuItem,
     categoryWithMenuItem,
     categoryWithMenuItemList,
-    addMenuItemStore,
     setMenuItemSampleImg,
     dragMenuItemStore,
   } = useMenuItemStore();
@@ -91,6 +89,9 @@ const MenuItemCard = ({ item, idx }: PropsType) => {
           <span className={styles['remain-ea']}>
             <span>남은 갯수: </span>
             <strong>{item.remain_ea}</strong>
+          </span>
+          <span>
+            <span>옵션</span>
           </span>
         </span>
       </button>

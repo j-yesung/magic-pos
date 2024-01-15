@@ -1,0 +1,63 @@
+.shop-list-item {
+  width: 9em;
+  height: 7em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 5% 0;
+  font-size: 1.5em;
+  border-radius: 0.5em;
+  transition: 0.2s;
+  background-color: var(--main-color);
+  cursor: pointer;
+  color: #fff;
+}
+
+.shop-list-item:hover {
+  background-color: #ccf;
+}
+
+.shop-list-item > div {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  font-size: 0.75em;
+  padding: 0 10%;
+}
+
+.item-table {
+  justify-content: flex-start;
+}
+
+.item-order-number > span{
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.item-order-number > span > span:last-child > span{
+  display: none;
+}
+
+
+.item-status {
+  justify-content: flex-end;
+}
+
+
+
+
+
+.shop-list-item:hover>.list-text {
+  display: none;
+}
+
+.shop-list-item:hover>.list-text-hover {
+  display: block;
+}
+
+.shop-text-hover {
+  display: none;
+}

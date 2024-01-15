@@ -36,7 +36,7 @@ const MenuItemFormPage = () => {
 
       const redcommendedNum = categoryWithMenuItem.menu_item.filter(item => item.recommended).length;
 
-      if (redcommendedNum > 4) {
+      if (redcommendedNum > 4 && !menuItem.recommended) {
         MagicModal.alert({ content: '추천 메뉴는 최대 5개입니다.' });
         return (isCheckRecommended = true);
       }

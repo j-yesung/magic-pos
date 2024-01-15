@@ -52,9 +52,9 @@ const useMenuItemStore = create<MenuItemStoreType>(set => ({
     recommended: false,
     position: 0,
   },
-  setMenuItem: (item: MenuItemType) => set(prev => ({ menuItem: { ...prev.menuItem, ...item } })),
+  setMenuItem: (item: Tables<'menu_item'>) => set(prev => ({ menuItem: { ...prev.menuItem, ...item } })),
   menuItemList: [],
-  setMenuItemList: (item: MenuItemType[]) => set({ menuItemList: item }),
+  setMenuItemList: (item: Tables<'menu_item'>[]) => set({ menuItemList: item }),
   categoryWithMenuItem: {
     id: '',
     store_id: '',
@@ -62,11 +62,11 @@ const useMenuItemStore = create<MenuItemStoreType>(set => ({
     position: 0,
     menu_item: [],
   },
-  setCategoryWithMenuItem: (item: CategoryWithItemType) =>
+  setCategoryWithMenuItem: (item: CategoryWithMenuItem) =>
     set(prev => ({ categoryWithMenuItem: { ...prev.categoryWithMenuItem, ...item } })),
   categoryWithMenuItemList: [],
-  setCategoryWithMenuItemList: (item: CategoryWithItemType[]) => set({ categoryWithMenuItemList: item }),
-  addMenuItemStore: (newMenuItem: MenuItemType) =>
+  setCategoryWithMenuItemList: (item: CategoryWithMenuItem[]) => set({ categoryWithMenuItemList: item }),
+  addMenuItemStore: (newMenuItem: Tables<'menu_item'>) =>
     set(state => ({
       ...state,
       categoryWithMenuItemList: state.categoryWithMenuItemList.map(category =>
@@ -82,7 +82,7 @@ const useMenuItemStore = create<MenuItemStoreType>(set => ({
         menu_item: [...state.categoryWithMenuItem.menu_item, newMenuItem],
       },
     })),
-  removeMenuItemStore: (removeMenuItem: MenuItemType) =>
+  removeMenuItemStore: (removeMenuItem: Tables<'menu_item'>) =>
     set(state => ({
       ...state,
       categoryWithMenuItemList: state.categoryWithMenuItemList.map(category =>
@@ -98,7 +98,7 @@ const useMenuItemStore = create<MenuItemStoreType>(set => ({
         menu_item: state.categoryWithMenuItem.menu_item.filter(item => item.id !== removeMenuItem.id),
       },
     })),
-  updateMenuItemStore: (updatedMenuItem: MenuItemType) =>
+  updateMenuItemStore: (updatedMenuItem: Tables<'menu_item'>) =>
     set(state => ({
       ...state,
       categoryWithMenuItemList: state.categoryWithMenuItemList.map(category =>

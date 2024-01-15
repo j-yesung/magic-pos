@@ -1,8 +1,18 @@
 import AdminLayout from '@/components/layout/admin/AdminLayout';
+import StoreContents from '@/components/store/StoreContents';
+import Head from 'next/head';
 import { ReactNode } from 'react';
 
 const StorePage = () => {
-  return <div>스토어 페이지</div>;
+  return (
+    <>
+      <Head>
+        <title>Magic Pos</title>
+        <meta name="description" content="store" />
+      </Head>
+      <StoreContents />
+    </>
+  );
 };
 
 StorePage.getLayout = (page: ReactNode) => <AdminLayout>{page}</AdminLayout>;
