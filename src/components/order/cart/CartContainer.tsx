@@ -13,13 +13,13 @@ import TotalPrice from '@/components/order/common/TotalPrice';
  * @constructor
  */
 const CartContainer = () => {
-  const { orderList, orderType } = useOrderStore();
+  const { orderList, orderType, storeName } = useOrderStore();
 
   const group = groupByKey<Tables<'menu_item'>>(orderList, 'id');
 
   return (
     <div className={styles.container}>
-      <StoreInfo orderType={orderType} storeName={'어쩌구 카페'} />
+      <StoreInfo orderType={orderType} storeName={storeName} />
       <div className={styles.rowContainer}>
         {group.size === 0 && <WarningNoOrderList />}
         {[...group].map(([key, value]) => (

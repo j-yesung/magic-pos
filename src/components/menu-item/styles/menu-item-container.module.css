@@ -1,0 +1,14 @@
+.wrap {
+  height: calc(100% - 13rem);
+  position: relative;
+}
+
+.menu-container {
+  height: 100%;
+}
+
+.menu-container h2 {
+  padding: 10rem 10rem 3rem 10rem;
+  font-size: 4rem;
+  font-weight: 500;
+}
