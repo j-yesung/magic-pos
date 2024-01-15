@@ -9,6 +9,7 @@ import useOrderStore from '@/shared/store/order';
 import { isEmptyObject } from '@/shared/helper';
 import { useRouter } from 'next/router';
 import OrderContainer from '@/components/order/OrderContainer';
+import useToast from '@/hooks/toast/useToast';
 
 const OrderIndexPage = ({
   menuData,
@@ -22,6 +23,7 @@ const OrderIndexPage = ({
   const { setMenuData, setStoreId, setTableId, orderNumber, orderType } = useOrderStore();
   const [isLoaded, setIsLoaded] = useState(false);
   const router = useRouter();
+  const { toast } = useToast();
 
   useEffect(() => {
     if (orderNumber !== 0) {
@@ -38,6 +40,27 @@ const OrderIndexPage = ({
     if (tableId) setTableId(tableId);
 
     setIsLoaded(true);
+
+    toast('test222', {
+      type: 'info',
+      position: 'top-right',
+      showCloseButton: false,
+      autoClose: 2000,
+    });
+
+    toast('test222222', {
+      type: 'info',
+      position: 'top-right',
+      showCloseButton: false,
+      autoClose: 2000000,
+    });
+
+    toast('test222222', {
+      type: 'info',
+      position: 'top-right',
+      showCloseButton: false,
+      autoClose: 3000000,
+    });
   }, []);
 
   return <>{isLoaded && <OrderContainer />}</>;
