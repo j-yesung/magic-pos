@@ -5,11 +5,11 @@ import SideBarContainer from "./SideBarContainer";
 import styles from "./styles/TableSideBar.module.css";
 
 const TableSideBar = () => {
-  const { tableNumber, refSideBar, refDummySideBar, refSideBarBg, setsideBarRef, setideBarBgRef } = useTableStore();
+  const { tableNumber, refSideBar, refDummySideBar, refSideBarBg, setSideBarRef, setSideBarBgRef } = useTableStore();
   const sideBarRef = useRef<HTMLDivElement>(null)
   const sideBarBgRef = useRef<HTMLDivElement>(null)
 
-  const clickCloseSideBarHandler = () => { 
+  const clickCloseSideBarHandler = () => {
     refSideBar?.current?.style.setProperty('right', '-18%')
     refDummySideBar?.current?.style.setProperty('width', '0%')
     refSideBarBg?.current?.style.setProperty('visibility', 'hidden')
@@ -17,9 +17,10 @@ const TableSideBar = () => {
   }
 
   useEffect(() => {
-    setsideBarRef(sideBarRef)
-    setideBarBgRef(sideBarBgRef)
-  },[])
+    setSideBarRef(sideBarRef)
+    setSideBarBgRef(sideBarBgRef)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <>

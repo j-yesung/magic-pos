@@ -7,7 +7,8 @@
   "typescript.tsdk": ".yarn/sdks/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "editor.codeActionsOnSave": {
-    "source.organizeImports": "explicit"
+    "source.organizeImports": "explicit",
+    "editor.formatOnSave": "explicit"
   },
   "files.associations": {
     "*html": "html",
@@ -15,5 +16,6 @@
   },
   "editor.quickSuggestions": {
     "strings": true
-  }
+  },
+  "prettier.prettierPath": ".yarn/sdks/prettier/index.cjs"
 }

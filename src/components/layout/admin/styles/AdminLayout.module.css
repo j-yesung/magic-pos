@@ -141,7 +141,7 @@
 
 /* 메인 영역입니다. */
 .main-wrapper {
-  padding: 8rem;
+  /* padding: 8rem; */
   grid-area: main;
   border-radius: 2rem;
   height: calc(100vh - 6rem);
