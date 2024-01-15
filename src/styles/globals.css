@@ -1,13 +1,32 @@
 :root {
-  --kiosk-header-height: 6rem  /* 80/10 */;
+  --kiosk-header-height: 6rem /* 80/10 */;
   --kiosk-footer-height: 50px;
   --kiosk-container-padding: 1.25rem;
 
+  /* palette */
   --main-color: #8f00ff;
   --main-color-hover: #8508e6;
-  --point-color: #ceb7ff;
+  --point-color-80: #a87fff;
+  --point-color-50: #ceb7ff;
+  --potin-color2: #ffa800;
 
-  /* 그라데이션 컬러 */
+  /* shadow */
+  --shadow-color-10: #4409c2;
+  --shaodw-color-20: #000000;
+
+  /* font */
+  --text1: #121416;
+  --text2: #5c5c5c;
+  --text3: #bfbfbf;
+  --text4: #ff5656;
+  --text5: #ffffff;
+
+  /* bg */
+  --bg-line: #ededed;
+  --bg-p: #f3edff;
+  --bg-g: #f7f7f7;
+
+  /* gradlient */
   --signature-color: linear-gradient(to right, var(--main-color), #ffa800);
 
   --level-1-z-index: 100;
