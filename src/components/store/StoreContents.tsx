@@ -25,9 +25,7 @@ const StoreContents = () => {
       {isLoaded && auth && (
         <form>
           <Input value={value} onChangeHandler={changeHandler} />
-          <Button type="button" >
-            등록하기
-          </Button>
+          <StoreTimeSet userId={userId} />
         </form>
       )}
     </section>
