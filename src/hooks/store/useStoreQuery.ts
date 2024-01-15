@@ -2,6 +2,10 @@ import { incrementOrderNumber, updateStoreInfomation } from '@/server/api/supaba
 import useOrderStore from '@/shared/store/order';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
+const enum QueryKey {
+  STORE = 'store',
+}
+
 /**
  * supabase store table CRUD hook
  */
@@ -23,8 +27,11 @@ export const useStoreQuery = () => {
   const updateStoreInfomationMutation = useMutation({
     mutationFn: updateStoreInfomation,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['store'] });
+      queryClient.invalidateQueries({ queryKey: [QueryKey.STORE] });
       alert('저장되었습니다.');
+    },
+    onError: error => {
+      console.error(error);
     },
   });
 
