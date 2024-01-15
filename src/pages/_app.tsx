@@ -5,6 +5,7 @@ import { NextPageWithLayout } from '@/types/common';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { AppProps } from 'next/app';
+import Toast from '@/components/toast/Toast';
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       <ReactQueryDevtools initialIsOpen={false} />
       {getLayout(<Component {...pageProps} />)}
       <Modal />
+      <Toast />
     </QueryClientProvider>
   );
 }
