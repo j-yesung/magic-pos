@@ -15,3 +15,15 @@ export const getStore = async (userId: string) => {
   const { data } = await supabase.from('store').select('*').eq('business_id', userId);
   return data;
 };
+
+/**
+ * 영업 시간 지정
+ * @param param 유저 id, 시작 시간, 종료 시간
+ */
+export const updateStoreTime = async ({ userId, startTime, endTime }: Record<string, string>) => {
+  const { error } = await supabase
+    .from('store')
+    .update({ start_time: startTime, end_time: endTime })
+    .eq('business_id', userId);
+  if (error) throw error;
+};

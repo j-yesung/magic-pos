@@ -60,7 +60,7 @@ const Input = ({ value, onChangeHandler, onKeyDownHandler }: InputProps) => {
     name: 'businessName',
     type: 'text',
     placeholder: '상호명',
-  }
+  };
 
   const businessNumberInput = {
     id: 6,
@@ -98,20 +98,12 @@ const Input = ({ value, onChangeHandler, onKeyDownHandler }: InputProps) => {
     disabled: true,
   };
 
-  const storeBusinessTimeInput = {
-    id: 10,
-    name: 'businessTime',
-    type: 'text',
-    label: '영업 시간',
-    placeholder: '영업 시간',
-  };
-
   const inputOptions: Record<string, InputType[]> = {
     '/auth/login': [emailInput, passwordInput],
     '/auth/signup': [emailInput, passwordSignUpInput, passwordConfirmInput, businessNameInput, businessNumberInput],
     '/auth/findPassword': [emailInput],
     '/auth/reset': [passwordInput, passwordConfirmInput],
-    '/admin/store': [storeEmailInput, bnoNumberInput, storeBusineesNameInput, storeBusinessTimeInput],
+    '/admin/store': [storeEmailInput, bnoNumberInput, storeBusineesNameInput],
   };
 
   const inputs = inputOptions[path];
