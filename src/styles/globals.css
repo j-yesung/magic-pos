@@ -4,6 +4,8 @@
   --kiosk-container-padding: 1.25rem;
 
   --main-color: #8f00ff;
+  --main-color-hover: #8508e6;
+  --point-color: #ceb7ff;
 
   /* 그라데이션 컬러 */
   --signature-color: linear-gradient(to right, var(--main-color), #ffa800);
