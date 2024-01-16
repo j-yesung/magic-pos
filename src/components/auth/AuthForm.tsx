@@ -3,7 +3,7 @@ import { useInput } from '@/hooks/auth/useInput';
 import { useValid } from '@/hooks/auth/useValid';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Button from './Button';
+import Button from '../common/Button';
 import Input from './Input';
 import styles from './styles/Auth.module.css';
 
