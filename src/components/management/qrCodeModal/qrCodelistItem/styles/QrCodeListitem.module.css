@@ -1,0 +1,73 @@
+.qr-code-svg-box {
+  width: auto;
+  height: auto;
+  padding: 2rem 4rem;
+}
+
+.qr-code {
+  width: auto;
+  height: auto;
+  margin: 1rem 0;
+  position: relative;
+  transition: 0.2s;
+}
+
+.table-number {
+  width: 100%;
+  height: auto;
+  padding-bottom: 2rem;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.qr-code:hover::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: #000;
+  opacity: 0.5;
+  width: 100%;
+  height: calc(100% - 4rem);
+  content: '';
+  transition: 0.2s;
+  cursor: pointer;
+  visibility: visible;
+}
+
+.qr-code:hover::before {
+  position: absolute;
+  bottom: calc(50% - 4rem);
+  left: 50%;
+  width: 9rem;
+  height: auto;
+  padding: 0.8rem 0;
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+  font-size: 1.2rem;
+  border-radius: 50rem;
+  transform: translateX(-50%);
+  transition: 0.2s;
+  content: '다운로드';
+  box-shadow: 0 0 1rem 0 #000;
+  cursor: pointer;
+  z-index: 50;
+  opacity: 100;
+  visibility: visible;
+}
+
+.qr-code.active:hover::after {
+  opacity: 0;
+  visibility: hidden;
+}
+.qr-code.active:hover::before {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.qr-code.order-type-togo:hover::after {
+  height: 100%;
+}
+.qr-code.order-type-togo:hover::before {
+  transform: translate(-50%, -70%);
+}

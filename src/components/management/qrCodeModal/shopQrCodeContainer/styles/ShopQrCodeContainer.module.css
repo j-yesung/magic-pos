@@ -1,0 +1,31 @@
+.shop-qr-code-container {
+  width: auto;
+  min-width: 30rem;
+  height: auto;
+}
+.shop-qr-code-title {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
+  font-size: 3rem;
+}
+.shop-qr-code-list-box {
+  width: 100%;
+  height: auto;
+  max-height: 30rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  place-items: center;
+  padding: 2rem 0;
+  overflow-y: scroll;
+}
+.grid-row-1 {
+  grid-template-columns: repeat(1, 1fr);
+}
+.grid-row-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
