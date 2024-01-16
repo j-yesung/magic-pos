@@ -67,7 +67,7 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
         menu_list: orderList.map(order => JSON.parse(JSON.stringify(order))),
         order_time: payment.approvedAt,
         order_id: payment.orderId,
-        total_price: getTotalPrice(),
+        total_price: getTotalPrice(orderList),
         is_done: false,
         payment_method: payment.method,
       };

@@ -73,7 +73,7 @@ const ReceiptContainer = () => {
           ) : (
             <p>현재 메뉴가 준비 중 입니다...</p>
           )}
-          <TotalPrice itemList={orderData?.menu_list as Tables<'menu_item'>[]} />
+          <TotalPrice itemList={orderData?.menu_list} />
         </>
       )}
     </div>

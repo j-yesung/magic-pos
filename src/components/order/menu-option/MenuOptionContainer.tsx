@@ -8,7 +8,7 @@ import Amount from '@/components/order/menu-option/Amount';
 import TotalPrice from '@/components/order/common/TotalPrice';
 
 const MenuOptionContainer = () => {
-  const { selectedMenu, amount } = useOrderStore();
+  const { selectedMenu, amount, selectedOptions } = useOrderStore();
 
   return (
     <>
@@ -19,7 +19,13 @@ const MenuOptionContainer = () => {
           {selectedMenu?.menu_option.map(option => <OptionRow key={option.id} option={option} />)}
           <Amount />
           <div className={styles.totalPrice}>
-            <TotalPrice itemList={new Array(amount).fill(true).map(() => selectedMenu)} isAll={false} />
+            <TotalPrice
+              itemList={new Array(amount).fill(true).map(() => {
+                const menu = { ...selectedMenu };
+                menu.menu_option = selectedOptions;
+                return menu;
+              })}
+            />
           </div>
         </section>
       )}

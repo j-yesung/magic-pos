@@ -26,7 +26,7 @@ const CartContainer = () => {
           <CartRow key={key} itemList={value} />
         ))}
       </div>
-      <TotalPrice itemList={orderList} isAll={true} />
+      <TotalPrice itemList={orderList} />
     </div>
   );
 };

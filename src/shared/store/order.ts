@@ -26,7 +26,7 @@ interface OrderState {
   resetOrderList: () => void;
   addOrderList: (menu: MenuItemWithOption[]) => void;
   subtractOrderList: (menu: MenuItemWithOption) => void;
-  getTotalPrice: () => number;
+  getTotalPrice: (list: MenuItemWithOption[]) => number;
   getOptionPriceByList: (list: MenuOptionWithDetail[]) => number;
   storeId: string | null;
   setStoreId: (storeId: string) => void;
@@ -84,9 +84,9 @@ export const useOrderStore = create<OrderState>()(
           return { orderList: state.orderList };
         }),
       // orderList에 담긴 메뉴 아이템의 총합 가격을 나타냅니다.
-      getTotalPrice: () => {
-        return get()
-          ?.orderList.map(
+      getTotalPrice: list => {
+        return list
+          ?.map(
             menu =>
               menu.menu_option
                 .map(option => option.menu_option_detail.reduce((acc, cur) => acc + cur.price, 0))

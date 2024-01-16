@@ -18,7 +18,7 @@ const StepButton = ({ sliderRef }: ButtonProps) => {
   const { paymentWidget, handlePaymentRequest } = usePaymentWidget();
 
   const BUTTON_OPTIONS: { [key: number]: string } = {
-    1: convertNumberToWon(getTotalPrice()),
+    1: convertNumberToWon(getTotalPrice(orderList)),
     2: '결제 하러 이동',
     3: '결제 하기',
   };
