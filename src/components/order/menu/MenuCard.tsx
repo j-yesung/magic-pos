@@ -10,9 +10,10 @@ interface MenuCardProps {
 }
 
 const MenuCard = ({ menu }: MenuCardProps) => {
-  const { optionSwiperRef } = useOrderStore();
+  const { optionSwiperRef, setSelectedMenu } = useOrderStore();
 
   const handleClickCard = () => {
+    setSelectedMenu(menu);
     optionSwiperRef?.current?.swiper.slideNext(SLIDE_MOVE_SPEED);
   };
 

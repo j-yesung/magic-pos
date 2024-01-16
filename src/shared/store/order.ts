@@ -43,6 +43,8 @@ interface OrderState {
   setStoreName: (storeName: string) => void;
   orderId: string | null;
   setOrderId: (orderId: string) => void;
+  selectedMenu: Tables<'menu_item'> | null;
+  setSelectedMenu: (menu: Tables<'menu_item'>) => void;
 }
 
 export const useOrderStore = create<OrderState>()(
@@ -96,6 +98,9 @@ export const useOrderStore = create<OrderState>()(
       setSwiperRef: (swiperRef: React.RefObject<SwiperRef>) => set(() => ({ swiperRef })),
       optionSwiperRef: null,
       setOptionSwiperRef: (optionSwiperRef: React.RefObject<SwiperRef>) => set(() => ({ optionSwiperRef })),
+      // 선택된 메뉴 (옵션에서 사용)
+      selectedMenu: null,
+      setSelectedMenu: (selectedMenu: Tables<'menu_item'>) => set(() => ({ selectedMenu })),
     }),
     {
       name: 'order-storage',

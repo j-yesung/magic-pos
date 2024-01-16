@@ -19,8 +19,9 @@ const OrderLayout = ({ children }: { children: React.ReactNode }) => {
   const { pathname } = useRouter();
 
   const clickPrevButtonHandler = () => {
-    if (optionSwiperRef?.current?.swiper.activeIndex === 1) optionSwiperRef.current?.swiper.slidePrev(SLIDE_MOVE_SPEED);
-    else {
+    if (optionSwiperRef?.current?.swiper?.activeIndex === 1) {
+      optionSwiperRef.current?.swiper.slidePrev(SLIDE_MOVE_SPEED);
+    } else {
       sliderRef!.current?.swiper.slidePrev(SLIDE_MOVE_SPEED);
       goPrevStep();
     }
