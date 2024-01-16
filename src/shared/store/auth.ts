@@ -9,7 +9,7 @@ const useAuthStore = create<AuthState>()(
       storeId: null,
       storeName: null,
       storeBno: null,
-      setStroeName: name => set(state => ({ ...state, storeName: name })),
+      setStoreName: name => set(state => ({ ...state, storeName: name })),
       setStoreBno: bno => set(state => ({ ...state, storeBno: bno })),
       setStoreId: storeId => set(state => ({ ...state, storeId })),
       setSession: auth => set(state => ({ ...state, auth })),

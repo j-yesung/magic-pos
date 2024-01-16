@@ -4,6 +4,7 @@ import useManagementStore from "@/shared/store/management";
 import ManagementContainer from "./managementContainer/ManagementContainer";
 import ManagementModal from "./managementModal/ManagementModal";
 import ManagementSideBar from "./managementSideBar/ManagementSideBar";
+import QrCodeModal from "./qrCodeModal/QrCodeModal";
 import styles from "./styles/Management.module.css";
 
 const Management = () => {
@@ -16,6 +17,7 @@ const Management = () => {
   return (
     <div className={styles['managementWrapper']}>
       {isModal && <ManagementModal />}
+      <QrCodeModal />
       <ManagementContainer managementData={data} />
       <ManagementSideBar managementData={data} />
     </div>
