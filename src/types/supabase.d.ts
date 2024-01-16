@@ -549,7 +549,7 @@ interface StoreWithOrderInfo extends Tables<'store'> {
 }
 
 interface CategoryWithMenuItem extends Tables<'menu_category'> {
-  menu_item: Tables<'menu_item'>[];
+  menu_item: MenuItemWithOption[];
   store: Pick<Tables<'store'>, 'business_name'>;
 }
 
@@ -562,3 +562,11 @@ type NumberOrderWithStoreName = Tables<'order_number'>['Row'] & {
 };
 
 type OrderDataWithStoreName = NumberOrderWithStoreName & StoreOrderWithStoreName;
+
+interface MenuOptionWithDetail extends Tables<'menu_option'> {
+  menu_option_detail: Tables<'menu_option_detail'>[];
+}
+
+interface MenuItemWithOption extends Tables<'menu_item'> {
+  menu_option: Tables<'menu_option'>[];
+}

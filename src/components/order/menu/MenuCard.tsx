@@ -1,12 +1,12 @@
 import React from 'react';
 import styles from './styles/MenuCard.module.css';
-import { Tables } from '@/types/supabase';
+import { MenuItemWithOption } from '@/types/supabase';
 import Image from 'next/image';
 import useOrderStore from '@/shared/store/order';
 import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButton';
 
 interface MenuCardProps {
-  menu: Tables<'menu_item'>;
+  menu: MenuItemWithOption;
 }
 
 const MenuCard = ({ menu }: MenuCardProps) => {

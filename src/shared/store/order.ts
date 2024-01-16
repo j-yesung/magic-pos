@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { CategoryWithMenuItem, Tables } from '@/types/supabase';
+import { CategoryWithMenuItem, MenuItemWithOption, Tables } from '@/types/supabase';
 import { SwiperRef } from 'swiper/react';
 import React from 'react';
 
@@ -43,8 +43,8 @@ interface OrderState {
   setStoreName: (storeName: string) => void;
   orderId: string | null;
   setOrderId: (orderId: string) => void;
-  selectedMenu: Tables<'menu_item'> | null;
-  setSelectedMenu: (menu: Tables<'menu_item'>) => void;
+  selectedMenu: MenuItemWithOption | null;
+  setSelectedMenu: (menu: MenuItemWithOption) => void;
 }
 
 export const useOrderStore = create<OrderState>()(
@@ -100,7 +100,7 @@ export const useOrderStore = create<OrderState>()(
       setOptionSwiperRef: (optionSwiperRef: React.RefObject<SwiperRef>) => set(() => ({ optionSwiperRef })),
       // 선택된 메뉴 (옵션에서 사용)
       selectedMenu: null,
-      setSelectedMenu: (selectedMenu: Tables<'menu_item'>) => set(() => ({ selectedMenu })),
+      setSelectedMenu: (selectedMenu: MenuItemWithOption) => set(() => ({ selectedMenu })),
     }),
     {
       name: 'order-storage',

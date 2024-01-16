@@ -3,7 +3,7 @@ import useOrderStore from '@/shared/store/order';
 import MenuCategoryContainer from '@/components/order/menu/MenuCategoryContainer';
 import styles from './styles/MenuContainer.module.css';
 import MenuCard from '@/components/order/menu/MenuCard';
-import { Tables } from '@/types/supabase';
+import { MenuItemWithOption } from '@/types/supabase';
 import StoreInfo from '@/components/order/common/StoreInfo';
 
 /**
@@ -13,7 +13,7 @@ import StoreInfo from '@/components/order/common/StoreInfo';
 const MenuContainer = () => {
   const { menuData, orderType, storeName } = useOrderStore();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [menuItemList, setMenuItemList] = useState<Tables<'menu_item'>[]>([]);
+  const [menuItemList, setMenuItemList] = useState<MenuItemWithOption[]>([]);
 
   useEffect(() => {
     if (menuData && menuData.length > 0) {
