@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { CategoryWithMenuItem, MenuItemWithOption, Tables } from '@/types/supabase';
+import { CategoryWithMenuItem, MenuItemWithOption } from '@/types/supabase';
 import { SwiperRef } from 'swiper/react';
 import React from 'react';
 
@@ -22,10 +22,10 @@ interface OrderState {
   goNextStep: () => void;
   goPrevStep: () => void;
   setMenuData: (data: CategoryWithMenuItem[]) => void;
-  orderList: Tables<'menu_item'>[];
+  orderList: MenuItemWithOption[];
   resetOrderList: () => void;
-  addOrderList: (menu: Tables<'menu_item'>[]) => void;
-  subtractOrderList: (menu: Tables<'menu_item'>) => void;
+  addOrderList: (menu: MenuItemWithOption[]) => void;
+  subtractOrderList: (menu: MenuItemWithOption) => void;
   getTotalPrice: () => number;
   storeId: string | null;
   setStoreId: (storeId: string) => void;
@@ -44,7 +44,7 @@ interface OrderState {
   orderId: string | null;
   setOrderId: (orderId: string) => void;
   selectedMenu: MenuItemWithOption | null;
-  setSelectedMenu: (menu: MenuItemWithOption) => void;
+  setSelectedMenu: (menu: MenuItemWithOption | null) => void;
 }
 
 export const useOrderStore = create<OrderState>()(
@@ -67,8 +67,8 @@ export const useOrderStore = create<OrderState>()(
       // 주문에 담은 메뉴 목록을 나타냅니다.
       orderList: [],
       resetOrderList: () => set(() => ({ orderList: [] })),
-      addOrderList: (menu: Tables<'menu_item'>[]) => set(state => ({ orderList: [...state.orderList, ...menu] })),
-      subtractOrderList: (menu: Tables<'menu_item'>) =>
+      addOrderList: (menu: MenuItemWithOption[]) => set(state => ({ orderList: [...state.orderList, ...menu] })),
+      subtractOrderList: (menu: MenuItemWithOption) =>
         set(state => {
           const findIndex = state.orderList.findLastIndex(o => o.id === menu.id);
           state.orderList.splice(findIndex, 1);
@@ -100,7 +100,7 @@ export const useOrderStore = create<OrderState>()(
       setOptionSwiperRef: (optionSwiperRef: React.RefObject<SwiperRef>) => set(() => ({ optionSwiperRef })),
       // 선택된 메뉴 (옵션에서 사용)
       selectedMenu: null,
-      setSelectedMenu: (selectedMenu: MenuItemWithOption) => set(() => ({ selectedMenu })),
+      setSelectedMenu: (selectedMenu: MenuItemWithOption | null) => set(() => ({ selectedMenu })),
     }),
     {
       name: 'order-storage',

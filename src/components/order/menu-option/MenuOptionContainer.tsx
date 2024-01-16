@@ -7,7 +7,6 @@ import OptionRow from '@/components/order/menu-option/OptionRow';
 
 const MenuOptionContainer = () => {
   const { selectedMenu } = useOrderStore();
-  console.log(selectedMenu?.menu_option);
 
   return (
     <section className={styles.container}>
