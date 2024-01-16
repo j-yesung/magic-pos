@@ -3,64 +3,6 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export interface Database {
   public: {
     Tables: {
-      distribution: {
-        Row: {
-          company_name: string | null;
-          id: string;
-          menu_id: string;
-        };
-        Insert: {
-          company_name?: string | null;
-          id?: string;
-          menu_id: string;
-        };
-        Update: {
-          company_name?: string | null;
-          id?: string;
-          menu_id?: string;
-        };
-        Relationships: [
-          {
-            foreignKeyName: 'distribution_menu_id_fkey';
-            columns: ['menu_id'];
-            isOneToOne: false;
-            referencedRelation: 'menu_item';
-            referencedColumns: ['id'];
-          },
-        ];
-      };
-      distribution_detail: {
-        Row: {
-          distribution_id: string;
-          id: string;
-          min_ea: number | null;
-          name: string | null;
-          price: number | null;
-        };
-        Insert: {
-          distribution_id: string;
-          id?: string;
-          min_ea?: number | null;
-          name?: string | null;
-          price?: number | null;
-        };
-        Update: {
-          distribution_id?: string;
-          id?: string;
-          min_ea?: number | null;
-          name?: string | null;
-          price?: number | null;
-        };
-        Relationships: [
-          {
-            foreignKeyName: 'distribution_detail_distribution_id_fkey';
-            columns: ['distribution_id'];
-            isOneToOne: false;
-            referencedRelation: 'distribution';
-            referencedColumns: ['id'];
-          },
-        ];
-      };
       menu_category: {
         Row: {
           id: string;
@@ -135,18 +77,21 @@ export interface Database {
         Row: {
           id: string;
           is_use: boolean | null;
+          max_detail_count: number;
           menu_id: string;
           name: string | null;
         };
         Insert: {
           id?: string;
           is_use?: boolean | null;
+          max_detail_count?: number;
           menu_id: string;
           name?: string | null;
         };
         Update: {
           id?: string;
           is_use?: boolean | null;
+          max_detail_count?: number;
           menu_id?: string;
           name?: string | null;
         };
@@ -304,6 +249,38 @@ export interface Database {
           name?: string;
         };
         Relationships: [];
+      };
+      platform: {
+        Row: {
+          id: string;
+          image_url: string | null;
+          link_url: string | null;
+          name: string | null;
+          store_id: string;
+        };
+        Insert: {
+          id?: string;
+          image_url?: string | null;
+          link_url?: string | null;
+          name?: string | null;
+          store_id: string;
+        };
+        Update: {
+          id?: string;
+          image_url?: string | null;
+          link_url?: string | null;
+          name?: string | null;
+          store_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'platform_store_id_fkey';
+            columns: ['store_id'];
+            isOneToOne: false;
+            referencedRelation: 'store';
+            referencedColumns: ['id'];
+          },
+        ];
       };
       profiles: {
         Row: {
@@ -568,5 +545,5 @@ interface MenuOptionWithDetail extends Tables<'menu_option'> {
 }
 
 interface MenuItemWithOption extends Tables<'menu_item'> {
-  menu_option: Tables<'menu_option'>[];
+  menu_option: MenuOptionWithDetail[];
 }
