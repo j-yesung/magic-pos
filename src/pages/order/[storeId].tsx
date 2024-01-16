@@ -92,16 +92,6 @@ const OrderIndexPage = ({
     if (storeId) setStoreId(storeId);
     if (tableId) setTableId(tableId);
     setIsLoaded(true);
-
-    MagicModal.fire(<div>test</div>);
-    MagicModal.alert({ content: 'test222', showButton: true });
-    MagicModal.confirm({
-      content: '안녕하세요',
-      confirmButtonText: '화악인',
-      cancelButtonText: '취이소',
-      confirmButtonCallback: () => alert(1),
-      cancelButtonCallback: () => alert(2),
-    });
   }, []);
 
   return <>{isLoaded && <OrderContainer />}</>;
