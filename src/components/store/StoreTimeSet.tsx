@@ -1,7 +1,7 @@
 import { useGetQuery } from '@/hooks/store/useGetQuery';
 import { useStoreQuery } from '@/hooks/store/useStoreQuery';
 import { Fragment, useEffect, useState } from 'react';
-import Button from '../auth/Button';
+import Button from '../common/Button';
 import styles from './styles/StroeContents.module.css';
 
 const TIME_SIZE = 48;

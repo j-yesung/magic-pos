@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './styles/Auth.module.css';
+import styles from '../auth/styles/Auth.module.css';
 
 interface ButtonProps {
   type: 'submit' | 'button';
