@@ -1,9 +1,10 @@
 import useModalStore from '@/shared/store/modal';
 import { ReactElement } from 'react';
 import { ModalAlertTypeOption, ModalConfirmTypeOption } from '@/types/common';
+import { nanoid } from 'nanoid';
 
 export const useModal = () => {
-  const { showModal, hideModal, setChildElem, setAlertTypeOption, setConfirmTypeOption } = useModalStore();
+  const { addChildElem, addAlert, addConfirm } = useModalStore();
 
   class MagicModal {
     /**
@@ -12,15 +13,18 @@ export const useModal = () => {
      * @param elem 컴포넌트
      */
     static fire(elem: ReactElement) {
-      setChildElem(elem);
-      showModal();
+      const id = nanoid();
+      addChildElem({ id, child: elem, type: 'component', show: true });
     }
 
     /**
-     * 모달을 닫습니다.
+     * 확인 모달을 출력합니다.
+     * usage: MagicModal.confirm({ content: '안녕하세요', confirmButtonCallback: () => {alert('yes!!')} });
+     * @param option
      */
-    static destroy() {
-      hideModal();
+    static confirm(option: ModalConfirmTypeOption) {
+      const id = nanoid();
+      addConfirm({ ...option, id });
     }
 
     /**
@@ -30,18 +34,8 @@ export const useModal = () => {
      * @param option
      */
     static alert(option: ModalAlertTypeOption) {
-      setAlertTypeOption(option);
-      showModal();
-    }
-
-    /**
-     * 확인 모달을 출력합니다.
-     * usage: MagicModal.confirm({ content: '안녕하세요', confirmButtonCallback: () => {alert('yes!!')} });
-     * @param option
-     */
-    static confirm(option: ModalConfirmTypeOption) {
-      setConfirmTypeOption(option);
-      showModal();
+      const id = nanoid();
+      addAlert({ ...option, id });
     }
   }
 
