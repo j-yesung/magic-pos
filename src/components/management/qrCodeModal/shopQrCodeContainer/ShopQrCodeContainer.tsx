@@ -1,21 +1,14 @@
-import useManagementStore from '@/shared/store/management';
 import { StoreWithOrderInfo } from '@/types/supabase';
 import { useQueryClient } from '@tanstack/react-query';
 import clsx from 'clsx';
-import { useEffect } from 'react';
-import QrCodeListItem from '../qrCodelistItem/QrCodeListItem';
+import QrCodeListItem from '../qrCodeListItem/QrCodeListItem';
 import styles from './styles/ShopQrCodeContainer.module.css';
 
 const ShopQrCodeContainer = () => {
   const queryClient = useQueryClient();
   const data = queryClient.getQueryData<StoreWithOrderInfo[]>(['management'])
   const storeTable = data && data[0].store_table;
-  // const qrImageRef = useRef<HTMLDivElement[]>([]);
-  const { QRImageRef } = useManagementStore()
 
-  useEffect(() => {
-    QRImageRef
-  }, [QRImageRef])
   return (
     <div className={styles['shop-qr-code-container']}>
       <div className={styles['shop-qr-code-title']}>매장용 QR코드</div>

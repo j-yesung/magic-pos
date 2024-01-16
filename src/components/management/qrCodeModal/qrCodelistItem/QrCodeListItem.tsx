@@ -29,7 +29,6 @@ const QrCodeListItem = ({ storeTable, orderType, index }: propsType) => {
   const clickQrDownLoadHandler = () => {
     setIsQrClick(true)
   }
-  console.log()
   useEffect(() => {
     if (tableCount) {
       if (QRImage && qrUrl && storeId && tableCount.length + 1 > qrData.length) {
@@ -42,9 +41,6 @@ const QrCodeListItem = ({ storeTable, orderType, index }: propsType) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [QRImage, qrUrl, storeId])
-  useEffect(() => {
-    console.log(qrData)
-  }, [qrData])
   useEffect(() => {
     if (isQrClick) {
       qrDownLoad({

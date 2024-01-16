@@ -5,13 +5,12 @@ import QrCodeModal from "../qrCodeModal/QrCodeModal"
 import styles from "./styles/SideBarButtonBox.module.css"
 
 const SideBarButtonBox = () => {
-  const { orderData, isModal, setIsModal, isQRModal, setIsQRModal } = useManagementStore()
+  const { orderData } = useManagementStore()
   const { MagicModal } = useModal()
 
   const clickOrderConfirmHandler = () => {
     if (orderData.length === 0) {
       MagicModal.alert({ content: '선택한 주문내역이 없습니다.' });
-      return
     } else {
       MagicModal.fire(<ManagementModal />)
     }
