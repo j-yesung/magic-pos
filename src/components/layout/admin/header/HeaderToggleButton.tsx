@@ -16,7 +16,7 @@ const HeaderToggleButton = () => {
     } else if (!isToggle && currentPath === managementPath) {
       router.push('/admin/store');
     }
-  }, [isToggle]);
+  }, [isToggle, router]);
 
   return (
     <>
