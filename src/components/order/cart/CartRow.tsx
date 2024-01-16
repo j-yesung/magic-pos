@@ -5,7 +5,7 @@ import { convertNumberToWon } from '@/shared/helper';
 import useOrderStore from '@/shared/store/order';
 
 const CartRow = ({ itemList }: { itemList: MenuItemWithOption[] }) => {
-  const { addOrderList, subtractOrderList } = useOrderStore();
+  const { addOrderList, subtractOrderList, getOptionPriceByList } = useOrderStore();
 
   const handleClickUpQuantity = (item: MenuItemWithOption) => {
     addOrderList([item]);
@@ -26,7 +26,9 @@ const CartRow = ({ itemList }: { itemList: MenuItemWithOption[] }) => {
         </div>
       </div>
       <div>
-        <span>{convertNumberToWon(itemList.reduce((acc, cur) => acc + cur.price, 0))}</span>
+        <span>
+          {convertNumberToWon(itemList.reduce((acc, cur) => acc + cur.price, 0) + getOptionPriceByList(itemList))}
+        </span>
       </div>
     </div>
   );

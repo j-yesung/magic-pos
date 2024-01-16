@@ -19,7 +19,7 @@ const MenuOptionContainer = () => {
           {selectedMenu?.menu_option.map(option => <OptionRow key={option.id} option={option} />)}
           <Amount />
           <div className={styles.totalPrice}>
-            <TotalPrice allItemList={new Array(amount).fill(true).map(() => selectedMenu)} />
+            <TotalPrice itemList={new Array(amount).fill(true).map(() => selectedMenu)} isAll={false} />
           </div>
         </section>
       )}
