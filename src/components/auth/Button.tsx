@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './styles/Auth.module.css';
 
-interface BurrtonProps {
+interface ButtonProps {
   type: 'submit' | 'button';
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   children: React.ReactNode;
@@ -9,7 +9,7 @@ interface BurrtonProps {
   disabled?: boolean;
 }
 
-const Button = ({ type, onClick, children, className, disabled }: BurrtonProps) => {
+const Button = ({ type, onClick, children, className, disabled }: ButtonProps) => {
   return (
     <button
       className={!disabled ? `${styles.button} ${className}` : styles.disabledButton}
