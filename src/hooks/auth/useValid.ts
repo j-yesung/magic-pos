@@ -9,19 +9,10 @@ export const useValid = (value: Record<string, string>) => {
   const [isValid, setIsValid] = useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
-  const [bnoErrorMessage, setBnoErrorMessage] = useState('');
   const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  // 사업자 번호 유효성 검사를 바로 실행하지 않고, useEffect 내에서 상태를 설정하도록 변경
-  const [isBnoValid, setIsBnoValid] = useState(false);
-
-  const isBusinessNumberValid = value.businessNumber.length === MAX_BUSINESS_NUM_LENGTH;
+  const businessNumberRegex = /^\d{10}$/;
 
   useEffect(() => {
-    // 사업자 번호 유효성 검사 로직을 useEffect로 이동
-    const businessNumberRegex = /^\d{10}$/;
-    const currentIsBnoValid = businessNumberRegex.test(businessNumber);
-    setIsBnoValid(currentIsBnoValid);
-
     if (path === '/auth/signup') {
       const isPasswordMatch = password !== '' && password === passwordConfirm;
       const areFieldsFilled =
@@ -40,18 +31,20 @@ export const useValid = (value: Record<string, string>) => {
         setPasswordErrorMessage(''); // 비밀번호나 비밀번호 확인 값이 변경되었을 때 초기화
       }
 
-      // 사업자 번호 에러 메세지 처리
-      setBnoErrorMessage(businessNumber.trim() !== '' && !isBnoValid ? '올바른 사업자 번호 형식이 아닙니다.' : '');
-
       // 모든 필드가 유효한지 최종 검사하여 isValid 업데이트
-      setIsValid(isEmailValid && isPasswordMatch && currentIsBnoValid && areFieldsFilled);
+      setIsValid(isEmailValid && isPasswordMatch && areFieldsFilled);
     } else {
       const areFieldsFilled = email.trim() !== '' && password.trim() !== '';
 
       setIsValid(isEmailValid && areFieldsFilled);
       setEmailErrorMessage(email.trim() !== '' && !isEmailValid ? '올바른 이메일 형식이 아닙니다.' : '');
     }
-  }, [businessNumber, email, isBnoValid, isEmailValid, isValid, password, passwordConfirm, path]);
+  }, [businessNumber, email, isEmailValid, password, passwordConfirm, path]);
 
-  return { isValid, emailErrorMessage, passwordErrorMessage, bnoErrorMessage, isBusinessNumberValid };
+  const isBusinessNumberValid =
+    value.businessNumber.length === MAX_BUSINESS_NUM_LENGTH &&
+    businessNumberRegex.test(value.businessNumber) &&
+    isValid;
+
+  return { isValid, emailErrorMessage, passwordErrorMessage, isBusinessNumberValid };
 };
