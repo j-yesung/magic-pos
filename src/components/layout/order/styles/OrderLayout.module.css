@@ -9,7 +9,7 @@
 
 .children {
     display: flex;
-    height: calc(100vh - var(--kiosk-container-padding)*2);
+    height: calc(100vh - var(--kiosk-footer-height));
 }
 
 .prev-button {

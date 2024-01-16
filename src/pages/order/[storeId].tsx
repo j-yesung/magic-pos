@@ -29,6 +29,8 @@ const OrderIndexPage = ({
   const { MagicModal } = useModal();
   const router = useRouter();
 
+  // numberOrderData: 번호표 주문 (포장, 테이블 번호가 없는 매장 주문)
+  // storeOrderData: 테이블 주문 (테이블 번호가 있는 매장 주문)
   useEffect(() => {
     if (orderId) {
       (async () => {

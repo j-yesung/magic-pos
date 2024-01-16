@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { CategoryWithMenuItem, Tables } from '@/types/supabase';
+import { CategoryWithMenuItem, MenuItemWithOption, MenuOptionWithDetail } from '@/types/supabase';
 import { SwiperRef } from 'swiper/react';
 import React from 'react';
 
@@ -22,10 +22,10 @@ interface OrderState {
   goNextStep: () => void;
   goPrevStep: () => void;
   setMenuData: (data: CategoryWithMenuItem[]) => void;
-  orderList: Tables<'menu_item'>[];
+  orderList: MenuItemWithOption[];
   resetOrderList: () => void;
-  addOrderList: (menu: Tables<'menu_item'>[]) => void;
-  subtractOrderList: (menu: Tables<'menu_item'>) => void;
+  addOrderList: (menu: MenuItemWithOption[]) => void;
+  subtractOrderList: (menu: MenuItemWithOption) => void;
   getTotalPrice: () => number;
   storeId: string | null;
   setStoreId: (storeId: string) => void;
@@ -37,10 +37,18 @@ interface OrderState {
   setOrderType: (orderType: OrderType) => void;
   swiperRef: React.RefObject<SwiperRef> | null;
   setSwiperRef: (ref: React.RefObject<SwiperRef>) => void;
+  optionSwiperRef: React.RefObject<SwiperRef> | null;
+  setOptionSwiperRef: (ref: React.RefObject<SwiperRef>) => void;
   storeName: string;
   setStoreName: (storeName: string) => void;
   orderId: string | null;
   setOrderId: (orderId: string) => void;
+  selectedMenu: MenuItemWithOption | null;
+  setSelectedMenu: (menu: MenuItemWithOption | null) => void;
+  selectedOptions: MenuOptionWithDetail[];
+  addSelectedOption: (selectedOption: MenuOptionWithDetail) => void;
+  subtractSelectedOption: (id: string) => void;
+  resetSelectedOptions: () => void;
 }
 
 export const useOrderStore = create<OrderState>()(
@@ -53,7 +61,7 @@ export const useOrderStore = create<OrderState>()(
       goPrevStep: () => set(state => ({ step: Math.max(state.step - 1, 0) })),
       // 메뉴, 카테고리가 담긴 데이터를 나타냅니다.
       menuData: null,
-      setMenuData: (data: CategoryWithMenuItem[]) =>
+      setMenuData: data =>
         set(state => {
           if (state.menuData === null) {
             return { menuData: data };
@@ -63,8 +71,8 @@ export const useOrderStore = create<OrderState>()(
       // 주문에 담은 메뉴 목록을 나타냅니다.
       orderList: [],
       resetOrderList: () => set(() => ({ orderList: [] })),
-      addOrderList: (menu: Tables<'menu_item'>[]) => set(state => ({ orderList: [...state.orderList, ...menu] })),
-      subtractOrderList: (menu: Tables<'menu_item'>) =>
+      addOrderList: menu => set(state => ({ orderList: [...state.orderList, ...menu] })),
+      subtractOrderList: menu =>
         set(state => {
           const findIndex = state.orderList.findLastIndex(o => o.id === menu.id);
           state.orderList.splice(findIndex, 1);
@@ -74,24 +82,65 @@ export const useOrderStore = create<OrderState>()(
       getTotalPrice: () => get()?.orderList.reduce((acc, cur) => acc + cur.price, 0),
       // 가게 ID
       storeId: null,
-      setStoreId: (storeId: string) => set(() => ({ storeId })),
+      setStoreId: storeId => set(() => ({ storeId })),
       // 주문 번호
       orderNumber: 0,
-      setOrderNumber: (orderNumber: number) => set(() => ({ orderNumber })),
+      setOrderNumber: orderNumber => set(() => ({ orderNumber })),
       // 테이블 아이디
       tableId: null,
-      setTableId: (tableId: string) => set(() => ({ tableId })),
+      setTableId: tableId => set(() => ({ tableId })),
       // 주문 타입 (togo, store)
       orderType: { type: null },
-      setOrderType: (orderType: OrderType) => set(() => ({ orderType })),
+      setOrderType: orderType => set(() => ({ orderType })),
       // 결제 승인시 토스에서 발급되는 orderId
       orderId: null,
-      setOrderId: (orderId: string) => set(() => ({ orderId })),
+      setOrderId: orderId => set(() => ({ orderId })),
       // 가게 이름
       storeName: '',
-      setStoreName: (storeName: string) => set(() => ({ storeName })),
+      setStoreName: storeName => set(() => ({ storeName })),
       swiperRef: null,
-      setSwiperRef: (swiperRef: React.RefObject<SwiperRef>) => set(() => ({ swiperRef })),
+      setSwiperRef: swiperRef => set(() => ({ swiperRef })),
+      optionSwiperRef: null,
+      setOptionSwiperRef: optionSwiperRef => set(() => ({ optionSwiperRef })),
+      // 선택된 메뉴 (옵션에서 사용)
+      selectedMenu: null,
+      setSelectedMenu: selectedMenu => set(() => ({ selectedMenu })),
+      // 선택된 옵션
+      selectedOptions: [],
+      // 옵션 추가
+      addSelectedOption: param =>
+        set(state => {
+          let newSelectedOptions = [...state.selectedOptions];
+          // 이미 옵션이 있다면 기존 옵션에서 details만 갈아끼우고, 옵션이 없다면 새로 만든다.
+          if (newSelectedOptions.length === 0) newSelectedOptions = [param];
+          else {
+            const find = state.selectedOptions.find(s => s.id === param.id);
+            if (find) {
+              newSelectedOptions = state.selectedOptions.map(option => {
+                if (option.id === param.id) {
+                  option.menu_option_detail = param.menu_option_detail;
+                  return option;
+                }
+                return option;
+              });
+            } else {
+              newSelectedOptions = [...state.selectedOptions, param];
+            }
+          }
+          return { ...state, selectedOptions: newSelectedOptions };
+        }),
+      // 옵션 제거
+      subtractSelectedOption: detailId =>
+        set(state => ({
+          selectedOptions: state.selectedOptions
+            ?.map(option => {
+              option.menu_option_detail = option.menu_option_detail.filter(detail => detail.id !== detailId);
+              return option;
+            })
+            .filter(o => o.menu_option_detail.length > 0),
+        })),
+      // 옵션 초기화
+      resetSelectedOptions: () => set(() => ({ selectedOptions: [] })),
     }),
     {
       name: 'order-storage',

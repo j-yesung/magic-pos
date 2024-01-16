@@ -1,17 +1,17 @@
 import React from 'react';
 import styles from './styles/CartRow.module.css';
-import { Tables } from '@/types/supabase';
+import { MenuItemWithOption } from '@/types/supabase';
 import { convertNumberToWon } from '@/shared/helper';
 import useOrderStore from '@/shared/store/order';
 
-const CartRow = ({ itemList }: { itemList: Tables<'menu_item'>[] }) => {
+const CartRow = ({ itemList }: { itemList: MenuItemWithOption[] }) => {
   const { addOrderList, subtractOrderList } = useOrderStore();
 
-  const handleClickUpQuantity = (item: Tables<'menu_item'>) => {
+  const handleClickUpQuantity = (item: MenuItemWithOption) => {
     addOrderList([item]);
   };
 
-  const handleClickDownQuantity = (item: Tables<'menu_item'>) => {
+  const handleClickDownQuantity = (item: MenuItemWithOption) => {
     subtractOrderList(item);
   };
 

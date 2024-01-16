@@ -15,7 +15,7 @@
   border-radius: 1rem /* 15/10 */;
   padding: 1rem;
 
-  @media screen and (max-width: 76.8rem  /* 768/10 */) {
+  @media screen and (min-width: 76.8rem  /* 768/10 */) {
     width: 25vw;
   }
 }

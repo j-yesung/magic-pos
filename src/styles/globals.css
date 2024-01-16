@@ -1,6 +1,6 @@
 :root {
   --kiosk-header-height: 6rem /* 80/10 */;
-  --kiosk-footer-height: 50px;
+  --kiosk-footer-height: 5rem;
   --kiosk-container-padding: 1.25rem;
 
   /* palette */
