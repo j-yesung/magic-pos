@@ -7,8 +7,7 @@ export const fetchManagement = async (id?: string) => {
       .select('*, store_table(*),order_store(*),order_number(*)')
       .eq('business_id', id)
       .eq('order_store.is_done', false)
-      .eq('order_number.is_done', false);
-
+      .eq('order_number.is_done', false)
     if (error) throw new Error(error.message);
     return store;
   }
