@@ -65,7 +65,7 @@ export const updateCategoryPosition = async (categoryId: string, position: numbe
 export const fetchCategoriesWithMenuItemByStoreId = async (store_id: string) => {
   const { data, error } = await supabase
     .from('menu_category')
-    .select('*, menu_item(*)')
+    .select('*, menu_item(*), store(business_name)')
     .eq('store_id', store_id)
     .order('position', { ascending: true })
     .returns<CategoryWithMenuItem[]>();

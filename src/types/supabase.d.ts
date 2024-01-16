@@ -526,7 +526,7 @@ interface StoreWithOrderInfo extends Tables<'store'> {
 }
 
 interface CategoryWithMenuItem extends Tables<'menu_category'> {
-  menu_item: MenuItemWithOption[];
+  menu_item: Tables<'menu_item'>[];
   store: Pick<Tables<'store'>, 'business_name'>;
 }
 
