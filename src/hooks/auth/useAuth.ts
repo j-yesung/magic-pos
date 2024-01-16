@@ -64,8 +64,8 @@ export const useAuth = () => {
     mutationFn: logoutHandler,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.LOGOUT] });
-      useAuthStore.persist.clearStorage();
       setSession(null);
+      useAuthStore.persist.clearStorage();
       router.push('/');
     },
     onError: error => {
