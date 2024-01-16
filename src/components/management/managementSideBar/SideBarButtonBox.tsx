@@ -3,7 +3,7 @@ import useManagementStore from "@/shared/store/management"
 import styles from "./styles/SideBarButtonBox.module.css"
 
 const SideBarButtonBox = () => {
-  const { orderData, isModal, setIsModal } = useManagementStore()
+  const { orderData, isModal, setIsModal, isQRModal, setIsQRModal } = useManagementStore()
   const { MagicModal } = useModal()
 
   const clickOrderConfirmHandler = () => {
@@ -14,11 +14,14 @@ const SideBarButtonBox = () => {
       setIsModal(!isModal)
     }
   }
+  const clickQRModalHandler = () => {
+    setIsQRModal(!isQRModal)
+  }
 
   return (
     <div className={styles['side-bar-button-box']}>
       <button className={styles['side-bar-button']} onClick={clickOrderConfirmHandler}>주문 완료</button>
-      <button className={styles['side-bar-button']}>QR코드 출력</button>
+      <button className={styles['side-bar-button']} onClick={clickQRModalHandler}>QR코드 출력</button>
     </div>
   )
 }

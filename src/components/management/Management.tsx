@@ -12,12 +12,12 @@ const Management = () => {
   const user = auth?.user;
   const id = user?.id;
   const { data } = useFetchManagement(id);
-  const { isModal } = useManagementStore()
+  const { isModal, isQRModal } = useManagementStore()
 
   return (
     <div className={styles['managementWrapper']}>
       {isModal && <ManagementModal />}
-      <QrCodeModal />
+      {isQRModal && <QrCodeModal />}
       <ManagementContainer managementData={data} />
       <ManagementSideBar managementData={data} />
     </div>

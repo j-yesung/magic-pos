@@ -8,10 +8,12 @@ interface managementType {
   orderStatus: string;
   tableNumber: string;
   isModal: boolean;
+  isQRModal: boolean;
   orderConfirmData: OrderConfirmType[];
   setOrderData: (value: OrderDataWithStoreName[]) => void
   setOrderId: (value: { id: string[], status: string, number: string }) => void
   setIsModal: (value: boolean) => void
+  setIsQRModal: (value: boolean) => void
   addOrderConfirmData: (value: OrderConfirmType) => void
   removeOrderConfirmData: (value: string) => void
 }
@@ -22,6 +24,7 @@ const useManagementStore = create<managementType>((set) => ({
   orderStatus: '',
   tableNumber: '',
   isModal: false,
+  isQRModal: false,
   orderConfirmData: [],
   setOrderData: (value) =>
     set(() => ({
@@ -36,6 +39,10 @@ const useManagementStore = create<managementType>((set) => ({
   setIsModal: (value) =>
     set(() => ({
       isModal: value
+    })),
+  setIsQRModal: (value) =>
+    set(() => ({
+      isQRModal: value
     })),
   addOrderConfirmData: (value) =>
     set((state) => ({
