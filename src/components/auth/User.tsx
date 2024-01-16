@@ -19,14 +19,14 @@ const User = () => {
     subName: '비밀번호를 잊으셨나요?',
     caption: '아직 회원이 아니신가요? 회원가입하러 가기',
     buttonName: '로그인',
+    buttonSubName: '회원가입',
   };
   const SIGNUP_DATA = {
     url: '/auth/login',
     title: '편리함의 시작',
     subTitle: 'Magic Pos',
-    caption: '이미 가입을 하셨나요? 로그인하러 가기',
     buttonName: '회원가입',
-    subButtonName: '사업자등록번호 인증',
+    subButtonName: '인증하기',
   };
   const FIND_PASSWORD_DATA = {
     title: '편리함의 시작',
