@@ -7,6 +7,7 @@ type NextPageWithLayout<P = NonNullable<unknown>, IP = P> = NextPage<P, IP> & {
 };
 
 interface ModalAlertTypeOption {
+  id?: string;
   content: string;
   showButton?: boolean;
   buttonText?: string;
@@ -14,6 +15,7 @@ interface ModalAlertTypeOption {
 }
 
 interface ModalConfirmTypeOption {
+  id?: string;
   content: string;
   confirmButtonText?: string;
   cancelButtonText?: string;
@@ -59,7 +61,7 @@ interface AuthState {
   storeId: string | null;
   storeName: string | null;
   storeBno: string | null;
-  setStroeName: (name: string) => void;
+  setStoreName: (name: string) => void;
   setStoreBno: (bno: string) => void;
   setSession: (auth) => void;
   setStoreId: (id: string) => void;

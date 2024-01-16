@@ -1,29 +1,30 @@
 import React from 'react';
 import useModalStore from '@/shared/store/modal';
 import styles from './styles/DefaultModal.module.css';
+import { ModalConfirmTypeOption } from '@/types/common';
 
-const ConfirmModal = () => {
-  const { hideModal, confirmTypeOption } = useModalStore();
+const ConfirmModal = ({ confirmOption }: { confirmOption: ModalConfirmTypeOption }) => {
+  const { hideConfirm } = useModalStore();
 
   const handleClickCancel = () => {
-    if (confirmTypeOption.cancelButtonCallback) confirmTypeOption.cancelButtonCallback();
-    hideModal();
+    if (confirmOption.cancelButtonCallback) confirmOption.cancelButtonCallback();
+    hideConfirm(confirmOption.id ?? '');
   };
 
   const handleClickConfirm = () => {
-    if (confirmTypeOption.confirmButtonCallback) confirmTypeOption.confirmButtonCallback();
-    hideModal();
+    if (confirmOption.confirmButtonCallback) confirmOption.confirmButtonCallback();
+    hideConfirm(confirmOption.id ?? '');
   };
 
   return (
     <div className={styles.container}>
-      <span>{confirmTypeOption.content}</span>
+      <span>{confirmOption.content}</span>
       <div className={styles['confirm-button-container']}>
         <button className={styles.cancel} onClick={handleClickCancel}>
-          {confirmTypeOption.cancelButtonText}
+          {confirmOption.cancelButtonText}
         </button>
         <button className={styles.confirm} onClick={handleClickConfirm}>
-          {confirmTypeOption.confirmButtonText}
+          {confirmOption.confirmButtonText}
         </button>
       </div>
     </div>

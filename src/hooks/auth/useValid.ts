@@ -1,56 +1,50 @@
 import { useRouter } from 'next/router';
-
-type Values = Record<string, string>;
+import { useEffect, useState } from 'react';
 
 const MAX_BUSINESS_NUM_LENGTH = 10;
 
-export const useValid = (value: Values) => {
+export const useValid = (value: Record<string, string>) => {
   const path = useRouter().pathname;
   const { email, password, passwordConfirm, businessNumber } = value;
+  const [isValid, setIsValid] = useState(false);
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
+  const [emailErrorMessage, setEmailErrorMessage] = useState('');
+  const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const businessNumberRegex = /^\d{10}$/;
 
-  const validateCheck = () => {
-    const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
-    // const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/g;
-    const businessNumberRegex = /^\d{10}$/g;
-
-    if (path === '/auth/login') {
-      if (!email || !password) {
-        return alert('필수 입력값을 입력해 주세요.');
-      }
-    }
-
+  useEffect(() => {
     if (path === '/auth/signup') {
-      if (!email || !password || !passwordConfirm || !businessNumber) {
-        return alert('필수 입력값을 입력해 주세요.');
+      const isPasswordMatch = password !== '' && password === passwordConfirm;
+      const areFieldsFilled =
+        email.trim() !== '' && password.trim() !== '' && passwordConfirm.trim() !== '' && businessNumber.trim() !== '';
+
+      // 이메일 에러 메세지 처리
+      setEmailErrorMessage(email.trim() !== '' && !isEmailValid ? '올바른 이메일 형식이 아닙니다.' : '');
+
+      /**
+       * 비밀번호 에러 메세지 처리
+       * 비밀번호가 비어 있지 않을 때만 에러 메시지를 설정합니다.
+       */
+      if (password.trim() !== '' && passwordConfirm.trim() !== '') {
+        setPasswordErrorMessage(!isPasswordMatch ? '비밀번호가 일치하지 않습니다.' : '비밀번호가 일치합니다.');
+      } else {
+        setPasswordErrorMessage(''); // 비밀번호나 비밀번호 확인 값이 변경되었을 때 초기화
       }
+
+      // 모든 필드가 유효한지 최종 검사하여 isValid 업데이트
+      setIsValid(isEmailValid && isPasswordMatch && areFieldsFilled);
+    } else {
+      const areFieldsFilled = email.trim() !== '' && password.trim() !== '';
+
+      setIsValid(isEmailValid && areFieldsFilled);
+      setEmailErrorMessage(email.trim() !== '' && !isEmailValid ? '올바른 이메일 형식이 아닙니다.' : '');
     }
+  }, [businessNumber, email, isEmailValid, password, passwordConfirm, path]);
 
-    if (path === '/auth/findPassword') {
-      if (!email) {
-        return alert('필수 입력값을 입력해 주세요.');
-      }
-    }
+  const isBusinessNumberValid =
+    value.businessNumber.length === MAX_BUSINESS_NUM_LENGTH &&
+    businessNumberRegex.test(value.businessNumber) &&
+    isValid;
 
-    if (!emailRegex.test(email)) {
-      return alert('이메일 형식이 올바르지 않습니다.');
-    }
-    // if (!passwordRegex.test(password)) {
-    //   return alert('비밀번호 형식이 올바르지 않습니다.');
-    // }
-
-    if (path === '/auth/signup' || path === '/auth/reset') {
-      if (password !== passwordConfirm) {
-        return alert('비밀번호가 일치하지 않습니다.');
-      }
-      if (!businessNumberRegex.test(businessNumber)) {
-        return alert('사업자등록번호 형식이 올바르지 않습니다.');
-      }
-    }
-
-    return true;
-  };
-
-  const isBusinessNumberValid = value.businessNumber.length === MAX_BUSINESS_NUM_LENGTH;
-
-  return { validateCheck, isBusinessNumberValid };
+  return { isValid, emailErrorMessage, passwordErrorMessage, isBusinessNumberValid };
 };

@@ -3,11 +3,9 @@ import { Tables } from '@/types/supabase';
 import Image from 'next/image';
 import styles from './styles/MenuModal.module.css';
 import { convertNumberToWon } from '@/shared/helper';
-import { useModal } from '@/hooks/modal/useModal';
 import useOrderStore from '@/shared/store/order';
 
 const MenuModal = ({ menu }: { menu: Tables<'menu_item'> }) => {
-  const { MagicModal } = useModal();
   const [quantity, setQuantity] = useState(1);
   const { addOrderList } = useOrderStore();
 
@@ -22,7 +20,6 @@ const MenuModal = ({ menu }: { menu: Tables<'menu_item'> }) => {
   };
 
   const handleClickAddCart = () => {
-    MagicModal.destroy();
     addOrderList(new Array(quantity).fill(false).map(() => menu));
   };
 
