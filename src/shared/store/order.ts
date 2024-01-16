@@ -114,22 +114,30 @@ export const useOrderStore = create<OrderState>()(
           // 이미 옵션이 있다면 기존 옵션에서 details만 갈아끼우고, 옵션이 없다면 새로 만든다.
           if (newSelectedOptions.length === 0) newSelectedOptions = [param];
           else {
-            newSelectedOptions = state.selectedOptions.map(option => {
-              if (option.id === param.id) {
-                option.menu_option_detail = param.menu_option_detail;
-              }
-              return option;
-            });
+            const find = state.selectedOptions.find(s => s.id === param.id);
+            if (find) {
+              newSelectedOptions = state.selectedOptions.map(option => {
+                if (option.id === param.id) {
+                  option.menu_option_detail = param.menu_option_detail;
+                  return option;
+                }
+                return option;
+              });
+            } else {
+              newSelectedOptions = [...state.selectedOptions, param];
+            }
           }
           return { ...state, selectedOptions: newSelectedOptions };
         }),
       // 옵션 제거
       subtractSelectedOption: detailId =>
         set(state => ({
-          selectedOptions: state.selectedOptions?.map(option => {
-            option.menu_option_detail = option.menu_option_detail.filter(detail => detail.id !== detailId);
-            return option;
-          }),
+          selectedOptions: state.selectedOptions
+            ?.map(option => {
+              option.menu_option_detail = option.menu_option_detail.filter(detail => detail.id !== detailId);
+              return option;
+            })
+            .filter(o => o.menu_option_detail.length > 0),
         })),
       // 옵션 초기화
       resetSelectedOptions: () => set(() => ({ selectedOptions: [] })),

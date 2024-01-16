@@ -25,12 +25,15 @@ const OptionDetailRow = ({
   selectedDetail: Tables<'menu_option_detail'>[];
   setSelectedDetail: React.Dispatch<React.SetStateAction<Tables<'menu_option_detail'>[]>>;
 }) => {
-  const { addSelectedOption } = useOrderStore();
+  const { addSelectedOption, subtractSelectedOption } = useOrderStore();
   const { toast } = useToast();
 
-  const onClickCheckOption = () => {
+  const onClickCheckOption = (e: React.MouseEvent<HTMLInputElement>) => {
+    const checked = e.currentTarget.checked;
+
     // 지정된 개수를 초과하면 무시
-    if (selectedDetail.length >= option.max_detail_count) {
+    if (selectedDetail.length >= option.max_detail_count && checked) {
+      e.preventDefault();
       toast(`해당 옵션은 ${option.max_detail_count}개 이상 선택할 수 없습니다.`, {
         type: 'danger',
         position: 'top-right',
@@ -39,10 +42,14 @@ const OptionDetailRow = ({
       });
       return;
     }
-
-    const newSelectedDetail = [...selectedDetail, detail];
-    setSelectedDetail(newSelectedDetail);
-    addSelectedOption({ ...option, menu_option_detail: newSelectedDetail });
+    if (!checked) {
+      setSelectedDetail(prev => prev.filter(p => p.id !== detail.id));
+      subtractSelectedOption(detail.id);
+    } else {
+      const newSelectedDetail = [...selectedDetail, detail];
+      setSelectedDetail(newSelectedDetail);
+      addSelectedOption({ ...option, menu_option_detail: newSelectedDetail });
+    }
   };
 
   return (
