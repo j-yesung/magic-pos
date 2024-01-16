@@ -544,6 +544,4 @@ interface MenuOptionWithDetail extends Tables<'menu_option'> {
   menu_option_detail: Tables<'menu_option_detail'>[];
 }
 
-interface MenuItemWithOption extends Tables<'menu_item'> {
-  menu_option: MenuOptionWithDetail[];
-}
+type MenuItemWithOption = Tables<'menu_item'> & { menu_option: MenuOptionWithDetail[] };

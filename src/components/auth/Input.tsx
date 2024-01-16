@@ -1,4 +1,15 @@
-import { useValid } from '@/hooks/auth/useValid';
+import {
+  bnoNumberInput,
+  businessNameInput,
+  emailInput,
+  passwordConfirmInput,
+  passwordInput,
+  passwordSignUpInput,
+  storeBusineesNameInput,
+  storeEmailInput,
+} from '@/data/input-props';
+import { useErrorMessage } from '@/hooks/auth/useErrorMessage';
+import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import styles from './styles/Auth.module.css';
 
@@ -18,69 +29,8 @@ interface InputType {
 
 const Input = ({ value, onChangeHandler }: InputProps) => {
   const path = useRouter().pathname;
-  const { passwordErrorMessage } = useValid(value);
-
-  const emailInput = {
-    id: 1,
-    name: 'email',
-    type: 'text',
-    label: '사용하실 이메일과 비밀번호를 입력해 주세요.',
-    placeholder: '이메일',
-  };
-
-  const passwordInput = {
-    id: 2,
-    name: 'password',
-    type: 'password',
-    placeholder: '비밀번호',
-  };
-
-  const passwordSignUpInput = {
-    id: 3,
-    name: 'password',
-    type: 'password',
-    placeholder: '비밀번호 (대소문자/특수문자 포함 8~16자리 영문)',
-  };
-
-  const passwordConfirmInput = {
-    id: 4,
-    name: 'passwordConfirm',
-    type: 'password',
-    placeholder: '비밀번호 확인',
-  };
-
-  const businessNameInput = {
-    id: 5,
-    name: 'businessName',
-    label: '상호명을 입력해 주세요.',
-    type: 'text',
-    placeholder: '상호명',
-  };
-
-  const storeEmailInput = {
-    id: 6,
-    name: 'storeEmail',
-    type: 'text',
-    label: '이메일',
-    disabled: true,
-  };
-
-  const bnoNumberInput = {
-    id: 7,
-    name: 'bnoNumber',
-    type: 'text',
-    label: '사업자등록번호',
-    disabled: true,
-  };
-
-  const storeBusineesNameInput = {
-    id: 8,
-    name: 'storeName',
-    type: 'text',
-    label: '상호명',
-    placeholder: '가게 이름',
-    disabled: true,
-  };
+  // const { passwordErrorMessage } = useValid(value);
+  const { isPasswordValid, passwordValidationMessage } = useErrorMessage(value);
 
   const inputOptions: Record<string, InputType[]> = {
     '/auth/login': [emailInput, passwordInput],
@@ -95,9 +45,8 @@ const Input = ({ value, onChangeHandler }: InputProps) => {
   return (
     <>
       {inputs.map((input: InputType) => {
-        const key = input.name as keyof typeof value;
-        const isPasswordConfirm = input.name === 'passwordConfirm';
-        const isSuccess = passwordErrorMessage === '비밀번호가 일치합니다.' && isPasswordConfirm;
+        const key = input.name;
+        const isPasswordConfirm = input.name === 'passwordConfirm' && path === '/auth/signup';
 
         if (input) {
           return (
@@ -106,13 +55,9 @@ const Input = ({ value, onChangeHandler }: InputProps) => {
               {path === '/auth/signup' && <label htmlFor={input.name}>{input.label}</label>}
               <input
                 id={input.name}
-                className={
-                  isSuccess
-                    ? styles.input
-                    : isPasswordConfirm && passwordErrorMessage !== ''
-                      ? `${styles.input} ${styles.inputError}`
-                      : styles.input
-                }
+                className={clsx(styles.input, {
+                  [styles.inputError]: isPasswordConfirm && !isPasswordValid,
+                })}
                 name={input.name}
                 value={value[key]}
                 onChange={onChangeHandler}
@@ -121,9 +66,8 @@ const Input = ({ value, onChangeHandler }: InputProps) => {
                 disabled={input.disabled}
                 required
               />
-              {/* 로그인 & 회원가입 둘 다 적용 */}
-              {input.name === 'passwordConfirm' && (
-                <span className={isSuccess ? styles.match : styles.error}>{passwordErrorMessage || ''}</span>
+              {isPasswordConfirm && (
+                <span className={isPasswordValid ? styles.match : styles.error}>{passwordValidationMessage}</span>
               )}
             </div>
           );

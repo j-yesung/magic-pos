@@ -5,11 +5,12 @@
   bottom: 2.5rem;
   position: fixed;
   align-items: center;
-  padding: 2.7rem;
-  border-radius: 1.7rem;
+  padding: 4rem;
+  height: 6rem;
+  border-radius: 3rem;
   background-color: #ffffff;
   justify-content: space-between;
-  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 20px 0px rgba(68, 9, 194, 0.1);
 }
 .wrapper .logo {
   cursor: pointer;
@@ -24,8 +25,28 @@
   align-items: center;
   justify-content: center;
 }
-.wrapper .tab-area a {
+.tab-area div {
+  gap: 3rem;
+  display: flex;
+}
+.tab-area a {
   font-size: 1.5rem;
   color: var(--text1);
   text-decoration: none;
+}
+.scroll-top-box {
+  display: flex;
+  align-items: center;
+  justify-self: center;
+}
+.scroll-top-box button {
+  width: 5rem;
+  height: 5rem;
+  cursor: pointer;
+  font-size: 2rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text5);
+  border-radius: 50%;
+  background: var(--point-100);
 }
