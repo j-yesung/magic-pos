@@ -2,6 +2,11 @@ import { OrderConfirmType } from "@/types/common";
 import { OrderDataWithStoreName } from "@/types/supabase";
 import create from "zustand";
 
+export type QRdataType = {
+  qrRef: HTMLDivElement,
+  qrUrl: string,
+  orderType: string
+}
 interface managementType {
   orderData: OrderDataWithStoreName[];
   orderId: string[];
@@ -10,14 +15,15 @@ interface managementType {
   isModal: boolean;
   isQRModal: boolean;
   orderConfirmData: OrderConfirmType[];
-  QRImageRef: HTMLDivElement[]
+  qrData: QRdataType[]
   setOrderData: (value: OrderDataWithStoreName[]) => void
   setOrderId: (value: { id: string[], status: string, number: string }) => void
   setIsModal: (value: boolean) => void
   setIsQRModal: (value: boolean) => void
   addOrderConfirmData: (value: OrderConfirmType) => void
   removeOrderConfirmData: (value: string) => void
-  setQRImageRef: (value: HTMLDivElement) => void
+  setQrData: (value: QRdataType) => void
+  reSetQrData: () => void
 }
 
 const useManagementStore = create<managementType>((set) => ({
@@ -28,7 +34,7 @@ const useManagementStore = create<managementType>((set) => ({
   isModal: false,
   isQRModal: false,
   orderConfirmData: [],
-  QRImageRef: [],
+  qrData: [],
   setOrderData: (value) =>
     set(() => ({
       orderData: value
@@ -55,9 +61,13 @@ const useManagementStore = create<managementType>((set) => ({
     set((state) => ({
       orderConfirmData: [...state.orderConfirmData.filter((x) => x.id !== value)]
     })),
-  setQRImageRef: (value) =>
+  setQrData: (value) =>
     set((state) => ({
-      QRImageRef: [...state.QRImageRef, value]
+      qrData: [...state.qrData, value]
+    })),
+  reSetQrData: () =>
+    set(() => ({
+      qrData: []
     }))
 }))
 

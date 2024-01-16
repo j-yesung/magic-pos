@@ -1,13 +1,16 @@
 import useQRCodeDownLoad from '@/hooks/management/useQRCodeDownLoad';
+import useManagementStore from '@/shared/store/management';
 import PackagingQrCodeContainer from './packagingQrCodeContainer/PackagingQrCodeContainer';
 import ShopQrCodeContainer from './shopQrCodeContainer/ShopQrCodeContainer';
 import styles from './styles/QrCodeModal.module.css';
 
 const QrCodeModal = () => {
-
-  const qrDownLoad = useQRCodeDownLoad(QRImage.current[index], qrUrl, orderType);
+  const { qrData } = useManagementStore();
+  const qrDownLoad = useQRCodeDownLoad();
   const clickQrDownLoadHandler = () => {
-    qrDownLoad();
+    qrData.forEach((item) => {
+      qrDownLoad(item);
+    })
   }
 
   return (
@@ -21,7 +24,6 @@ const QrCodeModal = () => {
         </div>
         <div className={styles['qr-code-button-box']}>
           <button onClick={clickQrDownLoadHandler}>QR코드 다운로드</button>
-          <button>취소</button>
         </div>
       </div>
     </div>

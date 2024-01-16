@@ -18,29 +18,45 @@ const QrCodeListItem = ({ storeTable, orderType, index }: propsType) => {
   const queryClient = useQueryClient();
   const data = queryClient.getQueryData<StoreWithOrderInfo[]>(['management'])
   const storeId = data && data[0].id
+  const tableCount = data && data[0].store_table
   const [isQrClick, setIsQrClick] = useState(false)
   const QRImage = useRef<HTMLDivElement[]>([]);
   const qrUrl = storeTable
     ? `${process.env.NEXT_PUBLIC_SUPACE_REDIRECT_TO}/${storeId}/${storeTable.id}`
     : `${process.env.NEXT_PUBLIC_SUPACE_REDIRECT_TO}/${storeId}`
-  const { setQRImageRef } = useManagementStore()
-  const qrDownLoad = useQRCodeDownLoad(QRImage.current[index], qrUrl, orderType);
+  const { setQrData, qrData, reSetQrData } = useManagementStore()
+  const qrDownLoad = useQRCodeDownLoad();
   const clickQrDownLoadHandler = () => {
     setIsQrClick(true)
   }
-
+  console.log()
   useEffect(() => {
-    setQRImageRef(QRImage.current[index])
+    if (tableCount) {
+      if (QRImage && qrUrl && storeId && tableCount.length + 1 > qrData.length) {
+        setQrData({
+          qrRef: QRImage.current[index],
+          qrUrl,
+          orderType,
+        })
+      }
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [QRImage])
-
+  }, [QRImage, qrUrl, storeId])
+  useEffect(() => {
+    console.log(qrData)
+  }, [qrData])
   useEffect(() => {
     if (isQrClick) {
-      qrDownLoad();
+      qrDownLoad({
+        qrRef: QRImage.current[index],
+        qrUrl,
+        orderType,
+      });
     }
     setIsQrClick(false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isQrClick])
+
   return (
     <div className={styles['qr-code-svg-box']} ref={(el) => QRImage.current[index] = el as HTMLDivElement} onClick={clickQrDownLoadHandler}>
       <div className={clsx(styles['qr-code'],
