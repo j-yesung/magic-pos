@@ -1,0 +1,7 @@
+.item {
+  width: 40rem;
+  height: 20rem;
+  padding: 2rem;
+  border: 1px solid var(--point-80);
+  display: inline-block;
+}

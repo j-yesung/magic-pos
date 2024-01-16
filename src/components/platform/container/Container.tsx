@@ -1,28 +1,25 @@
-import Link from 'next/link';
+import { useState } from 'react';
+import Card from './card/Card';
+import Form from './form/Form';
+import Button from './form/button/Button';
 import styles from './styles/container.module.css';
 const Container = () => {
+  const [cardList, setCardList] = useState<
+    {
+      name: string;
+      link_url: string;
+    }[]
+  >([]);
+
+  const [isRegist, setIsRegist] = useState(false);
+
   return (
     <div className={styles.container}>
-      <div className="card-container">
-        <Link href={'https://zep.us/@nbcamp-3nd-React/25651j'} target={'_blank'}>
-          내배켐
-        </Link>
-      </div>
+      <Button setIsRegist={setIsRegist} cardList={cardList} buttonType="regist" />
 
-      <form
-        action=""
-        onSubmit={e => {
-          e.preventDefault();
-        }}
-        className={styles.form}
-      >
-        <div className={styles.inputWrapper}>
-          <input name="link" type="text" placeholder="link를 넣어주세요" />
-          <input name="title" type="text" placeholder="어디사이트인가요?" />
-        </div>
+      <Card cardList={cardList} />
 
-        <button>등록</button>
-      </form>
+      {isRegist && <Form setCardList={setCardList} />}
     </div>
   );
 };
