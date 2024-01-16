@@ -1,5 +1,7 @@
 import { useModal } from "@/hooks/modal/useModal"
 import useManagementStore from "@/shared/store/management"
+import ManagementModal from "../managementModal/ManagementModal"
+import QrCodeModal from "../qrCodeModal/QrCodeModal"
 import styles from "./styles/SideBarButtonBox.module.css"
 
 const SideBarButtonBox = () => {
@@ -11,11 +13,11 @@ const SideBarButtonBox = () => {
       MagicModal.alert({ content: '선택한 주문내역이 없습니다.' });
       return
     } else {
-      setIsModal(!isModal)
+      MagicModal.fire(<ManagementModal />)
     }
   }
   const clickQRModalHandler = () => {
-    setIsQRModal(!isQRModal)
+    MagicModal.fire(<QrCodeModal />)
   }
 
   return (
