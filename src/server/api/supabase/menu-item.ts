@@ -93,18 +93,15 @@ export const fetchMenuOptions = async () => {
   if (error) throw error;
   return { data, error };
 };
-
 /**
  * 메뉴 옵션 추가하기
  * @returns data
  */
-
 export const addMenuOption = async (menuOption: TablesInsert<'menu_option'>) => {
   const { data, error } = await supabase.from('menu_option').insert([menuOption]).select();
   if (error) throw error;
   return { data, error };
 };
-
 /**
  * 메뉴 옵션 삭제하기
  * @param values 메뉴 물품 아이디
@@ -113,7 +110,6 @@ export const removeMenuOption = async (menuOptionId: string) => {
   const { error } = await supabase.from('menu_option').delete().eq('id', menuOptionId);
   if (error) throw error;
 };
-
 /**
  * 메뉴 옵션 수정하기
  * @param values 메뉴의 items
@@ -134,18 +130,15 @@ export const fetchMenuOptionDetail = async () => {
   if (error) throw error;
   return { data, error };
 };
-
 /**
  * 메뉴 옵션 디테일 추가하기
  * @returns data
  */
-
 export const addMenuOptionDetail = async (optionDetail: TablesInsert<'menu_option_detail'>) => {
   const { data, error } = await supabase.from('menu_option_detail').insert([optionDetail]).select();
   if (error) throw error;
   return { data, error };
 };
-
 /**
  * 메뉴 옵션 디테일 upsert
  * @returns data
@@ -167,7 +160,6 @@ export const removeMenuOptionDetail = async (optionDetailId: string) => {
   const { error } = await supabase.from('menu_option_detail').delete().eq('id', optionDetailId);
   if (error) throw error;
 };
-
 /**
  * 메뉴 옵션 디테일 이름 수정하기
  * @param values 메뉴의 items

@@ -14,13 +14,20 @@ const DONT_RENDER_FOOTER_PATH_LIST = ['/order/success', '/order/receipt', '/orde
  */
 const OrderLayout = ({ children }: { children: React.ReactNode }) => {
   // slide에 사용될 컴포넌트를 담습니다.
-  const { setSwiperRef, step, goPrevStep } = useOrderStore();
+  const { setSwiperRef, step, goPrevStep, optionSwiperRef, setSelectedMenu, orderList, resetSelectedOptions } =
+    useOrderStore();
   const sliderRef = useRef<SwiperRef>(null);
   const { pathname } = useRouter();
 
   const clickPrevButtonHandler = () => {
-    sliderRef!.current?.swiper.slidePrev(SLIDE_MOVE_SPEED);
-    goPrevStep();
+    if (optionSwiperRef?.current?.swiper?.activeIndex === ORDER_STEP.SELECT_MENU) {
+      optionSwiperRef.current?.swiper.slidePrev(SLIDE_MOVE_SPEED);
+      setSelectedMenu(null);
+      resetSelectedOptions();
+    } else {
+      sliderRef!.current?.swiper.slidePrev(SLIDE_MOVE_SPEED);
+      goPrevStep();
+    }
   };
 
   useEffect(() => {

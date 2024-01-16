@@ -7,6 +7,7 @@ type NextPageWithLayout<P = NonNullable<unknown>, IP = P> = NextPage<P, IP> & {
 };
 
 interface ModalAlertTypeOption {
+  id?: string;
   content: string;
   showButton?: boolean;
   buttonText?: string;
@@ -14,11 +15,24 @@ interface ModalAlertTypeOption {
 }
 
 interface ModalConfirmTypeOption {
+  id?: string;
   content: string;
   confirmButtonText?: string;
   cancelButtonText?: string;
   confirmButtonCallback?: (() => void) | null;
   cancelButtonCallback?: (() => void) | null;
+}
+
+type ToastAnimationType = 'hide-top-right' | 'hide-top-left' | 'hide-bottom-right' | 'hide-bottom-left' | null;
+type ToastPositionType = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
+interface ToastTypeOption {
+  id: string;
+  content: string;
+  showCloseButton: boolean;
+  position: ToastPositionType;
+  type: 'info' | 'success' | 'warn' | 'danger';
+  autoClose: number;
+  animation: ToastAnimationType;
 }
 
 interface AuthState {
@@ -45,6 +59,16 @@ interface AuthState {
     };
   } | null;
   storeId: string | null;
+  storeName: string | null;
+  storeBno: string | null;
+  setStoreName: (name: string) => void;
+  setStoreBno: (bno: string) => void;
   setSession: (auth) => void;
   setStoreId: (id: string) => void;
+}
+
+interface OrderConfirmType {
+  id: string;
+  number: number;
+  isTogo: boolean;
 }

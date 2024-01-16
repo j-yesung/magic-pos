@@ -1,0 +1,49 @@
+.qr-code-modal-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  height: auto;
+  border-radius: 1rem;
+  box-shadow: 0 0 1rem 0 #000;
+  background-color: #fff;
+}
+
+.qr-code-title {
+  width: 100%;
+  height: auto;
+  padding: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4rem;
+}
+
+.qr-code-box {
+  width: 100%;
+  height: auto;
+  display: flex;
+}
+
+.qr-code-button-box {
+  width: 100%;
+  height: auto;
+  padding: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.qr-code-button-box > button {
+  background-color: var(--main-color);
+  color: #fff;
+  padding: 1.5rem 4rem;
+  font-size: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 0.5rem 0 #000;
+  transition: 0.2s;
+}
+.qr-code-button-box > button:hover {
+  background-color: #fff;
+  color: var(--main-color);
+}

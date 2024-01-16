@@ -1,0 +1,126 @@
+.toast-container {
+  position: fixed;
+  z-index: var(--level-1-z-index);
+}
+
+.toast-content {
+  margin: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 45vw;
+  height: 4rem /* 40/10 */;
+  background-color: white;
+  border-radius: 1rem /* 15/10 */;
+  padding: 1rem;
+
+  @media screen and (min-width: 76.8rem  /* 768/10 */) {
+    width: 25vw;
+  }
+}
+
+.danger {
+  box-shadow: rgba(0, 0, 0, 0.05) 0 0.6rem 0.24rem 0, red 0 0 0 0.1rem;
+}
+
+.info {
+  box-shadow: rgba(0, 0, 0, 0.05) 0 0.6rem 0.24rem 0, rgba(0, 0, 0, 0.08) 0 0 0 0.1rem;
+}
+
+.warn {
+  box-shadow: rgba(0, 0, 0, 0.05) 0 0.6rem 0.24rem 0, yellow 0 0 0 0.1rem;
+}
+
+.success {
+  box-shadow: rgba(0, 0, 0, 0.05) 0 0.6rem 0.24rem 0, green 0 0 0 0.1rem;
+}
+
+.top-right {
+  top: 0;
+  right: 0;
+}
+
+.top-left {
+  top: 0;
+  left: 0;
+}
+
+.bottom-left {
+  bottom: 0;
+  left: 0;
+}
+
+.bottom-right {
+  bottom: 0;
+  right: 0;
+}
+
+/* top */
+.hide-top-right {
+  animation: hide-right .5s linear 0.7s forwards;
+}
+
+.hide-top-right ~ div {
+  animation: row-up 1s linear .5s forwards;
+}
+
+.hide-top-left  {
+  animation: hide-left .5s linear 0.7s forwards;
+}
+
+.hide-top-left ~ div {
+  animation: row-up 1s linear .5s forwards;
+}
+
+/* bottom */
+.hide-bottom-right {
+  animation: hide-right .5s linear 0.7s forwards;
+}
+
+.hide-bottom-left  {
+  animation: hide-left .5s linear 0.7s forwards;
+}
+
+
+@keyframes hide-right {
+  25% {
+    transform: translateX(-10%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+@keyframes hide-left {
+  25% {
+    transform: translateX(10%);
+  }
+  100% {
+    transform: translateX(-200%);
+  }
+}
+
+@keyframes row-up {
+  25% {
+    transform: translateY(10%);
+  }
+  65% {
+    transform: translateY(-5rem);
+  }
+  100% {
+    transform: translateY(-5rem);
+  }
+}
+
+@keyframes row-down {
+  25% {
+    transform: translateY(-10%);
+  }
+  65% {
+    transform: translateY(5rem);
+  }
+  100% {
+    transform: translateY(5rem);
+  }
+}

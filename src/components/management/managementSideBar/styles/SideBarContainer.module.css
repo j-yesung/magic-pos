@@ -1,0 +1,33 @@
+.sideBar-container{
+  width: 100%;
+  height: 65%;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.order_list{
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: scroll;
+  
+}
+
+.order_list::-webkit-scrollbar {
+  display: none;
+}
+
+.total-price{
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10% 0;
+  font-size: 2.5rem;
+  background-color: #ccc;
+}

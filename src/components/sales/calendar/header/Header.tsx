@@ -1,5 +1,6 @@
 import { useCalendar } from '@/hooks/sales/useCalendar';
 import useSalesStore from '@/shared/store/sales';
+
 import styles from './styles/header.module.css';
 const Header = () => {
   const {

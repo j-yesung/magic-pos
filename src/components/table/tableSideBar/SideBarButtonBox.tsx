@@ -12,7 +12,7 @@ const SideBarButtonBox = () => {
   const { updateMutate, deleteMutate } = useSetTable()
   const client = useQueryClient();
   const data = client.getQueryData<StoreWithStoreTable[]>(["table"]);
-  const storeData = data?.[0].store_table
+  const storeData = data?.[0]?.store_table
   const tableData = storeData?.filter((x) => x.id === tableId)
   const { MagicModal } = useModal()
 
@@ -21,23 +21,22 @@ const SideBarButtonBox = () => {
     is_disabled: isDisabled,
     max_guest: maxGuest
   }
-    
+
   const clickUpdateTableHandler = () => {
     if (data) {
       if (tableData?.[0]?.is_disabled === isDisabled && tableData?.[0]?.max_guest === maxGuest) {
         MagicModal.alert({ content: '수정사항이 없습니다.' });
       } else {
-      MagicModal.confirm({
-        content: '수정하시겠습니까?', confirmButtonCallback: () => { updateMutate(updateStoreTableData) }
-      })
+        MagicModal.confirm({
+          content: '수정하시겠습니까?', confirmButtonCallback: () => { updateMutate(updateStoreTableData) }
+        })
       }
     }
   }
 
   const clickDeleteTableHandler = () => {
-    MagicModal.confirm({ content: '정말로 삭제하시겠습니까?', confirmButtonCallback: () => {deleteMutate(tableId) } })
-   }
-
+    MagicModal.confirm({ content: '정말로 삭제하시겠습니까?', confirmButtonCallback: () => { deleteMutate(tableId) } })
+  }
   return (
     <div className={styles['side-bar-button-box']}>
       <button className={styles['side-bar-button']} onClick={clickUpdateTableHandler}>수정 완료</button>

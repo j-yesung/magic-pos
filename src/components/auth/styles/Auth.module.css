@@ -13,7 +13,7 @@
   cursor: pointer;
   align-items: center;
   flex-direction: row;
-  margin-bottom: 2.5rem;
+  margin-bottom: 5rem;
 }
 .title {
   font-size: 3.7rem;
@@ -26,6 +26,14 @@
 .sub-title {
   font-size: 3.7rem;
   font-weight: 700;
+}
+.description {
+  gap: 0.5rem;
+  display: flex;
+  font-size: 1.7rem;
+  color: var(--text2);
+  padding-right: 2rem;
+  flex-direction: column;
 }
 
 .form-wrapper {
@@ -41,7 +49,23 @@
 .form-inner-wrapper {
   gap: 1rem;
   display: flex;
+  width: 40rem;
   flex-direction: column;
+}
+.form-inner-wrapper .form-business {
+  gap: 2rem;
+  display: flex;
+  margin: 4rem 0 2rem 0;
+  flex-direction: column;
+}
+.form-business div {
+  gap: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.form-business input {
+  width: 29rem;
 }
 
 .form-button-wrapper {
@@ -51,36 +75,79 @@
 }
 
 .button {
-  padding: 2rem;
+  border: none;
   color: white;
-  background-color: #864af9;
+  padding: 2rem;
+  cursor: pointer;
+  border-radius: 1rem;
+  background-color: var(--main-color);
 }
 .button p {
   font-size: 1.4rem;
 }
+.push-button {
+  border: none;
+  cursor: pointer;
+  color: #191919;
+  padding: 2rem 1.5rem;
+  border-radius: 1rem;
+  background-color: var(--bg-p);
+}
 .disabledButton {
+  border: none;
+  cursor: pointer;
   padding: 2rem;
   color: #191919;
+  border-radius: 1rem;
   background-color: #dcdcdc;
 }
 .disabledButton p {
   font-size: 1.4rem;
 }
+.find-password-button {
+  margin-top: 2rem;
+}
 
+/* input */
 .input {
-  width: 100%;
+  width: 40rem;
+  height: 6rem;
+  display: flex;
   padding: 2rem;
   font-size: 1.5rem;
-  border-radius: 5px;
-  border: 2px solid #ccc;
+  background: #fff;
+  align-items: center;
+  border-radius: 1.5rem;
+  border: none;
+  box-shadow: 0px 0px 20px 0px rgba(68, 9, 194, 0.1);
 }
 .input:focus {
   outline: none;
-  border: 2px solid #864af9;
 }
 .input::placeholder {
   color: #ccc;
   font-size: 1.3rem;
+}
+.input-error {
+  width: 40rem;
+  height: 6rem;
+  display: flex;
+  padding: 2rem;
+  font-size: 1.5rem;
+  background: #fff;
+  align-items: center;
+  border-radius: 1.5rem;
+  box-shadow: 0px 0px 20px 0px rgba(68, 9, 194, 0.1);
+  border: 1.5px solid var(--text4);
+}
+.input[id='email'] {
+  margin-top: 2rem;
+}
+.input[id='passwordConfirm'] {
+  margin-bottom: 1rem;
+}
+.input[id='businessName'] {
+  margin-top: 2rem;
 }
 
 .caption-wrapper {
@@ -91,14 +158,29 @@
 }
 .caption {
   display: flex;
+  color: var(--text1);
   margin-top: 2rem;
   font-size: 1.2rem;
   justify-content: flex-end;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
-.description {
+.form-inner-wrapper label {
   font-size: 1.5rem;
-  color: #191919;
-  margin-bottom: 1rem;
+  font-style: normal;
+  color: var(--text2);
+}
+
+/* errorMessage */
+.error {
+  font-size: 1.2rem;
+  color: var(--text4);
+  display: inline-block;
+  margin: 0.5rem 0 2rem 0;
+}
+.match {
+  font-size: 1.2rem;
+  margin: 0.5rem 0 2rem 0;
+  display: inline-block;
+  color: var(--point-100);
 }

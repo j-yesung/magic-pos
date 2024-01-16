@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import OrderTypeContainer from '@/components/order/order-type/OrderTypeContainer';
 import MenuContainer from '@/components/order/menu/MenuContainer';
 import CartContainer from '@/components/order/cart/CartContainer';
 import PaymentContainer from '@/components/order/payment/PaymentContainer';
 import SuccessContainer from '@/components/order/success/SuccessContainer';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide, SwiperRef } from 'swiper/react';
 import { Virtual } from 'swiper/modules';
 import useOrderStore from '@/shared/store/order';
+import MenuOptionContainer from '@/components/order/menu-option/MenuOptionContainer';
 
+/**
+ * 키오스크 화면을 전반적으로 감싸는 Container
+ * 모든 화면은 Swiper 컴포넌트 안에 있으며, 메뉴 선택의 경우에는 Swiper안에 Swiper로 되어있다.
+ * @constructor
+ */
 const OrderContainer = () => {
-  const swiperRef = useOrderStore(state => state.swiperRef);
+  const { swiperRef, setOptionSwiperRef, orderList } = useOrderStore();
+  const optionSwiperRef = useRef<SwiperRef>(null);
+  console.log(orderList);
+  useEffect(() => {
+    if (optionSwiperRef) setOptionSwiperRef(optionSwiperRef);
+  }, []);
 
   return (
     <Swiper modules={[Virtual]} spaceBetween={50} slidesPerView={1} virtual allowTouchMove={false} ref={swiperRef}>
@@ -17,7 +28,21 @@ const OrderContainer = () => {
         <OrderTypeContainer />
       </SwiperSlide>
       <SwiperSlide>
-        <MenuContainer />
+        <Swiper
+          modules={[Virtual]}
+          spaceBetween={50}
+          slidesPerView={1}
+          virtual
+          allowTouchMove={false}
+          ref={optionSwiperRef}
+        >
+          <SwiperSlide>
+            <MenuContainer />
+          </SwiperSlide>
+          <SwiperSlide>
+            <MenuOptionContainer />
+          </SwiperSlide>
+        </Swiper>
       </SwiperSlide>
       <SwiperSlide>
         <CartContainer />

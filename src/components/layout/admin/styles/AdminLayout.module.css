@@ -24,6 +24,7 @@
 /* 헤더 영역입니다. */
 .header-wrapper {
   height: 6rem;
+  cursor: pointer;
   padding: 1.5rem;
   grid-area: header;
   display: flex;
