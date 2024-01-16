@@ -1,3 +1,4 @@
+import { debounce } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
 import styles from '../styles/StickBar.module.css';
 
@@ -8,15 +9,16 @@ const ScrollTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
-  const clickShowButtonHandler = useCallback(() => {
+  const clickShowButtonHandler = debounce(() => {
     setShowButton(window.scrollY > 700);
-  }, []);
+  }, 100);
 
   useEffect(() => {
     window.addEventListener('scroll', clickShowButtonHandler);
 
     return () => {
       window.removeEventListener('scroll', clickShowButtonHandler);
+      clickShowButtonHandler.cancel();
     };
   }, [clickShowButtonHandler]);
 
