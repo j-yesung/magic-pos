@@ -1,5 +1,7 @@
+import Item from './item/Item';
+
 const Card = () => {
-  return <div></div>;
+  return <Item />;
 };
 
 export default Card;

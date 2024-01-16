@@ -1,0 +1,27 @@
+.container {
+  position: relative;
+  height: 100%;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 2rem;
+  border-radius: 2rem;
+  border: 1px solid #ccc;
+  position: absolute;
+  bottom: 0;
+}
+
+.inputWrapper {
+  display: flex;
+}
+
+.inputWrapper img {
+  height: 4rem;
+}
+
+.file {
+  display: none;
+}
