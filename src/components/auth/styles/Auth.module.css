@@ -13,7 +13,7 @@
   cursor: pointer;
   align-items: center;
   flex-direction: row;
-  margin-bottom: 3.5rem;
+  margin-bottom: 5rem;
 }
 .title {
   font-size: 3.7rem;
@@ -26,6 +26,14 @@
 .sub-title {
   font-size: 3.7rem;
   font-weight: 700;
+}
+.description {
+  gap: 0.5rem;
+  display: flex;
+  font-size: 1.7rem;
+  color: var(--text2);
+  padding-right: 2rem;
+  flex-direction: column;
 }
 
 .form-wrapper {
@@ -67,8 +75,10 @@
 }
 
 .button {
-  padding: 2rem;
+  border: none;
   color: white;
+  padding: 2rem;
+  cursor: pointer;
   border-radius: 1rem;
   background-color: var(--main-color);
 }
@@ -76,12 +86,16 @@
   font-size: 1.4rem;
 }
 .push-button {
-  padding: 2rem 1.5rem;
+  border: none;
+  cursor: pointer;
   color: #191919;
+  padding: 2rem 1.5rem;
   border-radius: 1rem;
   background-color: var(--bg-p);
 }
 .disabledButton {
+  border: none;
+  cursor: pointer;
   padding: 2rem;
   color: #191919;
   border-radius: 1rem;
@@ -90,7 +104,11 @@
 .disabledButton p {
   font-size: 1.4rem;
 }
+.find-password-button {
+  margin-top: 2rem;
+}
 
+/* input */
 .input {
   width: 40rem;
   height: 6rem;
@@ -100,6 +118,7 @@
   background: #fff;
   align-items: center;
   border-radius: 1.5rem;
+  border: none;
   box-shadow: 0px 0px 20px 0px rgba(68, 9, 194, 0.1);
 }
 .input:focus {
@@ -121,6 +140,15 @@
   box-shadow: 0px 0px 20px 0px rgba(68, 9, 194, 0.1);
   border: 1.5px solid var(--text4);
 }
+.input[id='email'] {
+  margin-top: 2rem;
+}
+.input[id='passwordConfirm'] {
+  margin-bottom: 1rem;
+}
+.input[id='businessName'] {
+  margin-top: 2rem;
+}
 
 .caption-wrapper {
   display: flex;
@@ -130,27 +158,17 @@
 }
 .caption {
   display: flex;
+  color: var(--text1);
   margin-top: 2rem;
   font-size: 1.2rem;
   justify-content: flex-end;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .form-inner-wrapper label {
   font-size: 1.5rem;
   font-style: normal;
   color: var(--text2);
-}
-
-/* input */
-.input[id='email'] {
-  margin-top: 2rem;
-}
-.input[id='passwordConfirm'] {
-  margin-bottom: 1rem;
-}
-.input[id='businessName'] {
-  margin-top: 2rem;
 }
 
 /* errorMessage */

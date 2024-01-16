@@ -14,7 +14,18 @@ interface FormProps {
 const AuthForm = ({ data }: FormProps) => {
   const router = useRouter();
   const path = router.pathname;
-  const { url, subUrl, title, subTitle, subName, buttonName, subButtonName, description, buttonSubName } = data;
+  const {
+    url,
+    subUrl,
+    title,
+    subTitle,
+    subName,
+    buttonName,
+    subButtonName,
+    description,
+    buttonSubName,
+    subDescription,
+  } = data;
   const { login, signup, businessNumberCheck, sendResetPasswordEmail, updatePassword, status, message } = useAuth();
   const isSuccess = status.data === '사업자등록번호가 인증되었습니다.' ? true : false;
   const { value, changeHandler, keyDownHandler } = useInput({
@@ -33,7 +44,10 @@ const AuthForm = ({ data }: FormProps) => {
         <h2 className={styles.subTitle}>{subTitle}</h2>
       </div>
       {path === '/auth/findPassword' || path === '/auth/reset' ? (
-        <p className={styles.description}>{description}</p>
+        <div className={styles.description}>
+          <p>{description}</p>
+          <p>{subDescription}</p>
+        </div>
       ) : null}
       <form className={styles.form}>
         <div className={styles.formInnerWrapper}>
@@ -87,7 +101,11 @@ const AuthForm = ({ data }: FormProps) => {
             </>
           ) : null}
           {path === '/auth/findPassword' && (
-            <Button type="button" onClick={() => sendResetPasswordEmail(value.email)}>
+            <Button
+              type="button"
+              onClick={() => sendResetPasswordEmail(value.email)}
+              className={styles.findPasswordButton}
+            >
               {buttonName}
             </Button>
           )}

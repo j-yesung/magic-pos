@@ -26,4 +26,6 @@
 }
 .wrapper .tab-area a {
   font-size: 1.5rem;
+  color: var(--text1);
+  text-decoration: none;
 }

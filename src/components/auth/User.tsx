@@ -29,9 +29,9 @@ const User = () => {
     subButtonName: '인증하기',
   };
   const FIND_PASSWORD_DATA = {
-    title: '편리함의 시작',
-    subTitle: 'Magic Pos',
+    subTitle: '비밀번호 찾기',
     description: '가입하신 이메일을 입력해 주세요.',
+    subDescription: '가입하신 이메일로 비밀번호 재설정 링크를 보내드립니다.',
     buttonName: '링크 전송',
   };
   const UPDATE_PASSWORD_DATA = {
