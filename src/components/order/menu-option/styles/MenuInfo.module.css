@@ -9,7 +9,7 @@
 .container div {
     width: 100%;
     padding-bottom: 1rem;
-    border-bottom: 1px solid #cccccc;
+    border-bottom: 0.1rem solid #cccccc;
 }
 
 .price-wrapper {
