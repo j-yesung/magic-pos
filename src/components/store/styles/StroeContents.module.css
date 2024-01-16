@@ -1,0 +1,38 @@
+.wrapper {
+  width: 36rem;
+}
+.wrapper form {
+  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+.wrapper label {
+  font-size: 2rem;
+}
+.wrapper .timeset-container {
+  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+.wrapper .time-select-box {
+  gap: 2rem;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.time-select-box span {
+  font-size: 1.5rem;
+}
+.wrapper select {
+  padding: 1rem;
+  font-size: 1.5rem;
+  border-radius: 1rem;
+  border: 2px solid #ccc;
+}
+.wrapper input {
+  padding: 2rem;
+  font-size: 1.5rem;
+  border-radius: 1rem;
+  border: 2px solid #ccc;
+}
