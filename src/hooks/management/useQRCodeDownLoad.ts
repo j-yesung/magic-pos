@@ -1,13 +1,13 @@
+import { QRdataType } from '@/shared/store/management';
 import { saveAs } from 'file-saver';
 import html2canvas from "html2canvas";
 
-const useQRCodeDownLoad = (QRImage: { current: HTMLDivElement | null }, qrUrl: string, orderType: string) => {
+const useQRCodeDownLoad = () => {
 
-  const QRDownload = async () => {
-    if (!QRImage.current || qrUrl) {
+  const QRDownload = async ({ qrRef, qrUrl, orderType }: QRdataType) => {
+    if (!qrRef || qrUrl) {
       try {
-        const qrImgBox = QRImage.current;
-        const canvas = await html2canvas(qrImgBox, { scale: 2 });
+        const canvas = await html2canvas(qrRef, { scale: 2 });
         canvas.toBlob((blob) => {
           if (blob !== null) {
             saveAs(blob, `${orderType}.jpg`);

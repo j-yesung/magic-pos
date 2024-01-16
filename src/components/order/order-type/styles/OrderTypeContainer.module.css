@@ -29,6 +29,7 @@
     display: inline-flex;
     align-items: center;
     gap: 1rem  /* 10/10 */;
+    cursor: pointer;
 }
 .language-wrapper img {
     width: 2.3rem  /* 23/10 */;
