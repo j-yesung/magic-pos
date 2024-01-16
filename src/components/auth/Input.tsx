@@ -52,7 +52,7 @@ const Input = ({ value, onChangeHandler }: InputProps) => {
   const businessNameInput = {
     id: 5,
     name: 'businessName',
-    label: '사업자등록번호',
+    label: '상호명을 입력해 주세요.',
     type: 'text',
     placeholder: '상호명',
   };
