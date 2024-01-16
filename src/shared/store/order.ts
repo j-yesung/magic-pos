@@ -49,6 +49,10 @@ interface OrderState {
   addSelectedOption: (selectedOption: MenuOptionWithDetail) => void;
   subtractSelectedOption: (id: string) => void;
   resetSelectedOptions: () => void;
+  amount: number;
+  addAmount: () => void;
+  subtractAmount: () => void;
+  resetAmount: () => void;
 }
 
 export const useOrderStore = create<OrderState>()(
@@ -141,6 +145,11 @@ export const useOrderStore = create<OrderState>()(
         })),
       // 옵션 초기화
       resetSelectedOptions: () => set(() => ({ selectedOptions: [] })),
+      // 메뉴 하나 수량
+      amount: 1,
+      addAmount: () => set(state => ({ amount: state.amount + 1 })),
+      subtractAmount: () => set(state => ({ amount: Math.max(state.amount - 1, 1) })),
+      resetAmount: () => set(() => ({ amount: 1 })),
     }),
     {
       name: 'order-storage',
