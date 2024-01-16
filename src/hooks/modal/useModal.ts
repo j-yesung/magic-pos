@@ -4,17 +4,27 @@ import { ModalAlertTypeOption, ModalConfirmTypeOption } from '@/types/common';
 import { nanoid } from 'nanoid';
 
 export const useModal = () => {
-  const { addChildElem, addAlert, addConfirm } = useModalStore();
+  const { addChildElem, addAlert, addConfirm, hideConfirm, hideAlert, hideModal } = useModalStore();
 
   class MagicModal {
     /**
      * 컴포넌트를 모달로 출력합니다. 모달로 띄우고자 하는 컴포넌트를 전달합니다.
      * usage: MagicModal.fire(<SomeComponent />);
+     *
+     * 커스텀 모달에서 닫기 이벤트를 주고싶은 경우, 컴포넌트에서 modalId를 props로 받아온 후, hideModal 호출
+     * const SomeModal = ({ modalId }: { modalId?: string }) => {
+     *   const { MagicModal } = useModal();
+     *
+     *   const handler = () => {
+     *     MagicModal.hide(modalId ?? '');
+     *   };
+     *
      * @param elem 컴포넌트
      */
     static fire(elem: ReactElement) {
       const id = nanoid();
       addChildElem({ id, child: elem, type: 'component', show: true });
+      return id;
     }
 
     /**
@@ -25,6 +35,7 @@ export const useModal = () => {
     static confirm(option: ModalConfirmTypeOption) {
       const id = nanoid();
       addConfirm({ ...option, id });
+      return id;
     }
 
     /**
@@ -36,6 +47,13 @@ export const useModal = () => {
     static alert(option: ModalAlertTypeOption) {
       const id = nanoid();
       addAlert({ ...option, id });
+      return id;
+    }
+
+    static hide(id: string) {
+      hideAlert(id);
+      hideModal(id);
+      hideConfirm(id);
     }
   }
 

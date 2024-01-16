@@ -35,7 +35,7 @@ const Modal = () => {
         <div className={styles['modal-overlay']} onClick={handleClickOverlay} ref={overlayRef}>
           {modalList?.map(modal => (
             <div key={modal.id} className={clsx(styles['modal-container'], styles['modal-position-center'])}>
-              {modal.child}
+              {React.cloneElement(modal.child, { modalId: modal.id })}
             </div>
           ))}
           {confirmList?.map(confirm => (
