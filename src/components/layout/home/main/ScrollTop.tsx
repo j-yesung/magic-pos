@@ -1,39 +1,31 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styles from '../styles/StickBar.module.css';
 
 const ScrollTop = () => {
   const [showButton, setShowButton] = useState(false);
 
-  const clickScrollTopHandler = () => {
+  const clickScrollTopHandler = useCallback(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  }, []);
+
+  const clickShowButtonHandler = useCallback(() => {
+    setShowButton(window.scrollY > 700);
+  }, []);
 
   useEffect(() => {
-    const clickShowButtonHandler = () => {
-      if (window.scrollY > 700) {
-        setShowButton(true);
-      } else {
-        setShowButton(false);
-      }
-    };
-
     window.addEventListener('scroll', clickShowButtonHandler);
 
     return () => {
       window.removeEventListener('scroll', clickShowButtonHandler);
     };
-  }, []);
+  }, [clickShowButtonHandler]);
 
   return (
-    <>
-      {showButton && (
-        <div className={styles.scrollTopBox}>
-          <button onClick={clickScrollTopHandler}>
-            <p>Top</p>
-          </button>
-        </div>
-      )}
-    </>
+    showButton && (
+      <div className={styles.scrollTopBox}>
+        <button onClick={clickScrollTopHandler}>Top</button>
+      </div>
+    )
   );
 };
 

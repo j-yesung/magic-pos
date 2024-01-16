@@ -44,11 +44,9 @@
   height: 5rem;
   cursor: pointer;
   font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   color: var(--text5);
   border-radius: 50%;
   background: var(--point-100);
-}
-.scroll-top-box p {
-  font-size: 1.5rem;
 }
