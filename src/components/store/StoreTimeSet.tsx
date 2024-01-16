@@ -2,6 +2,7 @@ import { useGetQuery } from '@/hooks/store/useGetQuery';
 import { useStoreQuery } from '@/hooks/store/useStoreQuery';
 import { Fragment, useEffect, useState } from 'react';
 import Button from '../auth/Button';
+import styles from './styles/StroeContents.module.css';
 
 const TIME_SIZE = 48;
 
@@ -28,8 +29,8 @@ const StoreTimeSet = ({ userId }: { userId: string }) => {
   );
 
   const timeSet = [
-    { id: 1, name: 'startTime' },
-    { id: 2, name: 'endTime' },
+    { id: 1, name: 'startTime', label: '오픈' },
+    { id: 2, name: 'endTime', label: '마감' },
   ];
 
   const clickUpdateStoreHandler = () => {
@@ -45,23 +46,28 @@ const StoreTimeSet = ({ userId }: { userId: string }) => {
 
   return (
     <>
-      <div>
+      <div className={styles.timesetContainer}>
         <label htmlFor="tiem">영업 시간</label>
-        {timeSet.map(item => (
-          <Fragment key={item.id}>
-            {data && data?.length > 0 && (
-              <select name={item.name} id={item.name} onChange={changeTimeHandler} value={times[item.name]}>
-                {time
-                  .filter(t => (item.name === 'endTime' ? t > times.startTime : true))
-                  .map((t, index) => (
-                    <option key={index} value={t}>
-                      {t}
-                    </option>
-                  ))}
-              </select>
-            )}
-          </Fragment>
-        ))}
+        <div className={styles.timeSelectBox}>
+          {timeSet.map(item => (
+            <Fragment key={item.id}>
+              {data && data?.length > 0 && (
+                <>
+                  <span>{item.label}</span>
+                  <select name={item.name} id={item.name} onChange={changeTimeHandler} value={times[item.name]}>
+                    {time
+                      .filter(t => (item.name === 'endTime' ? t > times.startTime : true))
+                      .map((t, index) => (
+                        <option key={index} value={t}>
+                          {t}
+                        </option>
+                      ))}
+                  </select>
+                </>
+              )}
+            </Fragment>
+          ))}
+        </div>
       </div>
       <Button type="button" onClick={clickUpdateStoreHandler}>
         등록하기

@@ -25,7 +25,7 @@ const enum QUERY_KEY {
 export const useAuth = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
-  const { setSession, setStoreId, setStroeName, setStoreBno } = useAuthStore();
+  const { setSession, setStoreId, setStoreName, setStoreBno } = useAuthStore();
 
   const signupMutation = useMutation({
     mutationFn: signUpHandler,
@@ -49,7 +49,7 @@ export const useAuth = () => {
       const storeBno = store && store[0]?.business_number;
       setSession(auth.session);
       setStoreBno(storeBno!);
-      setStroeName(storeName!);
+      setStoreName(storeName!);
       storeId.length !== 0 ? setStoreId(storeId[0].id) : setStoreId(null!);
       router.push('/');
     },
@@ -63,10 +63,11 @@ export const useAuth = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.LOGOUT] });
       useAuthStore.persist.clearStorage();
+      setSession(null);
       router.push('/');
     },
     onError: error => {
-      throw error;
+      console.error(error);
     },
   });
 
