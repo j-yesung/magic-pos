@@ -6,7 +6,7 @@ import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButton';
 
 const AddCartButton = ({ menu }: { menu: MenuItemWithOption | null }) => {
   const [quantity, setQuantity] = useState(1);
-  const { addOrderList, optionSwiperRef } = useOrderStore();
+  const { addOrderList, optionSwiperRef, selectedOptions, resetSelectedOptions, setSelectedMenu } = useOrderStore();
 
   // 수량 증가
   const handleClickUpQuantity = () => {
@@ -20,9 +20,11 @@ const AddCartButton = ({ menu }: { menu: MenuItemWithOption | null }) => {
 
   const handleClickAddCart = () => {
     if (menu) {
-      addOrderList(new Array(quantity).fill(false).map(() => menu));
+      addOrderList(new Array(quantity).fill(false).map(() => ({ ...menu, menu_option: selectedOptions })));
     }
     optionSwiperRef?.current!.swiper.slidePrev(SLIDE_MOVE_SPEED);
+    resetSelectedOptions();
+    setSelectedMenu(null);
   };
 
   return (
