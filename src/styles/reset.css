@@ -128,3 +128,9 @@ table {
 html {
   font-size: 62.5%; /* 1rem = 10px */
 }
+button {
+  border: none;
+}
+a {
+  text-decoration: none;
+}
