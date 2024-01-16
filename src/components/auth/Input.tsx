@@ -1,4 +1,5 @@
 import { useValid } from '@/hooks/auth/useValid';
+import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import styles from './styles/Auth.module.css';
 
@@ -95,7 +96,7 @@ const Input = ({ value, onChangeHandler }: InputProps) => {
   return (
     <>
       {inputs.map((input: InputType) => {
-        const key = input.name as keyof typeof value;
+        const key = input.name;
         const isPasswordConfirm = input.name === 'passwordConfirm';
         const isSuccess = passwordErrorMessage === '비밀번호가 일치합니다.' && isPasswordConfirm;
 
@@ -106,13 +107,9 @@ const Input = ({ value, onChangeHandler }: InputProps) => {
               {path === '/auth/signup' && <label htmlFor={input.name}>{input.label}</label>}
               <input
                 id={input.name}
-                className={
-                  isSuccess
-                    ? styles.input
-                    : isPasswordConfirm && passwordErrorMessage !== ''
-                      ? `${styles.input} ${styles.inputError}`
-                      : styles.input
-                }
+                className={clsx(styles.input, {
+                  [styles.inputError]: !isSuccess && isPasswordConfirm && passwordErrorMessage !== '',
+                })}
                 name={input.name}
                 value={value[key]}
                 onChange={onChangeHandler}
