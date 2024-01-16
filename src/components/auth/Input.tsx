@@ -46,8 +46,7 @@ const Input = ({ value, onChangeHandler }: InputProps) => {
     <>
       {inputs.map((input: InputType) => {
         const key = input.name;
-        const isPasswordConfirm = input.name === 'passwordConfirm';
-        const isSuccess = passwordErrorMessage === '비밀번호가 일치합니다.' && isPasswordConfirm;
+        const isPasswordConfirm = input.name === 'passwordConfirm' && path === '/auth/signup';
 
         if (input) {
           return (
@@ -57,7 +56,7 @@ const Input = ({ value, onChangeHandler }: InputProps) => {
               <input
                 id={input.name}
                 className={clsx(styles.input, {
-                  [styles.inputError]: !isSuccess && isPasswordConfirm && passwordErrorMessage !== '',
+                  [styles.inputError]: isPasswordConfirm && !isPasswordValid,
                 })}
                 name={input.name}
                 value={value[key]}
@@ -67,9 +66,8 @@ const Input = ({ value, onChangeHandler }: InputProps) => {
                 disabled={input.disabled}
                 required
               />
-              {/* 로그인 & 회원가입 둘 다 적용 */}
-              {input.name === 'passwordConfirm' && (
-                <span className={isSuccess ? styles.match : styles.error}>{passwordErrorMessage || ''}</span>
+              {isPasswordConfirm && (
+                <span className={isPasswordValid ? styles.match : styles.error}>{passwordValidationMessage}</span>
               )}
             </div>
           );
