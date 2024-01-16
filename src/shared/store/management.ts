@@ -10,12 +10,14 @@ interface managementType {
   isModal: boolean;
   isQRModal: boolean;
   orderConfirmData: OrderConfirmType[];
+  QRImageRef: HTMLDivElement[]
   setOrderData: (value: OrderDataWithStoreName[]) => void
   setOrderId: (value: { id: string[], status: string, number: string }) => void
   setIsModal: (value: boolean) => void
   setIsQRModal: (value: boolean) => void
   addOrderConfirmData: (value: OrderConfirmType) => void
   removeOrderConfirmData: (value: string) => void
+  setQRImageRef: (value: HTMLDivElement) => void
 }
 
 const useManagementStore = create<managementType>((set) => ({
@@ -26,6 +28,7 @@ const useManagementStore = create<managementType>((set) => ({
   isModal: false,
   isQRModal: false,
   orderConfirmData: [],
+  QRImageRef: [],
   setOrderData: (value) =>
     set(() => ({
       orderData: value
@@ -51,6 +54,10 @@ const useManagementStore = create<managementType>((set) => ({
   removeOrderConfirmData: (value) =>
     set((state) => ({
       orderConfirmData: [...state.orderConfirmData.filter((x) => x.id !== value)]
+    })),
+  setQRImageRef: (value) =>
+    set((state) => ({
+      QRImageRef: [...state.QRImageRef, value]
     }))
 }))
 

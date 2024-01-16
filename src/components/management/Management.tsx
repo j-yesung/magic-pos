@@ -17,7 +17,8 @@ const Management = () => {
   return (
     <div className={styles['managementWrapper']}>
       {isModal && <ManagementModal />}
-      {isQRModal && <QrCodeModal />}
+      {/* {isQRModal && <QrCodeModal />} */}
+      <QrCodeModal />
       <ManagementContainer managementData={data} />
       <ManagementSideBar managementData={data} />
     </div>

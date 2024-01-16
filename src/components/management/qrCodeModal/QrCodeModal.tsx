@@ -1,8 +1,15 @@
-import PackagingQrCodeContainer from './packagingQrCodeContainer/PackagingQrCodeContainer'
-import ShopQrCodeContainer from './shopQrCodeContainer/ShopQrCodeContainer'
-import styles from './styles/QrCodeModal.module.css'
+import useQRCodeDownLoad from '@/hooks/management/useQRCodeDownLoad';
+import PackagingQrCodeContainer from './packagingQrCodeContainer/PackagingQrCodeContainer';
+import ShopQrCodeContainer from './shopQrCodeContainer/ShopQrCodeContainer';
+import styles from './styles/QrCodeModal.module.css';
 
 const QrCodeModal = () => {
+
+  const qrDownLoad = useQRCodeDownLoad(QRImage.current[index], qrUrl, orderType);
+  const clickQrDownLoadHandler = () => {
+    qrDownLoad();
+  }
+
   return (
     <div className={styles['qr-code-modal-wrapper']}>
       <div className={styles['qr-code-modal-background']}></div>
@@ -13,7 +20,8 @@ const QrCodeModal = () => {
           <ShopQrCodeContainer />
         </div>
         <div className={styles['qr-code-button-box']}>
-          <button>주문완료하기</button>
+          <button onClick={clickQrDownLoadHandler}>QR코드 다운로드</button>
+          <button>취소</button>
         </div>
       </div>
     </div>

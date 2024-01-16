@@ -1,6 +1,8 @@
+import useManagementStore from '@/shared/store/management';
 import { StoreWithOrderInfo } from '@/types/supabase';
 import { useQueryClient } from '@tanstack/react-query';
 import clsx from 'clsx';
+import { useEffect } from 'react';
 import QrCodeListItem from '../qrCodelistItem/QrCodeListItem';
 import styles from './styles/ShopQrCodeContainer.module.css';
 
@@ -8,7 +10,12 @@ const ShopQrCodeContainer = () => {
   const queryClient = useQueryClient();
   const data = queryClient.getQueryData<StoreWithOrderInfo[]>(['management'])
   const storeTable = data && data[0].store_table;
+  // const qrImageRef = useRef<HTMLDivElement[]>([]);
+  const { QRImageRef } = useManagementStore()
 
+  useEffect(() => {
+    QRImageRef
+  }, [QRImageRef])
   return (
     <div className={styles['shop-qr-code-container']}>
       <div className={styles['shop-qr-code-title']}>매장용 QR코드</div>
@@ -19,9 +26,9 @@ const ShopQrCodeContainer = () => {
             ? styles['grid-row-2']
             : styles['qr-code-svg-box'])}>
         {
-          storeTable?.sort((a, b) => a.position && b.position && a.position > b.position ? 1 : -1).map((item) => {
+          storeTable?.sort((a, b) => a.position && b.position && a.position > b.position ? 1 : -1).map((item, index) => {
             return (
-              <QrCodeListItem key={item.id} storeTable={item} orderType={`table${item.position}`} />
+              <QrCodeListItem key={item.id} storeTable={item} orderType={`table${item.position}`} index={index} />
             )
           })
         }

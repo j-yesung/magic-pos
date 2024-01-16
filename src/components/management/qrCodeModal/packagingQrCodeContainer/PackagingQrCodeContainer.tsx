@@ -6,7 +6,7 @@ const PackagingQrCodeContainer = () => {
     <div className={styles['packaging-qr-code-container']} >
       <div className={styles['packaging-qr-code-title']}>포장용 QR코드</div>
       <div className={styles['packaging-qr-code-item-box']}>
-        <QrCodeListItem orderType='packaging' />
+        <QrCodeListItem index={0} orderType='packaging' />
       </div>
     </div>
   )
