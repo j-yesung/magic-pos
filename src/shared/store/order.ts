@@ -107,21 +107,23 @@ export const useOrderStore = create<OrderState>()(
       setSelectedMenu: selectedMenu => set(() => ({ selectedMenu })),
       // 선택된 옵션
       selectedOptions: [],
+      // 옵션 추가
       addSelectedOption: param =>
         set(state => {
           let newSelectedOptions = [...state.selectedOptions];
+          // 이미 옵션이 있다면 기존 옵션에서 details만 갈아끼우고, 옵션이 없다면 새로 만든다.
           if (newSelectedOptions.length === 0) newSelectedOptions = [param];
           else {
             newSelectedOptions = state.selectedOptions.map(option => {
               if (option.id === param.id) {
                 option.menu_option_detail = param.menu_option_detail;
-                return option;
               }
               return option;
             });
           }
           return { ...state, selectedOptions: newSelectedOptions };
         }),
+      // 옵션 제거
       subtractSelectedOption: detailId =>
         set(state => ({
           selectedOptions: state.selectedOptions?.map(option => {
@@ -129,6 +131,7 @@ export const useOrderStore = create<OrderState>()(
             return option;
           }),
         })),
+      // 옵션 초기화
       resetSelectedOptions: () => set(() => ({ selectedOptions: [] })),
     }),
     {

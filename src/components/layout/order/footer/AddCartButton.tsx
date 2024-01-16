@@ -4,6 +4,11 @@ import useOrderStore from '@/shared/store/order';
 import { MenuItemWithOption } from '@/types/supabase';
 import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButton';
 
+/**
+ * 옵션, 수량 등을 정한 뒤 장바구니(orderList)에 담는다.
+ * @param menu
+ * @constructor
+ */
 const AddCartButton = ({ menu }: { menu: MenuItemWithOption | null }) => {
   const [quantity, setQuantity] = useState(1);
   const { addOrderList, optionSwiperRef, selectedOptions, resetSelectedOptions, setSelectedMenu } = useOrderStore();
@@ -18,6 +23,9 @@ const AddCartButton = ({ menu }: { menu: MenuItemWithOption | null }) => {
     setQuantity(prev => Math.max(prev - 1, 1));
   };
 
+  /**
+   * 주문 목록에 메뉴를 담는다.
+   */
   const handleClickAddCart = () => {
     if (menu) {
       addOrderList(new Array(quantity).fill(false).map(() => ({ ...menu, menu_option: selectedOptions })));
