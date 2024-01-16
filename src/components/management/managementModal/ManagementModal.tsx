@@ -21,18 +21,15 @@ const ManagementModal = () => {
     }
   }
   return (
-    <div className={styles['management-modal-wrapper']}>
-      <div className={styles['management-modal-background']}></div>
-      <div className={styles['management-modal-box']}>
-        <div className={styles['modal-order-title']}>주문완료 하기</div>
-        <ul className={styles['modal-order-list']}>
-          {orderData.map((item) => <ModalOrderListItem key={item.id} orderData={item} />)}
-        </ul>
-        <div className={styles['modal-button-box']}>
-          <button onClick={clickOrderConfirmHandler}>{
-            orderConfirmData.map((item) => <span key={item.id}>{item.number}번&nbsp;</span>)
-          } 주문완료하기</button>
-        </div>
+    <div className={styles['management-modal-box']}>
+      <div className={styles['modal-order-title']}>주문완료 하기</div>
+      <ul className={styles['modal-order-list']}>
+        {orderData.map((item) => <ModalOrderListItem key={item.id} orderData={item} />)}
+      </ul>
+      <div className={styles['modal-button-box']}>
+        <button onClick={clickOrderConfirmHandler}>{
+          orderConfirmData.map((item) => <span key={item.id}>{item.number}번&nbsp;</span>)
+        } 주문완료하기</button>
       </div>
     </div>
   )

@@ -57,12 +57,10 @@
 }
 
 .qr-code.active:hover::after {
-  opacity: 0;
-  visibility: hidden;
+  display: none;
 }
 .qr-code.active:hover::before {
-  opacity: 0;
-  visibility: hidden;
+  display: none;
 }
 
 .qr-code.order-type-togo:hover::after {
