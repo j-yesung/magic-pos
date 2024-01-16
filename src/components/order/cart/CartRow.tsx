@@ -27,7 +27,10 @@ const CartRow = ({ itemList }: { itemList: MenuItemWithOption[] }) => {
       </div>
       <div>
         <span>
-          {convertNumberToWon(itemList.reduce((acc, cur) => acc + cur.price, 0) + getOptionPriceByList(itemList))}
+          {convertNumberToWon(
+            itemList.reduce((acc, cur) => acc + cur.price, 0) +
+              getOptionPriceByList(itemList.map(item => item.menu_option).flat()),
+          )}
         </span>
       </div>
     </div>

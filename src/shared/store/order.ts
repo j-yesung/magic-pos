@@ -27,7 +27,7 @@ interface OrderState {
   addOrderList: (menu: MenuItemWithOption[]) => void;
   subtractOrderList: (menu: MenuItemWithOption) => void;
   getTotalPrice: () => number;
-  getOptionPriceByList: (list: MenuItemWithOption[]) => number;
+  getOptionPriceByList: (list: MenuOptionWithDetail[]) => number;
   storeId: string | null;
   setStoreId: (storeId: string) => void;
   orderNumber: number;
@@ -96,14 +96,10 @@ export const useOrderStore = create<OrderState>()(
       },
       getOptionPriceByList: list => {
         return list
-          .map(item =>
-            item.menu_option
-              .map(option =>
-                option.menu_option_detail.reduce((acc, cur) => {
-                  return acc + cur.price;
-                }, 0),
-              )
-              .reduce((acc, cur) => acc + cur, 0),
+          .map(option =>
+            option.menu_option_detail.reduce((acc, cur) => {
+              return acc + cur.price;
+            }, 0),
           )
           .reduce((acc, cur) => acc + cur, 0);
       },
