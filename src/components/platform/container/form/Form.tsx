@@ -24,7 +24,7 @@ export interface UploadParam {
   link_url: string;
   createdAt: string;
   store_id: string | null;
-  file?: File;
+  file?: File | null;
   image_url?: string;
 }
 const Form = ({ setCardList }: FormProps) => {
@@ -63,7 +63,6 @@ const Form = ({ setCardList }: FormProps) => {
 
     if (input.file) {
       await uploadPlatFormImage(input);
-      console.log(updateData);
       const { publicUrl: image_url } = downloadPlatFormImageUrl(input);
       updateData = {
         ...input,
