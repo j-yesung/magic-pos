@@ -1,22 +1,22 @@
 import React from 'react';
-import styles from './styles/ReceiptHeader.module.css';
+import styles from './styles/ReceiptOrderHeader.module.css';
 
 interface ReceiptHeaderProps {
   orderNumber: number;
   orderName: string | null;
-  orderType: OrderType;
+  isTogo: boolean;
 }
 
-const ReceiptHeader = ({ orderType, orderName, orderNumber }: ReceiptHeaderProps) => {
+const ReceiptOrderHeader = ({ isTogo, orderName, orderNumber }: ReceiptHeaderProps) => {
   return (
     <div className={styles.container}>
       <span className={styles.orderNumber}>{orderNumber}</span>
       <span className={styles.orderStoreName}>{orderName}</span>
       <div className={styles.orderType}>
-        <span>{orderType.type === 'togo' ? '포장' : '매장'}</span>
+        <span>{isTogo ? '포장' : '매장'}</span>
       </div>
     </div>
   );
 };
 
-export default ReceiptHeader;
+export default ReceiptOrderHeader;

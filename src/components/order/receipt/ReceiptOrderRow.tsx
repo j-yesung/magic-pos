@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './styles/ReceiptRow.module.css';
+import styles from './styles/ReceiptOrderRow.module.css';
 import Image from 'next/image';
 import clsx from 'clsx';
 import { MenuItemWithOption } from '@/types/supabase';
@@ -7,7 +7,7 @@ import { convertNumberToWon } from '@/shared/helper';
 import useOrderStore from '@/shared/store/order';
 import CartOptionRow from '@/components/order/cart/CartOptionRow';
 
-const ReceiptRow = ({ itemList }: { itemList: MenuItemWithOption[] }) => {
+const ReceiptOrderRow = ({ itemList }: { itemList: MenuItemWithOption[] }) => {
   const getOptionPriceByList = useOrderStore(state => state.getOptionPriceByList);
 
   return (
@@ -30,4 +30,4 @@ const ReceiptRow = ({ itemList }: { itemList: MenuItemWithOption[] }) => {
   );
 };
 
-export default ReceiptRow;
+export default ReceiptOrderRow;

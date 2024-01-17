@@ -25,12 +25,12 @@ const OrderIndexPage = ({
   const setMenuData = useOrderStore(state => state.setMenuData);
   const setStoreId = useOrderStore(state => state.setStoreId);
   const setTableId = useOrderStore(state => state.setTableId);
-  const orderId = useOrderStore(state => state.orderId);
+  const orderIdList = useOrderStore(state => state.orderIdList);
   const resetOrderList = useOrderStore(state => state.resetOrderList);
   const setStoreName = useOrderStore(state => state.setStoreName);
 
-  const { storeOrderData } = useStoreOrderQuery(orderId ?? '');
-  const { numberOrderData } = useNumberOrderQuery(orderId ?? '');
+  const { storeOrderData } = useStoreOrderQuery(orderIdList);
+  const { numberOrderData } = useNumberOrderQuery(orderIdList);
   const [isLoaded, setIsLoaded] = useState(false);
   const { MagicModal } = useModal();
   const router = useRouter();
@@ -38,15 +38,20 @@ const OrderIndexPage = ({
   // numberOrderData: 번호표 주문 (포장, 테이블 번호가 없는 매장 주문)
   // storeOrderData: 테이블 주문 (테이블 번호가 있는 매장 주문)
   useEffect(() => {
-    if (orderId) {
+    if (orderIdList.length > 0) {
       (async () => {
         let isOrdered = false;
-        if (storeOrderData?.data && !storeOrderData.data?.is_done) {
-          isOrdered = true;
+
+        if (storeOrderData?.data) {
+          if (storeOrderData.data?.length > 0 && !storeOrderData.data.find(d => d.is_done)) {
+            isOrdered = true;
+          }
         }
 
-        if (numberOrderData?.data && !numberOrderData.data?.is_done) {
-          isOrdered = true;
+        if (numberOrderData?.data) {
+          if (numberOrderData.data?.length > 0 && !numberOrderData.data.find(d => d.is_done)) {
+            isOrdered = true;
+          }
         }
 
         if (isOrdered) {
