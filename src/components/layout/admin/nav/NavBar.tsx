@@ -20,6 +20,11 @@ const NavBar = (adminInfo: AdminCategories) => {
 
   return (
     <aside className={styles.navWrapper}>
+      <div className={styles.notification}>
+        <Ellipse width={8} height={8} />
+        현재 관리자 모드를 보고있습니다.
+      </div>
+      <p>※ 운영 모드를 이용하려면 토글 버튼을 클릭해 주세요.</p>
       <ul>
         {navList.map(list => (
           <li
