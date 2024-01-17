@@ -1,6 +1,10 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { CategoryWithMenuItem, MenuItemWithOption, MenuOptionWithDetail } from '@/types/supabase';
+import {
+  CategoryWithMenuItemWithStore,
+  MenuItemWithOption,
+  MenuOptionWithDetail,
+} from '@/types/supabase';
 import { SwiperRef } from 'swiper/react';
 import React from 'react';
 
@@ -18,15 +22,16 @@ export enum ORDER_STEP {
 interface OrderState {
   step: number;
   readonly maxStep: number;
-  menuData: CategoryWithMenuItem[] | null;
+  menuData: CategoryWithMenuItemWithStore[] | null;
   goNextStep: () => void;
   goPrevStep: () => void;
-  setMenuData: (data: CategoryWithMenuItem[]) => void;
+  setMenuData: (data: CategoryWithMenuItemWithStore[]) => void;
   orderList: MenuItemWithOption[];
   resetOrderList: () => void;
   addOrderList: (menu: MenuItemWithOption[]) => void;
   subtractOrderList: (menu: MenuItemWithOption) => void;
-  getTotalPrice: () => number;
+  getTotalPrice: (list: MenuItemWithOption[]) => number;
+  getOptionPriceByList: (list: MenuOptionWithDetail[]) => number;
   storeId: string | null;
   setStoreId: (storeId: string) => void;
   orderNumber: number;
@@ -49,6 +54,10 @@ interface OrderState {
   addSelectedOption: (selectedOption: MenuOptionWithDetail) => void;
   subtractSelectedOption: (id: string) => void;
   resetSelectedOptions: () => void;
+  amount: number;
+  addAmount: () => void;
+  subtractAmount: () => void;
+  resetAmount: () => void;
 }
 
 export const useOrderStore = create<OrderState>()(
@@ -79,7 +88,25 @@ export const useOrderStore = create<OrderState>()(
           return { orderList: state.orderList };
         }),
       // orderList에 담긴 메뉴 아이템의 총합 가격을 나타냅니다.
-      getTotalPrice: () => get()?.orderList.reduce((acc, cur) => acc + cur.price, 0),
+      getTotalPrice: list => {
+        return list
+          ?.map(
+            menu =>
+              menu.menu_option
+                .map(option => option.menu_option_detail.reduce((acc, cur) => acc + cur.price, 0))
+                .reduce((acc, cur) => acc + cur, 0) + menu.price,
+          )
+          .reduce((acc, cur) => acc + cur, 0);
+      },
+      getOptionPriceByList: list => {
+        return list
+          .map(option =>
+            option.menu_option_detail.reduce((acc, cur) => {
+              return acc + cur.price;
+            }, 0),
+          )
+          .reduce((acc, cur) => acc + cur, 0);
+      },
       // 가게 ID
       storeId: null,
       setStoreId: storeId => set(() => ({ storeId })),
@@ -141,6 +168,11 @@ export const useOrderStore = create<OrderState>()(
         })),
       // 옵션 초기화
       resetSelectedOptions: () => set(() => ({ selectedOptions: [] })),
+      // 메뉴 하나 수량
+      amount: 1,
+      addAmount: () => set(state => ({ amount: state.amount + 1 })),
+      subtractAmount: () => set(state => ({ amount: Math.max(state.amount - 1, 1) })),
+      resetAmount: () => set(() => ({ amount: 1 })),
     }),
     {
       name: 'order-storage',
