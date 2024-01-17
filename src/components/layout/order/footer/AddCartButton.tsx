@@ -18,7 +18,12 @@ const AddCartButton = ({ menu }: { menu: MenuItemWithOption | null }) => {
    */
   const handleClickAddCart = () => {
     if (menu) {
-      addOrderList(new Array(amount).fill(false).map(() => ({ ...menu, menu_option: selectedOptions })));
+      // 옵션 지정 여부에 따라 주문 확인에서는 다른 Row로 보여줘야 하므로 선택된 옵션 detail의 키를 조합하여 새로운 아이디를 만든다.
+      const uniqueId =
+        menu.id + selectedOptions.map(option => option.menu_option_detail.map(d => d.id).join('')).join('');
+      addOrderList(
+        new Array(amount).fill(false).map(() => ({ ...menu, menu_option: selectedOptions, unique: uniqueId })),
+      );
     }
     optionSwiperRef?.current!.swiper.slidePrev(SLIDE_MOVE_SPEED);
     resetSelectedOptions();

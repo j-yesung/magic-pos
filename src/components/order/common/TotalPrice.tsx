@@ -6,7 +6,6 @@ import useOrderStore from '@/shared/store/order';
 
 const TotalPrice = ({ itemList }: { itemList: MenuItemWithOption[] }) => {
   const { getTotalPrice } = useOrderStore();
-  console.log(itemList);
 
   return (
     <div className={styles.container}>
