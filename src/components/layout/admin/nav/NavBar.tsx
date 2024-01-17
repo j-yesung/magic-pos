@@ -20,6 +20,10 @@ const NavBar = (adminInfo: AdminCategories) => {
 
   return (
     <aside className={styles.navWrapper}>
+      <div className={styles.closeButton}>
+        <CloseButton width={40} height={40} />
+      </div>
+      <div className={styles.toggleButton}>{/* <HeaderToggleButton /> */}</div>
       <div className={styles.notification}>
         <Ellipse width={8} height={8} />
         현재 관리자 모드를 보고있습니다.
