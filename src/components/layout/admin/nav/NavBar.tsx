@@ -1,6 +1,6 @@
 import useSideBar from '@/shared/store/sidebar';
 import { useRouter } from 'next/router';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import styles from '../styles/AdminLayout.module.css';
 import CloseButton from '/public/icons/close.svg';
 import Ellipse from '/public/icons/ellipse.svg';
@@ -11,16 +11,19 @@ const NavBar = (adminInfo: AdminCategories) => {
   const targetRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
-  const clickNavListHandler = (id: number, url: string) => {
-    const currentActive = navList.find(item => item.active === true);
-    if (currentActive && currentActive.id === id) return;
+  const clickNavListHandler = useCallback(
+    (id: number, url: string) => {
+      const currentActive = navList.find(item => item.active === true);
+      if (currentActive && currentActive.id === id) return;
 
-    setNavList(prevList =>
-      prevList.map(item => (item.id === id ? { ...item, active: !item.active } : { ...item, active: false })),
-    );
+      setNavList(prevList =>
+        prevList.map(item => (item.id === id ? { ...item, active: !item.active } : { ...item, active: false })),
+      );
 
-    router.push(url);
-  };
+      router.push(url);
+    },
+    [navList, router],
+  );
 
   useEffect(() => {
     const closeSideBar = (e: MouseEvent) => {
