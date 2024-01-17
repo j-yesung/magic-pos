@@ -15,6 +15,7 @@
     "@tosspayments/payment-widget-sdk": "^0.10.2",
     "@tosspayments/payment-widget-types": "^0.0.5",
     "@types/lodash": "^4.14.202",
+    "@types/node": "^20.11.5",
     "axios": "^1.6.5",
     "chart.js": "^4.4.1",
     "chartjs-plugin-datalabels": "^2.2.0",
