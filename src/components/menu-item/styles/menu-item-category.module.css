@@ -1,3 +1,47 @@
+.swiper {
+  position: relative;
+  --swiper-background-left: linear-gradient(-90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+  --swiper-background-right: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+  --swiper-postion-left: 0;
+  --swiper-postion-right: 0;
+}
+
+.swiper:before,
+.swiper:after {
+  content: '';
+  height: 100%;
+  width: 0;
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  transition: all 0.3s;
+}
+
+.swiper:before {
+  background: var(--swiper-background-left);
+  left: var(--swiper-postion-left);
+}
+
+.swiper:after {
+  background: var(--swiper-background-right);
+  right: var(--swiper-postion-right);
+}
+
+.swiper.before:before,
+.swiper.after:after {
+  width: 4rem;
+}
+
+.swiper.before:before {
+  background: var(--swiper-background-left);
+  left: var(--swiper-postion-left);
+}
+
+.swiper.after:after {
+  background: var(--swiper-background-right);
+  right: var(--swiper-postion-right);
+}
+
 .slide {
   width: 20rem;
   height: 4rem;
@@ -7,9 +51,11 @@
   align-items: center;
   transition: all 0.3s;
   font-size: 2rem;
-  background-color: #f2f2f2;
+  background-color: var(--point-50);
   cursor: pointer;
+  border-radius: 1rem 1rem 0 0;
 }
+
 .slide p {
   white-space: nowrap;
   overflow: hidden;
@@ -17,7 +63,7 @@
 }
 
 .slide:hover {
-  background-color: #d1d1d1;
+  background-color: var(--point-80);
 }
 
 .slide.active {
