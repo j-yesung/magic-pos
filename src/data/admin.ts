@@ -7,3 +7,9 @@ export const adminCategories = [
   { id: 6, name: '메뉴 관리', url: '/admin/menu-item', active: false },
   { id: 7, name: '가게 설정', url: '/admin/store', active: false },
 ];
+
+export const modeText = ['현재 운영 모드를 보고 있습니다.', '현재 관리자 모드를 보고 있습니다.'];
+export const modeSubText = [
+  '※ 관리자 모드로 전환하려면 토글 버튼을 클릭해 주세요.',
+  '※ 운영 모드로 전환하려면 토글 버튼을 클릭해 주세요.',
+];

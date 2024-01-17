@@ -5,9 +5,9 @@ interface ToggleState {
   changeToggle: () => void;
 }
 
-const useToggleStore = create<ToggleState>(set => ({
+const useToggleState = create<ToggleState>(set => ({
   isChecked: true,
   changeToggle: () => set(state => ({ isChecked: !state.isChecked })),
 }));
 
-export default useToggleStore;
+export default useToggleState;

@@ -1,4 +1,4 @@
-import { adminCategories } from '@/data/admin-categories';
+import { adminCategories } from '@/data/admin';
 import useAuthStore from '@/shared/store/auth';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';

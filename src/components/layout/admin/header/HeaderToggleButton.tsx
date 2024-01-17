@@ -1,10 +1,10 @@
-import useToggleStore from '@/shared/store/toggle';
+import useToggleState from '@/shared/store/toggle';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import styles from '../styles/AdminLayout.module.css';
 
 const HeaderToggleButton = () => {
-  const { isChecked, changeToggle } = useToggleStore();
+  const { isChecked, changeToggle } = useToggleState();
   const router = useRouter();
 
   useEffect(() => {
