@@ -11,10 +11,16 @@ interface ButtonProps {
   sliderRef: React.RefObject<SwiperRef>;
 }
 
-export const SLIDE_MOVE_SPEED = 600;
+export const SLIDE_MOVE_SPEED = 500;
 
 const StepButton = ({ sliderRef }: ButtonProps) => {
-  const { goNextStep, orderList, step, getTotalPrice, optionSwiperRef, selectedMenu } = useOrderStore();
+  const goNextStep = useOrderStore(state => state.goNextStep);
+  const orderList = useOrderStore(state => state.orderList);
+  const step = useOrderStore(state => state.step);
+  const getTotalPrice = useOrderStore(state => state.getTotalPrice);
+  const optionSwiperRef = useOrderStore(state => state.optionSwiperRef);
+  const selectedMenu = useOrderStore(state => state.selectedMenu);
+
   const { paymentWidget, handlePaymentRequest } = usePaymentWidget();
 
   const BUTTON_OPTIONS: { [key: number]: string } = {

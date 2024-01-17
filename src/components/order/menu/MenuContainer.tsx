@@ -11,7 +11,9 @@ import StoreInfo from '@/components/order/common/StoreInfo';
  * @constructor
  */
 const MenuContainer = () => {
-  const { menuData, orderType, storeName } = useOrderStore();
+  const menuData = useOrderStore(state => state.menuData);
+  const orderType = useOrderStore(state => state.orderType);
+  const storeName = useOrderStore(state => state.storeName);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [menuItemList, setMenuItemList] = useState<MenuItemWithOption[]>([]);
 

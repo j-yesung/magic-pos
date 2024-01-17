@@ -29,4 +29,5 @@
     margin-left: 1.5rem  /* 15/10 */;
     border-radius: 1rem  /* 10/10 */;
     z-index: var(--level-1-z-index);
+    cursor: pointer;
 }

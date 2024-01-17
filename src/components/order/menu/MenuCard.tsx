@@ -10,7 +10,8 @@ interface MenuCardProps {
 }
 
 const MenuCard = ({ menu }: MenuCardProps) => {
-  const { optionSwiperRef, setSelectedMenu } = useOrderStore();
+  const optionSwiperRef = useOrderStore(state => state.optionSwiperRef);
+  const setSelectedMenu = useOrderStore(state => state.setSelectedMenu);
 
   const handleClickCard = () => {
     setSelectedMenu(menu);

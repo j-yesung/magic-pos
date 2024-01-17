@@ -12,8 +12,16 @@ import image from '@/../public/images/image-success.png';
 import { useRouter } from 'next/router';
 
 const SuccessContainer = ({ payment }: { payment?: Payment }) => {
-  const { orderList, storeId, tableId, menuData, orderNumber, getTotalPrice, orderType, orderId, setOrderId } =
-    useOrderStore();
+  const orderList = useOrderStore(state => state.orderList);
+  const storeId = useOrderStore(state => state.storeId);
+  const tableId = useOrderStore(state => state.tableId);
+  const menuData = useOrderStore(state => state.menuData);
+  const orderNumber = useOrderStore(state => state.orderNumber);
+  const getTotalPrice = useOrderStore(state => state.getTotalPrice);
+  const orderType = useOrderStore(state => state.orderType);
+  const orderId = useOrderStore(state => state.orderId);
+  const setOrderId = useOrderStore(state => state.setOrderId);
+
   const { addSales } = useSalesQuery();
   const { addStoreOrder } = useStoreOrderQuery();
   const { addNumberOrder } = useNumberOrderQuery();
