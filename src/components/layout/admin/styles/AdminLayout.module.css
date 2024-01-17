@@ -4,14 +4,6 @@
   flex-direction: column;
   transition: all 0.4s;
 }
-/* 운영 모드 레이아웃 */
-.admin-wrapper-toggle {
-  transition: all 0.4s;
-}
-.admin-wrapper-toggle .nav-wrapper {
-  transform: translateX(-100%);
-  transition: transform 0.3s ease-in-out;
-}
 
 /* 헤더 영역입니다. */
 .header-wrapper {
@@ -52,6 +44,7 @@
   width: 10rem;
   height: 4rem;
   display: block;
+  cursor: pointer;
   position: relative;
   color: var(--text5);
   border-radius: 3rem;
@@ -109,7 +102,6 @@
   height: 95%;
   width: 33rem;
   margin: 2rem;
-  padding: 5rem 3rem;
   display: flex;
   position: fixed;
   border-radius: 3rem;
@@ -118,6 +110,10 @@
   background-color: #fff;
   z-index: var(--level-5-z-index); /* 최상위 레벨 */
   box-shadow: 0px 0px 20px 0px rgba(68, 9, 194, 0.1);
+}
+
+.nav-wrapper .contents {
+  padding: 5rem 3rem 0 3rem;
 }
 
 .nav-wrapper .notification {
@@ -185,14 +181,24 @@
   color: var(--point-100);
 }
 
-.nav-wrapper .logout-button {
+.nav-wrapper .button-wrapper {
+  bottom: 0;
   width: 100%;
   display: flex;
-  justify-content: center;
+  padding: 2rem 2rem;
+  position: absolute;
+  background: var(--bg-g);
+  justify-content: space-around;
   align-items: center;
   border-radius: 0 0 3rem 3rem;
-  background: var(--bg-g);
-  width: 100%;
+}
+
+.nav-wrapper button {
+  cursor: pointer;
+  background: none;
+}
+.nav-wrapper button:hover {
+  color: var(--point-100);
 }
 
 /* close sidebar */
