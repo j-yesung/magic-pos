@@ -1,4 +1,6 @@
+import { downloadPlatFormImageUrl, uploadPlatFormImage } from '@/server/api/supabase/platform';
 import useAuthStore from '@/shared/store/auth';
+import moment from 'moment';
 import { ChangeEvent, FormEvent, SetStateAction, useState } from 'react';
 import Img from './img/Img';
 import styles from './styles/form.module.css';
@@ -8,18 +10,33 @@ interface FormProps {
       {
         name: string;
         link_url: string;
+        image_url?: string;
+        store_id: string;
+        id?: string;
       }[]
     >
   >;
 }
+export interface UploadParam {
+  name: string;
+  link_url: string;
+  createdAt: string;
+  store_id: string | null;
+  file?: File;
+  image_url?: string;
+}
 const Form = ({ setCardList }: FormProps) => {
-  const [input, setInput] = useState({
+  const { storeId } = useAuthStore();
+  const [input, setInput] = useState<UploadParam>({
     name: '',
     link_url: '',
+    createdAt: moment().toISOString(),
+    store_id: storeId,
   });
 
   const changeLinkValue = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+
     setInput(pre => ({
       ...pre,
       [name]: value,
@@ -32,16 +49,27 @@ const Form = ({ setCardList }: FormProps) => {
       [name]: value,
     }));
   };
-  const submitAddCard = (e: FormEvent<HTMLFormElement>) => {
+
+  // 이미지 저장 안 할 때 이미지 업로드 하지 않고
+
+  const submitAddCard = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setCardList(pre => [...pre, input]);
+    let updateData = { ...input };
+    if (!input.name.trim() || !input.link_url.trim()) alert('써라');
+
+    await uploadPlatFormImage(input);
+
+    const { publicUrl: image_url } = downloadPlatFormImageUrl(input);
+    updateData = {
+      ...input,
+      image_url,
+    };
   };
-  const { storeId } = useAuthStore();
 
   return (
     <form onSubmit={submitAddCard} className={styles.formContainer}>
       <div className={styles.formWrapper}>
-        <Img />
+        <Img setInput={setInput} />
 
         <div className={styles.inputWrapper}>
           <input
@@ -54,7 +82,7 @@ const Form = ({ setCardList }: FormProps) => {
           <input
             className={styles.input}
             onChange={changeTitleValue}
-            name="title"
+            name="name"
             type="text"
             placeholder="어디사이트인가요?"
           />

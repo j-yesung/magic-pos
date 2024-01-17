@@ -1,3 +1,4 @@
+import { UploadParam } from '@/components/platform/container/form/Form';
 import { supabase } from '@/shared/supabase';
 import { TablesInsert } from '@/types/supabase';
 
@@ -59,4 +60,24 @@ export const addPlatForm = async (param: TablesInsert<'platform'>) => {
   }
 
   return { platform, error };
+};
+
+export const uploadPlatFormImage = async (param: UploadParam) => {
+  const { data, error } = await supabase.storage
+    .from('images')
+    .upload(`platform/${param.store_id}/${param.createdAt}`, param.file!);
+
+  if (error) throw error;
+  return { data, error };
+};
+
+export const downloadPlatFormImageUrl = (param: UploadParam) => {
+  try {
+    const { data } = supabase.storage.from('images').getPublicUrl(`platform/${param.store_id}/${param.createdAt}`);
+
+    return data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
 };

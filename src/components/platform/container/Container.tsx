@@ -8,6 +8,9 @@ const Container = () => {
     {
       name: string;
       link_url: string;
+      image_url?: string;
+      store_id: string;
+      id?: string;
     }[]
   >([]);
 

@@ -1,14 +1,23 @@
 import Image from 'next/image';
 import { ChangeEvent, useState } from 'react';
+import { UploadParam } from '../Form';
 import styles from './styles/img.module.css';
-const Img = () => {
+interface ImgProps {
+  setInput: React.Dispatch<React.SetStateAction<UploadParam>>;
+}
+const Img = ({ setInput }: ImgProps) => {
   const [preImage, setPreImage] = useState<string>();
 
   const changePreview = (e: ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files || null;
-    if (files?.length) {
-      const currentImgUrl = URL.createObjectURL(files![0]);
+    const fileList = e.target.files || [];
+    if (fileList?.length !== 0) {
+      const file = fileList[0];
+      const currentImgUrl = URL.createObjectURL(file);
       setPreImage(currentImgUrl);
+      setInput(pre => ({
+        ...pre,
+        file,
+      }));
     }
   };
   const DEFAULT_IMG = '/logo.svg';
