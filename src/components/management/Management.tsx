@@ -5,7 +5,7 @@ import ManagementSideBar from "./managementSideBar/ManagementSideBar";
 import styles from "./styles/Management.module.css";
 
 const Management = () => {
-  const { auth } = useAuthStore();
+  const auth = useAuthStore(state => state.auth);
   const user = auth?.user;
   const id = user?.id;
   const { data } = useFetchManagement(id);

@@ -5,7 +5,7 @@ import AuthForm from './AuthForm';
 type AuthObjectType = Record<string, string>;
 
 const User = () => {
-  const { auth } = useAuthStore();
+  const auth = useAuthStore(state => state.auth);
   const path = useRouter().pathname;
   const router = useRouter();
 
