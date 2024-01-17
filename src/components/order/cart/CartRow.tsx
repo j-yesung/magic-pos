@@ -1,17 +1,20 @@
 import React from 'react';
 import styles from './styles/CartRow.module.css';
-import { Tables } from '@/types/supabase';
+import { MenuItemWithOption } from '@/types/supabase';
 import { convertNumberToWon } from '@/shared/helper';
 import useOrderStore from '@/shared/store/order';
+import CartOptionRow from '@/components/order/cart/CartOptionRow';
 
-const CartRow = ({ itemList }: { itemList: Tables<'menu_item'>[] }) => {
-  const { addOrderList, subtractOrderList } = useOrderStore();
+const CartRow = ({ itemList }: { itemList: MenuItemWithOption[] }) => {
+  const addOrderList = useOrderStore(state => state.addOrderList);
+  const subtractOrderList = useOrderStore(state => state.subtractOrderList);
+  const getOptionPriceByList = useOrderStore(state => state.getOptionPriceByList);
 
-  const handleClickUpQuantity = (item: Tables<'menu_item'>) => {
+  const handleClickUpQuantity = (item: MenuItemWithOption) => {
     addOrderList([item]);
   };
 
-  const handleClickDownQuantity = (item: Tables<'menu_item'>) => {
+  const handleClickDownQuantity = (item: MenuItemWithOption) => {
     subtractOrderList(item);
   };
 
@@ -25,8 +28,18 @@ const CartRow = ({ itemList }: { itemList: Tables<'menu_item'>[] }) => {
           <button onClick={handleClickUpQuantity.bind(null, itemList[0])}>+</button>
         </div>
       </div>
+      {itemList[0].menu_option?.length > 0 && (
+        <div className={styles.optionWrapper}>
+          <CartOptionRow menu={itemList} />
+        </div>
+      )}
       <div>
-        <span>{convertNumberToWon(itemList.reduce((acc, cur) => acc + cur.price, 0))}</span>
+        <span>
+          {convertNumberToWon(
+            itemList.reduce((acc, cur) => acc + cur.price, 0) +
+              getOptionPriceByList(itemList.map(item => item.menu_option).flat()),
+          )}
+        </span>
       </div>
     </div>
   );

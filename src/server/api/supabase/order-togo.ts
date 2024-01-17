@@ -6,12 +6,10 @@ export const addNumberOrder = async (item: Omit<Tables<'order_number'>, 'id'>) =
   return { data, error };
 };
 
-export const fetchNumberOrderByOrderIdWithStoreName = async (orderId: string) => {
+export const fetchNumberOrderByOrderIdWithStoreName = async (orderIdList: string[]) => {
   const { data, error } = await supabase
     .from('order_number')
     .select('*, store(business_name)')
-    .eq('order_id', orderId)
-    .single();
-
+    .filter('order_id', 'in', `(${orderIdList.join(',')})`);
   return { data, error };
 };

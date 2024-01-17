@@ -2,6 +2,7 @@ import { addMenuItem } from '@/server/api/supabase/menu-item';
 import useMenuItemStore from '@/shared/store/menu-item';
 import { Tables } from '@/types/supabase';
 import clsx from 'clsx';
+import { useState } from 'react';
 import MenuItemCard from './MenuItemCard';
 import styles from './styles/menu-item.module.css';
 
@@ -17,6 +18,8 @@ const MenuItemPage = () => {
     setMenuItemSampleImg,
   } = useMenuItemStore();
 
+  const [dropNum, setDropNum] = useState(0);
+
   // 메뉴 플러스
   const clickAddMenuItemHandler = async () => {
     toggleShow(true);
@@ -28,7 +31,7 @@ const MenuItemPage = () => {
       price: 0,
       remain_ea: 0,
       recommended: false,
-      position: categoryWithMenuItem.menu_item[categoryWithMenuItem.menu_item.length - 1].position + 1,
+      position: categoryWithMenuItem.menu_item.length === 0 ? 0 : categoryWithMenuItem.menu_item[categoryWithMenuItem.menu_item.length - 1].position + 1,
     };
     const { data } = await addMenuItem(menuItemOmit);
     const newMenuItem: Tables<'menu_item'> = {
@@ -45,14 +48,15 @@ const MenuItemPage = () => {
     addMenuItemStore(newMenuItem);
     setMenuItemSampleImg(newMenuItem.image_url ?? '');
   };
-
   return (
-    <div className={menuItem.id !== '' ? clsx(styles['wrap'], styles['active']) : styles['wrap']}>
+    <div className={clsx(styles.wrap, {[styles.active]: menuItem.id !== ''})}>
       <ul>
         {categoryWithMenuItemList
           .filter(list => list.id === categoryWithMenuItem.id)
           .map(categoryWithMenu =>
-            categoryWithMenu.menu_item.map((item, idx) => <MenuItemCard key={item.id} item={item} idx={idx} />),
+            categoryWithMenu.menu_item.map((item, idx) => (
+              <MenuItemCard dropNum={dropNum} setDropNum={setDropNum} key={item.id} item={item} idx={idx} />
+            )),
           )}
         <li>
           <button className={styles['plus']} type="button" onClick={clickAddMenuItemHandler}>

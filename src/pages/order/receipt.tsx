@@ -9,7 +9,7 @@ import OrderLayout from '@/components/layout/order/OrderLayout';
  * @constructor
  */
 const OrderReceiptPage = () => {
-  const { orderId } = useOrderStore();
+  const orderId = useOrderStore(state => state.orderIdList);
   const [isLoaded, setIsLoaded] = useState(false);
   const router = useRouter();
 

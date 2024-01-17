@@ -1,4 +1,4 @@
-import { CategoryWithMenuItem, Tables } from '@/types/supabase';
+import { CategoryWithMenuItem, MenuOptionWithDetail, Tables } from '@/types/supabase';
 import { create } from 'zustand';
 
 /**
@@ -25,6 +25,22 @@ interface MenuItemStoreType {
   menuItemSampleImg: string;
   setMenuItemSampleImg: (item: string) => void;
   dragMenuItemStore: (dragItem: Tables<'menu_item'>, dragOver: Tables<'menu_item'>) => void;
+  menuOption: MenuOptionWithDetail;
+  setMenuOption: (item: MenuOptionWithDetail) => void;
+  menuOptions: MenuOptionWithDetail[];
+  setMenuOptions: (item: MenuOptionWithDetail[]) => void;
+  updateMenuOptionsStore: (item: (prev: MenuOptionWithDetail[]) => MenuOptionWithDetail[]) => void;
+  origineMenuOptions: MenuOptionWithDetail[];
+  setOrigineMenuOptions: (item: MenuOptionWithDetail[]) => void;
+  changeMenuOptions: MenuOptionWithDetail[];
+  setChangeMenuOptions: (item: MenuOptionWithDetail[]) => void;
+  updateChangeMenuOptionsStore: (item: (prev: MenuOptionWithDetail[]) => MenuOptionWithDetail[]) => void;
+  removeChangeMenuOptionsStore: (item: MenuOptionWithDetail) => void;
+  // 메뉴 옵션 디테일
+  menuOptionDetailList: Tables<'menu_option_detail'>[];
+  setMenuOptionDetailList: (item: Tables<'menu_option_detail'>[]) => void;
+  menuOptionIndex: number;
+  setMenuOptionIndex: (item: number) => void;
 }
 
 const getDragObject = (drag: Omit<Tables<'menu_item'>, 'positon'>) => {
@@ -166,6 +182,32 @@ const useMenuItemStore = create<MenuItemStoreType>(set => ({
         ),
       },
     })),
+  menuOption: {
+    id: '',
+    is_use: false,
+    menu_id: '',
+    name: '',
+    menu_option_detail: [],
+    max_detail_count: 1,
+  },
+  setMenuOption: (item: MenuOptionWithDetail) => set(prev => ({ menuOption: { ...prev.menuOption, ...item } })),
+  menuOptions: [],
+  setMenuOptions: (item: MenuOptionWithDetail[]) => set({ menuOptions: item }),
+  updateMenuOptionsStore: item => set(state => ({ menuOptions: item(state.menuOptions) })),
+  origineMenuOptions: [],
+  setOrigineMenuOptions: (item: MenuOptionWithDetail[]) => set({ origineMenuOptions: item }),
+  changeMenuOptions: [],
+  setChangeMenuOptions: (item: MenuOptionWithDetail[]) => set({ changeMenuOptions: item }),
+  updateChangeMenuOptionsStore: item => set(state => ({ changeMenuOptions: item(state.changeMenuOptions) })),
+  removeChangeMenuOptionsStore: (item: MenuOptionWithDetail) => {
+    set(state => ({
+      origineMenuOptions: state.origineMenuOptions.filter(menu => menu.id !== item.id),
+    }));
+  },
+  menuOptionDetailList: [],
+  setMenuOptionDetailList: (item: Tables<'menu_option_detail'>[]) => set({ menuOptionDetailList: item }),
+  menuOptionIndex: 0,
+  setMenuOptionIndex: (item: number) => set({ menuOptionIndex: item }),
 }));
 
 export default useMenuItemStore;

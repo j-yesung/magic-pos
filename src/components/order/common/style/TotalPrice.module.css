@@ -5,7 +5,7 @@
 }
 
 .container span {
-    color: #000;
+    color: var(--text1);
     font-family: Pretendard, sans-serif;
     font-size: 1.4rem  /* 14/10 */;
     font-style: normal;

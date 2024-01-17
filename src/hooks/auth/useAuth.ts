@@ -12,6 +12,7 @@ import { getStore } from '@/server/api/supabase/store';
 import useAuthStore from '@/shared/store/auth';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 const enum QUERY_KEY {
   LOGIN = 'login',
@@ -26,6 +27,7 @@ export const useAuth = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
   const { setSession, setStoreId, setStoreName, setStoreBno } = useAuthStore();
+  const [message, setMessage] = useState('');
 
   const signupMutation = useMutation({
     mutationFn: signUpHandler,
@@ -62,8 +64,8 @@ export const useAuth = () => {
     mutationFn: logoutHandler,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.LOGOUT] });
-      useAuthStore.persist.clearStorage();
       setSession(null);
+      useAuthStore.persist.clearStorage();
       router.push('/');
     },
     onError: error => {
@@ -75,7 +77,7 @@ export const useAuth = () => {
     mutationFn: businessNumberCheckHandler,
     onSuccess: data => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.BUSINESS] });
-      alert(data);
+      setMessage(data);
     },
     onError: error => {
       console.error(error);
@@ -124,5 +126,6 @@ export const useAuth = () => {
     sendResetPasswordEmail: sendResetPasswordEmailMutation.mutate,
     getUserSession: getUserSessionMutation.mutate,
     status: businessNumberCheckMutation,
+    message,
   };
 };

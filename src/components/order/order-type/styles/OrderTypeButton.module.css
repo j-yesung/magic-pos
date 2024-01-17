@@ -7,9 +7,9 @@
     justify-content: center;
     align-items: center;
     gap: 3rem  /* 30/10 */;
-
+    cursor: pointer;
     border-radius: 1rem  /* 10/10 */;
-    background: #FFF;
+    background: var(--bg-g);
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.10);
 }
 
@@ -26,7 +26,7 @@
 }
 
 .wrapper span {
-    color: #000;
+    color: var(--text1);
     font-family: Pretendard, sans-serif;
     font-size: 1.2rem  /* 12/10 */;
     font-style: normal;

@@ -1,7 +1,7 @@
 import { StoreWithOrderInfo } from '@/types/supabase';
 import { useQueryClient } from '@tanstack/react-query';
 import clsx from 'clsx';
-import QrCodeListItem from '../qrCodelistItem/QrCodeListItem';
+import QrCodeListItem from "../qrCodelistItem/QrCodeListItem";
 import styles from './styles/ShopQrCodeContainer.module.css';
 
 const ShopQrCodeContainer = () => {
@@ -19,7 +19,7 @@ const ShopQrCodeContainer = () => {
             ? styles['grid-row-2']
             : styles['qr-code-svg-box'])}>
         {
-          storeTable?.sort((a, b) => a.position && b.position && a.position > b.position ? 1 : -1).map((item) => {
+          storeTable?.sort((a, b) => a.position && b.position && a.position > b.position ? 1 : -1).map((item, index) => {
             return (
               <QrCodeListItem key={item.id} storeTable={item} orderType={`table${item.position}`} />
             )

@@ -1,51 +1,55 @@
-import { OrderConfirmType } from "@/types/common";
-import { OrderDataWithStoreName } from "@/types/supabase";
-import create from "zustand";
+import { OrderConfirmType } from '@/types/common';
+import { OrderDataWithStoreName } from '@/types/supabase';
+import { create } from 'zustand';
 
+export type QRdataType = {
+  qrRef: HTMLDivElement;
+  qrUrl: string;
+  orderType: string;
+};
 interface managementType {
   orderData: OrderDataWithStoreName[];
   orderId: string[];
   orderStatus: string;
   tableNumber: string;
-  isModal: boolean;
   orderConfirmData: OrderConfirmType[];
-  setOrderData: (value: OrderDataWithStoreName[]) => void
-  setOrderId: (value: { id: string[], status: string, number: string }) => void
-  setIsModal: (value: boolean) => void
-  addOrderConfirmData: (value: OrderConfirmType) => void
-  removeOrderConfirmData: (value: string) => void
+  qrData: QRdataType[];
+  setOrderData: (value: OrderDataWithStoreName[]) => void;
+  setOrderId: (value: { id: string[]; status: string; number: string }) => void;
+  addOrderConfirmData: (value: OrderConfirmType) => void;
+  removeOrderConfirmData: (value: string) => void;
+  setQrData: (value: QRdataType) => void;
 }
 
-const useManagementStore = create<managementType>((set) => ({
+const useManagementStore = create<managementType>(set => ({
   orderData: [],
   orderId: [],
   orderStatus: '',
   tableNumber: '',
-  isModal: false,
   orderConfirmData: [],
-  setOrderData: (value) =>
+  qrData: [],
+  setOrderData: value =>
     set(() => ({
-      orderData: value
+      orderData: value,
     })),
-  setOrderId: (value) =>
+  setOrderId: value =>
     set(() => ({
       orderId: value.id,
       orderStatus: value.status,
-      tableNumber: value.number
+      tableNumber: value.number,
     })),
-  setIsModal: (value) =>
-    set(() => ({
-      isModal: value
+  addOrderConfirmData: value =>
+    set(state => ({
+      orderConfirmData: [...state.orderConfirmData, value],
     })),
-  addOrderConfirmData: (value) =>
-    set((state) => ({
-      orderConfirmData: [...state.orderConfirmData, value]
+  removeOrderConfirmData: value =>
+    set(state => ({
+      orderConfirmData: [...state.orderConfirmData.filter(x => x.id !== value)],
     })),
-  removeOrderConfirmData: (value) =>
-    set((state) => ({
-      orderConfirmData: [...state.orderConfirmData.filter((x) => x.id !== value)]
-    }))
-}))
+  setQrData: value =>
+    set(state => ({
+      qrData: [...state.qrData, value],
+    })),
+}));
 
-
-export default useManagementStore
+export default useManagementStore;

@@ -6,13 +6,13 @@ const QUERY_KEY = 'number-order';
 /**
  * supabase order_number table CRUD hook
  */
-export const useNumberOrderQuery = (orderId?: string) => {
+export const useNumberOrderQuery = (orderId?: string[]) => {
   const queryClient = useQueryClient();
 
   const { data: numberOrderData } = useQuery({
     queryKey: [QUERY_KEY, orderId],
     queryFn: () => {
-      return fetchNumberOrderByOrderIdWithStoreName(orderId ?? '');
+      return fetchNumberOrderByOrderIdWithStoreName(orderId ?? []);
     },
   });
 

@@ -3,7 +3,7 @@ import useOrderStore from '@/shared/store/order';
 import CartRow from '@/components/order/cart/CartRow';
 import styles from './styles/CartContainer.module.css';
 import { groupByKey } from '@/shared/helper';
-import { Tables } from '@/types/supabase';
+import { MenuItemWithOption } from '@/types/supabase';
 import WarningNoOrderList from '@/components/order/cart/WarningNoOrderList';
 import StoreInfo from '@/components/order/common/StoreInfo';
 import TotalPrice from '@/components/order/common/TotalPrice';
@@ -13,9 +13,11 @@ import TotalPrice from '@/components/order/common/TotalPrice';
  * @constructor
  */
 const CartContainer = () => {
-  const { orderList, orderType, storeName } = useOrderStore();
+  const orderList = useOrderStore(state => state.orderList);
+  const orderType = useOrderStore(state => state.orderType);
+  const storeName = useOrderStore(state => state.storeName);
 
-  const group = groupByKey<Tables<'menu_item'>>(orderList, 'id');
+  const group = groupByKey<MenuItemWithOption>(orderList, 'unique');
 
   return (
     <div className={styles.container}>
@@ -26,7 +28,7 @@ const CartContainer = () => {
           <CartRow key={key} itemList={value} />
         ))}
       </div>
-      <TotalPrice allItemList={orderList} />
+      <TotalPrice itemList={orderList} />
     </div>
   );
 };

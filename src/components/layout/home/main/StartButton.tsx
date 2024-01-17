@@ -4,7 +4,7 @@ import styles from '../styles/Home.module.css';
 
 const StartButton = () => {
   const router = useRouter();
-  const { auth } = useAuthStore();
+  const auth = useAuthStore(state => state.auth);
 
   const clickStartHandler = () => {
     auth ? router.push('/admin/management') : router.push('/auth/login/');

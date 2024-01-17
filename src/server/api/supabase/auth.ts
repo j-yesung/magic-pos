@@ -38,7 +38,7 @@ export const loginHandler = async (values: values) => {
     password,
   });
   if (error && error.status === 400) {
-    alert('비밀번호가 일치하지 않습니다.');
+    alert('이메일 또는 비밀번호가 일치하지 않습니다.');
     throw error;
   }
   return data;

@@ -4,7 +4,7 @@ import 'swiper/css/virtual';
 import OrderLayout from '@/components/layout/order/OrderLayout';
 import { fetchCategoriesWithMenuItemByStoreId } from '@/server/api/supabase/menu-category';
 import { GetServerSideProps } from 'next';
-import { CategoryWithMenuItem } from '@/types/supabase';
+import { CategoryWithMenuItemWithStore } from '@/types/supabase';
 import useOrderStore from '@/shared/store/order';
 import { isEmptyObject } from '@/shared/helper';
 import { useRouter } from 'next/router';
@@ -18,30 +18,43 @@ const OrderIndexPage = ({
   storeId,
   tableId,
 }: {
-  menuData: CategoryWithMenuItem[];
+  menuData: CategoryWithMenuItemWithStore[];
   storeId: string;
   tableId: string;
 }) => {
-  const { setMenuData, setStoreId, setTableId, orderId, resetOrderList, setStoreName } = useOrderStore();
-  const { storeOrderData } = useStoreOrderQuery(orderId ?? '');
-  const { numberOrderData } = useNumberOrderQuery(orderId ?? '');
+  const setMenuData = useOrderStore(state => state.setMenuData);
+  const setStoreId = useOrderStore(state => state.setStoreId);
+  const setTableId = useOrderStore(state => state.setTableId);
+  const orderIdList = useOrderStore(state => state.orderIdList);
+  const resetOrderList = useOrderStore(state => state.resetOrderList);
+  const setStoreName = useOrderStore(state => state.setStoreName);
+
+  const { storeOrderData } = useStoreOrderQuery(orderIdList);
+  const { numberOrderData } = useNumberOrderQuery(orderIdList);
   const [isLoaded, setIsLoaded] = useState(false);
   const { MagicModal } = useModal();
   const router = useRouter();
 
+  // numberOrderData: 번호표 주문 (포장, 테이블 번호가 없는 매장 주문)
+  // storeOrderData: 테이블 주문 (테이블 번호가 있는 매장 주문)
   useEffect(() => {
-    if (orderId) {
+    if (orderIdList.length > 0) {
       (async () => {
-        let isOrdered = false;
-        if (storeOrderData?.data && !storeOrderData.data?.is_done) {
-          isOrdered = true;
+        let isOrderAllReady = true;
+
+        if (storeOrderData?.data) {
+          if (storeOrderData.data?.length > 0 && storeOrderData.data.find(d => !d.is_done)) {
+            isOrderAllReady = false;
+          }
         }
 
-        if (numberOrderData?.data && !numberOrderData.data?.is_done) {
-          isOrdered = true;
+        if (numberOrderData?.data) {
+          if (numberOrderData.data?.length > 0 && numberOrderData.data.find(d => !d.is_done)) {
+            isOrderAllReady = false;
+          }
         }
 
-        if (isOrdered) {
+        if (!isOrderAllReady) {
           MagicModal.confirm({
             content: '아직 준비 중인 메뉴가 있습니다. 추가로 주문 하시겠습니까?',
             confirmButtonText: '추가 주문 하기',

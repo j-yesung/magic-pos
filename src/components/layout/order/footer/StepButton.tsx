@@ -5,26 +5,28 @@ import { usePaymentWidget } from '@/hooks/order/usePaymentWidget';
 import styles from './styles/StepButton.module.css';
 import { convertNumberToWon } from '@/shared/helper';
 import CartIcon from '@/components/icons/CartIcon';
+import AddCartButton from '@/components/layout/order/footer/AddCartButton';
 
 interface ButtonProps {
   sliderRef: React.RefObject<SwiperRef>;
 }
 
-export const SLIDE_MOVE_SPEED = 600;
+export const SLIDE_MOVE_SPEED = 500;
 
 const StepButton = ({ sliderRef }: ButtonProps) => {
-  const { goNextStep, goPrevStep, orderList, step, getTotalPrice } = useOrderStore();
+  const goNextStep = useOrderStore(state => state.goNextStep);
+  const orderList = useOrderStore(state => state.orderList);
+  const step = useOrderStore(state => state.step);
+  const getTotalPrice = useOrderStore(state => state.getTotalPrice);
+  const optionSwiperRef = useOrderStore(state => state.optionSwiperRef);
+  const selectedMenu = useOrderStore(state => state.selectedMenu);
+
   const { paymentWidget, handlePaymentRequest } = usePaymentWidget();
 
   const BUTTON_OPTIONS: { [key: number]: string } = {
-    1: convertNumberToWon(getTotalPrice()),
+    1: convertNumberToWon(getTotalPrice(orderList)),
     2: '결제 하러 이동',
     3: '결제 하기',
-  };
-
-  const prevClickHandler = () => {
-    sliderRef.current!.swiper.slidePrev(SLIDE_MOVE_SPEED);
-    goPrevStep();
   };
 
   const nextClickHandler = async () => {
@@ -38,16 +40,20 @@ const StepButton = ({ sliderRef }: ButtonProps) => {
 
   return (
     <>
-      {step !== 0 && (
+      {step > ORDER_STEP.CHOOSE_ORDER_TYPE && (
         <div className={styles.container}>
-          <button className={styles.button} onClick={nextClickHandler} disabled={orderList.length === 0}>
-            <span>{step > ORDER_STEP.CHOOSE_ORDER_TYPE && BUTTON_OPTIONS[step]}</span>
-            {step === ORDER_STEP.SELECT_MENU && (
-              <div className={styles.iconWrapper}>
-                <CartIcon amount={orderList.length} />
-              </div>
-            )}
-          </button>
+          {optionSwiperRef?.current!.swiper?.realIndex !== 1 ? (
+            <button className={styles.button} onClick={nextClickHandler} disabled={orderList.length === 0}>
+              <span>{BUTTON_OPTIONS[step]}</span>
+              {step === ORDER_STEP.SELECT_MENU && (
+                <div className={styles.iconWrapper}>
+                  <CartIcon amount={orderList.length} />
+                </div>
+              )}
+            </button>
+          ) : (
+            <AddCartButton menu={selectedMenu} />
+          )}
         </div>
       )}
     </>

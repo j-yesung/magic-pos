@@ -1,13 +1,15 @@
 import { create } from 'zustand';
 
 interface ToggleState {
-  isToggle: boolean;
+  isChecked: boolean;
   changeToggle: () => void;
+  resetToggle: () => void;
 }
 
-const useToggleStore = create<ToggleState>(set => ({
-  isToggle: true,
-  changeToggle: () => set(state => ({ isToggle: !state.isToggle })),
+const useToggleState = create<ToggleState>(set => ({
+  isChecked: true,
+  changeToggle: () => set(state => ({ isChecked: !state.isChecked })),
+  resetToggle: () => set(() => ({ isChecked: true })),
 }));
 
-export default useToggleStore;
+export default useToggleState;

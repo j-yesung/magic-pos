@@ -10,7 +10,7 @@ const enum StoreKey {
  * supabase store table CRUD hook
  */
 export const useStoreQuery = () => {
-  const { setOrderNumber } = useOrderStore();
+  const setOrderNumber = useOrderStore(state => state.setOrderNumber);
   const queryClient = useQueryClient();
 
   const incrementOrderNumberMutation = useMutation({

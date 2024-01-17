@@ -4,12 +4,13 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styles from '../styles/StickBar.module.css';
+import ScrollTop from './ScrollTop';
 import Logo from '/public/logo.svg';
 
 const StickBar = () => {
   const router = useRouter();
   const { logout } = useAuth();
-  const { auth } = useAuthStore();
+  const auth = useAuthStore(state => state.auth);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -21,20 +22,20 @@ const StickBar = () => {
       {isLoaded && (
         <div className={styles.wrapper}>
           <Logo className={styles.logo} width={200} height={20} onClick={() => router.push('/')} />
-
           <div className={styles.tabArea}>
-            {auth === null ? (
-              <>
-                <Link href="/auth/signup">회원가입</Link>
-                <Link href="/auth/login">로그인</Link>
-              </>
-            ) : (
-              <>
+            <div>
+              {auth === null ? (
+                <>
+                  <Link href="/auth/signup">회원가입</Link>
+                  <Link href="/auth/login">로그인</Link>
+                </>
+              ) : (
                 <Link href="/" onClick={() => logout()}>
                   로그아웃
                 </Link>
-              </>
-            )}
+              )}
+            </div>
+            <ScrollTop />
           </div>
         </div>
       )}

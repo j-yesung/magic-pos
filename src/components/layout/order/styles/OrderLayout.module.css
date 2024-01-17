@@ -9,7 +9,7 @@
 
 .children {
     display: flex;
-    height: calc(100vh - var(--kiosk-container-padding)*2);
+    height: calc(100vh - var(--kiosk-footer-height));
 }
 
 .prev-button {
@@ -24,8 +24,10 @@
     gap: 1rem  /* 10/10 */;
     flex-shrink: 0;
     background: var(--main-color);
+    color: var(--text5);
     margin-top: 8.1rem  /* 96/10 */;
     margin-left: 1.5rem  /* 15/10 */;
     border-radius: 1rem  /* 10/10 */;
     z-index: var(--level-1-z-index);
+    cursor: pointer;
 }

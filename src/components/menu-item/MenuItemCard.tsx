@@ -1,17 +1,20 @@
 import { updateMenuItemPosition } from '@/server/api/supabase/menu-item';
+import { convertNumberToWon } from '@/shared/helper';
 import useMenuItemStore from '@/shared/store/menu-item';
 import { Tables } from '@/types/supabase';
 import clsx from 'clsx';
 import Image from 'next/image';
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import styles from './styles/menu-item-card.module.css';
 
 interface PropsType {
   item: Tables<'menu_item'>;
   idx: number;
+  dropNum: number;
+  setDropNum: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const MenuItemCard = ({ item, idx }: PropsType) => {
+const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
   const {
     toggleShow,
     menuItem,
@@ -20,6 +23,10 @@ const MenuItemCard = ({ item, idx }: PropsType) => {
     categoryWithMenuItemList,
     setMenuItemSampleImg,
     dragMenuItemStore,
+    menuOption,
+    setMenuOption,
+    setMenuOptions,
+    origineMenuOptions,
   } = useMenuItemStore();
 
   // 메뉴 선택
@@ -27,6 +34,15 @@ const MenuItemCard = ({ item, idx }: PropsType) => {
     toggleShow(true);
     setMenuItem(item);
     setMenuItemSampleImg(item.image_url ?? '');
+    fetchMenuOptionData(item.id);
+    setMenuOption({ ...menuOption, menu_id: item.id });
+  };
+
+  // 메뉴 옵션 ID 필터링 이벤트
+  const fetchMenuOptionData = (menuId: string) => {
+    const filterMenuOptionList = origineMenuOptions.filter(item => item.menu_id === menuId);
+    // setMenuOptionList(filterMenuOptionList);
+    setMenuOptions(filterMenuOptionList);
   };
 
   // 드래그 이벤트
@@ -41,20 +57,19 @@ const MenuItemCard = ({ item, idx }: PropsType) => {
   // 드래그중인 대상이 위로 포개졌을 때
   const dragEnterHandler = (e: React.DragEvent<HTMLButtonElement>, index: number) => {
     dragOverRef.current = index;
+    setDropNum(index);
   };
-
   // 드랍 (커서 뗐을 때)
   const dropHandler = async () => {
     const filterIndex: number = categoryWithMenuItemList.findIndex(list => list.id === categoryWithMenuItem.id);
-
     const newList = [...categoryWithMenuItemList[filterIndex].menu_item];
     const dragItemValue = newList[dragItemRef.current];
-    const dragOverValue = newList[dragOverRef.current];
+    const dragOverValue = newList[dropNum];
     dragMenuItemStore(dragItemValue, dragOverValue);
     await updateMenuItemPosition(dragItemValue.id, dragOverValue.position);
     await updateMenuItemPosition(dragOverValue.id, dragItemValue.position);
-    dragItemRef.current = 0;
-    dragOverRef.current = 0;
+    dragItemRef.current = dropNum;
+    dragOverRef.current = dragItemRef.current;
   };
 
   return (
@@ -72,26 +87,21 @@ const MenuItemCard = ({ item, idx }: PropsType) => {
         onDragStart={e => dragStartHandler(e, idx)}
         onDragEnter={e => dragEnterHandler(e, idx)}
         onDragEnd={dropHandler}
-        onDragOver={e => e.preventDefault()}
       >
         <span className={styles['img']}>
-          <Image src={item.image_url ?? ''} alt={item.name ?? ''} width={50} height={50} />
+          <Image src={item.image_url ?? ''} alt={item.name ?? ''} width={100} height={100} />
         </span>
         <span className={styles['txt']}>
-          <span className={styles['name']}>
-            <span>메뉴명: </span>
-            <strong>{item.name}</strong>
-          </span>
-          <span className={styles['price']}>
-            <span>가격: </span>
-            <strong>{item.price}원</strong>
-          </span>
-          <span className={styles['remain-ea']}>
-            <span>남은 갯수: </span>
-            <strong>{item.remain_ea}</strong>
-          </span>
-          <span>
-            <span>옵션</span>
+          <span className={styles['name']}>{item.name}</span>
+          <span className={styles['price']}>{convertNumberToWon(item.price)}</span>
+          <span className={styles['remain-ea']}>남은 갯수: {item.remain_ea}</span>
+          <span className={styles['position']}>위치: {item.position}</span>
+          <span className={styles['option']}>
+            {origineMenuOptions
+              .filter(options => options.menu_id === item.id)
+              .map((option: Tables<'menu_option'>) => (
+                <span key={option.id}>{option.name}</span>
+              ))}
           </span>
         </span>
       </button>

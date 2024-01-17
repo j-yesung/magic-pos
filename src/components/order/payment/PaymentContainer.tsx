@@ -10,7 +10,7 @@ import { usePaymentWidget } from '@/hooks/order/usePaymentWidget';
 const PaymentContainer = () => {
   const paymentMethodsWidgetRef = useRef<PaymentMethodsWidget>();
   const { paymentWidget } = usePaymentWidget();
-  const { getTotalPrice } = useOrderStore.getState();
+  const { getTotalPrice, orderList } = useOrderStore.getState();
 
   useEffect(() => {
     if (paymentWidget == null) {
@@ -21,7 +21,7 @@ const PaymentContainer = () => {
     // @docs https://docs.tosspayments.com/reference/widget-sdk#renderpaymentmethods선택자-결제-금액-옵션
     paymentMethodsWidgetRef.current = paymentWidget.renderPaymentMethods(
       '#payment-widget',
-      { value: getTotalPrice() },
+      { value: getTotalPrice(orderList) },
       { variantKey: 'DEFAULT' },
     );
 
