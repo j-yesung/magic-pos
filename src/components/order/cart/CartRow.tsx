@@ -6,7 +6,9 @@ import useOrderStore from '@/shared/store/order';
 import CartOptionRow from '@/components/order/cart/CartOptionRow';
 
 const CartRow = ({ itemList }: { itemList: MenuItemWithOption[] }) => {
-  const { addOrderList, subtractOrderList, getOptionPriceByList } = useOrderStore();
+  const addOrderList = useOrderStore(state => state.addOrderList);
+  const subtractOrderList = useOrderStore(state => state.subtractOrderList);
+  const getOptionPriceByList = useOrderStore(state => state.getOptionPriceByList);
 
   const handleClickUpQuantity = (item: MenuItemWithOption) => {
     addOrderList([item]);
@@ -26,7 +28,7 @@ const CartRow = ({ itemList }: { itemList: MenuItemWithOption[] }) => {
           <button onClick={handleClickUpQuantity.bind(null, itemList[0])}>+</button>
         </div>
       </div>
-      {itemList[0].menu_option.length > 0 && (
+      {itemList[0].menu_option?.length > 0 && (
         <div className={styles.optionWrapper}>
           <CartOptionRow menu={itemList} />
         </div>

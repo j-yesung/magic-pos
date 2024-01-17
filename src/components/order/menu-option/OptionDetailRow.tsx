@@ -27,7 +27,8 @@ const OptionDetailRow = ({
   selectedDetail: Tables<'menu_option_detail'>[];
   setSelectedDetail: React.Dispatch<React.SetStateAction<Tables<'menu_option_detail'>[]>>;
 }) => {
-  const { addSelectedOption, subtractSelectedOption } = useOrderStore();
+  const addSelectedOption = useOrderStore(state => state.addSelectedOption);
+  const subtractSelectedOption = useOrderStore(state => state.subtractSelectedOption);
   const { toast } = useToast();
 
   const onClickCheckOption = (e: React.MouseEvent<HTMLInputElement>) => {

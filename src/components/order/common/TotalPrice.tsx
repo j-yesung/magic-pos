@@ -5,7 +5,7 @@ import { MenuItemWithOption } from '@/types/supabase';
 import useOrderStore from '@/shared/store/order';
 
 const TotalPrice = ({ itemList }: { itemList: MenuItemWithOption[] }) => {
-  const { getTotalPrice } = useOrderStore();
+  const getTotalPrice = useOrderStore(state => state.getTotalPrice);
 
   return (
     <div className={styles.container}>

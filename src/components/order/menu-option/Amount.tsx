@@ -3,7 +3,10 @@ import styles from './styles/Amount.module.css';
 import useOrderStore from '@/shared/store/order';
 
 const Amount = () => {
-  const { addAmount, subtractAmount, amount, resetAmount } = useOrderStore();
+  const addAmount = useOrderStore(state => state.addAmount);
+  const subtractAmount = useOrderStore(state => state.subtractAmount);
+  const amount = useOrderStore(state => state.amount);
+  const resetAmount = useOrderStore(state => state.resetAmount);
 
   useEffect(() => {
     return () => {
