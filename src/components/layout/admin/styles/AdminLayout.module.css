@@ -185,20 +185,16 @@
   bottom: 0;
   width: 100%;
   display: flex;
-  padding: 2rem 2rem;
   position: absolute;
-  background: var(--bg-g);
-  justify-content: space-around;
   align-items: center;
+  background: var(--bg-g);
+  justify-content: space-evenly;
   border-radius: 0 0 3rem 3rem;
 }
 
 .nav-wrapper button {
   cursor: pointer;
   background: none;
-}
-.nav-wrapper button:hover {
-  color: var(--point-100);
 }
 
 /* close sidebar */

@@ -1,3 +1,4 @@
+import Button from '@/components/common/Button';
 import { modeSubText, modeText } from '@/data/admin';
 import { useAuth } from '@/hooks/auth/useAuth';
 import useSideBar from '@/shared/store/sidebar';
@@ -70,11 +71,13 @@ const Sidebar = (adminInfo: AdminCategories) => {
         </ul>
       </div>
       <div className={styles.buttonWrapper}>
-        <button className={styles.callButton}>문의하기</button>
+        <Button type="button" className={styles.callButton}>
+          문의하기
+        </Button>
         <p>|</p>
-        <button className={styles.logoutButton} onClick={() => logout()}>
+        <Button type="button" className={styles.logoutButton} onClick={() => logout()}>
           로그아웃
-        </button>
+        </Button>
       </div>
     </aside>
   );
