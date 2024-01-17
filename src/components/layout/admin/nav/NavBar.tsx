@@ -1,4 +1,5 @@
 import useSideBar from '@/shared/store/sidebar';
+import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import styles from '../styles/AdminLayout.module.css';
@@ -10,6 +11,9 @@ const NavBar = (adminInfo: AdminCategories) => {
   const { isSideBarOpen, setIsSideBarOpen } = useSideBar();
   const targetRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  const sidebarClass = clsx(styles.navWrapper, {
+    [styles.closeNav]: !isSideBarOpen,
+  });
 
   const clickNavListHandler = useCallback(
     (id: number, url: string) => {
@@ -40,7 +44,7 @@ const NavBar = (adminInfo: AdminCategories) => {
   }, [setIsSideBarOpen]);
 
   return (
-    <aside className={`${styles.navWrapper} ${isSideBarOpen ? '' : styles.closeNav}`} ref={targetRef}>
+    <aside className={sidebarClass} ref={targetRef}>
       <div className={styles.closeButton}>
         <CloseButton width={40} height={40} onClick={() => setIsSideBarOpen(false)} />
       </div>
