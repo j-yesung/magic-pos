@@ -1,5 +1,5 @@
 //platform.ts
-import { UploadParam } from '@/components/platform/container/form/Form';
+import { UploadParam as AddFormType } from '@/components/platform/container/form/Form';
 import { supabase } from '@/shared/supabase';
 import { TablesInsert } from '@/types/supabase';
 
@@ -40,6 +40,7 @@ type AddPlatFormType = (param: TablesInsert<'platform'>) => Promise<GetPlatFormR
 
 //   return { platform, error };
 // };
+
 export const addPlatForm = async (param: TablesInsert<'platform'>) => {
   const { data: platform, error } = await supabase
     .from('platform')
@@ -63,7 +64,7 @@ export const addPlatForm = async (param: TablesInsert<'platform'>) => {
   return { platform, error };
 };
 
-export const uploadPlatFormImage = async (param: UploadParam) => {
+export const uploadPlatFormImage = async (param: AddFormType) => {
   const { data, error } = await supabase.storage
     .from('images')
     .upload(`platform/${param.store_id}/${param.createdAt}`, param.file!);
@@ -72,7 +73,7 @@ export const uploadPlatFormImage = async (param: UploadParam) => {
   return { data, error };
 };
 
-export const downloadPlatFormImageUrl = (param: UploadParam) => {
+export const downloadPlatFormImageUrl = (param: AddFormType) => {
   try {
     const { data } = supabase.storage.from('images').getPublicUrl(`platform/${param.store_id}/${param.createdAt}`);
 
@@ -83,7 +84,7 @@ export const downloadPlatFormImageUrl = (param: UploadParam) => {
   }
 };
 
-export const insertPlatFormRow = async (param: UploadParam) => {
+export const insertPlatFormRow = async (param: AddFormType) => {
   console.log(param.store_id);
   const { data, error } = await supabase
     .from('platform')
@@ -100,4 +101,12 @@ export const insertPlatFormRow = async (param: UploadParam) => {
   if (error) return { data: null, error };
 
   return { data, error };
+};
+
+export const fetchPlatForm = async (store_id: string) => {
+  const { data: platform, error } = await supabase.from('platform').select('*').eq('store_id', store_id);
+
+  if (error) return { platform: [], error };
+
+  return { platform, error };
 };

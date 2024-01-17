@@ -1,12 +1,16 @@
 import clsx from 'clsx';
 import Image from 'next/image';
-import { ChangeEvent, useState } from 'react';
-import { UploadParam } from '../Form';
+import { ChangeEvent, SetStateAction, useState } from 'react';
+import { AddFormType } from '../../Container';
 import styles from './styles/img.module.css';
+// interface ImgProps {
+//   setAddForm: Pick<FormProps, 'setAddForm'>;
+// }
+
 interface ImgProps {
-  setInput: React.Dispatch<React.SetStateAction<UploadParam>>;
+  setAddForm: React.Dispatch<SetStateAction<AddFormType>>;
 }
-const Img = ({ setInput }: ImgProps) => {
+const Img = ({ setAddForm }: ImgProps) => {
   const [preImage, setPreImage] = useState<string | null>();
 
   const changePreview = (e: ChangeEvent<HTMLInputElement>) => {
@@ -16,7 +20,7 @@ const Img = ({ setInput }: ImgProps) => {
       const currentImgUrl = URL.createObjectURL(file);
 
       setPreImage(currentImgUrl);
-      setInput(pre => ({
+      setAddForm(pre => ({
         ...pre,
         file,
       }));
@@ -25,7 +29,7 @@ const Img = ({ setInput }: ImgProps) => {
 
   const removeImage = () => {
     setPreImage(null);
-    setInput(pre => ({
+    setAddForm(pre => ({
       ...pre,
       // file type은 file?:File | null인데 아래 보다 더 좋은 방법이 있을까..
       file: null,

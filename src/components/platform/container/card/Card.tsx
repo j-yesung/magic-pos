@@ -1,18 +1,16 @@
+import { Tables } from '@/types/supabase';
 import Item from './item/Item';
 import styles from './styles/card.module.css';
 
 interface CardPropsType {
-  cardList: {
-    name: string;
-    link_url: string;
-  }[];
+  fetchDataList: Tables<'platform'>[];
 }
-const Card = ({ cardList }: CardPropsType) => {
+const Card = ({ fetchDataList }: CardPropsType) => {
   return (
     <div className={styles.cardContainer}>
-      {cardList.length >= 1 &&
-        cardList.map((card, idx) => {
-          return <Item key={`${card.link_url + card.name + idx}`} link={card.link_url} title={card.name} />;
+      {fetchDataList.length >= 1 &&
+        fetchDataList.map((card, idx) => {
+          return <Item key={`${card.link_url! + card.name! + idx}`} link={card.link_url!} title={card.name!} />;
         })}
     </div>
   );

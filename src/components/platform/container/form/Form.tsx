@@ -1,83 +1,61 @@
 // Form tsx
 
 import { downloadPlatFormImageUrl, insertPlatFormRow, uploadPlatFormImage } from '@/server/api/supabase/platform';
-import useAuthStore from '@/shared/store/auth';
-import moment from 'moment';
-import { ChangeEvent, FormEvent, SetStateAction, useState } from 'react';
+import { Tables } from '@/types/supabase';
+import { ChangeEvent, FormEvent, SetStateAction } from 'react';
+import { AddFormType } from '../Container';
 import Img from './img/Img';
 import styles from './styles/form.module.css';
-interface FormProps {
-  setCardList: React.Dispatch<
-    SetStateAction<
-      {
-        name: string;
-        link_url: string;
-        image_url?: string;
-        store_id: string;
-        id?: string;
-      }[]
-    >
-  >;
+export interface FormProps {
+  setAddForm: React.Dispatch<SetStateAction<AddFormType>>;
+  addForm: AddFormType;
+  setIsRegist: React.Dispatch<SetStateAction<boolean>>;
+  setFecthDataList: React.Dispatch<SetStateAction<Tables<'platform'>[]>>;
 }
-export interface UploadParam {
-  name: string;
-  link_url: string;
-  createdAt: string;
-  store_id: string | null;
-  file?: File | null;
-  image_url?: string;
-}
-const Form = ({ setCardList }: FormProps) => {
-  const { storeId } = useAuthStore();
-  const [input, setInput] = useState<UploadParam>({
-    name: '',
-    link_url: '',
-    createdAt: moment().toISOString(),
-    store_id: storeId,
-  });
 
-  console.log(storeId);
-
+const Form = ({ setAddForm, addForm, setIsRegist, setFecthDataList }: FormProps) => {
   const changeLinkValue = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    setInput(pre => ({
+    setAddForm(pre => ({
       ...pre,
       [name]: value,
     }));
   };
   const changeTitleValue = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setInput(pre => ({
+    setAddForm(pre => ({
       ...pre,
       [name]: value,
     }));
   };
 
-  // 이미지 저장 안 할 때 이미지 업로드 하지 않고
-
   const submitAddCard = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    let updateData = { ...input };
-    if (!input.name.trim() || !input.link_url.trim()) alert('써라');
+    let updateData = { ...addForm };
+    if (!addForm.name.trim() || !addForm.link_url.trim()) alert('써라');
 
-    if (input.file) {
-      await uploadPlatFormImage(input);
-      const { publicUrl: image_url } = downloadPlatFormImageUrl(input);
+    if (addForm.file) {
+      await uploadPlatFormImage(addForm);
+      const { publicUrl: image_url } = downloadPlatFormImageUrl(addForm);
       updateData = {
-        ...input,
+        ...addForm,
         image_url,
       };
       const { data } = await insertPlatFormRow(updateData);
+      setFecthDataList(pre => [...pre, ...data!]);
     } else {
       const { data } = await insertPlatFormRow(updateData);
+      setFecthDataList(pre => [...pre, ...data!]);
     }
+
+    setIsRegist(pre => !pre);
   };
 
   return (
     <form onSubmit={submitAddCard} className={styles.formContainer}>
       <div className={styles.formWrapper}>
-        <Img setInput={setInput} />
+        <Img setAddForm={setAddForm} />
 
         <div className={styles.inputWrapper}>
           <input
