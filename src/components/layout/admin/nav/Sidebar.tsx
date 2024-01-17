@@ -1,14 +1,18 @@
 import useSideBar from '@/shared/store/sidebar';
+import useToggleStore from '@/shared/store/toggle';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import HeaderToggleButton from '../header/HeaderToggleButton';
 import styles from '../styles/AdminLayout.module.css';
 import CloseButton from '/public/icons/close.svg';
 import Ellipse from '/public/icons/ellipse.svg';
 
-const NavBar = (adminInfo: AdminCategories) => {
+const Sidebar = (adminInfo: AdminCategories) => {
   const [navList, setNavList] = useState(adminInfo.adminCategories);
   const { isSideBarOpen, setIsSideBarOpen } = useSideBar();
+  const { isToggle } = useToggleStore();
+  console.log('isToggle: ', isToggle);
   const targetRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const sidebarClass = clsx(styles.navWrapper, {
@@ -48,7 +52,9 @@ const NavBar = (adminInfo: AdminCategories) => {
       <div className={styles.closeButton}>
         <CloseButton width={40} height={40} onClick={() => setIsSideBarOpen(false)} />
       </div>
-      <div className={styles.toggleButton}>{/* <HeaderToggleButton /> */}</div>
+      <div className={styles.toggleButton}>
+        <HeaderToggleButton />
+      </div>
       <div className={styles.notification}>
         <Ellipse width={8} height={8} />
         현재 관리자 모드를 보고있습니다.
@@ -72,4 +78,4 @@ const NavBar = (adminInfo: AdminCategories) => {
   );
 };
 
-export default NavBar;
+export default Sidebar;

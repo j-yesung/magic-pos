@@ -29,7 +29,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
 
   return (
     <div className={styles.adminWrapper}>
-      <NavBar adminCategories={adminCategories} />
+      <Sidebar adminCategories={adminCategories} />
       <Header />
       <main className={styles.mainWrapper}>
         <CategoryTitle adminCategories={adminCategories} />
