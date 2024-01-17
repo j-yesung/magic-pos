@@ -19,10 +19,10 @@ const HeaderToggleButton = () => {
   }, [isToggle, router]);
 
   return (
-    <>
+    <div>
       <input className={styles.toggle} type="checkbox" id="toggle" onChange={changeToggle} defaultChecked={isToggle} />
       <label className={styles.label} htmlFor="toggle" />
-    </>
+    </div>
   );
 };
 
