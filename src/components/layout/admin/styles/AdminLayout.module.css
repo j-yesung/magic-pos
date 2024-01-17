@@ -106,9 +106,8 @@
 /* 사이드바 영역입니다. */
 .nav-wrapper {
   top: 0;
-
   height: 95%;
-  width: 32rem;
+  width: 33rem;
   margin: 2rem;
   padding: 5rem 3rem;
   display: flex;
@@ -153,6 +152,7 @@
 }
 
 .nav-wrapper p {
+  color: var(--text2);
   font-size: 1.2rem;
 }
 
@@ -203,7 +203,7 @@
 
 /* 메인 영역입니다. */
 .main-wrapper {
-  padding: 8rem;
+  padding: 8rem 8rem 0 8rem;
   border-radius: 2rem;
   height: calc(100vh - 10rem);
   transition: all 0.4s;
@@ -215,7 +215,7 @@
 
 /* 페이지 제목 */
 .category-title {
-  margin-bottom: 8rem;
+  padding-bottom: 5rem;
   font-size: 5rem;
   font-weight: 600;
 }
