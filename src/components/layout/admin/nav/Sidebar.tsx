@@ -65,9 +65,7 @@ const Sidebar = (adminInfo: AdminCategories) => {
       <ul>
         <SidebarList navList={navList} clickFn={clickNavListHandler} />
       </ul>
-      <div>
-        <button className={styles.logoutButton}>로그아웃</button>
-      </div>
+      <div>{/* <button className={styles.logoutButton}>로그아웃</button> */}</div>
     </aside>
   );
 };
