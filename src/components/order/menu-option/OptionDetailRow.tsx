@@ -1,6 +1,6 @@
 import React from 'react';
 import { MenuOptionWithDetail, Tables } from '@/types/supabase';
-import useOrderStore from '@/shared/store/order';
+import { addSelectedOption, subtractSelectedOption } from '@/shared/store/order';
 import useToast from '@/hooks/toast/useToast';
 import { convertNumberToWon } from '@/shared/helper';
 import styles from './styles/OptionDetailRow.module.css';
@@ -27,8 +27,6 @@ const OptionDetailRow = ({
   selectedDetail: Tables<'menu_option_detail'>[];
   setSelectedDetail: React.Dispatch<React.SetStateAction<Tables<'menu_option_detail'>[]>>;
 }) => {
-  const addSelectedOption = useOrderStore(state => state.addSelectedOption);
-  const subtractSelectedOption = useOrderStore(state => state.subtractSelectedOption);
   const { toast } = useToast();
 
   const onClickCheckOption = (e: React.MouseEvent<HTMLInputElement>) => {

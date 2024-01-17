@@ -6,7 +6,7 @@ import PaymentContainer from '@/components/order/payment/PaymentContainer';
 import SuccessContainer from '@/components/order/success/SuccessContainer';
 import { Swiper, SwiperSlide, SwiperRef } from 'swiper/react';
 import { Virtual } from 'swiper/modules';
-import useOrderStore from '@/shared/store/order';
+import useOrderStore, { setOptionSwiperRef } from '@/shared/store/order';
 import MenuOptionContainer from '@/components/order/menu-option/MenuOptionContainer';
 
 /**
@@ -16,7 +16,6 @@ import MenuOptionContainer from '@/components/order/menu-option/MenuOptionContai
  */
 const OrderContainer = () => {
   const swiperRef = useOrderStore(state => state.swiperRef);
-  const setOptionSwiperRef = useOrderStore(state => state.setOptionSwiperRef);
   const optionSwiperRef = useRef<SwiperRef>(null);
   useEffect(() => {
     if (optionSwiperRef) setOptionSwiperRef(optionSwiperRef);

@@ -1,12 +1,9 @@
 import React, { useEffect } from 'react';
 import styles from './styles/Amount.module.css';
-import useOrderStore from '@/shared/store/order';
+import useOrderStore, { addAmount, resetAmount, subtractAmount } from '@/shared/store/order';
 
 const Amount = () => {
-  const addAmount = useOrderStore(state => state.addAmount);
-  const subtractAmount = useOrderStore(state => state.subtractAmount);
   const amount = useOrderStore(state => state.amount);
-  const resetAmount = useOrderStore(state => state.resetAmount);
 
   useEffect(() => {
     return () => {
