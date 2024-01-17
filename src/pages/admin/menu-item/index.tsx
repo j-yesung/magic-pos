@@ -12,15 +12,15 @@ interface PropsType {
   menuOptionData: MenuOptionWithDetail[];
 }
 
-const CategoryPage = (props: PropsType) => {
+const ItemPage = (props: PropsType) => {
   return <MenuItemsComponentPage {...props} />;
 };
 
-CategoryPage.getLayout = (page: ReactNode) => {
+ItemPage.getLayout = (page: ReactNode) => {
   return <AdminLayout>{page}</AdminLayout>;
 };
 
-export default CategoryPage;
+export default ItemPage;
 
 export const getStaticProps: GetStaticProps = async () => {
   const storeId = '0c4b3064-7983-42a7-9e92-207373b019ad';

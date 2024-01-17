@@ -6,13 +6,13 @@ const QUERY_KEY = 'store-order';
 /**
  * supabase order_store table CRUD hook
  */
-export const useStoreOrderQuery = (orderId?: string) => {
+export const useStoreOrderQuery = (orderId?: string[]) => {
   const queryClient = useQueryClient();
 
   const { data: storeOrderData } = useQuery({
     queryKey: [QUERY_KEY, orderId],
     queryFn: () => {
-      return fetchStoreOrderByOrderIdWithStoreName(orderId ?? '');
+      return fetchStoreOrderByOrderIdWithStoreName(orderId ?? []);
     },
   });
 

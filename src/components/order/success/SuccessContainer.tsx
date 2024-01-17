@@ -19,8 +19,8 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const orderNumber = useOrderStore(state => state.orderNumber);
   const getTotalPrice = useOrderStore(state => state.getTotalPrice);
   const orderType = useOrderStore(state => state.orderType);
-  const orderId = useOrderStore(state => state.orderId);
-  const setOrderId = useOrderStore(state => state.setOrderId);
+  const orderIdList = useOrderStore(state => state.orderIdList);
+  const addOrderId = useOrderStore(state => state.addOrderId);
 
   const { addSales } = useSalesQuery();
   const { addStoreOrder } = useStoreOrderQuery();
@@ -45,23 +45,20 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
         return;
       }
 
-      // 전역값에 담긴 orderId가 null일때만 insert한다.
       // 결제 승인시 sales테이블에 담아놓은 orderList 데이터를 insert 한다.
-      if (orderId === null) {
-        const group = groupByKey<Tables<'menu_item'>>(orderList, 'id');
-        const salesData = [...group].map(([, value]) => ({
-          store_id: storeId,
-          sales_date: payment.approvedAt,
-          product_name: value[0].name,
-          product_ea: value.length,
-          product_category: menuData?.find(menu => menu.id === value[0].category_id)!.name,
-          product_price: value[0].price,
-        })) as Omit<Tables<'sales'>, 'id'>[];
+      const group = groupByKey<Tables<'menu_item'>>(orderList, 'id');
+      const salesData = [...group].map(([, value]) => ({
+        store_id: storeId,
+        sales_date: payment.approvedAt,
+        product_name: value[0].name,
+        product_ea: value.length,
+        product_category: menuData?.find(menu => menu.id === value[0].category_id)!.name,
+        product_price: value[0].price,
+      })) as Omit<Tables<'sales'>, 'id'>[];
 
-        addSales(salesData);
-        incrementOrderNumber(storeId);
-        setOrderId(payment.orderId);
-      }
+      addSales(salesData);
+      incrementOrderNumber(storeId);
+      addOrderId(payment.orderId);
     }
   }, [orderList]);
 

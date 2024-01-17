@@ -89,32 +89,18 @@ const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
         onDragEnd={dropHandler}
       >
         <span className={styles['img']}>
-          <Image src={item.image_url ?? ''} alt={item.name ?? ''} width={50} height={50} />
+          <Image src={item.image_url ?? ''} alt={item.name ?? ''} width={100} height={100} />
         </span>
         <span className={styles['txt']}>
-          <span>
-            <span>메뉴명: </span>
-            <strong>{item.name}</strong>
-          </span>
-          <span>
-            <span>가격: </span>
-            <strong>{convertNumberToWon(item.price)}</strong>
-          </span>
-          <span>
-            <span>남은 갯수: </span>
-            <strong>{item.remain_ea}</strong>
-          </span>
-          <span>
-            <span>포지션: </span>
-            <strong>{item.position}</strong>
-          </span>
+          <span className={styles['name']}>{item.name}</span>
+          <span className={styles['price']}>{convertNumberToWon(item.price)}</span>
+          <span className={styles['remain-ea']}>남은 갯수: {item.remain_ea}</span>
+          <span className={styles['position']}>위치: {item.position}</span>
           <span className={styles['option']}>
             {origineMenuOptions
               .filter(options => options.menu_id === item.id)
               .map((option: Tables<'menu_option'>) => (
-                <span key={option.id}>
-                  <span>{option.name}</span>
-                </span>
+                <span key={option.id}>{option.name}</span>
               ))}
           </span>
         </span>

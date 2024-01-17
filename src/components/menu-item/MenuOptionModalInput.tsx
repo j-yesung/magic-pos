@@ -4,12 +4,7 @@ import React, { Fragment, useState } from 'react';
 
 const MenuOptionModalInput = () => {
   const { MagicModal } = useModal();
-  const {
-    menuOption,
-    setMenuOption,
-    menuOptionDetailList,
-    setMenuOptionDetailList,
-  } = useMenuItemStore();
+  const { menuOption, setMenuOption, menuOptionDetailList, setMenuOptionDetailList } = useMenuItemStore();
 
   const defaultOptionDetail = {
     detailName: '',
@@ -133,7 +128,7 @@ const MenuOptionModalInput = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default MenuOptionModalInput
+export default MenuOptionModalInput;
