@@ -6,8 +6,8 @@
     align-items: center;
     gap: 1rem  /* 10/10 */;
     flex-shrink: 0;
-    border-bottom: 0.1rem  /* 1/10 */ solid #666;
-    background: #F2F2F2;
+    border-bottom: 0.1rem  /* 1/10 */ solid var(--text2);
+    background: var(--bg-g);
 }
 
 .container img{
@@ -19,7 +19,7 @@
     align-items: center;
     gap: 1rem  /* 10/10 */;
     flex-shrink: 0;
-    background: #CEB7FF;
+    background: var(--point-50);
 }
 
 .info {
@@ -35,7 +35,7 @@
 }
 
 .product-name {
-    color: #000;
+    color: var(--text1);
     font-family: Pretendard, sans-serif;
     font-size: 1.4rem  /* 14/10 */;
     font-style: normal;
@@ -44,7 +44,7 @@
 }
 
 .product-option {
-    color: #999;
+    color: var(--text2);
     font-family: Pretendard, sans-serif;
     font-size: 1.2rem  /* 12/10 */;
     font-style: normal;
@@ -53,7 +53,7 @@
 }
 
 .product-price {
-    color: #000;
+    color: var(--text1);
     font-family: Pretendard, sans-serif;
     font-size: 1.4rem  /* 14/10 */;
     font-style: normal;

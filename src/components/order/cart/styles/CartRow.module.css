@@ -4,7 +4,8 @@
     justify-content: space-between;
     font-size: 1.3rem;
     height: 10rem  /* 100/10 */;
-    border: 0.1rem  /* 1/10 */ solid #864AF9;
+    border: 0.1rem  /* 1/10 */ solid var(--main-color);
+    margin-bottom: 1rem;
     padding: 1.2rem  /* 12/10 */;
     border-radius: 1rem  /* 10/10 */;
 }
@@ -16,9 +17,9 @@
 }
 
 .menu-name button {
-    background: #864AF9;
+    background: var(--main-color);
     padding: 0.5rem  /* 5/10 */ 1rem  /* 10/10 */ 0.5rem  /* 5/10 */ 1rem  /* 10/10 */;
-    color: white;
+    color: var(--text5);
     border-radius: 1rem  /* 10/10 */;
     margin: 0 1rem  /* 10/10 */ 0 1rem  /* 10/10 */;
     cursor: pointer;
