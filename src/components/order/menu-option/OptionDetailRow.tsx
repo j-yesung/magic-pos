@@ -2,6 +2,8 @@ import React from 'react';
 import { MenuOptionWithDetail, Tables } from '@/types/supabase';
 import useOrderStore from '@/shared/store/order';
 import useToast from '@/hooks/toast/useToast';
+import { convertNumberToWon } from '@/shared/helper';
+import styles from './styles/OptionDetailRow.module.css';
 
 /**
  * -- 로직 설명
@@ -53,9 +55,14 @@ const OptionDetailRow = ({
   };
 
   return (
-    <div>
-      <input type="checkbox" onClick={onClickCheckOption} />
-      <span>{detail.name}</span>
+    <div className={styles.container}>
+      <div>
+        <input type="checkbox" onClick={onClickCheckOption} />
+        <span>{detail.name}</span>
+      </div>
+      <div>
+        <span>{convertNumberToWon(detail.price)}</span>
+      </div>
     </div>
   );
 };
