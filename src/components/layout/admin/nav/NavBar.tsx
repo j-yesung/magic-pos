@@ -22,6 +22,19 @@ const NavBar = (adminInfo: AdminCategories) => {
     router.push(url);
   };
 
+  useEffect(() => {
+    const closeSideBar = (e: MouseEvent) => {
+      if (targetRef.current && !targetRef.current.contains(e.target as Node)) {
+        setIsSideBarOpen(false);
+      }
+    };
+
+    window.addEventListener('mousedown', closeSideBar);
+
+    return () => {
+      window.removeEventListener('mousedown', closeSideBar);
+    };
+  }, [setIsSideBarOpen]);
 
   return (
     <aside className={`${styles.navWrapper} ${isSideBarOpen ? '' : styles.closeNav}`} ref={targetRef}>
