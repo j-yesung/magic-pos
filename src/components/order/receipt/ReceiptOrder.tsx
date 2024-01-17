@@ -6,15 +6,14 @@ import ReceiptOrderRow from '@/components/order/receipt/ReceiptOrderRow';
 
 const ReceiptOrder = ({ data }: { data: OrderDataWithStoreName }) => {
   const group = groupByKey<MenuItemWithOption>(data.menu_list, 'id');
-  console.log(' (ReceiptOrderRow.tsx:10) ~ group', group);
-
-  console.log(' (OrderContainer.tsx:7) ~ menuList', data);
 
   return (
     <div>
-      <ReceiptOrderHeader orderNumber={data.order_number} orderName={data.name} isTogo={data.is_togo} />
+      <ReceiptOrderHeader orderNumber={data.order_number} orderName={data.store.business_name} isTogo={data.is_togo} />
       {[...group].map(([key, value]) => (
-        <ReceiptOrderRow key={key} itemList={value} />
+        <>
+          <ReceiptOrderRow key={key} itemList={value} />
+        </>
       ))}
     </div>
   );

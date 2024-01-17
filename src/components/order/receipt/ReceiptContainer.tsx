@@ -6,6 +6,7 @@ import useOrderStore from '@/shared/store/order';
 import { OrderDataWithStoreName } from '@/types/supabase';
 import { useRouter } from 'next/router';
 import ReceiptOrder from '@/components/order/receipt/ReceiptOrder';
+import TotalPrice from '@/components/order/common/TotalPrice';
 
 const ReceiptContainer = () => {
   const orderIdList = useOrderStore(state => state.orderIdList);
@@ -43,6 +44,7 @@ const ReceiptContainer = () => {
       {orderDataList.map((data: OrderDataWithStoreName) => (
         <ReceiptOrder key={data.id} data={data} />
       ))}
+      <TotalPrice itemList={orderDataList.map(d => d.menu_list).flat()} />
     </div>
   );
 };
