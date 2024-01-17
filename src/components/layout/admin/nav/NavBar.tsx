@@ -39,7 +39,7 @@ const NavBar = (adminInfo: AdminCategories) => {
   return (
     <aside className={`${styles.navWrapper} ${isSideBarOpen ? '' : styles.closeNav}`} ref={targetRef}>
       <div className={styles.closeButton}>
-        <CloseButton width={40} height={40} />
+        <CloseButton width={40} height={40} onClick={() => setIsSideBarOpen(false)} />
       </div>
       <div className={styles.toggleButton}>{/* <HeaderToggleButton /> */}</div>
       <div className={styles.notification}>
