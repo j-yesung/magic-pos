@@ -61,7 +61,10 @@ const Container = () => {
   }, []);
 
   const [isRegist, setIsRegist] = useState(false);
-  // edit
+
+  /**
+   * 수정기능 Start
+   */
   const [isEdit, setIsEdit] = useState(false);
   const [isShowEditForm, setIsShowEditForm] = useState(false);
   const [preImage, setPreImage] = useState<string | null>(null);
@@ -160,10 +163,10 @@ const Container = () => {
     }
     const { platform, error } = await fetchPlatForm(storeId!);
     setFecthDataList(platform);
-
     setIsShowEditForm(false);
   };
 
+  // 수정 할 카드의 정보를 담는 useEffect입니다.
   useEffect(() => {
     if (editRef.current) return;
     editRef.current = editTarget;
@@ -172,6 +175,13 @@ const Container = () => {
     };
   }, [isShowEditForm]);
 
+  /**
+   * 수정 기능 End
+   */
+
+  /**
+   * 삭제 기능
+   */
   const onClickRemoveData = async () => {
     await removePlatFormData(editTarget.id);
     const { platform } = await fetchPlatForm(editTarget.store_id!);
