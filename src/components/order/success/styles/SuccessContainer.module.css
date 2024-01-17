@@ -23,7 +23,7 @@
 }
 
 .text-box span {
-    color: #000;
+    color: var(--text1);
     text-align: center;
     font-size: 1.4rem  /* 14/10 */;
     font-style: normal;
@@ -32,7 +32,7 @@
 }
 
 .text-box strong {
-    color: #000;
+    color: var(--text1);
     font-size: 1.8rem  /* 18/10 */;
     font-style: normal;
     font-weight: 600;
@@ -43,19 +43,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    padding: 1rem;
     flex-direction: column;
-    gap: 10px;
+    gap: 1rem;
     flex-shrink: 0;
 
     width: 100%;
     height: 5rem  /* 50/10 */;
     background: var(--main-color);
-    border-radius: 10px;
+    border-radius: 1rem;
 
-    color: #000;
+    color: var(--text5);
     font-family: Pretendard, sans-serif;
-    font-size: 14px;
+    font-size: 1.4rem;
     font-style: normal;
     font-weight: 400;
     line-height: normal;

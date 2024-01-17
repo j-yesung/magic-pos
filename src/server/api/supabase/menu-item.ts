@@ -84,3 +84,90 @@ export const updateMenuItemPosition = async (menuItemId: string, position: numbe
   if (error) throw error;
   return data;
 };
+
+/**
+ * 메뉴 옵션 불러오기
+ */
+export const fetchMenuOptions = async () => {
+  const { data, error } = await supabase.from('menu_option').select('*, menu_option_detail(*)');
+  if (error) throw error;
+  return { data, error };
+};
+/**
+ * 메뉴 옵션 추가하기
+ * @returns data
+ */
+export const addMenuOption = async (menuOption: TablesInsert<'menu_option'>) => {
+  const { data, error } = await supabase.from('menu_option').insert([menuOption]).select();
+  if (error) throw error;
+  return { data, error };
+};
+/**
+ * 메뉴 옵션 삭제하기
+ * @param values 메뉴 물품 아이디
+ */
+export const removeMenuOption = async (menuOptionId: string) => {
+  const { error } = await supabase.from('menu_option').delete().eq('id', menuOptionId);
+  if (error) throw error;
+};
+/**
+ * 메뉴 옵션 수정하기
+ * @param values 메뉴의 items
+ * @returns data
+ */
+export const updateMenuOption = async (menuOption: TablesUpdate<'menu_option'>) => {
+  const { id, name, is_use, max_detail_count } = menuOption;
+  const { error } = await supabase.from('menu_option').update({ name, is_use, max_detail_count }).eq('id', id!);
+  if (error) throw error;
+  return true;
+};
+
+/**
+ * 메뉴 옵션 디테일 불러오기
+ */
+export const fetchMenuOptionDetail = async () => {
+  const { data, error } = await supabase.from('menu_option_detail').select('*');
+  if (error) throw error;
+  return { data, error };
+};
+/**
+ * 메뉴 옵션 디테일 추가하기
+ * @returns data
+ */
+export const addMenuOptionDetail = async (optionDetail: TablesInsert<'menu_option_detail'>) => {
+  const { data, error } = await supabase.from('menu_option_detail').insert([optionDetail]).select();
+  if (error) throw error;
+  return { data, error };
+};
+/**
+ * 메뉴 옵션 디테일 upsert
+ * @returns data
+ */
+
+export const addUpsertMenuOptionDetail = async (
+  optionDetail: Omit<Tables<'menu_option_detail'>, 'id'> | Tables<'menu_option_detail'>,
+) => {
+  const { data, error } = await supabase.from('menu_option_detail').upsert([optionDetail]).select();
+  if (error) throw error;
+  return { data, error };
+};
+
+/**
+ * 메뉴 옵션 디테일 삭제하기
+ * @param values 메뉴 옵션 디테일 아이디
+ */
+export const removeMenuOptionDetail = async (optionDetailId: string) => {
+  const { error } = await supabase.from('menu_option_detail').delete().eq('id', optionDetailId);
+  if (error) throw error;
+};
+/**
+ * 메뉴 옵션 디테일 이름 수정하기
+ * @param values 메뉴의 items
+ * @returns data
+ */
+export const updateMenuOptionDetail = async (optionDetail: TablesUpdate<'menu_option_detail'>) => {
+  const { id, name, price } = optionDetail;
+  const { data, error } = await supabase.from('menu_option_detail').update({ name, price }).eq('id', id!);
+  if (error) throw error;
+  return data;
+};

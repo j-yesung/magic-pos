@@ -4,7 +4,7 @@ import 'swiper/css/virtual';
 import OrderLayout from '@/components/layout/order/OrderLayout';
 import { fetchCategoriesWithMenuItemByStoreId } from '@/server/api/supabase/menu-category';
 import { GetServerSideProps } from 'next';
-import { CategoryWithMenuItem } from '@/types/supabase';
+import { CategoryWithMenuItemWithStore } from '@/types/supabase';
 import useOrderStore from '@/shared/store/order';
 import { isEmptyObject } from '@/shared/helper';
 import { useRouter } from 'next/router';
@@ -18,7 +18,7 @@ const OrderIndexPage = ({
   storeId,
   tableId,
 }: {
-  menuData: CategoryWithMenuItem[];
+  menuData: CategoryWithMenuItemWithStore[];
   storeId: string;
   tableId: string;
 }) => {
@@ -29,6 +29,8 @@ const OrderIndexPage = ({
   const { MagicModal } = useModal();
   const router = useRouter();
 
+  // numberOrderData: 번호표 주문 (포장, 테이블 번호가 없는 매장 주문)
+  // storeOrderData: 테이블 주문 (테이블 번호가 있는 매장 주문)
   useEffect(() => {
     if (orderId) {
       (async () => {

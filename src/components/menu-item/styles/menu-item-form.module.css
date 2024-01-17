@@ -1,4 +1,7 @@
 .wrap {
+  --input-border-radius: 1rem;
+  --input-box-shadow: 0 0 1rem rgba(0, 0, 0, 0.25);
+  --input-padding: 1rem;
   background-color: #fff;
   z-index: 1;
   display: flex;
@@ -62,12 +65,12 @@
   color: #999999;
 }
 .wrap .txt-wrap > div.input-wrap > input {
-  border-radius: 1rem;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.25);
-  padding: 2rem;
+  border-radius: var(--input-border-radius);
+  box-shadow: var(--input-box-shadow);
+  padding: var(--input-padding);
 }
 .wrap .txt-wrap > div.input-wrap > input::placeholder {
-  color: #999999;
+  --input-placeholder-color: #999999;
 }
 .wrap .txt-wrap > div.input-wrap > input:nth-child(1) {
   width: 50%;
@@ -101,50 +104,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40px;
-  height: 40px;
+  width: 4rem;
+  height: 4rem;
   border-radius: 50%;
-  color: #fff;
   background-color: var(--point-color);
   font-size: 2rem;
 }
-/* 
-.wrap > div {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: auto;
+.wrap .txt-wrap > div.option-wrap {
+  flex-wrap: wrap;
+  gap: 1rem;
 }
-
-.wrap > div button {
-  width: 100%;
-  height: 40px;
-  border-width: 1px;
-  border-style: solid;
-  font-weight: bold;
-  border-radius: 15px;
-  background-color: #fff;
-  transition: all 0.3s;
+.wrap .txt-wrap > div.option-wrap button {
+  border-radius: var(--input-border-radius);
+  box-shadow: var(--input-box-shadow);
+  padding: var(--input-padding);
 }
-.wrap > div button:hover,
-.wrap > div button:active {
-  background-color: #f0f0f0;
-}
-
-.update-btn {
-  border-color: #ffd800;
-}
-
-.delete-btn {
-  border-color: #ff0000;
-}
-
-.wrap input {
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 10px;
-}
-.wrap input:focus {
-  outline: none;
-  border: 1px solid var(--main-color);
-} */

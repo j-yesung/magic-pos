@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - var(--kiosk-footer-height) - var(--kiosk-container-padding));
+    padding-bottom: 2rem;
+    overflow-y: auto;
+}
+
+.container img {
+    width: 100%;
+    height: 100%;
+    max-width: 40rem;
+    max-height: 40rem;
+    margin: 0 auto;
+    object-fit: contain;
+    background: var(--bg-g);
+}
+
+.total-price {
+    margin: 1rem;
+}

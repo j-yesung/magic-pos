@@ -5,7 +5,7 @@
     justify-content: center;
     align-items: center;
     gap: 1rem  /* 10/10 */;
-    background: #cccccc;
+    background: var(--bg-p);
     cursor: pointer;
 
     color: #000;
@@ -16,5 +16,6 @@
 }
 
 .selected {
-    background: #864AF9;
+    background: var(--main-color);
+    color: var(--text5);
 }
