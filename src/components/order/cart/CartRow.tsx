@@ -3,6 +3,7 @@ import styles from './styles/CartRow.module.css';
 import { MenuItemWithOption } from '@/types/supabase';
 import { convertNumberToWon } from '@/shared/helper';
 import useOrderStore from '@/shared/store/order';
+import CartOptionRow from '@/components/order/cart/CartOptionRow';
 
 const CartRow = ({ itemList }: { itemList: MenuItemWithOption[] }) => {
   const { addOrderList, subtractOrderList, getOptionPriceByList } = useOrderStore();
@@ -25,6 +26,11 @@ const CartRow = ({ itemList }: { itemList: MenuItemWithOption[] }) => {
           <button onClick={handleClickUpQuantity.bind(null, itemList[0])}>+</button>
         </div>
       </div>
+      {itemList[0].menu_option.length > 0 && (
+        <div className={styles.optionWrapper}>
+          <CartOptionRow menu={itemList} />
+        </div>
+      )}
       <div>
         <span>
           {convertNumberToWon(
