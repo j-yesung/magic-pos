@@ -1,6 +1,7 @@
 import {
   downloadPlatFormImageUrl,
   fetchPlatForm,
+  removePlatFormData,
   removePlatFormImage,
   updatePlatFormData,
   uploadPlatFormImage,
@@ -171,6 +172,13 @@ const Container = () => {
     };
   }, [isShowEditForm]);
 
+  const onClickRemoveData = async () => {
+    await removePlatFormData(editTarget.id);
+    const { platform } = await fetchPlatForm(editTarget.store_id!);
+    setFecthDataList(platform);
+    setIsShowEditForm(false);
+  };
+
   const DEFAULT_IMG = '/logo.svg';
   return (
     <div className={styles.container}>
@@ -241,7 +249,7 @@ const Container = () => {
             <button type="submit" className={styles.button}>
               <p>수정</p>
             </button>
-            <button type="button" className={styles.button}>
+            <button onClick={onClickRemoveData} type="button" className={styles.button}>
               <p>삭제</p>
             </button>
             <button onClick={clickEditCancel} type="button" className={styles.button}>

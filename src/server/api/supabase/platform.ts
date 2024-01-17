@@ -135,3 +135,7 @@ export const updatePlatFormData = async (param: TablesInsert<'platform'>) => {
 
   return { data: [], error };
 };
+
+export const removePlatFormData = async (id: string) => {
+  const { error } = await supabase.from('platform').delete().eq('id', id);
+};
