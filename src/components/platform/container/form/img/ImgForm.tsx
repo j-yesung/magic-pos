@@ -10,7 +10,7 @@ import styles from './styles/img.module.css';
 interface ImgProps {
   setAddForm: React.Dispatch<SetStateAction<AddFormType>>;
 }
-const Img = ({ setAddForm }: ImgProps) => {
+const ImgForm = ({ setAddForm }: ImgProps) => {
   const [preImage, setPreImage] = useState<string | null>();
 
   const changePreview = (e: ChangeEvent<HTMLInputElement>) => {
@@ -58,4 +58,4 @@ const Img = ({ setAddForm }: ImgProps) => {
   );
 };
 
-export default Img;
+export default ImgForm;

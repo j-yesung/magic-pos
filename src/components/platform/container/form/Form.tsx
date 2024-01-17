@@ -4,7 +4,7 @@ import { downloadPlatFormImageUrl, insertPlatFormRow, uploadPlatFormImage } from
 import { Tables } from '@/types/supabase';
 import { ChangeEvent, FormEvent, SetStateAction } from 'react';
 import { AddFormType } from '../Container';
-import Img from './img/Img';
+import ImgForm from './img/ImgForm';
 import styles from './styles/form.module.css';
 export interface FormProps {
   setAddForm: React.Dispatch<SetStateAction<AddFormType>>;
@@ -55,7 +55,7 @@ const Form = ({ setAddForm, addForm, setIsRegist, setFecthDataList }: FormProps)
   return (
     <form onSubmit={submitAddCard} className={styles.formContainer}>
       <div className={styles.formWrapper}>
-        <Img setAddForm={setAddForm} />
+        <ImgForm setAddForm={setAddForm} />
 
         <div className={styles.inputWrapper}>
           <input

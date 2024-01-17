@@ -8,8 +8,9 @@ interface CardPropsType {
   isEdit: boolean;
   setEditTarget: React.Dispatch<React.SetStateAction<EditFormType>>;
   setIsShowEditForm: React.Dispatch<React.SetStateAction<boolean>>;
+  setPreImage: React.Dispatch<React.SetStateAction<string | null>>;
 }
-const Card = ({ fetchDataList, isEdit, setEditTarget, setIsShowEditForm }: CardPropsType) => {
+const Card = ({ fetchDataList, isEdit, setEditTarget, setIsShowEditForm, setPreImage }: CardPropsType) => {
   return (
     <div className={styles.cardContainer}>
       {fetchDataList.length >= 1 &&
@@ -24,6 +25,7 @@ const Card = ({ fetchDataList, isEdit, setEditTarget, setIsShowEditForm }: CardP
               imgUrl={card.image_url}
               setEditTarget={setEditTarget}
               setIsShowEditForm={setIsShowEditForm}
+              setPreImage={setPreImage}
             />
           );
         })}

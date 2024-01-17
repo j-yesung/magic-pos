@@ -11,15 +11,18 @@ interface ItemProps {
   setEditTarget: React.Dispatch<React.SetStateAction<EditFormType>>;
   imgUrl: string | null;
   setIsShowEditForm: React.Dispatch<React.SetStateAction<boolean>>;
+  setPreImage: React.Dispatch<React.SetStateAction<string | null>>;
 }
-const Item = ({ link, title, isEdit, id, setEditTarget, imgUrl, setIsShowEditForm }: ItemProps) => {
+const Item = ({ link, title, isEdit, id, setEditTarget, imgUrl, setIsShowEditForm, setPreImage }: ItemProps) => {
   const editForm = () => {
-    setEditTarget({
+    setEditTarget(pre => ({
+      ...pre,
       id,
       link_url: link,
-      image_url: imgUrl,
       name: title,
-    });
+    }));
+
+    setPreImage(imgUrl);
     setIsShowEditForm(true);
   };
   const DEFAULT_IMG = '/logo.svg';
