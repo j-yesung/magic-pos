@@ -1,3 +1,4 @@
+//platform.ts
 import { UploadParam } from '@/components/platform/container/form/Form';
 import { supabase } from '@/shared/supabase';
 import { TablesInsert } from '@/types/supabase';
@@ -80,4 +81,23 @@ export const downloadPlatFormImageUrl = (param: UploadParam) => {
     console.log(error);
     throw error;
   }
+};
+
+export const insertPlatFormRow = async (param: UploadParam) => {
+  console.log(param.store_id);
+  const { data, error } = await supabase
+    .from('platform')
+    .insert([
+      {
+        image_url: param.image_url,
+        store_id: param.store_id!,
+        name: param.name,
+        link_url: param.link_url,
+      },
+    ])
+    .select();
+
+  if (error) return { data: null, error };
+
+  return { data, error };
 };

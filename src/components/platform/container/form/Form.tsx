@@ -1,4 +1,6 @@
-import { downloadPlatFormImageUrl, uploadPlatFormImage } from '@/server/api/supabase/platform';
+// Form tsx
+
+import { downloadPlatFormImageUrl, insertPlatFormRow, uploadPlatFormImage } from '@/server/api/supabase/platform';
 import useAuthStore from '@/shared/store/auth';
 import moment from 'moment';
 import { ChangeEvent, FormEvent, SetStateAction, useState } from 'react';
@@ -34,6 +36,8 @@ const Form = ({ setCardList }: FormProps) => {
     store_id: storeId,
   });
 
+  console.log(storeId);
+
   const changeLinkValue = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
@@ -57,13 +61,18 @@ const Form = ({ setCardList }: FormProps) => {
     let updateData = { ...input };
     if (!input.name.trim() || !input.link_url.trim()) alert('써라');
 
-    await uploadPlatFormImage(input);
-
-    const { publicUrl: image_url } = downloadPlatFormImageUrl(input);
-    updateData = {
-      ...input,
-      image_url,
-    };
+    if (input.file) {
+      await uploadPlatFormImage(input);
+      console.log(updateData);
+      const { publicUrl: image_url } = downloadPlatFormImageUrl(input);
+      updateData = {
+        ...input,
+        image_url,
+      };
+      const { data } = await insertPlatFormRow(updateData);
+    } else {
+      const { data } = await insertPlatFormRow(updateData);
+    }
   };
 
   return (
