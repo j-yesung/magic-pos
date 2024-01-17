@@ -9,13 +9,11 @@ const Header = () => {
 
   return (
     <header className={styles.headerWrapper}>
-      <div className={styles.firstContainer}>
+      <div className={styles.container}>
         <HamburgerMenu />
         <Logo className={styles.logo} width={200} height={30} onClick={() => router.push('/')} />
       </div>
-      <div className={styles.secondContainer}>
-        <HeaderToggleButton />
-      </div>
+      <HeaderToggleButton />
     </header>
   );
 };
