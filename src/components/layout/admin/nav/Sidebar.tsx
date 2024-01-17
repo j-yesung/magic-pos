@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import HeaderToggleButton from '../header/HeaderToggleButton';
 import styles from '../styles/AdminLayout.module.css';
+import SidebarList from './SidebarList';
 import CloseButton from '/public/icons/close.svg';
 import Ellipse from '/public/icons/ellipse.svg';
 
@@ -29,8 +30,9 @@ const Sidebar = (adminInfo: AdminCategories) => {
       );
 
       router.push(url);
+      setIsSideBarOpen(false);
     },
-    [navList, router],
+    [navList, router, setIsSideBarOpen],
   );
 
   useEffect(() => {
@@ -61,15 +63,7 @@ const Sidebar = (adminInfo: AdminCategories) => {
       </div>
       <p>{isMode ? modeSubText[0] : modeSubText[1]}</p>
       <ul>
-        {navList.map(list => (
-          <li
-            className={list.active ? styles.active : ''}
-            key={list.id}
-            onClick={() => clickNavListHandler(list.id, list.url)}
-          >
-            {list.name}
-          </li>
-        ))}
+        <SidebarList navList={navList} clickFn={clickNavListHandler} />
       </ul>
       <div>
         <button className={styles.logoutButton}>로그아웃</button>
