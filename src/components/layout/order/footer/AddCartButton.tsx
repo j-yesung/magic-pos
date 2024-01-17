@@ -10,8 +10,11 @@ import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButton';
  * @constructor
  */
 const AddCartButton = ({ menu }: { menu: MenuItemWithOption | null }) => {
-  const { addOrderList, optionSwiperRef, selectedOptions, resetSelectedOptions, setSelectedMenu, amount, resetAmount } =
-    useOrderStore();
+  const addOrderList = useOrderStore(state => state.addOrderList);
+  const optionSwiperRef = useOrderStore(state => state.optionSwiperRef);
+  const selectedOptions = useOrderStore(state => state.selectedOptions);
+  const amount = useOrderStore(state => state.amount);
+  const resetSelectedMenu = useOrderStore(state => state.resetSelectedMenu);
 
   /**
    * 주문 목록에 메뉴를 담는다.
@@ -26,9 +29,7 @@ const AddCartButton = ({ menu }: { menu: MenuItemWithOption | null }) => {
       );
     }
     optionSwiperRef?.current!.swiper.slidePrev(SLIDE_MOVE_SPEED);
-    resetSelectedOptions();
-    setSelectedMenu(null);
-    resetAmount();
+    resetSelectedMenu();
   };
 
   return (

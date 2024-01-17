@@ -8,7 +8,9 @@ import Amount from '@/components/order/menu-option/Amount';
 import TotalPrice from '@/components/order/common/TotalPrice';
 
 const MenuOptionContainer = () => {
-  const { selectedMenu, amount, selectedOptions } = useOrderStore();
+  const selectedMenu = useOrderStore(state => state.selectedMenu);
+  const amount = useOrderStore(state => state.amount);
+  const selectedOptions = useOrderStore(state => state.selectedOptions);
 
   return (
     <>

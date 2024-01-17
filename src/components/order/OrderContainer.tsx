@@ -15,7 +15,8 @@ import MenuOptionContainer from '@/components/order/menu-option/MenuOptionContai
  * @constructor
  */
 const OrderContainer = () => {
-  const { swiperRef, setOptionSwiperRef, orderList } = useOrderStore();
+  const swiperRef = useOrderStore(state => state.swiperRef);
+  const setOptionSwiperRef = useOrderStore(state => state.setOptionSwiperRef);
   const optionSwiperRef = useRef<SwiperRef>(null);
   useEffect(() => {
     if (optionSwiperRef) setOptionSwiperRef(optionSwiperRef);
