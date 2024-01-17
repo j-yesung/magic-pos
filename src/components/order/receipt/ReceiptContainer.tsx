@@ -5,7 +5,7 @@ import ReceiptRow from '@/components/order/receipt/ReceiptRow';
 import { useStoreOrderQuery } from '@/hooks/order/useStoreOrderQuery';
 import { useNumberOrderQuery } from '@/hooks/order/useNumberOrderQuery';
 import useOrderStore from '@/shared/store/order';
-import { OrderDataWithStoreName, Tables } from '@/types/supabase';
+import { MenuItemWithOption, OrderDataWithStoreName, Tables } from '@/types/supabase';
 import { groupByKey } from '@/shared/helper';
 import TotalPrice from '@/components/order/common/TotalPrice';
 import { useRouter } from 'next/router';
@@ -28,7 +28,7 @@ const ReceiptContainer = () => {
   // 주문 데이터가 있다면 그룹화 합니다.
   useEffect(() => {
     if (orderData) {
-      const group = groupByKey<Tables<'menu_item'>>(orderData?.menu_list as Tables<'menu_item'>[], 'id');
+      const group = groupByKey<MenuItemWithOption>(orderData?.menu_list, 'unique');
       setGroupData(group);
     }
   }, [orderData]);
