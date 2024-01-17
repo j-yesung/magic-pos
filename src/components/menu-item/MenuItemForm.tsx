@@ -118,20 +118,14 @@ const MenuItemFormPage = () => {
         };
         // 디테일 있는것도 있고 없는것도 있으니까 upsert
         item.menu_option_detail.map(async option => {
-          let addOptionForm: Omit<Tables<'menu_option_detail'>, 'id'> | Tables<'menu_option_detail'>;
+          const addOptionForm:Omit<Tables<'menu_option_detail'>, 'id'> | Tables<'menu_option_detail'> = {
+            name: option.name,
+            option_id: newOptionList.id,
+            price: option.price,
+          };
 
-          option.id === ''
-            ? (addOptionForm = {
-                name: option.name,
-                option_id: newOptionList.id,
-                price: option.price,
-              })
-            : (addOptionForm = {
-                id: option.id,
-                name: option.name,
-                option_id: newOptionList.id,
-                price: option.price,
-              });
+          if (option.id !== '') 
+            (addOptionForm as Tables<'menu_option_detail'>).id = option.id;
 
           await addUpsertMenuOptionDetail(addOptionForm);
         });

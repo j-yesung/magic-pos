@@ -20,8 +20,9 @@ const MenuItemFormInput = () => {
 
    // 썸네일 이미지 보여주기
    const handleChangeImg = async (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files !== null && e.target.files[0] !== null) {
-      const file = e.target.files[0];
+    const  fileList = e.target.files || [ ]
+    if ( fileList?.length !== 0) {
+      const file = fileList[0];
       if (file && file.type.substring(0, 5) === 'image') {
         const reader = new FileReader();
         reader.readAsDataURL(file);
@@ -58,7 +59,7 @@ const MenuItemFormInput = () => {
     <>
       <div className={styles['img-wrap']}>
         <label htmlFor="sampleImg"></label>
-        <Image src={menuItemSampleImg} alt={menuItem.name ?? ''} width={220} height={220} />
+        <Image src={menuItemSampleImg} alt={menuItem.name ?? 'Sample Image'} width={220} height={220} />
         <input
           type="file"
           accept="image/png, image/jpeg, image/jpg"

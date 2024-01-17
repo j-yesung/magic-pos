@@ -49,7 +49,7 @@ const MenuItemPage = () => {
     setMenuItemSampleImg(newMenuItem.image_url ?? '');
   };
   return (
-    <div className={menuItem.id !== '' ? clsx(styles['wrap'], styles['active']) : styles['wrap']}>
+    <div className={clsx(styles.wrap, {[styles.active]: menuItem.id !== ''})}>
       <ul>
         {categoryWithMenuItemList
           .filter(list => list.id === categoryWithMenuItem.id)

@@ -1,4 +1,5 @@
 import { updateMenuItemPosition } from '@/server/api/supabase/menu-item';
+import { convertNumberToWon } from '@/shared/helper';
 import useMenuItemStore from '@/shared/store/menu-item';
 import { Tables } from '@/types/supabase';
 import clsx from 'clsx';
@@ -97,7 +98,7 @@ const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
           </span>
           <span>
             <span>가격: </span>
-            <strong>{item.price}원</strong>
+            <strong>{convertNumberToWon(item.price)}</strong>
           </span>
           <span>
             <span>남은 갯수: </span>
@@ -107,7 +108,7 @@ const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
             <span>포지션: </span>
             <strong>{item.position}</strong>
           </span>
-          <span style={{ background: 'red' }}>
+          <span className={styles['option']}>
             {origineMenuOptions
               .filter(options => options.menu_id === item.id)
               .map((option: Tables<'menu_option'>) => (
