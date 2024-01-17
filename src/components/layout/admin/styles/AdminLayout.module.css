@@ -37,10 +37,17 @@
   display: none;
 }
 
-.header-wrapper div {
+.first-container {
+  gap: 2rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+}
+.first-container .hamburger {
+  cursor: pointer;
+}
+
+.header-wrapper .logo {
+  cursor: pointer;
 }
 
 .header-wrapper a {
