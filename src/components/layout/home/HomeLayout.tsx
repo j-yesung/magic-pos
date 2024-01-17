@@ -1,13 +1,19 @@
+import useToggleState from '@/shared/store/toggle';
+import { useEffect } from 'react';
 import Footer from './footer/Footer';
 import Header from './header/Header';
 import Contents from './main/Contents';
 import styles from './styles/Home.module.css';
 
-interface HomeLayoutProps {
-  children: React.ReactNode;
-}
+const HomeLayout = ({ children }: { children: React.ReactNode }) => {
+  const { isChecked, resetToggle } = useToggleState();
 
-const HomeLayout = ({ children }: HomeLayoutProps) => {
+  useEffect(() => {
+    return () => {
+      if (!isChecked) resetToggle();
+    };
+  }, []);
+
   return (
     <div className={styles.wrapper}>
       <Header />
