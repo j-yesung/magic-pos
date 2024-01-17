@@ -4,7 +4,7 @@ import 'swiper/css/virtual';
 import OrderLayout from '@/components/layout/order/OrderLayout';
 import { fetchCategoriesWithMenuItemByStoreId } from '@/server/api/supabase/menu-category';
 import { GetServerSideProps } from 'next';
-import { CategoryWithMenuItem } from '@/types/supabase';
+import { CategoryWithMenuItemWithStore } from '@/types/supabase';
 import useOrderStore from '@/shared/store/order';
 import { isEmptyObject } from '@/shared/helper';
 import { useRouter } from 'next/router';
@@ -18,7 +18,7 @@ const OrderIndexPage = ({
   storeId,
   tableId,
 }: {
-  menuData: CategoryWithMenuItem[];
+  menuData: CategoryWithMenuItemWithStore[];
   storeId: string;
   tableId: string;
 }) => {
