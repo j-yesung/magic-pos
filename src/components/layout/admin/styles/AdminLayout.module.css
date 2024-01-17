@@ -215,6 +215,7 @@
 
 /* 페이지 제목 */
 .category-title {
+  padding-bottom: 5rem;
   font-size: 5rem;
   font-weight: 600;
 }
