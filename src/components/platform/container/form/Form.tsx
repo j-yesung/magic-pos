@@ -33,7 +33,7 @@ const Form = ({ setAddForm, addForm, setIsRegist, setFecthDataList }: FormProps)
   const submitAddCard = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     let updateData = { ...addForm };
-    if (!addForm.name.trim() || !addForm.link_url.trim()) alert('써라');
+    if (!addForm.name.trim() || !addForm.link_url.trim()) return alert('써라');
 
     if (addForm.file) {
       await uploadPlatFormImage(addForm);
