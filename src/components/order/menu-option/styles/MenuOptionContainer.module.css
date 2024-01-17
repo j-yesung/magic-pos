@@ -12,6 +12,8 @@
     max-width: 40rem;
     max-height: 40rem;
     margin: 0 auto;
+    object-fit: contain;
+    background: var(--bg-g);
 }
 
 .total-price {

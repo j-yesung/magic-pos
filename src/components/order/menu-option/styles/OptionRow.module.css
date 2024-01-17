@@ -5,7 +5,7 @@
     align-items: flex-start;
     gap: 0.5rem;
     margin: 1rem;
-    border-bottom: 0.1rem solid #F2F2F2;
+    border-bottom: 0.1rem solid var(--bg-line);
 }
 
 .container div {

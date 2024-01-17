@@ -23,7 +23,7 @@
 }
 
 .text-box span {
-    color: #000;
+    color: var(--text1);
     text-align: center;
     font-size: 1.4rem  /* 14/10 */;
     font-style: normal;
@@ -32,7 +32,7 @@
 }
 
 .text-box strong {
-    color: #000;
+    color: var(--text1);
     font-size: 1.8rem  /* 18/10 */;
     font-style: normal;
     font-weight: 600;
@@ -53,7 +53,7 @@
     background: var(--main-color);
     border-radius: 1rem;
 
-    color: #000;
+    color: var(--text5);
     font-family: Pretendard, sans-serif;
     font-size: 1.4rem;
     font-style: normal;
