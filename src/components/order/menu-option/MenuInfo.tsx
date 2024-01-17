@@ -4,7 +4,7 @@ import styles from './styles/MenuInfo.module.css';
 import { convertNumberToWon } from '@/shared/helper';
 
 const MenuInfo = () => {
-  const { selectedMenu } = useOrderStore();
+  const selectedMenu = useOrderStore(state => state.selectedMenu);
 
   return (
     <div className={styles.container}>

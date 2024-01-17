@@ -1,10 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import {
-  CategoryWithMenuItemWithStore,
-  MenuItemWithOption,
-  MenuOptionWithDetail,
-} from '@/types/supabase';
+import { CategoryWithMenuItemWithStore, MenuItemWithOption, MenuOptionWithDetail } from '@/types/supabase';
 import { SwiperRef } from 'swiper/react';
 import React from 'react';
 
@@ -58,6 +54,7 @@ interface OrderState {
   addAmount: () => void;
   subtractAmount: () => void;
   resetAmount: () => void;
+  resetSelectedMenu: () => void;
 }
 
 export const useOrderStore = create<OrderState>()(
@@ -84,8 +81,9 @@ export const useOrderStore = create<OrderState>()(
       subtractOrderList: menu =>
         set(state => {
           const findIndex = state.orderList.findLastIndex(o => o.id === menu.id);
-          state.orderList.splice(findIndex, 1);
-          return { orderList: state.orderList };
+          const newOrderList = [...state.orderList];
+          newOrderList.splice(findIndex, 1);
+          return { orderList: newOrderList };
         }),
       // orderList에 담긴 메뉴 아이템의 총합 가격을 나타냅니다.
       getTotalPrice: list => {
@@ -93,13 +91,14 @@ export const useOrderStore = create<OrderState>()(
           ?.map(
             menu =>
               menu.menu_option
-                .map(option => option.menu_option_detail.reduce((acc, cur) => acc + cur.price, 0))
+                ?.map(option => option.menu_option_detail.reduce((acc, cur) => acc + cur.price, 0))
                 .reduce((acc, cur) => acc + cur, 0) + menu.price,
           )
           .reduce((acc, cur) => acc + cur, 0);
       },
       getOptionPriceByList: list => {
         return list
+          .filter(item => item)
           .map(option =>
             option.menu_option_detail.reduce((acc, cur) => {
               return acc + cur.price;
@@ -173,6 +172,11 @@ export const useOrderStore = create<OrderState>()(
       addAmount: () => set(state => ({ amount: state.amount + 1 })),
       subtractAmount: () => set(state => ({ amount: Math.max(state.amount - 1, 1) })),
       resetAmount: () => set(() => ({ amount: 1 })),
+      resetSelectedMenu: () => {
+        get().resetAmount();
+        get().resetSelectedOptions();
+        get().setSelectedMenu(null);
+      },
     }),
     {
       name: 'order-storage',

@@ -11,7 +11,8 @@ import TotalPrice from '@/components/order/common/TotalPrice';
 import { useRouter } from 'next/router';
 
 const ReceiptContainer = () => {
-  const { orderId, storeId } = useOrderStore();
+  const orderId = useOrderStore(state => state.orderId);
+  const storeId = useOrderStore(state => state.storeId);
   const { storeOrderData } = useStoreOrderQuery(orderId ?? '');
   const { numberOrderData } = useNumberOrderQuery(orderId ?? '');
   const [orderData, setOrderData] = useState<OrderDataWithStoreName>(null);

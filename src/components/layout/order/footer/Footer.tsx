@@ -9,7 +9,7 @@ interface FooterProps {
 }
 
 const Footer = ({ sliderRef }: FooterProps) => {
-  const { step } = useOrderStore();
+  const step = useOrderStore(state => state.step);
   const [isPageLoading, setIsPageLoading] = useState(true);
 
   useEffect(() => {

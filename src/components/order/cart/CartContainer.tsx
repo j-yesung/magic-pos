@@ -13,7 +13,9 @@ import TotalPrice from '@/components/order/common/TotalPrice';
  * @constructor
  */
 const CartContainer = () => {
-  const { orderList, orderType, storeName } = useOrderStore();
+  const orderList = useOrderStore(state => state.orderList);
+  const orderType = useOrderStore(state => state.orderType);
+  const storeName = useOrderStore(state => state.storeName);
 
   const group = groupByKey<MenuItemWithOption>(orderList, 'unique');
 

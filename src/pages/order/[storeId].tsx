@@ -22,7 +22,13 @@ const OrderIndexPage = ({
   storeId: string;
   tableId: string;
 }) => {
-  const { setMenuData, setStoreId, setTableId, orderId, resetOrderList, setStoreName } = useOrderStore();
+  const setMenuData = useOrderStore(state => state.setMenuData);
+  const setStoreId = useOrderStore(state => state.setStoreId);
+  const setTableId = useOrderStore(state => state.setTableId);
+  const orderId = useOrderStore(state => state.orderId);
+  const resetOrderList = useOrderStore(state => state.resetOrderList);
+  const setStoreName = useOrderStore(state => state.setStoreName);
+
   const { storeOrderData } = useStoreOrderQuery(orderId ?? '');
   const { numberOrderData } = useNumberOrderQuery(orderId ?? '');
   const [isLoaded, setIsLoaded] = useState(false);
