@@ -1,6 +1,10 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { CategoryWithMenuItem, MenuItemWithOption, MenuOptionWithDetail } from '@/types/supabase';
+import {
+  CategoryWithMenuItemWithStore,
+  MenuItemWithOption,
+  MenuOptionWithDetail,
+} from '@/types/supabase';
 import { SwiperRef } from 'swiper/react';
 import React from 'react';
 
@@ -18,10 +22,10 @@ export enum ORDER_STEP {
 interface OrderState {
   step: number;
   readonly maxStep: number;
-  menuData: CategoryWithMenuItem[] | null;
+  menuData: CategoryWithMenuItemWithStore[] | null;
   goNextStep: () => void;
   goPrevStep: () => void;
-  setMenuData: (data: CategoryWithMenuItem[]) => void;
+  setMenuData: (data: CategoryWithMenuItemWithStore[]) => void;
   orderList: MenuItemWithOption[];
   resetOrderList: () => void;
   addOrderList: (menu: MenuItemWithOption[]) => void;

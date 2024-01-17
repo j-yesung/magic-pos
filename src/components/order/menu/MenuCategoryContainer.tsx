@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import { CategoryWithMenuItem } from '@/types/supabase';
+import { CategoryWithMenuItemWithStore } from '@/types/supabase';
 import styles from './styles/MenuCategoryContainer.module.css';
 import MenuCategory from '@/components/order/menu/MenuCategory';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -7,7 +7,7 @@ import { Virtual } from 'swiper/modules';
 import { isEmptyObject } from '@/shared/helper';
 
 interface MenCategoryContainerProps {
-  menuData: CategoryWithMenuItem[];
+  menuData: CategoryWithMenuItemWithStore[];
   setSelectedCategory: Dispatch<SetStateAction<string | null>>;
   selectedCategory: string | null;
 }
