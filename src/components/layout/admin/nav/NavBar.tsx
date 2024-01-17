@@ -1,13 +1,17 @@
+import useSideBar from '@/shared/store/sidebar';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from '../styles/AdminLayout.module.css';
+import CloseButton from '/public/icons/close.svg';
+import Ellipse from '/public/icons/ellipse.svg';
 
 const NavBar = (adminInfo: AdminCategories) => {
   const [navList, setNavList] = useState(adminInfo.adminCategories);
+  const { isSideBarOpen, setIsSideBarOpen } = useSideBar();
+  const targetRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
   const clickNavListHandler = (id: number, url: string) => {
-    // 현재 active 상태인 list는 클릭해도 반응하지 않습니다.
     const currentActive = navList.find(item => item.active === true);
     if (currentActive && currentActive.id === id) return;
 
@@ -18,8 +22,9 @@ const NavBar = (adminInfo: AdminCategories) => {
     router.push(url);
   };
 
+
   return (
-    <aside className={styles.navWrapper}>
+    <aside className={`${styles.navWrapper} ${isSideBarOpen ? '' : styles.closeNav}`} ref={targetRef}>
       <div className={styles.closeButton}>
         <CloseButton width={40} height={40} />
       </div>
@@ -40,6 +45,9 @@ const NavBar = (adminInfo: AdminCategories) => {
           </li>
         ))}
       </ul>
+      <div>
+        <button className={styles.logoutButton}>로그아웃</button>
+      </div>
     </aside>
   );
 };
