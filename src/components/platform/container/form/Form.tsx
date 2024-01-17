@@ -1,5 +1,3 @@
-// Form tsx
-
 import { downloadPlatFormImageUrl, insertPlatFormRow, uploadPlatFormImage } from '@/server/api/supabase/platform';
 import { Tables } from '@/types/supabase';
 import { ChangeEvent, FormEvent, SetStateAction } from 'react';

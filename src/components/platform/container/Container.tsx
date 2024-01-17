@@ -1,6 +1,13 @@
-import { fetchPlatForm } from '@/server/api/supabase/platform';
+import {
+  downloadPlatFormImageUrl,
+  fetchPlatForm,
+  removePlatFormImage,
+  updatePlatFormData,
+  uploadPlatFormImage,
+} from '@/server/api/supabase/platform';
+import { isEmptyObject } from '@/shared/helper';
 import useAuthStore from '@/shared/store/auth';
-import { Tables } from '@/types/supabase';
+import { Tables, TablesInsert } from '@/types/supabase';
 import clsx from 'clsx';
 import moment from 'moment';
 import Image from 'next/image';
@@ -16,6 +23,7 @@ export interface AddFormType {
   store_id: string;
   createdAt: string;
   link_url: string;
+  id?: string | null;
 }
 
 export interface EditFormType {
@@ -25,6 +33,7 @@ export interface EditFormType {
   store_id: string | null;
   image_url?: string | null;
   file?: File | null;
+  createdAt: string;
 }
 
 const Container = () => {
@@ -61,8 +70,9 @@ const Container = () => {
     link_url: '',
     store_id: storeId!,
     image_url: preImage ?? null,
+    createdAt: moment().toISOString(),
   });
-  console.log(editTarget);
+
   const editRef = useRef<EditFormType | null>();
 
   const clickEditCancel = () => {
@@ -106,15 +116,53 @@ const Container = () => {
       [name]: value,
     }));
   };
-  const updatePlatForm = (e: FormEvent<HTMLFormElement>) => {
+  const updatePlatForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const updateData = {
+    const editData: EditFormType = {
       ...editTarget,
     };
-    console.log(editRef.current);
-    console.log(updateData);
-    console.log(JSON.stringify(editRef.current) === JSON.stringify(updateData));
+    console.log('asdf');
+    // object의 각 value 값을 비교해서 틀린 값만을 추출하기
+    let comparedData = Object.entries(editData).reduce((acc, [key, value]) => {
+      // 조금더 이해하기 위해 주석을 지우지 않았습니다.
+      // for (const key in editRef.current) {
+      //   if (editRef.current[key as keyof EditFormType] !== value) {
+      //     acc[key] = value;
+      //   }
+      // }
+      if (editRef.current![key as keyof EditFormType] !== value) {
+        acc[key as keyof EditFormType] = value;
+      }
+
+      return acc;
+    }, new Object() as EditFormType);
+
+    if (isEmptyObject(comparedData)) return;
+
+    comparedData.id = editData.id;
+    comparedData.store_id = editData.store_id;
+    comparedData.createdAt = editData.createdAt;
+    if (comparedData.file) {
+      if (editRef.current?.image_url) await removePlatFormImage(editRef.current);
+      console.log(comparedData);
+      await uploadPlatFormImage(comparedData);
+      const { publicUrl: image_url } = downloadPlatFormImageUrl(addForm);
+      comparedData = {
+        ...comparedData,
+        image_url,
+      };
+      const { file, createdAt, ...updateTarget } = comparedData;
+      const { data } = await updatePlatFormData(updateTarget as TablesInsert<'platform'>);
+    } else {
+      const { createdAt, file, ...updateTarget } = comparedData;
+      await updatePlatFormData(updateTarget as TablesInsert<'platform'>);
+    }
+    const { platform, error } = await fetchPlatForm(storeId!);
+    setFecthDataList(platform);
+
+    setIsShowEditForm(false);
   };
+
   useEffect(() => {
     if (editRef.current) return;
     editRef.current = editTarget;
