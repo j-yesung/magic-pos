@@ -43,7 +43,7 @@ const OrderLayout = ({ children }: { children: React.ReactNode }) => {
         <article className={styles.children}>
           {step > ORDER_STEP.CHOOSE_ORDER_TYPE && (
             <button className={styles.prevButton} onClick={clickPrevButtonHandler}>
-              ⬅️{' '}
+              ←
             </button>
           )}
           {children}
