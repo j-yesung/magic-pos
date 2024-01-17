@@ -16,13 +16,13 @@ const HeaderToggleButton = () => {
     } else if (!isToggle && currentPath === managementPath) {
       router.push('/admin/store');
     }
-  }, [isToggle]);
+  }, [isToggle, router]);
 
   return (
-    <>
+    <div>
       <input className={styles.toggle} type="checkbox" id="toggle" onChange={changeToggle} defaultChecked={isToggle} />
       <label className={styles.label} htmlFor="toggle" />
-    </>
+    </div>
   );
 };
 

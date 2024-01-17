@@ -1,8 +1,13 @@
 .wrapper {
-  width: 36rem;
+  width: 40rem;
 }
 .wrapper form {
-  gap: 2rem;
+  gap: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+.wrapper div {
+  gap: 1rem;
   display: flex;
   flex-direction: column;
 }
