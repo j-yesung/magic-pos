@@ -116,11 +116,12 @@ export const removeMenuOption = async (menuOptionId: string) => {
  * @returns data
  */
 export const updateMenuOption = async (menuOption: TablesUpdate<'menu_option'>) => {
-  const { id, name, is_use } = menuOption;
-  const { error } = await supabase.from('menu_option').update({ name, is_use }).eq('id', id!);
+  const { id, name, is_use, max_detail_count } = menuOption;
+  const { error } = await supabase.from('menu_option').update({ name, is_use, max_detail_count }).eq('id', id!);
   if (error) throw error;
   return true;
 };
+
 /**
  * 메뉴 옵션 디테일 불러오기
  */
@@ -138,6 +139,19 @@ export const addMenuOptionDetail = async (optionDetail: TablesInsert<'menu_optio
   if (error) throw error;
   return { data, error };
 };
+/**
+ * 메뉴 옵션 디테일 upsert
+ * @returns data
+ */
+
+export const addUpsertMenuOptionDetail = async (
+  optionDetail: Omit<Tables<'menu_option_detail'>, 'id'> | Tables<'menu_option_detail'>,
+) => {
+  const { data, error } = await supabase.from('menu_option_detail').upsert([optionDetail]).select();
+  if (error) throw error;
+  return { data, error };
+};
+
 /**
  * 메뉴 옵션 디테일 삭제하기
  * @param values 메뉴 옵션 디테일 아이디

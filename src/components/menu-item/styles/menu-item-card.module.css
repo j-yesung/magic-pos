@@ -52,3 +52,11 @@
 .li button > span.txt > span strong {
   font-weight: bold;
 }
+.li button > span.txt > span.option {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.li button > span.txt > span.option > span {
+  background-color: red;
+}
