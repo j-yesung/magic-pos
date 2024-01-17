@@ -1,28 +1,24 @@
 .shop-container {
-  width: 100%;
-  height: calc(60% - 0.3rem);
-}
-
-.shop-title {
-  width: 100%;
-  height: 20%;
+  width: 1720px;
+  height: 100%;
   display: flex;
   justify-content: flex-start;
-  align-items: center;
-  padding-left: 13.5%;
-  font-size: 2.5em;
-}
-.shop-list {
-  width: 100%;
-  height: 80%;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  place-items: center;
-  padding: 0 10%;
+  align-items: flex-start;
+  flex-wrap: wrap;
   overflow-y: scroll;
+  overflow-x: hidden;
+  background-color: #f00;
 }
 
-.shop-list::-webkit-scrollbar {
-  display: none;
+.shop-container::-webkit-scrollbar {
+  width: 0.6rem;
+}
+
+.shop-container::-webkit-scrollbar-thumb {
+  background: var(--point-100);
+  border-radius: 1rem;
+}
+
+.shop-container::-webkit-scrollbar-track {
+  background: none;
 }

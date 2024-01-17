@@ -1,7 +1,6 @@
 import useFetchManagement from "@/hooks/management/useFetchManagement";
 import useAuthStore from "@/shared/store/auth";
 import ManagementContainer from "./managementContainer/ManagementContainer";
-import ManagementSideBar from "./managementSideBar/ManagementSideBar";
 import styles from "./styles/Management.module.css";
 
 const Management = () => {
@@ -13,7 +12,7 @@ const Management = () => {
   return (
     <div className={styles['managementWrapper']}>
       <ManagementContainer managementData={data} />
-      <ManagementSideBar managementData={data} />
+      {/* <ManagementSideBar managementData={data} /> */}
     </div>
   )
 }
