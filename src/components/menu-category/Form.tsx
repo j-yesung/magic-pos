@@ -39,6 +39,7 @@ const CategoryFormPage = () => {
         onChange={changeCategoryHandler}
         name="name"
         value={category.name}
+        placeholder="카테고리명을 입력하세요."
         minLength={2}
         maxLength={10}
       />

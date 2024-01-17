@@ -1,19 +1,21 @@
+import useFetchManagement from '@/hooks/management/useFetchManagement';
+import useFetchCategoryWithMenu from '@/hooks/menu/useCategoryWithMenu';
+import useFetchMenuOptions from '@/hooks/menu/useMenuOptions';
 import { fetchMenuOptions } from '@/server/api/supabase/menu-item';
+import useAuthStore from '@/shared/store/auth';
 import useMenuItemStore from '@/shared/store/menu-item';
-import { CategoryWithMenuItem, MenuOptionWithDetail } from '@/types/supabase';
 import { useEffect } from 'react';
 import MenuItemFormPage from './MenuItemForm';
 import MenuItemListPage from './MenuItemList';
 import styles from './styles/menu-item-container.module.css';
 
-interface PropsType {
-  categoryWithMenuData: CategoryWithMenuItem[];
-  storeId: string;
-  menuOptionData: MenuOptionWithDetail[];
-}
-
-const MenuItemsComponentPage = (props: PropsType) => {
-  const { categoryWithMenuData, storeId, menuOptionData } = props;
+const MenuItemsComponentPage = () => {
+  const { auth } = useAuthStore();
+  const id = auth?.user.id;
+  const { data: managementData } = useFetchManagement(id);
+  const storeId = managementData?.[0]?.id ?? '';
+  const { data: categoryWithMenuData } = useFetchCategoryWithMenu(storeId);
+  const { data: menuOptionData } = useFetchMenuOptions();
 
   const {
     setMenuItemList,
@@ -26,17 +28,21 @@ const MenuItemsComponentPage = (props: PropsType) => {
   } = useMenuItemStore();
 
   useEffect(() => {
-    setCategoryWithMenuItemList(categoryWithMenuData);
-    setCategoryWithMenuItem({
-      ...categoryWithMenuItem,
-      id: categoryWithMenuData[0].id, // 초기값 첫 카테고리 선택
-      store_id: storeId,
-      position: categoryWithMenuData.length,
-      menu_item: categoryWithMenuData[0].menu_item, // 초기값 첫 카테고리 선택
-    });
-    setMenuItemList(categoryWithMenuData[0].menu_item);
-    setMenuOptions(menuOptionData);
-    setOrigineMenuOptions(menuOptionData);
+    if (categoryWithMenuData?.error === null) {
+      setCategoryWithMenuItemList(categoryWithMenuData?.data);
+      setCategoryWithMenuItem({
+        ...categoryWithMenuItem,
+        id: categoryWithMenuData?.data[0].id, // 초기값 첫 카테고리 선택
+        store_id: storeId,
+        position: categoryWithMenuData?.data.length,
+        menu_item: categoryWithMenuData?.data[0].menu_item, // 초기값 첫 카테고리 선택
+      });
+      setMenuItemList(categoryWithMenuData?.data[0].menu_item);
+    }
+    if (menuOptionData?.error === null) {
+      setMenuOptions(menuOptionData?.data);
+      setOrigineMenuOptions(menuOptionData?.data);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryWithMenuData, menuOptionData]);
 
