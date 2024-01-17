@@ -42,8 +42,9 @@ interface OrderState {
   setOptionSwiperRef: (ref: React.RefObject<SwiperRef>) => void;
   storeName: string;
   setStoreName: (storeName: string) => void;
-  orderId: string | null;
-  setOrderId: (orderId: string) => void;
+  orderIdList: string[];
+  addOrderId: (orderId: string) => void;
+  setOrderIdList: (list: string[]) => void;
   selectedMenu: MenuItemWithOption | null;
   setSelectedMenu: (menu: MenuItemWithOption | null) => void;
   selectedOptions: MenuOptionWithDetail[];
@@ -118,9 +119,10 @@ export const useOrderStore = create<OrderState>()(
       // 주문 타입 (togo, store)
       orderType: { type: null },
       setOrderType: orderType => set(() => ({ orderType })),
-      // 결제 승인시 토스에서 발급되는 orderId
-      orderId: null,
-      setOrderId: orderId => set(() => ({ orderId })),
+      // 결제 승인시 토스에서 발급되는 orderId를 List에 담는다. (여러 개 조회 가능)
+      orderIdList: [],
+      addOrderId: orderId => set(state => ({ orderIdList: [...state.orderIdList, orderId] })),
+      setOrderIdList: list => set(() => ({ orderIdList: list })),
       // 가게 이름
       storeName: '',
       setStoreName: storeName => set(() => ({ storeName })),
@@ -182,7 +184,7 @@ export const useOrderStore = create<OrderState>()(
       name: 'order-storage',
       storage: createJSONStorage(() => sessionStorage),
       partialize: state => ({
-        orderId: state.orderId,
+        orderIdList: state.orderIdList,
         orderType: state.orderType,
         storeId: state.storeId,
         orderNumber: state.orderNumber,
