@@ -13,13 +13,12 @@ interface managementType {
   orderStatus: string;
   tableNumber: string;
   orderConfirmData: OrderConfirmType[];
-  qrData: QRdataType[]
-  setOrderData: (value: OrderDataWithStoreName[]) => void
-  setOrderId: (value: { id: string[], status: string, number: string }) => void
-  addOrderConfirmData: (value: OrderConfirmType) => void
-  removeOrderConfirmData: (value: string) => void
-  setQrData: (value: QRdataType) => void
-  reSetQrData: () => void
+  qrData: QRdataType[];
+  setOrderData: (value: OrderDataWithStoreName[]) => void;
+  setOrderId: (value: { id: string[], status: string, number: string }) => void;
+  addOrderConfirmData: (value: OrderConfirmType) => void;
+  removeOrderConfirmData: (value: string) => void;
+  setQrData: (value: QRdataType) => void;
 }
 
 const useManagementStore = create<managementType>((set) => ({
@@ -50,10 +49,6 @@ const useManagementStore = create<managementType>((set) => ({
   setQrData: (value) =>
     set((state) => ({
       qrData: [...state.qrData, value]
-    })),
-  reSetQrData: () =>
-    set(() => ({
-      qrData: []
     }))
 }))
 
