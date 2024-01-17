@@ -1,4 +1,5 @@
 import { modeSubText, modeText } from '@/data/admin';
+import { useAuth } from '@/hooks/auth/useAuth';
 import useSideBar from '@/shared/store/sidebar';
 import useToggleState from '@/shared/store/toggle';
 import clsx from 'clsx';
@@ -16,6 +17,7 @@ const Sidebar = (adminInfo: AdminCategories) => {
   const isMode = useToggleState(state => state.isChecked);
   const targetRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  const { logout } = useAuth();
   const sidebarClass = clsx(styles.navWrapper, {
     [styles.closeNav]: !isSideBarOpen,
   });
@@ -51,21 +53,29 @@ const Sidebar = (adminInfo: AdminCategories) => {
 
   return (
     <aside className={sidebarClass} ref={targetRef}>
-      <div className={styles.closeButton}>
-        <CloseButton width={40} height={40} onClick={() => setIsSideBarOpen(false)} />
+      <div className={styles.contents}>
+        <div className={styles.closeButton}>
+          <CloseButton width={40} height={40} onClick={() => setIsSideBarOpen(false)} />
+        </div>
+        <div className={styles.toggleButton}>
+          <HeaderToggleButton />
+        </div>
+        <div className={styles.notification}>
+          <Ellipse width={8} height={8} />
+          {isMode ? modeText[0] : modeText[1]}
+        </div>
+        <p>{isMode ? modeSubText[0] : modeSubText[1]}</p>
+        <ul>
+          <SidebarList navList={navList} clickFn={clickNavListHandler} />
+        </ul>
       </div>
-      <div className={styles.toggleButton}>
-        <HeaderToggleButton />
+      <div className={styles.buttonWrapper}>
+        <button className={styles.callButton}>문의하기</button>
+        <p>|</p>
+        <button className={styles.logoutButton} onClick={() => logout()}>
+          로그아웃
+        </button>
       </div>
-      <div className={styles.notification}>
-        <Ellipse width={8} height={8} />
-        {isMode ? modeText[0] : modeText[1]}
-      </div>
-      <p>{isMode ? modeSubText[0] : modeSubText[1]}</p>
-      <ul>
-        <SidebarList navList={navList} clickFn={clickNavListHandler} />
-      </ul>
-      <div>{/* <button className={styles.logoutButton}>로그아웃</button> */}</div>
     </aside>
   );
 };
