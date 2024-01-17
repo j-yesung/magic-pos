@@ -11,8 +11,8 @@ import Ellipse from '/public/icons/ellipse.svg';
 const Sidebar = (adminInfo: AdminCategories) => {
   const [navList, setNavList] = useState(adminInfo.adminCategories);
   const { isSideBarOpen, setIsSideBarOpen } = useSideBar();
-  const { isToggle } = useToggleStore();
-  console.log('isToggle: ', isToggle);
+  const { isChecked } = useToggleStore();
+  console.log('isToggle: ', isChecked);
   const targetRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const sidebarClass = clsx(styles.navWrapper, {

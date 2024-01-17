@@ -4,23 +4,23 @@ import { useEffect } from 'react';
 import styles from '../styles/AdminLayout.module.css';
 
 const HeaderToggleButton = () => {
-  const { isToggle, changeToggle } = useToggleStore();
+  const { isChecked, changeToggle } = useToggleStore();
   const router = useRouter();
 
   useEffect(() => {
     const currentPath = router.asPath;
     const managementPath = '/admin/management';
 
-    if (isToggle && currentPath !== managementPath) {
+    if (isChecked && currentPath !== managementPath) {
       router.push(managementPath);
-    } else if (!isToggle && currentPath === managementPath) {
-      router.push('/admin/store');
+    } else if (!isChecked && currentPath === managementPath) {
+      router.push('/admin/table');
     }
-  }, [isToggle, router]);
+  }, [isChecked, router]);
 
   return (
     <div>
-      <input className={styles.toggle} type="checkbox" id="toggle" onChange={changeToggle} defaultChecked={isToggle} />
+      <input className={styles.toggle} type="checkbox" id="toggle" onChange={changeToggle} checked={isChecked} />
       <label className={styles.label} htmlFor="toggle" />
     </div>
   );
