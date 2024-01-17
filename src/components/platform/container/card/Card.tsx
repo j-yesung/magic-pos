@@ -1,16 +1,31 @@
 import { Tables } from '@/types/supabase';
+import { EditFormType } from '../Container';
 import Item from './item/Item';
 import styles from './styles/card.module.css';
 
 interface CardPropsType {
   fetchDataList: Tables<'platform'>[];
+  isEdit: boolean;
+  setEditTarget: React.Dispatch<React.SetStateAction<EditFormType>>;
+  setIsShowEditForm: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const Card = ({ fetchDataList }: CardPropsType) => {
+const Card = ({ fetchDataList, isEdit, setEditTarget, setIsShowEditForm }: CardPropsType) => {
   return (
     <div className={styles.cardContainer}>
       {fetchDataList.length >= 1 &&
         fetchDataList.map((card, idx) => {
-          return <Item key={`${card.link_url! + card.name! + idx}`} link={card.link_url!} title={card.name!} />;
+          return (
+            <Item
+              key={`${card.link_url! + card.name! + idx}`}
+              link={card.link_url!}
+              title={card.name!}
+              isEdit={isEdit}
+              id={card.id}
+              imgUrl={card.image_url}
+              setEditTarget={setEditTarget}
+              setIsShowEditForm={setIsShowEditForm}
+            />
+          );
         })}
     </div>
   );

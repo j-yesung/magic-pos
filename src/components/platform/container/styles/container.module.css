@@ -2,3 +2,57 @@
   position: relative;
   height: 100%;
 }
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: absolute;
+  top: 40rem;
+  padding: 2rem;
+  border-radius: 2rem;
+  border: 1px solid #ccc;
+  gap: 2.4rem;
+}
+
+.form-wrapper {
+  display: flex;
+  gap: 2rem;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+}
+.input {
+  width: 100%;
+  padding: 2rem;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+}
+.input:focus {
+  outline: none;
+  border: 2px solid #864af9;
+}
+.input::placeholder {
+  color: #ccc;
+  font-size: 1.3rem;
+}
+
+.button-group {
+  display: flex;
+  gap: 1.4rem;
+}
+
+.button {
+  all: unset;
+  padding: 2rem;
+  color: white;
+  background-color: #864af9;
+}
+.button p {
+  font-size: 1.4rem;
+}
