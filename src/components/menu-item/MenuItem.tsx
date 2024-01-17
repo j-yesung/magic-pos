@@ -31,7 +31,7 @@ const MenuItemPage = () => {
       price: 0,
       remain_ea: 0,
       recommended: false,
-      position: categoryWithMenuItem.menu_item[categoryWithMenuItem.menu_item.length - 1].position + 1,
+      position: categoryWithMenuItem.menu_item.length === 0 ? 0 : categoryWithMenuItem.menu_item[categoryWithMenuItem.menu_item.length - 1].position + 1,
     };
     const { data } = await addMenuItem(menuItemOmit);
     const newMenuItem: Tables<'menu_item'> = {
