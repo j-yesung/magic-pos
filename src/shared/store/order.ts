@@ -119,7 +119,7 @@ export const useOrderStore = create<OrderState>()(
       // 주문 타입 (togo, store)
       orderType: { type: null },
       setOrderType: orderType => set(() => ({ orderType })),
-      // 결제 승인시 토스에서 발급되는 orderIdList
+      // 결제 승인시 토스에서 발급되는 orderId를 List에 담는다. (여러 개 조회 가능)
       orderIdList: [],
       addOrderId: orderId => set(state => ({ orderIdList: [...state.orderIdList, orderId] })),
       setOrderIdList: list => set(() => ({ orderIdList: list })),

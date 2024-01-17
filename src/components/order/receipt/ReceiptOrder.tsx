@@ -11,9 +11,7 @@ const ReceiptOrder = ({ data }: { data: OrderDataWithStoreName }) => {
     <div>
       <ReceiptOrderHeader orderNumber={data.order_number} orderName={data.store.business_name} isTogo={data.is_togo} />
       {[...group].map(([key, value]) => (
-        <>
-          <ReceiptOrderRow key={key} itemList={value} />
-        </>
+        <ReceiptOrderRow key={key} itemList={value} />
       ))}
     </div>
   );

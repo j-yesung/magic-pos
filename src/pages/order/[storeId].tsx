@@ -40,21 +40,21 @@ const OrderIndexPage = ({
   useEffect(() => {
     if (orderIdList.length > 0) {
       (async () => {
-        let isOrdered = false;
+        let isOrderAllReady = true;
 
         if (storeOrderData?.data) {
-          if (storeOrderData.data?.length > 0 && !storeOrderData.data.find(d => d.is_done)) {
-            isOrdered = true;
+          if (storeOrderData.data?.length > 0 && storeOrderData.data.find(d => !d.is_done)) {
+            isOrderAllReady = false;
           }
         }
 
         if (numberOrderData?.data) {
-          if (numberOrderData.data?.length > 0 && !numberOrderData.data.find(d => d.is_done)) {
-            isOrdered = true;
+          if (numberOrderData.data?.length > 0 && numberOrderData.data.find(d => !d.is_done)) {
+            isOrderAllReady = false;
           }
         }
 
-        if (isOrdered) {
+        if (!isOrderAllReady) {
           MagicModal.confirm({
             content: '아직 준비 중인 메뉴가 있습니다. 추가로 주문 하시겠습니까?',
             confirmButtonText: '추가 주문 하기',
