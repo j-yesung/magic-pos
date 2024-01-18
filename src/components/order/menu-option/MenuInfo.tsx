@@ -12,7 +12,7 @@ const MenuInfo = () => {
         <h2>{selectedMenu?.name}</h2>
       </div>
       <div className={styles.priceWrapper}>
-        <span>가격</span>
+        <h3>가격</h3>
         <span>{convertNumberToWon(selectedMenu?.price ?? 0)}</span>
       </div>
     </div>

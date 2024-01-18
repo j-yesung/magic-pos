@@ -4,6 +4,7 @@
     align-items: flex-start;
     gap: 1rem  /* 10/10 */;
     margin: 1rem  /* 10/10 */;
+    font-size: 1.5rem;
 }
 
 .container div {
