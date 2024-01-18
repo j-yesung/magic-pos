@@ -27,9 +27,6 @@ const Cell = () => {
   } = useSalesStore();
   const { clickShowDataOfDateHandler } = useCalendar();
 
-  const CALENDAL_KEY = '/admin/sales/calendar';
-  const path = useRouter().pathname;
-
   const startDay = currentDate.clone().startOf('month').startOf('week'); // monthStart가 속한 주의 시작 주
   const endDay = currentDate.clone().endOf('month').endOf('week'); // monthStart가 속한 마지막 주
 
@@ -56,6 +53,7 @@ const Cell = () => {
     return sortedData;
   };
 
+  console.log(useRouter());
   useEffect(() => {
     if (path === CALENDAL_KEY)
       getMonthSales(currentDate.clone()).then(result => {
@@ -83,7 +81,9 @@ const Cell = () => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentDate]);
+  const CALENDAL_KEY = '/admin/sales/calendar';
 
+  const path = useRouter().pathname as '/admin/sales/status' | '/admin/sales/calendar';
   const option = {
     '/admin/sales/status': clickShowDataOfDateHandler,
     '/admin/sales/calendar': getMinMaxSalesType,

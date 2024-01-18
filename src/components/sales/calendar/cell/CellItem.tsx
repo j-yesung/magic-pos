@@ -8,7 +8,7 @@ import {
 } from '@/shared/helper';
 import useSalesStore from '@/shared/store/sales';
 import { cva } from 'class-variance-authority';
-import { Moment } from 'moment';
+import moment, { Moment } from 'moment';
 import { useRouter } from 'next/router';
 import styles from '../styles/calendar.module.css';
 import { CalendarDataType } from './Cell';
@@ -17,7 +17,7 @@ interface CellItemProps {
   day: Moment;
   salesData?: CalendarDataType;
   getMinMaxSalesType?: (param: CalendarDataType) => GetMinMaxSalesReturnType;
-  clickShowDataOfDateHandler?: (param: Moment) => () => Promise<void>;
+  clickShowDataOfDateHandler?: (day: moment.Moment) => () => Promise<void>;
 }
 
 type Cell = (param: CellItemProps) => JSX.Element;
