@@ -48,14 +48,8 @@ export const useCalendar = () => {
 
   // sales/stauts에서 click하면 calendar를 보여주는 함수
   const clickShowCalendarHandler = () => setIsShow(true);
-  const clickMoveYesterdayHandler = () => {
-    if (yesterDay === currentDate) return;
-    setCurrentDate(yesterDay);
-    setSelectedDate(yesterDay);
-  };
 
   const clickMoveTodayHandler = async () => {
-    if (today === currentDate) return;
     const { sales, formatType } = await getTodaySales(utcStandardDate.clone());
     if (sales.length !== 0) {
       const { result, recordData } = formatData(sales, formatType);
@@ -95,7 +89,6 @@ export const useCalendar = () => {
     clickPreMonthHandler,
     clickNextMonthHandler,
     clickShowCalendarHandler,
-    clickMoveYesterdayHandler,
     clickMoveTodayHandler,
     clickWeeksChartHandler,
     clickMonthsChartHandler,
