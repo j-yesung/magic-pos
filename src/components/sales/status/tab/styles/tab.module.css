@@ -1,25 +1,41 @@
 .wrapper {
-  position: relative;
-  margin-top: 1rem;
-  text-align: center;
-}
-
-.date {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  gap: 15rem;
+  position: relative;
+}
+
+.date-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.1rem;
+}
+
+.date-button {
+  display: flex;
+  padding: 1rem 2rem;
+  align-items: flex-start;
   gap: 1rem;
+  border-radius: 5rem;
 }
 
-.date span {
-  cursor: pointer;
+.calendar-wrapper {
+  display: flex;
+  height: 3.5rem;
   padding: 1rem;
-  border: 1px solid orange;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 1rem;
+  border: 1px solid var(--bg, #f2f2f2);
 }
 
-.calendar {
-  display: inline-block;
-  margin: 1rem;
-  padding: 1rem;
-  cursor: pointer;
-  border: 1px solid var(--main-color);
+.calendar-icon {
+  color: #000;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.2rem; /* 100% */
 }

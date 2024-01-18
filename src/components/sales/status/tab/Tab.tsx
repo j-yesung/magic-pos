@@ -13,19 +13,25 @@ const Tab = () => {
     useCalendar();
 
   return (
-    <div className={styles['wrapper']}>
-      <div className={styles['date']}>
-        <span onClick={clickMoveTodayHandler}>오늘</span>
-        <span onClick={clickWeeksChartHandler}>이번 주</span>
-        <span onClick={clickMonthsChartHandler}>이번 달</span>
+    <div className={styles.wrapper}>
+      <div className={styles.dateWrapper}>
+        <span className={styles.dateButton} onClick={clickMoveTodayHandler}>
+          오늘
+        </span>
+        <span className={styles.dateButton} onClick={clickWeeksChartHandler}>
+          이번 주
+        </span>
+        <span className={styles.dateButton} onClick={clickMonthsChartHandler}>
+          이번 달
+        </span>
       </div>
 
       {isShow ? (
         <Calendar />
       ) : (
-        <span className={styles['calendar']} onClick={clickShowCalendarHandler}>
-          {currentDate.clone().format('YYYY년 MM월 DD일')}
-        </span>
+        <div className={styles.calendarWrapper} onClick={clickShowCalendarHandler}>
+          <div className={styles.calendarIcon}>{currentDate.clone().format('YYYY년 MM월 DD일')} icon자리</div>
+        </div>
       )}
     </div>
   );

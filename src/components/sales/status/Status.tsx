@@ -6,8 +6,8 @@ import moment from 'moment';
 import { useEffect } from 'react';
 import ChartBar from './chart/ChartBar';
 import Record from './record/Record';
+import styles from './styles/status.module.css';
 import Tab from './tab/Tab';
-
 const Status = () => {
   const {
     date: { utcStandardDate },
@@ -28,7 +28,7 @@ const Status = () => {
   }, []);
 
   return (
-    <div>
+    <div className={styles.statusContainer}>
       <Tab />
       <Record />
       <ChartBar />
