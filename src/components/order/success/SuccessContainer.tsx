@@ -64,7 +64,7 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   useEffect(() => {
     if (payment?.status === 'DONE' && storeId && orderNumber > 0) {
       const orderData = {
-        order_number: useOrderStore.getState().orderNumber,
+        order_number: orderNumber,
         store_id: storeId,
         menu_list: orderList.map(order => JSON.parse(JSON.stringify(order))),
         order_time: payment.approvedAt,
