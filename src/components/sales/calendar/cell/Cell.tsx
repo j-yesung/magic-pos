@@ -5,8 +5,8 @@ import useSalesStore from '@/shared/store/sales';
 import { Tables } from '@/types/supabase';
 import moment from 'moment';
 import { useEffect } from 'react';
-import styles from '../styles/calendar.module.css';
 import CellItem from './CellItem';
+import styles from './styles/cell.module.css';
 
 type FormatCalendarReturnType = (data: Map<string, Tables<'sales'>[]>) => { sales: number; date: string }[];
 export interface CalendarDataType {

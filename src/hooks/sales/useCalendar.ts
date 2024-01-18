@@ -5,7 +5,7 @@ import { Moment } from 'moment';
 
 export const useCalendar = () => {
   const {
-    date: { currentDate, today, yesterDay, utcStandardDate },
+    date: { currentDate, today, utcStandardDate },
     setCurrentDate,
     setIsShow,
     setSelectedDate,

@@ -1,0 +1,15 @@
+/*
+달력 한 줄의 css
+*/
+
+.calendar-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1rem;
+}
+
+.calendar-body {
+  display: grid;
+  gap: 1rem;
+  text-align: center;
+}

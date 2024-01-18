@@ -1,5 +1,11 @@
 .days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 1rem;
+  margin: 1rem 0;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.day {
+  padding: 1rem;
 }

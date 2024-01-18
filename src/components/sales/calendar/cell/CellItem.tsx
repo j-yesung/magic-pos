@@ -9,8 +9,8 @@ import {
 import useSalesStore from '@/shared/store/sales';
 import { cva } from 'class-variance-authority';
 import moment, { Moment } from 'moment';
-import styles from '../styles/calendar.module.css';
 import { CalendarDataType } from './Cell';
+import styles from './styles/cellItem.module.css';
 
 interface CellItemProps {
   day: Moment;
@@ -47,6 +47,9 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
       selectedDateType: {
         SELECTEDTYPE: styles.pointDate,
       },
+      componentType: {
+        CALENDAR: styles.calendarCell,
+      },
     },
   });
 
@@ -70,6 +73,9 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
   });
 
   const POINT = 'SELECTEDTYPE';
+
+  const COMPONENT_TYPE = 'CALENDAR';
+
   const formatDate = day.clone().format('YY MM D').substring(6);
 
   return (
@@ -78,7 +84,8 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
         calendarType: getCalendarType(day, currentDate),
         monthType: getMonthType(day, currentDate),
         dateType: getDateType(day),
-        selectedDateType: day.isSame(selectedDate, 'day') ? POINT : undefined,
+        selectedDateType: isChangeView && day.isSame(selectedDate, 'day') ? POINT : null,
+        componentType: !isChangeView ? COMPONENT_TYPE : null,
       })}
       onClick={
         isChangeView

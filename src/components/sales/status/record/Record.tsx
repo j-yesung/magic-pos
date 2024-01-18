@@ -14,10 +14,10 @@ const Record = () => {
     weeks: '이번 주',
     month: '이번 달',
   } as const;
-
   return (
-    <div className={styles.container}>
-      {SALES_TYPE[record.dateType as keyof typeof SALES_TYPE]}의 매출은 {convertNumberToWon(record.currentSales)}
+    <div className={styles.recordContainer}>
+      {SALES_TYPE[record.dateType as keyof typeof SALES_TYPE]}의 매출은
+      <span className={styles.recordSales}>{convertNumberToWon(record.currentSales)}</span>
     </div>
   );
 };
