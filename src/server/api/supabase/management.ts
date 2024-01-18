@@ -1,5 +1,7 @@
 import { supabase } from '@/shared/supabase';
 import { OrderConfirmType } from '@/types/common';
+import { StoreWithOrderInfo } from '@/types/supabase';
+import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
 
 export const fetchManagement = async (id?: string) => {
   if (id) {
@@ -23,3 +25,23 @@ export const updateIsDone = async (orderData: OrderConfirmType[]) => {
     if (error) throw new Error(error.message);
   }
 }
+
+export const submitDetectedOrder = async (
+  storeId: string,
+  refetch: (options?: RefetchOptions | undefined) =>
+    Promise<QueryObserverResult<StoreWithOrderInfo[] | undefined, Error>>
+) => {
+  supabase
+    .channel('order_store')
+    .on(
+      'postgres_changes',
+      { event: 'INSERT', schema: 'public', table: 'order_store', filter: `store_id=eq.${storeId}` },
+      payload => {
+        refetch();
+      },
+    )
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'order_number', filter: `store_id=eq.${storeId}` }, payload => {
+      refetch();
+    })
+    .subscribe();
+};

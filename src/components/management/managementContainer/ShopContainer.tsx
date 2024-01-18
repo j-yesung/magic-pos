@@ -17,14 +17,11 @@ const ShopContainer = ({ managementData }: { managementData?: StoreWithOrderInfo
 
   return (
     <div className={styles['shop-container']}>
-      <div className={styles['shop-title']}>매장 주문</div>
-      <ul className={styles['shop-list']}>
-        {
-          storeTableSort?.map((item: Tables<'store_table'>) => {
-            return <ShopListItem key={item.id} storeOrderData={storeOrder} shopData={item} />
-          })
-        }
-      </ul>
+      {
+        storeTableSort?.map((item: Tables<'store_table'>, index: number) => {
+          return <ShopListItem key={item.id} index={index} storeOrderData={storeOrder} shopData={item} />
+        })
+      }
     </div>
   )
 }

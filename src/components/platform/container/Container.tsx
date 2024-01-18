@@ -149,7 +149,6 @@ const Container = () => {
     comparedData.createdAt = editData.createdAt;
     if (comparedData.file) {
       if (editRef.current?.image_url) await removePlatFormImage(editRef.current);
-      console.log(comparedData);
       await uploadPlatFormImage(comparedData);
       const { publicUrl: image_url } = downloadPlatFormImageUrl(addForm);
       comparedData = {

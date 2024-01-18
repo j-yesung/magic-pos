@@ -7,11 +7,16 @@ const enum QUERY_KEY {
 }
 
 const useFetchManagement = (id?: string) => {
-  const { data, isLoading, isError, error } = useQuery({
+
+  const { data, isError, isLoading, error, refetch } = useQuery({
     queryKey: [QUERY_KEY.TABLE],
     queryFn: () => fetchManagement(id),
-    enabled: !!id,
   });
+
+
+
+
+
 
   useEffect(() => {
     if (isError) {
@@ -19,7 +24,7 @@ const useFetchManagement = (id?: string) => {
     }
   }, [isError, error]);
 
-  return { data, isLoading };
+  return { data, isLoading, refetch };
 };
 
 export default useFetchManagement;
