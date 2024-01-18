@@ -38,7 +38,7 @@ const ChartBar = () => {
   const { data } = useSalesStore();
 
   return (
-    <div className={styles['bar-wrapper']}>
+    <div className={styles.barWrapper}>
       {data.length !== 0 && (
         <Bar
           data={{
