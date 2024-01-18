@@ -1,4 +1,3 @@
-import useFetchManagement from '@/hooks/management/useFetchManagement';
 import useFetchCategories from '@/hooks/menu/useCategories';
 import useAuthStore from '@/shared/store/auth';
 import useCategoriesStore from '@/shared/store/menu-category';
@@ -7,11 +6,8 @@ import CategoryComponentPage from './Category';
 import CategoryFormPage from './Form';
 
 const CategoriesComponentPage = () => {
-  const { auth } = useAuthStore();
-  const id = auth?.user.id;
-  const { data: managementData } = useFetchManagement(id);
-  const storeId = managementData?.[0]?.id ?? '';
-  const { data: categoreisData } = useFetchCategories(storeId);
+  const { storeId } = useAuthStore();
+  const { data: categoreisData } = useFetchCategories(storeId ?? '');
   const { category, setCategory, setCategories } = useCategoriesStore();
 
   useEffect(() => {

@@ -1,4 +1,3 @@
-import useFetchManagement from '@/hooks/management/useFetchManagement';
 import useFetchCategoryWithMenu from '@/hooks/menu/useCategoryWithMenu';
 import useFetchMenuOptions from '@/hooks/menu/useMenuOptions';
 import { fetchMenuOptions } from '@/server/api/supabase/menu-item';
@@ -10,11 +9,8 @@ import MenuItemListPage from './MenuItemList';
 import styles from './styles/menu-item-container.module.css';
 
 const MenuItemsComponentPage = () => {
-  const { auth } = useAuthStore();
-  const id = auth?.user.id;
-  const { data: managementData } = useFetchManagement(id);
-  const storeId = managementData?.[0]?.id ?? '';
-  const { data: categoryWithMenuData } = useFetchCategoryWithMenu(storeId);
+  const { storeId } = useAuthStore();
+  const { data: categoryWithMenuData } = useFetchCategoryWithMenu(storeId ?? '');
   const { data: menuOptionData } = useFetchMenuOptions();
 
   const {
@@ -33,7 +29,7 @@ const MenuItemsComponentPage = () => {
       setCategoryWithMenuItem({
         ...categoryWithMenuItem,
         id: categoryWithMenuData?.data[0].id, // 초기값 첫 카테고리 선택
-        store_id: storeId,
+        store_id: storeId ?? '',
         position: categoryWithMenuData?.data.length,
         menu_item: categoryWithMenuData?.data[0].menu_item, // 초기값 첫 카테고리 선택
       });
