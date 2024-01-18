@@ -82,7 +82,7 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
         calendarType: getCalendarType(day, currentDate),
         monthType: getMonthType(day, currentDate),
         dateType: getDateType(day),
-        selectedDateType: day.isSame(selectedDate, 'day') ? POINT : null,
+        selectedDateType: isChangeView && day.isSame(selectedDate, 'day') ? POINT : null,
         componentType: !isChangeView ? COMPONENT_TYPE : null,
       })}
       onClick={

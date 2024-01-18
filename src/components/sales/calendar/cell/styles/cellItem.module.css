@@ -25,7 +25,7 @@
     */
 .prev-month {
   opacity: 0.5;
-  background-color: #353131;
+  background-color: #7f60d6e8;
 }
 
 .current-month {
@@ -80,16 +80,17 @@
   display: block;
   margin-top: 1rem;
   color: #000;
-  font-size: 1rem;
+  font-size: 1.4rem;
   height: 3rem;
+  font-weight: bold;
 }
 
 .sales-max {
   color: rgb(150, 185, 20);
-  font-size: 1.4rem;
+  font-size: 1.8rem;
 }
 
 .sales-min {
   color: rgb(24, 77, 224);
-  font-size: 1.4rem;
+  font-size: 1.8rem;
 }

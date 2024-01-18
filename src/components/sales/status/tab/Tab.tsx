@@ -8,11 +8,13 @@ const Tab = () => {
   const {
     date: { currentDate },
     isShow,
+    setIsShow,
   } = useSalesStore();
 
   const { clickMoveTodayHandler, clickWeeksChartHandler, clickMonthsChartHandler, clickShowCalendarHandler } =
     useCalendar();
 
+  const clickCloseCalendar = () => setIsShow(false);
   return (
     <div className={styles.wrapper}>
       <div className={styles.dateWrapper}>
@@ -27,6 +29,8 @@ const Tab = () => {
         </span>
       </div>
       <Record />
+
+      {isShow && <div className={styles.calendarBg} onClick={clickCloseCalendar}></div>}
       {isShow ? (
         <Calendar />
       ) : (
