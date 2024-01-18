@@ -1,34 +1,23 @@
-import { addCategory, updateCategoryPosition } from '@/server/api/supabase/menu-category';
+import { updateCategoryPosition } from '@/server/api/supabase/menu-category';
 import useCategoriesStore from '@/shared/store/menu-category';
+import { Tables } from '@/types/supabase';
 import { useRef } from 'react';
 import styles from './styles/category.module.css';
 
 const CategoryComponentPage = () => {
-  const { toggleShow, category, setCategory, categories, addCategoryStore, dragCategoryStore } = useCategoriesStore();
+  const { toggleShow, setIsEdit, setCategory, categories, dragCategoryStore } = useCategoriesStore();
 
   // 카테고리 플러스
   const clickAddCategoryHandler = async () => {
+    setIsEdit(false);
     toggleShow(true);
-    const emptyValue = `카테고리를 수정해주세요 ${categories.length}`;
-    const { data } = await addCategory(category.store_id, emptyValue, categories.length);
-    setCategory({
-      id: data[0].id,
-      name: data[0].name || '',
-      store_id: data[0].store_id,
-      position: data[0].position || 0,
-    });
-    addCategoryStore(category);
   };
 
   // 카테고리 선택
-  const clickChoiceCategoryHandler = (item: CategoryType) => {
+  const clickChoiceCategoryHandler = (item: Tables<'menu_category'>) => {
+    setIsEdit(true);
     toggleShow(true);
-    setCategory({
-      id: item.id,
-      name: item.name,
-      store_id: item.store_id,
-      position: item.position,
-    });
+    setCategory({ id: item.id, name: item.name, store_id: item.store_id, position: item.position });
   };
 
   // 드래그 이벤트
@@ -51,8 +40,7 @@ const CategoryComponentPage = () => {
     const dragItemValue = newList[dragItemRef.current];
     const dragOverValue = newList[dragOverRef.current];
     dragCategoryStore(dragItemValue, dragOverValue);
-    await updateCategoryPosition(dragItemValue.id, dragOverValue.position);
-    await updateCategoryPosition(dragOverValue.id, dragItemValue.position);
+    await updateCategoryPosition(dragItemValue, dragOverValue);
     dragItemRef.current = 0;
     dragOverRef.current = 0;
   };

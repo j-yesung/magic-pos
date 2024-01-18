@@ -3,12 +3,12 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 
 const enum QUERY_KEY {
-  TABLE = 'categoryWithMenu',
+  MENU_CATEGORY_WITH_ITEM = 'categoryWithMenu',
 }
 
 const useFetchCategoryWithMenu = (id: string) => {
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: [QUERY_KEY.TABLE],
+    queryKey: [QUERY_KEY.MENU_CATEGORY_WITH_ITEM],
     queryFn: () => fetchCategoriesWithMenuItemByStoreId(id),
     enabled: !!id,
   });
