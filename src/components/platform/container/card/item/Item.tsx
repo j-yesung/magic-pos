@@ -38,7 +38,9 @@ const Item = ({ link, title, isEdit, id, setEditTarget, imgUrl, setIsShowEditFor
       >
         {imgUrl ? <Image src={imgUrl} width={100} height={100} alt={title ?? 'default_img'} /> : <Default />}
 
-        <div>{title}</div>
+        <div className={styles.itemHeader}>
+          <span className={styles.itemTitle}>{title}</span>
+        </div>
       </Link>
       {isEdit && <span onClick={editForm} className={styles.edit}></span>}
     </div>

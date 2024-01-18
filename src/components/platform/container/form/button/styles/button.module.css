@@ -3,7 +3,9 @@
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
-  margin-bottom: 2rem;
+  position: absolute;
+  right: 0;
+  top: -18rem;
 }
 
 .button-group button {
