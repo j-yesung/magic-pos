@@ -27,3 +27,10 @@ export const UPDATE_PASSWORD_DATA = {
   buttonName: '비밀번호 변경',
   description: '새로운 비밀번호를 입력해 주세요.',
 };
+export const SIGNUP_SUCCESS_DATA = {
+  title: '편리함의 시작',
+  subTitle: 'Magic Pos',
+  description: '회원가입을 환영합니다!',
+  subDescription: '지금 바로 매직포스를 시작해 볼까요?',
+  buttonName: '시작하기',
+};

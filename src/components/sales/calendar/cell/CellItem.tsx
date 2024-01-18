@@ -9,7 +9,6 @@ import {
 import useSalesStore from '@/shared/store/sales';
 import { cva } from 'class-variance-authority';
 import moment, { Moment } from 'moment';
-import { useRouter } from 'next/router';
 import styles from '../styles/calendar.module.css';
 import { CalendarDataType } from './Cell';
 
@@ -69,10 +68,8 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
       },
     },
   });
-  // path '/admin/sales/calendar' , '/admin/sales/status'
-  const STATUS_KEY = '/admin/sales/status';
+
   const POINT = 'SELECTEDTYPE';
-  const path = useRouter().pathname;
   const formatDate = day.clone().format('YY MM D').substring(6);
 
   return (
@@ -84,7 +81,7 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
         selectedDateType: day.isSame(selectedDate, 'day') ? POINT : undefined,
       })}
       onClick={
-        !isChangeView
+        isChangeView
           ? day.isSame(today, 'D') || day.isBefore(today, 'D')
             ? clickShowDataOfDateHandler?.(day.clone())
             : undefined
@@ -105,7 +102,7 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
           sales: salesData && getMinMaxSalesType?.(salesData),
         })}
       >
-        {isChangeView && salesData?.sales && convertNumberToWon(salesData.sales)}
+        {!isChangeView && salesData?.sales && convertNumberToWon(salesData.sales)}
       </span>
     </div>
   );
