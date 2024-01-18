@@ -8,10 +8,11 @@ export const addStoreOrder = async (item: Omit<Tables<'order_store'>, 'id'>) => 
   return { data, error };
 };
 
-export const fetchStoreOrderByOrderIdWithStoreName = async (orderIdList: string[]) => {
+export const fetchStoreOrderByOrderIdWithStoreName = async (orderIdList: string[], storeId: string) => {
   const { data, error } = await supabase
     .from('order_store')
     .select('*, store(business_name)')
+    .eq('store_id', storeId)
     .filter('order_id', 'in', `(${orderIdList.join(',')})`);
   return { data, error };
 };
