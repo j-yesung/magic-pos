@@ -203,7 +203,7 @@
 
 /* 메인 영역입니다. */
 .main-wrapper {
-  padding: 8rem 8rem 0 8rem;
+  padding: 8rem 10rem 0 10rem;
   border-radius: 2rem;
   height: calc(100vh - 10rem);
   transition: all 0.4s;

@@ -4,8 +4,8 @@ import html2canvas from "html2canvas";
 
 const useQRCodeDownLoad = () => {
 
-  const QRDownload = async ({ qrRef, qrUrl, orderType }: QRdataType) => {
-    if (!qrRef || qrUrl) {
+  const QRDownload = async ({ qrRef, orderType }: QRdataType) => {
+    if (!qrRef) {
       try {
         const canvas = await html2canvas(qrRef, { scale: 2 });
         canvas.toBlob((blob) => {

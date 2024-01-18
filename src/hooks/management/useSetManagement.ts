@@ -1,12 +1,10 @@
 import { updateIsDone } from "@/server/api/supabase/management";
-import useManagementStore from "@/shared/store/management";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useRef } from "react";
 
 const useSetManagement = () => {
   const didMount = useRef(false);
   const queryClient = useQueryClient();
-  const { setIsModal } = useManagementStore()
 
   const {
     mutate, isError, error, isPending } = useMutation({
@@ -15,6 +13,11 @@ const useSetManagement = () => {
         queryClient.invalidateQueries({ queryKey: ['management'] });
       },
     });
+
+
+
+
+
 
 
   useEffect(() => {
@@ -34,7 +37,7 @@ const useSetManagement = () => {
     }
   }, [isError, error]);
 
-  return { mutate };
+  return { mutate, reData };
 }
 
 export default useSetManagement;

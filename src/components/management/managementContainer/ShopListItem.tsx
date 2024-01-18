@@ -43,8 +43,8 @@ const ShopListItem = ({ shopData, index, storeOrderData }: propsType) => {
 
 
   return (
-    <div className={clsx(styles['shop-list-item'], index % 6 === 5 && styles['list-item-row'])} onClick={clickOrderDataReFetchHandler}>
-      {/* <div className={styles['item-table']}>테이블 {shopData.position}</div>
+    <div className={clsx(styles['shop-list-item'], index % 3 === 2 && styles['list-item-row'])} onClick={clickOrderDataReFetchHandler}>
+      <div className={styles['item-table']}>테이블 {shopData.position}</div>
       <div className={styles['item-order-number']}>
         <span>
           <span>주문 번호</span>
@@ -54,7 +54,7 @@ const ShopListItem = ({ shopData, index, storeOrderData }: propsType) => {
             })
           }</span>
       </div>
-      <div className={styles['item-status']}>매뉴 준비중</div> */}
+      <div className={styles['item-status']}>매뉴 준비중</div>
     </div>
   )
 }
