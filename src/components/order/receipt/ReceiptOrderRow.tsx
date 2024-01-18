@@ -4,12 +4,10 @@ import Image from 'next/image';
 import clsx from 'clsx';
 import { MenuItemWithOption } from '@/types/supabase';
 import { convertNumberToWon, groupByKey } from '@/shared/helper';
-import useOrderStore from '@/shared/store/order';
 import CartOptionRow from '@/components/order/cart/CartOptionRow';
+import { getOptionPriceByList } from '@/shared/store/order';
 
 const ReceiptOrderRow = ({ itemList }: { itemList: MenuItemWithOption[] }) => {
-  const getOptionPriceByList = useOrderStore(state => state.getOptionPriceByList);
-
   const group = groupByKey<MenuItemWithOption>(itemList, 'unique');
 
   return (

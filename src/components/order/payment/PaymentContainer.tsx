@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import styles from './styles/PaymentContainer.module.css';
-import useOrderStore from '@/shared/store/order';
+import useOrderStore, { getTotalPrice } from '@/shared/store/order';
 import { usePaymentWidget } from '@/hooks/order/usePaymentWidget';
 
 /**
@@ -10,7 +10,7 @@ import { usePaymentWidget } from '@/hooks/order/usePaymentWidget';
 const PaymentContainer = () => {
   const paymentMethodsWidgetRef = useRef<PaymentMethodsWidget>();
   const { paymentWidget } = usePaymentWidget();
-  const { getTotalPrice, orderList } = useOrderStore.getState();
+  const orderList = useOrderStore(state => state.orderList);
 
   useEffect(() => {
     if (paymentWidget == null) {

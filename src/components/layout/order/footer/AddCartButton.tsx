@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './styles/StepButton.module.css';
-import useOrderStore from '@/shared/store/order';
+import useOrderStore, { addOrderList, resetSelectedMenu } from '@/shared/store/order';
 import { MenuItemWithOption } from '@/types/supabase';
 import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButton';
 
@@ -10,11 +10,9 @@ import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButton';
  * @constructor
  */
 const AddCartButton = ({ menu }: { menu: MenuItemWithOption | null }) => {
-  const addOrderList = useOrderStore(state => state.addOrderList);
   const optionSwiperRef = useOrderStore(state => state.optionSwiperRef);
   const selectedOptions = useOrderStore(state => state.selectedOptions);
   const amount = useOrderStore(state => state.amount);
-  const resetSelectedMenu = useOrderStore(state => state.resetSelectedMenu);
 
   /**
    * 주문 목록에 메뉴를 담는다.

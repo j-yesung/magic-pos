@@ -5,7 +5,7 @@ import OrderLayout from '@/components/layout/order/OrderLayout';
 import { fetchCategoriesWithMenuItemByStoreId } from '@/server/api/supabase/menu-category';
 import { GetServerSideProps } from 'next';
 import { CategoryWithMenuItemWithStore } from '@/types/supabase';
-import useOrderStore from '@/shared/store/order';
+import useOrderStore, { resetOrderList, setMenuData, setStoreId, setStoreName, setTableId } from '@/shared/store/order';
 import { isEmptyObject } from '@/shared/helper';
 import { useRouter } from 'next/router';
 import OrderContainer from '@/components/order/OrderContainer';
@@ -22,12 +22,7 @@ const OrderIndexPage = ({
   storeId: string;
   tableId: string;
 }) => {
-  const setMenuData = useOrderStore(state => state.setMenuData);
-  const setStoreId = useOrderStore(state => state.setStoreId);
-  const setTableId = useOrderStore(state => state.setTableId);
   const orderIdList = useOrderStore(state => state.orderIdList);
-  const resetOrderList = useOrderStore(state => state.resetOrderList);
-  const setStoreName = useOrderStore(state => state.setStoreName);
 
   const { storeOrderData } = useStoreOrderQuery(orderIdList);
   const { numberOrderData } = useNumberOrderQuery(orderIdList);

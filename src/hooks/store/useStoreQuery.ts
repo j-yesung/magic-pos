@@ -1,5 +1,5 @@
 import { incrementOrderNumber, updateStoreTime } from '@/server/api/supabase/store';
-import useOrderStore from '@/shared/store/order';
+import { setOrderNumber } from '@/shared/store/order';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const enum StoreKey {
@@ -10,7 +10,6 @@ const enum StoreKey {
  * supabase store table CRUD hook
  */
 export const useStoreQuery = () => {
-  const setOrderNumber = useOrderStore(state => state.setOrderNumber);
   const queryClient = useQueryClient();
 
   const incrementOrderNumberMutation = useMutation({
