@@ -20,13 +20,14 @@ export interface CalendarDataType {
 type SortMinMaxDataReturnType = (target: CalendarDataType[]) => CalendarDataType[];
 const Cell = () => {
   const {
-    date: { currentDate },
+    date: { currentDate, today },
     setCalendarData,
     calendarData,
     setSalesSum,
     isChangeView,
+    setCurrentDate,
   } = useSalesStore();
-  const { clickShowDataOfDateHandler } = useCalendar();
+  const { clickShowDataOfDateHandler, clickMoveTodayHandler } = useCalendar();
 
   const startDay = currentDate.clone().startOf('month').startOf('week'); // monthStart가 속한 주의 시작 주
   const endDay = currentDate.clone().endOf('month').endOf('week'); // monthStart가 속한 마지막 주
@@ -89,6 +90,12 @@ const Cell = () => {
     '/admin/sales/status': clickShowDataOfDateHandler,
     '/admin/sales/calendar': getMinMaxSalesType,
   };
+
+  useEffect(() => {
+    return () => {
+      setCurrentDate(today);
+    };
+  }, []);
 
   const row = [];
   let days = [];
