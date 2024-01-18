@@ -2,6 +2,9 @@ import { supabase } from '@/shared/supabase';
 import { OrderConfirmType } from '@/types/common';
 import { StoreWithOrderInfo } from '@/types/supabase';
 import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
+import { RefObject } from 'react';
+
+
 
 export const fetchManagement = async (id?: string) => {
   if (id) {
@@ -30,32 +33,28 @@ export const submitDetectedOrder = async (
   storeId: string,
   refetch: (options?: RefetchOptions | undefined) =>
     Promise<QueryObserverResult<StoreWithOrderInfo[] | undefined, Error>>,
-  toast: (content: string, option: Omit<ToastTypeOption, "id" | "content" | "animation">) => void
+  toast: (content: string, option: Omit<ToastTypeOption, "id" | "content" | "animation">) => void,
+  audioRef: RefObject<HTMLButtonElement>
 ) => {
-  toast
+  const payloadFunction = (orderNumber: number) => {
+    audioRef.current?.click();
+    toast(`주문번호${orderNumber}번이 요청되었습니다.`, {
+      type: 'info',
+      position: 'top-right',
+      showCloseButton: false,
+      autoClose: 5000,
+    });
+    refetch();
+  }
+
   supabase
     .channel('order_store')
     .on(
       'postgres_changes',
       { event: 'INSERT', schema: 'public', table: 'order_store', filter: `store_id=eq.${storeId}` },
-      payload => {
-        toast(`주문번호${payload.new.order_number}번이 요청되었습니다.`, {
-          type: 'info',
-          position: 'top-right',
-          showCloseButton: false,
-          autoClose: 5000,
-        });
-        refetch();
-      },
+      payload => { payloadFunction(payload.new.order_number) },
     )
-    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'order_number', filter: `store_id=eq.${storeId}` }, payload => {
-      toast(`주문번호${payload.new.order_number}번이 요청되었습니다.`, {
-        type: 'info',
-        position: 'top-right',
-        showCloseButton: false,
-        autoClose: 5000,
-      });
-      refetch();
-    })
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'order_number', filter: `store_id=eq.${storeId}` },
+      payload => { payloadFunction(payload.new.order_number) })
     .subscribe();
 };
