@@ -65,11 +65,11 @@ const Tab = () => {
       )}
 
       {!isShow && (
-        <>
+        <Fragment>
           <div className={styles.calendarWrapper} onClick={clickShowCalendarHandler}>
             <div className={styles.calendarIcon}>{currentDate.clone().format('YYYY년 MM월 DD일')} icon자리</div>
           </div>
-        </>
+        </Fragment>
       )}
     </div>
   );
