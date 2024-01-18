@@ -4812,6 +4812,7 @@ __metadata:
     react-chartjs-2: "npm:^5.2.0"
     react-dom: "npm:^18"
     react-i18next: "npm:^14.0.0"
+    react-icons: "npm:^5.0.1"
     react-intersection-observer: "npm:^9.5.3"
     styled-components: "npm:^6.1.6"
     supabase: "npm:1.127.4"
@@ -5439,6 +5440,15 @@ __metadata:
     react-native:
       optional: true
   checksum: 923990e941cdc9ca73bb34fca8a408f850c6ce7ca490661d83c808c5a91f33997882d40e0d2da64664c91a064e12002164c8dd843d75542a7e7e261a3d4198d8
+  languageName: node
+  linkType: hard
+
+"react-icons@npm:^5.0.1":
+  version: 5.0.1
+  resolution: "react-icons@npm:5.0.1"
+  peerDependencies:
+    react: "*"
+  checksum: 717022d93a3b2b30082f86fbb3c725a94a603b3fa1c611533439cc886f691a13b1833c30446d257a177667779239eac57411fa7516d8a4787bd735e965c9f63d
   languageName: node
   linkType: hard
 
