@@ -1,0 +1,16 @@
+/*등록,수정,삭제 버튼*/
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.button-group button {
+  all: unset;
+  padding: 0.8rem 1.2rem;
+  text-align: center;
+  border-radius: 0.5rem;
+  background: var(--bg-p, #f3edff);
+  cursor: pointer;
+}
