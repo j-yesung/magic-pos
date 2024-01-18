@@ -1,13 +1,41 @@
 .container {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 1.4rem;
   padding: 1rem;
-  background-color: #ccc;
+  margin-bottom: 6rem;
+}
+
+.sales-grade {
+  display: flex;
+  gap: 4rem;
+  margin-right: 6rem;
+}
+
+.grade-color {
+  position: relative;
+}
+
+.grade-color::before {
+  content: '';
+  position: absolute;
+  top: 0.1rem;
+  left: -1.4rem;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+}
+.grade-max::before {
+  background-color: rgb(150, 185, 20);
+}
+
+.grade-min::before {
+  background-color: rgb(24, 77, 224);
 }
 
 .sumSales {
   display: flex;
   gap: 1rem;
-  width: 18rem;
+  font-size: 1.8rem;
 }

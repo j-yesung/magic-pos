@@ -1,22 +1,45 @@
 .header {
   display: flex;
+  width: 100%;
+  align-items: center;
+  border-bottom: 1px solid #fff;
+  margin-bottom: 0.8rem;
+  padding-bottom: 1.2rem;
+}
+
+.status-header {
   justify-content: space-between;
 }
 
-.header-text {
-  display: felx;
-  gap: 1rem;
+.calendar-header {
+  justify-content: center;
+  gap: 2rem;
 }
 
-.btn-group {
-  border: 1px solid #000;
-  padding: 1rem;
+.header-text {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.4rem;
+  color: var(--text1);
+}
+
+.text-year {
+  font-size: 2rem;
 }
 
 .btn-group span {
-  cursor: pointer;
-  border: 1px solid red;
-  padding: 1rem;
-  display: inline-block;
+  border: 1px solid var(--point-100);
+  padding: 0.8rem 1.4rem;
   margin-right: 1rem;
+  display: inline-block;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btn-group span:hover {
+  border: 1px solid transparent;
+  color: var(--text5);
+  background-color: var(--main-color-hover);
+  transition: all 0.5s;
 }

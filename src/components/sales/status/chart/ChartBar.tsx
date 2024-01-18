@@ -38,7 +38,7 @@ const ChartBar = () => {
   const { data } = useSalesStore();
 
   return (
-    <div className={styles['bar-wrapper']}>
+    <div className={styles.barWrapper}>
       {data.length !== 0 && (
         <Bar
           data={{
@@ -61,7 +61,7 @@ const ChartBar = () => {
               },
             },
             layout: {
-              padding: 20,
+              padding: 50,
             },
             scales: {
               x: {
@@ -72,6 +72,12 @@ const ChartBar = () => {
                 },
                 grid: {
                   display: false, // chartBackgroundArea의 세로선
+                },
+                ticks: {
+                  font: {
+                    size: 18, // x 축 font-size
+                    // family:'vazir' <- 여기다 font-family
+                  },
                 },
               },
               y: {
@@ -89,12 +95,16 @@ const ChartBar = () => {
               },
               datalabels: {
                 color: value => {
-                  return value.dataset.data.length - 1 === value.dataIndex ? 'black' : ' red';
+                  return value.dataset.data.length - 1 === value.dataIndex ? '#8f00ff' : ' black';
                 }, // 바 위에 뜬 value에 대한 color 조절 입니다.
                 anchor: 'end',
                 align: 'end',
                 offset: 3,
                 clamp: true,
+                font: {
+                  weight: 'bold',
+                  size: 18,
+                },
                 formatter(value) {
                   return convertNumberToWon(value.y);
                 },

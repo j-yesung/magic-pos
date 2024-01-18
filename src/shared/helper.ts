@@ -111,12 +111,10 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
       for (const [, value] of group) {
         if (moment().isSame(value[0].original_sales_date, 'week')) {
           recordData.currentSales = value.reduce((acc, cur) => acc + cur.product_ea * cur.product_price, 0);
-          recordData.dateType = 'weeks';
-
           break;
         }
       }
-
+      recordData.dateType = 'weeks';
       const result = [...group.entries()]
         .map(([key, value]) => {
           return {
@@ -139,10 +137,9 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
       for (const [key, value] of group) {
         if (moment().format('YYYY-MM') === key) {
           recordData.currentSales = value.reduce((acc, cur) => acc + cur.product_ea * cur.product_price, 0);
-          recordData.dateType = 'month';
         }
       }
-
+      recordData.dateType = 'month';
       const result = [...group.entries()]
         .map(([key, value]) => {
           return { x: key, y: value.reduce((acc, cur) => acc + cur.product_price * cur.product_ea, 0) };
