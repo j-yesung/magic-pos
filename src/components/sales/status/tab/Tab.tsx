@@ -1,7 +1,7 @@
 import { useCalendar } from '@/hooks/sales/useCalendar';
 import useSalesStore from '@/shared/store/sales';
 import clsx from 'clsx';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import Calendar from '../../calendar/Calendar';
 import Record from '../record/Record';
 import styles from './styles/tab.module.css';
@@ -57,13 +57,19 @@ const Tab = () => {
       </div>
       <Record />
 
-      {isShow && <div className={styles.calendarBg} onClick={clickCloseCalendar}></div>}
-      {isShow ? (
-        <Calendar />
-      ) : (
-        <div className={styles.calendarWrapper} onClick={clickShowCalendarHandler}>
-          <div className={styles.calendarIcon}>{currentDate.clone().format('YYYY년 MM월 DD일')} icon자리</div>
-        </div>
+      {isShow && (
+        <Fragment>
+          <div className={styles.calendarBg} onClick={clickCloseCalendar}></div>
+          <Calendar />
+        </Fragment>
+      )}
+
+      {!isShow && (
+        <>
+          <div className={styles.calendarWrapper} onClick={clickShowCalendarHandler}>
+            <div className={styles.calendarIcon}>{currentDate.clone().format('YYYY년 MM월 DD일')} icon자리</div>
+          </div>
+        </>
       )}
     </div>
   );
