@@ -55,7 +55,6 @@ const Cell = () => {
   };
 
   useEffect(() => {
-    console.log(isChangeView);
     if (isChangeView) {
       getMonthSales(currentDate.clone()).then(result => {
         if (result.sales.length !== 0) {
@@ -75,7 +74,7 @@ const Cell = () => {
       });
     }
     return () => {
-      if (calendarData.length !== 0 && !isChangeView) {
+      if (calendarData.length !== 0) {
         console.log('123', calendarData);
         setCalendarData([]);
         setSalesSum(null);
