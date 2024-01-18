@@ -3,5 +3,5 @@
   height: 100%;
 }
 .audio-button {
-  display: none;
+  opacity: 0;
 }

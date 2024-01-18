@@ -1,5 +1,5 @@
 import { supabase } from '@/shared/supabase';
-import { OrderConfirmType } from '@/types/common';
+import { OrderConfirmType, ToastTypeOption } from '@/types/common';
 import { StoreWithOrderInfo } from '@/types/supabase';
 import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
 import { RefObject } from 'react';
@@ -45,6 +45,16 @@ export const submitDetectedOrder = async (
       autoClose: 5000,
     });
     refetch();
+    orderNotification(orderNumber);
+  }
+  const orderNotification = (orderNumber: number) => {
+    const notification = new Notification(`주문번호${orderNumber}`, {
+      icon: '',
+      body: `주문번호${orderNumber}번이 요청되었습니다.`,
+    });
+    notification.onclick = () => {
+      window.open(`${process.env.NEXT_PUBLIC_SUPACE_REDIRECT_TO}/admin/management`);
+    };
   }
 
   supabase
