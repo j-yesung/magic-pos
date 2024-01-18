@@ -6,20 +6,18 @@ import styles from "./styles/Management.module.css";
 
 
 const Management = () => {
+  const { auth, storeId } = useAuthStore();
+  const user = auth?.user;
+  const id = user?.id;
+  const { data, refetch } = useFetchManagement(id);
+  submitDetectedOrder(storeId!, refetch)
 
-  const Management = () => {
-    const { auth, storeId } = useAuthStore();
-    const user = auth?.user;
-    const id = user?.id;
-    const { data, refetch } = useFetchManagement(id);
-    submitDetectedOrder(storeId!, refetch)
+  return (
+    <div className={styles['managementWrapper']}>
+      <ManagementContainer managementData={data} />
+      {/* <ManagementSideBar managementData={data} /> */}
+    </div>
+  );
+};
 
-    return (
-      <div className={styles['managementWrapper']}>
-        <ManagementContainer managementData={data} />
-        {/* <ManagementSideBar managementData={data} /> */}
-      </div>
-    );
-  };
-
-  export default Management;
+export default Management;
