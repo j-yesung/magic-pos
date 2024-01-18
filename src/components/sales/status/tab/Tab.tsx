@@ -1,6 +1,7 @@
 import { useCalendar } from '@/hooks/sales/useCalendar';
 import useSalesStore from '@/shared/store/sales';
 import Calendar from '../../calendar/Calendar';
+import Record from '../record/Record';
 import styles from './styles/tab.module.css';
 
 const Tab = () => {
@@ -25,7 +26,7 @@ const Tab = () => {
           이번 달
         </span>
       </div>
-
+      <Record />
       {isShow ? (
         <Calendar />
       ) : (

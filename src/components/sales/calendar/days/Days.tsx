@@ -4,7 +4,9 @@ const Days = () => {
   return (
     <div className={styles.days}>
       {days.map(day => (
-        <span key={day}>{day}</span>
+        <span key={day} className={styles.day}>
+          {day}
+        </span>
       ))}
     </div>
   );

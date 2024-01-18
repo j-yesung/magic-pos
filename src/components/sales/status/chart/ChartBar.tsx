@@ -61,7 +61,7 @@ const ChartBar = () => {
               },
             },
             layout: {
-              padding: 20,
+              padding: 50,
             },
             scales: {
               x: {

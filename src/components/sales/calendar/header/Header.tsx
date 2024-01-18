@@ -12,13 +12,14 @@ const Header = () => {
     <div className={styles.header}>
       <div className="wrapper">
         <span className={styles.headerText}>
-          <span className="text-year">{currentDate.clone().format('YYYY년')}</span>
+          <span className={styles.textYear}>{currentDate.clone().format('YYYY년')}</span>
           {currentDate.clone().format('MM월')}
         </span>
       </div>
+
       <div className={styles.btnGroup}>
-        <span onClick={clickPreMonthHandler}>이전</span>
-        <span onClick={clickNextMonthHandler}>다음</span>
+        <span onClick={clickPreMonthHandler}>&lt;</span>
+        <span onClick={clickNextMonthHandler}>&gt;</span>
       </div>
     </div>
   );
