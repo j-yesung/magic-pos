@@ -4,6 +4,9 @@
   border: 1px solid #000;
 }
 
+.calendarCell {
+  padding-top: 1.4rem;
+}
 /*
     기본 calendar css 입니다.
     */
@@ -75,7 +78,7 @@
 
 .sales-base {
   display: block;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
   color: #000;
   font-size: 1rem;
   height: 3rem;

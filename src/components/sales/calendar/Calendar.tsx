@@ -1,3 +1,5 @@
+import useSalesStore from '@/shared/store/sales';
+import clsx from 'clsx';
 import 'moment/locale/ko';
 import Cell from './cell/Cell';
 import Days from './days/Days';
@@ -8,8 +10,9 @@ import styles from './styles/calendar.module.css';
  */
 
 const Calendar = ({ children }: { children?: React.ReactNode }) => {
+  const isChangeView = useSalesStore(state => state.isChangeView);
   return (
-    <div className={styles.calendarContainer}>
+    <div className={clsx(isChangeView ? styles.salesStatus : styles.salesCalendar)}>
       <Header />
       {children}
       <Days />

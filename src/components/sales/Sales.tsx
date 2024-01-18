@@ -11,7 +11,6 @@ const Sales = () => {
   return (
     <div className={styles.container}>
       <div className={styles.titleWrapper}>
-        <h2>매출관리</h2>
         <div className={styles.toggleBtnWrapper}>
           <button className={isChangeView ? styles.clickedToggle : ''} onClick={clickShowChart}>
             매출관리

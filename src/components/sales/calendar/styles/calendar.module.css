@@ -1,4 +1,4 @@
-.calendar-container {
+.sales-status {
   position: absolute;
   padding: 4rem;
   width: 52rem;
@@ -9,6 +9,8 @@
   border-radius: 4rem;
 }
 
+.sales-calendar {
+}
 /*
 calendar component를 감싸는 div의 class css입니다.
 */

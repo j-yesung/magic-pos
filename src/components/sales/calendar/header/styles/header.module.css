@@ -1,11 +1,19 @@
 .header {
   display: flex;
   width: 100%;
-  justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #fff;
   margin-bottom: 0.8rem;
   padding-bottom: 1.2rem;
+}
+
+.status-header {
+  justify-content: space-between;
+}
+
+.calendar-header {
+  justify-content: center;
+  gap: 2rem;
 }
 
 .header-text {
