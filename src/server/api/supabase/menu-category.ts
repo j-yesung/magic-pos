@@ -1,5 +1,5 @@
 import { supabase } from '@/shared/supabase';
-import { CategoryWithMenuItem } from '@/types/supabase';
+import { CategoryWithMenuItem, Tables, TablesInsert, TablesUpdate } from '@/types/supabase';
 /**
  * 특정 가게에 대한 카테고리만 가져온다
  * @param store_id 가게 고유 아이디
@@ -10,7 +10,7 @@ export const fetchCategories = async (store_id: string) => {
     .select('*')
     .eq('store_id', store_id)
     .order('position', { ascending: true })
-    .returns<CategoryType[]>();
+    .returns<Tables<'menu_category'>[]>();
   if (error) throw error;
   return { data, error };
 };
@@ -20,31 +20,31 @@ export const fetchCategories = async (store_id: string) => {
  * @param values 가게 id, 카테고리 name, 카테고리 순서
  * @returns data
  */
-export const addCategory = async (store_id: string, name: string, position: number) => {
-  const { data, error } = await supabase
-    .from('menu_category')
-    .insert([{ store_id: store_id, name, position }])
-    .select();
-  if (error) throw error;
-  return { data, error };
+export const addCategory = async (categoryData: TablesInsert<'menu_category'>) => {
+  const { error } = await supabase.from('menu_category').insert([categoryData]).select();
+  if (error) throw new Error(error.message);
 };
+
 /**
  * 카테고리 삭제하기
  * @param values 카테고리 아이디
  */
 export const removeCategory = async (categoryId: string) => {
   const { error } = await supabase.from('menu_category').delete().eq('id', categoryId);
-  if (error) throw error;
+  if (error) throw new Error(error.message);
 };
 /**
  * 카테고리 이름 수정하기
  * @param values 카테고리 id, 카테고리 name
  * @returns data
  */
-export const updateCategoryName = async (categoryId: string, name: string) => {
-  const { data, error } = await supabase.from('menu_category').update({ name }).eq('id', categoryId);
-  if (error) throw error;
-  return data;
+export const updateCategoryName = async (categoryPick: Pick<TablesUpdate<'menu_category'>, 'id' | 'name'>) => {
+  const { id, name } = categoryPick;
+  const { error } = await supabase
+    .from('menu_category')
+    .update({ name })
+    .eq('id', id ?? '');
+  if (error) throw new Error(error.message);
 };
 
 /**
@@ -52,10 +52,22 @@ export const updateCategoryName = async (categoryId: string, name: string) => {
  * @param values 카테고리 id, 카테고리 position
  * @returns data
  */
-export const updateCategoryPosition = async (categoryId: string, position: number) => {
-  const { data, error } = await supabase.from('menu_category').update({ position }).eq('id', categoryId);
-  if (error) throw error;
-  return data;
+type ChangeCategoryPosition = TablesUpdate<'menu_category'>;
+export const updateCategoryPosition = async (
+  categoryPick: ChangeCategoryPosition,
+  categoryOver: ChangeCategoryPosition,
+) => {
+  const { id: pickId, position: pickPosition } = categoryPick;
+  const { id: overId, position: overPosition } = categoryOver;
+  const { error: pickError } = await supabase
+    .from('menu_category')
+    .update({ position: overPosition })
+    .eq('id', pickId ?? '');
+  const { error: OverError } = await supabase
+    .from('menu_category')
+    .update({ position: pickPosition })
+    .eq('id', overId ?? '');
+  if (pickError && OverError) throw new Error(pickError.message);
 };
 
 /**

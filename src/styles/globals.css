@@ -6,21 +6,32 @@
   /* palette */
   --main-color: #8f00ff;
   --main-color-hover: #8508e6;
-  --point-100: #5200ff;
-  --point-80: #a87fff;
-  --point-50: #ceb7ff;
-  --point-2: #ffa800;
+  --point-100: #5200ff; /* deprecated */
+  --point-80: #a87fff; /* deprecated */
+  --point-50: #ceb7ff; /* deprecated */
+
+  /* point color 1 */
+  --point1: #5200ff;
+  --point1-80: #a87fff;
+  --point1-50: #ceb7ff;
+
+  /* point color 2 */
+  --point2: #ffa800;
 
   /* shadow */
-  --shadow-color-10: #4409c2;
-  --shadow-color-20: #000000;
+  --shadow-color-10: #4409C21A;
+  --shadow-color-20: #00000033;
 
   /* font */
   --text1: #121416;
   --text2: #5c5c5c;
   --text3: #bfbfbf;
-  --text4: #ff5656;
+  --text4: #ff5656; /* deprecated */
   --text5: #ffffff;
+
+  /* color */
+  --red: #FF5656;
+  --white: #FFFFFF;
 
   /* bg */
   --bg-line: #ededed;
@@ -28,8 +39,9 @@
   --bg-g: #f7f7f7;
 
   /* gradlient */
-  --signature-color: linear-gradient(to right, var(--main-color), #ffa800);
+  --signature-color: linear-gradient(to right, var(--main-color), var(--point2));
 
+  /* z-index level */
   --level-1-z-index: 100;
   --level-2-z-index: 200;
   --level-3-z-index: 300;

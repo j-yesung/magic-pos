@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import styles from './styles/ReceiptContainer.module.css';
-import { useStoreOrderQuery } from '@/hooks/order/useStoreOrderQuery';
-import { useNumberOrderQuery } from '@/hooks/order/useNumberOrderQuery';
+import { useStoreOrderSetQuery } from '@/hooks/order/useStoreOrderSetQuery';
+import { useNumberOrderSetQuery } from '@/hooks/order/useNumberOrderSetQuery';
 import useOrderStore from '@/shared/store/order';
 import { OrderDataWithStoreName } from '@/types/supabase';
 import { useRouter } from 'next/router';
 import ReceiptOrder from '@/components/order/receipt/ReceiptOrder';
 import TotalPrice from '@/components/order/common/TotalPrice';
+import { useStoreOrderFetchQuery } from '@/hooks/order/useStoreOrderFetchQuery';
+import { useNumberOrderFetchQuery } from '@/hooks/order/useNumberOrderFetchQuery';
 
 const ReceiptContainer = () => {
   const orderIdList = useOrderStore(state => state.orderIdList);
-  const storeId = useOrderStore(state => state.storeId);
-  const { storeOrderData } = useStoreOrderQuery(orderIdList);
-  const { numberOrderData } = useNumberOrderQuery(orderIdList);
+  const storeId = useOrderStore(state => state.storeId) ?? '';
+  const { storeOrderData } = useStoreOrderFetchQuery(orderIdList, storeId);
+  const { numberOrderData } = useNumberOrderFetchQuery(orderIdList, storeId);
   const [orderDataList, setOrderDataList] = useState<OrderDataWithStoreName[]>([]);
   const router = useRouter();
 

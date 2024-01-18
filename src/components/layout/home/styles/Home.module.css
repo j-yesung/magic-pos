@@ -131,7 +131,8 @@
 .card-wrapper {
   margin: 0.7rem;
   position: relative;
-  width: 2100px;
+  /* width: 2100px; */
+  width: 100vw;
   height: 20rem;
   overflow: hidden;
   border-radius: 3rem;
@@ -150,33 +151,54 @@
 }
 
 .card-wrapper li {
-  padding: 2rem;
-  width: 40rem;
+  gap: 1rem;
+  width: 38rem;
   height: 100%;
   display: flex;
-  align-items: flex-start;
+  padding: 3rem;
   border-radius: 1rem;
-  justify-content: center;
   flex-direction: column;
+  justify-content: flex-start;
   background-color: #ffffff;
   border: 2px solid #d6d6d6;
   box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem rgba(0.1, 0.1, 0.1, 0.1);
 }
-.card-wrapper span {
-  font-size: 4rem;
+.card-wrapper .rvBg {
+  border-radius: 1rem;
+}
+.card-wrapper .title-box {
+  gap: 0.5rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding-bottom: 1, 5rem;
+  justify-content: space-between;
+}
+.title-box span {
+  font-size: 2.6rem;
+  font-weight: bold;
 }
 .card-wrapper h1 {
-  font-size: 2rem;
+  padding: 0.5rem;
+  font-size: 1.5rem;
   font-weight: 700;
 }
-.card-wrapper h6 {
+.card-wrapper .review-box {
+  height: 10rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+}
+.review-box p {
   font-size: 1.7rem;
   font-weight: 400;
 }
 
 .card-list,
 .card-list-dynamic {
-  animation-duration: 35s;
+  animation-duration: 160s;
   animation-fill-mode: forwards;
   animation-timing-function: linear;
   animation-iteration-count: infinite;

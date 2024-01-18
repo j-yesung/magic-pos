@@ -14,6 +14,7 @@ export const SIGNUP_DATA = {
   subTitle: 'Magic Pos',
   buttonName: '회원가입',
   subButtonName: '인증하기',
+  comment: '사업자등록번호를 인증해 주세요.',
 };
 export const FIND_PASSWORD_DATA = {
   subTitle: '비밀번호 찾기',
@@ -28,9 +29,10 @@ export const UPDATE_PASSWORD_DATA = {
   description: '새로운 비밀번호를 입력해 주세요.',
 };
 export const SIGNUP_SUCCESS_DATA = {
+  url: '/auth/login',
   title: '편리함의 시작',
   subTitle: 'Magic Pos',
   description: '회원가입을 환영합니다!',
   subDescription: '지금 바로 매직포스를 시작해 볼까요?',
-  buttonName: '시작하기',
+  buttonSubName: '시작하기',
 };

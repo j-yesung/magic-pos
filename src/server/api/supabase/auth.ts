@@ -57,7 +57,8 @@ export const logoutHandler = async () => {
  * 비밀번호 변경 메일 전송
  * @param email 비밀번호 변경 메일받을 이메일
  */
-export const resetPasswordHandler = async (email: string) => {
+export const resetPasswordHandler = async (values: values) => {
+  const { email } = values;
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: `${process.env.NEXT_PUBLIC_AUTH_REDIRECT_TO}/auth/reset`,
   });
@@ -70,7 +71,8 @@ export const resetPasswordHandler = async (email: string) => {
  * 비밀번호 재설정
  * @param password 비밀번호
  */
-export const updatePasswordHandler = async (password: string) => {
+export const updatePasswordHandler = async (values: values) => {
+  const { password } = values;
   const { data, error } = await supabase.auth.updateUser({ password });
   if (data) {
     alert('비밀번호 변경이 완료되었습니다.');

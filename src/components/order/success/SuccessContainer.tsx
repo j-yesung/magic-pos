@@ -4,8 +4,8 @@ import useOrderStore, { addOrderId, getTotalPrice } from '@/shared/store/order';
 import { groupByKey } from '@/shared/helper';
 import { Tables } from '@/types/supabase';
 import { useStoreQuery } from '@/hooks/store/useStoreQuery';
-import { useStoreOrderQuery } from '@/hooks/order/useStoreOrderQuery';
-import { useNumberOrderQuery } from '@/hooks/order/useNumberOrderQuery';
+import { useStoreOrderSetQuery } from '@/hooks/order/useStoreOrderSetQuery';
+import { useNumberOrderSetQuery } from '@/hooks/order/useNumberOrderSetQuery';
 import styles from './styles/SuccessContainer.module.css';
 import Image from 'next/image';
 import image from '@/../public/images/image-success.png';
@@ -20,8 +20,8 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const orderType = useOrderStore(state => state.orderType);
 
   const { addSales } = useSalesQuery();
-  const { addStoreOrder } = useStoreOrderQuery();
-  const { addNumberOrder } = useNumberOrderQuery();
+  const { addStoreOrder } = useStoreOrderSetQuery();
+  const { addNumberOrder } = useNumberOrderSetQuery();
   const { incrementOrderNumber } = useStoreQuery();
   const [isPageLoading, setIsPageLoading] = useState(false);
   const router = useRouter();
@@ -64,7 +64,7 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   useEffect(() => {
     if (payment?.status === 'DONE' && storeId && orderNumber > 0) {
       const orderData = {
-        order_number: useOrderStore.getState().orderNumber,
+        order_number: orderNumber,
         store_id: storeId,
         menu_list: orderList.map(order => JSON.parse(JSON.stringify(order))),
         order_time: payment.approvedAt,
