@@ -3,8 +3,8 @@ const Days = () => {
   const days = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
   return (
     <div className={styles.days}>
-      {days.map(day => (
-        <span key={day} className={styles.day}>
+      {days.map((day, idx) => (
+        <span key={day + idx} className={styles.day}>
           {day}
         </span>
       ))}
