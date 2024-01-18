@@ -4,7 +4,6 @@ import { getMinMaxSalesType, groupByKey } from '@/shared/helper';
 import useSalesStore from '@/shared/store/sales';
 import { Tables } from '@/types/supabase';
 import moment from 'moment';
-import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import styles from '../styles/calendar.module.css';
 import CellItem from './CellItem';
@@ -27,7 +26,7 @@ const Cell = () => {
     isChangeView,
     setCurrentDate,
   } = useSalesStore();
-  const { clickShowDataOfDateHandler, clickMoveTodayHandler } = useCalendar();
+  const { clickShowDataOfDateHandler } = useCalendar();
 
   const startDay = currentDate.clone().startOf('month').startOf('week'); // monthStart가 속한 주의 시작 주
   const endDay = currentDate.clone().endOf('month').endOf('week'); // monthStart가 속한 마지막 주
@@ -76,20 +75,12 @@ const Cell = () => {
     }
     return () => {
       if (calendarData.length !== 0) {
-        console.log('123', calendarData);
         setCalendarData([]);
         setSalesSum(null);
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentDate]);
-  const CALENDAL_KEY = '/admin/sales/calendar';
-
-  const path = useRouter().pathname as '/admin/sales/status' | '/admin/sales/calendar';
-  const option = {
-    '/admin/sales/status': clickShowDataOfDateHandler,
-    '/admin/sales/calendar': getMinMaxSalesType,
-  };
 
   useEffect(() => {
     return () => {

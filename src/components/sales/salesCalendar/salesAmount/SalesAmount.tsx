@@ -2,7 +2,7 @@ import { convertNumberToWon } from '@/shared/helper';
 import useSalesStore from '@/shared/store/sales';
 import styles from './styles/salesAmount.module.css';
 const SalesAmount = () => {
-  const { salesSum, setSalesSum } = useSalesStore();
+  const { salesSum } = useSalesStore();
 
   return (
     <div className={styles.container}>
