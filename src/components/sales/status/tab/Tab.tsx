@@ -9,18 +9,12 @@ const Tab = () => {
     isShow,
   } = useSalesStore();
 
-  const {
-    clickMoveYesterdayHandler,
-    clickMoveTodayHandler,
-    clickWeeksChartHandler,
-    clickMonthsChartHandler,
-    clickShowCalendarHandler,
-  } = useCalendar();
+  const { clickMoveTodayHandler, clickWeeksChartHandler, clickMonthsChartHandler, clickShowCalendarHandler } =
+    useCalendar();
 
   return (
     <div className={styles['wrapper']}>
       <div className={styles['date']}>
-        <span onClick={clickMoveYesterdayHandler}>어제</span>
         <span onClick={clickMoveTodayHandler}>오늘</span>
         <span onClick={clickWeeksChartHandler}>이번 주</span>
         <span onClick={clickMonthsChartHandler}>이번 달</span>

@@ -8,7 +8,7 @@ import {
 } from '@/shared/helper';
 import useSalesStore from '@/shared/store/sales';
 import { cva } from 'class-variance-authority';
-import { Moment } from 'moment';
+import moment, { Moment } from 'moment';
 import { useRouter } from 'next/router';
 import styles from '../styles/calendar.module.css';
 import { CalendarDataType } from './Cell';
@@ -17,7 +17,7 @@ interface CellItemProps {
   day: Moment;
   salesData?: CalendarDataType;
   getMinMaxSalesType?: (param: CalendarDataType) => GetMinMaxSalesReturnType;
-  clickShowDataOfDateHandler?: (param: Moment) => () => Promise<void>;
+  clickShowDataOfDateHandler?: (day: moment.Moment) => () => Promise<void>;
 }
 
 type Cell = (param: CellItemProps) => JSX.Element;
@@ -25,6 +25,7 @@ type Cell = (param: CellItemProps) => JSX.Element;
 const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDateHandler }) => {
   const {
     date: { currentDate, selectedDate, today },
+    isChangeView,
   } = useSalesStore();
 
   const dateVariant = cva([styles.dateBase], {
@@ -83,7 +84,7 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
         selectedDateType: day.isSame(selectedDate, 'day') ? POINT : undefined,
       })}
       onClick={
-        path === STATUS_KEY
+        !isChangeView
           ? day.isSame(today, 'D') || day.isBefore(today, 'D')
             ? clickShowDataOfDateHandler?.(day.clone())
             : undefined
@@ -104,7 +105,7 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
           sales: salesData && getMinMaxSalesType?.(salesData),
         })}
       >
-        {salesData?.sales && convertNumberToWon(salesData.sales)}
+        {isChangeView && salesData?.sales && convertNumberToWon(salesData.sales)}
       </span>
     </div>
   );

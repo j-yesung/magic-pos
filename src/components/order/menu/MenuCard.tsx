@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './styles/MenuCard.module.css';
 import { MenuItemWithOption } from '@/types/supabase';
 import Image from 'next/image';
-import useOrderStore from '@/shared/store/order';
+import useOrderStore, { setSelectedMenu } from '@/shared/store/order';
 import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButton';
 
 interface MenuCardProps {
@@ -11,7 +11,6 @@ interface MenuCardProps {
 
 const MenuCard = ({ menu }: MenuCardProps) => {
   const optionSwiperRef = useOrderStore(state => state.optionSwiperRef);
-  const setSelectedMenu = useOrderStore(state => state.setSelectedMenu);
 
   const handleClickCard = () => {
     setSelectedMenu(menu);

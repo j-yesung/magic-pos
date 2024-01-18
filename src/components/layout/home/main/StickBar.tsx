@@ -10,7 +10,7 @@ import Logo from '/public/logo.svg';
 const StickBar = () => {
   const router = useRouter();
   const { logout } = useAuth();
-  const { auth } = useAuthStore();
+  const auth = useAuthStore(state => state.auth);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {

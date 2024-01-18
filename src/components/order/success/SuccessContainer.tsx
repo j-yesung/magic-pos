@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSalesQuery } from '@/hooks/sales/useSalesQuery';
-import useOrderStore from '@/shared/store/order';
+import useOrderStore, { addOrderId, getTotalPrice } from '@/shared/store/order';
 import { groupByKey } from '@/shared/helper';
 import { Tables } from '@/types/supabase';
 import { useStoreQuery } from '@/hooks/store/useStoreQuery';
@@ -17,10 +17,7 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const tableId = useOrderStore(state => state.tableId);
   const menuData = useOrderStore(state => state.menuData);
   const orderNumber = useOrderStore(state => state.orderNumber);
-  const getTotalPrice = useOrderStore(state => state.getTotalPrice);
   const orderType = useOrderStore(state => state.orderType);
-  const orderIdList = useOrderStore(state => state.orderIdList);
-  const addOrderId = useOrderStore(state => state.addOrderId);
 
   const { addSales } = useSalesQuery();
   const { addStoreOrder } = useStoreOrderQuery();

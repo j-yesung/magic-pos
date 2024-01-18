@@ -36,3 +36,13 @@
   --level-4-z-index: 400;
   --level-5-z-index: 500;
 }
+
+/* 폰트 */
+@font-face {
+  font-family: 'pretendard';
+  src: url('/public/font/Pretendard-Regular.woff2') format('woff2');
+}
+
+body {
+  font-family: 'pretendard', sans-serif;
+}

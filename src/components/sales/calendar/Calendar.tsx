@@ -7,7 +7,6 @@ import Header from './header/Header';
  */
 
 const Calendar = ({ children }: { children?: React.ReactNode }) => {
-  console.log(children);
   return (
     <>
       <Header />

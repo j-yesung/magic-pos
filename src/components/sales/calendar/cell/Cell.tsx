@@ -4,7 +4,6 @@ import { getMinMaxSalesType, groupByKey } from '@/shared/helper';
 import useSalesStore from '@/shared/store/sales';
 import { Tables } from '@/types/supabase';
 import moment from 'moment';
-import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import styles from '../styles/calendar.module.css';
 import CellItem from './CellItem';
@@ -20,15 +19,14 @@ export interface CalendarDataType {
 type SortMinMaxDataReturnType = (target: CalendarDataType[]) => CalendarDataType[];
 const Cell = () => {
   const {
-    date: { currentDate },
+    date: { currentDate, today },
     setCalendarData,
     calendarData,
     setSalesSum,
+    isChangeView,
+    setCurrentDate,
   } = useSalesStore();
   const { clickShowDataOfDateHandler } = useCalendar();
-
-  const CALENDAL_KEY = '/admin/sales/calendar';
-  const path = useRouter().pathname;
 
   const startDay = currentDate.clone().startOf('month').startOf('week'); // monthStart가 속한 주의 시작 주
   const endDay = currentDate.clone().endOf('month').endOf('week'); // monthStart가 속한 마지막 주
@@ -57,7 +55,7 @@ const Cell = () => {
   };
 
   useEffect(() => {
-    if (path === CALENDAL_KEY)
+    if (isChangeView) {
       getMonthSales(currentDate.clone()).then(result => {
         if (result.sales.length !== 0) {
           const group = groupByKey<Tables<'sales'>>(
@@ -74,7 +72,7 @@ const Cell = () => {
           setSalesSum(formattedData);
         }
       });
-
+    }
     return () => {
       if (calendarData.length !== 0) {
         setCalendarData([]);
@@ -84,10 +82,11 @@ const Cell = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentDate]);
 
-  const option = {
-    '/admin/sales/status': clickShowDataOfDateHandler,
-    '/admin/sales/calendar': getMinMaxSalesType,
-  };
+  useEffect(() => {
+    return () => {
+      setCurrentDate(today);
+    };
+  }, []);
 
   const row = [];
   let days = [];
@@ -102,8 +101,8 @@ const Cell = () => {
           key={itemKey}
           day={day}
           salesData={salesData[0]}
-          getMinMaxSalesType={option[path as '/admin/sales/calendar']}
-          clickShowDataOfDateHandler={option[path as '/admin/sales/status']}
+          {...(isChangeView && { getMinMaxSalesType: getMinMaxSalesType })}
+          {...(!isChangeView && { clickShowDataOfDateHandler: clickShowDataOfDateHandler })}
         />,
       );
       day = day.clone().add(1, 'day');

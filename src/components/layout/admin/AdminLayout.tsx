@@ -8,7 +8,7 @@ import Sidebar from './nav/Sidebar';
 import styles from './styles/AdminLayout.module.css';
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
-  const { auth } = useAuthStore();
+  const auth = useAuthStore(state => state.auth);
   const router = useRouter();
 
   useEffect(() => {
