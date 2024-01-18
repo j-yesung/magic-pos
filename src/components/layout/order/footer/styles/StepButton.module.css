@@ -28,6 +28,7 @@
 
 .button:disabled {
     background: var(--bg-g);
+    color: var(--text2);
 }
 
 .icon-wrapper {
@@ -39,11 +40,13 @@
 }
 
 .icon-wrapper span {
-    color: var(--text2);
+    position: absolute;
+    left: 1.2rem;
+    color: var(--text1);
     text-align: center;
     font-family: Pretendard, sans-serif;
-    font-size: 1rem  /* 10/10 */;
+    font-size: 1.2rem  /* 10/10 */;
     font-style: normal;
-    font-weight: 500;
+    font-weight: bold;
     line-height: 1rem  /* 10/10 */; /* 100% */
 }

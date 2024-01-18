@@ -10,7 +10,6 @@ const MenuInfo = () => {
     <div className={styles.container}>
       <div>
         <h2>{selectedMenu?.name}</h2>
-        <p>간단한 제품 설명이 들어갑니다. 두 줄 이상의 텍스트는 점으로 생랴ㅕㄱ...................</p>
       </div>
       <div className={styles.priceWrapper}>
         <span>가격</span>
