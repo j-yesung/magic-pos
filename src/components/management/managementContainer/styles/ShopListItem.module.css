@@ -1,24 +1,26 @@
 .shop-list-item {
-  width: 9em;
-  height: 7em;
+  width: 26rem;
+  height: 28rem;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  margin: 5% 0;
-  font-size: 1.5em;
-  border-radius: 0.5em;
+  align-items: flex-start;
   transition: 0.2s;
-  background-color: var(--main-color);
+  border-radius: 1rem;
+  background: var(--bg-g);
   cursor: pointer;
-  color: #fff;
+  margin-right: 3.2rem;
+  margin-bottom: 4.5rem;
+}
+
+.shop-list-item.list-item-row {
+  margin-right: -6px;
 }
 
 .shop-list-item:hover {
   background-color: #ccf;
 }
 
-.shop-list-item > div {
+/* .shop-list-item > div {
   width: 100%;
   flex: 1;
   display: flex;
@@ -31,33 +33,28 @@
   justify-content: flex-start;
 }
 
-.item-order-number > span{
+.item-order-number > span {
   width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.item-order-number > span > span:last-child > span{
+.item-order-number > span > span:last-child > span {
   display: none;
 }
-
 
 .item-status {
   justify-content: flex-end;
 }
 
-
-
-
-
-.shop-list-item:hover>.list-text {
+.shop-list-item:hover > .list-text {
   display: none;
 }
 
-.shop-list-item:hover>.list-text-hover {
+.shop-list-item:hover > .list-text-hover {
   display: block;
 }
 
 .shop-text-hover {
   display: none;
-}
+} */

@@ -2,16 +2,18 @@ import { useModal } from "@/hooks/modal/useModal";
 import useManagementStore from "@/shared/store/management";
 import useManagementCssStore from "@/shared/store/management-css";
 import { Tables } from "@/types/supabase";
+import clsx from "clsx";
 import { useEffect, useState } from "react";
 import styles from "./styles/ShopListItem.module.css";
 
 interface propsType {
   shopData: Tables<'store_table'>;
+  index: number;
   storeOrderData?: Tables<'order_store'>[]
 }
 
 
-const ShopListItem = ({ shopData, storeOrderData }: propsType) => {
+const ShopListItem = ({ shopData, index, storeOrderData }: propsType) => {
   const [storeOrderInTable, setStoreOrderInTable] = useState<Tables<'order_store'>[]>([])
   const [storeOrderInTableById, setStoreOrderInTableById] = useState<string[]>([])
   const { setOrderId } = useManagementStore()
@@ -41,7 +43,7 @@ const ShopListItem = ({ shopData, storeOrderData }: propsType) => {
 
 
   return (
-    <div className={styles['shop-list-item']} onClick={clickOrderDataReFetchHandler}>
+    <div className={clsx(styles['shop-list-item'], index % 3 === 2 && styles['list-item-row'])} onClick={clickOrderDataReFetchHandler}>
       <div className={styles['item-table']}>테이블 {shopData.position}</div>
       <div className={styles['item-order-number']}>
         <span>

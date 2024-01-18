@@ -33,7 +33,7 @@ export const useAuth = () => {
     mutationFn: signUpHandler,
     onSuccess: async () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.SIGNUP] });
-      router.push('/auth/login');
+      router.push('/auth/success');
     },
     onError: error => {
       console.error(error);

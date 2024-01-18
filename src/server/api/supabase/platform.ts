@@ -86,7 +86,6 @@ export const downloadPlatFormImageUrl = (param: AddFormType | EditFormType) => {
 };
 
 export const insertPlatFormRow = async (param: AddFormType | EditFormType) => {
-  console.log(param.store_id);
   const { data, error } = await supabase
     .from('platform')
     .insert([
