@@ -4,8 +4,8 @@ import useOrderStore, { getTotalPrice, goNextStep, ORDER_STEP } from '@/shared/s
 import { usePaymentWidget } from '@/hooks/order/usePaymentWidget';
 import styles from './styles/StepButton.module.css';
 import { convertNumberToWon } from '@/shared/helper';
-import CartIcon from '@/components/icons/CartIcon';
 import AddCartButton from '@/components/layout/order/footer/AddCartButton';
+import { IoCart } from 'react-icons/io5';
 
 interface ButtonProps {
   sliderRef: React.RefObject<SwiperRef>;
@@ -45,7 +45,8 @@ const StepButton = ({ sliderRef }: ButtonProps) => {
               <span>{BUTTON_OPTIONS[step]}</span>
               {step === ORDER_STEP.SELECT_MENU && (
                 <div className={styles.iconWrapper}>
-                  <CartIcon amount={orderList.length} />
+                  <IoCart size={28} />
+                  <span>{orderList.length}</span>
                 </div>
               )}
             </button>

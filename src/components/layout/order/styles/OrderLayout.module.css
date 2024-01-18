@@ -3,7 +3,7 @@
     height: 100vh;
     margin-left: auto;
     margin-right: auto;
-    max-width: 76.8rem  /* 768/10 */;
+    max-width: 76.8rem;
     padding: var(--kiosk-container-padding) 0 var(--kiosk-container-padding) 0;
 }
 
@@ -15,19 +15,19 @@
 .prev-button {
     position: fixed;
     display: flex;
-    width: 3.5rem  /* 35/10 */;
-    height: 3.5rem  /* 35/10 */;
-    padding: 1rem  /* 10/10 */;
+    width: 3.5rem;
+    height: 3.5rem;
+    padding: 1rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1rem  /* 10/10 */;
+    gap: 1rem;
     flex-shrink: 0;
-    background: var(--main-color);
+    background: rgba(143, 0, 255, 0.68);
     color: var(--text5);
-    margin-top: 8.1rem  /* 96/10 */;
-    margin-left: 1.5rem  /* 15/10 */;
-    border-radius: 1rem  /* 10/10 */;
+    margin-top: 8.1rem;
+    margin-left: 1.5rem;
+    border-radius: 1rem;
     z-index: var(--level-1-z-index);
     cursor: pointer;
 }

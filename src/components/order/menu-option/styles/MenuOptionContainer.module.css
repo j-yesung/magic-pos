@@ -4,6 +4,7 @@
     height: calc(100vh - var(--kiosk-footer-height) - var(--kiosk-container-padding));
     padding-bottom: 2rem;
     overflow-y: auto;
+    font-size: 1.5rem;
 }
 
 .container img {
