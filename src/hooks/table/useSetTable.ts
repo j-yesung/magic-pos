@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useRef } from 'react';
 
 export const useSetTable = () => {
-  const {  refSideBar, refDummySideBar, refSideBarBg } = useTableStore();
+  const { refSideBar, refDummySideBar, refSideBarBg } = useTableStore();
   const didMount = useRef(false);
   const queryClient = useQueryClient();
   const {
@@ -30,7 +30,7 @@ export const useSetTable = () => {
       queryClient.invalidateQueries({ queryKey: ['table'] });
     },
   });
-  
+
   const {
     mutate: deleteMutate,
     isError: deleteIsError,
@@ -47,7 +47,6 @@ export const useSetTable = () => {
 
   useEffect(() => {
     if (didMount.current) {
-        console.log('로딩중');
       if (addIsPending || updateIsPending || deleteIsPending) {
         refSideBar?.current?.style.setProperty('right', '-18%')
         refDummySideBar?.current?.style.setProperty('width', '0%')

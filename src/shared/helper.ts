@@ -70,8 +70,6 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
       const m = new Map();
       test.forEach(a => m.set(a, []));
 
-      console.log(salesData);
-
       const group = groupByKey<Tables<'sales'>>(
         salesData.map(data => ({ ...data, sales_date: moment(data.sales_date).format('YYYY-MM-DD') })),
         'sales_date',
@@ -79,7 +77,6 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
 
       for (const [key, value] of group) {
         if (selectedType?.format('YYYY-MM-DD') === key) {
-          console.log('value');
           recordData.currentSales = value.reduce((acc, cur) => acc + cur.product_ea * cur.product_price, 0);
         }
       }

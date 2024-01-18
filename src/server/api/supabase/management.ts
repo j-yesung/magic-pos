@@ -37,12 +37,10 @@ export const submitDetectedOrder = async (
       'postgres_changes',
       { event: 'INSERT', schema: 'public', table: 'order_store', filter: `store_id=eq.${storeId}` },
       payload => {
-        console.log('order_store', payload.new);
         refetch();
       },
     )
     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'order_number', filter: `store_id=eq.${storeId}` }, payload => {
-      console.log('order_number', payload.new);
       refetch();
     })
     .subscribe();
