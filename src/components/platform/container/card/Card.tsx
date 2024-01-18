@@ -13,7 +13,7 @@ interface CardPropsType {
 const Card = ({ fetchDataList, isEdit, setEditTarget, setIsShowEditForm, setPreImage }: CardPropsType) => {
   return (
     <div className={styles.cardContainer}>
-      {fetchDataList.length >= 1 &&
+      {fetchDataList &&
         fetchDataList.map((card, idx) => {
           return (
             <Item

@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { EditFormType } from '../../Container';
 import styles from './styles/item.module.css';
+import Default from '/public/logo.svg';
 interface ItemProps {
   link: string;
   title: string;
@@ -25,7 +26,7 @@ const Item = ({ link, title, isEdit, id, setEditTarget, imgUrl, setIsShowEditFor
     setPreImage(imgUrl);
     setIsShowEditForm(true);
   };
-  const DEFAULT_IMG = '/logo.svg';
+
   return (
     <div className={styles.itemWrapper}>
       <Link
@@ -35,7 +36,8 @@ const Item = ({ link, title, isEdit, id, setEditTarget, imgUrl, setIsShowEditFor
         })}
         href={link}
       >
-        <Image src={imgUrl ?? DEFAULT_IMG} width={100} height={100} alt={title ?? 'default_img'} />
+        {imgUrl ? <Image src={imgUrl} width={100} height={100} alt={title ?? 'default_img'} /> : <Default />}
+
         <div>{title}</div>
       </Link>
       {isEdit && <span onClick={editForm} className={styles.edit}></span>}

@@ -17,6 +17,7 @@ import Card from './card/Card';
 import Form from './form/Form';
 import Button from './form/button/Button';
 import styles from './styles/container.module.css';
+import Logo from '/public/logo.svg';
 export interface AddFormType {
   file?: File | null;
   image_url?: string;
@@ -125,7 +126,7 @@ const Container = () => {
     const editData: EditFormType = {
       ...editTarget,
     };
-    console.log('asdf');
+
     // object의 각 value 값을 비교해서 틀린 값만을 추출하기
     let comparedData = Object.entries(editData).reduce((acc, [key, value]) => {
       // 조금더 이해하기 위해 주석을 지우지 않았습니다.
@@ -189,7 +190,6 @@ const Container = () => {
     setIsShowEditForm(false);
   };
 
-  const DEFAULT_IMG = '/logo.svg';
   return (
     <div className={styles.container}>
       <Button
@@ -225,13 +225,12 @@ const Container = () => {
               >
                 X
               </button>
-              <Image
-                className={styles.img}
-                src={preImage ?? DEFAULT_IMG}
-                alt={editTarget.name}
-                width={200}
-                height={200}
-              />
+
+              {preImage ? (
+                <Image className={styles.img} src={preImage} alt={editTarget.name} width={200} height={200} />
+              ) : (
+                <Logo />
+              )}
             </label>
 
             <input type="file" id="file" className={styles.file} onChange={changePreview} />
