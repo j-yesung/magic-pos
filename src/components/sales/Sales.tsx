@@ -1,27 +1,28 @@
-import { useState } from 'react';
+import useSalesStore from '@/shared/store/sales';
 import SalesDeatilWithCalendar from './salesCalendar/SalesDetailWithCalendar';
 import Status from './status/Status';
 import styles from './styles/sales.module.css';
 
 const Sales = () => {
-  const [toggle, setToggle] = useState(false);
-  const clickShowChart = () => setToggle(pre => true);
-  const clickShowCalendar = () => setToggle(pre => false);
+  const { isChangeView, setIsChangeView } = useSalesStore();
+
+  const clickShowChart = () => setIsChangeView(true);
+  const clickShowCalendar = () => setIsChangeView(false);
   return (
     <div className={styles.container}>
       <div className={styles.titleWrapper}>
         <h2>매출관리</h2>
         <div className={styles.toggleBtnWrapper}>
-          <button className={toggle ? styles.clickedToggle : ''} onClick={clickShowChart}>
+          <button className={isChangeView ? styles.clickedToggle : ''} onClick={clickShowChart}>
             매출관리
           </button>
-          <button className={!toggle ? styles.clickedToggle : ''} onClick={clickShowCalendar}>
+          <button className={!isChangeView ? styles.clickedToggle : ''} onClick={clickShowCalendar}>
             매출달력
           </button>
         </div>
       </div>
 
-      {toggle ? <SalesDeatilWithCalendar /> : <Status />}
+      {isChangeView ? <SalesDeatilWithCalendar /> : <Status />}
     </div>
   );
 };

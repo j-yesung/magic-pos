@@ -24,6 +24,7 @@ const Cell = () => {
     setCalendarData,
     calendarData,
     setSalesSum,
+    isChangeView,
   } = useSalesStore();
   const { clickShowDataOfDateHandler } = useCalendar();
 
@@ -53,9 +54,9 @@ const Cell = () => {
     return sortedData;
   };
 
-  console.log(useRouter());
   useEffect(() => {
-    if (path === CALENDAL_KEY)
+    console.log(isChangeView);
+    if (isChangeView) {
       getMonthSales(currentDate.clone()).then(result => {
         if (result.sales.length !== 0) {
           const group = groupByKey<Tables<'sales'>>(
@@ -72,9 +73,10 @@ const Cell = () => {
           setSalesSum(formattedData);
         }
       });
-
+    }
     return () => {
-      if (calendarData.length !== 0) {
+      if (calendarData.length !== 0 && !isChangeView) {
+        console.log('123', calendarData);
         setCalendarData([]);
         setSalesSum(null);
       }
@@ -102,8 +104,8 @@ const Cell = () => {
           key={itemKey}
           day={day}
           salesData={salesData[0]}
-          getMinMaxSalesType={option[path as '/admin/sales/calendar']}
-          clickShowDataOfDateHandler={option[path as '/admin/sales/status']}
+          {...(isChangeView && { getMinMaxSalesType: getMinMaxSalesType })}
+          {...(!isChangeView && { clickShowDataOfDateHandler: clickShowDataOfDateHandler })}
         />,
       );
       day = day.clone().add(1, 'day');
