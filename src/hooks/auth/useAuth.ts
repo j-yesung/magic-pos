@@ -58,6 +58,12 @@ export const useAuth = () => {
       setStoreName(storeName!);
       storeId.length !== 0 ? setStoreId(storeId[0].id) : setStoreId(null!);
       router.push('/');
+      toast(`${storeName} 사장님 반갑습니다.`, {
+        type: 'success',
+        position: 'top-right',
+        showCloseButton: false,
+        autoClose: 2000,
+      });
     },
     onError: error => {
       console.error(error);
