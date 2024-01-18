@@ -15,7 +15,7 @@ const Management = () => {
   const { toast } = useToast();
   typeof window !== 'undefined' && Notification.requestPermission();
   useEffect(() => {
-    submitDetectedOrder(storeId!, refetch, toast, audioRef)
+    submitDetectedOrder(storeId!, refetch, toast)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

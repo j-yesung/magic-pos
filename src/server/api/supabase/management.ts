@@ -2,7 +2,6 @@ import { supabase } from '@/shared/supabase';
 import { OrderConfirmType, ToastTypeOption } from '@/types/common';
 import { StoreWithOrderInfo } from '@/types/supabase';
 import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
-import { RefObject } from 'react';
 
 
 
@@ -50,7 +49,6 @@ export const submitDetectedOrder = (
   refetch: (options?: RefetchOptions | undefined) =>
     Promise<QueryObserverResult<StoreWithOrderInfo[] | undefined, Error>>,
   toast: (content: string, option: Omit<ToastTypeOption, "id" | "content" | "animation">) => void,
-  audioRef: RefObject<HTMLButtonElement>
 ) => {
   supabase
     .channel('order_store')
@@ -59,13 +57,13 @@ export const submitDetectedOrder = (
       { event: 'INSERT', schema: 'public', table: 'order_store', filter: `store_id=eq.${storeId}` },
       payload => {
         console.log(payload)
-        payloadFunction(payload.new.order_number, toast, audioRef, refetch)
+        payloadFunction(payload.new.order_number, toast, refetch)
       },
     )
     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'order_number', filter: `store_id=eq.${storeId}` },
       payload => {
         console.log(payload)
-        payloadFunction(payload.new.order_number, toast, audioRef, refetch)
+        payloadFunction(payload.new.order_number, toast, refetch)
       })
     .subscribe();
 };
@@ -75,7 +73,6 @@ export const submitDetectedOrder = (
 const payloadFunction = (
   orderNumber: number,
   toast: (content: string, option: Omit<ToastTypeOption, "id" | "content" | "animation">) => void,
-  audioRef: RefObject<HTMLButtonElement>,
   refetch: (options?: RefetchOptions | undefined) =>
     Promise<QueryObserverResult<StoreWithOrderInfo[] | undefined, Error>>,
 ) => {
