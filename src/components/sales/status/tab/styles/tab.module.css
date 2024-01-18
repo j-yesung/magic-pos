@@ -20,6 +20,11 @@
   border-radius: 5rem;
 }
 
+.active {
+  border-radius: 5rem;
+  background: var(--bg, #f2f2f2);
+}
+
 .calendar-wrapper {
   display: flex;
   height: 3.5rem;
