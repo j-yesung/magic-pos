@@ -29,7 +29,6 @@ interface InputType {
 
 const Input = ({ value, onChangeHandler }: InputProps) => {
   const path = useRouter().pathname;
-  // const { passwordErrorMessage } = useValid(value);
   const { isPasswordValid, passwordValidationMessage } = useErrorMessage(value);
 
   const inputOptions: Record<string, InputType[]> = {
