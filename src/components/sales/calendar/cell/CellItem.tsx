@@ -73,7 +73,9 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
   });
 
   const POINT = 'SELECTEDTYPE';
+
   const COMPONENT_TYPE = 'CALENDAR';
+
   const formatDate = day.clone().format('YY MM D').substring(6);
 
   return (

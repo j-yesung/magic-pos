@@ -1,25 +1,46 @@
-import { data } from '@/data/dummy';
+import { createDummyData } from '@/data/dummy';
+import { useEffect, useState } from 'react';
 import styles from '../styles/Home.module.css';
 
 const SliderArea = () => {
-  const dataChunks = [data.slice(0, 10), data.slice(10, 20)];
+  const [isLoaded, setIsLoaded] = useState(false);
+  const data1 = createDummyData(40);
+  const data2 = createDummyData(40);
+  const dataChunks = [data1, data2];
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
 
   return (
-    <section>
-      {dataChunks.map((chunk, chunkIndex) => (
-        <div key={chunkIndex} className={styles.cardWrapper}>
-          <ul className={chunkIndex === 0 ? styles.cardList : styles.cardListDynamic}>
-            {chunk.map(list => (
-              <li key={list.id + chunkIndex * 10}>
-                <span>{list.icon}</span>
-                <h1>{list.title}</h1>
-                <h6>{list.description}</h6>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </section>
+    <>
+      {isLoaded && (
+        <section>
+          {dataChunks.map((chunk, chunkIndex) => (
+            <div key={chunkIndex} className={styles.cardWrapper}>
+              <ul className={chunkIndex === 0 ? styles.cardList : styles.cardListDynamic}>
+                {chunk.map(review => (
+                  <li key={review.id + chunkIndex * 10}>
+                    <div className={styles.titleBox}>
+                      <div>
+                        <span className={styles.icon}>{review.icon}</span>
+                        <span className={styles.name}>{review.storeName}</span>
+                      </div>
+                      <div style={{ backgroundColor: review.bgColor }} className={styles.rvBg}>
+                        <h1 style={{ color: review.fontColor }}>{review.nWeeksLater}주 사용 후기</h1>
+                      </div>
+                    </div>
+                    <div className={styles.reviewBox}>
+                      <p>{review.reviewContent}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </section>
+      )}
+    </>
   );
 };
 

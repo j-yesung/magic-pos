@@ -1,3 +1,4 @@
+import { Tables } from '@/types/supabase';
 import { create } from 'zustand';
 
 /**
@@ -7,44 +8,37 @@ import { create } from 'zustand';
 interface CategoriesStoreType {
   isShow: boolean;
   toggleShow: (item: boolean) => void;
-  category: CategoryType;
-  setCategory: (item: CategoryType) => void;
-  categories: CategoryType[];
-  setCategories: (item: CategoryType[]) => void;
-  addCategoryStore: (item: CategoryType) => void;
-  removeCategoryStore: (item: CategoryType) => void;
-  updateCategoryStore: (item: CategoryType) => void;
-  dragCategoryStore: (dragItem: CategoryType, dragOver: CategoryType) => void;
+  isEdit: boolean;
+  setIsEdit: (item: boolean) => void;
+  category: Tables<'menu_category'>;
+  setCategory: (item: Tables<'menu_category'>) => void;
+  categories: Tables<'menu_category'>[];
+  setCategories: (item: Tables<'menu_category'>[]) => void;
+  dragCategoryStore: (dragItem: Tables<'menu_category'>, dragOver: Tables<'menu_category'>) => void;
 }
 
 const useCategoriesStore = create<CategoriesStoreType>(set => ({
   isShow: false,
   toggleShow: item => set({ isShow: item }),
+  isEdit: false,
+  setIsEdit: item => set({ isEdit: item }),
   category: {
     id: '',
     store_id: '',
     name: '',
     position: 0,
   },
-  setCategory: (item: CategoryType) => set(prev => ({ category: { ...prev.category, ...item } })),
+  setCategory: (item: Tables<'menu_category'>) => set(prev => ({ category: { ...prev.category, ...item } })),
   categories: [],
-  setCategories: (item: CategoryType[]) => set({ categories: item }),
-  addCategoryStore: (item: CategoryType) =>
-    set(state => ({ categories: [...state.categories, { ...state.category, item }] })),
-  removeCategoryStore: (item: CategoryType) =>
-    set(state => ({ categories: state.categories.filter(it => it.id !== item.id) })),
-  updateCategoryStore: (item: CategoryType) =>
-    set(state => ({
-      categories: state.categories.map(it => (it.id === item.id ? { ...it, name: item.name } : it)),
-    })),
-  dragCategoryStore: (dragItem: CategoryType, dragOver: CategoryType) =>
+  setCategories: (item: Tables<'menu_category'>[]) => set({ categories: item }),
+  dragCategoryStore: (dragItem: Tables<'menu_category'>, dragOver: Tables<'menu_category'>) =>
     set(state => ({
       categories: state.categories.map(it =>
         it.id === dragItem.id
           ? { id: dragOver.id, name: dragOver.name, store_id: dragOver.store_id, position: dragItem.position }
           : it.id === dragOver.id
-          ? { id: dragItem.id, name: dragItem.name, store_id: dragItem.store_id, position: dragOver.position }
-          : it,
+            ? { id: dragItem.id, name: dragItem.name, store_id: dragItem.store_id, position: dragOver.position }
+            : it,
       ),
     })),
 }));

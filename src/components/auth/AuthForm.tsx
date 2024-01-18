@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Button from '../common/Button';
 import Input from './Input';
+import FormButton from './button/FormButton';
 import styles from './styles/Auth.module.css';
 
 interface FormProps {
@@ -26,6 +27,7 @@ const AuthForm = ({ data }: FormProps) => {
     description,
     buttonSubName,
     subDescription,
+    comment,
   } = data;
   const { login, signup, businessNumberCheck, sendResetPasswordEmail, updatePassword, status, message } = useAuth();
   const isSuccess = status.data === '사업자등록번호가 인증되었습니다.' ? true : false;
@@ -55,13 +57,13 @@ const AuthForm = ({ data }: FormProps) => {
           <p>{subDescription}</p>
         </div>
       ) : null}
-      {path === '/auth/success' || (
+      {path !== '/auth/success' && (
         <form className={styles.form}>
           <div className={styles.formInnerWrapper}>
             <Input value={value} onChangeHandler={changeHandler} />
             {path === '/auth/signup' && (
               <div className={styles.formBusiness}>
-                <label htmlFor="businessNumber">사업자등록번호를 인증해 주세요.</label>
+                <label htmlFor="businessNumber">{comment}</label>
                 <div>
                   <input
                     className={styles.input}
@@ -84,43 +86,21 @@ const AuthForm = ({ data }: FormProps) => {
                     {subButtonName}
                   </Button>
                 </div>
-                {/* 사업자등록번호 인증 여부 메세지 */}
                 <span className={isSuccess ? styles.match : styles.error}>{message}</span>
               </div>
             )}
           </div>
           <div className={styles.formButtonWrapper}>
             {path === '/auth/signup' && (
-              <>
-                <Button type="button" onClick={() => signup(value)} disabled={!isSuccess}>
-                  {buttonName}
-                </Button>
-              </>
+              <FormButton actionFn={signup} value={value} btnName={buttonName} isSuccess={isSuccess} />
             )}
-            {path === '/auth/login' ? (
-              <>
-                <Button type="button" onClick={() => login(value)}>
-                  {buttonName}
-                </Button>
-                <Button type="button" onClick={() => router.push(url)} className={styles.pushButton}>
-                  {buttonSubName}
-                </Button>
-              </>
-            ) : null}
+            {path === '/auth/login' && (
+              <FormButton actionFn={login} value={value} btnName={buttonName} btnSubName={buttonSubName} url={url} />
+            )}
             {path === '/auth/findPassword' && (
-              <Button
-                type="button"
-                onClick={() => sendResetPasswordEmail(value.email)}
-                className={styles.findPasswordButton}
-              >
-                {buttonName}
-              </Button>
+              <FormButton actionFn={sendResetPasswordEmail} value={value} btnName={buttonName} />
             )}
-            {path === '/auth/reset' && (
-              <Button type="button" onClick={() => updatePassword(value.password)}>
-                {buttonName}
-              </Button>
-            )}
+            {path === '/auth/reset' && <FormButton actionFn={updatePassword} value={value} btnName={buttonName} />}
           </div>
         </form>
       )}
@@ -131,13 +111,7 @@ const AuthForm = ({ data }: FormProps) => {
           </Link>
         </div>
       )}
-      {path === '/auth/success' && (
-        <div>
-          <Button className={styles.startButton} type="button" onClick={() => router.push('/auth/login')}>
-            시작하기
-          </Button>
-        </div>
-      )}
+      <div>{path === '/auth/success' && <FormButton url={url} btnSubName={buttonSubName} />}</div>
     </div>
   );
 };

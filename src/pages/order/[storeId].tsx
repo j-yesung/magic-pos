@@ -9,9 +9,9 @@ import useOrderStore, { resetOrderList, setMenuData, setStoreId, setStoreName, s
 import { isEmptyObject } from '@/shared/helper';
 import { useRouter } from 'next/router';
 import OrderContainer from '@/components/order/OrderContainer';
-import { useStoreOrderQuery } from '@/hooks/order/useStoreOrderQuery';
-import { useNumberOrderQuery } from '@/hooks/order/useNumberOrderQuery';
 import { useModal } from '@/hooks/modal/useModal';
+import { useStoreOrderFetchQuery } from '@/hooks/order/useStoreOrderFetchQuery';
+import { useNumberOrderFetchQuery } from '@/hooks/order/useNumberOrderFetchQuery';
 
 const OrderIndexPage = ({
   menuData,
@@ -24,8 +24,8 @@ const OrderIndexPage = ({
 }) => {
   const orderIdList = useOrderStore(state => state.orderIdList);
 
-  const { storeOrderData } = useStoreOrderQuery(orderIdList);
-  const { numberOrderData } = useNumberOrderQuery(orderIdList);
+  const { storeOrderData } = useStoreOrderFetchQuery(orderIdList, storeId);
+  const { numberOrderData } = useNumberOrderFetchQuery(orderIdList, storeId);
   const [isLoaded, setIsLoaded] = useState(false);
   const { MagicModal } = useModal();
   const router = useRouter();

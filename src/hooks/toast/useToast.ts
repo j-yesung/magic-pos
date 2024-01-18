@@ -1,5 +1,5 @@
-import { ToastAnimationType, ToastTypeOption } from '@/types/common';
 import useToastStore from '@/shared/store/toast';
+import { ToastAnimationType, ToastTypeOption } from '@/types/common';
 import { nanoid } from 'nanoid';
 
 const ANIMATION_TERM_TIME = 500;

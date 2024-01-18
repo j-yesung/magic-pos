@@ -3,12 +3,12 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 
 const enum QUERY_KEY {
-  TABLE = 'menuOptions',
+  MENU_OPTION = 'menuOptions',
 }
 
 const useFetchMenuOptions = () => {
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: [QUERY_KEY.TABLE],
+    queryKey: [QUERY_KEY.MENU_OPTION],
     queryFn: () => fetchMenuOptions(),
   });
 
