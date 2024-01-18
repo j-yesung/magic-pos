@@ -24,7 +24,7 @@ const Tab = () => {
         <Calendar />
       ) : (
         <span className={styles['calendar']} onClick={clickShowCalendarHandler}>
-          {currentDate.format('YYYY년 MM월 DD일')}
+          {currentDate.clone().format('YYYY년 MM월 DD일')}
         </span>
       )}
     </div>
