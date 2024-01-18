@@ -7,6 +7,9 @@ import Record from '../record/Record';
 import styles from './styles/tab.module.css';
 
 const Tab = () => {
+  const TODAY = 'today';
+  const MONTHS = 'months';
+  const WEEKS = 'weeks';
   const {
     date: { currentDate },
     isShow,
@@ -15,11 +18,7 @@ const Tab = () => {
 
   const { clickMoveTodayHandler, clickWeeksChartHandler, clickMonthsChartHandler, clickShowCalendarHandler } =
     useCalendar();
-
   const clickCloseCalendar = () => setIsShow(false);
-  const TODAY = 'today';
-  const MONTHS = 'months';
-  const WEEKS = 'weeks';
   const [active, setActive] = useState(TODAY);
   useEffect(() => {
     return () => {
