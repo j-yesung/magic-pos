@@ -55,7 +55,6 @@ export const useCalendar = () => {
   };
 
   const clickMoveTodayHandler = async () => {
-    if (today === currentDate) return;
     const { sales, formatType } = await getTodaySales(utcStandardDate.clone());
     if (sales.length !== 0) {
       const { result, recordData } = formatData(sales, formatType);
