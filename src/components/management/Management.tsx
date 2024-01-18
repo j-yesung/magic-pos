@@ -1,4 +1,5 @@
 import useFetchManagement from "@/hooks/management/useFetchManagement";
+import useToast from "@/hooks/toast/useToast";
 import { submitDetectedOrder } from "@/server/api/supabase/management";
 import useAuthStore from "@/shared/store/auth";
 import ManagementContainer from "./managementContainer/ManagementContainer";
@@ -10,7 +11,8 @@ const Management = () => {
   const user = auth?.user;
   const id = user?.id;
   const { data, refetch } = useFetchManagement(id);
-  submitDetectedOrder(storeId!, refetch)
+  const { toast } = useToast();
+  submitDetectedOrder(storeId!, refetch, toast)
 
   return (
     <div className={styles['managementWrapper']}>
