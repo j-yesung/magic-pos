@@ -39,7 +39,7 @@ const ShopListItem = ({ shopData, index, storeOrderData }: propsType) => {
       setStoreOrderInTable([...data])
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [shopData, storeOrderData])
 
 
   return (
