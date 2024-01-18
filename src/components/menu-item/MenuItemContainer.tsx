@@ -1,5 +1,5 @@
-import useFetchCategoryWithMenu from '@/hooks/menu-category/useCategoryWithMenu';
-import useFetchMenuOptions from '@/hooks/menu-category/useMenuOptions';
+import useFetchCategoryWithMenu from '@/hooks/menu-item/useCategoryWithMenu';
+import useFetchMenuOptions from '@/hooks/menu-item/useMenuOptions';
 import { fetchMenuOptions } from '@/server/api/supabase/menu-item';
 import useAuthStore from '@/shared/store/auth';
 import useMenuItemStore from '@/shared/store/menu-item';
