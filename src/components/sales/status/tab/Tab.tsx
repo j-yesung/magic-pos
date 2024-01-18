@@ -19,10 +19,10 @@ const Tab = () => {
   const { clickMoveTodayHandler, clickWeeksChartHandler, clickMonthsChartHandler, clickShowCalendarHandler } =
     useCalendar();
   const clickCloseCalendar = () => setIsShow(false);
-  const [active, setActive] = useState(TODAY);
+  const [clickedTab, setClickedTab] = useState(TODAY);
   useEffect(() => {
     return () => {
-      setActive(TODAY);
+      setClickedTab(TODAY);
     };
   }, []);
   return (
@@ -30,27 +30,27 @@ const Tab = () => {
       <div className={styles.dateWrapper}>
         <span
           className={clsx(styles.dateButton, {
-            [styles.active]: active === TODAY,
+            [styles.active]: clickedTab === TODAY,
           })}
           onClick={async () => {
-            await clickMoveTodayHandler().then(() => setActive(TODAY));
+            await clickMoveTodayHandler().then(() => setClickedTab(TODAY));
           }}
         >
           오늘
         </span>
         <span
           className={clsx(styles.dateButton, {
-            [styles.active]: active === WEEKS,
+            [styles.active]: clickedTab === WEEKS,
           })}
-          onClick={async () => await clickWeeksChartHandler().then(() => setActive(WEEKS))}
+          onClick={async () => await clickWeeksChartHandler().then(() => setClickedTab(WEEKS))}
         >
           이번 주
         </span>
         <span
           className={clsx(styles.dateButton, {
-            [styles.active]: active === MONTHS,
+            [styles.active]: clickedTab === MONTHS,
           })}
-          onClick={async () => clickMonthsChartHandler().then(() => setActive(MONTHS))}
+          onClick={async () => clickMonthsChartHandler().then(() => setClickedTab(MONTHS))}
         >
           이번 달
         </span>
