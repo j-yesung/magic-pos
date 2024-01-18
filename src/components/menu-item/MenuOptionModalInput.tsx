@@ -1,6 +1,7 @@
 import { useModal } from '@/hooks/modal/useModal';
 import useMenuItemStore from '@/shared/store/menu-item';
 import React, { Fragment, useState } from 'react';
+import styles from './styles/menu-option-modal.module.css';
 
 const MenuOptionModalInput = () => {
   const { MagicModal } = useModal();
@@ -56,47 +57,70 @@ const MenuOptionModalInput = () => {
     <>
       <h3>옵션 상세 설정</h3>
       <div>
-        <h5>옵션 이름</h5>
-        <input
-          type="text"
-          name="name"
-          placeholder="옵션이름"
-          value={menuOption.name ?? ''}
-          onChange={changeMenuOptionHandler}
-        />
+        <p className={styles['input-wrap']}>
+          <label className={styles['input-name']} htmlFor="name">
+            옵션 이름
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            className={styles['input']}
+            placeholder="옵션이름"
+            value={menuOption.name ?? ''}
+            onChange={changeMenuOptionHandler}
+          />
+        </p>
       </div>
       <div>
         <h5>옵션 항목</h5>
-        <div>
+        <div className={styles['option-wrap']}>
           {menuOptionDetailList.map((option, index) => (
             <Fragment key={index}>
-              <p>
-                {option.id}
-                <span style={{ display: 'flex' }}>{option.name}</span>
-                <span style={{ display: 'flex' }}>{option.price}</span>
+              <p className={styles['option-list']}>
+                <span className={styles['option-sub-name']}>{option.name}</span>
+                <span className={styles['option-sub-price']}>{option.price}</span>
               </p>
-              <button type="button" onClick={() => handleRemoveOptionDetail(option.id, index)}>
-                항목 제거
+              <button
+                className={styles['option-btn']}
+                type="button"
+                onClick={() => handleRemoveOptionDetail(option.id, index)}
+              >
+                제거
               </button>
             </Fragment>
           ))}
         </div>
-        <p>
-          <input
-            type="text"
-            name="detailName"
-            value={optionDetail.detailName}
-            placeholder="옵션 이름"
-            onChange={e => changeMenuOptionItemHandler(e)}
-          />
-          <input
-            type="number"
-            name="detailPrice"
-            value={optionDetail.detailPrice}
-            placeholder="옵션 가격"
-            onChange={e => changeMenuOptionItemHandler(e)}
-          />
-        </p>
+        <div>
+          <p className={styles['input-wrap']}>
+            <label className={styles['input-name']} htmlFor="detailName">
+              옵션 내용
+            </label>
+            <input
+              type="text"
+              id="detailName"
+              name="detailName"
+              className={styles['input']}
+              value={optionDetail.detailName}
+              placeholder="옵션 내용을 입력하세요."
+              onChange={e => changeMenuOptionItemHandler(e)}
+            />
+          </p>
+          <p className={styles['input-wrap']}>
+            <label className={styles['input-name']} htmlFor="detailPrice">
+              옵션 이름
+            </label>
+            <input
+              type="number"
+              id="detailPrice"
+              name="detailPrice"
+              className={styles['input']}
+              value={optionDetail.detailPrice}
+              placeholder="옵션 가격을 입력하세요."
+              onChange={e => changeMenuOptionItemHandler(e)}
+            />
+          </p>
+        </div>
         <button type="button" onClick={AddDetailHandler}>
           <span>+</span>
           <span>항목 추가하기</span>
@@ -108,6 +132,7 @@ const MenuOptionModalInput = () => {
           <input
             type="number"
             name="max_detail_count"
+            className={styles['input']}
             value={menuOption.max_detail_count}
             placeholder="옵션 최대 선택 갯수"
             onChange={e => changeMenuOptionHandler(e)}

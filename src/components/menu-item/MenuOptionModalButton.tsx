@@ -1,18 +1,13 @@
-import { useModal } from "@/hooks/modal/useModal";
-import useMenuItemStore from "@/shared/store/menu-item";
-import { MenuOptionWithDetail, TablesUpdate } from "@/types/supabase";
+import { useModal } from '@/hooks/modal/useModal';
+import useMenuItemStore from '@/shared/store/menu-item';
+import { MenuOptionWithDetail, TablesUpdate } from '@/types/supabase';
+import styles from './styles/menu-option-modal.module.css';
 
 const MenuOptionModalButton = ({ modalId }: { modalId?: string }) => {
   const { MagicModal } = useModal();
-  
-  const {
-    menuOption,
-    menuOptions,
-    setMenuOptions,
-    updateMenuOptionsStore,
-    menuOptionDetailList,
-    menuOptionIndex,
-  } = useMenuItemStore();
+
+  const { menuOption, menuOptions, setMenuOptions, updateMenuOptionsStore, menuOptionDetailList, menuOptionIndex } =
+    useMenuItemStore();
 
   // 옵션 수정
   const updateOptionDetailHandler = async (menuOption: TablesUpdate<'menu_option'>) => {
@@ -52,12 +47,18 @@ const MenuOptionModalButton = ({ modalId }: { modalId?: string }) => {
   };
 
   return (
-    <>
-      <button onClick={() => MagicModal.hide(modalId ?? '')}>닫기</button>
-      <button onClick={removeOptionDetailHandler}>삭제</button>
-      <button onClick={() => updateOptionDetailHandler(menuOption)}>수정</button>
-    </>
-  )
-}
+    <div className={styles['btn-wrap']}>
+      <button className={styles['update-btn']} onClick={() => updateOptionDetailHandler(menuOption)}>
+        확인
+      </button>
+      <button className={styles['delete-btn']} onClick={removeOptionDetailHandler}>
+        삭제
+      </button>
+      <button className={styles['btn-wrap']} onClick={() => MagicModal.hide(modalId ?? '')}>
+        닫기
+      </button>
+    </div>
+  );
+};
 
-export default MenuOptionModalButton
+export default MenuOptionModalButton;

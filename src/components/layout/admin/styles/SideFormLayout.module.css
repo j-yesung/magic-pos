@@ -1,0 +1,40 @@
+/* 사이드바 영역입니다. */
+.nav-wrapper {
+  top: 0;
+  height: 95%;
+  width: 33rem;
+  margin: 2rem;
+  display: flex;
+  position: fixed;
+  border-radius: 3rem;
+  transition: all 0.4s;
+  flex-direction: column;
+  background-color: #fff;
+  z-index: var(--level-1-z-index); /* 최상위 레벨 */
+  box-shadow: 0px 0px 20px 0px rgba(68, 9, 194, 0.1);
+  right: 0;
+}
+
+.nav-wrapper .contents {
+  padding: 5rem 3rem 0 3rem;
+}
+
+.nav-wrapper .close-button {
+  display: flex;
+  cursor: pointer;
+  margin-bottom: 4rem;
+  justify-content: flex-end;
+}
+
+/* close sidebar */
+.close-nav {
+  transform: translateX(110%);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* 사이드폼 부분 */
+/* 공통틀만 잡고 상세는 알 수 없어서 일단 더미로 잡아놨습니다. */
+
+.nav-wrapper .inner {
+  height: calc(100vh - 20rem);
+}

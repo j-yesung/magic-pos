@@ -1,22 +1,18 @@
 import { removeMenuItem } from '@/server/api/supabase/menu-item';
 import useMenuItemStore from '@/shared/store/menu-item';
+import useSideFormState from '@/shared/store/side-form';
 import styles from './styles/menu-item-form.module.css';
 
 const MenuItemFormButton = () => {
-  const { toggleShow, menuItem, setMenuItem, removeMenuItemStore } = useMenuItemStore();
+  const { setIsSideFormOpen } = useSideFormState();
+  const { menuItem, setMenuItem, removeMenuItemStore } = useMenuItemStore();
 
   // 메뉴 삭제
   const clickRemoveCategoryHandler = async () => {
     removeMenuItemStore(menuItem);
     setMenuItem({ ...menuItem, id: '', name: '', price: 0, remain_ea: 0 });
     await removeMenuItem(menuItem.id);
-    toggleShow(false);
-  };
-
-  // 입력창 숨기기
-  const clickFormHideHandler = () => {
-    toggleShow(false);
-    setMenuItem({ ...menuItem, id: '' });
+    setIsSideFormOpen(false);
   };
 
   return (
@@ -29,9 +25,6 @@ const MenuItemFormButton = () => {
           삭제
         </button>
       </div>
-      <button className={styles['x-wrap']} type="button" onClick={clickFormHideHandler}>
-        X
-      </button>
     </>
   );
 };

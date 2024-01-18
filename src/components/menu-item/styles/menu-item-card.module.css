@@ -1,25 +1,13 @@
 .li:hover {
-  border-color: var(--bg-line);
+  background-color: var(--bg-line);
 }
 
 .li.active {
   border-color: var(--point-80);
 }
 
-.li.active:hover {
-  border-color: var(--point-100);
-}
-
 .li.recommended {
   border-color: var(--point-2);
-}
-
-.li.active.recommended {
-  border-color: var(--point-80);
-}
-
-.li.active.recommended:hover {
-  border-color: var(--point-100);
 }
 
 .li button {

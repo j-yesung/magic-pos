@@ -1,10 +1,13 @@
 import useSetCategories from '@/hooks/menu-category/useSetCategories';
 import useCategoriesStore from '@/shared/store/menu-category';
+import useSideFormState from '@/shared/store/side-form';
 import { TablesInsert } from '@/types/supabase';
+import SideFormLayout from '../layout/admin/SideFormLayout';
 import styles from './styles/form.module.css';
 
 const CategoryFormPage = () => {
-  const { isShow, toggleShow, isEdit, category, setCategory, categories } = useCategoriesStore();
+  const { setIsSideFormOpen } = useSideFormState();
+  const { isEdit, category, setCategory, categories } = useCategoriesStore();
   const { addMutate, updateNameMutate, deleteMutate } = useSetCategories();
 
   // 카테고리 input handler
@@ -24,7 +27,7 @@ const CategoryFormPage = () => {
   const submitupdateCategoryNameHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     isEdit ? updateNameMutate(category) : addMutate(newStoreTableData);
-    toggleShow(false);
+    setIsSideFormOpen(false);
     setCategory({ ...category, id: '', name: '' });
   };
 
@@ -32,43 +35,48 @@ const CategoryFormPage = () => {
   const clickRemoveCategoryHandler = async () => {
     deleteMutate(category.id);
     setCategory({ ...category, id: '', name: '' });
-    toggleShow(false);
+    setIsSideFormOpen(false);
   };
 
   return (
-    <form
-      onSubmit={submitupdateCategoryNameHandler}
-      className={isShow ? `${styles['wrap']} ${styles['active']}` : `${styles['wrap']}`}
-    >
-      <h3>카테고리명</h3>
-      <input
-        type="text"
-        onChange={changeCategoryHandler}
-        name="name"
-        value={category.name ?? ''}
-        placeholder="카테고리명을 입력하세요."
-        required
-        minLength={1}
-        maxLength={10}
-      />
+    <SideFormLayout>
+      <form onSubmit={submitupdateCategoryNameHandler} className={styles['wrap']}>
+        <div className={styles['input-wrap']}>
+          <label className={styles['input-name']} htmlFor="name">
+            카테고리명
+          </label>
+          <input
+            type="text"
+            onChange={changeCategoryHandler}
+            className={styles['input']}
+            id="name"
+            name="name"
+            value={category.name ?? ''}
+            placeholder="카테고리명을 입력하세요."
+            required
+            minLength={1}
+            maxLength={10}
+          />
+        </div>
 
-      {isEdit ? (
-        <div>
-          <button className={styles['update-btn']} type="submit">
-            수정
-          </button>
-          <button className={styles['delete-btn']} type="button" onClick={clickRemoveCategoryHandler}>
-            카테고리 삭제
-          </button>
-        </div>
-      ) : (
-        <div>
-          <button className={styles['update-btn']} type="submit">
-            추가
-          </button>
-        </div>
-      )}
-    </form>
+        {isEdit ? (
+          <div className={styles['btn-wrap']}>
+            <button className={styles['update-btn']} type="submit">
+              수정
+            </button>
+            <button className={styles['delete-btn']} type="button" onClick={clickRemoveCategoryHandler}>
+              카테고리 삭제
+            </button>
+          </div>
+        ) : (
+          <div>
+            <button className={styles['update-btn']} type="submit">
+              추가
+            </button>
+          </div>
+        )}
+      </form>
+    </SideFormLayout>
   );
 };
 
