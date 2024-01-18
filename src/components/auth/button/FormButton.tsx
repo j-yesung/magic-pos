@@ -3,15 +3,15 @@ import { useRouter } from 'next/router';
 import styles from '../styles/Auth.module.css';
 
 interface ButtonProps {
-  actionFn?: (value: Record<string, string>) => void;
-  value?: Record<string, string>;
-  btnName?: string;
-  btnSubName?: string;
-  url?: string;
-  isSuccess?: boolean;
+  actionFn: (value: Record<string, string>) => void;
+  value: Record<string, string>;
+  btnName: string;
+  btnSubName: string;
+  url: string;
+  isSuccess: boolean;
 }
 
-const FormButton = ({ actionFn, value, btnName, btnSubName, url, isSuccess }: ButtonProps) => {
+const FormButton = ({ actionFn, value, btnName, btnSubName, url, isSuccess }: Partial<ButtonProps>) => {
   const router = useRouter();
 
   return (
