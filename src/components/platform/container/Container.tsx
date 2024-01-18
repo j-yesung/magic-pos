@@ -23,7 +23,7 @@ export interface AddFormType {
   image_url?: string;
   name: string;
   store_id: string;
-  createdAt: string;
+  createdAt?: string;
   link_url: string;
   id?: string | null;
 }
@@ -44,7 +44,6 @@ const Container = () => {
   const [addForm, setAddForm] = useState<AddFormType>({
     name: '',
     link_url: '',
-    createdAt: moment().toISOString(),
     store_id: storeId!,
   });
 

@@ -39,7 +39,6 @@ export const loginHandler = async (values: values) => {
     password,
   });
   if (error && error.status === 400) {
-    alert('이메일 또는 비밀번호가 일치하지 않습니다.');
     throw error;
   }
   return data;
@@ -59,12 +58,9 @@ export const logoutHandler = async () => {
  */
 export const resetPasswordHandler = async (values: values) => {
   const { email } = values;
-  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+  supabase.auth.resetPasswordForEmail(email, {
     redirectTo: `${process.env.NEXT_PUBLIC_AUTH_REDIRECT_TO}/auth/reset`,
   });
-  if (!error) {
-    alert('메일이 전송되었습니다.\n메일을 확인해 주세요.');
-  }
 };
 
 /**
@@ -74,9 +70,6 @@ export const resetPasswordHandler = async (values: values) => {
 export const updatePasswordHandler = async (values: values) => {
   const { password } = values;
   const { data, error } = await supabase.auth.updateUser({ password });
-  if (data) {
-    alert('비밀번호 변경이 완료되었습니다.');
-  }
   if (error) throw error;
   return data;
 };

@@ -1,5 +1,6 @@
 import { downloadPlatFormImageUrl, insertPlatFormRow, uploadPlatFormImage } from '@/server/api/supabase/platform';
 import { Tables } from '@/types/supabase';
+import moment from 'moment';
 import { ChangeEvent, FormEvent, SetStateAction } from 'react';
 import { AddFormType } from '../Container';
 import ImgForm from './img/ImgForm';
@@ -30,12 +31,15 @@ const Form = ({ setAddForm, addForm, setIsRegist, setFecthDataList }: FormProps)
 
   const submitAddCard = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    let updateData = { ...addForm };
+    let updateData: AddFormType = { ...addForm, createdAt: moment().toISOString() };
+
+    console.log(moment().toISOString());
     if (!addForm.name.trim() || !addForm.link_url.trim()) return alert('써라');
 
     if (addForm.file) {
       await uploadPlatFormImage(addForm);
       const { publicUrl: image_url } = downloadPlatFormImageUrl(addForm);
+
       updateData = {
         ...addForm,
         image_url,
