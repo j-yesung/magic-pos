@@ -22,7 +22,7 @@ const Sales = () => {
         </div>
       </div>
 
-      {isChangeView ? <SalesDeatilWithCalendar /> : <Status />}
+      {isChangeView ? <Status /> : <SalesDeatilWithCalendar />}
     </div>
   );
 };
