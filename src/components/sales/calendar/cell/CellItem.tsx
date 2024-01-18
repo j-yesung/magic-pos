@@ -84,7 +84,7 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
         selectedDateType: day.isSame(selectedDate, 'day') ? POINT : undefined,
       })}
       onClick={
-        !isChangeView
+        isChangeView
           ? day.isSame(today, 'D') || day.isBefore(today, 'D')
             ? clickShowDataOfDateHandler?.(day.clone())
             : undefined
@@ -105,7 +105,7 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
           sales: salesData && getMinMaxSalesType?.(salesData),
         })}
       >
-        {isChangeView && salesData?.sales && convertNumberToWon(salesData.sales)}
+        {!isChangeView && salesData?.sales && convertNumberToWon(salesData.sales)}
       </span>
     </div>
   );

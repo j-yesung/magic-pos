@@ -55,7 +55,7 @@ const Cell = () => {
   };
 
   useEffect(() => {
-    if (isChangeView) {
+    if (!isChangeView) {
       getMonthSales(currentDate.clone()).then(result => {
         if (result.sales.length !== 0) {
           const group = groupByKey<Tables<'sales'>>(
@@ -101,8 +101,8 @@ const Cell = () => {
           key={itemKey}
           day={day}
           salesData={salesData[0]}
-          {...(isChangeView && { getMinMaxSalesType: getMinMaxSalesType })}
-          {...(!isChangeView && { clickShowDataOfDateHandler: clickShowDataOfDateHandler })}
+          {...(!isChangeView && { getMinMaxSalesType: getMinMaxSalesType })}
+          {...(isChangeView && { clickShowDataOfDateHandler: clickShowDataOfDateHandler })}
         />,
       );
       day = day.clone().add(1, 'day');
