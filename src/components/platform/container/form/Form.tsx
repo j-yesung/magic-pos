@@ -32,12 +32,12 @@ const Form = ({ setAddForm, addForm, setIsRegist, setFecthDataList }: FormProps)
   const submitAddCard = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     let updateData: AddFormType = { ...addForm, createdAt: moment().toISOString() };
+    console.log(updateData);
 
-    console.log(moment().toISOString());
     if (!addForm.name.trim() || !addForm.link_url.trim()) return alert('써라');
 
-    if (addForm.file) {
-      await uploadPlatFormImage(addForm);
+    if (updateData.file) {
+      await uploadPlatFormImage(updateData);
       const { publicUrl: image_url } = downloadPlatFormImageUrl(addForm);
 
       updateData = {
@@ -51,7 +51,7 @@ const Form = ({ setAddForm, addForm, setIsRegist, setFecthDataList }: FormProps)
       setFecthDataList(pre => [...pre, ...data!]);
     }
 
-    setIsRegist(pre => !pre);
+    // setIsRegist(pre => !pre);
   };
 
   return (
