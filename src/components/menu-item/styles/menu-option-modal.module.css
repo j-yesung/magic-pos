@@ -65,7 +65,11 @@
 }
 .wrap .option-wrap {
   display: flex;
+  flex-direction: column;
   gap: 1rem;
+}
+.wrap .option-wrap > div {
+  display: flex;
 }
 .wrap .option-wrap .option-list {
   display: flex;
@@ -83,4 +87,5 @@
 }
 .wrap .option-wrap .option-list .option-btn {
   width: 2rem;
+  cursor: pointer;
 }

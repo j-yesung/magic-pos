@@ -1,4 +1,5 @@
 import useSideFormState from '@/shared/store/side-form';
+import useSideBarState from '@/shared/store/sidebar';
 import clsx from 'clsx';
 import React, { useEffect, useRef } from 'react';
 import styles from './styles/SideFormLayout.module.css';
@@ -6,24 +7,16 @@ import CloseButton from '/public/icons/close.svg';
 
 const SideFormLayout = ({ children }: { children: React.ReactNode }) => {
   const { isSideFormOpen, setIsSideFormOpen } = useSideFormState();
+  const { isSideBarOpen } = useSideBarState();
   const targetRef = useRef<HTMLDivElement>(null);
   const sidebarClass = clsx(styles.navWrapper, {
     [styles.closeNav]: !isSideFormOpen,
   });
 
   useEffect(() => {
-    const closeSideBar = (e: MouseEvent) => {
-      if (targetRef.current && !targetRef.current.contains(e.target as Node)) {
-        setIsSideFormOpen(false);
-      }
-    };
-
-    window.addEventListener('mousedown', closeSideBar);
-
-    return () => {
-      window.removeEventListener('mousedown', closeSideBar);
-    };
-  }, [setIsSideFormOpen]);
+    setIsSideFormOpen(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSideBarOpen]);
   return (
     <aside className={sidebarClass} ref={targetRef}>
       <div className={styles.contents}>
