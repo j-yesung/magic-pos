@@ -36,7 +36,7 @@ const Item = ({ link, title, isEdit, id, setEditTarget, imgUrl, setIsShowEditFor
         })}
         href={link}
       >
-        {imgUrl ? <Image src={imgUrl} width={100} height={100} alt={title ?? 'default_img'} /> : <Default />}
+        {imgUrl ? <Image src={imgUrl} width={100} height={100} alt={title} /> : <Default />}
 
         <div className={styles.itemHeader}>
           <span className={styles.itemTitle}>{title}</span>
