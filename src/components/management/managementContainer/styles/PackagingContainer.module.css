@@ -6,7 +6,6 @@
   justify-content: flex-start;
   align-items: center;
   overflow-y: scroll;
-  overflow-x: hidden;
 }
 
 .packaging-container::-webkit-scrollbar {
