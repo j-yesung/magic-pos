@@ -148,8 +148,8 @@ const PlatFormWrapper = () => {
     comparedData.store_id = editData.store_id;
     comparedData.createdAt;
 
+    // 기존이미지가 있고 이미지 변경 했을 때
     if (editRef.current?.image_url && comparedData.file) {
-      console.log('1111111111');
       comparedData.createdAt = moment().toISOString();
       // 기존 이미지 삭제
       await removePlatFormImage(editRef.current);
@@ -163,6 +163,8 @@ const PlatFormWrapper = () => {
       const { file, createdAt, ...updateTarget } = comparedData;
       await updatePlatFormData(updateTarget as TablesInsert<'platform'>);
     }
+
+    // 기존데이터에 이미지가 없을 때 이미지 등록을 할 때
     if (!editRef.current?.image_url && comparedData.file) {
       comparedData.createdAt = moment().toISOString();
 
