@@ -171,3 +171,9 @@ export const updateMenuOptionDetail = async (optionDetail: TablesUpdate<'menu_op
   if (error) throw error;
   return data;
 };
+
+export const readRemainEaByMenuId = async (menuId: string) => {
+  const { data, error } = await supabase.from('menu_item').select('remain_ea, name, id').eq('id', menuId).single();
+  if (error) throw error;
+  return data;
+};

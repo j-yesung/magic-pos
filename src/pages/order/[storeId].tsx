@@ -94,7 +94,7 @@ const OrderIndexPage = ({
       menuList.push(...menuData);
 
       setMenuData(menuList);
-      setStoreName(menuData[0].store.business_name ?? '');
+      setStoreName(menuData[0].store?.business_name ?? '');
     }
 
     if (storeId) setStoreId(storeId);
