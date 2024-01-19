@@ -5,9 +5,12 @@ import { nanoid } from 'nanoid';
 const ANIMATION_TERM_TIME = 500;
 
 const useToast = () => {
-  const { addToastList, subtractToastList, setAnimation } = useToastStore();
+  const addToastList = useToastStore(state => state.addToastList);
+  const subtractToastList = useToastStore(state => state.subtractToastList);
+  const setAnimation = useToastStore(state => state.setAnimation);
 
   /**
+   * *WARN*: 절대 컴포넌트가 렌더링중에 실행하지 마세요! (useEffect 안이나, 핸들러에서 호출)
    * Toast 알림창을 띄웁니다. 최대한 react-toastify와 비슷하게 만들어보려 했습니다.
    * usage
    * ```
@@ -36,11 +39,15 @@ const useToast = () => {
       case 'top-left':
         hideAnimationType = 'hide-top-left';
         break;
+      case 'top-center':
+        hideAnimationType = 'hide-top-center';
+        break;
       case 'bottom-left':
         hideAnimationType = 'hide-bottom-left';
         break;
       case 'bottom-right':
         hideAnimationType = 'hide-bottom-right';
+        break;
     }
 
     setTimeout(() => {

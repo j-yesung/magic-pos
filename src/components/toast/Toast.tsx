@@ -3,10 +3,11 @@ import useToastStore from '@/shared/store/toast';
 import ToastContent from '@/components/toast/ToastContent';
 
 const Toast = () => {
-  const { toastList } = useToastStore();
+  const toastList = useToastStore(state => state.toastList);
 
   // Toast의 옵션마다 다른 위치에 렌더링 시켜야 한다.
   const topRightList = toastList.filter(toast => toast.position === 'top-right');
+  const topCetnerList = toastList.filter(toast => toast.position === 'top-center');
   const topLeftList = toastList.filter(toast => toast.position === 'top-left');
   const bottomRightList = toastList.filter(toast => toast.position === 'bottom-right');
   const bottomLeftList = toastList.filter(toast => toast.position === 'bottom-left');
@@ -14,6 +15,7 @@ const Toast = () => {
   return (
     <>
       {topRightList.length > 0 && <ToastContent list={topRightList} position="top-right" />}
+      {topCetnerList.length > 0 && <ToastContent list={topCetnerList} position="top-center" />}
       {topLeftList.length > 0 && <ToastContent list={topLeftList} position="top-left" />}
       {bottomRightList.length > 0 && <ToastContent list={bottomRightList} position="bottom-right" />}
       {bottomLeftList.length > 0 && <ToastContent list={bottomLeftList} position="bottom-left" />}
