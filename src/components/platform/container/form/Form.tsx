@@ -50,8 +50,14 @@ const Form = ({ setAddForm, addForm, setIsRegist, setFecthDataList }: FormProps)
       const { data } = await insertPlatFormRow(updateData);
       setFecthDataList(pre => [...pre, ...data!]);
     }
-
-    // setIsRegist(pre => !pre);
+    setAddForm(pre => ({
+      ...pre,
+      name: '',
+      link_url: '',
+      createdAt: '',
+      file: null,
+    }));
+    setIsRegist(pre => !pre);
   };
 
   return (

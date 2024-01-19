@@ -35,7 +35,7 @@ export interface EditFormType {
   store_id: string | null;
   image_url?: string | null;
   file?: File | null;
-  createdAt: string;
+  createdAt?: string;
 }
 
 const Container = () => {
@@ -74,9 +74,7 @@ const Container = () => {
     link_url: '',
     store_id: storeId!,
     image_url: preImage ?? null,
-    createdAt: moment().toISOString(),
   });
-
   const editRef = useRef<EditFormType | null>();
 
   const clickEditCancel = () => {
@@ -137,29 +135,65 @@ const Container = () => {
       if (editRef.current![key as keyof EditFormType] !== value) {
         acc[key as keyof EditFormType] = value;
       }
+      if (editRef.current!['image_url']) {
+        acc['image_url'] = editRef.current!['image_url'];
+      }
 
       return acc;
     }, new Object() as EditFormType);
 
-    if (isEmptyObject(comparedData)) return;
-
+    console.log(editData);
+    console.log(editRef.current);
+    console.log(preImage);
+    if (isEmptyObject(comparedData) && editRef.current?.image_url === preImage) return;
+    // 나중에 refactoring하기
     comparedData.id = editData.id;
     comparedData.store_id = editData.store_id;
-    comparedData.createdAt = editData.createdAt;
-    if (comparedData.file) {
-      if (editRef.current?.image_url) await removePlatFormImage(editRef.current);
+    console.log('----------------------------------');
+    console.log(preImage);
+    console.log(editRef.current);
+    console.log(editData);
+    if (editRef.current?.image_url && comparedData.file) {
+      console.log('1111111111');
+      comparedData.createdAt = moment().toISOString();
+      // 기존 이미지 삭제
+      await removePlatFormImage(editRef.current);
+      // 새로운 이미지 업로드
       await uploadPlatFormImage(comparedData);
-      const { publicUrl: image_url } = downloadPlatFormImageUrl(addForm);
+      const { publicUrl: image_url } = downloadPlatFormImageUrl(comparedData);
       comparedData = {
         ...comparedData,
         image_url,
       };
       const { file, createdAt, ...updateTarget } = comparedData;
-      const { data } = await updatePlatFormData(updateTarget as TablesInsert<'platform'>);
-    } else {
-      const { createdAt, file, ...updateTarget } = comparedData;
       await updatePlatFormData(updateTarget as TablesInsert<'platform'>);
     }
+    if (!editRef.current?.image_url && comparedData.file) {
+      await uploadPlatFormImage(comparedData);
+      const { publicUrl: image_url } = downloadPlatFormImageUrl(comparedData);
+      comparedData = {
+        ...comparedData,
+        image_url,
+      };
+      const { file, createdAt, ...updateTarget } = comparedData;
+      await updatePlatFormData(updateTarget as TablesInsert<'platform'>);
+      console.log('22222222222222222');
+    }
+
+    if (!preImage && !comparedData.link_url && !comparedData.name) {
+      console.log('여기인뎅');
+      console.log(comparedData);
+      await removePlatFormImage(comparedData);
+      await updatePlatFormData({ ...comparedData, image_url: null } as TablesInsert<'platform'>);
+      const { platform, error } = await fetchPlatForm(storeId!);
+      setFecthDataList(platform);
+      setIsShowEditForm(false);
+      return;
+    }
+    console.log('11');
+    console.log(comparedData);
+    await updatePlatFormData(comparedData as TablesInsert<'platform'>);
+    console.log('22');
     const { platform, error } = await fetchPlatForm(storeId!);
     setFecthDataList(platform);
     setIsShowEditForm(false);
@@ -168,7 +202,7 @@ const Container = () => {
   // 수정 할 카드의 정보를 담는 useEffect입니다.
   useEffect(() => {
     if (editRef.current) return;
-    editRef.current = editTarget;
+    editRef.current = { ...editTarget };
     return () => {
       editRef.current = null;
     };

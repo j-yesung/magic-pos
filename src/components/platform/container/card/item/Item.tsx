@@ -21,6 +21,7 @@ const Item = ({ link, title, isEdit, id, setEditTarget, imgUrl, setIsShowEditFor
       id,
       link_url: link,
       name: title,
+      image_url: imgUrl ?? null,
     }));
 
     setPreImage(imgUrl);

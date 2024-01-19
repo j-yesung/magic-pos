@@ -113,8 +113,8 @@ export const fetchPlatForm = async (store_id: string) => {
 
 export const removePlatFormImage = async (param: EditFormType) => {
   const imagePath = param?.image_url?.split('/').slice(-1)[0];
-
-  const { error } = await supabase.storage.from('images').remove([`platform/${param.store_id}/${imagePath}`]);
+  const { error, data } = await supabase.storage.from('images').remove([`platform/${param.store_id}/${imagePath}`]);
+  console.log(data);
 };
 
 /**
@@ -131,7 +131,7 @@ export const updatePlatFormData = async (param: TablesInsert<'platform'>) => {
     .eq('id', param.id!);
 
   if (error) return { data: null, error };
-
+  console.log(data);
   return { data: [], error };
 };
 
