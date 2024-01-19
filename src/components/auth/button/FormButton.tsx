@@ -18,12 +18,16 @@ const FormButton = (props: Partial<ButtonProps>) => {
 
   return (
     <>
-      {actionFn && (
+      {actionFn && router.pathname === '/auth/signup' ? (
         <Button
           type="button"
           onClick={() => actionFn && actionFn(value!)}
-          disabled={isSuccess !== undefined && isPasswordValid ? false : true}
+          disabled={isSuccess && isPasswordValid ? false : true}
         >
+          {btnName}
+        </Button>
+      ) : (
+        <Button type="button" onClick={() => actionFn && actionFn(value!)}>
           {btnName}
         </Button>
       )}
