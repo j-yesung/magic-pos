@@ -1,4 +1,4 @@
-import useSetCategories from '@/hooks/menu-category/useSetCategories';
+import useSetCategories from '@/hooks/menu/menu-category/useSetCategories';
 import useCategoriesStore from '@/shared/store/menu-category';
 import useSideFormState from '@/shared/store/side-form';
 import { TablesInsert } from '@/types/supabase';
@@ -17,7 +17,7 @@ const CategoryFormPage = () => {
   };
 
   // 카테고리 new data
-  const newStoreTableData: TablesInsert<'menu_category'> = {
+  const newCategoryData: TablesInsert<'menu_category'> = {
     name: category.name,
     store_id: category.store_id,
     position: categories.length,
@@ -26,7 +26,7 @@ const CategoryFormPage = () => {
   // 카테고리 등록 및 수정
   const submitupdateCategoryNameHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    isEdit ? updateNameMutate(category) : addMutate(newStoreTableData);
+    isEdit ? updateNameMutate(category) : addMutate(newCategoryData);
     setIsSideFormOpen(false);
     setCategory({ ...category, id: '', name: '' });
   };

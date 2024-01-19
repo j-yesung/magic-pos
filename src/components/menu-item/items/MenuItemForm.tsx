@@ -1,28 +1,27 @@
+import useSetMenuItem from '@/hooks/menu/menu-item/useSetMenuItems';
 import {
   addMenuOption,
   addUpsertMenuOptionDetail,
-  downloadMenuItemUrl,
-  removeMenuItemFromStorage,
   removeMenuOption,
-  updateMenuItem,
   updateMenuOption,
-  uploadMenuItem,
 } from '@/server/api/supabase/menu-item';
 import useMenuItemStore from '@/shared/store/menu-item';
 import useSideFormState from '@/shared/store/side-form';
-import { MenuOptionWithDetail, Tables } from '@/types/supabase';
+import { MenuOptionWithDetail, Tables, TablesInsert } from '@/types/supabase';
 import moment from 'moment';
-import SideFormLayout from '../layout/admin/SideFormLayout';
+import SideFormLayout from '../../layout/admin/SideFormLayout';
+import styles from '../styles/menu-item-form.module.css';
 import MenuItemFormButton from './MenuItemFormButton';
 import MenuItemFormInput from './MenuItemFormInput';
-import styles from './styles/menu-item-form.module.css';
 
 const MenuItemFormPage = () => {
   const { setIsSideFormOpen } = useSideFormState();
+  const { addMutate, updateNameMutate, uploadImageMutate } = useSetMenuItem();
+
   const {
+    isEdit,
     menuItem,
     setMenuItem,
-    updateMenuItemStore,
     menuItemImgFile,
     setMenuItemImgFile,
     menuOptions,
@@ -34,20 +33,40 @@ const MenuItemFormPage = () => {
     removeChangeMenuOptionsStore,
   } = useMenuItemStore();
 
-  // 메뉴 수정
+  // 메뉴 추가 and 수정
   const submitupdateMenuItemHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    let updateData = { ...menuItem };
-    if (menuItemImgFile !== null) {
-      await removeMenuItemFromStorage(menuItem);
-      const uploadedMenuImage = await fetchNewMenuItemImgUrl();
-      updateData = {
-        ...menuItem,
-        image_url: uploadedMenuImage,
-      };
+    const newMenuItemData: TablesInsert<'menu_item'> | Tables<'menu_item'> = {
+      category_id: menuItem.category_id,
+      name: menuItem.name,
+      position: menuItem.position,
+      price: menuItem.price,
+      recommended: menuItem.recommended,
+      remain_ea: menuItem.remain_ea,
+      image_url: menuItem.image_url,
+    };
+    if(!isEdit) {
+      const addData = await addMutate.mutateAsync(newMenuItemData);
+      setMenuItem({ ...menuItem, id: addData[0].id });
+      newMenuItemData.id = addData[0].id;
+    } else {
+      newMenuItemData.id = menuItem.id;
     }
-    updateMenuItemStore(updateData);
-    await updateMenuItem(updateData);
+
+    let uploadedMenuImage = '';
+    if (menuItemImgFile !== null) {
+      const formattedDate = moment().toISOString();
+      const uploadImageGroup = {
+        menuId: newMenuItemData.id,
+        categoryId: menuItem.category_id,
+        createAt: formattedDate,
+        selectedFile: menuItemImgFile,
+      };
+      uploadedMenuImage = await uploadImageMutate.mutateAsync(uploadImageGroup);
+      setMenuItem({ ...menuItem, image_url: uploadedMenuImage });
+      newMenuItemData.image_url = uploadedMenuImage;
+    }
+    updateNameMutate(newMenuItemData);
     setIsSideFormOpen(false);
     setMenuItemImgFile(null);
     setMenuItem({ ...menuItem, id: '' });
@@ -181,19 +200,6 @@ const MenuItemFormPage = () => {
     });
 
     return newItems.length === 0; // 반환 값이 true이면 두 배열이 같다는 것을 의미
-  };
-
-  // 사진 업로드, 사진 URL 저장
-  const fetchNewMenuItemImgUrl = async () => {
-    const { data } = await uploadMenuItem(menuItem, getTodayDate(), menuItemImgFile!);
-    const downloadedMenuImage = await downloadMenuItemUrl(menuItem, data.path.split('/')[3]);
-    return downloadedMenuImage;
-  };
-
-  // 현재 시간 계산
-  const getTodayDate = (): string => {
-    const formattedDate = moment().toISOString();
-    return formattedDate;
   };
 
   return (

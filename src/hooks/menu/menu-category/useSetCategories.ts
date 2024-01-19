@@ -1,4 +1,9 @@
-import { addCategory, removeCategory, updateCategoryName } from '@/server/api/supabase/menu-category';
+import {
+  addCategory,
+  removeCategory,
+  updateCategoryName,
+  updateCategoryPosition,
+} from '@/server/api/supabase/menu-category';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const enum QUERY_KEY {
@@ -25,6 +30,13 @@ export const useSetCategories = () => {
     },
   });
 
+  const updatePositionMutate = useMutation({
+    mutationFn: updateCategoryPosition,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.MENU_CATEGORY] });
+    },
+  });
+
   const deleteMutate = useMutation({
     mutationFn: removeCategory,
     onSuccess: () => {
@@ -35,6 +47,7 @@ export const useSetCategories = () => {
   return {
     addMutate: addMutate.mutate,
     updateNameMutate: updateNameMutate.mutate,
+    updatePositionMutate: updatePositionMutate.mutate,
     deleteMutate: deleteMutate.mutate,
   };
 };

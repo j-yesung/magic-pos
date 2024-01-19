@@ -9,8 +9,8 @@ import { Tables, TablesInsert, TablesUpdate } from '@/types/supabase';
 
 export const addMenuItem = async (menuItem: TablesInsert<'menu_item'>) => {
   const { data, error } = await supabase.from('menu_item').insert([menuItem]).select();
-  if (error) throw error;
-  return { data, error };
+  if (error) throw new Error(error.message);
+  return data
 };
 
 /**
@@ -19,7 +19,7 @@ export const addMenuItem = async (menuItem: TablesInsert<'menu_item'>) => {
  */
 export const removeMenuItem = async (menuId: string) => {
   const { error } = await supabase.from('menu_item').delete().eq('id', menuId);
-  if (error) throw error;
+  if (error) throw new Error(error.message);
 };
 
 /**
@@ -29,26 +29,56 @@ export const removeMenuItem = async (menuId: string) => {
  */
 export const updateMenuItem = async (menuItem: TablesUpdate<'menu_item'>) => {
   const { id, name, price, image_url, position, recommended, remain_ea } = menuItem;
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from('menu_item')
     .update({ name, price, image_url, position, recommended, remain_ea })
-    .eq('id', id!);
-  if (error) throw error;
-  return data;
+    .eq('id', id ?? '');
+  if (error) throw new Error(error.message);
 };
 
 /**
- * 메뉴 물품 이미지 삭제
+ * 메뉴 물품 이미지 삭제, 업로드, 다운로드
  * @param values 메뉴의 items
  * @returns data
  */
+type UploadMenuItemType = {
+  menuId: string;
+  categoryId: string;
+  createAt?: string;
+  selectedFile?: File;
+};
+export const uploadMenuItemImage = async (uploadMenuItem: UploadMenuItemType) => {
+  // 기존 storage 이미지 삭제
+  const { data: list } = await supabase.storage
+    .from('images')
+    .list(`menu/${uploadMenuItem.categoryId}/${uploadMenuItem.menuId}`);
+  const filesToRemove = list?.map(
+    x => `menu/${uploadMenuItem.categoryId}/${uploadMenuItem.menuId}/${x.name}`,
+  );
+  await supabase.storage.from('images').remove(filesToRemove!);
+  //stoage upload
+  const { error } = await supabase.storage
+    .from('images')
+    .upload(
+      `menu/${uploadMenuItem.categoryId}/${uploadMenuItem.menuId}/${uploadMenuItem.createAt}`,
+      uploadMenuItem.selectedFile!,
+      {},
+    );
+  // 올라간 image get url
+  const { data } = supabase.storage
+    .from('images')
+    .getPublicUrl(
+      `menu/${uploadMenuItem.categoryId}/${uploadMenuItem.menuId}/${uploadMenuItem.createAt}`,
+    );
+
+  if (error) throw error;
+  return data.publicUrl;
+};
+
 export const uploadMenuItem = async (menuItem: Tables<'menu_item'>, createAt: string, selectedFile: File) => {
   const { error, data } = await supabase.storage
     .from('images')
-    .upload(`menu/${menuItem.category_id}/${menuItem.id}/${createAt}`, selectedFile, {
-      // cacheControl: '3600',
-      // upsert: false,
-    });
+    .upload(`menu/${menuItem.category_id}/${menuItem.id}/${createAt}`, selectedFile, {});
   if (error) throw error;
   return { data, error };
 };
@@ -79,10 +109,22 @@ export const removeMenuItemFromStorage = async (menuItem: Tables<'menu_item'>) =
  * @param values 메뉴 id, 메뉴 position
  * @returns data
  */
-export const updateMenuItemPosition = async (menuItemId: string, position: number) => {
-  const { data, error } = await supabase.from('menu_item').update({ position }).eq('id', menuItemId);
-  if (error) throw error;
-  return data;
+type DragGroupType = {
+  pick: TablesUpdate<'menu_item'>;
+  over: TablesUpdate<'menu_item'>;
+};
+export const updateMenuItemPosition = async (dragGroup: DragGroupType) => {
+  const { id: pickId, position: pickPosition } = dragGroup.pick;
+  const { id: overId, position: overPosition } = dragGroup.over;
+  const { error: pickError } = await supabase
+    .from('menu_item')
+    .update({ position: overPosition })
+    .eq('id', pickId ?? '');
+  const { error: OverError } = await supabase
+    .from('menu_item')
+    .update({ position: pickPosition })
+    .eq('id', overId ?? '');
+  if (pickError && OverError) throw new Error(pickError.message);
 };
 
 /**

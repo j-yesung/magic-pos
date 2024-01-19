@@ -6,7 +6,7 @@ const enum QUERY_KEY {
   MENU_CATEGORY_WITH_ITEM = 'categoryWithMenu',
 }
 
-const useFetchCategoryWithMenu = (id: string) => {
+const useFetchMenuItems = (id: string) => {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: [QUERY_KEY.MENU_CATEGORY_WITH_ITEM],
     queryFn: () => fetchCategoriesWithMenuItemByStoreId(id),
@@ -22,4 +22,4 @@ const useFetchCategoryWithMenu = (id: string) => {
   return { data, isLoading };
 };
 
-export default useFetchCategoryWithMenu;
+export default useFetchMenuItems;

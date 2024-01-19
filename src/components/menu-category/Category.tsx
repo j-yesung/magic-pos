@@ -1,4 +1,4 @@
-import { updateCategoryPosition } from '@/server/api/supabase/menu-category';
+import useSetCategories from '@/hooks/menu/menu-category/useSetCategories';
 import useCategoriesStore from '@/shared/store/menu-category';
 import useSideFormState from '@/shared/store/side-form';
 import { Tables } from '@/types/supabase';
@@ -6,13 +6,15 @@ import { useRef } from 'react';
 import styles from './styles/category.module.css';
 
 const CategoryComponentPage = () => {
-  const { isSideFormOpen, setIsSideFormOpen } = useSideFormState();
-  const { setIsEdit, setCategory, categories, dragCategoryStore } = useCategoriesStore();
+  const { setIsSideFormOpen } = useSideFormState();
+  const { setIsEdit, category, setCategory, categories } = useCategoriesStore();
+  const { updatePositionMutate } = useSetCategories();
 
   // 카테고리 플러스
   const clickAddCategoryHandler = async () => {
     setIsEdit(false);
     setIsSideFormOpen(true);
+    setCategory({ ...category, id: '', name: '' });
   };
 
   // 카테고리 선택
@@ -41,8 +43,11 @@ const CategoryComponentPage = () => {
     const newList = [...categories];
     const dragItemValue = newList[dragItemRef.current];
     const dragOverValue = newList[dragOverRef.current];
-    dragCategoryStore(dragItemValue, dragOverValue);
-    await updateCategoryPosition(dragItemValue, dragOverValue);
+    const dragGroup = {
+      pick: dragItemValue,
+      over: dragOverValue,
+    };
+    updatePositionMutate(dragGroup);
     dragItemRef.current = 0;
     dragOverRef.current = 0;
   };

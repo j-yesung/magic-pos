@@ -1,7 +1,7 @@
 import { useModal } from '@/hooks/modal/useModal';
 import useMenuItemStore from '@/shared/store/menu-item';
 import React, { useState } from 'react';
-import styles from './styles/menu-option-modal.module.css';
+import styles from '../styles/menu-option-modal.module.css';
 
 const MenuOptionModalInput = () => {
   const { MagicModal } = useModal();
