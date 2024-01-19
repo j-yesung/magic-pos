@@ -11,7 +11,7 @@ const CartRow = ({ itemList }: { itemList: MenuItemWithOption[] }) => {
   };
 
   const handleClickDownQuantity = (item: MenuItemWithOption) => {
-    subtractOrderList(item);
+    subtractOrderList(item.id);
   };
 
   return (

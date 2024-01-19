@@ -23,6 +23,8 @@ interface InputType {
   name: string;
   type: string;
   label?: string;
+  minLength?: number;
+  maxLength?: number;
   disabled?: boolean;
   placeholder?: string;
 }
@@ -55,17 +57,19 @@ const Input = ({ value, onChangeHandler }: InputProps) => {
               <input
                 id={input.name}
                 className={clsx(styles.input, {
-                  [styles.inputError]: isPasswordConfirm && !isPasswordValid,
+                  [styles.inputError]: isPasswordConfirm && !isPasswordValid && value['passwordConfirm'],
                 })}
                 name={input.name}
                 value={value[key]}
                 onChange={onChangeHandler}
                 type={input.type}
+                minLength={input.minLength}
+                maxLength={input.maxLength}
                 placeholder={input.placeholder}
                 disabled={input.disabled}
                 required
               />
-              {isPasswordConfirm && (
+              {isPasswordConfirm && value['password'] && (
                 <span className={isPasswordValid ? styles.match : styles.error}>{passwordValidationMessage}</span>
               )}
             </div>

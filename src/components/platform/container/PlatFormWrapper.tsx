@@ -35,10 +35,10 @@ export interface EditFormType {
   store_id: string | null;
   image_url?: string | null;
   file?: File | null;
-  createdAt: string;
+  createdAt?: string;
 }
 
-const Container = () => {
+const PlatFormWrapper = () => {
   const storeId = useAuthStore(state => state.storeId);
   const [fetchDataList, setFecthDataList] = useState<Tables<'platform'>[]>([]);
   const [addForm, setAddForm] = useState<AddFormType>({
@@ -74,9 +74,7 @@ const Container = () => {
     link_url: '',
     store_id: storeId!,
     image_url: preImage ?? null,
-    createdAt: moment().toISOString(),
   });
-
   const editRef = useRef<EditFormType | null>();
 
   const clickEditCancel = () => {
@@ -137,29 +135,61 @@ const Container = () => {
       if (editRef.current![key as keyof EditFormType] !== value) {
         acc[key as keyof EditFormType] = value;
       }
+      if (editRef.current!['image_url']) {
+        acc['image_url'] = editRef.current!['image_url'];
+      }
 
       return acc;
     }, new Object() as EditFormType);
 
-    if (isEmptyObject(comparedData)) return;
-
+    if (isEmptyObject(comparedData) && editRef.current?.image_url === preImage) return;
+    // 나중에 refactoring하기
     comparedData.id = editData.id;
     comparedData.store_id = editData.store_id;
-    comparedData.createdAt = editData.createdAt;
-    if (comparedData.file) {
-      if (editRef.current?.image_url) await removePlatFormImage(editRef.current);
+    comparedData.createdAt;
+
+    // 기존이미지가 있고 이미지 변경 했을 때
+    if (editRef.current?.image_url && comparedData.file) {
+      comparedData.createdAt = moment().toISOString();
+      // 기존 이미지 삭제
+      await removePlatFormImage(editRef.current);
+      // 새로운 이미지 업로드
       await uploadPlatFormImage(comparedData);
-      const { publicUrl: image_url } = downloadPlatFormImageUrl(addForm);
+      const { publicUrl: image_url } = downloadPlatFormImageUrl(comparedData);
       comparedData = {
         ...comparedData,
         image_url,
       };
       const { file, createdAt, ...updateTarget } = comparedData;
-      const { data } = await updatePlatFormData(updateTarget as TablesInsert<'platform'>);
-    } else {
-      const { createdAt, file, ...updateTarget } = comparedData;
       await updatePlatFormData(updateTarget as TablesInsert<'platform'>);
     }
+
+    // 기존데이터에 이미지가 없을 때 이미지 등록을 할 때
+    if (!editRef.current?.image_url && comparedData.file) {
+      comparedData.createdAt = moment().toISOString();
+
+      await uploadPlatFormImage(comparedData);
+      const { publicUrl: image_url } = downloadPlatFormImageUrl(comparedData);
+      comparedData = {
+        ...comparedData,
+        image_url,
+      };
+      const { file, createdAt, ...updateTarget } = comparedData;
+      await updatePlatFormData(updateTarget as TablesInsert<'platform'>);
+    }
+
+    // 수정 할 때 이미지만 삭제 할 때 실행 되는 조건문
+    if (!preImage && !comparedData.link_url && !comparedData.name) {
+      await removePlatFormImage(comparedData);
+      const { file, createdAt, ...updateTarget } = comparedData;
+      await updatePlatFormData({ ...updateTarget, image_url: null } as TablesInsert<'platform'>);
+      const { platform, error } = await fetchPlatForm(storeId!);
+      setFecthDataList(platform);
+      setIsShowEditForm(false);
+      return;
+    }
+    const { file, createdAt, ...updateTarget } = comparedData;
+    await updatePlatFormData(updateTarget as TablesInsert<'platform'>);
     const { platform, error } = await fetchPlatForm(storeId!);
     setFecthDataList(platform);
     setIsShowEditForm(false);
@@ -168,7 +198,7 @@ const Container = () => {
   // 수정 할 카드의 정보를 담는 useEffect입니다.
   useEffect(() => {
     if (editRef.current) return;
-    editRef.current = editTarget;
+    editRef.current = { ...editTarget };
     return () => {
       editRef.current = null;
     };
@@ -183,6 +213,7 @@ const Container = () => {
    */
   const onClickRemoveData = async () => {
     await removePlatFormData(editTarget.id);
+    await removePlatFormImage(editTarget);
     const { platform } = await fetchPlatForm(editTarget.store_id!);
     setFecthDataList(platform);
     setIsShowEditForm(false);
@@ -269,4 +300,4 @@ const Container = () => {
   );
 };
 
-export default Container;
+export default PlatFormWrapper;

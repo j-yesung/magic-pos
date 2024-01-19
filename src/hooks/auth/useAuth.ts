@@ -60,7 +60,7 @@ export const useAuth = () => {
       router.push('/');
       toast(`${storeName} 사장님 반갑습니다.`, {
         type: 'success',
-        position: 'top-right',
+        position: 'top-center',
         showCloseButton: false,
         autoClose: 2000,
       });
@@ -69,7 +69,7 @@ export const useAuth = () => {
       console.error(error);
       toast('이메일 또는 비밀번호가 일치하지 않습니다.', {
         type: 'danger',
-        position: 'top-right',
+        position: 'top-center',
         showCloseButton: false,
         autoClose: 2000,
       });
@@ -118,7 +118,7 @@ export const useAuth = () => {
       if (data) {
         toast('비밀번호 변경이 완료되었습니다.', {
           type: 'success',
-          position: 'top-right',
+          position: 'top-center',
           showCloseButton: false,
           autoClose: 2000,
         });

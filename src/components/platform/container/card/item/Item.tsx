@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
-import { EditFormType } from '../../Container';
+import { EditFormType } from '../../PlatFormWrapper';
 import styles from './styles/item.module.css';
 import Default from '/public/logo.svg';
 interface ItemProps {
@@ -21,12 +21,12 @@ const Item = ({ link, title, isEdit, id, setEditTarget, imgUrl, setIsShowEditFor
       id,
       link_url: link,
       name: title,
+      image_url: imgUrl ?? null,
     }));
 
     setPreImage(imgUrl);
     setIsShowEditForm(true);
   };
-
   return (
     <div className={styles.itemWrapper}>
       <Link
@@ -36,7 +36,7 @@ const Item = ({ link, title, isEdit, id, setEditTarget, imgUrl, setIsShowEditFor
         })}
         href={link}
       >
-        {imgUrl ? <Image src={imgUrl} width={100} height={100} alt={title ?? 'default_img'} /> : <Default />}
+        {imgUrl ? <Image src={imgUrl} width={100} height={100} alt={title} /> : <Default />}
 
         <div className={styles.itemHeader}>
           <span className={styles.itemTitle}>{title}</span>

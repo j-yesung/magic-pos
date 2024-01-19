@@ -2,7 +2,7 @@ import { downloadPlatFormImageUrl, insertPlatFormRow, uploadPlatFormImage } from
 import { Tables } from '@/types/supabase';
 import moment from 'moment';
 import { ChangeEvent, FormEvent, SetStateAction } from 'react';
-import { AddFormType } from '../Container';
+import { AddFormType } from '../PlatFormWrapper';
 import ImgForm from './img/ImgForm';
 import styles from './styles/form.module.css';
 export interface FormProps {
@@ -32,13 +32,13 @@ const Form = ({ setAddForm, addForm, setIsRegist, setFecthDataList }: FormProps)
   const submitAddCard = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     let updateData: AddFormType = { ...addForm, createdAt: moment().toISOString() };
+    console.log(updateData);
 
-    console.log(moment().toISOString());
     if (!addForm.name.trim() || !addForm.link_url.trim()) return alert('써라');
 
-    if (addForm.file) {
-      await uploadPlatFormImage(addForm);
-      const { publicUrl: image_url } = downloadPlatFormImageUrl(addForm);
+    if (updateData.file) {
+      await uploadPlatFormImage(updateData);
+      const { publicUrl: image_url } = downloadPlatFormImageUrl(updateData);
 
       updateData = {
         ...addForm,
@@ -50,7 +50,13 @@ const Form = ({ setAddForm, addForm, setIsRegist, setFecthDataList }: FormProps)
       const { data } = await insertPlatFormRow(updateData);
       setFecthDataList(pre => [...pre, ...data!]);
     }
-
+    setAddForm(pre => ({
+      ...pre,
+      name: '',
+      link_url: '',
+      createdAt: '',
+      file: null,
+    }));
     setIsRegist(pre => !pre);
   };
 

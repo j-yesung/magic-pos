@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSalesQuery } from '@/hooks/sales/useSalesQuery';
-import useOrderStore, { addOrderId, getTotalPrice } from '@/shared/store/order';
+import useOrderStore, { addOrderId, getTotalPrice, setOrderNumber } from '@/shared/store/order';
 import { groupByKey } from '@/shared/helper';
 import { Tables } from '@/types/supabase';
 import { useStoreQuery } from '@/hooks/store/useStoreQuery';
@@ -10,6 +10,7 @@ import styles from './styles/SuccessContainer.module.css';
 import Image from 'next/image';
 import image from '@/../public/images/image-success.png';
 import { useRouter } from 'next/router';
+import { decrementRemainEaByMenuId } from '@/server/api/supabase/menu-item';
 
 const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const orderList = useOrderStore(state => state.orderList);
@@ -22,7 +23,7 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const { addSales } = useSalesQuery();
   const { addStoreOrder } = useStoreOrderSetQuery();
   const { addNumberOrder } = useNumberOrderSetQuery();
-  const { incrementOrderNumber } = useStoreQuery();
+  const { incrementOrderNumber, newOrderNumber } = useStoreQuery();
   const [isPageLoading, setIsPageLoading] = useState(false);
   const router = useRouter();
 
@@ -59,12 +60,12 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
     }
   }, [orderList]);
 
-  // sales 테이블에 데이터 업로드시 orderNumber가 바뀐다. orderNumber가 바뀌면
+  // sales 테이블에 데이터 업로드시 orderIdList가 바뀐다. orderIdList가 바뀌면
   // 주문내역 테이블 (order_store, order_number)에 insert 한다.
   useEffect(() => {
-    if (payment?.status === 'DONE' && storeId && orderNumber > 0) {
+    if (payment?.status === 'DONE' && storeId && newOrderNumber && newOrderNumber > 0) {
       const orderData = {
-        order_number: orderNumber,
+        order_number: newOrderNumber,
         store_id: storeId,
         menu_list: orderList.map(order => JSON.parse(JSON.stringify(order))),
         order_time: payment.approvedAt,
@@ -85,8 +86,15 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
           addNumberOrder({ ...orderData, is_togo: false });
         }
       }
+
+      // 주문한 메뉴의 남은 수량 감소 시키기
+      orderList.forEach(menu => {
+        decrementRemainEaByMenuId(menu.id);
+      });
+
+      setOrderNumber(newOrderNumber);
     }
-  }, [orderNumber]);
+  }, [newOrderNumber]);
 
   useEffect(() => {
     setIsPageLoading(true);
