@@ -13,7 +13,7 @@ const SalesAmount = () => {
       <div>매출금액</div>
       <div className={styles.sumSales}>
         <span> 총 매출금액 </span>
-        <span>{salesSum && convertNumberToWon(salesSum)}</span>
+        <span>{salesSum ? convertNumberToWon(salesSum) : '없네용 ㅜㅜ'}</span>
       </div>
     </div>
   );
