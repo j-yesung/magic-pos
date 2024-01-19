@@ -2,7 +2,7 @@ import { downloadPlatFormImageUrl, insertPlatFormRow, uploadPlatFormImage } from
 import { Tables } from '@/types/supabase';
 import moment from 'moment';
 import { ChangeEvent, FormEvent, SetStateAction } from 'react';
-import { AddFormType } from '../Container';
+import { AddFormType } from '../PlatFormWrapper';
 import ImgForm from './img/ImgForm';
 import styles from './styles/form.module.css';
 export interface FormProps {

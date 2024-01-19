@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
-import { EditFormType } from '../../Container';
+import { EditFormType } from '../../PlatFormWrapper';
 import styles from './styles/item.module.css';
 import Default from '/public/logo.svg';
 interface ItemProps {

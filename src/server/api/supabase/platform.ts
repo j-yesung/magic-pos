@@ -1,6 +1,6 @@
 //platform.ts
 
-import { AddFormType, EditFormType } from '@/components/platform/container/Container';
+import { AddFormType, EditFormType } from '@/components/platform/container/PlatFormWrapper';
 import { supabase } from '@/shared/supabase';
 import { TablesInsert } from '@/types/supabase';
 

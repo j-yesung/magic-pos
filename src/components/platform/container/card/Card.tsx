@@ -1,5 +1,5 @@
 import { Tables } from '@/types/supabase';
-import { EditFormType } from '../Container';
+import { EditFormType } from '../PlatFormWrapper';
 import Item from './item/Item';
 import styles from './styles/card.module.css';
 

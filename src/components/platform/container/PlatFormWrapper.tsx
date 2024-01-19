@@ -38,7 +38,7 @@ export interface EditFormType {
   createdAt?: string;
 }
 
-const Container = () => {
+const PlatFormWrapper = () => {
   const storeId = useAuthStore(state => state.storeId);
   const [fetchDataList, setFecthDataList] = useState<Tables<'platform'>[]>([]);
   const [addForm, setAddForm] = useState<AddFormType>({
@@ -299,4 +299,4 @@ const Container = () => {
   );
 };
 
-export default Container;
+export default PlatFormWrapper;
