@@ -2,7 +2,6 @@ import { supabase } from '@/shared/supabase';
 import { OrderConfirmType, ToastTypeOption } from '@/types/common';
 import { StoreWithOrderInfo } from '@/types/supabase';
 import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
-import { RefObject } from 'react';
 
 
 
@@ -29,42 +28,77 @@ export const updateIsDone = async (orderData: OrderConfirmType[]) => {
   }
 }
 
-export const submitDetectedOrder = async (
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export const submitDetectedOrder = (
   storeId: string,
   refetch: (options?: RefetchOptions | undefined) =>
     Promise<QueryObserverResult<StoreWithOrderInfo[] | undefined, Error>>,
   toast: (content: string, option: Omit<ToastTypeOption, "id" | "content" | "animation">) => void,
-  audioRef: RefObject<HTMLButtonElement>
 ) => {
-  const payloadFunction = (orderNumber: number) => {
-    audioRef.current?.click();
-    toast(`주문번호${orderNumber}번이 요청되었습니다.`, {
-      type: 'info',
-      position: 'top-right',
-      showCloseButton: false,
-      autoClose: 5000,
-    });
-    refetch();
-    orderNotification(orderNumber);
-  }
-  const orderNotification = (orderNumber: number) => {
-    const notification = new Notification(`주문번호${orderNumber}`, {
-      icon: '',
-      body: `주문번호${orderNumber}번이 요청되었습니다.`,
-    });
-    notification.onclick = () => {
-      window.open(`${process.env.NEXT_PUBLIC_SUPACE_REDIRECT_TO}/admin/management`);
-    };
-  }
-
   supabase
     .channel('order_store')
     .on(
       'postgres_changes',
       { event: 'INSERT', schema: 'public', table: 'order_store', filter: `store_id=eq.${storeId}` },
-      payload => { payloadFunction(payload.new.order_number) },
+      payload => {
+        console.log(payload)
+        payloadFunction(payload.new.order_number, toast, refetch)
+      },
     )
     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'order_number', filter: `store_id=eq.${storeId}` },
-      payload => { payloadFunction(payload.new.order_number) })
+      payload => {
+        console.log(payload)
+        payloadFunction(payload.new.order_number, toast, refetch)
+      })
     .subscribe();
 };
+
+
+// realTime에 payload함수에서 사용하는 함수
+const payloadFunction = (
+  orderNumber: number,
+  toast: (content: string, option: Omit<ToastTypeOption, "id" | "content" | "animation">) => void,
+  refetch: (options?: RefetchOptions | undefined) =>
+    Promise<QueryObserverResult<StoreWithOrderInfo[] | undefined, Error>>,
+) => {
+  // toast모달창
+  toast(`주문번호${orderNumber}번이 요청되었습니다.`, {
+    type: 'info',
+    position: 'top-right',
+    showCloseButton: false,
+    autoClose: 5000,
+  });
+
+  // TTS 음성알림
+  const synth = window.speechSynthesis
+  const text = `주문번호 ${orderNumber}번 주문이 요청되었습니다`
+  const utterThis = new SpeechSynthesisUtterance(text)
+  synth.speak(utterThis)
+
+  // 주문현황 refetch
+  refetch();
+
+  // notification 알림창
+  const notification = new Notification(`주문번호${orderNumber}`, {
+    icon: '',
+    body: `주문번호${orderNumber}번이 요청되었습니다.`,
+  });
+  notification.onclick = () => {
+    window.open(`${process.env.NEXT_PUBLIC_SUPACE_REDIRECT_TO}/admin/management`);
+  };
+}
