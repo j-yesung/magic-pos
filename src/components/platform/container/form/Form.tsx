@@ -38,7 +38,7 @@ const Form = ({ setAddForm, addForm, setIsRegist, setFecthDataList }: FormProps)
 
     if (updateData.file) {
       await uploadPlatFormImage(updateData);
-      const { publicUrl: image_url } = downloadPlatFormImageUrl(addForm);
+      const { publicUrl: image_url } = downloadPlatFormImageUrl(updateData);
 
       updateData = {
         ...addForm,
