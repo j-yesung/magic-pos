@@ -75,6 +75,7 @@ export const useOrderStore = create<OrderState>()(
         storeId: state.storeId,
         orderNumber: state.orderNumber,
         orderList: state.orderList,
+        tableId: state.tableId,
       }),
     },
   ),
@@ -97,9 +98,9 @@ export const setMenuData = (data: CategoryWithMenuItemWithStore[]) =>
 export const resetOrderList = () => useOrderStore.setState({ orderList: [] });
 export const addOrderList = (menu: MenuItemWithOption[]) =>
   useOrderStore.setState(state => ({ orderList: [...state.orderList, ...menu] }));
-export const subtractOrderList = (menu: MenuItemWithOption) =>
+export const subtractOrderList = (menuId: string) =>
   useOrderStore.setState(state => {
-    const findIndex = state.orderList.findLastIndex(o => o.id === menu.id);
+    const findIndex = state.orderList.findLastIndex(o => o.id === menuId);
     const newOrderList = [...state.orderList];
     newOrderList.splice(findIndex, 1);
     return { orderList: newOrderList };

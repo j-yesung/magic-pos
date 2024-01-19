@@ -13,6 +13,7 @@ const MenuCard = ({ menu }: MenuCardProps) => {
   const optionSwiperRef = useOrderStore(state => state.optionSwiperRef);
 
   const handleClickCard = () => {
+    if (menu.remain_ea === 0) return;
     setSelectedMenu(menu);
     optionSwiperRef?.current?.swiper.slideNext(SLIDE_MOVE_SPEED);
   };
@@ -21,6 +22,11 @@ const MenuCard = ({ menu }: MenuCardProps) => {
     <div className={styles.card} onClick={handleClickCard}>
       <Image src={menu.image_url ?? ''} alt={menu.name ?? ''} width={100} height={100} />
       <span>{menu.name}</span>
+      {menu.remain_ea === 0 && (
+        <div className={styles.soldOut}>
+          <p>소진 되었습니다</p>
+        </div>
+      )}
     </div>
   );
 };

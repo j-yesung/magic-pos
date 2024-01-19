@@ -37,7 +37,6 @@ const PaymentContainer = () => {
       {/* 결제 UI, 이용약관 UI 영역 */}
       <div id="payment-widget" />
       <div id="agreement" />
-      {/*  결제 버튼은 StepButtonContainer.tsx에 */}
     </div>
   );
 };

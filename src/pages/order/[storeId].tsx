@@ -12,6 +12,8 @@ import OrderContainer from '@/components/order/OrderContainer';
 import { useModal } from '@/hooks/modal/useModal';
 import { useStoreOrderFetchQuery } from '@/hooks/order/useStoreOrderFetchQuery';
 import { useNumberOrderFetchQuery } from '@/hooks/order/useNumberOrderFetchQuery';
+import { useGetQuery } from '@/hooks/store/useGetQuery';
+import useFetchTable from '@/hooks/table/useFetchTable';
 
 const OrderIndexPage = ({
   menuData,
@@ -23,10 +25,13 @@ const OrderIndexPage = ({
   tableId: string;
 }) => {
   const orderIdList = useOrderStore(state => state.orderIdList);
-
+  const prevStoreId = useOrderStore(state => state.storeId);
+  const { storeInfo } = useGetQuery({ storeId: storeId });
+  const { tableInfo } = useFetchTable({ tableId: tableId, storeId });
   const { storeOrderData } = useStoreOrderFetchQuery(orderIdList, storeId);
   const { numberOrderData } = useNumberOrderFetchQuery(orderIdList, storeId);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isInvalidURL, setIsInvalidURL] = useState(true);
   const { MagicModal } = useModal();
   const router = useRouter();
 
@@ -67,6 +72,22 @@ const OrderIndexPage = ({
   }, [numberOrderData, storeOrderData]);
 
   useEffect(() => {
+    if (!storeInfo) {
+      setIsInvalidURL(false);
+    } else {
+      setIsInvalidURL(true);
+    }
+
+    if (tableId) {
+      if (!tableInfo) {
+        setIsInvalidURL(false);
+      } else {
+        setIsInvalidURL(true);
+      }
+    }
+  }, [storeInfo, tableInfo]);
+
+  useEffect(() => {
     // 주소창에 uuid가 노출되는 것을 막기 위해 주소창의 URL만을 변경한다. (페이지 이동X)
     // window.history.replaceState({}, '/order', '/order');
     // TODO: 에러 처리
@@ -94,15 +115,27 @@ const OrderIndexPage = ({
       menuList.push(...menuData);
 
       setMenuData(menuList);
-      setStoreName(menuData[0].store.business_name ?? '');
+      setStoreName(menuData[0].store?.business_name ?? '');
     }
 
-    if (storeId) setStoreId(storeId);
+    if (storeId) {
+      // 이전에 저장된 storeId가 현재 storeId와 다르면 다른 가게로 온것이므로 주문 목록 초기화 시킴
+      if (prevStoreId && prevStoreId !== storeId) {
+        resetOrderList();
+      }
+      setStoreId(storeId);
+    }
     if (tableId) setTableId(tableId);
     setIsLoaded(true);
   }, []);
 
-  return <>{isLoaded && <OrderContainer />}</>;
+  return (
+    <>
+      {isInvalidURL && isLoaded && <OrderContainer />}
+      {/* TODO: 유효 하지 않은 가게 디자인 */}
+      {!isInvalidURL && <div>유효 하지 않은 가게입니다.</div>}
+    </>
+  );
 };
 
 OrderIndexPage.getLayout = (page: ReactNode) => <OrderLayout>{page}</OrderLayout>;
