@@ -33,7 +33,7 @@ const MenuItemFormInput = () => {
 
   // 메뉴 input handler
   const changeMenuItemHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, maxLength, name } = e.target;
+    const { value, maxLength, name, type } = e.target;
     if (name === 'recommended') {
       let isCheckRecommended: boolean = false;
 
@@ -45,7 +45,12 @@ const MenuItemFormInput = () => {
       }
 
       if (!isCheckRecommended) setMenuItem({ ...menuItem, recommended: !menuItem.recommended });
-    } else setMenuItem({ ...menuItem, [name]: value.slice(0, maxLength) });
+    } else if (type === 'number') {
+      const newValue = value.replace(/[^0-9]/g, '');
+      if (newValue) setMenuItem({ ...menuItem, [name]: newValue.slice(0, maxLength) });
+    } else {
+      setMenuItem({ ...menuItem, [name]: value.slice(0, maxLength) });
+    }
   };
 
   return (
@@ -125,8 +130,10 @@ const MenuItemFormInput = () => {
               name="remain_ea"
               value={menuItem.remain_ea ?? ''}
               minLength={1}
+              maxLength={20}
               placeholder="수량을 입력해주세요."
               required
+              pattern="[0-9]*"
             />
           </p>
         </div>
