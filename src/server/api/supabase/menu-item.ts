@@ -8,8 +8,9 @@ import { Tables, TablesInsert, TablesUpdate } from '@/types/supabase';
  */
 
 export const addMenuItem = async (menuItem: TablesInsert<'menu_item'>) => {
-  const { error } = await supabase.from('menu_item').insert([menuItem]).select();
+  const { data, error } = await supabase.from('menu_item').insert([menuItem]).select();
   if (error) throw new Error(error.message);
+  return data
 };
 
 /**
@@ -41,7 +42,8 @@ export const updateMenuItem = async (menuItem: TablesUpdate<'menu_item'>) => {
  * @returns data
  */
 type UploadMenuItemType = {
-  menuItem: Tables<'menu_item'>;
+  menuId: string;
+  categoryId: string;
   createAt?: string;
   selectedFile?: File;
 };
@@ -49,16 +51,16 @@ export const uploadMenuItemImage = async (uploadMenuItem: UploadMenuItemType) =>
   // 기존 storage 이미지 삭제
   const { data: list } = await supabase.storage
     .from('images')
-    .list(`menu/${uploadMenuItem.menuItem.category_id}/${uploadMenuItem.menuItem.id}`);
+    .list(`menu/${uploadMenuItem.categoryId}/${uploadMenuItem.menuId}`);
   const filesToRemove = list?.map(
-    x => `menu/${uploadMenuItem.menuItem.category_id}/${uploadMenuItem.menuItem.id}/${x.name}`,
+    x => `menu/${uploadMenuItem.categoryId}/${uploadMenuItem.menuId}/${x.name}`,
   );
   await supabase.storage.from('images').remove(filesToRemove!);
   //stoage upload
   const { error } = await supabase.storage
     .from('images')
     .upload(
-      `menu/${uploadMenuItem.menuItem.category_id}/${uploadMenuItem.menuItem.id}/${uploadMenuItem.createAt}`,
+      `menu/${uploadMenuItem.categoryId}/${uploadMenuItem.menuId}/${uploadMenuItem.createAt}`,
       uploadMenuItem.selectedFile!,
       {},
     );
@@ -66,10 +68,9 @@ export const uploadMenuItemImage = async (uploadMenuItem: UploadMenuItemType) =>
   const { data } = supabase.storage
     .from('images')
     .getPublicUrl(
-      `menu/${uploadMenuItem.menuItem.category_id}/${uploadMenuItem.menuItem.id}/${uploadMenuItem.createAt}`,
+      `menu/${uploadMenuItem.categoryId}/${uploadMenuItem.menuId}/${uploadMenuItem.createAt}`,
     );
 
-  console.log(data, 'supabase');
   if (error) throw error;
   return data.publicUrl;
 };

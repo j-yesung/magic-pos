@@ -17,6 +17,8 @@ const MenuItemsComponentPage = () => {
   const router = useRouter();
 
   const {
+    menuItem,
+    setMenuItem,
     setMenuItemList,
     categoryWithMenuItem,
     setCategoryWithMenuItem,
@@ -30,6 +32,16 @@ const MenuItemsComponentPage = () => {
   useEffect(() => {
     if (categoryWithMenuData?.error === null) {
       setCategoryWithMenuItemList(categoryWithMenuData?.data);
+    }
+    if (menuOptionData?.error === null) {
+      setMenuOptions(menuOptionData?.data);
+      setOrigineMenuOptions(menuOptionData?.data);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categoryWithMenuData, menuOptionData]);
+
+  useEffect(() => {
+    if (categoryWithMenuData?.error === null) {
       if (categoryWithMenuData?.data.length > 0 && categoryWithMenuData?.data[0]) {
         setCategoryWithMenuItem({
           ...categoryWithMenuItem,
@@ -41,12 +53,8 @@ const MenuItemsComponentPage = () => {
         setMenuItemList(categoryWithMenuData?.data[0].menu_item);
       }
     }
-    if (menuOptionData?.error === null) {
-      setMenuOptions(menuOptionData?.data);
-      setOrigineMenuOptions(menuOptionData?.data);
-    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [categoryWithMenuData, menuOptionData]);
+  }, []);
 
   useEffect(() => {
     fetchData();
@@ -59,6 +67,8 @@ const MenuItemsComponentPage = () => {
     setOrigineMenuOptions(data);
     return data;
   };
+
+
 
   return (
     <div

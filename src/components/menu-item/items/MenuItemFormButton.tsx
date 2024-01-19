@@ -6,7 +6,7 @@ import styles from '../styles/menu-item-form.module.css';
 const MenuItemFormButton = () => {
   const { setIsSideFormOpen } = useSideFormState();
   const { deleteMutate } = useSetMenuItem();
-  const { menuItem } = useMenuItemStore();
+  const { isEdit, menuItem } = useMenuItemStore();
 
   // 메뉴 삭제
   const clickRemoveCategoryHandler = async () => {
@@ -16,14 +16,22 @@ const MenuItemFormButton = () => {
 
   return (
     <>
-      <div className={styles['btn-wrap']}>
-        <button className={styles['update-btn']} type="submit">
-          확인
-        </button>
-        <button className={styles['delete-btn']} type="button" onClick={clickRemoveCategoryHandler}>
-          삭제
-        </button>
-      </div>
+      {isEdit ? (
+        <div className={styles['btn-wrap']}>
+          <button className={styles['update-btn']} type="submit">
+            수정
+          </button>
+          <button className={styles['delete-btn']} type="button" onClick={clickRemoveCategoryHandler}>
+            삭제
+          </button>
+        </div>
+      ) : (
+        <div className={styles['btn-wrap']}>
+          <button className={styles['update-btn']} type="submit">
+            추가
+          </button>
+        </div>
+      )}
     </>
   );
 };

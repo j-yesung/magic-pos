@@ -8,7 +8,7 @@ import styles from '../styles/menu-item-form.module.css';
 const MenuItemFormInput = () => {
   const { MagicModal } = useModal();
 
-  const { menuItem, setMenuItem, categoryWithMenuItem, setMenuItemImgFile, menuItemSampleImg, setMenuItemSampleImg } =
+  const { sampleImage, menuItem, setMenuItem, categoryWithMenuItem, setMenuItemImgFile, menuItemSampleImg, setMenuItemSampleImg } =
     useMenuItemStore();
 
   // 썸네일 이미지 보여주기
@@ -57,7 +57,7 @@ const MenuItemFormInput = () => {
     <>
       <div className={styles['img-wrap']}>
         <label htmlFor="sampleImg"></label>
-        <Image src={menuItemSampleImg} alt={menuItem.name ?? 'Sample Image'} width={270} height={270} />
+        <Image src={menuItemSampleImg === '' ? sampleImage : menuItemSampleImg} alt={menuItem.name ?? 'Sample Image'} width={270} height={270} />
         <input
           type="file"
           accept="image/png, image/jpeg, image/jpg"

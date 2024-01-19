@@ -20,6 +20,7 @@ const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
   const { updatePositionMutate } = useSetMenuItem();
   const {
     setIsEdit,
+    sampleImage,
     menuItem,
     setMenuItem,
     categoryWithMenuItem,
@@ -95,7 +96,7 @@ const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
         onDragEnd={dropHandler}
       >
         <span className={styles['img']}>
-          <Image src={item.image_url ?? ''} alt={item.name ?? ''} width={100} height={100} />
+          <Image src={item.image_url ?? sampleImage} alt={item.name ?? 'Sample Image'} width={100} height={100} />
         </span>
         <span className={styles['txt']}>
           <span className={styles['name']}>{item.name}</span>

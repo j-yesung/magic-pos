@@ -36,28 +36,37 @@ const MenuItemFormPage = () => {
   // 메뉴 추가 and 수정
   const submitupdateMenuItemHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    let uploadedMenuImage = '';
-    if (menuItemImgFile !== null) {
-      const formattedDate = moment().toISOString();
-      const uploadImageGroup = {
-        menuItem: menuItem,
-        createAt: formattedDate,
-        selectedFile: menuItemImgFile,
-      };
-      uploadedMenuImage = await uploadImageMutate.mutateAsync(uploadImageGroup);
-      setMenuItem({ ...menuItem, image_url: uploadedMenuImage });
-    }
-    // 카테고리 new data
-    const newMenuItemData: TablesInsert<'menu_item'> = {
+    const newMenuItemData: TablesInsert<'menu_item'> | Tables<'menu_item'> = {
       category_id: menuItem.category_id,
       name: menuItem.name,
       position: menuItem.position,
       price: menuItem.price,
       recommended: menuItem.recommended,
       remain_ea: menuItem.remain_ea,
-      image_url: uploadedMenuImage === '' ? menuItem.image_url : uploadedMenuImage,
+      image_url: menuItem.image_url,
     };
-    isEdit ? updateNameMutate(menuItem) : addMutate(newMenuItemData);
+    if(!isEdit) {
+      const addData = await addMutate.mutateAsync(newMenuItemData);
+      setMenuItem({ ...menuItem, id: addData[0].id });
+      newMenuItemData.id = addData[0].id;
+    } else {
+      newMenuItemData.id = menuItem.id;
+    }
+
+    let uploadedMenuImage = '';
+    if (menuItemImgFile !== null) {
+      const formattedDate = moment().toISOString();
+      const uploadImageGroup = {
+        menuId: newMenuItemData.id,
+        categoryId: menuItem.category_id,
+        createAt: formattedDate,
+        selectedFile: menuItemImgFile,
+      };
+      uploadedMenuImage = await uploadImageMutate.mutateAsync(uploadImageGroup);
+      setMenuItem({ ...menuItem, image_url: uploadedMenuImage });
+      newMenuItemData.image_url = uploadedMenuImage;
+    }
+    updateNameMutate(newMenuItemData);
     setIsSideFormOpen(false);
     setMenuItemImgFile(null);
     setMenuItem({ ...menuItem, id: '' });
