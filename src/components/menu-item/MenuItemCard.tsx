@@ -1,6 +1,7 @@
 import { updateMenuItemPosition } from '@/server/api/supabase/menu-item';
 import { convertNumberToWon } from '@/shared/helper';
 import useMenuItemStore from '@/shared/store/menu-item';
+import useSideFormState from '@/shared/store/side-form';
 import { Tables } from '@/types/supabase';
 import clsx from 'clsx';
 import Image from 'next/image';
@@ -15,8 +16,8 @@ interface PropsType {
 }
 
 const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
+  const { setIsSideFormOpen } = useSideFormState();
   const {
-    toggleShow,
     menuItem,
     setMenuItem,
     categoryWithMenuItem,
@@ -31,7 +32,7 @@ const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
 
   // 메뉴 선택
   const clickChoiceCategoryHandler = (item: Tables<'menu_item'>) => {
-    toggleShow(true);
+    setIsSideFormOpen(true);
     setMenuItem(item);
     setMenuItemSampleImg(item.image_url ?? '');
     fetchMenuOptionData(item.id);

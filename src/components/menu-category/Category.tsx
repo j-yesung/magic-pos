@@ -1,22 +1,24 @@
 import { updateCategoryPosition } from '@/server/api/supabase/menu-category';
 import useCategoriesStore from '@/shared/store/menu-category';
+import useSideFormState from '@/shared/store/side-form';
 import { Tables } from '@/types/supabase';
 import { useRef } from 'react';
 import styles from './styles/category.module.css';
 
 const CategoryComponentPage = () => {
-  const { toggleShow, setIsEdit, setCategory, categories, dragCategoryStore } = useCategoriesStore();
+  const { isSideFormOpen, setIsSideFormOpen } = useSideFormState();
+  const { setIsEdit, setCategory, categories, dragCategoryStore } = useCategoriesStore();
 
   // 카테고리 플러스
   const clickAddCategoryHandler = async () => {
     setIsEdit(false);
-    toggleShow(true);
+    setIsSideFormOpen(true);
   };
 
   // 카테고리 선택
   const clickChoiceCategoryHandler = (item: Tables<'menu_category'>) => {
     setIsEdit(true);
-    toggleShow(true);
+    setIsSideFormOpen(true);
     setCategory({ id: item.id, name: item.name, store_id: item.store_id, position: item.position });
   };
 

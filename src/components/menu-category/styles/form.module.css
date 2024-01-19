@@ -1,63 +1,63 @@
 .wrap {
-  background-color: #ccc;
+  --input-border: transparent;
+  --input-border-radius: 1rem;
+  --input-box-shadow: 0 0 1rem rgba(0, 0, 0, 0.25);
+  --input-padding: 1rem;
+  --input-border-focus: 1px solid var(--point50);
+  --input-placeholder-color: var(--text3);
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  position: fixed;
-  width: 300px;
   height: 100%;
-  right: -300px;
-  top: 0;
-  transition: all 0.3s;
 }
 
-.wrap.active {
-  right: 0;
+.wrap input::-webkit-inner-spin-button {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
 }
-
-.wrap h3 {
-  font-size: 16px;
-  font-weight: bold;
-  margin-top: 20px;
-  margin-bottom: 40px;
+.wrap .input-name {
+  font-size: 1.4rem;
+  color: var(--text2);
+}
+.wrap .input {
+  border: var(--input-border);
+  border-radius: var(--input-border-radius);
+  box-shadow: var(--input-box-shadow);
+  padding: var(--input-padding);
+}
+.wrap .input:focus {
+  border: var(--input-border-focus);
+  outline: none;
+}
+.wrap .input::placeholder {
+  color: var(--input-placeholder-color);
 }
 
 .wrap > div {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 1rem;
+}
+
+.wrap .btn-wrap {
   margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
-
-.wrap > div button {
-  width: 100%;
-  height: 40px;
-  border-width: 1px;
-  border-style: solid;
-  font-weight: bold;
-  border-radius: 15px;
-  background-color: #fff;
-  transition: all 0.3s;
+.wrap .btn-wrap button {
+  border-radius: 1rem;
+  height: 3.5rem;
+  cursor: pointer;
 }
-.wrap > div button:hover,
-.wrap > div button:active {
-  background-color: #f0f0f0;
+.wrap .btn-wrap button:hover {
+  background-color: var(--main-color);
 }
-
-.update-btn {
-  border-color: #ffd800;
+.wrap .btn-wrap button.update-btn {
+  background-color: var(--point1-80);
+  color: var(--text5);
 }
-
-.delete-btn {
-  border-color: #ff0000;
-}
-
-.wrap input {
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 10px;
-}
-.wrap input:focus {
-  outline: none;
-  border: 1px solid var(--main-color);
+.wrap .btn-wrap button.delete-btn {
+  background-color: var(--text4);
+  color: var(--text5);
 }

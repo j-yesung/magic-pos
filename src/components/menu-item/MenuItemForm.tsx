@@ -6,19 +6,20 @@ import {
   removeMenuOption,
   updateMenuItem,
   updateMenuOption,
-  uploadMenuItem
+  uploadMenuItem,
 } from '@/server/api/supabase/menu-item';
 import useMenuItemStore from '@/shared/store/menu-item';
+import useSideFormState from '@/shared/store/side-form';
 import { MenuOptionWithDetail, Tables } from '@/types/supabase';
 import moment from 'moment';
+import SideFormLayout from '../layout/admin/SideFormLayout';
 import MenuItemFormButton from './MenuItemFormButton';
 import MenuItemFormInput from './MenuItemFormInput';
 import styles from './styles/menu-item-form.module.css';
 
 const MenuItemFormPage = () => {
+  const { setIsSideFormOpen } = useSideFormState();
   const {
-    isShow,
-    toggleShow,
     menuItem,
     setMenuItem,
     updateMenuItemStore,
@@ -32,7 +33,6 @@ const MenuItemFormPage = () => {
     updateChangeMenuOptionsStore,
     removeChangeMenuOptionsStore,
   } = useMenuItemStore();
-
 
   // 메뉴 수정
   const submitupdateMenuItemHandler = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -48,7 +48,7 @@ const MenuItemFormPage = () => {
     }
     updateMenuItemStore(updateData);
     await updateMenuItem(updateData);
-    toggleShow(false);
+    setIsSideFormOpen(false);
     setMenuItemImgFile(null);
     setMenuItem({ ...menuItem, id: '' });
 
@@ -118,14 +118,13 @@ const MenuItemFormPage = () => {
         };
         // 디테일 있는것도 있고 없는것도 있으니까 upsert
         item.menu_option_detail.map(async option => {
-          const addOptionForm:Omit<Tables<'menu_option_detail'>, 'id'> | Tables<'menu_option_detail'> = {
+          const addOptionForm: Omit<Tables<'menu_option_detail'>, 'id'> | Tables<'menu_option_detail'> = {
             name: option.name,
             option_id: newOptionList.id,
             price: option.price,
           };
 
-          if (option.id !== '') 
-            (addOptionForm as Tables<'menu_option_detail'>).id = option.id;
+          if (option.id !== '') (addOptionForm as Tables<'menu_option_detail'>).id = option.id;
 
           await addUpsertMenuOptionDetail(addOptionForm);
         });
@@ -198,13 +197,12 @@ const MenuItemFormPage = () => {
   };
 
   return (
-    <form
-      onSubmit={submitupdateMenuItemHandler}
-      className={isShow ? `${styles['wrap']} ${styles['active']}` : `${styles['wrap']}`}
-    >
-      <MenuItemFormInput/>
-      <MenuItemFormButton/>
-    </form>
+    <SideFormLayout>
+      <form onSubmit={submitupdateMenuItemHandler} className={styles['wrap']}>
+        <MenuItemFormInput />
+        <MenuItemFormButton />
+      </form>
+    </SideFormLayout>
   );
 };
 

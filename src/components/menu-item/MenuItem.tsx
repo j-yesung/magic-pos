@@ -1,5 +1,6 @@
 import { addMenuItem } from '@/server/api/supabase/menu-item';
 import useMenuItemStore from '@/shared/store/menu-item';
+import useSideFormState from '@/shared/store/side-form';
 import { Tables } from '@/types/supabase';
 import clsx from 'clsx';
 import { useState } from 'react';
@@ -7,9 +8,10 @@ import MenuItemCard from './MenuItemCard';
 import styles from './styles/menu-item.module.css';
 
 const MenuItemPage = () => {
+  const { setIsSideFormOpen } = useSideFormState();
+
   const {
     sampleImage,
-    toggleShow,
     menuItem,
     setMenuItem,
     categoryWithMenuItem,
@@ -22,7 +24,7 @@ const MenuItemPage = () => {
 
   // 메뉴 플러스
   const clickAddMenuItemHandler = async () => {
-    toggleShow(true);
+    setIsSideFormOpen(true);
     const emptyValue = `임시 메뉴명`;
     const menuItemOmit: Omit<Tables<'menu_item'>, 'id'> = {
       category_id: categoryWithMenuItem.id,
@@ -31,7 +33,10 @@ const MenuItemPage = () => {
       price: 0,
       remain_ea: 0,
       recommended: false,
-      position: categoryWithMenuItem.menu_item.length === 0 ? 0 : categoryWithMenuItem.menu_item[categoryWithMenuItem.menu_item.length - 1].position + 1,
+      position:
+        categoryWithMenuItem.menu_item.length === 0
+          ? 0
+          : categoryWithMenuItem.menu_item[categoryWithMenuItem.menu_item.length - 1].position + 1,
     };
     const { data } = await addMenuItem(menuItemOmit);
     const newMenuItem: Tables<'menu_item'> = {
@@ -49,7 +54,7 @@ const MenuItemPage = () => {
     setMenuItemSampleImg(newMenuItem.image_url ?? '');
   };
   return (
-    <div className={clsx(styles.wrap, {[styles.active]: menuItem.id !== ''})}>
+    <div className={clsx(styles.wrap, { [styles.active]: menuItem.id !== '' })}>
       <ul>
         {categoryWithMenuItemList
           .filter(list => list.id === categoryWithMenuItem.id)

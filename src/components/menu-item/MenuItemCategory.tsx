@@ -1,12 +1,11 @@
 import useMenuItemStore from '@/shared/store/menu-item';
-// import { Navigation, Pagination, Scrollbar } from 'swiper';
 import { CategoryWithMenuItem } from '@/types/supabase';
 import clsx from 'clsx';
+import { useState } from 'react';
 import 'swiper/css';
 import { Virtual } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import styles from './styles/menu-item-category.module.css';
-import { useState } from 'react';
 
 const MenuItemCategoryPage = () => {
   const { setMenuItemList, categoryWithMenuItem, setCategoryWithMenuItem, categoryWithMenuItemList } =

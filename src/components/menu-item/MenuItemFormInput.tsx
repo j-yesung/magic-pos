@@ -5,23 +5,16 @@ import { ChangeEvent } from 'react';
 import MenuItemFormOption from './MenuItemFormOption';
 import styles from './styles/menu-item-form.module.css';
 
-
 const MenuItemFormInput = () => {
   const { MagicModal } = useModal();
 
-  const {
-    menuItem,
-    setMenuItem,
-    categoryWithMenuItem,
-    setMenuItemImgFile,
-    menuItemSampleImg,
-    setMenuItemSampleImg,
-  } = useMenuItemStore();
+  const { menuItem, setMenuItem, categoryWithMenuItem, setMenuItemImgFile, menuItemSampleImg, setMenuItemSampleImg } =
+    useMenuItemStore();
 
-   // 썸네일 이미지 보여주기
-   const handleChangeImg = async (e: ChangeEvent<HTMLInputElement>) => {
-    const  fileList = e.target.files || [ ]
-    if ( fileList?.length !== 0) {
+  // 썸네일 이미지 보여주기
+  const handleChangeImg = async (e: ChangeEvent<HTMLInputElement>) => {
+    const fileList = e.target.files || [];
+    if (fileList?.length !== 0) {
       const file = fileList[0];
       if (file && file.type.substring(0, 5) === 'image') {
         const reader = new FileReader();
@@ -59,7 +52,7 @@ const MenuItemFormInput = () => {
     <>
       <div className={styles['img-wrap']}>
         <label htmlFor="sampleImg"></label>
-        <Image src={menuItemSampleImg} alt={menuItem.name ?? 'Sample Image'} width={220} height={220} />
+        <Image src={menuItemSampleImg} alt={menuItem.name ?? 'Sample Image'} width={270} height={270} />
         <input
           type="file"
           accept="image/png, image/jpeg, image/jpg"
@@ -70,10 +63,9 @@ const MenuItemFormInput = () => {
         <input
           type="text"
           onChange={changeMenuItemHandler}
-          name="name"
+          id="imageUrl"
+          name="imageUrl"
           value={menuItem.image_url ?? ''}
-          minLength={2}
-          maxLength={20}
         />
       </div>
       <div className={styles['txt-wrap']}>
@@ -88,38 +80,60 @@ const MenuItemFormInput = () => {
           />
         </div>
         <div className={styles['input-wrap']}>
-          <input
-            type="text"
-            onChange={changeMenuItemHandler}
-            name="name"
-            value={menuItem.name ?? ''}
-            minLength={2}
-            maxLength={20}
-            placeholder="메뉴명"
-          />
-          <input
-            type="number"
-            onChange={changeMenuItemHandler}
-            name="price"
-            value={menuItem.price ?? ''}
-            minLength={2}
-            maxLength={20}
-            placeholder="가격"
-          />
-          <input
-            type="number"
-            onChange={changeMenuItemHandler}
-            name="remain_ea"
-            value={menuItem.remain_ea ?? ''}
-            minLength={2}
-            maxLength={20}
-            placeholder="수량"
-          />
+          <p>
+            <label className={styles['input-name']} htmlFor="name">
+              이름
+            </label>
+            <input
+              type="text"
+              className={styles['input']}
+              onChange={changeMenuItemHandler}
+              id="name"
+              name="name"
+              value={menuItem.name ?? ''}
+              minLength={1}
+              maxLength={20}
+              placeholder="메뉴명을 입력해주세요."
+              required
+            />
+          </p>
+          <p>
+            <label className={styles['input-name']} htmlFor="price">
+              가격
+            </label>
+            <input
+              type="number"
+              className={styles['input']}
+              onChange={changeMenuItemHandler}
+              id="price"
+              name="price"
+              value={menuItem.price ?? ''}
+              minLength={1}
+              maxLength={20}
+              placeholder="가격을 입력해주세요."
+              required
+            />
+          </p>
+          <p>
+            <label className={styles['input-name']} htmlFor="remain_ea">
+              수량
+            </label>
+            <input
+              type="number"
+              className={styles['input']}
+              onChange={changeMenuItemHandler}
+              name="remain_ea"
+              value={menuItem.remain_ea ?? ''}
+              minLength={1}
+              placeholder="수량을 입력해주세요."
+              required
+            />
+          </p>
         </div>
-        <MenuItemFormOption/>
+        <MenuItemFormOption />
       </div>
     </>
-  )
-}
+  );
+};
 
-export default MenuItemFormInput
+export default MenuItemFormInput;

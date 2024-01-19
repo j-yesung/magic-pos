@@ -1,12 +1,6 @@
 .wrap {
-  height: calc(100% + 3rem);
-  overflow-y: auto;
   transition: all 0.3s;
   margin-top: 1rem;
-}
-
-.wrap.active {
-  height: calc(100% + 3rem - 20rem);
 }
 
 .wrap ul {
