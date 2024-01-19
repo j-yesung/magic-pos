@@ -11,9 +11,9 @@
   --point-50: #ceb7ff; /* deprecated */
 
   /* point color 1 */
-  --point1: #5200ff;
-  --point1-80: #a87fff;
-  --point1-50: #ceb7ff;
+  --point1: #5200ff; /* deprecated */
+  --point1-80: #7433FF;
+  --point1-50: #A87FFF;
 
   /* point color 2 */
   --point2: #ffa800;

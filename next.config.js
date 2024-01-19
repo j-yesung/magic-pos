@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  mages: {
+  images: {
     remotePatterns: [
       {
         protocol: 'https',
