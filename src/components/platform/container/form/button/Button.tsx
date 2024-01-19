@@ -19,7 +19,7 @@ const Button = ({ setIsRegist, fetchDataList, buttonType, setIsEdit, isEdit, set
   };
   return (
     <div className={styles.buttonGroup}>
-      {!isEdit && (
+      {(!isEdit || fetchDataList.length === 0) && (
         <button onClick={clickShowForm} name="등록">
           등록
         </button>

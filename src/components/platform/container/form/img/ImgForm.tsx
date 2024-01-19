@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 import { ChangeEvent, SetStateAction, useState } from 'react';
-import { AddFormType } from '../../Container';
+import { AddFormType } from '../../PlatFormWrapper';
 import styles from './styles/img.module.css';
 // interface ImgProps {
 //   setAddForm: Pick<FormProps, 'setAddForm'>;

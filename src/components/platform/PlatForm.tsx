@@ -1,5 +1,5 @@
-import Container from './container/Container';
+import PlatFormWrapper from './container/PlatFormWrapper';
 
-const PlatForm = () => <Container />;
+const PlatForm = () => <PlatFormWrapper />;
 
 export default PlatForm;
