@@ -1,7 +1,8 @@
 import { useCalendar } from '@/hooks/sales/useCalendar';
 import useSalesStore from '@/shared/store/sales';
 import clsx from 'clsx';
-import { Fragment, useEffect, useState } from 'react';
+import { Moment } from 'moment';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import Calendar from '../../calendar/Calendar';
 import Record from '../record/Record';
 import styles from './styles/tab.module.css';
@@ -15,16 +16,27 @@ const Tab = () => {
     isShow,
     setIsShow,
   } = useSalesStore();
-
   const { clickMoveTodayHandler, clickWeeksChartHandler, clickMonthsChartHandler, clickShowCalendarHandler } =
     useCalendar();
   const clickCloseCalendar = () => setIsShow(false);
   const [clickedTab, setClickedTab] = useState(TODAY);
+  const dateRef = useRef<Moment | null>(null);
   useEffect(() => {
     return () => {
       setClickedTab(TODAY);
     };
   }, []);
+  useEffect(() => {
+    if (!dateRef.current) {
+      dateRef.current = currentDate;
+    }
+    return () => {
+      if (dateRef.current) {
+        dateRef.current = null;
+      }
+    };
+  }, [currentDate]);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.dateWrapper}>
@@ -67,7 +79,7 @@ const Tab = () => {
       {!isShow && (
         <Fragment>
           <div className={styles.calendarWrapper} onClick={clickShowCalendarHandler}>
-            <div className={styles.calendarIcon}>{currentDate.clone().format('YYYY년 MM월 DD일')} icon자리</div>
+            <div className={styles.calendarIcon}>{dateRef.current?.format('YY년 MM월 DD일')} icon자리</div>
           </div>
         </Fragment>
       )}
