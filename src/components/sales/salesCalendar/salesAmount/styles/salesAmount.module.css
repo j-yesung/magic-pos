@@ -27,7 +27,7 @@
   border-radius: 50%;
 }
 .grade-max::before {
-  background-color: rgb(150, 185, 20);
+  background-color: rgb(236, 24, 24);
 }
 
 .grade-min::before {
