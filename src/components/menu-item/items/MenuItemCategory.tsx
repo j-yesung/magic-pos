@@ -5,7 +5,7 @@ import { useState } from 'react';
 import 'swiper/css';
 import { Virtual } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import styles from './styles/menu-item-category.module.css';
+import styles from '../styles/menu-item-category.module.css';
 
 const MenuItemCategoryPage = () => {
   const { setMenuItemList, categoryWithMenuItem, setCategoryWithMenuItem, categoryWithMenuItemList } =

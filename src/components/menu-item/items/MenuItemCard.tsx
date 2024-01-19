@@ -1,4 +1,4 @@
-import { updateMenuItemPosition } from '@/server/api/supabase/menu-item';
+import useSetMenuItem from '@/hooks/menu/menu-item/useSetMenuItems';
 import { convertNumberToWon } from '@/shared/helper';
 import useMenuItemStore from '@/shared/store/menu-item';
 import useSideFormState from '@/shared/store/side-form';
@@ -6,7 +6,7 @@ import { Tables } from '@/types/supabase';
 import clsx from 'clsx';
 import Image from 'next/image';
 import React, { useRef } from 'react';
-import styles from './styles/menu-item-card.module.css';
+import styles from '../styles/menu-item-card.module.css';
 
 interface PropsType {
   item: Tables<'menu_item'>;
@@ -17,13 +17,15 @@ interface PropsType {
 
 const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
   const { setIsSideFormOpen } = useSideFormState();
+  const { updatePositionMutate } = useSetMenuItem();
   const {
+    setIsEdit,
     menuItem,
     setMenuItem,
     categoryWithMenuItem,
     categoryWithMenuItemList,
     setMenuItemSampleImg,
-    dragMenuItemStore,
+    setMenuItemImgFile,
     menuOption,
     setMenuOption,
     setMenuOptions,
@@ -32,17 +34,18 @@ const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
 
   // 메뉴 선택
   const clickChoiceCategoryHandler = (item: Tables<'menu_item'>) => {
+    setIsEdit(true);
     setIsSideFormOpen(true);
     setMenuItem(item);
     setMenuItemSampleImg(item.image_url ?? '');
     fetchMenuOptionData(item.id);
     setMenuOption({ ...menuOption, menu_id: item.id });
+    setMenuItemImgFile(null);
   };
 
   // 메뉴 옵션 ID 필터링 이벤트
   const fetchMenuOptionData = (menuId: string) => {
     const filterMenuOptionList = origineMenuOptions.filter(item => item.menu_id === menuId);
-    // setMenuOptionList(filterMenuOptionList);
     setMenuOptions(filterMenuOptionList);
   };
 
@@ -66,9 +69,11 @@ const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
     const newList = [...categoryWithMenuItemList[filterIndex].menu_item];
     const dragItemValue = newList[dragItemRef.current];
     const dragOverValue = newList[dropNum];
-    dragMenuItemStore(dragItemValue, dragOverValue);
-    await updateMenuItemPosition(dragItemValue.id, dragOverValue.position);
-    await updateMenuItemPosition(dragOverValue.id, dragItemValue.position);
+    const dragGroup = {
+      pick: dragItemValue,
+      over: dragOverValue,
+    };
+    updatePositionMutate(dragGroup);
     dragItemRef.current = dropNum;
     dragOverRef.current = dragItemRef.current;
   };

@@ -2,8 +2,8 @@ import { useModal } from '@/hooks/modal/useModal';
 import useMenuItemStore from '@/shared/store/menu-item';
 import Image from 'next/image';
 import { ChangeEvent } from 'react';
-import MenuItemFormOption from './MenuItemFormOption';
-import styles from './styles/menu-item-form.module.css';
+import MenuItemFormOption from '../options/MenuItemFormOption';
+import styles from '../styles/menu-item-form.module.css';
 
 const MenuItemFormInput = () => {
   const { MagicModal } = useModal();

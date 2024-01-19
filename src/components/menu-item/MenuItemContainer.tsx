@@ -1,18 +1,18 @@
-import useFetchCategoryWithMenu from '@/hooks/menu-item/useCategoryWithMenu';
-import useFetchMenuOptions from '@/hooks/menu-item/useMenuOptions';
+import useFetchMenuItems from '@/hooks/menu/menu-item/useFetchMenuItems';
+import useFetchMenuOptions from '@/hooks/menu/menu-item/useFetchMenuOption';
 import { fetchMenuOptions } from '@/server/api/supabase/menu-item';
 import useAuthStore from '@/shared/store/auth';
 import useMenuItemStore from '@/shared/store/menu-item';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import MenuItemFormPage from './MenuItemForm';
-import MenuItemListPage from './MenuItemList';
+import MenuItemFormPage from './items/MenuItemForm';
+import MenuItemListPage from './items/MenuItemList';
 import styles from './styles/menu-item-container.module.css';
 
 const MenuItemsComponentPage = () => {
   const { storeId } = useAuthStore();
-  const { data: categoryWithMenuData } = useFetchCategoryWithMenu(storeId ?? '');
+  const { data: categoryWithMenuData } = useFetchMenuItems(storeId ?? '');
   const { data: menuOptionData } = useFetchMenuOptions();
   const router = useRouter();
 

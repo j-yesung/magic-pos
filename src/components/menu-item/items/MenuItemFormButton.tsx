@@ -1,17 +1,16 @@
-import { removeMenuItem } from '@/server/api/supabase/menu-item';
+import useSetMenuItem from '@/hooks/menu/menu-item/useSetMenuItems';
 import useMenuItemStore from '@/shared/store/menu-item';
 import useSideFormState from '@/shared/store/side-form';
-import styles from './styles/menu-item-form.module.css';
+import styles from '../styles/menu-item-form.module.css';
 
 const MenuItemFormButton = () => {
   const { setIsSideFormOpen } = useSideFormState();
-  const { menuItem, setMenuItem, removeMenuItemStore } = useMenuItemStore();
+  const { deleteMutate } = useSetMenuItem();
+  const { menuItem } = useMenuItemStore();
 
   // 메뉴 삭제
   const clickRemoveCategoryHandler = async () => {
-    removeMenuItemStore(menuItem);
-    setMenuItem({ ...menuItem, id: '', name: '', price: 0, remain_ea: 0 });
-    await removeMenuItem(menuItem.id);
+    deleteMutate(menuItem.id);
     setIsSideFormOpen(false);
   };
 

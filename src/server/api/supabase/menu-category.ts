@@ -52,13 +52,13 @@ export const updateCategoryName = async (categoryPick: Pick<TablesUpdate<'menu_c
  * @param values 카테고리 id, 카테고리 position
  * @returns data
  */
-type ChangeCategoryPosition = TablesUpdate<'menu_category'>;
-export const updateCategoryPosition = async (
-  categoryPick: ChangeCategoryPosition,
-  categoryOver: ChangeCategoryPosition,
-) => {
-  const { id: pickId, position: pickPosition } = categoryPick;
-  const { id: overId, position: overPosition } = categoryOver;
+type DragGroupType = {
+  pick: TablesUpdate<'menu_category'>;
+  over: TablesUpdate<'menu_category'>;
+};
+export const updateCategoryPosition = async (dragGroup: DragGroupType) => {
+  const { id: pickId, position: pickPosition } = dragGroup.pick;
+  const { id: overId, position: overPosition } = dragGroup.over;
   const { error: pickError } = await supabase
     .from('menu_category')
     .update({ position: overPosition })
