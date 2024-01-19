@@ -149,6 +149,7 @@ const Container = () => {
     // 나중에 refactoring하기
     comparedData.id = editData.id;
     comparedData.store_id = editData.store_id;
+    comparedData.createdAt;
     console.log('----------------------------------');
     console.log(preImage);
     console.log(editRef.current);
@@ -169,6 +170,7 @@ const Container = () => {
       await updatePlatFormData(updateTarget as TablesInsert<'platform'>);
     }
     if (!editRef.current?.image_url && comparedData.file) {
+      comparedData.createdAt = moment().toISOString();
       await uploadPlatFormImage(comparedData);
       const { publicUrl: image_url } = downloadPlatFormImageUrl(comparedData);
       comparedData = {
@@ -180,6 +182,7 @@ const Container = () => {
       console.log('22222222222222222');
     }
 
+    // 수정 할 때 이미지만 삭제 할 때 실행 되는 조건문
     if (!preImage && !comparedData.link_url && !comparedData.name) {
       console.log('여기인뎅');
       console.log(comparedData);
@@ -216,7 +219,9 @@ const Container = () => {
    * 삭제 기능
    */
   const onClickRemoveData = async () => {
+    console.log(editTarget);
     await removePlatFormData(editTarget.id);
+    await removePlatFormImage(editTarget);
     const { platform } = await fetchPlatForm(editTarget.store_id!);
     setFecthDataList(platform);
     setIsShowEditForm(false);

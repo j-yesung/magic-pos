@@ -123,6 +123,7 @@ export const removePlatFormImage = async (param: EditFormType) => {
  * @returns update 성공하면 data는 null 값이기에 [] 배열로 넣었씁니다.
  */
 export const updatePlatFormData = async (param: TablesInsert<'platform'>) => {
+  console.log(param.id);
   const { data, error } = await supabase
     .from('platform')
     .update({
