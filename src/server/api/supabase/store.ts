@@ -40,3 +40,8 @@ export const updateStoreTime = async ({ userId, startTime, endTime }: Record<str
     .eq('business_id', userId);
   if (error) throw error;
 };
+
+export const fetchStoreInfoById = async (storeId: string) => {
+  const { data } = await supabase.from('store').select('*').eq('id', storeId).single();
+  return data;
+};

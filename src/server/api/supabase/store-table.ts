@@ -29,3 +29,11 @@ export const deleteStoreTable = async (id: string | undefined) => {
     if (error) throw new Error(error.message);
   }
 };
+
+export const fetchTableInfoById = async (tableId: string) => {
+  if (tableId) {
+    const { data: store, error } = await supabase.from('store_table').select('*').eq('id', tableId);
+    if (error) throw new Error(error.message);
+    return store;
+  }
+};
