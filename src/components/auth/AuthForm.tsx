@@ -1,4 +1,5 @@
 import { useAuth } from '@/hooks/auth/useAuth';
+import { useErrorMessage } from '@/hooks/auth/useErrorMessage';
 import { useInput } from '@/hooks/auth/useInput';
 import { useValid } from '@/hooks/auth/useValid';
 import Image from 'next/image';
@@ -39,6 +40,7 @@ const AuthForm = ({ data }: FormProps) => {
     businessNumber: '',
   });
   const { isBusinessNumberValid } = useValid(value);
+  const { isPasswordValid } = useErrorMessage(value);
 
   return (
     <div className={styles.wrapper}>
@@ -92,7 +94,13 @@ const AuthForm = ({ data }: FormProps) => {
           </div>
           <div className={styles.formButtonWrapper}>
             {path === '/auth/signup' && (
-              <FormButton actionFn={signup} value={value} btnName={buttonName} isSuccess={isSuccess} />
+              <FormButton
+                actionFn={signup}
+                value={value}
+                btnName={buttonName}
+                isSuccess={isSuccess}
+                isPasswordValid={isPasswordValid}
+              />
             )}
             {path === '/auth/login' && (
               <FormButton actionFn={login} value={value} btnName={buttonName} btnSubName={buttonSubName} url={url} />

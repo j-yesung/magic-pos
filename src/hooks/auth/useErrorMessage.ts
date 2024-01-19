@@ -1,19 +1,26 @@
 export const useErrorMessage = (value: Record<string, string>) => {
   const { password, passwordConfirm } = value;
+  const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/g;
 
-  /// 비밀번호와 비밀번호 확인이 모두 입력된 경우에만 비밀번호 일치 여부를 검사합니다.
-  const isPasswordMatch = password && passwordConfirm ? password === passwordConfirm : true;
+  const isPasswordAndConfirmEntered = password && passwordConfirm;
+  const isPasswordFormatValid = passwordRegex.test(password);
+  const isPasswordMatch = isPasswordAndConfirmEntered ? password === passwordConfirm : true;
 
-  // 비밀번호 유효성 메시지는 비밀번호 확인 필드에 값이 있을 때만 설정합니다.
-  const passwordValidationMessage = passwordConfirm
-    ? isPasswordMatch
-      ? '비밀번호가 일치합니다.'
-      : '비밀번호가 일치하지 않습니다.'
-    : '';
+  let passwordValidationMessage = '';
+
+  if (passwordConfirm) {
+    passwordValidationMessage = isPasswordMatch ? '비밀번호가 일치합니다.' : '비밀번호가 일치하지 않습니다.';
+  }
+
+  if (password && !isPasswordFormatValid) {
+    passwordValidationMessage = `비밀번호 형식이 올바르지 않습니다. (대소문자/특수문자 포함 8 ~ 16자리 영문으로 입력해 주세요.)`;
+  }
+
+  const isPasswordValid = isPasswordAndConfirmEntered ? isPasswordMatch && isPasswordFormatValid : false;
 
   return {
     isPasswordMatch,
     passwordValidationMessage,
-    isPasswordValid: passwordConfirm ? isPasswordMatch : true,
+    isPasswordValid,
   };
 };

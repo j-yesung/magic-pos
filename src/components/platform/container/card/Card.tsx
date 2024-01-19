@@ -1,5 +1,5 @@
 import { Tables } from '@/types/supabase';
-import { EditFormType } from '../Container';
+import { EditFormType } from '../PlatFormWrapper';
 import Item from './item/Item';
 import styles from './styles/card.module.css';
 
@@ -17,7 +17,7 @@ const Card = ({ fetchDataList, isEdit, setEditTarget, setIsShowEditForm, setPreI
         fetchDataList.map((card, idx) => {
           return (
             <Item
-              key={`${card.link_url! + card.name! + idx}`}
+              key={`${card.link_url! + card.name + idx}`}
               link={card.link_url!}
               title={card.name!}
               isEdit={isEdit}

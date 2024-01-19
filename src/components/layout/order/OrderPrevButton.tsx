@@ -10,7 +10,7 @@ const OrderPrevButton = () => {
 
   const clickPrevButtonHandler = () => {
     if (optionSwiperRef?.current?.swiper?.activeIndex === ORDER_STEP.SELECT_MENU) {
-      optionSwiperRef.current?.swiper.slidePrev(SLIDE_MOVE_SPEED);
+      optionSwiperRef.current?.swiper.slidePrev();
       setSelectedMenu(null);
       resetSelectedOptions();
     } else {

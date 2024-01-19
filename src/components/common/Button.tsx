@@ -9,7 +9,9 @@ interface ButtonProps {
   disabled?: boolean;
 }
 
-const Button = ({ type, onClick, children, className, disabled }: ButtonProps) => {
+const Button = (props: ButtonProps) => {
+  const { type, onClick, children, className = '', disabled = false } = props;
+
   return (
     <button
       className={!disabled ? `${styles.button} ${className}` : styles.disabledButton}

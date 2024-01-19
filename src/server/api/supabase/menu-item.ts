@@ -171,3 +171,26 @@ export const updateMenuOptionDetail = async (optionDetail: TablesUpdate<'menu_op
   if (error) throw error;
   return data;
 };
+
+export const readRemainEaByMenuId = async (menuId: string) => {
+  const { data, error } = await supabase.from('menu_item').select('remain_ea, name, id').eq('id', menuId).single();
+  if (error) throw error;
+  return data;
+};
+
+/**
+ * create or replace function decrement_remain_ea (menu_id uuid)
+ * returns void as
+ * $$
+ *   update menu_item
+ *   set remain_ea = remain_ea - 1
+ *   where id = menu_id;
+ * $$
+ * language sql volatile;
+ * @param menuId
+ */
+export const decrementRemainEaByMenuId = async (menuId: string) => {
+  const { data, error } = await supabase.rpc('decrement_remain_ea', { menu_id: menuId });
+  if (error) throw error;
+  return data;
+};

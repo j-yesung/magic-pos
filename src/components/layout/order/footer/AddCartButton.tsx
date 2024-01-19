@@ -26,7 +26,7 @@ const AddCartButton = ({ menu }: { menu: MenuItemWithOption | null }) => {
         new Array(amount).fill(false).map(() => ({ ...menu, menu_option: selectedOptions, unique: uniqueId })),
       );
     }
-    optionSwiperRef?.current!.swiper.slidePrev(SLIDE_MOVE_SPEED);
+    optionSwiperRef?.current!.swiper.slidePrev();
     resetSelectedMenu();
   };
 

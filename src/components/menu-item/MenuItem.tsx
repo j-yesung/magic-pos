@@ -18,6 +18,7 @@ const MenuItemPage = () => {
     categoryWithMenuItemList,
     addMenuItemStore,
     setMenuItemSampleImg,
+    setMenuOptions,
   } = useMenuItemStore();
 
   const [dropNum, setDropNum] = useState(0);
@@ -52,6 +53,7 @@ const MenuItemPage = () => {
     setMenuItem(newMenuItem);
     addMenuItemStore(newMenuItem);
     setMenuItemSampleImg(newMenuItem.image_url ?? '');
+    setMenuOptions([]);
   };
   return (
     <div className={clsx(styles.wrap, { [styles.active]: menuItem.id !== '' })}>

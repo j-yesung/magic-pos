@@ -12,12 +12,8 @@ const enum StoreKey {
 export const useStoreQuery = () => {
   const queryClient = useQueryClient();
 
-  const incrementOrderNumberMutation = useMutation({
+  const { data: incrementResult, mutate: incrementOrderNumberMutation } = useMutation({
     mutationFn: incrementOrderNumber,
-    onSuccess: ({ orderNumber, error }) => {
-      if (!error) setOrderNumber(orderNumber ?? -1);
-      else console.error(error);
-    },
     onError: error => {
       console.error(error);
     },
@@ -35,7 +31,8 @@ export const useStoreQuery = () => {
   });
 
   return {
-    incrementOrderNumber: incrementOrderNumberMutation.mutate,
+    newOrderNumber: incrementResult?.orderNumber,
+    incrementOrderNumber: incrementOrderNumberMutation,
     updateStoreTimeSet: updateStoreTimeSetMutation.mutate,
   };
 };

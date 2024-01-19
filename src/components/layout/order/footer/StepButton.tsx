@@ -1,11 +1,22 @@
 import React from 'react';
 import { SwiperRef } from 'swiper/react';
-import useOrderStore, { getTotalPrice, goNextStep, ORDER_STEP } from '@/shared/store/order';
+import useOrderStore, { getTotalPrice, goNextStep, ORDER_STEP, subtractOrderList } from '@/shared/store/order';
 import { usePaymentWidget } from '@/hooks/order/usePaymentWidget';
 import styles from './styles/StepButton.module.css';
 import { convertNumberToWon } from '@/shared/helper';
 import AddCartButton from '@/components/layout/order/footer/AddCartButton';
 import { IoCart } from 'react-icons/io5';
+import { readRemainEaByMenuId } from '@/server/api/supabase/menu-item';
+import { useModal } from '@/hooks/modal/useModal';
+
+class OrderError extends Error {
+  readonly id: string;
+  constructor(message: string, id: string) {
+    super(message);
+    this.message = message;
+    this.id = id;
+  }
+}
 
 interface ButtonProps {
   sliderRef: React.RefObject<SwiperRef>;
@@ -17,7 +28,9 @@ const StepButton = ({ sliderRef }: ButtonProps) => {
   const orderList = useOrderStore(state => state.orderList);
   const step = useOrderStore(state => state.step);
   const optionSwiperRef = useOrderStore(state => state.optionSwiperRef);
+  const swiperRef = useOrderStore(state => state.swiperRef);
   const selectedMenu = useOrderStore(state => state.selectedMenu);
+  const { MagicModal } = useModal();
 
   const { paymentWidget, handlePaymentRequest } = usePaymentWidget();
 
@@ -29,6 +42,26 @@ const StepButton = ({ sliderRef }: ButtonProps) => {
 
   const nextClickHandler = async () => {
     if (step === ORDER_STEP.PAYMENT && paymentWidget) {
+      // 결제 전에 남은 수량이 있는지 다시 한번 검사한다.
+      const fetchRemainEaList = orderList.map(
+        order =>
+          new Promise((res, rej) => {
+            readRemainEaByMenuId(order.id).then(result => {
+              if (result.remain_ea === 0) rej(new OrderError(`${result.name}이 품절 되었습니다. 😭`, result.id));
+              else res(result.remain_ea);
+            });
+          }),
+      );
+      try {
+        await Promise.all(fetchRemainEaList);
+      } catch (err) {
+        MagicModal.alert({ content: (err as OrderError).message, showButton: true });
+        subtractOrderList((err as OrderError).id);
+        swiperRef?.current!.swiper.slidePrev(SLIDE_MOVE_SPEED);
+        return;
+      }
+
+      // 검사가 통과 되면 결제 진해행
       await handlePaymentRequest(orderList);
     } else {
       sliderRef.current!.swiper.slideNext(SLIDE_MOVE_SPEED);

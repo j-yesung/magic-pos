@@ -11,15 +11,15 @@
   --point-50: #ceb7ff; /* deprecated */
 
   /* point color 1 */
-  --point1: #5200ff;
-  --point1-80: #a87fff;
-  --point1-50: #ceb7ff;
+  --point1: #5200ff; /* deprecated */
+  --point1-80: #7433ff;
+  --point1-50: #a87fff;
 
   /* point color 2 */
   --point2: #ffa800;
 
   /* shadow */
-  --shadow-color-10: #4409C21A;
+  --shadow-color-10: #4409c21a;
   --shadow-color-20: #00000033;
 
   /* font */
@@ -30,8 +30,8 @@
   --text5: #ffffff;
 
   /* color */
-  --red: #FF5656;
-  --white: #FFFFFF;
+  --red: #ff5656;
+  --white: #ffffff;
 
   /* bg */
   --bg-line: #ededed;
@@ -49,12 +49,6 @@
   --level-5-z-index: 500;
 }
 
-/* 폰트 */
-@font-face {
-  font-family: 'pretendard';
-  src: url('/public/font/Pretendard-Regular.woff2') format('woff2');
-}
-
-body {
-  font-family: 'pretendard', sans-serif;
+* {
+  font-family: var(--main-font);
 }

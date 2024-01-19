@@ -69,7 +69,7 @@ const CategoryFormPage = () => {
             </button>
           </div>
         ) : (
-          <div>
+          <div className={styles['btn-wrap']}>
             <button className={styles['update-btn']} type="submit">
               추가
             </button>

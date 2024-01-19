@@ -10,6 +10,8 @@ export const passwordInput = {
   id: 2,
   name: 'password',
   type: 'password',
+  minLength: 8,
+  maxLength: 16,
   placeholder: '비밀번호',
 };
 
@@ -17,13 +19,17 @@ export const passwordSignUpInput = {
   id: 3,
   name: 'password',
   type: 'password',
-  placeholder: '비밀번호 (대소문자/특수문자 포함 8~16자리 영문)',
+  minLength: 8,
+  maxLength: 16,
+  placeholder: '비밀번호 (대소문자/특수문자 포함 8 ~ 16자리 영문)',
 };
 
 export const passwordConfirmInput = {
   id: 4,
   name: 'passwordConfirm',
   type: 'password',
+  minLength: 8,
+  maxLength: 16,
   placeholder: '비밀번호 확인',
 };
 

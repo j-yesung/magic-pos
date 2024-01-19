@@ -9,19 +9,25 @@ interface ButtonProps {
   btnSubName: string;
   url: string;
   isSuccess: boolean;
+  isPasswordValid: boolean;
 }
 
-const FormButton = ({ actionFn, value, btnName, btnSubName, url, isSuccess }: Partial<ButtonProps>) => {
+const FormButton = (props: Partial<ButtonProps>) => {
   const router = useRouter();
+  const { actionFn, value, btnName, btnSubName, url, isSuccess, isPasswordValid } = props;
 
   return (
     <>
-      {actionFn && (
+      {actionFn && router.pathname === '/auth/signup' ? (
         <Button
           type="button"
           onClick={() => actionFn && actionFn(value!)}
-          disabled={isSuccess !== undefined && !isSuccess}
+          disabled={isSuccess && isPasswordValid ? false : true}
         >
+          {btnName}
+        </Button>
+      ) : (
+        <Button type="button" onClick={() => actionFn && actionFn(value!)}>
           {btnName}
         </Button>
       )}

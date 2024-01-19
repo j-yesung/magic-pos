@@ -10,7 +10,7 @@ type TimeState = Record<string, string>;
 
 const StoreTimeSet = ({ userId }: { userId: string }) => {
   const { updateStoreTimeSet } = useStoreQuery();
-  const { data } = useGetQuery(userId);
+  const { data } = useGetQuery({ userId });
   const [times, setTimes] = useState<TimeState>({ startTime: '', endTime: '' });
 
   useEffect(() => {

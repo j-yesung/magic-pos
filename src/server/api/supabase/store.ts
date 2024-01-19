@@ -1,5 +1,18 @@
 import { supabase } from '@/shared/supabase';
 
+/**
+ * create or replace function increment_order_number (row_id uuid)
+ * returns bigint as
+ * $$
+ *   update store
+ *   set order_number = order_number + 1
+ *   where id = row_id;
+ *   select order_number from store
+ *   where id = row_id
+ * $$
+ * language sql volatile;
+ * @param storeId
+ */
 export const incrementOrderNumber = async (storeId: string) => {
   const { data, error } = await supabase.rpc('increment_order_number', { row_id: storeId }).single();
   return { orderNumber: data, error };
@@ -26,4 +39,9 @@ export const updateStoreTime = async ({ userId, startTime, endTime }: Record<str
     .update({ start_time: startTime, end_time: endTime })
     .eq('business_id', userId);
   if (error) throw error;
+};
+
+export const fetchStoreInfoById = async (storeId: string) => {
+  const { data } = await supabase.from('store').select('*').eq('id', storeId).single();
+  return data;
 };

@@ -1,6 +1,6 @@
 import { useModal } from '@/hooks/modal/useModal';
 import useMenuItemStore from '@/shared/store/menu-item';
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './styles/menu-option-modal.module.css';
 
 const MenuOptionModalInput = () => {
@@ -15,19 +15,29 @@ const MenuOptionModalInput = () => {
 
   // 옵션 onchange handler
   const changeMenuOptionHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { name, value, type } = e.target;
 
     if (name === 'is_use') {
       setMenuOption({ ...menuOption, is_use: !menuOption.is_use });
     } else {
-      setMenuOption({ ...menuOption, [name]: value });
+      if (type === 'number') {
+        const newValue = value.replace(/[^0-9]/g, '');
+        if (newValue) setMenuOption({ ...menuOption, [name]: value });
+      } else {
+        setMenuOption({ ...menuOption, [name]: value });
+      }
     }
   };
 
   // 옵션 디테일 onchange handler
   const changeMenuOptionItemHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setOptionDetail({ ...optionDetail, [name]: value });
+    const { name, value, type } = e.target;
+    if (type === 'number') {
+      const newValue = value.replace(/[^0-9]/g, '');
+      if (newValue) setOptionDetail({ ...optionDetail, [name]: value });
+    } else {
+      setOptionDetail({ ...optionDetail, [name]: value });
+    }
   };
 
   // 옵션 detail 추가
@@ -76,7 +86,7 @@ const MenuOptionModalInput = () => {
         <h5>옵션 항목</h5>
         <div className={styles['option-wrap']}>
           {menuOptionDetailList.map((option, index) => (
-            <Fragment key={index}>
+            <div key={index}>
               <p className={styles['option-list']}>
                 <span className={styles['option-sub-name']}>{option.name}</span>
                 <span className={styles['option-sub-price']}>{option.price}</span>
@@ -88,7 +98,7 @@ const MenuOptionModalInput = () => {
               >
                 제거
               </button>
-            </Fragment>
+            </div>
           ))}
         </div>
         <div>
@@ -108,7 +118,7 @@ const MenuOptionModalInput = () => {
           </p>
           <p className={styles['input-wrap']}>
             <label className={styles['input-name']} htmlFor="detailPrice">
-              옵션 이름
+              옵션 가격
             </label>
             <input
               type="number"
