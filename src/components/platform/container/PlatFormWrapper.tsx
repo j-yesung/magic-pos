@@ -212,7 +212,6 @@ const PlatFormWrapper = () => {
    * 삭제 기능
    */
   const onClickRemoveData = async () => {
-    console.log(editTarget);
     await removePlatFormData(editTarget.id);
     await removePlatFormImage(editTarget);
     const { platform } = await fetchPlatForm(editTarget.store_id!);

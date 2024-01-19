@@ -27,8 +27,6 @@ const Item = ({ link, title, isEdit, id, setEditTarget, imgUrl, setIsShowEditFor
     setPreImage(imgUrl);
     setIsShowEditForm(true);
   };
-  console.log('0000000000000000000');
-  console.log(imgUrl);
   return (
     <div className={styles.itemWrapper}>
       <Link
