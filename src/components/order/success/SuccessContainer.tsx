@@ -10,6 +10,7 @@ import styles from './styles/SuccessContainer.module.css';
 import Image from 'next/image';
 import image from '@/../public/images/image-success.png';
 import { useRouter } from 'next/router';
+import { decrementRemainEaByMenuId } from '@/server/api/supabase/menu-item';
 
 const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const orderList = useOrderStore(state => state.orderList);
@@ -85,6 +86,11 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
           addNumberOrder({ ...orderData, is_togo: false });
         }
       }
+
+      // 주문한 메뉴의 남은 수량 감소 시키기
+      orderList.forEach(menu => {
+        decrementRemainEaByMenuId(menu.id);
+      });
     }
   }, [orderNumber]);
 

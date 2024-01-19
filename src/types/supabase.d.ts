@@ -427,6 +427,12 @@ export interface Database {
       [_ in never]: never;
     };
     Functions: {
+      decrement_remain_ea: {
+        Args: {
+          menu_id: string;
+        };
+        Returns: undefined;
+      };
       increment_order_number: {
         Args: {
           row_id: string;
