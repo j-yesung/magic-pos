@@ -1,25 +1,19 @@
-.order-check-list-title {
+.order-check-list-content-list {
   width: 100%;
-  height: 11rem;
-  display: flex;
-  border-bottom: 1px solid #000;
+  height: calc(100% - 11rem);
+  overflow-y: scroll;
 }
-.order-check-list-title > div {
-  height: 100%;
-  display: flex;
-  font-size: 2.8rem;
-  justify-content: center;
-  align-items: center;
+
+.order-check-list-content-list::-webkit-scrollbar {
+  width: 0.6rem;
 }
-div.title-number {
-  width: 12.5%;
+.order-check-list-content-list::-webkit-scrollbar-thumb {
+  background: var(--point-100);
+  border-radius: 1rem;
 }
-div.title-time {
-  width: 25%;
+.order-check-list-content-list::-webkit-scrollbar-track {
+  background: none;
 }
-div.title-content {
-  width: 50%;
-}
-div.title-status {
-  width: 12.5%;
+.inView {
+  height: 1rem;
 }

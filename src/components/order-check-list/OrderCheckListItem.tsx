@@ -2,10 +2,9 @@ import { Tables } from '@/types/supabase';
 import moment from 'moment';
 import styles from './styles/OrderCheckListItem.module.css';
 
-const OrderCheckListItem = ({ orderData }: { orderData: Tables<'order_store'> | Tables<'order_number'> }) => {
+const OrderCheckListItem = ({ orderData }: { orderData?: Tables<'order_store'> | Tables<'order_number'> }) => {
   const { menu_list, order_number, is_done, order_time } = orderData
   const menuList: Tables<'menu_item'>[] = JSON.parse(JSON.stringify(menu_list))
-  console.log(menuList)
 
   return (
     <div className={styles['order-check-list-content-item']}>

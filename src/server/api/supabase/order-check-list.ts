@@ -1,12 +1,24 @@
 import { supabase } from "@/shared/supabase";
 
 
-export const fetchOrderCheckList = async (id?: string) => {
+export const fetchOrderCheckList = async (id?: string, pageParam) => {
   if (id) {
-    const { data: store, error } = await supabase.from('store')
-      .select('*,order_store(*),order_number(*)')
-      .eq('business_id', id)
-    if (error) throw new Error(error.message);
-    return store;
+    const { data: order_store, error: storeError } = await supabase.from('order_store')
+      .select('*')
+      .eq('store_id', id)
+      .limit(pageParam * 2)
+
+    const { data: order_number, error: numberError } = await supabase.from('order_number')
+      .select('*')
+      .eq('store_id', id)
+      .limit(pageParam * 2)
+
+    console.log(pageParam)
+    console.log(order_store)
+    console.log(order_number)
+    if (storeError) throw new Error(storeError.message);
+    if (numberError) throw new Error(numberError.message);
+
+    return [...order_store, ...order_store];
   }
 };

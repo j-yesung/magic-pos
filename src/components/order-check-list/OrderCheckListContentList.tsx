@@ -1,16 +1,32 @@
-import { Tables } from "@/types/supabase";
+import useOrderCheckList from "@/hooks/order-check-list/useOrderCheckList";
+import useAuthStore from "@/shared/store/auth";
+import { useInView } from 'react-intersection-observer';
 import OrderCheckListItem from "./OrderCheckListItem";
 import styles from './styles/OrderCheckListContentList.module.css';
 
-const orderCheckListContentList = ({ orderData }: { orderData: Tables<'order_store'>[] | Tables<'order_number'>[] }) => {
+const OrderCheckListContentList = () => {
+  const { storeId } = useAuthStore();
+  const { data, hasNextPage, fetchNextPage, isFetchingNextPage } = useOrderCheckList(storeId!);
+  console.log(data)
+  const { ref, } = useInView({
+    threshold: 1,
+    onChange: (inView) => {
+      if (!inView || !hasNextPage || isFetchingNextPage) return;
+      fetchNextPage();
+    }
+  })
   return (
-    <div className={styles['order-check-list-content-list']}>
-      {
-        orderData?.sort((a, b) => a.is_done && !b.is_done || a.order_time < b.order_time ? 1 : -1)
-          .map((item) => <OrderCheckListItem key={item.id} orderData={item} />)
-      }
-    </div>
+    <>
+      <div className={styles['order-check-list-content-list']}>
+        {
+          data?.sort((a, b) => a.is_done && !b.is_done || a.order_time < b.order_time ? 1 : -1)
+            .map((item) => <OrderCheckListItem key={item.id} orderData={item} />)
+        }
+      </div>
+      {/* 인피니티 스크롤을 위한 div */}
+      <div ref={ref} className={styles['inView']}></div>
+    </>
   )
 }
 
-export default orderCheckListContentList
+export default OrderCheckListContentList
