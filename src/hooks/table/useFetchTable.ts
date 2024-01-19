@@ -6,7 +6,7 @@ const enum QUERY_KEY {
   TABLE = 'table',
 }
 
-const useFetchTable = ({ userId, tableId }: { userId?: string; tableId?: string }) => {
+const useFetchTable = ({ userId, tableId, storeId }: { userId?: string; tableId?: string; storeId?: string }) => {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: [QUERY_KEY.TABLE, userId],
     queryFn: () => fetchStoreTable(userId ?? ''),
@@ -15,8 +15,8 @@ const useFetchTable = ({ userId, tableId }: { userId?: string; tableId?: string 
 
   const { data: tableInfo } = useQuery({
     queryKey: [QUERY_KEY.TABLE, tableId],
-    queryFn: () => fetchTableInfoById(tableId ?? ''),
-    enabled: !!tableId,
+    queryFn: () => fetchTableInfoById(tableId ?? '', storeId ?? ''),
+    enabled: !!tableId && !!storeId,
   });
 
   useEffect(() => {
