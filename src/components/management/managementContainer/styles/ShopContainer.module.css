@@ -6,7 +6,6 @@
   align-items: flex-start;
   flex-wrap: wrap;
   overflow-y: scroll;
-  overflow-x: hidden;
 }
 
 .shop-container::-webkit-scrollbar {

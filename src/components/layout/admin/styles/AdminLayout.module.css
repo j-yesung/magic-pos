@@ -216,6 +216,11 @@
 }
 
 /* 페이지 제목 */
+
+.categoryTitleWrapper {
+  display: none;
+}
+
 .category-title {
   padding-bottom: 5rem;
   font-size: 5rem;
