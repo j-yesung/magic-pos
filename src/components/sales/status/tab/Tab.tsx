@@ -16,16 +16,21 @@ const Tab = () => {
     isShow,
     setIsShow,
   } = useSalesStore();
+
   const { clickMoveTodayHandler, clickWeeksChartHandler, clickMonthsChartHandler, clickShowCalendarHandler } =
     useCalendar();
+
   const clickCloseCalendar = () => setIsShow(false);
   const [clickedTab, setClickedTab] = useState(TODAY);
+
   const dateRef = useRef<Moment | null>(null);
+
   useEffect(() => {
     return () => {
       setClickedTab(TODAY);
     };
   }, []);
+
   useEffect(() => {
     if (!dateRef.current) {
       dateRef.current = currentDate;
@@ -77,11 +82,9 @@ const Tab = () => {
       )}
 
       {!isShow && (
-        <Fragment>
-          <div className={styles.calendarWrapper} onClick={clickShowCalendarHandler}>
-            <div className={styles.calendarIcon}>{dateRef.current?.format('YY년 MM월 DD일')} icon자리</div>
-          </div>
-        </Fragment>
+        <div className={styles.calendarWrapper} onClick={clickShowCalendarHandler}>
+          <div className={styles.calendarIcon}>{dateRef.current?.format('YY년 MM월 DD일')} icon자리</div>
+        </div>
       )}
     </div>
   );

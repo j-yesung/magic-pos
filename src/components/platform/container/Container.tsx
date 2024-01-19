@@ -142,18 +142,12 @@ const Container = () => {
       return acc;
     }, new Object() as EditFormType);
 
-    console.log(editData);
-    console.log(editRef.current);
-    console.log(preImage);
     if (isEmptyObject(comparedData) && editRef.current?.image_url === preImage) return;
     // 나중에 refactoring하기
     comparedData.id = editData.id;
     comparedData.store_id = editData.store_id;
     comparedData.createdAt;
-    console.log('----------------------------------');
-    console.log(preImage);
-    console.log(editRef.current);
-    console.log(editData);
+
     if (editRef.current?.image_url && comparedData.file) {
       console.log('1111111111');
       comparedData.createdAt = moment().toISOString();
@@ -171,6 +165,7 @@ const Container = () => {
     }
     if (!editRef.current?.image_url && comparedData.file) {
       comparedData.createdAt = moment().toISOString();
+
       await uploadPlatFormImage(comparedData);
       const { publicUrl: image_url } = downloadPlatFormImageUrl(comparedData);
       comparedData = {
@@ -179,24 +174,20 @@ const Container = () => {
       };
       const { file, createdAt, ...updateTarget } = comparedData;
       await updatePlatFormData(updateTarget as TablesInsert<'platform'>);
-      console.log('22222222222222222');
     }
 
     // 수정 할 때 이미지만 삭제 할 때 실행 되는 조건문
     if (!preImage && !comparedData.link_url && !comparedData.name) {
-      console.log('여기인뎅');
-      console.log(comparedData);
       await removePlatFormImage(comparedData);
-      await updatePlatFormData({ ...comparedData, image_url: null } as TablesInsert<'platform'>);
+      const { file, createdAt, ...updateTarget } = comparedData;
+      await updatePlatFormData({ ...updateTarget, image_url: null } as TablesInsert<'platform'>);
       const { platform, error } = await fetchPlatForm(storeId!);
       setFecthDataList(platform);
       setIsShowEditForm(false);
       return;
     }
-    console.log('11');
-    console.log(comparedData);
-    await updatePlatFormData(comparedData as TablesInsert<'platform'>);
-    console.log('22');
+    const { file, createdAt, ...updateTarget } = comparedData;
+    await updatePlatFormData(updateTarget as TablesInsert<'platform'>);
     const { platform, error } = await fetchPlatForm(storeId!);
     setFecthDataList(platform);
     setIsShowEditForm(false);
