@@ -3,13 +3,13 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 
 const enum QUERY_KEY {
-  TABLE = 'management',
+  MANAGEMENT = 'management',
 }
 
 const useFetchManagement = (id?: string) => {
 
   const { data, isError, isLoading, error, refetch } = useQuery({
-    queryKey: [QUERY_KEY.TABLE],
+    queryKey: [QUERY_KEY.MANAGEMENT],
     queryFn: () => fetchManagement(id),
   });
 

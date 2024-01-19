@@ -1,22 +1,33 @@
 .shop-container {
   width: 50%;
   height: 100%;
+}
+
+.shop-title {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  padding-bottom: 5rem;
+  font-size: 5rem;
+  font-weight: 600;
+}
+
+.shop-list {
+  width: 100%;
+  height: calc(100% - 10rem);
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
   flex-wrap: wrap;
   overflow-y: scroll;
 }
-
-.shop-container::-webkit-scrollbar {
+.shop-list::-webkit-scrollbar {
   width: 0.6rem;
 }
-
-.shop-container::-webkit-scrollbar-thumb {
+.shop-list::-webkit-scrollbar-thumb {
   background: var(--point-100);
   border-radius: 1rem;
 }
-
-.shop-container::-webkit-scrollbar-track {
+.shop-list::-webkit-scrollbar-track {
   background: none;
 }
