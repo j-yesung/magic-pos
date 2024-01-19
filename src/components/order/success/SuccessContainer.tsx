@@ -80,6 +80,7 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
         addNumberOrder({ ...orderData, is_togo: true });
       } else if (orderType.type === 'store') {
         // 매장 주문 insert!
+        console.log(tableId);
         if (tableId) {
           addStoreOrder({ ...orderData, table_id: tableId });
         } else {

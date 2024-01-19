@@ -27,7 +27,7 @@ const OrderIndexPage = ({
   const orderIdList = useOrderStore(state => state.orderIdList);
   const prevStoreId = useOrderStore(state => state.storeId);
   const { storeInfo } = useGetQuery({ storeId: storeId });
-  const { tableInfo } = useFetchTable({ tableId: tableId });
+  const { tableInfo } = useFetchTable({ tableId: tableId, storeId });
   const { storeOrderData } = useStoreOrderFetchQuery(orderIdList, storeId);
   const { numberOrderData } = useNumberOrderFetchQuery(orderIdList, storeId);
   const [isLoaded, setIsLoaded] = useState(false);

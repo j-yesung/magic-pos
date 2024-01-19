@@ -75,6 +75,7 @@ export const useOrderStore = create<OrderState>()(
         storeId: state.storeId,
         orderNumber: state.orderNumber,
         orderList: state.orderList,
+        tableId: state.tableId,
       }),
     },
   ),

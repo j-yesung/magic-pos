@@ -17,6 +17,7 @@ export const useStoreQuery = () => {
     onSuccess: ({ orderNumber, error }) => {
       if (!error) setOrderNumber(orderNumber ?? -1);
       else console.error(error);
+      return { orderNumber };
     },
     onError: error => {
       console.error(error);
