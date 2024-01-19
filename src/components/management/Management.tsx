@@ -21,7 +21,6 @@ const Management = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-
   return (
     <div className={styles['managementWrapper']}>
       <ManagementContainer managementData={data} />
