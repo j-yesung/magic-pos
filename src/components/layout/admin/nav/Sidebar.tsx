@@ -23,15 +23,10 @@ const Sidebar = (adminInfo: AdminCategories) => {
     [styles.closeNav]: !isSideBarOpen,
   });
 
-  const clickNavListHandler = useCallback(
+  const clickMoveListHandler = useCallback(
     (id: number, url: string) => {
       const currentActive = navList.find(item => item.active === true);
       if (currentActive && currentActive.id === id) return;
-
-      setNavList(prevList =>
-        prevList.map(item => (item.id === id ? { ...item, active: !item.active } : { ...item, active: false })),
-      );
-
       router.push(url);
       setIsSideBarOpen(false);
     },
@@ -45,12 +40,20 @@ const Sidebar = (adminInfo: AdminCategories) => {
       }
     };
 
+    const clickListChangeHandler = (url: string) => {
+      setNavList(prevNavList =>
+        prevNavList.map(item => (item.url === url ? { ...item, active: true } : { ...item, active: false })),
+      );
+    };
+
+    router.events.on('routeChangeComplete', clickListChangeHandler);
     window.addEventListener('mousedown', closeSideBar);
 
     return () => {
+      router.events.off('routeChangeComplete', clickListChangeHandler);
       window.removeEventListener('mousedown', closeSideBar);
     };
-  }, [setIsSideBarOpen]);
+  }, [router.events, setIsSideBarOpen]);
 
   return (
     <aside className={sidebarClass} ref={targetRef}>
@@ -67,7 +70,7 @@ const Sidebar = (adminInfo: AdminCategories) => {
         </div>
         <p>{isMode ? modeSubText[0] : modeSubText[1]}</p>
         <ul>
-          <SidebarList navList={navList} clickFn={clickNavListHandler} />
+          <SidebarList navList={navList} clickFn={clickMoveListHandler} />
         </ul>
       </div>
       <div className={styles.buttonWrapper}>
