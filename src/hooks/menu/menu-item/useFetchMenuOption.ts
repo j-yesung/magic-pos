@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 
 const enum QUERY_KEY {
-  MENU_OPTION = 'menuOptions',
+  MENU_OPTION = 'menuOption',
 }
 
 const useFetchMenuOptions = () => {

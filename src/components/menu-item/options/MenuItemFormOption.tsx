@@ -1,8 +1,8 @@
 import { useModal } from '@/hooks/modal/useModal';
 import useMenuItemStore from '@/shared/store/menu-item';
 import { MenuOptionWithDetail } from '@/types/supabase';
-import MenuOptionModal from './MenuOptionModal';
-import styles from './styles/menu-item-form.module.css';
+import MenuOptionModal from '../options/MenuOptionModal';
+import styles from '../styles/menu-item-form.module.css';
 
 const MenuItemFormOption = () => {
   const { MagicModal } = useModal();
@@ -21,7 +21,6 @@ const MenuItemFormOption = () => {
     MagicModal.fire(<MenuOptionModal />);
   };
 
-  
   // 옵션 추가
   const clickAddOptionHandler = async () => {
     const newOption: MenuOptionWithDetail = {
@@ -37,15 +36,9 @@ const MenuItemFormOption = () => {
     setMenuOptionIndex(-1);
     MagicModal.fire(<MenuOptionModal />);
   };
-  
-  const {
-    menuItem,
-    menuOption,
-    setMenuOption,
-    menuOptions,
-    setMenuOptionDetailList,
-    setMenuOptionIndex,
-  } = useMenuItemStore();
+
+  const { menuItem, menuOption, setMenuOption, menuOptions, setMenuOptionDetailList, setMenuOptionIndex } =
+    useMenuItemStore();
   return (
     <>
       {menuOptions ? (
@@ -63,7 +56,7 @@ const MenuItemFormOption = () => {
         ''
       )}
     </>
-  )
-}
+  );
+};
 
-export default MenuItemFormOption
+export default MenuItemFormOption;

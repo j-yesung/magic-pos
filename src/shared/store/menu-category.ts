@@ -14,7 +14,6 @@ interface CategoriesStoreType {
   setCategory: (item: Tables<'menu_category'>) => void;
   categories: Tables<'menu_category'>[];
   setCategories: (item: Tables<'menu_category'>[]) => void;
-  dragCategoryStore: (dragItem: Tables<'menu_category'>, dragOver: Tables<'menu_category'>) => void;
 }
 
 const useCategoriesStore = create<CategoriesStoreType>(set => ({
@@ -31,16 +30,6 @@ const useCategoriesStore = create<CategoriesStoreType>(set => ({
   setCategory: (item: Tables<'menu_category'>) => set(prev => ({ category: { ...prev.category, ...item } })),
   categories: [],
   setCategories: (item: Tables<'menu_category'>[]) => set({ categories: item }),
-  dragCategoryStore: (dragItem: Tables<'menu_category'>, dragOver: Tables<'menu_category'>) =>
-    set(state => ({
-      categories: state.categories.map(it =>
-        it.id === dragItem.id
-          ? { id: dragOver.id, name: dragOver.name, store_id: dragOver.store_id, position: dragItem.position }
-          : it.id === dragOver.id
-            ? { id: dragItem.id, name: dragItem.name, store_id: dragItem.store_id, position: dragOver.position }
-            : it,
-      ),
-    })),
 }));
 
 export default useCategoriesStore;

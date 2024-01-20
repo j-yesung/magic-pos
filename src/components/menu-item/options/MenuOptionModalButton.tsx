@@ -1,7 +1,7 @@
 import { useModal } from '@/hooks/modal/useModal';
 import useMenuItemStore from '@/shared/store/menu-item';
 import { MenuOptionWithDetail, TablesUpdate } from '@/types/supabase';
-import styles from './styles/menu-option-modal.module.css';
+import styles from '../styles/menu-option-modal.module.css';
 
 const MenuOptionModalButton = ({ modalId }: { modalId?: string }) => {
   const { MagicModal } = useModal();
