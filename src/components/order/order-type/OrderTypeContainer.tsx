@@ -2,6 +2,7 @@ import React from 'react';
 import ButtonContainer from '@/components/order/order-type/ButtonContainer';
 import styles from './styles/OrderTypeContainer.module.css';
 import Image from 'next/image';
+import { MdOutlineLanguage } from 'react-icons/md';
 
 /**
  * STEP1: 포장 / 매장 선택
@@ -10,12 +11,13 @@ import Image from 'next/image';
 const OrderTypeContainer = () => {
   return (
     <div className={styles.container}>
-      <div className={styles.chooseWrapper}>
-        <h1>포장 하시나요 드시고 가시나요?</h1>
-        <ButtonContainer />
-      </div>
+      <h1>
+        매장식사 또는 <br />
+        포장을 선택해 주세요.
+      </h1>
+      <ButtonContainer />
       <div className={styles.languageWrapper}>
-        <Image src={'/images/image-success.png'} alt={'언어 선택'} width={50} height={50} />
+        <MdOutlineLanguage size={20} />
         <span>Language</span>
       </div>
     </div>

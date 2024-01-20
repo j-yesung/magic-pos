@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './styles/StepButton.module.css';
 import useOrderStore, { addOrderList, resetSelectedMenu } from '@/shared/store/order';
 import { MenuItemWithOption } from '@/types/supabase';
-import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButton';
 
 /**
  * 옵션, 수량 등을 정한 뒤 장바구니(orderList)에 담는다.
@@ -32,7 +31,7 @@ const AddCartButton = ({ menu }: { menu: MenuItemWithOption | null }) => {
 
   return (
     <button className={styles.button} onClick={handleClickAddCart}>
-      담기
+      <span>담기</span>
     </button>
   );
 };

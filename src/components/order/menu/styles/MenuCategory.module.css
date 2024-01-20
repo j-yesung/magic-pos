@@ -1,21 +1,24 @@
 .button {
     display: flex;
-    padding: 1rem  /* 10/10 */ 2rem  /* 20/10 */;
-    height: 100%;
+    min-width: 100px;
+    padding: 1.2rem 1.5rem;
     justify-content: center;
     align-items: center;
-    gap: 1rem  /* 10/10 */;
-    background: var(--bg-p);
-    cursor: pointer;
+    gap: 1rem;
+    margin-right: 1.5rem;
+    border-radius: 0.5rem;
+    background: var(--bg-g);
 
-    color: #000;
-    font-size: 1.4rem  /* 14/10 */;
+    color: var(--text1);
+    font-size: 1.6rem;
     font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+    font-weight: 500;
+    line-height: 1.6rem; /* 100% */
+
+    cursor: pointer;
 }
 
 .selected {
-    background: var(--main-color);
+    background: var(--point1-80);
     color: var(--text5);
 }

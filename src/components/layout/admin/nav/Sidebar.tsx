@@ -6,6 +6,7 @@ import useToggleState from '@/shared/store/toggle';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { IoLogOutOutline, IoMailOutline } from 'react-icons/io5';
 import HeaderToggleButton from '../header/HeaderToggleButton';
 import styles from '../styles/AdminLayout.module.css';
 import SidebarList from './SidebarList';
@@ -75,11 +76,11 @@ const Sidebar = (adminInfo: AdminCategories) => {
       </div>
       <div className={styles.buttonWrapper}>
         <Button type="button" className={styles.callButton}>
-          문의하기
+          <IoMailOutline size={25} />
         </Button>
         <p>|</p>
         <Button type="button" className={styles.logoutButton} onClick={() => logout()}>
-          로그아웃
+          <IoLogOutOutline size={25} />
         </Button>
       </div>
     </aside>

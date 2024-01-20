@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react';
 import OrderLayout from '@/components/layout/order/OrderLayout';
-import OrderIndexPage from '@/pages/order/[storeId]';
 
 /**
  * 결제 실패 페이지

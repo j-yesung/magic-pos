@@ -2,8 +2,9 @@ import React from 'react';
 import { useSwiper } from 'swiper/react';
 import { goNextStep, setOrderType } from '@/shared/store/order';
 import styles from './styles/OrderTypeButton.module.css';
-import Image from 'next/image';
 import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButton';
+import { MdOutlineTableBar } from 'react-icons/md';
+import { TbPaperBag } from 'react-icons/tb';
 
 const OrderTypeCard = ({ order }: { order: OrderType }) => {
   const swiper = useSwiper();
@@ -16,10 +17,10 @@ const OrderTypeCard = ({ order }: { order: OrderType }) => {
 
   return (
     <div className={styles.wrapper} onClick={clickButtonHandler}>
-      <div>
-        <Image src={'/images/image-success.png'} alt={'test'} width={100} height={100} />
+      <div className={styles.iconWrapper}>
+        {order.type === 'togo' ? <TbPaperBag size={31} /> : <MdOutlineTableBar size={31} />}
       </div>
-      <span>{order.type === 'togo' ? '포장' : '매장'}</span>
+      <span>{order.type === 'togo' ? '포장 할게요' : '먹고 갈게요'}</span>
     </div>
   );
 };

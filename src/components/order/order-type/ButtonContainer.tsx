@@ -5,8 +5,8 @@ import styles from './styles/ButtonContainer.module.css';
 const ButtonContainer = () => {
   return (
     <div className={styles.container}>
-      <OrderTypeCard order={{ type: 'togo' }} />
       <OrderTypeCard order={{ type: 'store' }} />
+      <OrderTypeCard order={{ type: 'togo' }} />
     </div>
   );
 };

@@ -9,10 +9,12 @@ interface StoreInfoProps {
 const StoreInfo = ({ orderType, storeName }: StoreInfoProps) => {
   return (
     <div className={styles.storeInfo}>
-      <div className={styles.orderType}>
-        <span>{orderType.type === 'togo' ? '포장' : '매장'}</span>
+      <div className={styles.wrapper}>
+        <div className={styles.orderType}>
+          <span>{orderType.type === 'togo' ? '포장' : '매장'}</span>
+        </div>
+        <span className={styles.storeName}>{storeName}</span>
       </div>
-      <span className={styles.storeName}>{storeName}</span>
     </div>
   );
 };
