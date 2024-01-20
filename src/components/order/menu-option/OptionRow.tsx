@@ -22,7 +22,10 @@ const OptionRow = ({ option }: { option: MenuOptionWithDetail }) => {
 
   return (
     <div className={styles.container}>
-      <h3>{option.name}</h3>
+      <div className={styles.optionTitle}>
+        <h3>{option.name}</h3>
+        <span className={styles.maxOptionAmount}>(최대 {option.max_detail_count}개 선택 가능)</span>
+      </div>
       <div>
         {option.menu_option_detail.map(detail => (
           <OptionDetailRow

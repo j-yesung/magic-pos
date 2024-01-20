@@ -32,6 +32,7 @@ interface OrderState {
   selectedOptions: MenuOptionWithDetail[];
   amount: number;
   selectedMenu: MenuItemWithOption | null;
+  isOptionPage: boolean;
 }
 
 export const useOrderStore = create<OrderState>()(
@@ -65,6 +66,7 @@ export const useOrderStore = create<OrderState>()(
       selectedOptions: [],
       // 메뉴 하나 수량
       amount: 1,
+      isOptionPage: false,
     }),
     {
       name: 'order-storage',
@@ -83,6 +85,7 @@ export const useOrderStore = create<OrderState>()(
 
 // ACTIONS !!
 export const setOrderNumber = (orderNumber: number) => useOrderStore.setState(() => ({ orderNumber }));
+export const setIsOptionPage = (isOptionPage: boolean) => useOrderStore.setState(() => ({ isOptionPage }));
 export const goNextStep = () => useOrderStore.setState(state => ({ step: Math.min(state.step + 1, state.maxStep) }));
 export const goPrevStep = () => useOrderStore.setState(state => ({ step: Math.max(state.step - 1, 0) }));
 export const setStoreId = (storeId: string) => useOrderStore.setState(() => ({ storeId }));
@@ -175,6 +178,7 @@ export const resetSelectedMenu = () => {
   resetAmount();
   resetSelectedOptions();
   setSelectedMenu(null);
+  setIsOptionPage(false);
 };
 
 export default useOrderStore;
