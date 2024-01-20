@@ -1,7 +1,7 @@
 import { supabase } from '@/shared/supabase';
 import { TablesInsert, TablesUpdate } from '@/types/supabase';
 
-export const fetchStoreTable = async (id: string) => {
+export const fetchStoreTable = async (id?: string) => {
   if (id) {
     const { data: store, error } = await supabase.from('store').select('*, store_table(*)').eq('business_id', id);
     if (error) throw new Error(error.message);
@@ -11,6 +11,7 @@ export const fetchStoreTable = async (id: string) => {
 
 export const addStoreTable = async (storeTableData: TablesInsert<'store_table'>) => {
   const { error } = await supabase.from('store_table').insert([storeTableData]).select();
+  console.log(error)
   if (error) throw new Error(error.message);
 };
 

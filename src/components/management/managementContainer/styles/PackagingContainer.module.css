@@ -1,6 +1,20 @@
 .packaging-container {
   width: 50%;
   height: 100%;
+}
+
+.packaging-title {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  padding-bottom: 5rem;
+  font-size: 5rem;
+  font-weight: 600;
+}
+
+.packaging-list {
+  width: 100%;
+  height: calc(100% - 10rem);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -8,15 +22,15 @@
   overflow-y: scroll;
 }
 
-.packaging-container::-webkit-scrollbar {
+.packaging-list::-webkit-scrollbar {
   width: 0.6rem;
 }
 
-.packaging-container::-webkit-scrollbar-thumb {
+.packaging-list::-webkit-scrollbar-thumb {
   background: var(--point-100);
   border-radius: 1rem;
 }
 
-.packaging-container::-webkit-scrollbar-track {
+.packaging-list::-webkit-scrollbar-track {
   background: none;
 }

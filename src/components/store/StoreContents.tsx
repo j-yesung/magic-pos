@@ -1,5 +1,5 @@
 import { useInput } from '@/hooks/auth/useInput';
-import useAuthStore from '@/shared/store/auth';
+import useAuthState from '@/shared/store/session';
 import { useEffect, useState } from 'react';
 import Input from '../auth/Input';
 import StoreTimeSet from './StoreTimeSet';
@@ -7,9 +7,9 @@ import styles from './styles/StroeContents.module.css';
 
 const StoreContents = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const { auth, storeName, storeBno } = useAuthStore();
-  const userId = auth?.user.id || '';
-  const email = auth?.user.email || '';
+  const { session, storeName, storeBno } = useAuthState();
+  const userId = session?.user.id || '';
+  const email = session?.user.email || '';
   const { value, changeHandler } = useInput({
     storeEmail: email,
     bnoNumber: storeBno!,
@@ -22,7 +22,7 @@ const StoreContents = () => {
 
   return (
     <section className={styles.wrapper}>
-      {isLoaded && auth && (
+      {isLoaded && session && (
         <form>
           <Input value={value} onChangeHandler={changeHandler} />
           <StoreTimeSet userId={userId} />

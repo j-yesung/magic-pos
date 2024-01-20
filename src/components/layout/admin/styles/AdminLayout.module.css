@@ -1,4 +1,3 @@
-/* 관리자 모드 레이아웃 */
 .admin-wrapper {
   display: flex;
   flex-direction: column;
@@ -7,23 +6,28 @@
 
 /* 헤더 영역입니다. */
 .header-wrapper {
-  height: 10rem;
-  padding: 3rem;
+  position: relative;
+  padding: 4rem 20rem;
   display: flex;
   justify-content: space-between;
   background-color: #ffffff;
-  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.2);
 }
 
 .header-wrapper input {
   display: none;
 }
 
-.header-wrapper .container {
+.header-wrapper .left-container {
   gap: 2rem;
   display: flex;
   align-items: center;
 }
+
+.header-wrapper .right-container {
+  display: flex;
+  align-items: center;
+}
+
 .header-wrapper .hamburger {
   cursor: pointer;
 }
@@ -36,7 +40,6 @@
   color: #fff;
   font-size: 2rem;
   font-weight: 700;
-  /* font-family: Arial, Helvetica, sans-serif; */
 }
 
 .label {
@@ -139,7 +142,7 @@
 
 .nav-wrapper .toggle-button {
   display: flex;
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
   align-items: flex-start;
 }
 
@@ -205,24 +208,43 @@
 
 /* 메인 영역입니다. */
 .main-wrapper {
-  padding: 10rem 10rem 0 10rem;
+  position: relative;
+  padding: 5rem 20rem 5rem 20rem;
   border-radius: 2rem;
-  height: calc(100vh - 10rem);
+  height: calc(100vh - 12rem);
   transition: all 0.4s;
-  overflow-y: scroll;
+  overflow: hidden;
 }
+
+.main-wrapper .children-wrapper {
+  height: 90%;
+}
+
 .main-wrapper::-webkit-scrollbar {
   display: none;
 }
 
 /* 페이지 제목 */
-
 .categoryTitleWrapper {
   display: none;
 }
 
 .category-title {
-  padding-bottom: 5rem;
-  font-size: 5rem;
+  font-size: 3rem;
   font-weight: 600;
+  font-style: normal;
+}
+
+.icon-wrapper {
+  gap: 2rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ededed;
+  margin-bottom: 5rem;
+}
+.icon-wrapper .border-bottom-temp {
+  gap: 2rem;
+  display: flex;
+  margin-bottom: 1rem;
+  align-items: center;
 }

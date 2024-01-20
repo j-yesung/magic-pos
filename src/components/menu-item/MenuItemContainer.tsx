@@ -1,8 +1,8 @@
 import useFetchMenuItems from '@/hooks/menu/menu-item/useFetchMenuItems';
 import useFetchMenuOptions from '@/hooks/menu/menu-item/useFetchMenuOption';
 import { fetchMenuOptions } from '@/server/api/supabase/menu-item';
-import useAuthStore from '@/shared/store/auth';
 import useMenuItemStore from '@/shared/store/menu-item';
+import useAuthState from '@/shared/store/session';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -11,7 +11,7 @@ import MenuItemListPage from './items/MenuItemList';
 import styles from './styles/menu-item-container.module.css';
 
 const MenuItemsComponentPage = () => {
-  const { storeId } = useAuthStore();
+  const storeId = useAuthState(state => state.storeId);
   const { data: categoryWithMenuData } = useFetchMenuItems(storeId ?? '');
   const { data: menuOptionData } = useFetchMenuOptions();
   const router = useRouter();
@@ -67,8 +67,6 @@ const MenuItemsComponentPage = () => {
     setOrigineMenuOptions(data);
     return data;
   };
-
-
 
   return (
     <div

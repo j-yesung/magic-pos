@@ -6,7 +6,9 @@ const enum QUERY_KEY {
   TABLE = 'table',
 }
 
+
 const useFetchTable = ({ userId, tableId, storeId }: { userId?: string; tableId?: string; storeId?: string }) => {
+
   const { data, isLoading, isError, error } = useQuery({
     queryKey: [QUERY_KEY.TABLE, userId],
     queryFn: () => fetchStoreTable(userId ?? ''),
