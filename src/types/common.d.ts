@@ -47,22 +47,7 @@ interface AuthState {
     expires_in: number;
     refresh_token: string;
     token_type: string;
-    user: {
-      app_metadata: {
-        provider: string;
-        provider_access_token: string;
-        provider_user_id: string;
-      };
-      aud: string;
-      created_at: string;
-      email: string;
-      id: string;
-      role: string;
-      updated_at: string;
-      user_metadata: {
-        full_name: string;
-      };
-    };
+    user: Record<string, string | unknown>;
   } | null;
   storeId: string | null;
   storeName: string | null;
