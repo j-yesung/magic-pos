@@ -16,6 +16,7 @@
     background: var(--bg-g);
 }
 
-.total-price {
-    margin: 1rem;
+.empty-row {
+    height: 2rem;
+    background: var(--bg-g);
 }

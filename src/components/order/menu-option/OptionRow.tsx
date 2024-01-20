@@ -21,23 +21,27 @@ const OptionRow = ({ option }: { option: MenuOptionWithDetail }) => {
   }, []);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.optionTitle}>
-        <h3>{option.name}</h3>
-        <span className={styles.maxOptionAmount}>(최대 {option.max_detail_count}개 선택 가능)</span>
-      </div>
-      <div>
-        {option.menu_option_detail.map(detail => (
-          <OptionDetailRow
-            key={detail.id}
-            option={option}
-            detail={detail}
-            selectedDetail={selectedDetail}
-            setSelectedDetail={setSelectedDetail}
-          />
-        ))}
-      </div>
-    </div>
+    <>
+      {option.menu_option_detail.length > 0 && (
+        <div className={styles.container}>
+          <div className={styles.optionTitle}>
+            <h3>{option.name}</h3>
+            <span className={styles.maxOptionAmount}>(최대 {option.max_detail_count}개 선택 가능)</span>
+          </div>
+          <div>
+            {option.menu_option_detail.map(detail => (
+              <OptionDetailRow
+                key={detail.id}
+                option={option}
+                detail={detail}
+                selectedDetail={selectedDetail}
+                setSelectedDetail={setSelectedDetail}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

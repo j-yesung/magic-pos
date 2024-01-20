@@ -19,16 +19,15 @@ const MenuOptionContainer = () => {
           <Image src={selectedMenu?.image_url ?? ''} alt={selectedMenu?.name ?? ''} width={375} height={375} />
           <MenuInfo />
           {selectedMenu?.menu_option.map(option => <OptionRow key={option.id} option={option} />)}
+          <div className={styles.emptyRow}>&nbsp;</div>
           <Amount />
-          <div className={styles.totalPrice}>
-            <TotalPrice
-              itemList={new Array(amount).fill(true).map(() => {
-                const menu = { ...selectedMenu };
-                menu.menu_option = selectedOptions;
-                return menu;
-              })}
-            />
-          </div>
+          <TotalPrice
+            itemList={new Array(amount).fill(true).map(() => {
+              const menu = { ...selectedMenu };
+              menu.menu_option = selectedOptions;
+              return menu;
+            })}
+          />
         </section>
       )}
     </>
