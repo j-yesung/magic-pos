@@ -6,12 +6,12 @@ export const fetchOrderCheckList = async (id?: string, pageParam) => {
     const { data: order_store, error: storeError } = await supabase.from('order_store')
       .select('*')
       .eq('store_id', id)
-      .limit(pageParam * 2)
+      .limit(pageParam * 5)
 
     const { data: order_number, error: numberError } = await supabase.from('order_number')
       .select('*')
       .eq('store_id', id)
-      .limit(pageParam * 2)
+      .limit(pageParam * 5)
 
     if (storeError) throw new Error(storeError.message);
     if (numberError) throw new Error(numberError.message);
