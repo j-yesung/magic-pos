@@ -13,12 +13,9 @@ export const fetchOrderCheckList = async (id?: string, pageParam) => {
       .eq('store_id', id)
       .limit(pageParam * 2)
 
-    console.log(pageParam)
-    console.log(order_store)
-    console.log(order_number)
     if (storeError) throw new Error(storeError.message);
     if (numberError) throw new Error(numberError.message);
 
-    return [...order_store, ...order_store];
+    return [...order_store, ...order_number];
   }
 };
