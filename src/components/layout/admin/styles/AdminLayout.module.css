@@ -216,13 +216,18 @@
 }
 
 /* 페이지 제목 */
-
 .categoryTitleWrapper {
   display: none;
 }
 
 .category-title {
-  padding-bottom: 5rem;
   font-size: 5rem;
   font-weight: 600;
+}
+
+.icon-wrapper {
+  gap: 2rem;
+  display: flex;
+  align-items: center;
+  padding-bottom: 4rem;
 }
