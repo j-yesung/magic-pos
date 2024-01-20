@@ -1,16 +1,20 @@
 .table-list-item {
-  width: 9em;
-  height: 7em;
+  width: 25rem;
+  height: 25rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 5% 0;
-  font-size: 1.5em;
+  font-size: 1.5rem;
   border-radius: 0.5em;
   transition: 0.2s;
-  background-color: var(--main-color);
+  background: var(--bg-g);
   cursor: pointer;
-  color: #fff;
+  padding: 1rem;
+  margin-right: 11.7rem;
+  margin-bottom: 10rem;
+}
+.item-row-5 {
+  margin-right: 0;
 }
 
 .table-list-item:hover {

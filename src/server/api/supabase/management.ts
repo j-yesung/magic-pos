@@ -33,17 +33,6 @@ export const updateIsDone = async (orderData: OrderConfirmType[]) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 export const submitDetectedOrder = (
   storeId: string,
   refetch: (options?: RefetchOptions | undefined) =>
@@ -89,7 +78,7 @@ const payloadFunction = (
   const text = `주문번호 ${orderNumber} .번 주문이 요청되었습니다`
   const utterThis = new SpeechSynthesisUtterance(text)
   utterThis.lang = "ko-KR";
-  utterThis.rate = 2;
+  utterThis.rate = 1.6;
   synth.speak(utterThis)
 
   // 주문현황 refetch
