@@ -20,8 +20,10 @@ const CategoryTitle = (adminInfo: AdminCategories) => {
   return (
     <section className={clsx(isManagementPathName && styles.categoryTitleWrapper)}>
       <div className={styles.iconWrapper}>
-        <CategoryTitleIcon />
-        <h1 className={styles.categoryTitle}>{info && info.name}</h1>
+        <div className={styles.borderBottomTemp}>
+          <CategoryTitleIcon />
+          <h1 className={styles.categoryTitle}>{info && info.name}</h1>
+        </div>
       </div>
     </section>
   );
