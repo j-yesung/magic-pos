@@ -21,7 +21,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
       <Header />
       <main className={styles.mainWrapper}>
         <CategoryTitle adminCategories={adminCategories} />
-        {children}
+        <div className={styles.childrenWrapper}>{children}</div>
       </main>
     </div>
   );

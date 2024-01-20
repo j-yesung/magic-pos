@@ -208,12 +208,18 @@
 
 /* 메인 영역입니다. */
 .main-wrapper {
-  padding: 5rem 20rem 0 20rem;
+  position: relative;
+  padding: 5rem 20rem 5rem 20rem;
   border-radius: 2rem;
-  height: calc(100vh - 10rem);
+  height: calc(100vh - 12rem);
   transition: all 0.4s;
-  overflow-y: scroll;
+  overflow: hidden;
 }
+
+.main-wrapper .children-wrapper {
+  height: 90%;
+}
+
 .main-wrapper::-webkit-scrollbar {
   display: none;
 }
