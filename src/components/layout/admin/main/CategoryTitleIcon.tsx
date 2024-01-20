@@ -10,13 +10,13 @@ import {
 } from 'react-icons/io5';
 
 const ICONS: Record<string, JSX.Element> = {
-  '/admin/order-check-list': <IoDocumentOutline size={50} />,
-  '/admin/sales': <IoCellularSharp size={50} />,
-  '/admin/platform': <IoBrowsersOutline size={50} />,
-  '/admin/table': <IoGrid size={50} />,
-  '/admin/menu-category': <IoListSharp size={50} />,
-  '/admin/menu-item': <IoRestaurant size={50} />,
-  '/admin/store': <IoStorefront size={50} />,
+  '/admin/order-check-list': <IoDocumentOutline size={28} />,
+  '/admin/sales': <IoCellularSharp size={28} />,
+  '/admin/platform': <IoBrowsersOutline size={28} />,
+  '/admin/table': <IoGrid size={28} />,
+  '/admin/menu-category': <IoListSharp size={28} />,
+  '/admin/menu-item': <IoRestaurant size={28} />,
+  '/admin/store': <IoStorefront size={28} />,
 };
 
 const CategoryTitleIcon = () => {
