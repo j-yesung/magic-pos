@@ -76,12 +76,18 @@ const StepButton = ({ sliderRef }: ButtonProps) => {
         <div className={styles.container}>
           {optionSwiperRef?.current!.swiper?.realIndex !== 1 ? (
             <button className={styles.button} onClick={nextClickHandler} disabled={orderList.length === 0}>
-              <span>{BUTTON_OPTIONS[step]}</span>
-              {step === ORDER_STEP.SELECT_MENU && (
-                <div className={styles.iconWrapper}>
-                  <PiBagSimpleFill size={20} />
-                  <span>{orderList.length}</span>
-                </div>
+              {orderList.length === 0 ? (
+                <span>담은 상품이 없습니다.</span>
+              ) : (
+                <>
+                  <span>{BUTTON_OPTIONS[step]}</span>
+                  {step === ORDER_STEP.SELECT_MENU && (
+                    <div className={styles.iconWrapper}>
+                      <PiBagSimpleFill size={20} />
+                      <span>{orderList.length}</span>
+                    </div>
+                  )}
+                </>
               )}
             </button>
           ) : (
