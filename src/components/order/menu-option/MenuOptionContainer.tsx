@@ -4,8 +4,8 @@ import Image from 'next/image';
 import styles from './styles/MenuOptionContainer.module.css';
 import MenuInfo from '@/components/order/menu-option/MenuInfo';
 import OptionRow from '@/components/order/menu-option/OptionRow';
-import Amount from '@/components/order/menu-option/Amount';
 import TotalPrice from '@/components/order/common/TotalPrice';
+import Amount from '@/components/order/menu-option/Amount';
 
 const MenuOptionContainer = () => {
   const selectedMenu = useOrderStore(state => state.selectedMenu);

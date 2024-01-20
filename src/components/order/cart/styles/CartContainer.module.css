@@ -2,10 +2,23 @@
     --row-container-height: 90%;
     --price-container-height: 10%;
     height: calc(100% - var(--kiosk-footer-height) - var(--kiosk-container-padding) * 2);
-    padding: 0 1.5rem  /* 15/10 */
+}
+
+.cart-wrapper {
+    border-radius: 1rem;
+    border: 0.1rem solid var(--bg-line);
+    margin: 3rem 2rem;
+}
+
+.store-info {
+    border-radius: 1rem 1rem 0 0;
+    border: 0.1rem solid var(--bg-line);
+    background: var(--bg-g) !important;
+    justify-content: space-between;
 }
 
 .row-container {
     height: var(--row-container-height);
     overflow-y: auto;
 }
+
