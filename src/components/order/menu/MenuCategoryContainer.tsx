@@ -18,7 +18,6 @@ const MenuCategoryContainer = ({ menuData, selectedCategory, setSelectedCategory
       <Swiper
         modules={[Virtual]}
         spaceBetween={0}
-        height={200}
         slidesPerView={3.5}
         centeredSlides={true}
         centeredSlidesBounds={true}
@@ -26,7 +25,7 @@ const MenuCategoryContainer = ({ menuData, selectedCategory, setSelectedCategory
       >
         {!isEmptyObject(menuData) &&
           menuData?.map((category, index) => (
-            <SwiperSlide key={category.id} virtualIndex={index}>
+            <SwiperSlide key={category.id} virtualIndex={index} className={styles.widthFitContent}>
               <MenuCategory
                 key={category.id}
                 category={category}

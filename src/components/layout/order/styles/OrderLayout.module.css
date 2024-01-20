@@ -14,20 +14,22 @@
 
 .prev-button {
     position: fixed;
+
     display: flex;
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 4rem;
+    height: 4rem;
     padding: 1rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 1rem;
     flex-shrink: 0;
-    background: rgba(143, 0, 255, 0.68);
-    color: var(--text5);
-    margin-top: 8.1rem;
-    margin-left: 1.5rem;
-    border-radius: 1rem;
+    top: 1.6rem;
+    left: 2rem;
+
+    border-radius: 0.8rem;
+    background: var(--bg-g);
+
     z-index: var(--level-1-z-index);
     cursor: pointer;
 }

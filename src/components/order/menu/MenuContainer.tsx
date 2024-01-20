@@ -34,6 +34,7 @@ const MenuContainer = () => {
 
   return (
     <div className={styles.container}>
+      <StoreInfo orderType={orderType} storeName={storeName} />
       {menuData && (
         <MenuCategoryContainer
           menuData={menuData}
@@ -41,7 +42,6 @@ const MenuContainer = () => {
           setSelectedCategory={setSelectedCategory}
         />
       )}
-      <StoreInfo orderType={orderType} storeName={storeName} />
       <section className={styles.section}>
         {menuItemList.map(menu => (
           <MenuCard key={menu.id} menu={menu} />
