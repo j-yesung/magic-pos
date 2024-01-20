@@ -8,9 +8,7 @@ const MenuInfo = () => {
 
   return (
     <div className={styles.container}>
-      <div>
-        <h2>{selectedMenu?.name}</h2>
-      </div>
+      <h2>{selectedMenu?.name}</h2>
       <div className={styles.priceWrapper}>
         <h3>가격</h3>
         <span>{convertNumberToWon(selectedMenu?.price ?? 0)}</span>

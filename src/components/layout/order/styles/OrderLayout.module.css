@@ -14,7 +14,6 @@
 
 .prev-button {
     position: fixed;
-
     display: flex;
     width: 4rem;
     height: 4rem;
@@ -32,4 +31,8 @@
 
     z-index: var(--level-1-z-index);
     cursor: pointer;
+}
+
+.bg-opacity {
+    background: rgba(255, 255, 255, 0.50);
 }

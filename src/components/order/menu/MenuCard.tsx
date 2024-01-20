@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './styles/MenuCard.module.css';
 import { MenuItemWithOption } from '@/types/supabase';
 import Image from 'next/image';
-import useOrderStore, { setSelectedMenu } from '@/shared/store/order';
+import useOrderStore, { setIsOptionPage, setSelectedMenu } from '@/shared/store/order';
 import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButton';
 import { convertNumberToWon } from '@/shared/helper';
 
@@ -16,6 +16,7 @@ const MenuCard = ({ menu }: MenuCardProps) => {
   const handleClickCard = () => {
     if (menu.remain_ea === 0) return;
     setSelectedMenu(menu);
+    setIsOptionPage(true);
     optionSwiperRef?.current?.swiper.slideNext(SLIDE_MOVE_SPEED);
   };
 
