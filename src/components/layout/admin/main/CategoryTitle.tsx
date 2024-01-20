@@ -1,4 +1,3 @@
-import useAuthStore from '@/shared/store/auth';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -8,7 +7,6 @@ import CategoryTitleIcon from './CategoryTitleIcon';
 const CategoryTitle = (adminInfo: AdminCategories) => {
   const path = useRouter().pathname;
   const info = adminInfo.adminCategories.find(item => item.url === path);
-  const auth = useAuthStore(state => state.auth);
   const [isManagementPathName, setIsManagementPathName] = useState(false);
 
   useEffect(() => {
@@ -17,7 +15,7 @@ const CategoryTitle = (adminInfo: AdminCategories) => {
     } else {
       setIsManagementPathName(false);
     }
-  }, [auth, path, isManagementPathName]);
+  }, [path]);
 
   return (
     <section className={clsx(isManagementPathName && styles.categoryTitleWrapper)}>
