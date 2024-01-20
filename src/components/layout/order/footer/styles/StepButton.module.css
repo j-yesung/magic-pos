@@ -13,22 +13,35 @@
     align-items: center;
     flex-shrink: 0;
     cursor: pointer;
-    border-radius: 1rem  /* 10/10 */;
-    background: var(--main-color);
+    border-radius: 0.8rem;
+    background: var(--point1-80);
     color: var(--text5);
 }
 
 .button span {
-    font-family: Pretendard, sans-serif;
-    font-size: 1.4rem  /* 14/10 */;
+    color: var(--white);
+    text-align: center;
+    font-size: 1.6rem;
     font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+    font-weight: 600;
+    line-height: 1.6rem; /* 100% */
+    letter-spacing: -0.032rem;
 }
 
 .button:disabled {
     background: var(--bg-g);
+}
+
+.button:disabled span {
     color: var(--text2);
+}
+
+.button:disabled svg {
+    color: var(--text2);
+}
+
+.button:disabled .icon-wrapper span {
+    color: var(--text5);
 }
 
 .icon-wrapper {
@@ -41,12 +54,13 @@
 
 .icon-wrapper span {
     position: absolute;
-    left: 1.2rem;
-    color: var(--text1);
+    display: flex;
+    top: .56rem;
+    width: fit-content;
+    color: var(--point1-80);
     text-align: center;
-    font-family: Pretendard, sans-serif;
-    font-size: 1.2rem  /* 10/10 */;
+    font-size: 1.2rem;
     font-style: normal;
-    font-weight: bold;
-    line-height: 1rem  /* 10/10 */; /* 100% */
+    font-weight: 500;
+    line-height: 1.2rem; /* 100% */
 }

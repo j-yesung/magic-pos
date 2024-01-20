@@ -18,7 +18,7 @@ const MenuCategoryContainer = ({ menuData, selectedCategory, setSelectedCategory
       <Swiper
         modules={[Virtual]}
         spaceBetween={0}
-        slidesPerView={3.5}
+        slidesPerView={'auto'}
         centeredSlides={true}
         centeredSlidesBounds={true}
         slideToClickedSlide={true}

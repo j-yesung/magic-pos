@@ -4,6 +4,7 @@ import { MenuItemWithOption } from '@/types/supabase';
 import Image from 'next/image';
 import useOrderStore, { setSelectedMenu } from '@/shared/store/order';
 import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButton';
+import { convertNumberToWon } from '@/shared/helper';
 
 interface MenuCardProps {
   menu: MenuItemWithOption;
@@ -20,8 +21,11 @@ const MenuCard = ({ menu }: MenuCardProps) => {
 
   return (
     <div className={styles.card} onClick={handleClickCard}>
-      <Image src={menu.image_url ?? ''} alt={menu.name ?? ''} width={100} height={100} />
-      <span>{menu.name}</span>
+      <Image src={menu.image_url ?? ''} alt={menu.name ?? ''} width={125} height={125} />
+      <div className={styles.menuInfo}>
+        <span>{menu.name}</span>
+        <span>{convertNumberToWon(menu.price)}</span>
+      </div>
       {menu.remain_ea === 0 && (
         <div className={styles.soldOut}>
           <p>소진 되었습니다</p>

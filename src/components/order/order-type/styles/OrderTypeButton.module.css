@@ -12,7 +12,7 @@
     background: var(--bg-p2);
     box-shadow: 0 0 1rem 0 rgba(68, 9, 194, 0.10);
 
-
+    cursor: pointer;
 }
 .wrapper:nth-child(1) {
     margin-right: 0.2rem;

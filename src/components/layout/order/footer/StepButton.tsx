@@ -8,6 +8,7 @@ import AddCartButton from '@/components/layout/order/footer/AddCartButton';
 import { IoCart } from 'react-icons/io5';
 import { readRemainEaByMenuId } from '@/server/api/supabase/menu-item';
 import { useModal } from '@/hooks/modal/useModal';
+import { PiBagSimpleFill } from 'react-icons/pi';
 
 class OrderError extends Error {
   readonly id: string;
@@ -78,7 +79,7 @@ const StepButton = ({ sliderRef }: ButtonProps) => {
               <span>{BUTTON_OPTIONS[step]}</span>
               {step === ORDER_STEP.SELECT_MENU && (
                 <div className={styles.iconWrapper}>
-                  <IoCart size={28} />
+                  <PiBagSimpleFill size={20} />
                   <span>{orderList.length}</span>
                 </div>
               )}

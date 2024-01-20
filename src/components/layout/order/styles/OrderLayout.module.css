@@ -4,7 +4,7 @@
     margin-left: auto;
     margin-right: auto;
     max-width: 76.8rem;
-    padding: var(--kiosk-container-padding) 0 var(--kiosk-container-padding) 0;
+    padding: 0 0 var(--kiosk-container-padding) 0;
 }
 
 .children {
@@ -24,7 +24,7 @@
     align-items: center;
     gap: 1rem;
     flex-shrink: 0;
-    top: 1.6rem;
+    top: .6rem;
     left: 2rem;
 
     border-radius: 0.8rem;
