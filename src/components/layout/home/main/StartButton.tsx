@@ -1,15 +1,15 @@
 import useToast from '@/hooks/toast/useToast';
-import useAuthStore from '@/shared/store/auth';
+import useAuthState from '@/shared/store/session';
 import { useRouter } from 'next/router';
 import styles from '../styles/Home.module.css';
 
 const StartButton = () => {
   const router = useRouter();
-  const auth = useAuthStore(state => state.auth);
+  const session = useAuthState(state => state.session);
   const { toast } = useToast();
 
   const clickStartHandler = () => {
-    auth
+    session
       ? router.push('/admin/management')
       : toast('로그인 후 이용해 주세요.', {
           type: 'warn',

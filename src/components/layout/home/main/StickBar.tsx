@@ -1,5 +1,5 @@
 import { useAuth } from '@/hooks/auth/useAuth';
-import useAuthStore from '@/shared/store/auth';
+import useAuthState from '@/shared/store/session';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -10,7 +10,7 @@ import Logo from '/public/logo.svg';
 const StickBar = () => {
   const router = useRouter();
   const { logout } = useAuth();
-  const auth = useAuthStore(state => state.auth);
+  const session = useAuthState(state => state.session);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const StickBar = () => {
           <Logo className={styles.logo} width={200} height={20} onClick={() => router.push('/')} />
           <div className={styles.tabArea}>
             <div>
-              {auth === null ? (
+              {session === null ? (
                 <>
                   <Link href="/auth/signup">회원가입</Link>
                   <Link href="/auth/login">로그인</Link>
