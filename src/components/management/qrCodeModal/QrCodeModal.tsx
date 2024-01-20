@@ -10,13 +10,13 @@ const QrCodeModal = ({ modalId }: { modalId?: string }) => {
   const qrDownLoad = useQRCodeDownLoad();
   const { MagicModal } = useModal();
   const clickQrDownLoadHandler = () => {
-    qrData.forEach((item) => {
+    qrData.forEach(item => {
       qrDownLoad(item);
-    })
-  }
+    });
+  };
   const clickModalCloseHandler = () => {
-    MagicModal.hide(modalId ?? '')
-  }
+    MagicModal.hide(modalId ?? '');
+  };
 
   return (
     <div className={styles['qr-code-modal-box']}>
@@ -30,7 +30,7 @@ const QrCodeModal = ({ modalId }: { modalId?: string }) => {
         <button onClick={clickModalCloseHandler}>닫기</button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default QrCodeModal
+export default QrCodeModal;

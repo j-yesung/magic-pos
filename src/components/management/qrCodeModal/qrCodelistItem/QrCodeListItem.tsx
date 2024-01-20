@@ -8,26 +8,25 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './styles/QrCodeListitem.module.css';
 
 interface propsType {
-  storeTable?: Tables<'store_table'>
-  orderType: string
+  storeTable?: Tables<'store_table'>;
+  orderType: string;
 }
 
 const QrCodeListItem = ({ storeTable, orderType }: propsType) => {
-
   const queryClient = useQueryClient();
-  const data = queryClient.getQueryData<StoreWithOrderInfo[]>(['management'])
-  const storeId = data && data[0].id
-  const tableCount = data && data[0].store_table
-  const [isQrClick, setIsQrClick] = useState(false)
+  const data = queryClient.getQueryData<StoreWithOrderInfo[]>(['management']);
+  const storeId = data && data[0].id;
+  const tableCount = data && data[0].store_table;
+  const [isQrClick, setIsQrClick] = useState(false);
   const QRImage = useRef<HTMLDivElement[]>([]);
   const qrUrl = storeTable
     ? `${process.env.NEXT_PUBLIC_SUPACE_REDIRECT_TO}/${storeId}/${storeTable.id}`
-    : `${process.env.NEXT_PUBLIC_SUPACE_REDIRECT_TO}/${storeId}`
-  const { setQrData, qrData } = useManagementStore()
+    : `${process.env.NEXT_PUBLIC_SUPACE_REDIRECT_TO}/${storeId}`;
+  const { setQrData, qrData } = useManagementStore();
   const qrDownLoad = useQRCodeDownLoad();
   const clickQrDownLoadHandler = () => {
-    setIsQrClick(true)
-  }
+    setIsQrClick(true);
+  };
   useEffect(() => {
     if (tableCount) {
       if (QRImage && qrUrl && storeId && tableCount.length + 1 > qrData.length) {
@@ -35,11 +34,11 @@ const QrCodeListItem = ({ storeTable, orderType }: propsType) => {
           qrRef: QRImage.current[0],
           qrUrl,
           orderType,
-        })
+        });
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [QRImage, qrUrl, storeId])
+  }, [QRImage, qrUrl, storeId]);
   useEffect(() => {
     if (isQrClick) {
       qrDownLoad({
@@ -48,19 +47,22 @@ const QrCodeListItem = ({ storeTable, orderType }: propsType) => {
         orderType,
       });
     }
-    setIsQrClick(false)
+    setIsQrClick(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isQrClick])
+  }, [isQrClick]);
 
   return (
-    <div className={styles['qr-code-svg-box']} ref={(el) => QRImage.current[0] = el as HTMLDivElement} onClick={clickQrDownLoadHandler}>
-      <div className={clsx(styles['qr-code'],
-        isQrClick && styles['active'], !storeTable && styles['order-type-togo'])} >
+    <div
+      className={styles['qr-code-svg-box']}
+      ref={el => (QRImage.current[0] = el as HTMLDivElement)}
+      onClick={clickQrDownLoadHandler}
+    >
+      <div className={clsx(styles['qr-code'], isQrClick && styles['active'], !storeTable && styles['order-type-togo'])}>
         {storeTable && <div className={styles['table-number']}>{storeTable.position}번 테이블</div>}
         <QRCodeSVG value={qrUrl ?? ''} />
       </div>
-    </div >
-  )
-}
+    </div>
+  );
+};
 
-export default QrCodeListItem
+export default QrCodeListItem;

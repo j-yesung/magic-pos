@@ -1,4 +1,5 @@
-import styles from './styles/OrderCheckListTitle.module.css'
+import React from 'react';
+import styles from './styles/OrderCheckListTitle.module.css';
 
 const OrderCheckListTitle = () => {
   return (
@@ -8,7 +9,7 @@ const OrderCheckListTitle = () => {
       <div className={styles['title-content']}>주문내용</div>
       <div className={styles['title-status']}>상태</div>
     </div>
-  )
-}
+  );
+};
 
-export default OrderCheckListTitle
+export default OrderCheckListTitle;
