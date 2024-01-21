@@ -3,7 +3,6 @@ import useCategoriesStore from '@/shared/store/menu-category';
 import useAuthState from '@/shared/store/session';
 import { useEffect } from 'react';
 import CategoryComponentPage from './Category';
-import CategoryFormPage from './Form';
 
 const CategoriesComponentPage = () => {
   const storeId = useAuthState(state => state.storeId);
@@ -22,12 +21,7 @@ const CategoriesComponentPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoreisData]);
 
-  return (
-    <>
-      <CategoryComponentPage />
-      <CategoryFormPage />
-    </>
-  );
+  return <CategoryComponentPage />;
 };
 
 export default CategoriesComponentPage;
