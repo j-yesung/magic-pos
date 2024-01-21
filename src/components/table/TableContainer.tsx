@@ -32,20 +32,17 @@ const TableContainer = ({ storeData }: { storeData: StoreWithStoreTable[] }) => 
 
   return (
     <div className={styles['table-container']}>
-      <div className={styles['table-title']}>테이블 관리</div>
-      <ul className={styles['table-list']}>
-        {
-          storeData?.[0]?.store_table.sort((a, b) => {
-            if (a.position && b.position) {
-              return a.position < b.position ? -1 : 1
-            }
-            return 0
-          }).map((item: Tables<'store_table'>) => {
-            return <TableListItem key={item.id} storeTableData={item} />
-          })
-        }
-        <li className={styles['table-list-button']} onClick={clickAddStoreTableHandler}>+</li>
-      </ul>
+      {
+        storeData?.[0]?.store_table.sort((a, b) => {
+          if (a.position && b.position) {
+            return a.position < b.position ? -1 : 1
+          }
+          return 0
+        }).map((item: Tables<'store_table'>, index: number) => {
+          return <TableListItem key={item.id} storeTableData={item} index={index} />
+        })
+      }
+      <div className={styles['table-list-button']} onClick={clickAddStoreTableHandler}>+</div>
     </div>
   )
 }

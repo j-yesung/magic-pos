@@ -4,6 +4,7 @@ import { addSelectedOption, subtractSelectedOption } from '@/shared/store/order'
 import useToast from '@/hooks/toast/useToast';
 import { convertNumberToWon } from '@/shared/helper';
 import styles from './styles/OptionDetailRow.module.css';
+import Checkbox from '@/components/common/Checkbox';
 
 /**
  * -- 로직 설명
@@ -56,7 +57,7 @@ const OptionDetailRow = ({
   return (
     <div className={styles.container}>
       <div>
-        <input type="checkbox" onClick={onClickCheckOption} />
+        <Checkbox onClick={onClickCheckOption} />
         <span>{detail.name}</span>
       </div>
       <div>

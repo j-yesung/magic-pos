@@ -1,8 +1,9 @@
 import useTableStore from "@/shared/store/table";
 import { Tables } from "@/types/supabase";
+import clsx from "clsx";
 import styles from "./styles/TableListItem.module.css";
 
-const TableListItem = ({ storeTableData }: { storeTableData: Tables<'store_table'> }) => {
+const TableListItem = ({ storeTableData, index }: { storeTableData: Tables<'store_table'>, index: number }) => {
   const { TableItemClick, refSideBar, refDummySideBar, refSideBarBg } = useTableStore();
 
   const clickTableItemHandler = () => {
@@ -20,10 +21,10 @@ const TableListItem = ({ storeTableData }: { storeTableData: Tables<'store_table
     }
   }
   return (
-    <li className={styles['table-list-item']} onClick={clickTableItemHandler}>
+    <div className={clsx(styles['table-list-item'], index % 5 === 4 && styles['item-row-5'])} onClick={clickTableItemHandler}>
       <span className={styles['list-text']}>테이블{storeTableData.position}</span>
       <span className={styles['list-text-hover']}>상세보기</span>
-    </li>
+    </div>
   )
 }
 

@@ -7,7 +7,7 @@ import {
   uploadPlatFormImage,
 } from '@/server/api/supabase/platform';
 import { isEmptyObject } from '@/shared/helper';
-import useAuthStore from '@/shared/store/auth';
+import useAuthState from '@/shared/store/session';
 import { Tables, TablesInsert } from '@/types/supabase';
 import clsx from 'clsx';
 import moment from 'moment';
@@ -39,7 +39,7 @@ export interface EditFormType {
 }
 
 const PlatFormWrapper = () => {
-  const storeId = useAuthStore(state => state.storeId);
+  const storeId = useAuthState(state => state.storeId);
   const [fetchDataList, setFecthDataList] = useState<Tables<'platform'>[]>([]);
   const [addForm, setAddForm] = useState<AddFormType>({
     name: '',

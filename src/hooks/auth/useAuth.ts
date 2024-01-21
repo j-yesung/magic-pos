@@ -9,7 +9,7 @@ import {
   updatePasswordHandler,
 } from '@/server/api/supabase/auth';
 import { getStore } from '@/server/api/supabase/store';
-import useAuthStore from '@/shared/store/auth';
+import useAuthState, { setSession, setStoreBno, setStoreId, setStoreName } from '@/shared/store/session';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -28,7 +28,6 @@ const enum QUERY_KEY {
 export const useAuth = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
-  const { setSession, setStoreId, setStoreName, setStoreBno } = useAuthStore();
   const [message, setMessage] = useState('');
   const { toast } = useToast();
   const { MagicModal } = useModal();
@@ -51,11 +50,12 @@ export const useAuth = () => {
       const auth = await getUserSession();
       const storeId = await getStoreId();
       const store = await getStore(auth.session?.user.id || '');
+      const userSession = auth.session;
       const storeName = store && store[0]?.business_name;
       const storeBno = store && store[0]?.business_number;
-      setSession(auth.session);
-      setStoreBno(storeBno!);
-      setStoreName(storeName!);
+      setSession(userSession);
+      setStoreBno(storeBno);
+      setStoreName(storeName);
       storeId.length !== 0 ? setStoreId(storeId[0].id) : setStoreId(null!);
       router.push('/');
       toast(`${storeName} 사장님 반갑습니다.`, {
@@ -65,8 +65,7 @@ export const useAuth = () => {
         autoClose: 2000,
       });
     },
-    onError: error => {
-      console.error(error);
+    onError: () => {
       toast('이메일 또는 비밀번호가 일치하지 않습니다.', {
         type: 'danger',
         position: 'top-center',
@@ -81,7 +80,7 @@ export const useAuth = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.LOGOUT] });
       setSession(null);
-      useAuthStore.persist.clearStorage();
+      useAuthState.persist.clearStorage();
       router.push('/');
     },
     onError: error => {
@@ -134,7 +133,7 @@ export const useAuth = () => {
     mutationFn: getUserSession,
     onSuccess: data => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.SESSION] });
-      setSession(data);
+      setSession(data.session);
     },
     onError: error => {
       console.error(error);

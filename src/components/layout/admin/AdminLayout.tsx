@@ -1,5 +1,5 @@
 import { adminCategories } from '@/data/admin';
-import useAuthStore from '@/shared/store/auth';
+import useAuthState from '@/shared/store/session';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import Header from './header/Header';
@@ -8,12 +8,12 @@ import Sidebar from './nav/Sidebar';
 import styles from './styles/AdminLayout.module.css';
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
-  const auth = useAuthStore(state => state.auth);
+  const session = useAuthState(state => state.session);
   const router = useRouter();
 
   useEffect(() => {
-    if (!auth) router.push('/');
-  }, [auth, router]);
+    if (!session) router.push('/');
+  }, [router, session]);
 
   return (
     <div className={styles.adminWrapper}>
@@ -21,7 +21,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
       <Header />
       <main className={styles.mainWrapper}>
         <CategoryTitle adminCategories={adminCategories} />
-        {children}
+        <div className={styles.childrenWrapper}>{children}</div>
       </main>
     </div>
   );
