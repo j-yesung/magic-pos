@@ -54,9 +54,6 @@ const MenuOptionModalButton = ({ modalId }: { modalId?: string }) => {
       <button className={styles['update-btn']} onClick={() => updateOptionDetailHandler(menuOption)}>
         확인
       </button>
-      {/* <button className={styles['delete-btn']} onClick={removeOptionDetailHandler}>
-        삭제
-      </button> */}
     </div>
   );
 };
