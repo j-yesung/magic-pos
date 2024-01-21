@@ -143,7 +143,15 @@
 .nav-wrapper .toggle-button {
   display: flex;
   margin-bottom: 4rem;
-  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.nav-wrapper svg {
+  cursor: pointer;
+}
+
+.nav-wrapper svg:hover {
+  color: var(--point1);
 }
 
 .nav-wrapper input {
@@ -170,6 +178,7 @@
   height: 3rem;
   display: flex;
   font-size: 2rem;
+  padding-left: 1rem;
   border-radius: 1rem;
   align-items: flex-start;
 }
@@ -182,6 +191,14 @@
 .nav-wrapper ul li.active {
   font-weight: bold;
   color: var(--point-100);
+}
+.nav-wrapper .qr-wrapper {
+  display: flex;
+  font-weight: bold;
+  padding: 2.5rem 2rem;
+  align-items: center;
+  color: var(--point1);
+  background: var(--bg-p2);
 }
 
 .nav-wrapper .button-wrapper {

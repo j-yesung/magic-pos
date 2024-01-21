@@ -8,6 +8,7 @@
   border-radius: 1rem;
   box-shadow: 0 0 1rem 0 #000;
   background-color: #fff;
+  z-index: var(--level-5-z-index);
 }
 
 .qr-code-title {

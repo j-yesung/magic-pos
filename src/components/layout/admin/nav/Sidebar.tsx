@@ -1,12 +1,14 @@
 import Button from '@/components/common/Button';
+import QrCodeModal from '@/components/management/qrCodeModal/QrCodeModal';
 import { modeSubText, modeText } from '@/data/admin';
 import { useAuth } from '@/hooks/auth/useAuth';
+import { useModal } from '@/hooks/modal/useModal';
 import useSideBar from '@/shared/store/sidebar';
 import useToggleState from '@/shared/store/toggle';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { IoLogOutOutline, IoMailOutline } from 'react-icons/io5';
+import { IoLogOutOutline, IoMailOutline, IoQrCodeOutline } from 'react-icons/io5';
 import HeaderToggleButton from '../header/HeaderToggleButton';
 import styles from '../styles/AdminLayout.module.css';
 import SidebarList from './SidebarList';
@@ -23,16 +25,22 @@ const Sidebar = (adminInfo: AdminCategories) => {
   const sidebarClass = clsx(styles.navWrapper, {
     [styles.closeNav]: !isSideBarOpen,
   });
+  const { MagicModal } = useModal();
 
   const clickMoveListHandler = useCallback(
     (id: number, url: string) => {
       const currentActive = navList.find(item => item.active === true);
       if (currentActive && currentActive.id === id) return;
-      router.push(url);
+      if (url) router.push(url);
       setIsSideBarOpen(false);
     },
     [navList, router, setIsSideBarOpen],
   );
+
+  const clickQrModalOpenHandler = () => {
+    setIsSideBarOpen(false);
+    MagicModal.fire(<QrCodeModal />);
+  };
 
   useEffect(() => {
     const closeSideBar = (e: MouseEvent) => {
@@ -64,6 +72,7 @@ const Sidebar = (adminInfo: AdminCategories) => {
         </div>
         <div className={styles.toggleButton}>
           <HeaderToggleButton />
+          <IoQrCodeOutline size={40} onClick={clickQrModalOpenHandler} />
         </div>
         <div className={styles.notification}>
           <Ellipse width={8} height={8} />
