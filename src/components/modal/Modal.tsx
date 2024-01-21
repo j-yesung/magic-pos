@@ -15,16 +15,14 @@ const Modal = () => {
   // 모달 바깥쪽 Ref 지정
   const overlayRef = useRef(null);
 
-  console.log(confirmList);
-
   const handleClickOverlay = (e: React.MouseEvent) => {
     if (e.target === overlayRef.current) {
       if (alertList && alertList.length > 0) {
-        hideAlert(alertList.shift()?.id ?? '');
+        hideAlert(alertList.pop()?.id ?? '');
       } else if (confirmList && confirmList.length > 0) {
-        hideAlert(confirmList.shift()?.id ?? '');
+        hideAlert(confirmList.pop()?.id ?? '');
       } else if (modalList && modalList?.length > 0) {
-        hideModal(modalList.shift()?.id ?? '');
+        hideModal(modalList.pop()?.id ?? '');
       }
     }
   };
