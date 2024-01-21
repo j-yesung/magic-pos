@@ -15,6 +15,8 @@ const Modal = () => {
   // 모달 바깥쪽 Ref 지정
   const overlayRef = useRef(null);
 
+  console.log(confirmList);
+
   const handleClickOverlay = (e: React.MouseEvent) => {
     if (e.target === overlayRef.current) {
       if (alertList && alertList.length > 0) {
@@ -34,17 +36,23 @@ const Modal = () => {
         (confirmList && confirmList?.length > 0)) && (
         <div className={styles['modal-overlay']} onClick={handleClickOverlay} ref={overlayRef}>
           {modalList?.map(modal => (
-            <div key={modal.id} className={clsx(styles['modal-container'], styles['modal-position-center'])}>
+            <div
+              key={modal.id}
+              className={clsx(styles.modalContainer, styles.modalPositionCenter, styles.customZIndex)}
+            >
               {React.cloneElement(modal.child, { modalId: modal.id })}
             </div>
           ))}
           {confirmList?.map(confirm => (
-            <div key={confirm.id} className={clsx(styles['modal-container'], styles['modal-position-center'])}>
+            <div
+              key={confirm.id}
+              className={clsx(styles.modalContainer, styles.modalPositionCenter, styles.confirmZIndex)}
+            >
               <ConfirmModal confirmOption={confirm} />
             </div>
           ))}
           {alertList?.map(alert => (
-            <div key={alert.id} className={clsx(styles['modal-container'], styles['modal-position-center'])}>
+            <div key={alert.id} className={clsx(styles.modalContainer, styles.modalPositionCenter, styles.alertZIndex)}>
               <AlertModal alert={alert} />
             </div>
           ))}
