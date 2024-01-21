@@ -36,8 +36,11 @@
   /* bg */
   --bg-line: #ededed;
   --bg-p: #f3edff;
-  --bg-p2: #F9F6FF;
+  --bg-p2: #f9f6ff;
   --bg-g: #f7f7f7;
+
+  /* line */
+  --line: #ededed;
 
   /* gradlient */
   --signature-color: linear-gradient(to right, var(--main-color), var(--point2));

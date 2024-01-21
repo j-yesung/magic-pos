@@ -9,7 +9,7 @@ const OrderCheckListContentList = () => {
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage } = useOrderCheckList(storeId!);
 
   const { ref } = useInView({
-    threshold: 1,
+    threshold: 0.5,
     onChange: inView => {
       if (!inView || !hasNextPage || isFetchingNextPage) return;
       fetchNextPage();
