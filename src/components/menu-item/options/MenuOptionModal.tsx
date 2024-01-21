@@ -20,7 +20,6 @@ const MenuOptionModal = ({ modalId }: { modalId?: string }) => {
       </div>
       <div className={styles['line']}></div>
       <div className={styles['box']}>
-        {/* <MenuItemFormPage clickItemModalHide={clickItemModalHide} /> */}
         <MenuOptionModalInput />
         <MenuOptionModalButton modalId={modalId} />
       </div>
