@@ -62,3 +62,7 @@
   color: var(--text2);
   padding-left: 15rem;
 }
+
+.time-caption strong {
+  color: var(--point1-50);
+}

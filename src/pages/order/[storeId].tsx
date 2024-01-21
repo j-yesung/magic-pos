@@ -61,7 +61,7 @@ const OrderIndexPage = ({
             confirmButtonCallback: () => {
               resetOrderList();
             },
-            cancelButtonText: '주문 확인 하러 가기',
+            cancelButtonText: '주문 확인 하기',
             cancelButtonCallback: () => {
               router.push('/order/receipt');
             },

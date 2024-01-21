@@ -1,0 +1,4 @@
+.container {
+    border-radius: 0.8rem;
+    border: 0.1rem solid var(--bg-line);
+}
