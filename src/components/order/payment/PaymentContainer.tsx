@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import styles from './styles/PaymentContainer.module.css';
-import useOrderStore, { getTotalPrice } from '@/shared/store/order';
+import useOrderStore, { getTotalPrice, ORDER_STEP } from '@/shared/store/order';
 import { usePaymentWidget } from '@/hooks/order/usePaymentWidget';
 import MenuHeader from '@/components/order/common/MenuHeader';
 
@@ -12,9 +12,10 @@ const PaymentContainer = () => {
   const paymentMethodsWidgetRef = useRef<PaymentMethodsWidget>();
   const { paymentWidget } = usePaymentWidget();
   const orderList = useOrderStore(state => state.orderList);
+  const step = useOrderStore(state => state.step);
 
   useEffect(() => {
-    if (paymentWidget == null) {
+    if (paymentWidget == null || step !== ORDER_STEP.PAYMENT) {
       return;
     }
 
@@ -31,7 +32,7 @@ const PaymentContainer = () => {
     paymentWidget.renderAgreement('#agreement', {
       variantKey: 'AGREEMENT',
     });
-  }, [paymentWidget]);
+  }, [paymentWidget, step]);
 
   return (
     <div className={styles.container}>

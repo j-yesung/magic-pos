@@ -92,13 +92,12 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
       orderList.forEach(menu => {
         decrementRemainEaByMenuId(menu.id);
       });
-
+      setStep(ORDER_STEP.SUCCESS);
       setOrderNumber(newOrderNumber);
     }
   }, [newOrderNumber]);
 
   useEffect(() => {
-    setStep(ORDER_STEP.SUCCESS);
     setIsPageLoading(true);
   }, []);
 

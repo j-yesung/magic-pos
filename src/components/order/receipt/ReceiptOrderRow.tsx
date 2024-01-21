@@ -13,7 +13,13 @@ const ReceiptOrderRow = ({ itemList }: { itemList: MenuItemWithOption[] }) => {
     <>
       {[...group].map(([key, value]) => (
         <div key={key} className={styles.container}>
-          <Image src={value[0].image_url ?? ''} alt={value[0].name ?? ''} width={100} height={100}></Image>
+          <Image
+            src={value[0].image_url ?? ''}
+            alt={value[0].name ?? ''}
+            width={100}
+            height={100}
+            priority={true}
+          ></Image>
           <div className={styles.wrapper}>
             <div className={styles.info}>
               <h2 className={styles.productName}>{value[0].name}</h2>
