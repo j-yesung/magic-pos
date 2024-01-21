@@ -1,23 +1,29 @@
 .wrapper {
-  width: 40rem;
+  gap: 4rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .wrapper form {
+  width: 100%;
   gap: 3rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
-.wrapper div {
-  gap: 1rem;
+.wrapper .input-wrapper {
+  width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  gap: 2rem;
 }
 .wrapper label {
-  font-size: 2rem;
+  width: 10%;
+  font-size: 1.8rem;
 }
 .wrapper .timeset-container {
-  gap: 2rem;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  flex-direction: row;
 }
 .wrapper .time-select-box {
   gap: 2rem;
@@ -35,9 +41,24 @@
   border-radius: 1rem;
   border: 2px solid #ccc;
 }
+.wrapper .input-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
 .wrapper input {
-  padding: 2rem;
-  font-size: 1.5rem;
-  border-radius: 1rem;
-  border: 2px solid #ccc;
+  box-shadow: none;
+  font-size: 1.7rem;
+  color: var(--text1);
+}
+.wrapper .button-blank-area {
+  margin-left: 2rem;
+  padding: 1.5rem 4rem;
+}
+
+.time-caption {
+  font-size: 1.4rem;
+  color: var(--text2);
+  padding-left: 15rem;
 }

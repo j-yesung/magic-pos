@@ -29,9 +29,21 @@ const StoreTimeSet = ({ userId }: { userId: string }) => {
   );
 
   const timeSet = [
-    { id: 1, name: 'startTime', label: '오픈' },
-    { id: 2, name: 'endTime', label: '마감' },
+    { id: 1, name: 'startTime', label: '부터' },
+    { id: 2, name: 'endTime', label: '까지' },
   ];
+
+  const convertTimeFormat = (time: string) => {
+    const [hour, minute] = time.split(':');
+    const hourNumber = Number(hour);
+    const prefix = hourNumber >= 12 ? '오후' : '오전';
+    const convertedHour = hourNumber > 12 ? hourNumber - 12 : hourNumber === 0 ? 12 : hourNumber;
+
+    return {
+      originalTime: time,
+      convertedTime: `${prefix} ${convertedHour}:${minute}`,
+    };
+  };
 
   const clickUpdateStoreHandler = () => {
     updateStoreTimeSet({ userId, ...times });
@@ -47,31 +59,35 @@ const StoreTimeSet = ({ userId }: { userId: string }) => {
   return (
     <>
       <div className={styles.timesetContainer}>
-        <label htmlFor="tiem">영업 시간</label>
+        <label htmlFor="tiem">영업시간</label>
         <div className={styles.timeSelectBox}>
           {timeSet.map(item => (
             <Fragment key={item.id}>
               {data && data?.length > 0 && (
                 <>
-                  <span>{item.label}</span>
                   <select name={item.name} id={item.name} onChange={changeTimeHandler} value={times[item.name]}>
                     {time
                       .filter(t => (item.name === 'endTime' ? t > times.startTime : true))
                       .map((t, index) => (
                         <option key={index} value={t}>
-                          {t}
+                          {convertTimeFormat(t).convertedTime}
                         </option>
                       ))}
                   </select>
+                  <span>{item.label}</span>
                 </>
               )}
             </Fragment>
           ))}
         </div>
+        <Button type="button" onClick={clickUpdateStoreHandler} className={styles.buttonBlankArea}>
+          수정
+        </Button>
       </div>
-      <Button type="button" onClick={clickUpdateStoreHandler}>
-        등록하기
-      </Button>
+      <p className={styles.timeCaption}>
+        현재 {convertTimeFormat(times.startTime).convertedTime} 부터 {convertTimeFormat(times.endTime).convertedTime}
+        까지로 영업시간이 설정되었습니다.
+      </p>
     </>
   );
 };

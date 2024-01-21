@@ -53,7 +53,7 @@ export const bnoNumberInput = {
   id: 7,
   name: 'bnoNumber',
   type: 'text',
-  label: '사업자등록번호',
+  label: '사업자 번호',
   disabled: true,
 };
 

@@ -113,7 +113,7 @@
 
 /* input */
 .input {
-  width: 40rem;
+  width: 100%;
   height: 6rem;
   display: flex;
   padding: 2rem;
@@ -195,4 +195,12 @@
 .start-button {
   width: 40rem;
   margin-top: 4rem;
+}
+
+/* Input 컴포넌트에서 제어합니다. */
+.store-input-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
