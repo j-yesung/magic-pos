@@ -57,7 +57,7 @@
 .form-inner-wrapper .form-business {
   gap: 2rem;
   display: flex;
-  margin: 4rem 0 2rem 0;
+  margin-top: 2rem;
   flex-direction: column;
 }
 .form-business div {
@@ -210,4 +210,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.signup-success {
+  color: var(--point-80);
 }
