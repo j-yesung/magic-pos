@@ -1,18 +1,53 @@
 .container {
     display: flex;
+    padding: 1.5rem;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem  /* 10/10 */;
-    width: 100%;
-    background: var(--bg-line);
+
+    background: var(--bg-g);
+}
+
+.order-number-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.ready-box{
+    display: flex;
+    padding: 0.5rem 0.8rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+
+    border-radius: 0.3rem;
+
+    text-align: center;
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.4rem; /* 100% */
+    letter-spacing: -0.0284rem;
+}
+
+.not-ready {
+    color: var(--white);
+    background: var(--point1-80);
+}
+
+.ready {
+    background: var(--bg-p);
+    color: var(--point1-80);
 }
 
 .order-number {
-    color: var(--text2);
-    font-size: 2rem  /* 20/10 */;
+    color: var(--text1);
+    text-align: center;
+    font-size: 1.6rem;
     font-style: normal;
-    font-weight: 400;
-    line-height: 2rem  /* 20/10 */; /* 100% */
+    font-weight: 600;
+    line-height: 1.6rem; /* 100% */
+    letter-spacing: -0.032rem;
 }
 
 .order-store-name {
@@ -25,20 +60,31 @@
 
 .order-type {
     display: flex;
-    width: 4rem  /* 40/10 */;
-    height: 2.5rem  /* 25/10 */;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem  /* 10/10 */;
-    flex-shrink: 0;
-    border-radius: 0.3rem  /* 3/10 */;
-    background: var(--bg-g);
+    padding: 0.6rem 1rem;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 1rem;
+
+    border-radius: 0.5rem;
+    background: var(--point-80);
 }
 
 .order-type span {
+    color: var(--white);
+    text-align: center;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 00;
+    line-height: 1.5rem; /* 100% */
+    letter-spacing: -0.03rem;
+}
+
+.order-time {
     color: var(--text2);
-    font-size: 1.3rem  /* 13/10 */;
+    text-align: center;
+    font-size: 1.3rem;
     font-style: normal;
     font-weight: 400;
-    line-height: 1.3rem  /* 13/10 */; /* 100% */
+    line-height: 1.3rem; /* 100% */
+    letter-spacing: -0.026rem;
 }

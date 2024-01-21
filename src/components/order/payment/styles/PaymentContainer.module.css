@@ -2,3 +2,9 @@
     height: 100%;
     overflow-y: auto;
 }
+
+.toss-container {
+    border-radius: 1rem;
+    margin: 3rem 2rem 2rem 2rem;
+    border: 0.1rem solid var(--bg-line);
+}
