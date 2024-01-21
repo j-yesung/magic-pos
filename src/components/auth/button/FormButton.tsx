@@ -15,10 +15,12 @@ interface ButtonProps {
 const FormButton = (props: Partial<ButtonProps>) => {
   const router = useRouter();
   const { actionFn, value, btnName, btnSubName, url, isSuccess, isPasswordValid } = props;
+  const isSignUpPage = router.pathname === '/auth/signup';
+  const isSuccessPage = router.pathname !== '/auth/success';
 
   return (
     <>
-      {actionFn && router.pathname === '/auth/signup' ? (
+      {actionFn && isSignUpPage ? (
         <Button
           type="button"
           onClick={() => actionFn && actionFn(value!)}
@@ -27,9 +29,13 @@ const FormButton = (props: Partial<ButtonProps>) => {
           {btnName}
         </Button>
       ) : (
-        <Button type="button" onClick={() => actionFn && actionFn(value!)}>
-          {btnName}
-        </Button>
+        <>
+          {isSuccessPage && (
+            <Button type="button" onClick={() => actionFn && actionFn(value!)}>
+              {btnName}
+            </Button>
+          )}
+        </>
       )}
       {url && btnSubName && (
         <Button

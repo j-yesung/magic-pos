@@ -24,7 +24,7 @@
     gap: 1rem;
     flex-shrink: 0;
     top: .6rem;
-    left: 2rem;
+    margin-left: 2rem;
 
     border-radius: 0.8rem;
     background: var(--bg-g);

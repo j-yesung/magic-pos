@@ -29,3 +29,15 @@
     grid-column: 2;
     grid-row: 2;
 }
+
+.custom-z-index {
+    z-index: var(--level-3-z-index);
+}
+
+.confirm-z-index {
+    z-index: var(--level-4-z-index);
+}
+
+.alert-z-index {
+    z-index: var(--level-5-z-index);
+}

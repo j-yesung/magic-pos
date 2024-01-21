@@ -1,21 +1,13 @@
+import useFetchTable from '@/hooks/table/useFetchTable';
+import useAuthState from '@/shared/store/session';
+import TableContainer from './TableContainer';
+import styles from './styles/Table.module.css';
+
 const Table = () => {
-  // const token = typeof window !== 'undefined' && localStorage.getItem('sb-lajnysuklrkrhdyqhotr-auth-token');
-  // const { user } = typeof window !== 'undefined' && token && JSON.parse(token);
-  // const { id } = typeof window !== 'undefined' && user;
-  // const { data } = useFetchTable({ userId: id });
-  // const dummySideBarRef = useRef<HTMLDivElement>(null);
-  // const { setDummySideBarRef } = useTableStore();
-  // useEffect(() => {
-  //   setDummySideBarRef(dummySideBarRef);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-  // return (
-  //   <div className={styles['table-wrapper']}>
-  //     {data && <TableContainer storeData={data} />}
-  //     <div className={styles['table-dummy-side-bar']} ref={dummySideBarRef}></div>
-  //     <TableSideBar />
-  //   </div>
-  // );
+  const { session } = useAuthState();
+  const { data } = useFetchTable({ userId: session?.user.id });
+
+  return <div className={styles['table-wrapper']}>{data && <TableContainer storeData={data} />}</div>;
 };
 
 export default Table;

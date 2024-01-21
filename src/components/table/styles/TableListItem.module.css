@@ -1,31 +1,71 @@
 .table-list-item {
-  width: 25rem;
-  height: 25rem;
+  width: 22.5rem;
+  height: 21.8rem;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
-  border-radius: 0.5em;
-  transition: 0.2s;
+  flex-direction: column;
+  font-size: 2rem;
+  border-radius: 1rem;
   background: var(--bg-g);
   cursor: pointer;
-  padding: 1rem;
-  margin-right: 11.7rem;
-  margin-bottom: 10rem;
+  margin-right: 3.2rem;
+  margin-bottom: 1.8rem;
 }
+
 .item-row-5 {
   margin-right: 0;
 }
 
-.table-list-item:hover {
-  background-color: #ccf;
+.table-list-item > div {
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
 }
-.table-list-item:hover > .list-text {
-  display: none;
+
+div.close-button {
+  opacity: 0;
+  visibility: hidden;
+  flex: 1;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-left: 1.4rem;
+  padding-top: 1.4rem;
 }
-.table-list-item:hover > .list-text-hover {
-  display: block;
+.close-button-svg {
+  background-color: var(--text3);
+  padding: 0.4rem;
+  border-radius: 50px;
 }
-.list-text-hover {
-  display: none;
+.close-button-svg > path {
+  stroke: #fff;
+}
+
+div.table-number {
+  flex: 5;
+  justify-content: center;
+}
+div.edit-button {
+  opacity: 0;
+  visibility: hidden;
+  flex: 1;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding-right: 1.4rem;
+  padding-bottom: 1.4rem;
+}
+.edit-button-svg {
+  background-color: var(--bg-p);
+  padding: 1rem;
+  border-radius: 50px;
+}
+.edit-button-svg > path {
+  stroke: var(point-80);
+}
+
+.table-list-item:hover > div.close-button {
+  opacity: 100;
+  visibility: visible;
+}
+.table-list-item:hover > div.edit-button {
+  opacity: 100;
+  visibility: visible;
 }

@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    padding: 0.8rem 1.5rem;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+
+    border-radius: 0.5rem;
+    border: 0.1rem solid var(--bg-line);
+    background: #FFF;
+}
+
+.container > button:first-child {
+    color: var(--text3);
+}
+
+.quantity {
+    color: var(--text1);
+    text-align: center;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.6rem; /* 100% */
+    letter-spacing: -0.032rem;
+}

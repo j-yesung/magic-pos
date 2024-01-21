@@ -22,7 +22,7 @@ const MenuCard = ({ menu }: MenuCardProps) => {
 
   return (
     <div className={styles.card} onClick={handleClickCard}>
-      <Image src={menu.image_url ?? ''} alt={menu.name ?? ''} width={125} height={125} />
+      <Image src={menu.image_url ?? ''} alt={menu.name ?? ''} width={125} height={125} priority={true} />
       <div className={styles.menuInfo}>
         <span>{menu.name}</span>
         <span>{convertNumberToWon(menu.price)}</span>

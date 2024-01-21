@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    padding: 1.5rem 0;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    border-radius: 0 0 1rem 1rem;
+    background: var(--bg-g);
+
+    cursor: pointer;
+}
+
+.container span {
+    color: var(--text1);
+    text-align: center;
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.4rem; /* 100% */
+    letter-spacing: -0.028rem;
+}

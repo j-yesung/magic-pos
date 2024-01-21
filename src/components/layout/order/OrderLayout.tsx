@@ -29,7 +29,7 @@ const OrderLayout = ({ children }: { children: React.ReactNode }) => {
       </Head>
       <section className={styles.container}>
         <article className={styles.children}>
-          {step > ORDER_STEP.CHOOSE_ORDER_TYPE && <OrderPrevButton />}
+          {step > ORDER_STEP.CHOOSE_ORDER_TYPE && step < ORDER_STEP.SUCCESS && <OrderPrevButton />}
           {children}
         </article>
         {!DONT_RENDER_FOOTER_PATH_LIST.includes(pathname) && <Footer sliderRef={sliderRef} />}

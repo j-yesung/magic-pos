@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styles from './styles/ReceiptContainer.module.css';
-import { useStoreOrderSetQuery } from '@/hooks/order/useStoreOrderSetQuery';
-import { useNumberOrderSetQuery } from '@/hooks/order/useNumberOrderSetQuery';
-import useOrderStore from '@/shared/store/order';
+import useOrderStore, { ORDER_STEP, setStep, setStoreName } from '@/shared/store/order';
 import { OrderDataWithStoreName } from '@/types/supabase';
 import { useRouter } from 'next/router';
 import ReceiptOrder from '@/components/order/receipt/ReceiptOrder';
-import TotalPrice from '@/components/order/common/TotalPrice';
 import { useStoreOrderFetchQuery } from '@/hooks/order/useStoreOrderFetchQuery';
 import { useNumberOrderFetchQuery } from '@/hooks/order/useNumberOrderFetchQuery';
+import MenuHeader from '@/components/order/common/MenuHeader';
+import { useGetQuery } from '@/hooks/store/useGetQuery';
 
 const ReceiptContainer = () => {
   const orderIdList = useOrderStore(state => state.orderIdList);
@@ -17,8 +16,10 @@ const ReceiptContainer = () => {
   const { numberOrderData } = useNumberOrderFetchQuery(orderIdList, storeId);
   const [orderDataList, setOrderDataList] = useState<OrderDataWithStoreName[]>([]);
   const router = useRouter();
+  const { storeInfo } = useGetQuery({ storeId });
 
   const clickOrderMoreHandler = () => {
+    setStep(ORDER_STEP.CHOOSE_ORDER_TYPE);
     router.push(`/order/${storeId}`);
   };
 
@@ -41,12 +42,27 @@ const ReceiptContainer = () => {
     }
   }, [storeOrderData, numberOrderData]);
 
+  useEffect(() => {
+    if (storeInfo) {
+      setStoreName(storeInfo.business_name ?? '');
+    }
+  }, [storeInfo]);
+
+  useEffect(() => {
+    setStep(ORDER_STEP.RECEIPT);
+  }, []);
+
   return (
     <div className={styles.container}>
-      {orderDataList.map((data: OrderDataWithStoreName) => (
-        <ReceiptOrder key={data.id} data={data} />
-      ))}
-      <TotalPrice itemList={orderDataList.map(d => d.menu_list).flat()} />
+      <MenuHeader />
+      <section>
+        {orderDataList.map((data: OrderDataWithStoreName) => (
+          <ReceiptOrder key={data.id} data={data} />
+        ))}
+      </section>
+      <button className={styles.orderMoreButton} onClick={clickOrderMoreHandler}>
+        더 주문 하러 가기
+      </button>
     </div>
   );
 };
