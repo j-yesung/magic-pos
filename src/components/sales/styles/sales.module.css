@@ -5,7 +5,8 @@
 .title-wrapper {
   position: absolute;
   right: 0;
-  top: -10rem;
+  top: 0.4rem;
+  z-index: 99;
 }
 
 .title-wrapper h2 {
@@ -19,23 +20,23 @@
   gap: 1rem;
 }
 
-.toggle-btn-wrapper button {
+.toggle-button {
   display: flex;
-  padding: 1rem 2rem;
+  padding: 1rem 4rem;
   align-items: flex-start;
   gap: 1rem;
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 2rem;
-  font-style: normal;
-  color: #000;
-  font-weight: 400;
-  line-height: 2rem; /* 100% */
+  border-radius: 0.5rem;
+  background: var(--bg-g);
   cursor: pointer;
 }
-
 .clickedToggle {
-  border: 1px solid var(--point, #ceb7ff);
-  background: var(--bg, #f2f2f2);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 0.5rem;
+  background: var(--point1-80);
+  color: var(--text5);
+  text-align: center;
+  font-family: Pretendard;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.8rem; /* 100% */
+  letter-spacing: -0.036rem;
 }

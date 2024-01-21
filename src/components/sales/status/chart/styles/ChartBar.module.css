@@ -1,13 +1,9 @@
 .bar-wrapper {
-  width: 135rem;
-  height: 57rem;
+  margin-top: 12rem;
   padding: 1rem;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
 }
 
 .bar-wrapper canvas {
   width: 100% !important;
-  height: 100% !important;
+  max-height: 60rem;
 }

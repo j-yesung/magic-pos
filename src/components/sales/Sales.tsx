@@ -1,4 +1,5 @@
 import useSalesStore from '@/shared/store/sales';
+import clsx from 'clsx';
 import SalesDeatilWithCalendar from './salesCalendar/SalesDetailWithCalendar';
 import Status from './status/Status';
 import styles from './styles/sales.module.css';
@@ -12,15 +13,20 @@ const Sales = () => {
     <div className={styles.container}>
       <div className={styles.titleWrapper}>
         <div className={styles.toggleBtnWrapper}>
-          <button className={isChangeView ? styles.clickedToggle : ''} onClick={clickShowChart}>
+          <button
+            className={clsx(styles.toggleButton, { [styles.clickedToggle]: isChangeView })}
+            onClick={clickShowChart}
+          >
             매출관리
           </button>
-          <button className={!isChangeView ? styles.clickedToggle : ''} onClick={clickShowCalendar}>
+          <button
+            className={clsx(styles.toggleButton, { [styles.clickedToggle]: !isChangeView })}
+            onClick={clickShowCalendar}
+          >
             매출달력
           </button>
         </div>
       </div>
-
       {isChangeView ? <Status /> : <SalesDeatilWithCalendar />}
     </div>
   );
