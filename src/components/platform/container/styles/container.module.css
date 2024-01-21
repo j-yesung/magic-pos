@@ -22,7 +22,7 @@
 .form-wrapper {
   display: flex;
   justify-content: flex-end;
-  align-items: flex-start;
+  align-items: center;
   gap: 1.5rem;
 }
 
@@ -91,6 +91,7 @@
   display: inline-block;
   width: 24rem;
   height: 100%;
+  position: relative;
 }
 
 .img-label {
@@ -119,4 +120,28 @@
 }
 .has-delete-button {
   display: block;
+}
+.btn-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.img-wrapper:hover .btn-wrap {
+  display: flex;
+}
+
+.btn-wrap > span {
+  width: 5.8rem;
+  height: 5.8rem;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background: var(--bg-p, #f3edff);
 }

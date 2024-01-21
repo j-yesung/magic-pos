@@ -17,6 +17,7 @@ import Card from './card/Card';
 import Form from './form/Form';
 import Button from './form/button/Button';
 import styles from './styles/container.module.css';
+import EditButton from '/public/icons/pencil.svg';
 import Logo from '/public/logo.svg';
 export interface AddFormType {
   file?: File | null;
@@ -261,6 +262,12 @@ const PlatFormWrapper = () => {
                 ) : (
                   <Logo />
                 )}
+              </label>
+
+              <label htmlFor="file" className={styles.btnWrap}>
+                <span>
+                  <EditButton width={27} height={27} />
+                </span>
               </label>
 
               <input type="file" id="file" className={styles.file} onChange={changePreview} />
