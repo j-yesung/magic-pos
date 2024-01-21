@@ -96,6 +96,13 @@
   border-radius: 1rem;
   background-color: var(--bg-p);
 }
+
+/* table Button */
+.table-close-button {
+  margin: 5rem;
+  background-color: #000;
+}
+
 .disabledButton {
   border: none;
   cursor: pointer;

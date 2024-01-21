@@ -1,0 +1,29 @@
+.modal-button-box {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-button-box > button {
+  border: none;
+  display: flex;
+  width: 22.5rem;
+  padding: 1rem;
+  height: 5.6rem;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  font-size: 1.6rem;
+  margin: 3rem 0.5rem;
+}
+.close-button {
+  color: var(text2);
+  background-color: var(--bg-g);
+}
+.edit-button {
+  color: #fff;
+  background-color: var(--point1-80);
+}
