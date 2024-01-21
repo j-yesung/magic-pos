@@ -3,7 +3,8 @@ import { useModal } from '@/hooks/modal/useModal';
 import useCategoriesStore from '@/shared/store/menu-category';
 import { Tables } from '@/types/supabase';
 import { useRef } from 'react';
-import MenuCategoryModal from './menu-category-modal/MenuCategoryModal';
+import { FiAlertCircle } from 'react-icons/fi';
+import MenuCategoryModal from './modal/MenuCategoryModal';
 import styles from './styles/category.module.css';
 import CloseButton from '/public/icons/close.svg';
 import EditButton from '/public/icons/pencil.svg';
@@ -18,7 +19,6 @@ const CategoryComponentPage = () => {
   // 카테고리 플러스
   const clickAddCategoryHandler = async () => {
     MagicModal.fire(<MenuCategoryModal />);
-    console.log('플러스 여기');
     setIsEdit(false);
     setCategory({ ...category, id: '', name: '' });
   };
@@ -33,6 +33,7 @@ const CategoryComponentPage = () => {
   // 카테고리 삭제
   const clickRemoveCategoryHandler = (item: Tables<'menu_category'>) => {
     MagicModal.confirm({
+      icon: <FiAlertCircle size={50} />,
       content: '정말로 삭제하시겠습니까?',
       confirmButtonCallback: () => {
         deleteMutate(item.id);

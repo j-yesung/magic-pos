@@ -1,7 +1,10 @@
 import { useModal } from '@/hooks/modal/useModal';
 import useMenuItemStore from '@/shared/store/menu-item';
+import clsx from 'clsx';
 import React, { useState } from 'react';
+import { FaCheck } from 'react-icons/fa6';
 import styles from '../styles/menu-option-modal.module.css';
+import PlusButton from '/public/icons/plus.svg';
 
 const MenuOptionModalInput = () => {
   const { MagicModal } = useModal();
@@ -64,12 +67,11 @@ const MenuOptionModalInput = () => {
   };
 
   return (
-    <>
-      <h3>옵션 상세 설정</h3>
+    <div className={styles['wrap']}>
       <div>
         <p className={styles['input-wrap']}>
           <label className={styles['input-name']} htmlFor="name">
-            옵션 이름
+            옵션명
           </label>
           <input
             type="text"
@@ -83,29 +85,9 @@ const MenuOptionModalInput = () => {
         </p>
       </div>
       <div>
-        <h5>옵션 항목</h5>
-        <div className={styles['option-wrap']}>
-          {menuOptionDetailList.map((option, index) => (
-            <div key={index}>
-              <p className={styles['option-list']}>
-                <span className={styles['option-sub-name']}>{option.name}</span>
-                <span className={styles['option-sub-price']}>{option.price}</span>
-              </p>
-              <button
-                className={styles['option-btn']}
-                type="button"
-                onClick={() => handleRemoveOptionDetail(option.id, index)}
-              >
-                제거
-              </button>
-            </div>
-          ))}
-        </div>
-        <div>
+        <p className={styles['input-name']}>옵션 추가</p>
+        <div className={styles['option-three-wrap']}>
           <p className={styles['input-wrap']}>
-            <label className={styles['input-name']} htmlFor="detailName">
-              옵션 내용
-            </label>
             <input
               type="text"
               id="detailName"
@@ -117,9 +99,6 @@ const MenuOptionModalInput = () => {
             />
           </p>
           <p className={styles['input-wrap']}>
-            <label className={styles['input-name']} htmlFor="detailPrice">
-              옵션 가격
-            </label>
             <input
               type="number"
               id="detailPrice"
@@ -130,19 +109,40 @@ const MenuOptionModalInput = () => {
               onChange={e => changeMenuOptionItemHandler(e)}
             />
           </p>
+          <p>
+            <button type="button" onClick={AddDetailHandler}>
+              <PlusButton width={25} height={25} />
+            </button>
+          </p>
         </div>
-        <button type="button" onClick={AddDetailHandler}>
-          <span>+</span>
-          <span>항목 추가하기</span>
-        </button>
+        <div className={styles['line']}></div>
+        <div className={styles['option-list-wrap']}>
+          {menuOptionDetailList.map((option, index) => (
+            <div key={index} className={styles['option-three-wrap']}>
+              <p className={styles['option-list']}>{option.name}</p>
+              <p className={styles['option-list']}>{option.price}</p>
+              <p>
+                <button
+                  className={styles['option-btn']}
+                  type="button"
+                  onClick={() => handleRemoveOptionDetail(option.id, index)}
+                >
+                  삭제
+                </button>
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
       <div>
-        <h5>옵션 최대 선택 갯수</h5>
-        <div>
+        <div className={styles['max-count-wrap']}>
+          <label className={styles['input-name']} htmlFor="name">
+            옵션 최대 선택 갯수
+          </label>
           <input
             type="number"
             name="max_detail_count"
-            className={styles['input']}
+            className={clsx(styles['input'], styles['max-count'])}
             value={menuOption.max_detail_count}
             placeholder="옵션 최대 선택 갯수"
             onChange={e => changeMenuOptionHandler(e)}
@@ -150,19 +150,31 @@ const MenuOptionModalInput = () => {
         </div>
       </div>
       <div>
-        <h5>활성화 유무</h5>
-        <p>옵션을 보여줄지 설정할 수 있어요</p>
-        <div>
-          <input
-            type="checkbox"
-            id="is_use"
-            name="is_use"
-            checked={menuOption.is_use ?? false}
-            onChange={changeMenuOptionHandler}
-          />
+        <div></div>
+        <div className={styles['checkbox-wrap']}>
+          <p>
+            <label
+              className={clsx(styles['checkbox-label'], {
+                [styles.active]: menuOption.is_use,
+              })}
+              htmlFor="is_use"
+            >
+              <FaCheck size={14} />
+            </label>
+            <input
+              type="checkbox"
+              id="is_use"
+              name="is_use"
+              checked={menuOption.is_use ?? false}
+              onChange={changeMenuOptionHandler}
+            />
+          </p>
+          <label className={styles['checkbox-info']} htmlFor="is_use">
+            이 옵션을 노출합니다.{' '}
+          </label>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -6,7 +6,7 @@ import CloseButton from '/public/icons/close.svg';
 
 const MenuCategoryModal = ({ modalId }: { modalId?: string }) => {
   const { MagicModal } = useModal();
-  const { isEdit, setIsEdit, category, setCategory, categories } = useCategoriesStore();
+  const { isEdit } = useCategoriesStore();
 
   const clickCategoryModalHide = () => {
     MagicModal.hide(modalId ?? '');
