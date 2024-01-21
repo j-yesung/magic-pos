@@ -1,6 +1,6 @@
 import { CalendarDataType } from '@/components/sales/calendar/cell/Cell';
 import { DateFormatType } from '@/server/api/supabase/sales';
-import { Tables } from '@/types/supabase';
+import { Tables, TablesInsert } from '@/types/supabase';
 import moment, { Moment } from 'moment';
 
 /**
@@ -55,7 +55,7 @@ const getStartWeeks = (year: number) => {
  * @returns  { x: string, y: number}[]
  */
 
-export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormatType, selectedType?: Moment) => {
+export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormatType, selectedDateType?: Moment) => {
   if (salesData && formatType) {
     const recordData = {
       currentSales: 0,
@@ -63,39 +63,70 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
     };
     if (formatType === 'days') {
       // 일별로 데이터를 추출
-      const test = [];
+      const dateContainer = [];
       for (let i = 0; i < 7; i++) {
-        test.push(selectedType?.clone().subtract(i, 'day').format('YYYY-MM-DD'));
+        dateContainer.push(selectedDateType!.clone().subtract(i, 'day').format('YYYY-MM-DD'));
       }
-      const m = new Map();
-      test.forEach(a => m.set(a, []));
+      const dateGroup = new Map<string, Tables<'sales'>[]>();
+      const groupByDate = dateContainer.reduce((acc, cur) => {
+        acc.set(cur, []);
+        return acc;
+      }, dateGroup);
 
-      const group = groupByKey<Tables<'sales'>>(
-        salesData.map(data => ({ ...data, sales_date: moment(data.sales_date).format('YYYY-MM-DD') })),
-        'sales_date',
-      );
+      const formattedData = salesData.map(data => ({
+        ...data,
+        original_date: data.sales_date,
+        sales_date: moment(data.sales_date).format('YYYY-MM-DD'),
+      }));
 
-      for (const [key, value] of group) {
-        if (selectedType?.format('YYYY-MM-DD') === key) {
+      formattedData.forEach(data => {
+        for (const [key, _] of groupByDate) {
+          if (key === data.sales_date) {
+            dateGroup.get(key)?.push(data);
+          }
+        }
+      });
+
+      for (const [key, value] of groupByDate) {
+        if (selectedDateType?.format('YYYY-MM-DD') === key) {
           recordData.currentSales = value.reduce((acc, cur) => acc + cur.product_ea * cur.product_price, 0);
         }
       }
       recordData.dateType = 'days';
 
-      const result = [...group.entries()]
+      const result = [...groupByDate.entries()]
         .map(([key, value]) => {
           return { x: key, y: value.reduce((acc, cur) => acc + cur.product_price * cur.product_ea, 0) };
         })
         .toSorted((a, b) => (moment(a.x).isAfter(moment(b.x)) ? 1 : -1));
-
       return { result, recordData };
     } else if (formatType === 'weeks') {
       // 주별로 데이터를 추출
+      const test = moment();
+      const dateContainer = [];
+      for (let i = 0; i < 7; i++) {
+        const month = test.clone().subtract(i, 'week');
+        const weeksInfoByYear = getStartWeeks(month.year());
+        const weeksNumber = +month.format('W');
+        const whatMonth = month.month();
+        const startWeeksNumber = weeksInfoByYear[whatMonth];
+        dateContainer.push(month.format(`YYYY년 MM월 ${weeksNumber - startWeeksNumber + 1} 주차`));
+      }
+      const dateGroup = new Map<
+        string,
+        (TablesInsert<'sales'> & { moment?: Moment; original_sales_date?: Moment })[]
+      >();
+
+      const groupByDate = dateContainer.reduce((acc, cur) => {
+        acc.set(cur, []);
+        return acc;
+      }, dateGroup);
 
       const newData = salesData.map(sales => {
         const momentDate = moment(sales.sales_date).hour(0).minute(0).second(0).add(9, 'hours'); // sales_date는 utc기준시간이므로  우리나라 시간으로 바꾸려면 // 9를 더해준다.
         const weeksInfoByYear = getStartWeeks(momentDate.year()); // 전년도 이번년도에서 시작하는 주차가 다르니까
         const weeksNumber = +momentDate.format('W'); // w는 일요일기준, W는 월요일기준으로 주차를 결정한다.
+
         const month = momentDate.month(); // 몇월인지
         const startWeeksNumber = weeksInfoByYear[month]; // 각 년도별 월별 주차시작이 들어있는 배열입니다.
 
@@ -104,6 +135,14 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
           original_sales_date: momentDate,
           sales_date: momentDate.format(`YYYY년 MM월 ${weeksNumber - startWeeksNumber + 1} 주차`),
         };
+      });
+
+      newData.forEach(data => {
+        for (const [key, _] of groupByDate) {
+          if (key === data.sales_date) {
+            groupByDate.get(key)?.push(data);
+          }
+        }
       });
 
       const group = groupByKey<Tables<'sales'> & { original_sales_date: Moment }>(newData, 'sales_date');
@@ -115,12 +154,13 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
         }
       }
       recordData.dateType = 'weeks';
-      const result = [...group.entries()]
+
+      const result = [...groupByDate.entries()]
         .map(([key, value]) => {
           return {
-            moment: value[0].original_sales_date,
+            moment: value[0] ? value[0].original_sales_date : moment(key).hour(0).minute(0).second(0).add(9, 'hours'),
             x: key,
-            y: value.reduce((acc, cur) => acc + cur.product_price * cur.product_ea, 0),
+            y: value.length >= 1 ? value.reduce((acc, cur) => acc + cur.product_price! * cur.product_ea!, 0) : 0,
           };
         })
         .toSorted((a, b) => (moment(a.moment).isAfter(moment(b.moment)) ? 1 : -1));
@@ -128,19 +168,37 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
       return { result, recordData };
     } else if (formatType === 'months') {
       // 월별로 데이터를 추출
+      const test = moment();
+      const testArr = [];
+      for (let i = 0; i < 7; i++) {
+        testArr.push(test.clone().subtract(i, 'month').format('YYYY-MM'));
+      }
+      const m = new Map<string, Tables<'sales'>[]>();
+      const a = testArr.reduce((acc, cur) => {
+        acc.set(cur, []);
+        return acc;
+      }, m);
+      const t = salesData.map(data => ({
+        ...data,
+        original_date: data.sales_date,
+        sales_date: moment(data.sales_date).format('YYYY-MM'),
+      }));
+      t.forEach(data => {
+        for (const [key, value] of a) {
+          if (key === data.sales_date) {
+            a.get(key)?.push(data);
+          }
+        }
+      });
 
-      const group = groupByKey<Tables<'sales'>>(
-        salesData.map(data => ({ ...data, sales_date: moment(data.sales_date).format('YYYY-MM') })),
-        'sales_date',
-      );
-
-      for (const [key, value] of group) {
+      for (const [key, value] of a) {
         if (moment().format('YYYY-MM') === key) {
           recordData.currentSales = value.reduce((acc, cur) => acc + cur.product_ea * cur.product_price, 0);
         }
       }
       recordData.dateType = 'month';
-      const result = [...group.entries()]
+
+      const result = [...a.entries()]
         .map(([key, value]) => {
           return { x: key, y: value.reduce((acc, cur) => acc + cur.product_price * cur.product_ea, 0) };
         })
