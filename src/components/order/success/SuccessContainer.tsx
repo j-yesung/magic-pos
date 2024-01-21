@@ -12,6 +12,7 @@ import image from '@/../public/images/image-success.png';
 import { useRouter } from 'next/router';
 import { decrementRemainEaByMenuId } from '@/server/api/supabase/menu-item';
 import MenuHeader from '../common/MenuHeader';
+import { IoBagCheckOutline } from 'react-icons/io5';
 
 const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const orderList = useOrderStore(state => state.orderList);
@@ -111,7 +112,7 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
               <div className={styles.content}>
                 <h1>주문이 완료되었어요</h1>
                 <div>
-                  <Image src={image} alt={'성공 이미지'} width={140} height={140} />
+                  <IoBagCheckOutline size={100} />
                 </div>
                 <div className={styles.orderNumber}>
                   주문 번호 <strong>{orderNumber}</strong>
