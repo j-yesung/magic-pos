@@ -21,9 +21,9 @@
   font-size: 1.8rem;
 }
 .wrapper .timeset-container {
-  gap: 2rem;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  flex-direction: row;
 }
 .wrapper .time-select-box {
   gap: 2rem;
@@ -51,4 +51,14 @@
   box-shadow: none;
   font-size: 1.7rem;
   color: var(--text1);
+}
+.wrapper .button-blank-area {
+  margin-left: 2rem;
+  padding: 1.5rem 4rem;
+}
+
+.time-caption {
+  font-size: 1.4rem;
+  color: var(--text2);
+  padding-left: 15rem;
 }
