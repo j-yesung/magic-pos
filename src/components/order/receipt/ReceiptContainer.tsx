@@ -19,6 +19,7 @@ const ReceiptContainer = () => {
   const { storeInfo } = useGetQuery({ storeId });
 
   const clickOrderMoreHandler = () => {
+    setStep(ORDER_STEP.CHOOSE_ORDER_TYPE);
     router.push(`/order/${storeId}`);
   };
 

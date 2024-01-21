@@ -37,4 +37,6 @@
 
     border-radius: 0.8rem;
     background: var(--point1-80, #7433FF);
+
+    cursor: pointer;
 }
