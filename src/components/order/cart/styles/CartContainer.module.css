@@ -1,24 +1,25 @@
 .container {
-    --row-container-height: 90%;
+    --row-container-height: 85%;
+    --menu-header-height: 10rem;
     --price-container-height: 10%;
-    height: calc(100% - var(--kiosk-footer-height) - var(--kiosk-container-padding) * 2);
+    height: 100vh;
 }
 
 .cart-wrapper {
     border-radius: 1rem;
-    border: 0.1rem solid var(--bg-line);
     margin: 3rem 2rem;
+    border: 0.1rem solid var(--bg-line);
 }
 
 .store-info {
     border-radius: 1rem 1rem 0 0;
-    border: 0.1rem solid var(--bg-line);
     background: var(--bg-g) !important;
     justify-content: space-between;
+    max-height: 10rem;
 }
 
 .row-container {
-    height: var(--row-container-height);
+    height: calc(100vh - var(--kiosk-footer-height) - var(--kiosk-header-height) - var(--kiosk-container-padding) * 17);
     overflow-y: auto;
 }
 

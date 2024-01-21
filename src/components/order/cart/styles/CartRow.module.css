@@ -10,7 +10,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 1.3rem;
+    gap: 1.5rem;
+    width: 100%;
 }
 
 .menu-name-option {
@@ -53,6 +54,12 @@
     font-weight: 500;
     line-height: 1.4rem; /* 100% */
     letter-spacing: -0.028rem;
+}
+
+.menu-name-option + div {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
 }
 
 
