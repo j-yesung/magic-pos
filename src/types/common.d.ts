@@ -21,6 +21,7 @@ interface ModalConfirmTypeOption {
   cancelButtonText?: string;
   confirmButtonCallback?: (() => void) | null;
   cancelButtonCallback?: (() => void) | null;
+  icon?: ReactElement;
 }
 
 type ToastAnimationType =
