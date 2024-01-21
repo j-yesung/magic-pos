@@ -1,7 +1,7 @@
 import { useStoreQuery } from '@/hooks/store/useStoreQuery';
 import { useCallback } from 'react';
-import Button from '../common/Button';
-import styles from './styles/StroeContents.module.css';
+import Button from '../../common/Button';
+import styles from '../styles/StroeContents.module.css';
 
 const StoreSetButton = ({ userId, times }: StoreSetButtonProps) => {
   const { updateStoreTimeSet } = useStoreQuery();

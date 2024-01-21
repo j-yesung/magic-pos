@@ -2,8 +2,8 @@ import { useInput } from '@/hooks/auth/useInput';
 import useAuthState from '@/shared/store/session';
 import { useEffect, useState } from 'react';
 import Input from '../auth/Input';
-import StoreTimeSet from './StoreTimeSet';
 import styles from './styles/StroeContents.module.css';
+import StoreTimeSet from './sub-component/StoreTimeSet';
 
 const StoreContents = () => {
   const [isLoaded, setIsLoaded] = useState(false);
