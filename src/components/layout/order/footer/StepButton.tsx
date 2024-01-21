@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { SwiperRef } from 'swiper/react';
 import useOrderStore, { getTotalPrice, goNextStep, ORDER_STEP, subtractOrderList } from '@/shared/store/order';
 import { usePaymentWidget } from '@/hooks/order/usePaymentWidget';
@@ -9,6 +9,7 @@ import { IoCart } from 'react-icons/io5';
 import { readRemainEaByMenuId } from '@/server/api/supabase/menu-item';
 import { useModal } from '@/hooks/modal/useModal';
 import { PiBagSimpleFill } from 'react-icons/pi';
+import { BiSolidCircle } from 'react-icons/bi';
 
 class OrderError extends Error {
   readonly id: string;
@@ -35,10 +36,14 @@ const StepButton = ({ sliderRef }: ButtonProps) => {
 
   const { paymentWidget, handlePaymentRequest } = usePaymentWidget();
 
-  const BUTTON_OPTIONS: { [key: number]: string } = {
-    1: convertNumberToWon(getTotalPrice(orderList)),
-    2: '결제 하러 이동',
-    3: '결제 하기',
+  const BUTTON_OPTIONS: { [key: number]: ReactElement } = {
+    1: <>{convertNumberToWon(getTotalPrice(orderList))}</>,
+    2: (
+      <>
+        {convertNumberToWon(getTotalPrice(orderList))} {<BiSolidCircle size={2} />} 결제 하기
+      </>
+    ),
+    3: <>결제 하기</>,
   };
 
   const nextClickHandler = async () => {
@@ -80,13 +85,19 @@ const StepButton = ({ sliderRef }: ButtonProps) => {
                 <span>담은 상품이 없습니다.</span>
               ) : (
                 <>
-                  <span>{BUTTON_OPTIONS[step]}</span>
-                  {step === ORDER_STEP.SELECT_MENU && (
-                    <div className={styles.iconWrapper}>
-                      <PiBagSimpleFill size={20} />
-                      <span>{orderList.length}</span>
-                    </div>
-                  )}
+                  <span>
+                    {BUTTON_OPTIONS[step]}
+
+                    {step === ORDER_STEP.SELECT_MENU && (
+                      <>
+                        <BiSolidCircle size={2} />
+                        <div className={styles.iconWrapper}>
+                          <PiBagSimpleFill size={20} />
+                          <span>{orderList.length}</span>
+                        </div>
+                      </>
+                    )}
+                  </span>
                 </>
               )}
             </button>
