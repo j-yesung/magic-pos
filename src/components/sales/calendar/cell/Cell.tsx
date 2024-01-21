@@ -2,6 +2,7 @@ import { useCalendar } from '@/hooks/sales/useCalendar';
 import { getMonthSales } from '@/server/api/supabase/sales';
 import { getMinMaxSalesType, groupByKey } from '@/shared/helper';
 import useSalesStore from '@/shared/store/sales';
+import useAuthState from '@/shared/store/session';
 import { Tables } from '@/types/supabase';
 import moment from 'moment';
 import { useEffect } from 'react';
@@ -53,10 +54,10 @@ const Cell = () => {
     }
     return sortedData;
   };
-
+  const storeId = useAuthState(state => state.storeId);
   useEffect(() => {
     if (!isChangeView) {
-      getMonthSales(currentDate.clone()).then(result => {
+      getMonthSales(currentDate.clone(), storeId!).then(result => {
         if (result.sales.length !== 0) {
           const group = groupByKey<Tables<'sales'>>(
             result.sales.map(data => ({

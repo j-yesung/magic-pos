@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
+import { LuExternalLink } from 'react-icons/lu';
 import { EditFormType } from '../../PlatFormWrapper';
 import styles from './styles/item.module.css';
 import Default from '/public/logo.svg';
@@ -36,10 +37,20 @@ const Item = ({ link, title, isEdit, id, setEditTarget, imgUrl, setIsShowEditFor
         })}
         href={link}
       >
-        {imgUrl ? <Image src={imgUrl} width={100} height={100} alt={title} /> : <Default />}
+        {imgUrl ? (
+          <Image src={imgUrl} width={1000} height={1000} alt={title} />
+        ) : (
+          <div className={styles.defaultImgContainer}>
+            <Default />
+          </div>
+        )}
 
         <div className={styles.itemHeader}>
           <span className={styles.itemTitle}>{title}</span>
+        </div>
+        <div className={styles.externalLink}>
+          <LuExternalLink />
+          <span>이동하기</span>
         </div>
       </Link>
       {isEdit && <span onClick={editForm} className={styles.edit}></span>}

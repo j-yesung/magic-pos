@@ -60,6 +60,17 @@ const Form = ({ setAddForm, addForm, setIsRegist, setFecthDataList }: FormProps)
     setIsRegist(pre => !pre);
   };
 
+  const closeAddFormModal = () => {
+    setIsRegist(pre => !pre);
+    setAddForm(pre => ({
+      ...pre,
+      name: '',
+      link_url: '',
+      createdAt: '',
+      file: null,
+    }));
+  };
+
   return (
     <form onSubmit={submitAddCard} className={styles.formContainer}>
       <div className={styles.formWrapper}>
@@ -84,11 +95,11 @@ const Form = ({ setAddForm, addForm, setIsRegist, setFecthDataList }: FormProps)
       </div>
 
       <div className={styles.buttonGroup}>
+        <button type="button" className={styles.button} onClick={closeAddFormModal}>
+          <p>취소</p>
+        </button>
         <button type="submit" className={styles.button}>
           <p>등록</p>
-        </button>
-        <button type="button" className={styles.button}>
-          <p>취소</p>
         </button>
       </div>
     </form>

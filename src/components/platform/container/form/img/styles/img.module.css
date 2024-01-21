@@ -3,7 +3,7 @@
 }
 .img-wrapper {
   display: inline-block;
-  width: 24rem;
+  width: 18rem;
   height: 100%;
 }
 
@@ -33,4 +33,29 @@
 }
 .has-delete-button {
   display: block;
+}
+.img-label:hover .edit-icon-wrapper {
+  display: flex;
+}
+.edit-icon-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  width: 5.8rem;
+  height: 5.8rem;
+  padding: 1rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+  border-radius: 50rem;
+  background: var(--bg-p, #f3edff);
+}
+
+.edit-icon-wrapper svg {
+  width: 2.7rem;
+  height: 2.9rem;
 }

@@ -3,9 +3,7 @@ import Image from 'next/image';
 import { ChangeEvent, SetStateAction, useState } from 'react';
 import { AddFormType } from '../../PlatFormWrapper';
 import styles from './styles/img.module.css';
-// interface ImgProps {
-//   setAddForm: Pick<FormProps, 'setAddForm'>;
-// }
+import Pencil from '/public/icons/pencil.svg';
 
 interface ImgProps {
   setAddForm: React.Dispatch<SetStateAction<AddFormType>>;
@@ -50,7 +48,10 @@ const ImgForm = ({ setAddForm }: ImgProps) => {
         >
           X
         </button>
-        <Image className={styles.img} src={preImage ?? DEFAULT_IMG} alt="default image" width={200} height={200} />
+        <Image className={styles.img} src={preImage ?? DEFAULT_IMG} alt="default image" width={1000} height={1000} />
+        <div className={styles.editIconWrapper}>
+          <Pencil />
+        </div>
       </label>
 
       <input type="file" id="file" className={styles.file} onChange={changePreview} />

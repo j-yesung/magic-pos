@@ -1,6 +1,7 @@
 import { getTodaySales } from '@/server/api/supabase/sales';
 import { formatData } from '@/shared/helper';
 import useSalesStore from '@/shared/store/sales';
+import useAuthState from '@/shared/store/session';
 import { Tables } from '@/types/supabase';
 import moment from 'moment';
 import { useEffect } from 'react';
@@ -14,17 +15,25 @@ const Status = () => {
     setData,
     setRecord,
   } = useSalesStore();
-
+  const storeId = useAuthState(state => state.storeId);
   useEffect(() => {
-    getTodaySales(utcStandardDate.clone()).then(data => {
+    getTodaySales(utcStandardDate.clone(), storeId!).then(data => {
       if (data.sales.length !== 0) {
         const { result, recordData } = formatData(data.sales as Tables<'sales'>[], data.formatType, moment());
+        console.log(result);
+        console.log(recordData);
         if (result) {
           setData(result);
           setRecord(recordData);
         }
       }
     });
+    return () => {
+      setRecord({
+        currentSales: 0,
+        dateType: '',
+      });
+    };
   }, []);
 
   return (
