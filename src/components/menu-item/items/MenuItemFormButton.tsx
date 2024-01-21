@@ -14,7 +14,6 @@ const MenuItemFormButton: React.FC<MenuItemModal> = props => {
 
   // 메뉴 삭제
   const clickRemoveCategoryHandler = async () => {
-    deleteMutate(menuItem.id);
     MagicModal.confirm({
       icon: <FiAlertCircle size={50} />,
       content: '정말로 삭제하시겠습니까?',
