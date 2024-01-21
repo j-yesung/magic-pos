@@ -53,6 +53,7 @@
   color: var(--text1);
 }
 .wrapper .button-blank-area {
+  background: var(--point1-80);
   margin-left: 2rem;
   padding: 1.5rem 4rem;
 }
