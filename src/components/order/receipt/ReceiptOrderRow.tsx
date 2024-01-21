@@ -15,9 +15,9 @@ const ReceiptOrderRow = ({ itemList }: { itemList: MenuItemWithOption[] }) => {
       {[...group].map(([key, value]) => (
         <div key={key} className={styles.container}>
           <Image src={value[0].image_url ?? ''} alt={value[0].name ?? ''} width={100} height={100}></Image>
-          <div className={styles.info}>
-            <div className={clsx(styles.info, styles.gap10)}>
-              <span className={styles.productName}>{value[0].name}</span>
+          <div className={styles.wrapper}>
+            <div className={styles.info}>
+              <h2 className={styles.productName}>{value[0].name}</h2>
               <CartOptionRow menu={value} />
             </div>
             <span className={styles.productPrice}>

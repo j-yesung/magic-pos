@@ -7,6 +7,11 @@
 
 .container section {
     margin: 0 2rem 2rem 2rem;
+    display: inline-flex;
+    padding-bottom: 3rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
 }
 
 .row-wrapper {
