@@ -43,8 +43,8 @@ const StoreTimeSet = ({ userId }: { userId: string }) => {
       <p className={styles.timeCaption}>
         {isTimeSet
           ? '영업시간을 선택해 주세요.'
-          : `현재 ${openTime} 부터 ${closeTime}
-        까지로 영업시간이 설정되었습니다.`}
+          : `영업시간은 현재 ${openTime} 부터 ${closeTime}
+        까지입니다.`}
       </p>
     </>
   );

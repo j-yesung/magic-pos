@@ -12,8 +12,8 @@ const StoreContents = () => {
   const email = session?.user.email || '';
   const { value, changeHandler } = useInput({
     storeEmail: email,
-    bnoNumber: storeBno!,
-    storeName: storeName!,
+    bnoNumber: storeBno || '',
+    storeName: storeName || '',
   });
 
   useEffect(() => {
