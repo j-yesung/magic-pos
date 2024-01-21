@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './styles/ReceiptOrderRow.module.css';
 import Image from 'next/image';
-import clsx from 'clsx';
 import { MenuItemWithOption } from '@/types/supabase';
 import { convertNumberToWon, groupByKey } from '@/shared/helper';
 import CartOptionRow from '@/components/order/cart/CartOptionRow';
