@@ -1,9 +1,8 @@
 import useFetchManagement from '@/hooks/management/useFetchManagement';
 import useToast from '@/hooks/toast/useToast';
 import { submitDetectedOrder } from '@/server/api/supabase/management';
-import { useEffect } from 'react';
-// import tickSound from '../../../public/audio/DingSoundEffect.mp3';
 import useAuthState from '@/shared/store/session';
+import { useEffect } from 'react';
 import ManagementContainer from './managementContainer/ManagementContainer';
 import styles from './styles/Management.module.css';
 
