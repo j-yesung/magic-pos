@@ -4,7 +4,7 @@
   padding: 2rem 0;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 0.1rem solid var(--line);
 }
 .order-check-list-content-item > div {
   display: flex;
@@ -23,7 +23,7 @@ div.item-number > .is-togo {
   padding: 0.5rem 1rem;
   font-style: normal;
   font-weight: 400;
-  letter-spacing: -0.26px;
+  letter-spacing: -0.026000000000000002rem;
   border-radius: 0.5rem;
   margin-right: 1rem;
 }
@@ -47,50 +47,80 @@ div.item-content {
   width: 51.973684210526315%;
   align-items: flex-start;
   flex-direction: column;
+  gap: 2rem;
 }
 div.item-content > div {
-  width: 100%;
-  height: auto;
-  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
 }
-div.item-content > div:last-child {
-  width: 100%;
-  height: auto;
-  margin-bottom: 0rem;
-}
-div.item-content > div > .menu-title {
-  padding: 0.6rem;
-}
-div.item-content > div > .menu-title > span {
+
+ .menu-title {
+  display: inline-flex;
   font-weight: 500;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   background: var(--bg-g);
+  width: fit-content;
+  gap: 0.5rem;
+   align-items: center;
 }
-div.item-content > div > .menu-option {
-  height: auto;
+
+
+.menu-title span:last-child {
+  color: var(--point1-80, #7433FF);
+  text-align: center;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.5rem; /* 100% */
+  letter-spacing: -0.03rem;
 }
+
+.menu-option {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
 div.item-content > div > .menu-option > div {
-  margin-top: 1rem;
+  color: var(--text2);
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2.2rem; /* 157.143% */
+  letter-spacing: -0.028rem;
 }
 
 div.item-status {
   width: 9.210526315789473%;
-  margin-left: 2.5rem;
   justify-content: center;
+
+  display: flex;
+  padding: 0.8rem 1.5rem;
+  align-items: center;
+  gap: 1rem;
+
+  border-radius: 3rem;
 }
 
 div.item-status > span {
+  text-align: center;
   font-size: 1.5rem;
-  padding: 0.8rem 1.5rem;
-  border-radius: 30px;
+  font-style: normal;
   font-weight: 500;
+  line-height: 1.5rem; /* 100% */
+  letter-spacing: -0.03rem;
 }
-div.item-status > span.done-true {
-  color: var(--text2);
+.done-true {
+  color: var(--text2) !important;
   background: var(--bg-g);
 }
-div.item-status > span.done-false {
-  color: #fff;
+.done-false {
+  color: var(--text5) !important;
   background: var(--point1-80);
 }
