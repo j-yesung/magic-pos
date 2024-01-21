@@ -2,10 +2,13 @@ import { MenuItemWithOption, StoreOrderWithStoreName, Tables } from '@/types/sup
 import clsx from 'clsx';
 import moment from 'moment';
 import styles from './styles/OrderCheckListItem.module.css';
+import { groupByKey } from '@/shared/helper';
 
 const OrderCheckListItem = ({ orderData }: { orderData?: Tables<'order_store'> | Tables<'order_number'> }) => {
   const { is_togo, menu_list, order_number, is_done, order_time } = orderData as StoreOrderWithStoreName;
   const menuList: MenuItemWithOption[] = JSON.parse(JSON.stringify(menu_list));
+  const group = groupByKey<MenuItemWithOption>(menuList, 'unique');
+
   return (
     <div className={styles['order-check-list-content-item']}>
       <div className={styles['item-number']}>
@@ -19,17 +22,15 @@ const OrderCheckListItem = ({ orderData }: { orderData?: Tables<'order_store'> |
         <span>{moment(order_time).format('HH:mm:ss')}</span>
       </div>
       <div className={styles['item-content']}>
-        {menuList.map(menu => {
+        {[...group].map(([key, menuList]) => {
           return (
-            <div key={menu.id}>
-              <div className={styles['menu-title']}>
-                <span>
-                  {menu.name}&nbsp;&nbsp;
-                  {menu.remain_ea}
-                </span>
-              </div>
+            <div key={key}>
               <div className={styles['menu-option']}>
-                {menu.menu_option?.map(option => (
+                <div className={styles['menu-title']}>
+                  <span>{menuList[0].name}</span>
+                  <span>{menuList.length}</span>
+                </div>
+                {menuList[0].menu_option?.map(option => (
                   <div key={option.id}>
                     <span>- {option.name}: </span>
                     {option.menu_option_detail.map(optionDetail => (
@@ -42,10 +43,13 @@ const OrderCheckListItem = ({ orderData }: { orderData?: Tables<'order_store'> |
           );
         })}
       </div>
-      <div className={styles['item-status']}>
-        <span className={clsx(is_done ? styles['done-true'] : styles['done-false'])}>
-          {is_done ? '주문 완료' : '주문 준비중'}
-        </span>
+      <div
+        className={clsx(styles['item-status'], {
+          [styles['done-false']]: !is_done,
+          [styles['done-true']]: is_done,
+        })}
+      >
+        {is_done ? '주문 완료' : '주문 준비중'}
       </div>
     </div>
   );

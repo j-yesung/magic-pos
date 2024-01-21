@@ -1,33 +1,36 @@
 .wrap {
   --input-border: transparent;
   --input-border-radius: 1rem;
-  --input-box-shadow: 0 0 1rem rgba(0, 0, 0, 0.25);
-  --input-padding: 1rem;
+  --input-box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+  --input-padding: 2rem;
   --input-border-focus: 1px solid var(--point50);
   --input-placeholder-color: var(--text3);
   display: flex;
   flex-direction: column;
   height: 100%;
+  display: flex;
+  gap: 3rem;
+  flex-direction: column;
 }
 .wrap input::-webkit-inner-spin-button {
   appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
 }
-.wrap .input-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 1;
-}
 .wrap .input-name {
-  font-size: 1.4rem;
-  color: var(--text2);
+  color: var(--text1, #121416);
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.6rem; /* 100% */
+  letter-spacing: -0.032rem;
 }
 .wrap .input {
   border: var(--input-border);
   border-radius: var(--input-border-radius);
   box-shadow: var(--input-box-shadow);
   padding: var(--input-padding);
+  height: 5.4rem;
 }
 .wrap .input:focus {
   border: var(--input-border-focus);
@@ -36,9 +39,13 @@
 .wrap .input::placeholder {
   color: var(--input-placeholder-color);
 }
+.wrap .img-txt-wrap {
+  display: flex;
+  gap: 1rem;
+}
 .wrap .img-wrap {
-  width: 100%;
-  height: 27rem;
+  width: 12.3rem;
+  height: 12.3rem;
   position: relative;
 }
 .wrap .img-wrap img {
@@ -59,42 +66,125 @@
   border: 0;
 }
 .wrap .txt-wrap {
-  font-size: 2rem;
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-.wrap .txt-wrap > div {
-  display: flex;
-  gap: 2rem;
-}
-.wrap .txt-wrap > div.checkbox-wrap {
-  margin-top: 1rem;
-  color: var(--text2);
-}
-.wrap .txt-wrap > div.input-wrap {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
-.wrap .txt-wrap > div.input-wrap > p {
+
+.wrap .txt-wrap .input-wrap {
+  gap: 1.5rem 3rem;
   display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.wrap .txt-wrap .input-wrap.bottom {
+}
+
+.wrap .txt-wrap .input-wrap > p {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 1.9rem;
+}
+/* .wrap .txt-wrap .input-wrap.top > p:first-child {
+  flex: auto;
+  width: 60%;
+}
+.wrap .txt-wrap .input-wrap.top > p:last-child {
+  flex: auto;
+  width: 30%;
+} */
+.wrap .txt-wrap .input-wrap > p label {
+  width: 4.8rem;
+}
+.wrap .txt-wrap .input-wrap > p input {
+  flex: 1;
+}
+.wrap .checkbox-wrap {
+  display: flex;
+  align-items: center;
+}
+.wrap .checkbox-wrap p {
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--point1-80);
+  background-color: #fff;
+  margin-left: 2.1rem;
+}
+.wrap .checkbox-wrap p label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.wrap .checkbox-wrap p label.active {
+  background-color: var(--point1-80);
+}
+.wrap .checkbox-wrap p label svg path {
+  fill: #fff;
+}
+.wrap .checkbox-wrap p input {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+.wrap .checkbox-wrap .checkbox-info {
+  margin-left: 1rem;
+  color: var(--text3, #bfbfbf);
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.4rem; /* 100% */
+  letter-spacing: -0.028rem;
+  cursor: pointer;
+}
+.wrap .line-wrap {
+  width: 100%;
+  height: 1px;
+  background: #ededed;
+}
+/* 옵션 설정 부분 */
+.option-container {
+  display: flex;
+  gap: 2rem;
   flex-direction: column;
+}
+
+.option-container .option-wrap {
+  display: flex;
   gap: 1rem;
 }
+.option-container .option-wrap button {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: var(--bg-g, #f7f7f7);
+  color: var(--text2, #5c5c5c);
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.4rem; /* 100% */
+  letter-spacing: -0.028rem;
+  position: relative;
+}
+
 .wrap .btn-wrap {
   display: flex;
-  flex-direction: column;
   gap: 1rem;
 }
 .wrap .btn-wrap button {
   border-radius: 1rem;
-  height: 3.5rem;
+  height: 5.6rem;
   cursor: pointer;
-}
-.wrap .btn-wrap button:hover {
-  background-color: var(--main-color);
+  flex: 1;
 }
 .wrap .btn-wrap button.update-btn {
   background-color: var(--point1-80);
@@ -104,14 +194,45 @@
   background-color: var(--text4);
   color: var(--text5);
 }
-.wrap .txt-wrap > div.option-wrap {
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-.wrap .txt-wrap > div.option-wrap button {
-  border-radius: var(--input-border-radius);
-  box-shadow: var(--input-box-shadow);
-  padding: var(--input-padding);
+.wrap .btn-wrap button.basic-btn {
   background-color: var(--bg-g);
+}
+
+/* 메뉴 옵션 미니 버튼들 */
+
+.mini-edit-btn {
+  width: 2.9rem;
+  height: 2.9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: var(--bg-p);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   cursor: pointer;
+}
+.mini-remove-btn {
+  position: absolute;
+  top: -0.7rem;
+  right: -0.7rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: var(--text3);
+  cursor: pointer;
+}
+.mini-remove-btn path {
+  stroke: #fff;
+}
+.option-wrap button span {
+  display: none;
+}
+.option-wrap button:hover span {
+  display: flex;
 }
