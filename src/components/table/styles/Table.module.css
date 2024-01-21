@@ -1,13 +1,4 @@
 .table-wrapper {
-  display: flex;
   width: 100%;
-  height: auto;
-  font-size: 15px;
-}
-
-
-/* 더미 사이드 바 (right) */
-.table-dummy-side-bar {
-  width: 0%;
-  transition: all 0.4s;
+  height: 100%;
 }
