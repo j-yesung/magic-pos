@@ -8,18 +8,20 @@ const OrderCheckListContentList = () => {
   const storeId = useAuthState(state => state.storeId);
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage } = useOrderCheckList(storeId!);
 
-  const { ref } = useInView({
+  const { ref, inView } = useInView({
     threshold: 1,
     onChange: inView => {
+      console.log(inView);
       if (!inView || !hasNextPage || isFetchingNextPage) return;
       fetchNextPage();
     },
   });
+  console.log(inView);
   return (
     <div className={styles['order-check-list-content-list']}>
       {data?.map((item, index) => <OrderCheckListItem key={item?.id ?? index} orderData={item} />)}
       {/* 인피니티 스크롤을 위한 div */}
-      <div ref={ref} className={styles['inView']}></div>
+      <div className={styles['inView']}></div>
     </div>
   );
 };
