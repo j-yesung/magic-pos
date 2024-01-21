@@ -41,23 +41,6 @@ interface ToastTypeOption {
   animation: ToastAnimationType;
 }
 
-interface AuthState {
-  auth: {
-    access_token: string;
-    expires_in: number;
-    refresh_token: string;
-    token_type: string;
-    user: Record<string, string | unknown>;
-  } | null;
-  storeId: string | null;
-  storeName: string | null;
-  storeBno: string | null;
-  setStoreName: (name: string) => void;
-  setStoreBno: (bno: string) => void;
-  setSession: (auth) => void;
-  setStoreId: (id: string) => void;
-}
-
 interface OrderConfirmType {
   id: string;
   number: number;
