@@ -2,13 +2,13 @@ import { useAuth } from '@/hooks/auth/useAuth';
 import { useErrorMessage } from '@/hooks/auth/useErrorMessage';
 import { useInput } from '@/hooks/auth/useInput';
 import { useValid } from '@/hooks/auth/useValid';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Button from '../common/Button';
 import Input from './Input';
 import FormButton from './button/FormButton';
 import styles from './styles/Auth.module.css';
+import Logo from '/public/logo.svg';
 
 interface FormProps {
   data: Record<string, string>;
@@ -46,7 +46,7 @@ const AuthForm = ({ data }: FormProps) => {
     <div className={styles.wrapper}>
       <div className={styles.titleWrapper} onClick={() => router.push('/')}>
         <h1 className={styles.title}>{title}</h1>
-        <h2 className={styles.subTitle}>{subTitle}</h2>
+        <Logo className={styles.logo} width={200} height={30} />
       </div>
       {path === '/auth/success' && (
         <div className={styles.successImage}>
