@@ -41,10 +41,13 @@ const StoreTimeSet = ({ userId }: { userId: string }) => {
         <StoreSetButton times={times} userId={userId} />
       </div>
       <p className={styles.timeCaption}>
-        {isTimeSet
-          ? '영업시간을 선택해 주세요.'
-          : `영업시간은 현재 ${openTime} 부터 ${closeTime}
-        까지입니다.`}
+        {isTimeSet ? (
+          '영업시간을 선택해 주세요.'
+        ) : (
+          <>
+            영업시간은 현재 <strong>{`${openTime} ~ ${closeTime}`}</strong> 까지입니다.
+          </>
+        )}
       </p>
     </>
   );
