@@ -7,7 +7,7 @@
 
 .cart-wrapper {
     border-radius: 1rem;
-    margin: 3rem 2rem;
+    margin: 3rem 2rem 2rem 2rem;
     border: 0.1rem solid var(--bg-line);
 }
 
@@ -19,7 +19,7 @@
 }
 
 .row-container {
-    height: calc(100vh - var(--kiosk-footer-height) - var(--kiosk-header-height) - var(--kiosk-container-padding) * 17);
+    height: calc(100vh - var(--kiosk-footer-height) - var(--kiosk-header-height) - var(--kiosk-container-padding) * 18);
     overflow-y: auto;
 }
 

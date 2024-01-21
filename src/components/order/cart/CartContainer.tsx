@@ -40,8 +40,8 @@ const CartContainer = () => {
           </div>
           <CartMoreButton />
         </section>
+        <TotalPrice itemList={orderList} />
       </div>
-      <TotalPrice itemList={orderList} />
     </>
   );
 };
