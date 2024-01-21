@@ -1,6 +1,6 @@
 import { incrementOrderNumber, updateStoreTime } from '@/server/api/supabase/store';
-import { setOrderNumber } from '@/shared/store/order';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import useToast from '../toast/useToast';
 
 const enum StoreKey {
   STORE_UPDATE_TIME = 'storeUpdateTime',
@@ -11,6 +11,7 @@ const enum StoreKey {
  */
 export const useStoreQuery = () => {
   const queryClient = useQueryClient();
+  const { toast } = useToast();
 
   const { data: incrementResult, mutate: incrementOrderNumberMutation } = useMutation({
     mutationFn: incrementOrderNumber,
@@ -23,7 +24,12 @@ export const useStoreQuery = () => {
     mutationFn: updateStoreTime,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [StoreKey.STORE_UPDATE_TIME] });
-      alert('영업 시간이 변경되었습니다.');
+      toast('영업시간이 변경되었습니다.', {
+        type: 'success',
+        position: 'top-right',
+        showCloseButton: false,
+        autoClose: 2000,
+      });
     },
     onError: error => {
       console.error(error);

@@ -1,5 +1,5 @@
 import AdminLayout from '@/components/layout/admin/AdminLayout';
-import StoreContents from '@/components/store/StoreContents';
+import StoreContents from '@/components/store/StoreMain';
 import Head from 'next/head';
 import { ReactNode } from 'react';
 
