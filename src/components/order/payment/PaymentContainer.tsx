@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import styles from './styles/PaymentContainer.module.css';
 import useOrderStore, { getTotalPrice } from '@/shared/store/order';
 import { usePaymentWidget } from '@/hooks/order/usePaymentWidget';
+import MenuHeader from '@/components/order/common/MenuHeader';
 
 /**
  * STEP4: 토스 결제 화면
@@ -34,9 +35,12 @@ const PaymentContainer = () => {
 
   return (
     <div className={styles.container}>
+      <MenuHeader />
       {/* 결제 UI, 이용약관 UI 영역 */}
-      <div id="payment-widget" />
-      <div id="agreement" />
+      <div className={styles.tossContainer}>
+        <div id="payment-widget" />
+        <div id="agreement" />
+      </div>
     </div>
   );
 };

@@ -43,7 +43,11 @@ const StepButton = ({ sliderRef }: ButtonProps) => {
         {convertNumberToWon(getTotalPrice(orderList))} {<BiSolidCircle size={2} />} 결제 하기
       </>
     ),
-    3: <>결제 하기</>,
+    3: (
+      <>
+        {convertNumberToWon(getTotalPrice(orderList))} {<BiSolidCircle size={2} />} 결제 하기
+      </>
+    ),
   };
 
   const nextClickHandler = async () => {

@@ -9,6 +9,7 @@ export enum ORDER_STEP {
   SELECT_MENU,
   CHECK_MENU,
   PAYMENT,
+  SUCCESS,
 }
 
 /**
