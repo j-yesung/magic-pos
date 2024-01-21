@@ -1,7 +1,12 @@
-.container {
-    margin-bottom: .5rem;
+.container span {
+    color: var(--text2) !important;
+    font-size: 1.3rem !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    line-height: 2rem !important;
+    letter-spacing: -0.026rem !important;
 }
 
 .option-name {
-    margin-right: 1rem;
+    margin-right: .5rem;
 }

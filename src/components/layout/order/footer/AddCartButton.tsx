@@ -2,6 +2,8 @@ import React from 'react';
 import styles from './styles/StepButton.module.css';
 import useOrderStore, { addOrderList, resetSelectedMenu } from '@/shared/store/order';
 import { MenuItemWithOption } from '@/types/supabase';
+import { useModal } from '@/hooks/modal/useModal';
+import CartAlertModal from '@/components/order/cart/CartAlertModal';
 
 /**
  * 옵션, 수량 등을 정한 뒤 장바구니(orderList)에 담는다.
@@ -12,6 +14,7 @@ const AddCartButton = ({ menu }: { menu: MenuItemWithOption | null }) => {
   const optionSwiperRef = useOrderStore(state => state.optionSwiperRef);
   const selectedOptions = useOrderStore(state => state.selectedOptions);
   const amount = useOrderStore(state => state.amount);
+  const { MagicModal } = useModal();
 
   /**
    * 주문 목록에 메뉴를 담는다.
@@ -27,6 +30,7 @@ const AddCartButton = ({ menu }: { menu: MenuItemWithOption | null }) => {
     }
     optionSwiperRef?.current!.swiper.slidePrev();
     resetSelectedMenu();
+    MagicModal.fire(<CartAlertModal />);
   };
 
   return (

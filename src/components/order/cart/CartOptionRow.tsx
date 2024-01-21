@@ -8,8 +8,8 @@ const CartOptionRow = ({ menu }: { menu: MenuItemWithOption[] }) => {
     <>
       {menu[0].menu_option.map(option => (
         <div key={option.id} className={styles.container}>
-          <span className={styles.optionName}>{option.name}</span>
-          <CartOptionDetailRow details={option.menu_option_detail} />
+          <span className={styles.optionName}>{option.name}:</span>
+          <span>{option.menu_option_detail.map(detail => detail.name).join('/')}</span>
         </div>
       ))}
     </>

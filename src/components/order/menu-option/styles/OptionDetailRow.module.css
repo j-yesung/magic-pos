@@ -5,6 +5,10 @@
     width: 100%;
 }
 
+.container:not(:last-child) {
+    margin-bottom: 1.5rem;
+}
+
 
 .container div{
     display: flex;

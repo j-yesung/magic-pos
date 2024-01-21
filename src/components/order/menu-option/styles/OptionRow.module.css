@@ -1,12 +1,10 @@
 .container {
     display: flex;
-    width: 37.5rem;
     padding: 2rem;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    gap: 1rem;
-
+    gap: 2rem;
     border-bottom: 0.1rem solid var(--bg-line);
 }
 

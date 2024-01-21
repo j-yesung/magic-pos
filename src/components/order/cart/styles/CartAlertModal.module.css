@@ -1,0 +1,26 @@
+.container {
+    width: 100%;
+    display: inline-flex;
+    padding: 3rem 2rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+
+    border-radius: 0.8rem;
+    background: var(--white);
+}
+
+.container p {
+    color: var(--text2);
+    text-align: center;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.6rem; /* 100% */
+    letter-spacing: -0.032rem;
+}
+
+.container svg{
+    color: var(--point1-80);
+}
