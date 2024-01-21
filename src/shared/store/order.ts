@@ -10,6 +10,7 @@ export enum ORDER_STEP {
   CHECK_MENU,
   PAYMENT,
   SUCCESS,
+  RECEIPT,
 }
 
 /**

@@ -6,14 +6,16 @@ const TITLE: { [key in number]: string } = {
   [ORDER_STEP.CHECK_MENU]: '장바구니',
   [ORDER_STEP.PAYMENT]: '결제 하기',
   [ORDER_STEP.SUCCESS]: '주문 완료',
+  [ORDER_STEP.RECEIPT]: '주문 확인',
 };
 
 const MenuHeader = () => {
   const step = useOrderStore(state => state.step);
-  console.log(step);
+  const storeName = useOrderStore(state => state.storeName);
 
   return (
     <header className={styles.container}>
+      {step === ORDER_STEP.RECEIPT && <h1>{storeName}</h1>}
       <div>{TITLE[step]}</div>
     </header>
   );

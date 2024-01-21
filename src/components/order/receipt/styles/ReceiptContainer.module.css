@@ -1,9 +1,12 @@
 .container {
     display: flex;
     flex-direction: column;
-    height: 100%;
     width: 100%;
     gap: 2rem  /* 20/10 */;
+}
+
+.container section {
+    margin: 0 2rem 2rem 2rem;
 }
 
 .row-wrapper {

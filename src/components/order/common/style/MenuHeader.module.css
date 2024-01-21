@@ -1,4 +1,5 @@
 .container {
+    position: relative;
     display: flex;
     padding: 1rem 2rem;
     align-items: center;
@@ -25,4 +26,20 @@
 
     border-radius: 0.3rem;
     background: var(--bg-g);
+}
+
+.container h1 {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+
+    color: var(--text2);
+    text-align: center;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.6rem; /* 100% */
+    letter-spacing: -0.032rem;
 }
