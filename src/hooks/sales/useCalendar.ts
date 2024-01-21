@@ -52,7 +52,7 @@ export const useCalendar = () => {
   const clickMoveTodayHandler = async () => {
     const { sales, formatType } = await getTodaySales(utcStandardDate.clone());
     if (sales.length !== 0) {
-      const { result, recordData } = formatData(sales, formatType);
+      const { result, recordData } = formatData(sales, formatType, today);
       if (result && recordData) {
         setData(result);
         setRecord(recordData);
@@ -77,6 +77,7 @@ export const useCalendar = () => {
     const { sales, formatType } = await getMonthsSales(utcStandardDate.clone());
     if (sales.length !== 0) {
       const { result, recordData } = formatData(sales, formatType);
+
       if (result && recordData) {
         setData(result);
         setRecord(recordData);
