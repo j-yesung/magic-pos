@@ -52,7 +52,7 @@ const getStartWeeks = (year: number) => {
  *
  * @param salesData salesTable에서 조건부로 받아온 데이터
  * @param formatType 'days', 'weeks' , 'months' 를 받습니다.
- * @returns  { x: string, y: number}[]
+ * @returns  { x: string, y: number, moment?:Moment}[]
  */
 
 export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormatType, selectedDateType?: Moment) => {
