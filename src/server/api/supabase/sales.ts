@@ -93,7 +93,6 @@ export const getMonthsSales: getSalesReturnType = async month => {
   if (error) {
     return { sales: [], error };
   }
-  console.log(sales);
   return { sales, formatType: 'months' };
 };
 

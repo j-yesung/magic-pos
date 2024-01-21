@@ -1,16 +1,17 @@
 .sales-status {
   position: absolute;
-  padding: 4rem;
-  width: 52rem;
-  right: -56rem;
-  top: 0rem;
-  z-index: var(--level-1-z-index);
-  background-color: var(--bg-p);
-  border-radius: 4rem;
+  top: 5rem;
+  left: 30rem;
+  display: inline-flex;
+  padding: 1.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--line, #ededed);
+  background: #fff;
 }
 
-.sales-calendar {
-}
 /*
 calendar component를 감싸는 div의 class css입니다.
 */
@@ -18,8 +19,28 @@ calendar component를 감싸는 div의 class css입니다.
   display: grid;
   gap: 1rem;
   padding: 1rem;
+  position: relative;
+  margin-top: 12rem;
 }
 
 .hidden-calendar {
   display: none;
+}
+
+.calendar-body {
+  position: absolute;
+  top: 2rem;
+  right: 10rem;
+}
+
+.calendar-border {
+  position: absolute;
+  right: -1rem;
+  display: flex;
+  padding: 3rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  border-radius: 2rem;
+  border: 1px solid var(--line, #ededed);
 }

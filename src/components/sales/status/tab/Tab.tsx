@@ -39,7 +39,13 @@ const Tab = () => {
         dateRef.current = null;
       }
     };
-  }, [currentDate]);
+  }, [isShow]);
+
+  useEffect(() => {
+    return () => {
+      setIsShow(false);
+    };
+  }, []);
 
   return (
     <div className={styles.wrapper}>
@@ -72,19 +78,15 @@ const Tab = () => {
         </span>
       </div>
 
+      <div className={styles.calendarWrapper} onClick={clickShowCalendarHandler}>
+        <span className={styles.dateText}>{dateRef.current?.format('YYYY-MM-DD')}</span>
+        <IoCalendarClearOutline className={styles.calendarIcon} />
+      </div>
       {isShow && (
         <Fragment>
           <div className={styles.calendarBg} onClick={clickCloseCalendar}></div>
           <Calendar />
         </Fragment>
-      )}
-
-      {!isShow && (
-        <div className={styles.calendarWrapper} onClick={clickShowCalendarHandler}>
-          <span className={styles.dateText}>{dateRef.current?.format('YYYY-MM-DD')}</span>
-
-          <IoCalendarClearOutline className={styles.calendarIcon} />
-        </div>
       )}
     </div>
   );

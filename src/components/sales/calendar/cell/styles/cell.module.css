@@ -9,7 +9,7 @@
 }
 
 .calendar-body {
-  display: grid;
-  gap: 1rem;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }

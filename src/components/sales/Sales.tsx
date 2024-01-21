@@ -10,7 +10,7 @@ const Sales = () => {
   const clickShowChart = () => setIsChangeView(true);
   const clickShowCalendar = () => setIsChangeView(false);
   return (
-    <div className={styles.container}>
+    <div>
       <div className={styles.titleWrapper}>
         <div className={styles.toggleBtnWrapper}>
           <button

@@ -1,11 +1,7 @@
-.container {
-  position: relative;
-}
-
 .title-wrapper {
   position: absolute;
-  right: 0;
-  top: 0.4rem;
+  right: 19.4rem;
+  top: 12.4rem;
   z-index: 99;
 }
 
