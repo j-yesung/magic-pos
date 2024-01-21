@@ -1,27 +1,45 @@
 import useSetCategories from '@/hooks/menu/menu-category/useSetCategories';
+import { useModal } from '@/hooks/modal/useModal';
 import useCategoriesStore from '@/shared/store/menu-category';
-import useSideFormState from '@/shared/store/side-form';
 import { Tables } from '@/types/supabase';
 import { useRef } from 'react';
+import { FiAlertCircle } from 'react-icons/fi';
+import MenuCategoryModal from './modal/MenuCategoryModal';
 import styles from './styles/category.module.css';
+import CloseButton from '/public/icons/close.svg';
+import EditButton from '/public/icons/pencil.svg';
+import PlusButton from '/public/icons/plus.svg';
 
 const CategoryComponentPage = () => {
-  const { setIsSideFormOpen } = useSideFormState();
+  const { MagicModal } = useModal();
   const { setIsEdit, category, setCategory, categories } = useCategoriesStore();
   const { updatePositionMutate } = useSetCategories();
+  const { deleteMutate } = useSetCategories();
 
   // 카테고리 플러스
   const clickAddCategoryHandler = async () => {
+    MagicModal.fire(<MenuCategoryModal />);
     setIsEdit(false);
-    setIsSideFormOpen(true);
     setCategory({ ...category, id: '', name: '' });
   };
 
-  // 카테고리 선택
+  // 카테고리 수정
   const clickChoiceCategoryHandler = (item: Tables<'menu_category'>) => {
+    MagicModal.fire(<MenuCategoryModal />);
     setIsEdit(true);
-    setIsSideFormOpen(true);
     setCategory({ id: item.id, name: item.name, store_id: item.store_id, position: item.position });
+  };
+
+  // 카테고리 삭제
+  const clickRemoveCategoryHandler = (item: Tables<'menu_category'>) => {
+    MagicModal.confirm({
+      icon: <FiAlertCircle size={50} />,
+      content: '정말로 삭제하시겠습니까?',
+      confirmButtonCallback: () => {
+        deleteMutate(item.id);
+        setCategory({ ...category, id: '', name: '' });
+      },
+    });
   };
 
   // 드래그 이벤트
@@ -60,7 +78,6 @@ const CategoryComponentPage = () => {
             <li key={category.id}>
               <button
                 type="button"
-                onClick={() => clickChoiceCategoryHandler(category)}
                 draggable
                 onDragStart={e => dragStartHandler(e, idx)}
                 onDragEnter={e => dragEnterHandler(e, idx)}
@@ -68,13 +85,21 @@ const CategoryComponentPage = () => {
                 onDragOver={e => e.preventDefault()}
               >
                 {category.name}
+                <span className={styles['btn-wrap']}>
+                  <span className={styles['edit-btn']} onClick={() => clickChoiceCategoryHandler(category)}>
+                    <EditButton width={16} height={16} />
+                  </span>
+                  <span className={styles['remove-btn']} onClick={() => clickRemoveCategoryHandler(category)}>
+                    <CloseButton width={15} height={15} />
+                  </span>
+                </span>
               </button>
             </li>
           );
         })}
         <li>
-          <button type="button" onClick={clickAddCategoryHandler}>
-            +
+          <button className={styles['plus-btn']} type="button" onClick={() => clickAddCategoryHandler()}>
+            <PlusButton width={22} height={22} />
           </button>
         </li>
       </ul>

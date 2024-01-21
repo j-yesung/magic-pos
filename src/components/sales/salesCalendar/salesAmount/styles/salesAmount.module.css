@@ -1,27 +1,35 @@
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: inline-flex;
+  flex-direction: column;
   gap: 1.4rem;
-  padding: 1rem;
   margin-bottom: 6rem;
 }
 
 .sales-grade {
   display: flex;
-  gap: 4rem;
+  flex-direction: column;
+  gap: 1.8rem;
+  margin-top: 2rem;
   margin-right: 6rem;
 }
 
 .grade-color {
+  padding-left: 1rem;
+  margin-left: 1rem;
   position: relative;
+  color: var(--text1, #121416);
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 2rem; /* 100% */
+  letter-spacing: -0.04rem;
 }
 
 .grade-color::before {
   content: '';
   position: absolute;
-  top: 0.1rem;
-  left: -1.4rem;
+  top: 0.6rem;
+  left: -1rem;
   width: 0.8rem;
   height: 0.8rem;
   border-radius: 50%;
@@ -32,6 +40,10 @@
 
 .grade-min::before {
   background-color: rgb(24, 77, 224);
+}
+
+.grade-holiday::before {
+  background-color: var(--text3, #bfbfbf);
 }
 
 .sumSales {

@@ -6,16 +6,17 @@ import {
   updateMenuOption,
 } from '@/server/api/supabase/menu-item';
 import useMenuItemStore from '@/shared/store/menu-item';
-import useSideFormState from '@/shared/store/side-form';
 import { MenuOptionWithDetail, Tables, TablesInsert } from '@/types/supabase';
 import moment from 'moment';
-import SideFormLayout from '../../layout/admin/SideFormLayout';
 import styles from '../styles/menu-item-form.module.css';
 import MenuItemFormButton from './MenuItemFormButton';
 import MenuItemFormInput from './MenuItemFormInput';
 
-const MenuItemFormPage = () => {
-  const { setIsSideFormOpen } = useSideFormState();
+interface MenuItemModal {
+  clickItemModalHide: () => void;
+}
+
+const MenuItemFormPage: React.FC<MenuItemModal> = props => {
   const { addMutate, updateNameMutate, uploadImageMutate } = useSetMenuItem();
 
   const {
@@ -45,7 +46,7 @@ const MenuItemFormPage = () => {
       remain_ea: menuItem.remain_ea,
       image_url: menuItem.image_url,
     };
-    if(!isEdit) {
+    if (!isEdit) {
       const addData = await addMutate.mutateAsync(newMenuItemData);
       setMenuItem({ ...menuItem, id: addData[0].id });
       newMenuItemData.id = addData[0].id;
@@ -67,7 +68,7 @@ const MenuItemFormPage = () => {
       newMenuItemData.image_url = uploadedMenuImage;
     }
     updateNameMutate(newMenuItemData);
-    setIsSideFormOpen(false);
+    props.clickItemModalHide();
     setMenuItemImgFile(null);
     setMenuItem({ ...menuItem, id: '' });
 
@@ -203,12 +204,10 @@ const MenuItemFormPage = () => {
   };
 
   return (
-    <SideFormLayout>
-      <form onSubmit={submitupdateMenuItemHandler} className={styles['wrap']}>
-        <MenuItemFormInput />
-        <MenuItemFormButton />
-      </form>
-    </SideFormLayout>
+    <form onSubmit={submitupdateMenuItemHandler} className={styles['wrap']}>
+      <MenuItemFormInput />
+      <MenuItemFormButton clickItemModalHide={props.clickItemModalHide} />
+    </form>
   );
 };
 

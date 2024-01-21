@@ -17,22 +17,7 @@ interface ChartProps {
  * chart component의 어디서든 재사용 가능하도록 하는것이 plugin 같습니다.
  */
 
-const CHART_MAIN_COLOR = 'hsl(259, 100%, 50%)';
-
-const chartXAxisBorder = {
-  id: 'chartXAxisBorder',
-  beforeDatasetsDraw({ ctx, chartArea }: ChartProps) {
-    ctx.save(); //이해가 안됨 일딴 넘어가자
-    ctx.beginPath(); // 선그리기 시작
-    ctx.strokeStyle = CHART_MAIN_COLOR; // 선 색상
-    ctx.lineWidth = 3; // 선 간격
-    ctx.setLineDash([5, 5]); // 선의 길이: 5 ,선의 간격 : 5
-    ctx.moveTo(chartArea.left, chartArea.bottom); // 시작점으로 이동
-    ctx.lineTo(chartArea.right, chartArea.bottom); // 선의 끝점으로 이동
-    ctx.stroke(); // 선을 그린다.
-    ctx.restore();
-  },
-};
+const CHART_MAIN_COLOR = '#7433FF';
 
 const ChartBar = () => {
   const { data } = useSalesStore();
@@ -41,23 +26,27 @@ const ChartBar = () => {
     <div className={styles.barWrapper}>
       {data.length !== 0 && (
         <Bar
+          // style={{
+          //   width: '100%',
+          // }}
           data={{
             datasets: [
               {
                 data,
                 backgroundColor: data.map((_, i) => {
-                  const bgColor = i === data.length - 1 ? CHART_MAIN_COLOR : '#ccc';
+                  const bgColor = i === data.length - 1 ? CHART_MAIN_COLOR : '#EDEDED';
                   return bgColor;
                 }),
                 barThickness: 90,
-                maxBarThickness: 120,
               },
             ],
           }}
           options={{
+            // maintainAspectRatio: false,
+            // responsive: true,
             elements: {
               bar: {
-                borderRadius: 12,
+                borderRadius: 10,
               },
             },
             layout: {
@@ -66,9 +55,9 @@ const ChartBar = () => {
             scales: {
               x: {
                 border: {
-                  width: 3,
+                  width: 1,
                   color: '#ccc',
-                  display: false, // chartBackgrounArea의 x축 border
+                  display: true, // chartBackgrounArea의 x축 border
                 },
                 grid: {
                   display: false, // chartBackgroundArea의 세로선
@@ -76,7 +65,7 @@ const ChartBar = () => {
                 ticks: {
                   font: {
                     size: 18, // x 축 font-size
-                    // family:'vazir' <- 여기다 font-family
+                    family: 'Pretendard', // <- 여기다 font-family
                   },
                 },
               },
@@ -95,15 +84,17 @@ const ChartBar = () => {
               },
               datalabels: {
                 color: value => {
-                  return value.dataset.data.length - 1 === value.dataIndex ? '#8f00ff' : ' black';
+                  return value.dataset.data.length - 1 === value.dataIndex ? 'red' : ' #000';
                 }, // 바 위에 뜬 value에 대한 color 조절 입니다.
-                anchor: 'end',
-                align: 'end',
-                offset: 3,
+                anchor: 'end', // datalabel 위치 조정
+                align: 'top', // datalabel text 위치 조정
+                offset: 0, // datalabel 위치 조정
                 clamp: true,
+
                 font: {
-                  weight: 'bold',
-                  size: 18,
+                  weight: 800,
+                  size: 14,
+                  lineHeight: '1.4rem',
                 },
                 formatter(value) {
                   return convertNumberToWon(value.y);
@@ -111,7 +102,6 @@ const ChartBar = () => {
               },
             },
           }}
-          plugins={[chartXAxisBorder]}
         />
       )}
     </div>

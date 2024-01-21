@@ -112,6 +112,7 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
         const startWeeksNumber = weeksInfoByYear[whatMonth];
         dateContainer.push(month.format(`YYYY년 MM월 ${weeksNumber - startWeeksNumber + 1} 주차`));
       }
+
       const dateGroup = new Map<
         string,
         (TablesInsert<'sales'> & { moment?: Moment; original_sales_date?: Moment })[]
@@ -147,14 +148,16 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
 
       const group = groupByKey<Tables<'sales'> & { original_sales_date: Moment }>(newData, 'sales_date');
 
-      for (const [, value] of group) {
-        if (moment().isSame(value[0].original_sales_date, 'week')) {
-          recordData.currentSales = value.reduce((acc, cur) => acc + cur.product_ea * cur.product_price, 0);
-          break;
+      for (const [, value] of groupByDate) {
+        if (value.length >= 1) {
+          if (moment().isSame(value[0].original_sales_date, 'weeks')) {
+            console.log(value, 'asjdifjiasdfisd');
+            recordData.currentSales = value.reduce((acc, cur) => acc + cur.product_ea! * cur.product_price!, 0);
+            break;
+          }
         }
       }
       recordData.dateType = 'weeks';
-
       const result = [...groupByDate.entries()]
         .map(([key, value]) => {
           return {

@@ -35,7 +35,7 @@ const MenuItemCategoryPage = () => {
     <div className={styles['wrap']}>
       <Swiper
         modules={[Virtual]}
-        spaceBetween={10}
+        spaceBetween={15}
         slidesPerView={'auto'}
         onSlideChange={handleSlideChange}
         className={clsx(styles.swiper, {

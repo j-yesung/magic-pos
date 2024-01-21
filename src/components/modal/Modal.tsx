@@ -18,11 +18,11 @@ const Modal = () => {
   const handleClickOverlay = (e: React.MouseEvent) => {
     if (e.target === overlayRef.current) {
       if (alertList && alertList.length > 0) {
-        hideAlert(alertList.shift()?.id ?? '');
+        hideAlert(alertList.pop()?.id ?? '');
       } else if (confirmList && confirmList.length > 0) {
-        hideAlert(confirmList.shift()?.id ?? '');
+        hideAlert(confirmList.pop()?.id ?? '');
       } else if (modalList && modalList?.length > 0) {
-        hideModal(modalList.shift()?.id ?? '');
+        hideModal(modalList.pop()?.id ?? '');
       }
     }
   };
@@ -34,17 +34,23 @@ const Modal = () => {
         (confirmList && confirmList?.length > 0)) && (
         <div className={styles['modal-overlay']} onClick={handleClickOverlay} ref={overlayRef}>
           {modalList?.map(modal => (
-            <div key={modal.id} className={clsx(styles['modal-container'], styles['modal-position-center'])}>
+            <div
+              key={modal.id}
+              className={clsx(styles.modalContainer, styles.modalPositionCenter, styles.customZIndex)}
+            >
               {React.cloneElement(modal.child, { modalId: modal.id })}
             </div>
           ))}
           {confirmList?.map(confirm => (
-            <div key={confirm.id} className={clsx(styles['modal-container'], styles['modal-position-center'])}>
+            <div
+              key={confirm.id}
+              className={clsx(styles.modalContainer, styles.modalPositionCenter, styles.confirmZIndex)}
+            >
               <ConfirmModal confirmOption={confirm} />
             </div>
           ))}
           {alertList?.map(alert => (
-            <div key={alert.id} className={clsx(styles['modal-container'], styles['modal-position-center'])}>
+            <div key={alert.id} className={clsx(styles.modalContainer, styles.modalPositionCenter, styles.alertZIndex)}>
               <AlertModal alert={alert} />
             </div>
           ))}

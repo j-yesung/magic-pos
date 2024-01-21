@@ -1,80 +1,188 @@
-.li:hover {
-  background-color: var(--bg-line);
+.wrap {
+  height: calc(100% - 10rem);
+  padding-right: 0.7rem;
+  overflow-y: scroll;
+  margin-top: 3rem;
 }
 
-.li.active {
-  border-color: var(--point-80);
+.wrap::-webkit-scrollbar {
+  width: 0.5rem;
 }
 
-.li.recommended {
+.wrap::-webkit-scrollbar-thumb {
+  background: var(--point1-50);
+  border-radius: 1rem;
+}
+
+.wrap::-webkit-scrollbar-track {
+  background: none;
+}
+
+.wrap ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.wrap li {
+  width: 39.2rem;
+  height: 15.9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--text5);
+}
+
+.wrap li {
+  position: relative;
+}
+.wrap li.recommended {
   border-color: var(--point-2);
 }
 
-.li button {
+.wrap li:hover button {
+  opacity: 0.5;
+}
+
+/* 추천 메뉴 */
+.wrap li .recommended-icon {
+  display: none;
+  position: absolute;
+  top: 2.5rem;
+  left: 2.5rem;
+  z-index: 1;
+}
+.wrap li .recommended-icon path {
+  fill: var(--point1-80);
+}
+
+.wrap li.recommended .recommended-icon {
+  display: flex;
+}
+
+/* 버튼 수정 삭제 */
+.wrap li .btn-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  gap: 1rem;
+}
+
+.wrap li:hover .btn-wrap {
+  display: flex;
+}
+
+.wrap li .btn-wrap > span {
+  width: 5.8rem;
+  height: 5.8rem;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.wrap li .btn-wrap {
+  cursor: pointer;
+}
+.wrap li .btn-wrap .edit-btn {
+  background: var(--bg-p, #f3edff);
+}
+
+.wrap li button {
   width: 100%;
   height: 100%;
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
   padding: 2rem;
+  cursor: pointer;
+  border-radius: 1rem;
+  border: 1px solid var(--line);
+  transition: all 0.3s;
 }
 
-.li button > span.img {
-  width: 10rem;
-  height: 10rem;
+.wrap li button.plus {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 3rem;
+  transition: all 0.3s;
+}
+
+.wrap li button > span.img {
+  width: 11.9rem;
+  height: 11.9rem;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.li button > span.img img {
+.wrap li button > span.img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.li button > span.txt {
+.wrap li button > span.txt {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
   text-align: left;
 }
 
-.li button > span.txt > span.name {
+.wrap li button > span.txt > span.name {
   color: var(--text1);
   font-size: 1.8rem;
   font-weight: 600;
+  line-height: 1.8rem;
+  letter-spacing: -0.036rem;
 }
 
-.li button > span.txt > span.price {
-  color: var(--text2);
-  font-size: 1.3rem;
+.wrap li button > span.txt > span.price-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wrap li button > span.txt > span.price-wrap span.price {
+  color: var(--text1);
+  font-size: 1.6rem;
   font-weight: 500;
+  line-height: 1.6rem;
+  letter-spacing: -0.032rem;
 }
 
-.li button > span.txt > span.remain-ea {
-  color: var(--text2);
-  font-size: 1.3rem;
-  font-weight: 500;
+.wrap li button > span.txt > span.price-wrap span.remain-ea {
+  color: var(--text3);
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 1.4rem;
+  letter-spacing: -0.028rem;
 }
 
-.li button > span.txt > span.position {
-  color: var(--text2);
-  font-size: 1.3rem;
-  font-weight: 500;
-}
-
-.li button > span.txt > span.option {
+.wrap li button > span.txt > span.option {
   flex-wrap: wrap;
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
+  overflow: hidden;
+  height: 6.5rem;
+  align-items: baseline;
 }
 
-.li button > span.txt > span.option > span {
-  padding: 0.7rem 1.2rem;
-  border-radius: 0.5rem;
-  background: var(--bg-line);
-  color: var(--text2, #5c5c5c);
+.wrap li button > span.txt > span.option > span {
+  border-radius: 0.3rem;
+  background: var(--bg-g);
   font-size: 1.3rem;
   font-weight: 500;
+  padding: 0.8rem 1rem;
+  color: var(--text2);
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.4rem;
+  letter-spacing: -0.028rem;
 }

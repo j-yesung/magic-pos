@@ -1,12 +1,15 @@
 import useSetMenuItem from '@/hooks/menu/menu-item/useSetMenuItems';
+import { useModal } from '@/hooks/modal/useModal';
 import { convertNumberToWon } from '@/shared/helper';
 import useMenuItemStore from '@/shared/store/menu-item';
-import useSideFormState from '@/shared/store/side-form';
 import { Tables } from '@/types/supabase';
 import clsx from 'clsx';
 import Image from 'next/image';
 import React, { useRef } from 'react';
+import { FaStar } from 'react-icons/fa';
 import styles from '../styles/menu-item-card.module.css';
+import MenuItemModal from './MenuItemModal';
+import EditButton from '/public/icons/pencil.svg';
 
 interface PropsType {
   item: Tables<'menu_item'>;
@@ -16,7 +19,7 @@ interface PropsType {
 }
 
 const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
-  const { setIsSideFormOpen } = useSideFormState();
+  const { MagicModal } = useModal();
   const { updatePositionMutate } = useSetMenuItem();
   const {
     setIsEdit,
@@ -36,8 +39,18 @@ const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
   // 메뉴 선택
   const clickChoiceCategoryHandler = (item: Tables<'menu_item'>) => {
     setIsEdit(true);
-    setIsSideFormOpen(true);
-    setMenuItem(item);
+    MagicModal.fire(<MenuItemModal />);
+    setMenuItem({
+      ...menuItem,
+      id: item.id,
+      name: item.name,
+      category_id: item.category_id,
+      image_url: item.image_url,
+      position: item.position,
+      price: item.price,
+      recommended: item.recommended,
+      remain_ea: item.remain_ea,
+    });
     setMenuItemSampleImg(item.image_url ?? '');
     fetchMenuOptionData(item.id);
     setMenuOption({ ...menuOption, menu_id: item.id });
@@ -87,22 +100,24 @@ const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
         [styles.recommended]: item.recommended,
       })}
     >
+      <FaStar className={styles['recommended-icon']} size={20} />
       <button
         type="button"
-        onClick={() => clickChoiceCategoryHandler(item)}
         draggable
         onDragStart={e => dragStartHandler(e, idx)}
         onDragEnter={e => dragEnterHandler(e, idx)}
         onDragEnd={dropHandler}
+        onClick={() => clickChoiceCategoryHandler(item)}
       >
         <span className={styles['img']}>
           <Image src={item.image_url ?? sampleImage} alt={item.name ?? 'Sample Image'} width={100} height={100} />
         </span>
         <span className={styles['txt']}>
           <span className={styles['name']}>{item.name}</span>
-          <span className={styles['price']}>{convertNumberToWon(item.price)}</span>
-          <span className={styles['remain-ea']}>남은 갯수: {item.remain_ea}</span>
-          <span className={styles['position']}>위치: {item.position}</span>
+          <span className={styles['price-wrap']}>
+            <span className={styles['price']}>{convertNumberToWon(item.price)}</span>
+            <span className={styles['remain-ea']}>수량 {item.remain_ea}</span>
+          </span>
           <span className={styles['option']}>
             {origineMenuOptions
               .filter(options => options.menu_id === item.id)
@@ -112,6 +127,11 @@ const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
           </span>
         </span>
       </button>
+      <span className={styles['btn-wrap']} onClick={() => clickChoiceCategoryHandler(item)}>
+        <span className={styles['edit-btn']}>
+          <EditButton width={27} height={27} />
+        </span>
+      </span>
     </li>
   );
 };

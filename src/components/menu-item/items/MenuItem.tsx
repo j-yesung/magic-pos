@@ -1,14 +1,15 @@
+import { useModal } from '@/hooks/modal/useModal';
 import useMenuItemStore from '@/shared/store/menu-item';
-import useSideFormState from '@/shared/store/side-form';
 import { Tables } from '@/types/supabase';
 import clsx from 'clsx';
 import { useState } from 'react';
 import MenuItemCard from '../items/MenuItemCard';
-import styles from '../styles/menu-item.module.css';
+import styles from '../styles/menu-item-card.module.css';
+import MenuItemModal from './MenuItemModal';
+import PlusButton from '/public/icons/plus.svg';
 
 const MenuItemPage = () => {
-  const { setIsSideFormOpen } = useSideFormState();
-
+  const { MagicModal } = useModal();
   const {
     setIsEdit,
     sampleImage,
@@ -26,7 +27,7 @@ const MenuItemPage = () => {
   // 메뉴 플러스
   const clickAddMenuItemHandler = async () => {
     setIsEdit(false);
-    setIsSideFormOpen(true);
+    MagicModal.fire(<MenuItemModal />);
     const newMenuItem: Tables<'menu_item'> = {
       id: '',
       name: '',
@@ -57,7 +58,7 @@ const MenuItemPage = () => {
           )}
         <li>
           <button className={styles['plus']} type="button" onClick={clickAddMenuItemHandler}>
-            +
+            <PlusButton width={22} height={22} />
           </button>
         </li>
       </ul>

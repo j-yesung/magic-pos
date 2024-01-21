@@ -25,10 +25,15 @@ const Record = () => {
       }
     };
   }, [selectedDate]);
+  console.log(record);
   return (
     <div className={styles.recordContainer}>
-      {SALES_TYPE[record.dateType as keyof typeof SALES_TYPE]}의 매출은
-      <span className={styles.recordSales}>{convertNumberToWon(record.currentSales)}</span>
+      <div className={styles.recordSalesWrapper}>
+        {SALES_TYPE[record.dateType as keyof typeof SALES_TYPE]}의 매출은
+        <span className={styles.recordSales}>{convertNumberToWon(record.currentSales)}</span>입니다.
+      </div>
+      <div className={styles.recordDate}>{selectedDate.format('YYYY년 M월 D일')}</div>
+      <div>{/* 위 태그를 가운데로 맞추려고 일부러 넣은 div */}</div>
     </div>
   );
 };

@@ -6,7 +6,6 @@ import useAuthState from '@/shared/store/session';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import MenuItemFormPage from './items/MenuItemForm';
 import MenuItemListPage from './items/MenuItemList';
 import styles from './styles/menu-item-container.module.css';
 
@@ -86,10 +85,7 @@ const MenuItemsComponentPage = () => {
             </button>
           </div>
         ) : (
-          <>
-            <MenuItemListPage />
-            <MenuItemFormPage />
-          </>
+          <MenuItemListPage />
         )}
       </div>
     </div>

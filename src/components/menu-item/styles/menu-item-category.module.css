@@ -43,36 +43,34 @@
 }
 
 .slide {
-  width: 20rem;
-  height: 4rem;
-  padding: 1rem;
+  width: auto;
+  height: 5.6rem;
+  padding: 1.9rem 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: all 0.3s;
-  font-size: 2rem;
-  background-color: var(--point-50);
+  font-size: 1.8rem;
+  font-weight: 400;
+  line-height: 1.8rem;
+  letter-spacing: -0.036rem;
   cursor: pointer;
-  border-radius: 1rem 1rem 0 0;
+  border-radius: 1rem;
+  background: var(--bg-g, #f7f7f7);
+  color: var(--text1);
 }
-
+.slide:hover {
+  background: var(--bg-p);
+}
 .slide p {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.slide:hover {
-  background-color: var(--point-80);
-}
-
 .slide.active {
-  background-color: var(--main-color);
-  color: #fff;
-}
-
-.slide.active:hover {
-  background-color: var(--main-color-hover);
+  background-color: var(--point1-80);
+  color: var(--text5);
 }
 
 .slide button {

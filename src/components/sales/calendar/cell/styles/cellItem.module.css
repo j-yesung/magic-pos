@@ -1,22 +1,25 @@
 /*default calendar에 들어갈 class css*/
 .date-base {
-  padding-top: 0.5rem;
-  border: 1px solid #000;
+  display: flex;
+  width: 3rem;
+  height: 4.4rem;
+  padding: 1rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.calendarCell {
-  padding-top: 1.4rem;
-}
 /*
     기본 calendar css 입니다.
     */
 .current {
+  opacity: 1 !important;
   background-color: #fff;
 }
 
 .prev,
 .after {
-  background-color: #ccc;
+  /* background-color: #ccc; */
   color: #000;
 }
 
@@ -25,11 +28,12 @@
     */
 .prev-month {
   opacity: 0.5;
-  background-color: #7f60d6e8;
+  background-color: var(--point-2);
 }
 
 .current-month {
-  border: 1px solid var(--main-color);
+  opacity: 1 !important;
+  /* border: 1px solid var(--main-color); */
 }
 
 .after-month {
@@ -40,22 +44,22 @@
      date 관련 class css 입니다.
     */
 .prev-date {
-  opacity: 1;
+  opacity: 0.5;
   cursor: pointer;
 }
 
 .current-date {
   cursor: pointer;
-  opacity: 1;
+  opacity: 1 !important;
   background-color: orange;
 }
 
 .after-date {
-  opacity: 0.5;
+  opacity: 0.5 !important;
 }
 
 .point-date {
-  background-color: cadetblue;
+  background-color: var(--main-color);
 }
 
 /*
@@ -78,21 +82,64 @@
     sales/calendar에서 매출 CSS 입니다.
     */
 
-.sales-base {
-  display: block;
-  margin-top: 1rem;
-  color: #000;
+.calendarCell {
+  padding-top: 1.4rem;
+  display: flex;
+  width: 15rem;
+  height: 15rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  cursor: default !important;
   font-size: 1.4rem;
-  height: 3rem;
-  font-weight: bold;
+}
+
+.sales-base {
+  display: flex;
+  width: 15rem;
+  height: 15rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  color: var(--text1, #121416);
+  text-align: center;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2rem; /* 100% */
+  letter-spacing: -0.04rem;
 }
 
 .sales-max {
-  color: rgb(236, 24, 24);
+  color: var(--red, #ff5656);
   font-size: 1.8rem;
+  position: relative;
+}
+
+.sales-max::before {
+  content: '';
+  position: absolute;
+  top: -3.2rem;
+  left: 2rem;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: var(--red, #ff5656);
 }
 
 .sales-min {
-  color: rgb(24, 77, 224);
+  position: relative;
+  color: #2382f1;
   font-size: 1.8rem;
+}
+
+.sales-min::before {
+  content: '';
+  position: absolute;
+  top: -3.2rem;
+  left: 2rem;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: #2382f1;
 }

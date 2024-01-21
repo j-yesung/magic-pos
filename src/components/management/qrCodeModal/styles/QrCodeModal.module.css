@@ -1,4 +1,7 @@
 .qr-code-modal-box {
+  gap: 3rem;
+  display: flex;
+  flex-direction: column;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -8,21 +11,30 @@
   border-radius: 1rem;
   box-shadow: 0 0 1rem 0 #000;
   background-color: #fff;
+  z-index: var(--level-5-z-index);
 }
 
-.qr-code-title {
+.qr-title-container {
   width: 100%;
   height: auto;
-  padding: 5rem;
   display: flex;
-  justify-content: center;
   align-items: center;
-  font-size: 4rem;
+  padding: 1.5rem 2rem;
+  justify-content: center;
+  border-bottom: 1px solid var(--bg-line);
+}
+.qr-code-title {
+  width: 100%;
+  display: flex;
+  font-size: 1.8rem;
+  align-items: center;
 }
 
 .qr-code-box {
   width: 100%;
   height: auto;
+  /* align-items: center; */
+  justify-content: center;
   display: flex;
 }
 

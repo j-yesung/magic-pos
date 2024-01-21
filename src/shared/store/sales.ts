@@ -42,7 +42,7 @@ const useSalesStore = create<SalesStore>()(set => ({
   date: {
     today: moment(),
     yesterDay: moment().subtract(1, 'day'),
-    currentDate: moment().clone(),
+    currentDate: moment(),
     selectedDate: moment().clone(),
     // utcStandardDate는 supabase의 Sales에서 데이터를 가져올 때 사용합니다.
     utcStandardDate: moment().hour(0).subtract(9, 'hour'),

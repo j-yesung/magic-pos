@@ -48,14 +48,11 @@ const MenuOptionModalButton = ({ modalId }: { modalId?: string }) => {
 
   return (
     <div className={styles['btn-wrap']}>
+      <button className={styles['basic-btn']} onClick={() => MagicModal.hide(modalId ?? '')}>
+        취소
+      </button>
       <button className={styles['update-btn']} onClick={() => updateOptionDetailHandler(menuOption)}>
         확인
-      </button>
-      <button className={styles['delete-btn']} onClick={removeOptionDetailHandler}>
-        삭제
-      </button>
-      <button className={styles['btn-wrap']} onClick={() => MagicModal.hide(modalId ?? '')}>
-        닫기
       </button>
     </div>
   );
