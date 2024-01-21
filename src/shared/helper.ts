@@ -112,6 +112,7 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
         const startWeeksNumber = weeksInfoByYear[whatMonth];
         dateContainer.push(month.format(`YYYY년 MM월 ${weeksNumber - startWeeksNumber + 1} 주차`));
       }
+      console.log(dateContainer);
       const dateGroup = new Map<
         string,
         (TablesInsert<'sales'> & { moment?: Moment; original_sales_date?: Moment })[]
@@ -121,7 +122,7 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
         acc.set(cur, []);
         return acc;
       }, dateGroup);
-
+      console.log(groupByDate);
       const newData = salesData.map(sales => {
         const momentDate = moment(sales.sales_date).hour(0).minute(0).second(0).add(9, 'hours'); // sales_date는 utc기준시간이므로  우리나라 시간으로 바꾸려면 // 9를 더해준다.
         const weeksInfoByYear = getStartWeeks(momentDate.year()); // 전년도 이번년도에서 시작하는 주차가 다르니까
@@ -147,14 +148,17 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
 
       const group = groupByKey<Tables<'sales'> & { original_sales_date: Moment }>(newData, 'sales_date');
 
-      for (const [, value] of group) {
-        if (moment().isSame(value[0].original_sales_date, 'week')) {
-          recordData.currentSales = value.reduce((acc, cur) => acc + cur.product_ea * cur.product_price, 0);
-          break;
+      for (const [, value] of groupByDate) {
+        if (value.length >= 1) {
+          if (moment().isSame(value[0].original_sales_date, 'weeks')) {
+            console.log(value, 'asjdifjiasdfisd');
+            recordData.currentSales = value.reduce((acc, cur) => acc + cur.product_ea! * cur.product_price!, 0);
+            break;
+          }
         }
       }
       recordData.dateType = 'weeks';
-
+      console.log(recordData);
       const result = [...groupByDate.entries()]
         .map(([key, value]) => {
           return {

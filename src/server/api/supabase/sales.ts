@@ -88,14 +88,12 @@ export const getMonthsSales: getSalesReturnType = async month => {
   const { data: sales, error } = await supabase
     .from('sales')
     .select('*')
-    .gte(
-      'sales_date',
-      momentToString(month.clone().subtract(6, 'month').startOf('month').subtract(6, 'month'), TIME_FORMAT),
-    )
-    .lte('sales_date', momentToString(month.clone(), TIME_FORMAT));
+    .gte('sales_date', momentToString(month.clone().startOf('month').subtract(6, 'month'), TIME_FORMAT))
+    .lte('sales_date', momentToString(month.clone().endOf('month'), TIME_FORMAT));
   if (error) {
     return { sales: [], error };
   }
+  console.log(sales);
   return { sales, formatType: 'months' };
 };
 
@@ -110,7 +108,7 @@ export const getMonthSales: getSalesReturnType = async month => {
     .from('sales')
     .select('*')
     .gte('sales_date', momentToString(month.clone().startOf('month'), TIME_FORMAT))
-    .lte('sales_date', momentToString(month.clone(), TIME_FORMAT));
+    .lte('sales_date', momentToString(month.clone().endOf('month'), TIME_FORMAT));
   if (error) {
     return { sales: [], error };
   }
