@@ -38,10 +38,11 @@ const Input = ({ value, onChangeHandler }: InputProps) => {
     '/auth/signup': [emailInput, passwordSignUpInput, passwordConfirmInput, businessNameInput],
     '/auth/findPassword': [emailInput],
     '/auth/reset': [passwordInput, passwordConfirmInput],
-    '/admin/store': [storeEmailInput, bnoNumberInput, storeBusineesNameInput],
+    '/admin/store': [storeEmailInput, storeBusineesNameInput, bnoNumberInput],
   };
 
   const inputs = inputOptions[path];
+  const isStoreClassName = path === '/admin/store' ? styles.storeInputWrapper : '';
 
   return (
     <>
@@ -51,7 +52,7 @@ const Input = ({ value, onChangeHandler }: InputProps) => {
 
         if (input) {
           return (
-            <div key={input.id}>
+            <div key={input.id} className={isStoreClassName}>
               {path === '/admin/store' && <label htmlFor={input.name}>{input.label}</label>}
               {path === '/auth/signup' && <label htmlFor={input.name}>{input.label}</label>}
               <input
