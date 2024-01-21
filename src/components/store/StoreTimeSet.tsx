@@ -1,16 +1,14 @@
 import { useGetQuery } from '@/hooks/store/useGetQuery';
-import { useStoreQuery } from '@/hooks/store/useStoreQuery';
-import { Fragment, useCallback, useEffect, useState } from 'react';
-import Button from '../common/Button';
+import { Fragment, useEffect, useState } from 'react';
 import { convertTimeFormat, timeSet } from '../utils/time-format';
 import StoreSelectBox from './StoreSelectBox';
+import StoreSetButton from './StoreSetButton';
 import styles from './styles/StroeContents.module.css';
 
 export type TimeState = Record<string, string>;
 
 const StoreTimeSet = ({ userId }: { userId: string }) => {
   const { data } = useGetQuery({ userId });
-  const { updateStoreTimeSet } = useStoreQuery();
   const [times, setTimes] = useState<TimeState>({ startTime: '', endTime: '' });
   const openTime = convertTimeFormat(times.startTime).convertedTime;
   const closeTime = convertTimeFormat(times.endTime).convertedTime;
@@ -25,11 +23,6 @@ const StoreTimeSet = ({ userId }: { userId: string }) => {
       });
     }
   }, [data]);
-
-  // DB 영업시간 변경
-  const clickUpdateStoreHandler = useCallback(() => {
-    updateStoreTimeSet({ userId, ...times });
-  }, [times, updateStoreTimeSet, userId]);
 
   return (
     <>
@@ -47,9 +40,7 @@ const StoreTimeSet = ({ userId }: { userId: string }) => {
             </>
           )}
         </div>
-        <Button type="button" onClick={clickUpdateStoreHandler} className={styles.buttonBlankArea}>
-          수정
-        </Button>
+        <StoreSetButton times={times} userId={userId} />
       </div>
       <p className={styles.timeCaption}>
         {isTimeSet
