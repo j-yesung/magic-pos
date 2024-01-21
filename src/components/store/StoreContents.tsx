@@ -23,10 +23,10 @@ const StoreContents = () => {
   return (
     <section className={styles.wrapper}>
       {isLoaded && session && (
-        <form>
+        <>
           <Input value={value} onChangeHandler={changeHandler} />
           <StoreTimeSet userId={userId} />
-        </form>
+        </>
       )}
     </section>
   );
