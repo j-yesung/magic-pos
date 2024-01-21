@@ -30,7 +30,11 @@ const ConfirmModal = ({ confirmOption }: { confirmOption: ModalConfirmTypeOption
         </button>
       </header>
       <div className={styles.content}>
-        <Image src={'/images/image-success.png'} alt={'확인 아이콘'} width={92} height={92} />
+        {confirmOption.icon ? (
+          confirmOption.icon
+        ) : (
+          <Image src={'/images/image-success.png'} alt={'확인 아이콘'} width={92} height={92} />
+        )}
         <p>{confirmOption.content}</p>
       </div>
       <div className={styles.buttonWrapper}>
