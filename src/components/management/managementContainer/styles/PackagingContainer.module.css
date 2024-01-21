@@ -1,5 +1,5 @@
 .packaging-container {
-  width: 50%;
+  width: 48.5%;
   height: 100%;
 }
 
@@ -7,11 +7,25 @@
   width: 100%;
   display: flex;
   justify-content: flex-start;
-  padding-bottom: 5rem;
-  font-size: 5rem;
+  align-items: center;
+  padding-bottom: 3rem;
+  font-size: 3rem;
   font-weight: 600;
 }
 
+.packaging-title > p {
+  width: 100%;
+  width: 2.4rem;
+  height: 2.4rem;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  border-radius: 5rem;
+  background: var(--red);
+  margin-left: 1rem;
+}
 .packaging-list {
   width: 100%;
   height: calc(100% - 10rem);

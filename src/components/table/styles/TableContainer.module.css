@@ -4,7 +4,6 @@
   display: flex;
   flex-wrap: wrap;
   overflow-y: scroll;
-  background-color: #f00;
 }
 .table-container::-webkit-scrollbar {
   width: 0.5rem;

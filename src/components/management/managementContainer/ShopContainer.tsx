@@ -25,10 +25,12 @@ const ShopContainer = ({ managementData }: { managementData?: StoreWithOrderInfo
     })
     .sort((a, b) => (a.position && b.position && a.position > b.position ? -1 : 1))
     .sort((a, b) => (a.order_time[0] < b.order_time[0] ? 1 : -1));
-
+  console.log(storeTableSort);
   return (
     <div className={styles['shop-container']}>
-      <div className={styles['shop-title']}>매장 관리</div>
+      <div className={styles['shop-title']}>
+        매장 관리<p>{storeOrder?.length}</p>
+      </div>
       <div className={styles['shop-list']}>
         {storeTableSort?.map((item: Tables<'store_table'>, index: number) => {
           return <ShopListItem key={item.id} index={index} storeOrderData={storeOrder} shopData={item} />;

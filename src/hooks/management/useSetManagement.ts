@@ -1,29 +1,24 @@
-import { updateIsDone } from "@/server/api/supabase/management";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useRef } from "react";
+import { updateIsDone } from '@/server/api/supabase/management';
+import useManagementStore from '@/shared/store/management';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useEffect, useRef } from 'react';
 
 const useSetManagement = () => {
   const didMount = useRef(false);
   const queryClient = useQueryClient();
+  const { setIsSideBar } = useManagementStore();
 
-  const {
-    mutate, isError, error, isPending } = useMutation({
-      mutationFn: updateIsDone,
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['management'] });
-      },
-    });
-
-
-
-
-
-
+  const { mutate, isError, error, isPending } = useMutation({
+    mutationFn: updateIsDone,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['management'] });
+    },
+  });
 
   useEffect(() => {
     if (didMount.current) {
       if (!isPending) {
-        setIsModal(false)
+        setIsSideBar();
       }
     } else {
       didMount.current = true;
@@ -37,7 +32,7 @@ const useSetManagement = () => {
     }
   }, [isError, error]);
 
-  return { mutate, reData };
-}
+  return { mutate };
+};
 
 export default useSetManagement;

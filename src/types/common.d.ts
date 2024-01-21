@@ -43,6 +43,6 @@ interface ToastTypeOption {
 
 interface OrderConfirmType {
   id: string;
-  number: number;
+  number?: number;
   isTogo: boolean;
 }

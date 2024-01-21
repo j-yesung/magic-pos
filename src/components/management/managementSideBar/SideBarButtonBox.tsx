@@ -24,9 +24,6 @@ const SideBarButtonBox = () => {
       <button className={styles['side-bar-button']} onClick={clickOrderConfirmHandler}>
         주문 완료
       </button>
-      <button className={styles['side-bar-button']} onClick={clickQRModalHandler}>
-        QR코드 출력
-      </button>
     </div>
   );
 };

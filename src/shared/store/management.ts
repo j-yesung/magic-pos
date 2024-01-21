@@ -14,13 +14,13 @@ interface managementType {
   tableNumber: string;
   orderConfirmData: OrderConfirmType[];
   qrData: QRdataType[];
-  realTimeData: OrderDataWithStoreName | null,
+  isSideBar: boolean;
   setOrderData: (value: OrderDataWithStoreName[]) => void;
   setOrderId: (value: { id: string[]; status: string; number: string }) => void;
   addOrderConfirmData: (value: OrderConfirmType) => void;
   removeOrderConfirmData: (value: string) => void;
   setQrData: (value: QRdataType) => void;
-  setRealTimeData: (value: OrderDataWithStoreName) => void;
+  setIsSideBar: () => void;
 }
 
 const useManagementStore = create<managementType>(set => ({
@@ -30,7 +30,7 @@ const useManagementStore = create<managementType>(set => ({
   tableNumber: '',
   orderConfirmData: [],
   qrData: [],
-  realTimeData: {},
+  isSideBar: false,
   setOrderData: value =>
     set(() => ({
       orderData: value,
@@ -53,9 +53,9 @@ const useManagementStore = create<managementType>(set => ({
     set(state => ({
       qrData: [...state.qrData, value],
     })),
-  setRealTimeData: value =>
-    set(() => ({
-      qrData: value,
+  setIsSideBar: () =>
+    set(state => ({
+      isSideBar: !state.isSideBar,
     })),
 }));
 
