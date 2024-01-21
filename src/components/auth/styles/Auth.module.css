@@ -57,7 +57,7 @@
 .form-inner-wrapper .form-business {
   gap: 2rem;
   display: flex;
-  margin: 4rem 0 2rem 0;
+  margin-top: 2rem;
   flex-direction: column;
 }
 .form-business div {

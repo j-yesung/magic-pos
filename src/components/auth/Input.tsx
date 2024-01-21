@@ -70,8 +70,12 @@ const Input = ({ value, onChangeHandler }: InputProps) => {
                 disabled={input.disabled}
                 required
               />
-              {isPasswordConfirm && value['password'] && (
-                <span className={isPasswordValid ? styles.match : styles.error}>{passwordValidationMessage}</span>
+              {input.name === 'passwordConfirm' && (
+                <span
+                  className={isPasswordConfirm && value['password'] && isPasswordValid ? styles.match : styles.error}
+                >
+                  {isPasswordConfirm && value['password'] ? passwordValidationMessage : <>&nbsp;</>}
+                </span>
               )}
             </div>
           );
