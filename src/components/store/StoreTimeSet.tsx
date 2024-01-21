@@ -5,8 +5,6 @@ import StoreSelectBox from './StoreSelectBox';
 import StoreSetButton from './StoreSetButton';
 import styles from './styles/StroeContents.module.css';
 
-export type TimeState = Record<string, string>;
-
 const StoreTimeSet = ({ userId }: { userId: string }) => {
   const { data } = useGetQuery({ userId });
   const [times, setTimes] = useState<TimeState>({ startTime: '', endTime: '' });

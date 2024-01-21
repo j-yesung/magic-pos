@@ -1,16 +1,9 @@
 import Select, { StylesConfig } from 'react-select';
 import { createTimeOptions, timeOption } from '../utils/time-format';
-import { TimeState } from './StoreTimeSet';
 
 interface OptionType {
   value: string;
   label: string;
-}
-
-interface StoreSelectBoxProps {
-  times: TimeState;
-  item: { id: number; name: string; label: string; defaultValue: string };
-  setTimes: React.Dispatch<React.SetStateAction<TimeState>>;
 }
 
 const customStyles: StylesConfig<OptionType, false> = {
