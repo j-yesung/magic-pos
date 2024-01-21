@@ -13,7 +13,7 @@ export const useErrorMessage = (value: Record<string, string>) => {
   }
 
   if (password && !isPasswordFormatValid) {
-    passwordValidationMessage = `비밀번호 형식이 올바르지 않습니다. (대소문자/특수문자 포함 8 ~ 16자리 영문으로 입력해 주세요.)`;
+    passwordValidationMessage = '비밀번호 형식이 올바르지 않습니다.';
   }
 
   const isPasswordValid = isPasswordAndConfirmEntered ? isPasswordMatch && isPasswordFormatValid : false;
