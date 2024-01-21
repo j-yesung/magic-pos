@@ -18,7 +18,6 @@ export const useCalendar = () => {
   const clickPreMonthHandler = () => {
     setCurrentDate(currentDate.clone().subtract(1, 'month'));
   };
-
   //다음 달로 이동
   const clickNextMonthHandler = () => {
     setCurrentDate(currentDate.clone().add(1, 'month'));
@@ -64,6 +63,7 @@ export const useCalendar = () => {
 
   const clickWeeksChartHandler = async () => {
     const { sales, formatType } = await getWeekSales(utcStandardDate.clone());
+    console.log(sales);
     if (sales.length !== 0) {
       const { result, recordData } = formatData(sales, formatType);
       if (result && recordData) {

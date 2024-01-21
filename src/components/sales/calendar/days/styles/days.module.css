@@ -1,11 +1,36 @@
+/*status Days*/
+
 .days {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  margin: 1rem 0;
-  font-size: 1.4rem;
-  text-align: center;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
 }
 
 .day {
+  display: flex;
+  width: 3rem;
+  height: 3rem;
   padding: 1rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+/*calendar Days*/
+
+.calendar-day {
+  display: flex;
+  width: 15rem;
+  padding-bottom: 2rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  color: var(--text1, #121416);
+  text-align: center;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 2rem; /* 100% */
+  letter-spacing: -0.04rem;
 }

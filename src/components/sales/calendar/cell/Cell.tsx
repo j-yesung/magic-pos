@@ -104,9 +104,6 @@ const Cell = () => {
           // ... spreadOperator
           {...(!isChangeView && { getMinMaxSalesType: getMinMaxSalesType })}
           {...(isChangeView && { clickShowDataOfDateHandler: clickShowDataOfDateHandler })}
-
-          // clickShowDataOfDateHandler={isChangeView && clickShowDataOfDateHandler}
-          // getMinMaxSalesType={isChangeView && getMinMaxSalesType}
         />,
       );
       day = day.clone().add(1, 'day');

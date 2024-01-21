@@ -3,10 +3,9 @@ import useSalesStore from '@/shared/store/sales';
 import clsx from 'clsx';
 import { Moment } from 'moment';
 import { Fragment, useEffect, useRef, useState } from 'react';
+import { IoCalendarClearOutline } from 'react-icons/io5';
 import Calendar from '../../calendar/Calendar';
-import Record from '../record/Record';
 import styles from './styles/tab.module.css';
-
 const Tab = () => {
   const TODAY = 'today';
   const MONTHS = 'months';
@@ -40,7 +39,13 @@ const Tab = () => {
         dateRef.current = null;
       }
     };
-  }, [currentDate]);
+  }, [isShow]);
+
+  useEffect(() => {
+    return () => {
+      setIsShow(false);
+    };
+  }, []);
 
   return (
     <div className={styles.wrapper}>
@@ -72,19 +77,16 @@ const Tab = () => {
           이번 달
         </span>
       </div>
-      <Record />
 
+      <div className={styles.calendarWrapper} onClick={clickShowCalendarHandler}>
+        <span className={styles.dateText}>{dateRef.current?.format('YYYY-MM-DD')}</span>
+        <IoCalendarClearOutline className={styles.calendarIcon} />
+      </div>
       {isShow && (
         <Fragment>
           <div className={styles.calendarBg} onClick={clickCloseCalendar}></div>
           <Calendar />
         </Fragment>
-      )}
-
-      {!isShow && (
-        <div className={styles.calendarWrapper} onClick={clickShowCalendarHandler}>
-          <div className={styles.calendarIcon}>{dateRef.current?.format('YY년 MM월 DD일')} icon자리</div>
-        </div>
       )}
     </div>
   );
