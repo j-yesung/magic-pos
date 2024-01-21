@@ -17,7 +17,10 @@ const useAuthState = create<UserAuth>()(
       storeName: null,
       storeBno: null,
     }),
-    { name: 'auth' },
+    {
+      name: 'auth-storage',
+      getStorage: () => sessionStorage,
+    },
   ),
 );
 
