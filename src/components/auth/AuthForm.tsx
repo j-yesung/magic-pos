@@ -4,6 +4,7 @@ import { useInput } from '@/hooks/auth/useInput';
 import { useValid } from '@/hooks/auth/useValid';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { IoIosCheckmarkCircleOutline } from 'react-icons/io';
 import Button from '../common/Button';
 import Input from './Input';
 import FormButton from './button/FormButton';
@@ -21,7 +22,6 @@ const AuthForm = ({ data }: FormProps) => {
     url,
     subUrl,
     title,
-    subTitle,
     subName,
     buttonName,
     subButtonName,
@@ -50,7 +50,7 @@ const AuthForm = ({ data }: FormProps) => {
       </div>
       {path === '/auth/success' && (
         <div className={styles.successImage}>
-          <Image src="/images/image-success.png" width={100} height={100} alt="success" priority />
+          <IoIosCheckmarkCircleOutline size={200} className={styles.signupSuccess} />
         </div>
       )}
       {path === '/auth/findPassword' || path === '/auth/reset' || path === '/auth/success' ? (

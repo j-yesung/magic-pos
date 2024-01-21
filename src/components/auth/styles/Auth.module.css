@@ -211,3 +211,7 @@
   flex-direction: row;
   align-items: center;
 }
+
+.signup-success {
+  color: var(--point-80);
+}
