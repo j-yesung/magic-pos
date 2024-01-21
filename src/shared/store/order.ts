@@ -89,6 +89,7 @@ export const setOrderNumber = (orderNumber: number) => useOrderStore.setState(()
 export const setIsOptionPage = (isOptionPage: boolean) => useOrderStore.setState(() => ({ isOptionPage }));
 export const goNextStep = () => useOrderStore.setState(state => ({ step: Math.min(state.step + 1, state.maxStep) }));
 export const goPrevStep = () => useOrderStore.setState(state => ({ step: Math.max(state.step - 1, 0) }));
+export const setStep = (step: number) => useOrderStore.setState(() => ({ step }));
 export const setStoreId = (storeId: string) => useOrderStore.setState(() => ({ storeId }));
 export const setTableId = (tableId: string) => useOrderStore.setState(() => ({ tableId }));
 export const setOrderType = (orderType: OrderType) => useOrderStore.setState(() => ({ orderType }));

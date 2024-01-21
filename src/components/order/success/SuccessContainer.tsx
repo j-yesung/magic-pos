@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSalesQuery } from '@/hooks/sales/useSalesQuery';
-import useOrderStore, { addOrderId, getTotalPrice, setOrderNumber } from '@/shared/store/order';
+import useOrderStore, { addOrderId, getTotalPrice, ORDER_STEP, setOrderNumber, setStep } from '@/shared/store/order';
 import { groupByKey } from '@/shared/helper';
 import { Tables } from '@/types/supabase';
 import { useStoreQuery } from '@/hooks/store/useStoreQuery';
@@ -11,6 +11,7 @@ import Image from 'next/image';
 import image from '@/../public/images/image-success.png';
 import { useRouter } from 'next/router';
 import { decrementRemainEaByMenuId } from '@/server/api/supabase/menu-item';
+import MenuHeader from '../common/MenuHeader';
 
 const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const orderList = useOrderStore(state => state.orderList);
@@ -97,24 +98,32 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   }, [newOrderNumber]);
 
   useEffect(() => {
+    setStep(ORDER_STEP.SUCCESS);
     setIsPageLoading(true);
   }, []);
 
   return (
     <>
       {isPageLoading && (
-        <div className={styles.container}>
-          <Image src={image} alt={'성공 이미지'} width={200} height={200} />
-          <div className={styles.textBox}>
-            <span>주문이 완료되었습니다!</span>
-            <em>
-              주문 번호는 <strong>{orderNumber}</strong> 입니다.
-            </em>
+        <>
+          <div className={styles.container}>
+            <MenuHeader />
+            <div className={styles.wrapper}>
+              <div className={styles.content}>
+                <h1>주문이 완료되었어요</h1>
+                <div>
+                  <Image src={image} alt={'성공 이미지'} width={140} height={140} />
+                </div>
+                <div className={styles.orderNumber}>
+                  주문 번호 <strong>{orderNumber}</strong>
+                </div>
+                <div className={styles.checkOrder} onClick={clickCheckOrderHandler}>
+                  주문 확인하기
+                </div>
+              </div>
+            </div>
           </div>
-          <div className={styles.checkOrder} onClick={clickCheckOrderHandler}>
-            주문 확인하기
-          </div>
-        </div>
+        </>
       )}
     </>
   );

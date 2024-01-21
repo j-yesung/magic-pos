@@ -10,6 +10,7 @@ const TITLE: { [key in number]: string } = {
 
 const MenuHeader = () => {
   const step = useOrderStore(state => state.step);
+  console.log(step);
 
   return (
     <header className={styles.container}>
