@@ -13,7 +13,7 @@ export interface SalesDataReturnType {
   error?: PostgrestError;
   formatType?: DateFormatType;
 }
-type getSalesReturnType = (date: Moment) => Promise<SalesDataReturnType>;
+type getSalesReturnType = (date: Moment, store_id: string) => Promise<SalesDataReturnType>;
 
 export const addSales = async (sales: Omit<Tables<'sales'>, 'id'>[]) => {
   const { error } = await supabase.from('sales').insert(sales).select();
@@ -40,12 +40,13 @@ const TIME_FORMAT = 'YYYY-MM-DD HH:00';
  * @returns
  */
 
-export const getTodaySales: getSalesReturnType = async day => {
+export const getTodaySales: getSalesReturnType = async (day, store_id) => {
   const { data: sales, error } = await supabase
     .from('sales')
     .select('*')
     .gte('sales_date', momentToString(day.clone().subtract(6, 'day'), TIME_FORMAT))
-    .lt('sales_date', momentToString(day.clone().add(1, 'day'), TIME_FORMAT));
+    .lt('sales_date', momentToString(day.clone().add(1, 'day'), TIME_FORMAT))
+    .eq('store_id', store_id);
   if (error) {
     return { sales: [], error };
   }
@@ -62,12 +63,13 @@ export const getTodaySales: getSalesReturnType = async day => {
  * @returns
  */
 
-export const getWeekSales: getSalesReturnType = async week => {
+export const getWeekSales: getSalesReturnType = async (week, store_id) => {
   const { data: sales, error } = await supabase
     .from('sales')
     .select('*')
     .gte('sales_date', momentToString(week.clone().subtract(6, 'week'), TIME_FORMAT))
-    .lte('sales_date', momentToString(week.clone(), TIME_FORMAT));
+    .lte('sales_date', momentToString(week.clone(), TIME_FORMAT))
+    .eq('store_id', store_id);
 
   if (error) {
     return { sales: [], error };
@@ -84,12 +86,13 @@ export const getWeekSales: getSalesReturnType = async week => {
  * @returns
  */
 
-export const getMonthsSales: getSalesReturnType = async month => {
+export const getMonthsSales: getSalesReturnType = async (month, store_id) => {
   const { data: sales, error } = await supabase
     .from('sales')
     .select('*')
     .gte('sales_date', momentToString(month.clone().startOf('month').subtract(6, 'month'), TIME_FORMAT))
-    .lte('sales_date', momentToString(month.clone().endOf('month'), TIME_FORMAT));
+    .lte('sales_date', momentToString(month.clone().endOf('month'), TIME_FORMAT))
+    .eq('store_id', store_id);
   if (error) {
     return { sales: [], error };
   }
@@ -102,12 +105,13 @@ export const getMonthsSales: getSalesReturnType = async month => {
  * @returns 1달치의 data가 return 됩니다.
  */
 
-export const getMonthSales: getSalesReturnType = async month => {
+export const getMonthSales: getSalesReturnType = async (month, store_id) => {
   const { data: sales, error } = await supabase
     .from('sales')
     .select('*')
     .gte('sales_date', momentToString(month.clone().startOf('month'), TIME_FORMAT))
-    .lte('sales_date', momentToString(month.clone().endOf('month'), TIME_FORMAT));
+    .lte('sales_date', momentToString(month.clone().endOf('month'), TIME_FORMAT))
+    .eq('store_id', store_id);
   if (error) {
     return { sales: [], error };
   }

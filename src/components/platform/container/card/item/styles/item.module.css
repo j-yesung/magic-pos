@@ -1,6 +1,7 @@
 .item-wrapper {
   position: relative;
-  border: 1px solid var(--main-color);
+  border-radius: 1rem;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 53.76%);
 }
 
 .item {
@@ -8,31 +9,69 @@
   position: relative;
   width: 30rem;
   height: 15rem;
-  border: 1px solid var(--point-80);
   display: inline-block;
   cursor: pointer;
+}
+
+.external-link {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8.5rem;
+  height: 8.5rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  flex-shrink: 0;
+  border-radius: 50rem;
+  background: var(--point1-50, #a87fff);
+}
+.external-link span {
+  color: var(--white, #fff);
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem; /* 100% */
+}
+.external-link svg {
+  width: 2.4rem;
+  height: 2.5rem;
+}
+
+.item:hover .external-link {
+  display: flex;
 }
 
 .item img {
   width: 100%;
   height: 100%;
 }
+.default-img-container {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.default-img-container svg {
+  width: 12rem;
+  height: 12rem;
+}
 .item-header {
   position: absolute;
   display: flex;
   align-items: center;
-  top: -5rem;
-  left: -0.2rem;
-  width: 14rem;
-  height: 5rem;
-  border-radius: 22% 69% 100% 0% / 0% 100% 0% 100%;
-  border: 0.2rem solid var(--point-80);
+  bottom: 1.8rem;
+  left: 2.8rem;
 }
 
 .item-title {
   display: inline-block;
-  padding-left: 2rem;
-  font-size: 1.4rem;
+  font-size: 2rem;
   font-weight: bold;
 }
 
