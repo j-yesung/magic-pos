@@ -1,6 +1,6 @@
 import { supabase } from '@/shared/supabase';
 
-export const fetchOrderCheckList = async (id?: string, pageParam) => {
+export const fetchOrderCheckList = async (pageParam: number, id?: string) => {
   if (id) {
     const { data: order_store, error: storeError } = await supabase
       .from('order_store')

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import 'swiper/css';
 import { Virtual } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper as swipers } from 'swiper/types';
 import styles from '../styles/menu-item-category.module.css';
 
 const MenuItemCategoryPage = () => {
@@ -22,7 +23,7 @@ const MenuItemCategoryPage = () => {
     setMenuItemList(item.menu_item);
   };
 
-  const handleSlideChange = swiper => {
+  const handleSlideChange = (swiper: swipers) => {
     // 슬라이드 변경 후에 호출됩니다.
     setOnSwiperIndex(swiper.activeIndex);
     // 마지막 슬라이드에 도달했을 때

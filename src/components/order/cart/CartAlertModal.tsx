@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
-import styles from './styles/CartAlertModal.module.css';
-import { FaCheck } from 'react-icons/fa6';
 import { useModal } from '@/hooks/modal/useModal';
+import { useEffect } from 'react';
+import { FaCheck } from 'react-icons/fa6';
+import styles from './styles/CartAlertModal.module.css';
 
-const CartAlertModal = ({ modalId }: { modalId: string }) => {
+const CartAlertModal = ({ modalId }: { modalId?: string }) => {
   const { MagicModal } = useModal();
 
   useEffect(() => {
     setTimeout(() => {
-      MagicModal.hide(modalId);
+      MagicModal.hide(modalId ?? '');
     }, 700);
   }, []);
 

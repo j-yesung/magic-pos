@@ -4,7 +4,7 @@ import TableEditModalContainer from './TableEditModalContainer';
 import styles from './styles/TableEditModal.module.css';
 import CloseButton from '/public/icons/close.svg';
 
-const TableEditModal = ({ modalId }: { modalId: string }) => {
+const TableEditModal = ({ modalId }: { modalId?: string }) => {
   const { MagicModal } = useModal();
 
   const clickRemoveTableHandler = () => {
@@ -19,7 +19,7 @@ const TableEditModal = ({ modalId }: { modalId: string }) => {
         </span>{' '}
       </div>
       <TableEditModalContainer />
-      <TableEditModalButtonBox modalId={modalId} />
+      <TableEditModalButtonBox modalId={modalId!} />
     </div>
   );
 };

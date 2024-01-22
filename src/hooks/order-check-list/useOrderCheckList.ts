@@ -8,7 +8,7 @@ const enum QUERY_KEY {
 const useOrderCheckList = (id?: string) => {
   const { data, isLoading, isError, error, hasNextPage, fetchNextPage, isFetchingNextPage } = useInfiniteQuery({
     queryKey: [QUERY_KEY.ORDER_CHECK_LIST, id],
-    queryFn: ({ pageParam }) => fetchOrderCheckList(id, pageParam),
+    queryFn: ({ pageParam }) => fetchOrderCheckList(pageParam, id),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPage) => {
       if (lastPage) {
