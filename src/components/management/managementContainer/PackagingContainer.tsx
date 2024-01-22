@@ -11,7 +11,7 @@ const PackagingContainer = ({ managementData }: { managementData?: StoreWithOrde
       <div className={styles['packaging-list-wrap']}>
         <div className={styles['packaging-list']}>
           {managementData?.[0]?.order_number
-            .filter(item => item.is_togo === true)
+            .filter(item => item.is_togo)
             .sort((a, b) => {
               if (a.order_time && b.order_time) {
                 return a.order_time < b.order_time ? -1 : 1;
