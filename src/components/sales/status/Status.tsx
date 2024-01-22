@@ -20,12 +20,15 @@ const Status = () => {
     getTodaySales(utcStandardDate.clone(), storeId!).then(data => {
       if (data.sales.length !== 0) {
         const { result, recordData } = formatData(data.sales as Tables<'sales'>[], data.formatType, moment());
-        console.log(result);
-        console.log(recordData);
         if (result) {
           setData(result);
           setRecord(recordData);
         }
+      } else if (data.sales.length === 0) {
+        setRecord({
+          currentSales: 0,
+          dateType: 'days',
+        });
       }
     });
     return () => {
