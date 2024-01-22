@@ -1,16 +1,13 @@
 import { convertNumberToWon } from '@/shared/helper';
 import useSalesStore from '@/shared/store/sales';
-import { BarElement, CategoryScale, ChartArea, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js';
+import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';
+import NoneSales from '../noneSales/NoneSales';
 import styles from './styles/ChartBar.module.css';
 // Chart.js를 사용하려면 먼저 library 등록을 해야합니다.
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels);
 
-interface ChartProps {
-  ctx: CanvasRenderingContext2D;
-  chartArea: ChartArea;
-}
 /**
  *  chat.js의 plugin객체인데, chart component의 option의 plugin에 id 값을 입력하면 사용가능합니다
  *
@@ -21,7 +18,7 @@ const CHART_MAIN_COLOR = '#7433FF';
 
 const ChartBar = () => {
   const { data } = useSalesStore();
-
+  console.log(data);
   return (
     <div className={styles.barWrapper}>
       {data.length !== 0 && (
@@ -104,6 +101,8 @@ const ChartBar = () => {
           }}
         />
       )}
+
+      {data.length === 0 && <NoneSales />}
     </div>
   );
 };

@@ -1,0 +1,11 @@
+.none-container {
+  width: 100%;
+  min-height: 50rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.none-sales {
+  font-size: 2rem;
+}

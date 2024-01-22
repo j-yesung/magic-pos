@@ -79,17 +79,23 @@ const Sidebar = (adminInfo: AdminCategories) => {
           {isMode ? modeText[0] : modeText[1]}
         </div>
         <p>{isMode ? modeSubText[0] : modeSubText[1]}</p>
-        <ul>
-          <SidebarList navList={navList} clickFn={clickMoveListHandler} />
-        </ul>
+        <div className={styles.mediaScroll}>
+          <ul>
+            <SidebarList navList={navList} clickFn={clickMoveListHandler} />
+          </ul>
+        </div>
       </div>
       <div className={styles.buttonWrapper}>
-        <Button type="button" className={styles.callButton}>
-          <IoMailOutline size={25} />
+        <Button type="button">
+          <div className={styles.callWrapper}>
+            <IoMailOutline size={25} /> 문의하기
+          </div>
         </Button>
         <p>|</p>
-        <Button type="button" className={styles.logoutButton} onClick={() => logout()}>
-          <IoLogOutOutline size={25} />
+        <Button type="button" onClick={() => logout()}>
+          <div className={styles.logoutWrapper}>
+            <IoLogOutOutline size={25} /> 로그아웃
+          </div>
         </Button>
       </div>
     </aside>

@@ -4,7 +4,7 @@ import { create } from 'zustand';
 
 export type QRdataType = {
   qrRef: HTMLDivElement;
-  qrUrl: string;
+  qrUrl?: string;
   orderType: string;
 };
 interface managementType {

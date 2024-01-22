@@ -39,8 +39,12 @@ export const useCalendar = () => {
         setRecord(recordData);
         setData(result);
       }
-    } else if (data.length !== 0) {
+    } else {
       setData([]);
+      setRecord({
+        currentSales: 0,
+        dateType: 'days',
+      });
     }
     setIsShow(false);
     setCurrentDate(day.clone());
@@ -58,6 +62,11 @@ export const useCalendar = () => {
         setData(result);
         setRecord(recordData);
       }
+    } else {
+      setRecord({
+        currentSales: 0,
+        dateType: 'days',
+      });
     }
     setCurrentDate(today);
     setSelectedDate(today);
@@ -72,6 +81,13 @@ export const useCalendar = () => {
         setRecord(recordData);
       }
     }
+
+    if (sales.length === 0) {
+      setRecord({
+        currentSales: 0,
+        dateType: 'weeks',
+      });
+    }
   };
 
   const clickMonthsChartHandler = async () => {
@@ -83,6 +99,11 @@ export const useCalendar = () => {
         setData(result);
         setRecord(recordData);
       }
+    } else {
+      setRecord({
+        currentSales: 0,
+        dateType: 'month',
+      });
     }
   };
 

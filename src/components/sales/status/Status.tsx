@@ -24,6 +24,11 @@ const Status = () => {
           setData(result);
           setRecord(recordData);
         }
+      } else if (data.sales.length === 0) {
+        setRecord({
+          currentSales: 0,
+          dateType: 'days',
+        });
       }
     });
     return () => {

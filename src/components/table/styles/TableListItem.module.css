@@ -1,5 +1,5 @@
 .table-list-item {
-  width: calc((100% - 12.8rem)/4);
+  width: calc((100% - 12.8rem) / 4);
   height: 21.8rem;
   display: flex;
   flex-direction: column;
@@ -7,8 +7,6 @@
   border-radius: 1rem;
   background: var(--bg-g);
   cursor: pointer;
-  margin-right: 3.2rem;
-  margin-bottom: 1.8rem;
 }
 
 .table-list-item > div {
