@@ -1,15 +1,22 @@
 .qr-code-svg-box {
-  width: auto;
+  width: 100%;
   height: auto;
   padding: 2rem 4rem;
 }
 
 .qr-code {
+  gap: 1rem;
+  display: flex;
   width: auto;
   height: auto;
   margin: 1rem 0;
   position: relative;
   transition: 0.2s;
+  padding: 1rem 1.2rem;
+}
+
+.qr-code svg {
+  border: 1px solid var(--line);
 }
 
 .table-number {
