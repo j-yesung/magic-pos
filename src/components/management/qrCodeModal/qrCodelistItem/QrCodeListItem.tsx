@@ -43,7 +43,6 @@ const QrCodeListItem = ({ storeTable, orderType }: propsType) => {
     if (isQrClick) {
       qrDownLoad({
         qrRef: QRImage.current[0],
-        qrUrl,
         orderType,
       });
     }
