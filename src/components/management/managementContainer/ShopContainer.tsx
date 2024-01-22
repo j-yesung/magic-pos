@@ -31,10 +31,12 @@ const ShopContainer = ({ managementData }: { managementData?: StoreWithOrderInfo
       <div className={styles['shop-title']}>
         매장 관리<p>{storeOrder?.length}</p>
       </div>
-      <div className={styles['shop-list']}>
-        {storeTableSort?.map((item: Tables<'store_table'>, index: number) => {
-          return <ShopListItem key={item.id} index={index} storeOrderData={storeOrder} shopData={item} />;
-        })}
+      <div className={styles['shop-list-wrap']}>
+        <div className={styles['shop-list']}>
+          {storeTableSort?.map((item: Tables<'store_table'>, index: number) => {
+            return <ShopListItem key={item.id} index={index} storeOrderData={storeOrder} shopData={item} />;
+          })}
+        </div>
       </div>
     </div>
   );
