@@ -86,12 +86,16 @@ const Sidebar = (adminInfo: AdminCategories) => {
         </div>
       </div>
       <div className={styles.buttonWrapper}>
-        <Button type="button" className={styles.callButton}>
-          <IoMailOutline size={25} />
+        <Button type="button">
+          <div className={styles.callWrapper}>
+            <IoMailOutline size={25} /> 문의하기
+          </div>
         </Button>
         <p>|</p>
-        <Button type="button" className={styles.logoutButton} onClick={() => logout()}>
-          <IoLogOutOutline size={25} />
+        <Button type="button" onClick={() => logout()}>
+          <div className={styles.logoutWrapper}>
+            <IoLogOutOutline size={25} /> 로그아웃
+          </div>
         </Button>
       </div>
     </aside>

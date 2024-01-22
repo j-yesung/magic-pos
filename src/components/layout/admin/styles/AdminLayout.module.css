@@ -250,6 +250,14 @@
   transition: transform 0.3s ease-in-out;
 }
 
+.call-wrapper,
+.logout-wrapper {
+  gap: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* 메인 영역입니다. */
 .main-wrapper {
   position: relative;
