@@ -7,8 +7,8 @@
 .item {
   all: unset;
   position: relative;
-  width: 30rem;
-  height: 15rem;
+  width: 35rem;
+  height: 20rem;
   display: inline-block;
   cursor: pointer;
 }
@@ -48,6 +48,7 @@
 .item img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 .default-img-container {
   width: 100%;
@@ -73,6 +74,7 @@
   display: inline-block;
   font-size: 2rem;
   font-weight: bold;
+  color: var(--text5);
 }
 
 .edit-item {
