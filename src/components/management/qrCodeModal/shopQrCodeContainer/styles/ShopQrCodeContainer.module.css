@@ -42,6 +42,6 @@
 .grid-row-2 {
   grid-template-columns: repeat(2, 1fr);
 }
-/* .grid-row-3 {
+.grid-row-3 {
   grid-template-columns: repeat(3, 1fr);
-} */
+}
