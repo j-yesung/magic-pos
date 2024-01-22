@@ -1,6 +1,6 @@
 import { useGetQuery } from '@/hooks/store/useGetQuery';
 import { Fragment, useEffect, useState } from 'react';
-import { convertTimeFormat, timeSet } from '../../utils/time-format';
+import { convertTimeFormat, timeSet } from '../../../utils/time-format';
 import styles from '../styles/StroeContents.module.css';
 import StoreSelectBox from './StoreSelectBox';
 import StoreSetButton from './StoreSetButton';

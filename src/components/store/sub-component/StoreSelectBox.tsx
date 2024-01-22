@@ -1,5 +1,5 @@
 import Select, { StylesConfig } from 'react-select';
-import { createTimeOptions, timeOption } from '../../utils/time-format';
+import { createTimeOptions, timeOption } from '../../../utils/time-format';
 
 interface OptionType {
   value: string;
