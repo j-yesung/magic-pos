@@ -17,6 +17,7 @@ import Card from './card/Card';
 import Form from './form/Form';
 import Button from './form/button/Button';
 import styles from './styles/container.module.css';
+import EditButton from '/public/icons/pencil.svg';
 import Logo from '/public/logo.svg';
 export interface AddFormType {
   file?: File | null;
@@ -244,44 +245,52 @@ const PlatFormWrapper = () => {
 
       {isShowEditForm && (
         <form onSubmit={updatePlatForm} className={styles.formContainer}>
-          <div className={styles.imgWrapper}>
-            <label htmlFor="file" className={styles.imgLabel}>
-              <button
-                className={clsx(styles.defaultDeleteButton, preImage && styles.hasDeleteButton)}
-                type="button"
-                name="delete-img"
-                onClick={removeImage}
-              >
-                X
-              </button>
+          <div className={styles.formWrapper}>
+            <div className={styles.imgWrapper}>
+              <label htmlFor="file" className={styles.imgLabel}>
+                <button
+                  className={clsx(styles.defaultDeleteButton, preImage && styles.hasDeleteButton)}
+                  type="button"
+                  name="delete-img"
+                  onClick={removeImage}
+                >
+                  X
+                </button>
 
-              {preImage ? (
-                <Image className={styles.img} src={preImage} alt={editTarget.name} width={200} height={200} />
-              ) : (
-                <Logo />
-              )}
-            </label>
+                {preImage ? (
+                  <Image className={styles.img} src={preImage} alt={editTarget.name} width={200} height={200} />
+                ) : (
+                  <Logo />
+                )}
+              </label>
 
-            <input type="file" id="file" className={styles.file} onChange={changePreview} />
-          </div>
+              <label htmlFor="file" className={styles.btnWrap}>
+                <span>
+                  <EditButton width={27} height={27} />
+                </span>
+              </label>
 
-          <div className={styles.inputWrapper}>
-            <input
-              className={styles.input}
-              type="text"
-              value={editTarget.link_url}
-              placeholder="link를 넣어주세요"
-              name="link_url"
-              onChange={changeEditForm}
-            />
-            <input
-              className={styles.input}
-              type="text"
-              name="name"
-              placeholder="어디사이트인가여"
-              value={editTarget.name}
-              onChange={changeEditForm}
-            />
+              <input type="file" id="file" className={styles.file} onChange={changePreview} />
+            </div>
+
+            <div className={styles.inputWrapper}>
+              <input
+                className={styles.input}
+                type="text"
+                value={editTarget.link_url}
+                placeholder="link를 넣어주세요"
+                name="link_url"
+                onChange={changeEditForm}
+              />
+              <input
+                className={styles.input}
+                type="text"
+                name="name"
+                placeholder="어디사이트인가여"
+                value={editTarget.name}
+                onChange={changeEditForm}
+              />
+            </div>
           </div>
           <div className={styles.buttonGroup}>
             <button type="submit" className={styles.button}>
