@@ -25,7 +25,7 @@ const MenuOptionModalInput = () => {
     } else {
       if (type === 'number') {
         const newValue = value.replace(/[^0-9]/g, '');
-        if (newValue) setMenuOption({ ...menuOption, [name]: value });
+        setMenuOption({ ...menuOption, [name]: newValue });
       } else {
         setMenuOption({ ...menuOption, [name]: value });
       }
@@ -37,7 +37,7 @@ const MenuOptionModalInput = () => {
     const { name, value, type } = e.target;
     if (type === 'number') {
       const newValue = value.replace(/[^0-9]/g, '');
-      if (newValue) setOptionDetail({ ...optionDetail, [name]: value });
+      setOptionDetail({ ...optionDetail, [name]: newValue });
     } else {
       setOptionDetail({ ...optionDetail, [name]: value });
     }
@@ -104,7 +104,7 @@ const MenuOptionModalInput = () => {
               id="detailPrice"
               name="detailPrice"
               className={styles['input']}
-              value={optionDetail.detailPrice}
+              value={optionDetail.detailPrice === 0 ? '' : optionDetail.detailPrice}
               placeholder="옵션 가격을 입력하세요."
               onChange={e => changeMenuOptionItemHandler(e)}
             />
@@ -143,7 +143,7 @@ const MenuOptionModalInput = () => {
             type="number"
             name="max_detail_count"
             className={clsx(styles['input'], styles['max-count'])}
-            value={menuOption.max_detail_count}
+            value={menuOption.max_detail_count === 0 ? '' : menuOption.max_detail_count}
             placeholder="옵션 최대 선택 갯수"
             onChange={e => changeMenuOptionHandler(e)}
           />
