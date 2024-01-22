@@ -1,4 +1,3 @@
-import { convertNumberToWon } from '@/shared/helper';
 import useManagementStore from '@/shared/store/management';
 import { OrderDataWithStoreName, StoreWithOrderInfo } from '@/types/supabase';
 import { useEffect, useState } from 'react';
@@ -28,10 +27,6 @@ const SideBarContainer = ({ managementData }: { managementData?: StoreWithOrderI
   return (
     <div className={styles['sideBar-container']}>
       <ul className={styles['order_list']}>{orderData?.map(item => <OrderItem key={item.id} orderData={item} />)}</ul>
-      <div className={styles['total-price']}>
-        <div>총 금액 : </div>
-        <div>{convertNumberToWon(totalPrice)}</div>
-      </div>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { submitDetectedOrder } from '@/server/api/supabase/management';
 import useAuthState from '@/shared/store/session';
 import { useEffect } from 'react';
 import ManagementContainer from './managementContainer/ManagementContainer';
+import ManagementSideBar from './managementSideBar/ManagementSideBar';
 import styles from './styles/Management.module.css';
 
 const Management = () => {
@@ -20,7 +21,7 @@ const Management = () => {
   return (
     <div className={styles['managementWrapper']}>
       <ManagementContainer managementData={data} />
-      {/* <ManagementSideBar managementData={data} /> */}
+      <ManagementSideBar managementData={data} />
     </div>
   );
 };

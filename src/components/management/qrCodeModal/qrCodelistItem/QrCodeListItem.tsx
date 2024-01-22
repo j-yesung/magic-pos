@@ -59,7 +59,7 @@ const QrCodeListItem = ({ storeTable, orderType }: propsType) => {
     >
       <div className={clsx(styles['qr-code'], isQrClick && styles['active'], !storeTable && styles['order-type-togo'])}>
         {storeTable && <div className={styles['table-number']}>{storeTable.position}번 테이블</div>}
-        <QRCodeSVG value={qrUrl ?? ''} />
+        <QRCodeSVG value={qrUrl ?? ''} width={110} height={110} />
       </div>
     </div>
   );

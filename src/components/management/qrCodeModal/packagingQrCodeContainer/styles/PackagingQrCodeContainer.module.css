@@ -1,8 +1,11 @@
 .packaging-qr-code-container {
-  width: 30rem;
+  width: 100%;
   height: auto;
   padding: 0 3rem;
   min-width: 50rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .packaging-qr-code-title {
   width: 100%;

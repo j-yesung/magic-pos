@@ -5,7 +5,9 @@ import styles from './styles/PackagingContainer.module.css';
 const PackagingContainer = ({ managementData }: { managementData?: StoreWithOrderInfo[] }) => {
   return (
     <div className={styles['packaging-container']}>
-      <div className={styles['packaging-title']}>포장 관리</div>
+      <div className={styles['packaging-title']}>
+        포장 관리<p>{managementData?.[0].order_number.length}</p>
+      </div>
       <div className={styles['packaging-list']}>
         {managementData?.[0]?.order_number
           .filter(item => item.is_togo === true)

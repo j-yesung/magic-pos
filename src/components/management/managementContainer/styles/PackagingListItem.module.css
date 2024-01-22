@@ -11,8 +11,18 @@
   font-weight: 400;
   line-height: 18px;
   letter-spacing: -0.36px;
+  cursor: pointer;
 }
 
 .packaging-list-item:hover {
   background-color: #ccf;
+}
+div.item-menu-list {
+  width: 54rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+div.item-menu-list > span {
+  margin-left: 1.5rem;
 }
