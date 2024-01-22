@@ -11,10 +11,6 @@
   margin-bottom: 1.8rem;
 }
 
-.item-row-5 {
-  margin-right: 0;
-}
-
 .table-list-item > div {
   transition: 0.2s;
   display: flex;
