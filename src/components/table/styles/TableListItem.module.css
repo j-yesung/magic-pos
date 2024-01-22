@@ -1,5 +1,5 @@
 .table-list-item {
-  width: 22.5rem;
+  width: calc((100% - 12.8rem)/4);
   height: 21.8rem;
   display: flex;
   flex-direction: column;
