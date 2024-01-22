@@ -3,9 +3,10 @@
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
+  /* gap: 1rem;
   position: absolute;
   right: 0;
-  top: -18rem;
+  top: -18rem; */
 }
 
 .button-group button {
@@ -15,4 +16,22 @@
   border-radius: 0.5rem;
   background: var(--bg-p, #f3edff);
   cursor: pointer;
+  display: flex;
+  padding: 1.5rem 4rem;
+  align-items: flex-start;
+  gap: 1rem;
+  border-radius: 0.5rem;
+  background: var(--bg-g, #f7f7f7);
+}
+
+.active {
+  border-radius: 0.5rem;
+  background: var(--point1-80, #7433ff) !important;
+  color: var(--white, #fff) !important;
+  text-align: center;
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.8rem; /* 100% */
+  letter-spacing: -0.036rem;
 }

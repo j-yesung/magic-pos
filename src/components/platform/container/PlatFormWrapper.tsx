@@ -88,6 +88,7 @@ const PlatFormWrapper = () => {
       file: null,
     }));
     setIsShowEditForm(false);
+    setClickedTab('');
   };
 
   const changePreview = (e: ChangeEvent<HTMLInputElement>) => {
@@ -205,6 +206,7 @@ const PlatFormWrapper = () => {
     };
   }, [isShowEditForm]);
 
+  const [clikcedTab, setClickedTab] = useState('');
   /**
    * 수정 기능 End
    */
@@ -229,6 +231,8 @@ const PlatFormWrapper = () => {
         setIsEdit={setIsEdit}
         isEdit={isEdit}
         setIsShowEditForm={setIsShowEditForm}
+        setClickedTab={setClickedTab}
+        clikcedTab={clikcedTab}
       />
 
       <Card
@@ -240,7 +244,13 @@ const PlatFormWrapper = () => {
       />
 
       {isRegist && (
-        <Form addForm={addForm} setFecthDataList={setFecthDataList} setAddForm={setAddForm} setIsRegist={setIsRegist} />
+        <Form
+          addForm={addForm}
+          setFecthDataList={setFecthDataList}
+          setAddForm={setAddForm}
+          setIsRegist={setIsRegist}
+          setClickedTab={setClickedTab}
+        />
       )}
 
       {isShowEditForm && (
