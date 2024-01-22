@@ -30,7 +30,7 @@ const TableEditModalContainer = () => {
         <input
           type="number"
           className={styles['table-max-gest-content']}
-          value={maxGuest}
+          value={maxGuest ?? 0}
           onChange={clickMaxGuestHandler}
         />
       </div>

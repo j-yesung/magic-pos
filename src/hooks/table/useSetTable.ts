@@ -43,20 +43,18 @@ export const useSetTable = () => {
     },
   });
 
-
-
   useEffect(() => {
     if (didMount.current) {
       if (addIsPending || updateIsPending || deleteIsPending) {
-        refSideBar?.current?.style.setProperty('right', '-18%')
-        refDummySideBar?.current?.style.setProperty('width', '0%')
-        refSideBarBg?.current?.style.setProperty('visibility', 'hidden')
-        refSideBarBg?.current?.style.setProperty('opacity', '0%')
+        refSideBar?.current?.style.setProperty('right', '-18%');
+        refDummySideBar?.current?.style.setProperty('width', '0%');
+        refSideBarBg?.current?.style.setProperty('visibility', 'hidden');
+        refSideBarBg?.current?.style.setProperty('opacity', '0%');
       }
     } else {
-      didMount.current = true
-    };
-  }, [addIsPending, updateIsPending, deleteIsPending]);
+      didMount.current = true;
+    }
+  }, [addIsPending, deleteIsPending, refDummySideBar, refSideBar, refSideBarBg, updateIsPending]);
 
   useEffect(() => {
     if (addIsError) {
