@@ -1,9 +1,5 @@
 .menu-modal-wrap {
-  width: 54rem;
   position: relative;
-  @media screen and (max-width: 64rem) {
-    width: 100%;
-  }
 }
 
 .close-button {

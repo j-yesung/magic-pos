@@ -54,8 +54,8 @@ const MenuItemFormInput = () => {
 
       if (!isCheckRecommended) setMenuItem({ ...menuItem, recommended: !menuItem.recommended });
     } else if (type === 'number') {
-      const newValue = value.replace(/[^0-9]/g, '');
-      if (newValue) setMenuItem({ ...menuItem, [name]: newValue.slice(0, maxLength) });
+      const newValue = value.replace(/[^0-9e]/gi, '');
+      setMenuItem({ ...menuItem, [name]: newValue.slice(0, maxLength) });
     } else {
       setMenuItem({ ...menuItem, [name]: value.slice(0, maxLength) });
     }
@@ -118,7 +118,7 @@ const MenuItemFormInput = () => {
                 onChange={changeMenuItemHandler}
                 id="price"
                 name="price"
-                value={menuItem.price ?? ''}
+                value={menuItem.price === 0 ? '' : menuItem.price}
                 minLength={1}
                 maxLength={20}
                 placeholder="가격을 입력해주세요."
@@ -134,12 +134,11 @@ const MenuItemFormInput = () => {
                 className={styles['input']}
                 onChange={changeMenuItemHandler}
                 name="remain_ea"
-                value={menuItem.remain_ea ?? ''}
+                value={menuItem.remain_ea === 0 ? '' : menuItem.remain_ea ?? ''}
                 minLength={1}
                 maxLength={20}
                 placeholder="수량을 입력해주세요."
                 required
-                pattern="[0-9]*"
               />
             </p>
           </div>

@@ -79,9 +79,6 @@
   flex: 1;
 }
 
-.wrap .txt-wrap .input-wrap.bottom {
-}
-
 .wrap .txt-wrap .input-wrap > p {
   display: flex;
   align-items: center;
