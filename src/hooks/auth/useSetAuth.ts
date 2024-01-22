@@ -27,7 +27,7 @@ const enum QUERY_KEY {
   CHECKED = 'checked',
 }
 
-export const useAuth = () => {
+export const useSetAuth = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
   const [message, setMessage] = useState('');
