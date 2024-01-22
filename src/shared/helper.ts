@@ -151,7 +151,6 @@ export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormat
       for (const [, value] of groupByDate) {
         if (value.length >= 1) {
           if (moment().isSame(value[0].original_sales_date, 'weeks')) {
-            console.log(value, 'asjdifjiasdfisd');
             recordData.currentSales = value.reduce((acc, cur) => acc + cur.product_ea! * cur.product_price!, 0);
             break;
           }

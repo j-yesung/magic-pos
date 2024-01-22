@@ -25,7 +25,6 @@ const Record = () => {
       }
     };
   }, [selectedDate]);
-  console.log(record);
   return (
     <div className={styles.recordContainer}>
       <div className={styles.recordSalesWrapper}>

@@ -1,17 +1,20 @@
 .shop-list-item {
-  width: 22.5rem;
-  height: 21.8rem;
   display: flex;
+  padding: 3rem 2rem;
   flex-direction: column;
   align-items: flex-start;
-  transition: 0.2s;
+  gap: 2rem;
+  min-width: 22.5rem;
+  min-height: 21.8rem;
+
   border-radius: 1rem;
   background: var(--bg-g);
+
   cursor: pointer;
 }
 
 .shop-list-item.list-item-row {
-  margin-right: -6px;
+  margin-right: -0.6rem;
 }
 
 .shop-list-item:hover {
@@ -26,19 +29,20 @@
 }
 
 div.item-table {
-  justify-content: flex-start;
+  color: var(--text1, #121416);
+  text-align: center;
   font-size: 2rem;
-  margin-top: 3rem;
-  margin-bottom: 2rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 2rem; /* 100% */
+  letter-spacing: -0.04rem;
 }
 
 div.item-menu-box {
-  justify-content: space-between;
-  font-size: 1.6rem;
-  font-weight: 500;
-  height: 11.8rem;
-  align-items: flex-start;
+  display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
 }
 div.item-menu {
   width: 100%;
@@ -46,4 +50,23 @@ div.item-menu {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5rem;
+}
+
+.item-menu span {
+  color: var(--text1);
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.6rem; /* 100% */
+  letter-spacing: -0.032rem;
+}
+
+.item-menu span:last-child {
+  color: var(--point1-80);
+  text-align: center;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 15px; /* 100% */
+  letter-spacing: -0.3px;
 }

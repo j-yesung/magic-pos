@@ -33,7 +33,6 @@ const Form = ({ setAddForm, addForm, setIsRegist, setFecthDataList, setClickedTa
   const submitAddCard = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     let updateData: AddFormType = { ...addForm, createdAt: moment().toISOString() };
-    console.log(updateData);
 
     if (!addForm.name.trim() || !addForm.link_url.trim()) return alert('써라');
 

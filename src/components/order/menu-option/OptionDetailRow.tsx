@@ -44,7 +44,6 @@ const OptionDetailRow = ({
       });
       return;
     }
-    console.log(detail);
     if (!checked) {
       setSelectedDetail(prev => prev.filter(p => p.id !== detail.id));
       subtractSelectedOption(detail.id);
