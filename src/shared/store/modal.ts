@@ -16,25 +16,39 @@ interface ModalElement {
 }
 
 interface ModalState {
-  modalList?: ModalElement[] | null;
-  alertList?: ModalAlertTypeOption[] | null;
-  confirmList?: ModalConfirmTypeOption[] | null;
-  addChildElem: (elem: ModalElement) => void;
-  addAlert: (elem: ModalAlertTypeOption) => void;
-  addConfirm: (elem: ModalConfirmTypeOption) => void;
-  hideModal: (id: string) => void;
-  hideConfirm: (id: string) => void;
-  hideAlert: (id: string) => void;
+  modalList?: ModalElement[];
+  alertList?: ModalAlertTypeOption[];
+  confirmList?: ModalConfirmTypeOption[];
 }
 
-const useModalStore = create<ModalState>()(set => ({
-  // 모달 기본 옵션
-  addChildElem: elem => set(state => ({ modalList: [...(state.modalList ?? []), elem] })),
-  addAlert: elem => set(state => ({ alertList: [...(state.alertList ?? []), elem] })),
-  addConfirm: elem => set(state => ({ confirmList: [...(state.confirmList ?? []), elem] })),
-  hideModal: (id: string) => set(state => ({ modalList: state.modalList?.filter(modal => modal.id !== id) })),
-  hideConfirm: (id: string) => set(state => ({ confirmList: state.confirmList?.filter(confirm => confirm.id !== id) })),
-  hideAlert: (id: string) => set(state => ({ alertList: state.alertList?.filter(alert => alert.id !== id) })),
+const useModalStore = create<ModalState>()(() => ({
+  modalList: [],
+  alertList: [],
+  confirmList: [],
 }));
+
+export const addChildElem = (elem: ModalElement) => {
+  useModalStore.setState(state => ({ modalList: [...(state.modalList ?? []), elem] }));
+};
+
+export const addAlert = (elem: ModalAlertTypeOption) => {
+  useModalStore.setState(state => ({ alertList: [...(state.alertList ?? []), elem] }));
+};
+
+export const addConfirm = (elem: ModalConfirmTypeOption) => {
+  useModalStore.setState(state => ({ confirmList: [...(state.confirmList ?? []), elem] }));
+};
+
+export const hideModal = (id: string) => {
+  useModalStore.setState(state => ({ modalList: state.modalList?.filter(modal => modal.id !== id) }));
+};
+
+export const hideConfirm = (id: string) => {
+  useModalStore.setState(state => ({ confirmList: state.confirmList?.filter(confirm => confirm.id !== id) }));
+};
+
+export const hideAlert = (id: string) => {
+  useModalStore.setState(state => ({ alertList: state.alertList?.filter(alert => alert.id !== id) }));
+};
 
 export default useModalStore;

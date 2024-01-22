@@ -1,11 +1,9 @@
-import useModalStore from '@/shared/store/modal';
+import { addAlert, addChildElem, addConfirm, hideAlert, hideConfirm, hideModal } from '@/shared/store/modal';
 import { ReactElement } from 'react';
 import { ModalAlertTypeOption, ModalConfirmTypeOption } from '@/types/common';
 import { nanoid } from 'nanoid';
 
 export const useModal = () => {
-  const { addChildElem, addAlert, addConfirm, hideConfirm, hideAlert, hideModal } = useModalStore();
-
   class MagicModal {
     /**
      * 컴포넌트를 모달로 출력합니다. 모달로 띄우고자 하는 컴포넌트를 전달합니다.
