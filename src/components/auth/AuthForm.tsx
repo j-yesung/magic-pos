@@ -30,7 +30,8 @@ const AuthForm = ({ data }: FormProps) => {
     subDescription,
     comment,
   } = data;
-  const { login, signup, businessNumberCheck, sendResetPasswordEmail, updatePassword, status, message } = useAuth();
+  const { login, signup, businessNumberCheck, sendResetPasswordEmail, updatePassword, status, message, checkEmail } =
+    useAuth();
   const isSuccess = status.data === '사업자등록번호가 인증되었습니다.' ? true : false;
   const { value, changeHandler, keyDownHandler } = useInput({
     email: '',
@@ -41,6 +42,11 @@ const AuthForm = ({ data }: FormProps) => {
   });
   const { isBusinessNumberValid } = useValid(value);
   const { isPasswordValid } = useErrorMessage(value);
+
+  const clickCheckSignupHandler = async (value: Record<string, string>) => {
+    const isChecked = await checkEmail(value);
+    if (!isChecked) signup(value);
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -95,7 +101,7 @@ const AuthForm = ({ data }: FormProps) => {
           <div className={styles.formButtonWrapper}>
             {path === '/auth/signup' && (
               <FormButton
-                actionFn={signup}
+                actionFn={clickCheckSignupHandler}
                 value={value}
                 btnName={buttonName}
                 isSuccess={isSuccess}
