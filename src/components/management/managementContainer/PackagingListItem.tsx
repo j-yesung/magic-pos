@@ -1,12 +1,15 @@
 import useManagementStore from '@/shared/store/management';
-import { Tables } from '@/types/supabase';
+import { MenuItemWithOption, Tables } from '@/types/supabase';
 import moment from 'moment';
 import styles from './styles/PackagingListItem.module.css';
+import { groupByKey } from '@/shared/helper';
 
 const PackagingListItem = ({ packagingData }: { packagingData: Tables<'order_number'> }) => {
   const { setIsSideBar, setOrderId } = useManagementStore();
   const { menu_list } = packagingData;
-  const menuList: Tables<'menu_item'>[] = JSON.parse(JSON.stringify(menu_list));
+  const menuList: MenuItemWithOption[] = JSON.parse(JSON.stringify(menu_list));
+
+  const group = groupByKey<MenuItemWithOption>(menuList, 'unique');
 
   const clickOrderDataReFetchHandler = () => {
     setOrderId({ id: [packagingData.id], status: '포장', number: '' });
@@ -17,11 +20,11 @@ const PackagingListItem = ({ packagingData }: { packagingData: Tables<'order_num
     <div className={styles['packaging-list-item']} onClick={clickOrderDataReFetchHandler}>
       <div className={styles['item-order-number']}>{packagingData.order_number}</div>
       <div className={styles['item-menu-list']}>
-        {menuList.map(item => (
-          <span key={item.id}>
-            {item.name}&nbsp;&nbsp;
-            {item.remain_ea}
-          </span>
+        {[...group].map(([key, item]) => (
+          <div key={key}>
+            <span className={styles['item-name']}>{item[0].name}</span>
+            <span>{item.length}</span>
+          </div>
         ))}
       </div>
       <div className={styles['item-time']}>{moment(packagingData.order_time).format('HH:mm')}</div>

@@ -4,6 +4,7 @@ import { MenuItemWithOption, Tables } from '@/types/supabase';
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import styles from './styles/ShopListItem.module.css';
+import { groupByKey } from '@/shared/helper';
 
 interface propsType {
   shopData: Tables<'store_table'>;
@@ -33,11 +34,11 @@ const ShopListItem = ({ shopData, index, storeOrderData }: propsType) => {
       const menuData = [];
       for (let i = 0; i < data.length; i++) {
         idData.push(data[i].id);
-        menuData.push(data[i].menu_list[0]);
+        menuData.push(data[i].menu_list);
       }
       setStoreOrderInTableById([...idData]);
       setStoreOrderInTable([...data]);
-      setStoreOrderInTableByMenuList([...JSON.parse(JSON.stringify(menuData))]);
+      setStoreOrderInTableByMenuList([...JSON.parse(JSON.stringify(menuData.flat()))]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shopData, storeOrderData]);
@@ -49,11 +50,11 @@ const ShopListItem = ({ shopData, index, storeOrderData }: propsType) => {
     >
       <div className={styles['item-table']}>테이블 {shopData.position}</div>
       <div className={styles['item-menu-box']}>
-        {storeOrderInTableByMenuList.map((menu: MenuItemWithOption) => {
+        {[...groupByKey<MenuItemWithOption>(storeOrderInTableByMenuList, 'unique')].map(([key, menu]) => {
           return (
-            <div className={styles['item-menu']} key={menu.id}>
-              <span>{menu.name}</span>
-              <span>{menu.price}</span>
+            <div className={styles['item-menu']} key={key}>
+              <span>{menu[0].name}</span>
+              <span>{menu.length}</span>
             </div>
           );
         })}

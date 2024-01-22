@@ -38,7 +38,6 @@ export const submitDetectedOrder = (
       'postgres_changes',
       { event: 'INSERT', schema: 'public', table: 'order_store', filter: `store_id=eq.${storeId}` },
       payload => {
-        console.log(payload);
         payloadFunction(payload.new.order_number, toast, refetch);
       },
     )
@@ -46,7 +45,6 @@ export const submitDetectedOrder = (
       'postgres_changes',
       { event: 'INSERT', schema: 'public', table: 'order_number', filter: `store_id=eq.${storeId}` },
       payload => {
-        console.log(payload);
         payloadFunction(payload.new.order_number, toast, refetch);
       },
     )

@@ -25,7 +25,7 @@ const ShopContainer = ({ managementData }: { managementData?: StoreWithOrderInfo
     })
     .sort((a, b) => (a.position && b.position && a.position > b.position ? -1 : 1))
     .sort((a, b) => (a.order_time[0] < b.order_time[0] ? 1 : -1));
-  console.log(storeTableSort);
+
   return (
     <div className={styles['shop-container']}>
       <div className={styles['shop-title']}>

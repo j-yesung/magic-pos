@@ -1,11 +1,12 @@
 .table-container {
+  gap: 1.5rem;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
 }
 
 .table-list-button {
-  width: 22.5rem;
+  width: calc((100% - 12.8rem) / 4);
   height: 21.8rem;
   display: flex;
   justify-content: center;
