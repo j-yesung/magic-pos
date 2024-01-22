@@ -79,9 +79,11 @@ const Sidebar = (adminInfo: AdminCategories) => {
           {isMode ? modeText[0] : modeText[1]}
         </div>
         <p>{isMode ? modeSubText[0] : modeSubText[1]}</p>
-        <ul>
-          <SidebarList navList={navList} clickFn={clickMoveListHandler} />
-        </ul>
+        <div className={styles.mediaScroll}>
+          <ul>
+            <SidebarList navList={navList} clickFn={clickMoveListHandler} />
+          </ul>
+        </div>
       </div>
       <div className={styles.buttonWrapper}>
         <Button type="button" className={styles.callButton}>
