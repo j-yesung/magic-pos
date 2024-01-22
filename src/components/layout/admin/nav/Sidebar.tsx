@@ -61,6 +61,7 @@ const Sidebar = (adminInfo: AdminCategories) => {
     return () => {
       router.events.off('routeChangeComplete', clickListChangeHandler);
       window.removeEventListener('mousedown', closeSideBar);
+      setIsSideBarOpen(false);
     };
   }, [router.events, setIsSideBarOpen]);
 
