@@ -8,9 +8,6 @@
   border-radius: 1rem;
   background: var(--bg-g);
   cursor: pointer;
-  margin-right: 3.2rem;
-  margin-bottom: 4.5rem;
-  cursor: pointer;
 }
 
 .shop-list-item.list-item-row {
@@ -31,7 +28,6 @@
 div.item-table {
   justify-content: flex-start;
   font-size: 2rem;
-  font-weight: 500;
   margin-top: 3rem;
   margin-bottom: 2rem;
 }

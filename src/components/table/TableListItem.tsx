@@ -3,6 +3,7 @@ import useSetTable from '@/hooks/table/useSetTable';
 import useTableStore from '@/shared/store/table';
 import { Tables } from '@/types/supabase';
 import clsx from 'clsx';
+import { FiAlertCircle } from 'react-icons/fi';
 import TableEditModal from './styles/TableEditModal/TableEditModal';
 import styles from './styles/TableListItem.module.css';
 import CloseButton from '/public/icons/close.svg';
@@ -25,6 +26,7 @@ const TableListItem = ({ storeTableData, index }: { storeTableData: Tables<'stor
 
   const clickDeleteTableHandler = () => {
     MagicModal.confirm({
+      icon: <FiAlertCircle size={50} />,
       content: '정말로 삭제하시겠습니까?',
       confirmButtonCallback: () => {
         deleteMutate(storeTableData.id);

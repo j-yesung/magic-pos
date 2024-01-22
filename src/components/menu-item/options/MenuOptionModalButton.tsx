@@ -39,13 +39,6 @@ const MenuOptionModalButton = ({ modalId }: { modalId?: string }) => {
     MagicModal.hide(modalId ?? '');
   };
 
-  // 옵션 삭제
-  const removeOptionDetailHandler = async () => {
-    const removedItemList = menuOptions.filter((_, index) => index !== menuOptionIndex);
-    setMenuOptions(removedItemList);
-    MagicModal.hide(modalId ?? '');
-  };
-
   return (
     <div className={styles['btn-wrap']}>
       <button className={styles['basic-btn']} onClick={() => MagicModal.hide(modalId ?? '')}>

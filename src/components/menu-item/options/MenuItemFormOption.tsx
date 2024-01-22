@@ -8,7 +8,7 @@ import CloseButton from '/public/icons/close.svg';
 import EditButton from '/public/icons/pencil.svg';
 import PlusButton from '/public/icons/plus.svg';
 
-const MenuItemFormOption = ({ modalId }: { modalId?: string }) => {
+const MenuItemFormOption = () => {
   const { MagicModal } = useModal();
   const {
     menuItem,

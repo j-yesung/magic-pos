@@ -27,6 +27,7 @@
 }
 
 .shop-list {
+  gap: 2rem;
   width: 100%;
   height: calc(100% - 10rem);
   display: flex;
