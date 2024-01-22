@@ -11,7 +11,7 @@ const ManagementSideBar = ({ managementData }: { managementData?: StoreWithOrder
   return (
     <>
       <div
-        className={styles['side-bar-background']}
+        className={clsx(styles['side-bar-background'], isSideBar && styles['show-side-bar-bg'])}
         onClick={() => {
           setIsSideBar();
         }}

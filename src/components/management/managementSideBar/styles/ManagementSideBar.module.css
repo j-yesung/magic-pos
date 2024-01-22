@@ -4,6 +4,11 @@
   left: 0;
   width: 51.5%;
   height: 100vh;
+  display: none;
+  cursor: pointer;
+}
+.side-bar-background.show-side-bar-bg {
+  display: block;
 }
 .side-bar-wrapper {
   position: fixed;

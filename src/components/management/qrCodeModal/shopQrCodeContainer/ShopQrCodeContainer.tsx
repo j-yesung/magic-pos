@@ -8,7 +8,6 @@ const ShopQrCodeContainer = () => {
   const queryClient = useQueryClient();
   const data = queryClient.getQueryData<StoreWithOrderInfo[]>(['management']);
   const storeTable = data && data[0].store_table;
-
   return (
     <div className={styles['shop-qr-code-container']}>
       {/* <div className={styles['shop-qr-code-title']}>매장용 QR코드</div> */}
