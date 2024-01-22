@@ -7,9 +7,13 @@
 .item {
   all: unset;
   position: relative;
-  width: 30rem;
-  height: 15rem;
+  width: 35rem;
+  height: 20rem;
   display: inline-block;
+
+  border-radius: 1rem;
+  box-shadow: 0 0 2rem 0 rgba(68, 9, 194, 0.10);
+
   cursor: pointer;
 }
 
@@ -48,6 +52,8 @@
 .item img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  border-radius: 1rem;
 }
 .default-img-container {
   width: 100%;
@@ -73,6 +79,7 @@
   display: inline-block;
   font-size: 2rem;
   font-weight: bold;
+  color: var(--text5);
 }
 
 .edit-item {
@@ -93,7 +100,7 @@
   position: absolute;
   text-align: center;
   line-height: 2.4;
-  border: 1px solid #ccc;
+  border: 0.1rem solid #ccc;
   color: #fff;
   font-weight: bold;
   background-color: var(--point-80);
