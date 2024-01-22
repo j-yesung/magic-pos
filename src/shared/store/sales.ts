@@ -22,7 +22,7 @@ interface SalesStore {
   salesSum: number | null;
   isChangeView: boolean;
 
-  setIsShow: (param?: boolean) => void;
+  setIsShow: (param: boolean) => void;
   setData: (sales: { x: string; y: number }[]) => void;
   setCurrentDate: (day: Moment) => void;
   setSelectedDate: (day: Moment) => void;
@@ -68,7 +68,7 @@ const useSalesStore = create<SalesStore>()(set => ({
   setIsShow: prop =>
     set(state => ({
       ...state,
-      isShow: prop ? prop : !state.isShow,
+      isShow: prop,
     })),
   setCurrentDate: prop =>
     set(state => ({

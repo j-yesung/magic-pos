@@ -12,7 +12,6 @@ export const useCalendar = () => {
     setSelectedDate,
     setData,
     setRecord,
-    data,
   } = useSalesStore();
   const storeId = useAuthState(state => state.storeId);
 
