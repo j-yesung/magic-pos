@@ -34,7 +34,9 @@ const QrCodeModal = ({ modalId }: { modalId?: string }) => {
       <div className={styles.qrCodeModalBox}>
         <div className={styles.qrTitleContainer}>
           <div className={styles.qrCodeTitle}>QR코드 출력하기</div>
-          <CloseButton width={20} height={20} />
+          <span onClick={clickModalCloseHandler}>
+            <CloseButton width={20} height={20} />
+          </span>
         </div>
         <div className={styles.qrCodeBox}>
           <div
