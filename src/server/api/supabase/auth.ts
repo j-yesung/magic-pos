@@ -84,6 +84,19 @@ export const getUserSession = async () => {
 };
 
 /**
+ * 이메일 중복 체크
+ * @param email 이메일
+ * @returns 중복된 이메일이면 true, 아니면 false
+ */
+export const checkEmailHandler = async (values: values) => {
+  const { email } = values;
+  const { data, error } = await supabase.from('profiles').select('email').eq('email', email);
+  if (error) throw error;
+  if (data.length === 0) return false;
+  else return data[0].email === email;
+};
+
+/**
  * 스토어 id 가져오기
  * 현재 로그인한 세션 user id와 store 테이블의 business_id 컬럼과 비교하고 일치하면 storeId를 로컬 스토리지에 저장
  * @returns 현재 로그인한 store id

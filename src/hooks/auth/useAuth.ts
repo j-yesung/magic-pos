@@ -1,5 +1,6 @@
 import { businessNumberCheckHandler } from '@/server/api/external/business';
 import {
+  checkEmailHandler,
   getStoreId,
   getUserSession,
   loginHandler,
@@ -23,6 +24,7 @@ const enum QUERY_KEY {
   BUSINESS = 'business',
   UPDATE_PASSWORD = 'updatePassword',
   SESSION = 'session',
+  CHECKED = 'checked',
 }
 
 export const useAuth = () => {
@@ -140,6 +142,20 @@ export const useAuth = () => {
     },
   });
 
+  const checkEmailMutation = useMutation({
+    mutationFn: checkEmailHandler,
+    onSuccess: data => {
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.CHECKED] });
+      const toastMessage = toast('이미 가입된 이메일입니다.', {
+        type: 'danger',
+        position: 'top-center',
+        showCloseButton: false,
+        autoClose: 2000,
+      });
+      return data ? toastMessage : false;
+    },
+  });
+
   return {
     signup: signupMutation.mutate,
     login: loginMutation.mutate,
@@ -149,6 +165,7 @@ export const useAuth = () => {
     sendResetPasswordEmail: sendResetPasswordEmailMutation.mutate,
     getUserSession: getUserSessionMutation.mutate,
     status: businessNumberCheckMutation,
+    checkEmail: checkEmailMutation.mutateAsync,
     message,
   };
 };
