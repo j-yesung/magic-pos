@@ -6,7 +6,7 @@ import { StoreWithStoreTable } from '@/types/supabase';
 import { useQueryClient } from '@tanstack/react-query';
 import styles from './styles/TableEditModalButtonBox.module.css';
 
-const TableEditModalButtonBox = ({ modalId }: { modalId?: string }) => {
+const TableEditModalButtonBox = ({ modalId }: { modalId: string }) => {
   const { tableId, maxGuest, isDisabled } = useTableStore();
   const { session } = useAuthState();
   const { updateMutate } = useSetTable();
@@ -42,13 +42,7 @@ const TableEditModalButtonBox = ({ modalId }: { modalId?: string }) => {
   };
   return (
     <div className={styles['modal-button-box']}>
-      <button
-        type="button"
-        onClick={() => {
-          clickRemoveTableHandler;
-        }}
-        className={styles['close-button']}
-      >
+      <button type="button" onClick={clickRemoveTableHandler} className={styles['close-button']}>
         취소
       </button>
       <button type="button" className={styles['edit-button']} onClick={clickUpdateTableHandler}>
