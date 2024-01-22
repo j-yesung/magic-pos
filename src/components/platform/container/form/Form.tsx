@@ -10,9 +10,10 @@ export interface FormProps {
   addForm: AddFormType;
   setIsRegist: React.Dispatch<SetStateAction<boolean>>;
   setFecthDataList: React.Dispatch<SetStateAction<Tables<'platform'>[]>>;
+  setClickedTab: React.Dispatch<SetStateAction<string>>;
 }
 
-const Form = ({ setAddForm, addForm, setIsRegist, setFecthDataList }: FormProps) => {
+const Form = ({ setAddForm, addForm, setIsRegist, setFecthDataList, setClickedTab }: FormProps) => {
   const changeLinkValue = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
@@ -69,6 +70,7 @@ const Form = ({ setAddForm, addForm, setIsRegist, setFecthDataList }: FormProps)
       createdAt: '',
       file: null,
     }));
+    setClickedTab('');
   };
 
   return (
