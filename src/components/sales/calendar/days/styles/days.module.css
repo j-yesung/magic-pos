@@ -17,9 +17,12 @@
   gap: 1rem;
 }
 
-/*calendar Days*/
-
-.calendar-day {
+/*sales-calendar 일 때 css*/
+.sales-calendar-days {
+  display: flex;
+  align-items: flex-start;
+}
+.sales-calendar-day {
   display: flex;
   width: 15rem;
   padding-bottom: 2rem;

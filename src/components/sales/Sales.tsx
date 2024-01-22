@@ -10,8 +10,12 @@ const Sales = () => {
   const clickShowChart = () => setIsChangeView(true);
   const clickShowCalendar = () => setIsChangeView(false);
   return (
-    <div>
-      <div className={styles.titleWrapper}>
+    <div className={styles.salesContainer}>
+      <div
+        className={clsx(styles.titleWrapper, {
+          [styles.salesCalendar]: !isChangeView,
+        })}
+      >
         <div className={styles.toggleBtnWrapper}>
           <button
             className={clsx(styles.toggleButton, { [styles.clickedToggle]: isChangeView })}

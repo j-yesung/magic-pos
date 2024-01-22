@@ -1,15 +1,18 @@
-/*
-달력 한 줄의 css
-*/
-
-.calendar-row {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 1rem;
-}
+/* 달력 row를 감싸는 전체 body*/
 
 .calendar-body {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-end;
+  width: 100%;
+}
+
+/*
+달력 한 줄의 css
+*/
+.calendar-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1rem;
+  width: 100%;
 }

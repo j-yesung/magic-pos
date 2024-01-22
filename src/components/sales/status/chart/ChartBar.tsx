@@ -18,7 +18,6 @@ const CHART_MAIN_COLOR = '#7433FF';
 
 const ChartBar = () => {
   const { data } = useSalesStore();
-  console.log(data);
   return (
     <div className={styles.barWrapper}>
       {data.length !== 0 && (

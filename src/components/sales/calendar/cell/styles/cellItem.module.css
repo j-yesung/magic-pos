@@ -83,21 +83,20 @@
     */
 
 .calendarCell {
-  padding-top: 1.4rem;
   display: flex;
-  width: 15rem;
-  height: 15rem;
+  min-width: 12rem;
+  min-height: 12rem;
   flex-direction: column;
   align-items: flex-start;
   gap: 2rem;
-  cursor: default !important;
   font-size: 1.4rem;
+  cursor: default;
 }
 
 .sales-base {
   display: flex;
-  width: 15rem;
-  height: 15rem;
+  /* width: 15rem;
+  height: 15rem; */
   flex-direction: column;
   align-items: flex-start;
   gap: 2rem;
