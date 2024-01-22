@@ -11,9 +11,11 @@ import styles from './styles/status.module.css';
 import Tab from './tab/Tab';
 const Status = () => {
   const {
-    date: { utcStandardDate },
+    date: { utcStandardDate, today },
     setData,
     setRecord,
+    setSelectedDate,
+    setCurrentDate,
   } = useSalesStore();
   const storeId = useAuthState(state => state.storeId);
   useEffect(() => {
@@ -36,6 +38,8 @@ const Status = () => {
         currentSales: 0,
         dateType: '',
       });
+      setSelectedDate(today);
+      setCurrentDate(today);
     };
   }, []);
 
