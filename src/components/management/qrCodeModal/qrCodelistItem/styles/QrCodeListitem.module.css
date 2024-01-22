@@ -21,37 +21,54 @@
 .table-number {
   width: 100%;
   height: auto;
-  padding-bottom: 2rem;
-  font-size: 2rem;
-  text-align: center;
+  font-size: 1.5rem;
+  align-items: flex-start;
 }
 
-.qr-code:hover::before {
+.qr-code:hover::after {
   position: absolute;
-  bottom: calc(50% - 4rem);
-  left: 50%;
-  width: 9rem;
-  height: auto;
-  padding: 0.8rem 0;
-  display: flex;
-  justify-content: center;
-  background-color: #fff;
-  font-size: 1.2rem;
-  border-radius: 50rem;
-  transform: translateX(-50%);
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 80%;
+  background-color: rgba(255, 255, 255, 0.7);
   transition: 0.2s;
-  content: '다운로드';
-  box-shadow: 0 0 1rem 0 #000;
+  content: '';
   cursor: pointer;
-  z-index: 50;
-  opacity: 100;
   visibility: visible;
 }
 
-.qr-code.active:hover::before {
+.qr-code.active:hover::after {
   display: none;
 }
 
-.qr-code.order-type-togo:hover::before {
-  transform: translate(-50%, -70%);
+.qr-code.order-type-togo:hover::after {
+  height: 100%;
+}
+div.qr-print-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.4rem;
+  color: var(--print1-80);
+  width: 100px;
+  height: auto;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  line-height: 160%;
+  padding: 0.5rem;
+  letter-spacing: -0.28px;
+  display: none;
+  z-index: 500;
+  cursor: pointer;
+}
+.qr-code:hover > .qr-print-icon {
+  display: flex;
+}
+
+div.qr-print-icon.order-type-togo {
+  transform: translate(-50%, -50%);
 }

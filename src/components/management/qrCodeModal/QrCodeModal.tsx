@@ -13,7 +13,7 @@ const QrCodeModal = ({ modalId }: { modalId?: string }) => {
   const { qrData } = useManagementStore();
   const qrDownLoad: ReturnType<typeof useQRCodeDownLoad> = useQRCodeDownLoad();
   const { MagicModal } = useModal();
-  const [selectedComponent, setSelectedComponent] = useState<QrCodeModalProps>(null);
+  const [selectedComponent, setSelectedComponent] = useState<QrCodeModalProps>('shop');
 
   const clickComponentHandler = (component: 'shop' | 'packaging') => {
     if (component === selectedComponent) return;
