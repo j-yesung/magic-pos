@@ -146,13 +146,15 @@ export const useSetAuth = () => {
     mutationFn: checkEmailHandler,
     onSuccess: data => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.CHECKED] });
-      const toastMessage = toast('이미 가입된 이메일입니다.', {
-        type: 'danger',
-        position: 'top-center',
-        showCloseButton: false,
-        autoClose: 2000,
-      });
-      return data ? toastMessage : false;
+      if (data) {
+        toast('이미 가입된 이메일입니다.', {
+          type: 'danger',
+          position: 'top-center',
+          showCloseButton: false,
+          autoClose: 2000,
+        });
+      }
+      return data;
     },
   });
 
