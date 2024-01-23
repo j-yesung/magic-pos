@@ -1,10 +1,11 @@
-import { getTodaySales } from '@/server/api/supabase/sales';
-import { formatData } from '@/shared/helper';
+import { getDaySales } from '@/server/api/supabase/sales';
+
 import useSalesStore from '@/shared/store/sales';
 import useAuthState from '@/shared/store/session';
 import { Tables } from '@/types/supabase';
 import moment from 'moment';
 import { useEffect } from 'react';
+import { formatData } from '../calendarUtility/formatData';
 import ChartBar from './chart/ChartBar';
 import Record from './record/Record';
 import styles from './styles/status.module.css';
@@ -18,7 +19,7 @@ const SalesStatus = () => {
   } = useSalesStore();
   const storeId = useAuthState(state => state.storeId);
   useEffect(() => {
-    getTodaySales(utcStandardDate.clone(), storeId!).then(data => {
+    getDaySales(utcStandardDate.clone(), storeId!).then(data => {
       if (data.sales.length !== 0) {
         const { result, recordData } = formatData(data.sales as Tables<'sales'>[], data.formatType, moment());
         if (result) {

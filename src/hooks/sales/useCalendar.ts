@@ -1,5 +1,6 @@
-import { getMonthsSales, getTodaySales, getWeekSales } from '@/server/api/supabase/sales';
-import { formatData } from '@/shared/helper';
+import { formatData } from '@/components/sales/calendarUtility/formatData';
+import { getDaySales, getMonthsSales, getWeekSales } from '@/server/api/supabase/sales';
+
 import useSalesStore from '@/shared/store/sales';
 import useAuthState from '@/shared/store/session';
 import { Moment } from 'moment';
@@ -31,7 +32,7 @@ export const useCalendar = () => {
    * @returns salesStore의 state값 변경으로 void 입니다.
    */
   const clickShowDataOfDateHandler = (day: Moment) => async () => {
-    const { sales, formatType } = await getTodaySales(day.clone().hour(0).subtract(9, 'hour'), storeId!);
+    const { sales, formatType } = await getDaySales(day.clone().hour(0).subtract(9, 'hour'), storeId!);
     if (sales.length !== 0) {
       const { result, recordData } = formatData(sales, formatType, day.clone());
       if (result && recordData) {
@@ -54,7 +55,7 @@ export const useCalendar = () => {
   const clickShowCalendarHandler = () => setIsShow(true);
   const clickHiddenCalendarHandler = () => setIsShow(false);
   const clickMoveTodayHandler = async () => {
-    const { sales, formatType } = await getTodaySales(utcStandardDate.clone(), storeId!);
+    const { sales, formatType } = await getDaySales(utcStandardDate.clone(), storeId!);
     if (sales.length !== 0) {
       const { result, recordData } = formatData(sales, formatType, today);
       if (result && recordData) {
@@ -74,7 +75,7 @@ export const useCalendar = () => {
   const clickWeeksChartHandler = async () => {
     const { sales, formatType } = await getWeekSales(utcStandardDate.clone(), storeId!);
     if (sales.length !== 0) {
-      const { result, recordData } = formatData(sales, formatType);
+      const { result, recordData } = formatData(sales, formatType, today);
       if (result && recordData) {
         setData(result);
         setRecord(recordData);
@@ -92,7 +93,7 @@ export const useCalendar = () => {
   const clickMonthsChartHandler = async () => {
     const { sales, formatType } = await getMonthsSales(utcStandardDate.clone(), storeId!);
     if (sales.length !== 0) {
-      const { result, recordData } = formatData(sales, formatType);
+      const { result, recordData } = formatData(sales, formatType, today);
 
       if (result && recordData) {
         setData(result);
