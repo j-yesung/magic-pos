@@ -7,8 +7,6 @@ import { useStoreQuery } from '@/hooks/store/useStoreQuery';
 import { useStoreOrderSetQuery } from '@/hooks/order/useStoreOrderSetQuery';
 import { useNumberOrderSetQuery } from '@/hooks/order/useNumberOrderSetQuery';
 import styles from './styles/SuccessContainer.module.css';
-import Image from 'next/image';
-import image from '@/../public/images/image-success.png';
 import { useRouter } from 'next/router';
 import { decrementRemainEaByMenuId } from '@/server/api/supabase/menu-item';
 import MenuHeader from '../common/MenuHeader';
@@ -30,7 +28,7 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const router = useRouter();
 
   const clickCheckOrderHandler = () => {
-    router.push('/order/receipt');
+    router.push('/kiosk/receipt');
   };
 
   useEffect(() => {

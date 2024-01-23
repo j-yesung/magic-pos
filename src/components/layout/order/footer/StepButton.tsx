@@ -49,6 +49,8 @@ const StepButton = ({ sliderRef }: ButtonProps) => {
     ),
   };
 
+  console.log(step);
+
   const nextClickHandler = async () => {
     if (step === ORDER_STEP.PAYMENT && paymentWidget) {
       // 결제 전에 남은 수량이 있는지 다시 한번 검사한다.
@@ -80,7 +82,7 @@ const StepButton = ({ sliderRef }: ButtonProps) => {
 
   return (
     <>
-      {step > ORDER_STEP.CHOOSE_ORDER_TYPE && (
+      {step > ORDER_STEP.CHOOSE_ORDER_TYPE && step < ORDER_STEP.SUCCESS && (
         <div className={styles.container}>
           {optionSwiperRef?.current!.swiper?.realIndex !== 1 ? (
             <button className={styles.button} onClick={nextClickHandler} disabled={orderList.length === 0}>

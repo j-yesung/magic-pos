@@ -22,27 +22,20 @@ const CartContainer = () => {
   const group = groupByKey<MenuItemWithOption>(orderList, 'unique');
 
   return (
-    <>
-      <div className={styles.container}>
-        <MenuHeader />
-        <section className={styles.cartWrapper}>
-          <StoreInfo
-            orderType={orderType}
-            storeName={storeName}
-            className={styles.storeInfo}
-            amount={orderList.length}
-          />
-          <div className={styles.rowContainer}>
-            {group.size === 0 && <WarningNoOrderList />}
-            {[...group].map(([key, value]) => (
-              <CartRow key={key} itemList={value} />
-            ))}
-          </div>
-          <CartMoreButton />
-        </section>
-        <TotalPrice itemList={orderList} />
-      </div>
-    </>
+    <div className={styles.container}>
+      <MenuHeader />
+      <section className={styles.cartWrapper}>
+        <StoreInfo orderType={orderType} storeName={storeName} className={styles.storeInfo} amount={orderList.length} />
+        <div className={styles.rowContainer}>
+          {group.size === 0 && <WarningNoOrderList />}
+          {[...group].map(([key, value]) => (
+            <CartRow key={key} itemList={value} />
+          ))}
+        </div>
+        <CartMoreButton />
+      </section>
+      <TotalPrice itemList={orderList} />
+    </div>
   );
 };
 

@@ -3,7 +3,7 @@ import { useNumberOrderFetchQuery } from '@/hooks/order/useNumberOrderFetchQuery
 import { useEffect, useState } from 'react';
 import { useGetQuery } from '@/hooks/store/useGetQuery';
 import useFetchTable from '@/hooks/table/useFetchTable';
-import { CategoryWithMenuItemWithStore } from '@/types/supabase';
+import { CategoryWithMenuItemWithStore, MenuItemWithOption } from '@/types/supabase';
 import { isEmptyObject } from '@/shared/helper';
 
 export const useIsOrderAllReady = (orderIdList: string[], storeId: string) => {
@@ -87,4 +87,20 @@ export const useMakeMenuData = (menuData: CategoryWithMenuItemWithStore[], store
   }
 
   return menuList;
+};
+
+export const useGetOptionText = () => {
+  const getOptionList = (menu: MenuItemWithOption[]) => {
+    return menu[0].menu_option
+      .map(option => option.menu_option_detail)
+      .flat()
+      .map(detail => {
+        let text = detail.name;
+        if (detail.price > 0) text += `(+${detail.price})`;
+        return text;
+      })
+      .join(' / ');
+  };
+
+  return { getOptionList };
 };
