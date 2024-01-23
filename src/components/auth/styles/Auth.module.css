@@ -160,21 +160,6 @@
   margin-top: 2rem;
 }
 
-.caption-wrapper {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.caption {
-  display: flex;
-  color: var(--text1);
-  margin-top: 2rem;
-  font-size: 1.2rem;
-  justify-content: flex-end;
-  text-decoration: none;
-}
-
 .form-inner-wrapper label {
   font-size: 1.5rem;
   font-style: normal;
@@ -214,4 +199,38 @@
 
 .signup-success {
   color: var(--point-80);
+}
+
+/* 이메일 저장 체크박스 & 비밀번호 찾기 */
+.caption-box {
+  width: 100%;
+  display: flex;
+  padding: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+.checkbox {
+  width: 100%;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  flex-direction: row;
+}
+.checkbox p {
+  font-size: 1.2rem;
+  color: var(--text2);
+}
+.checkbox label {
+  cursor: pointer;
+}
+.find-password-box {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.find-password-box a {
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: var(--text2);
 }

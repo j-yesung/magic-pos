@@ -1,13 +1,13 @@
-import { useAuth } from '@/hooks/auth/useAuth';
 import { useErrorMessage } from '@/hooks/auth/useErrorMessage';
 import { useInput } from '@/hooks/auth/useInput';
+import { useSetAuth } from '@/hooks/auth/useSetAuth';
 import { useValid } from '@/hooks/auth/useValid';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { IoIosCheckmarkCircleOutline } from 'react-icons/io';
 import Button from '../common/Button';
 import Input from './Input';
 import FormButton from './button/FormButton';
+import SignCaption from './element/SignCaption';
 import styles from './styles/Auth.module.css';
 import Logo from '/public/logo.svg';
 
@@ -31,7 +31,7 @@ const AuthForm = ({ data }: FormProps) => {
     comment,
   } = data;
   const { login, signup, businessNumberCheck, sendResetPasswordEmail, updatePassword, status, message, checkEmail } =
-    useAuth();
+    useSetAuth();
   const isSuccess = status.data === '사업자등록번호가 인증되었습니다.' ? true : false;
   const { value, changeHandler, keyDownHandler } = useInput({
     email: '',
@@ -98,6 +98,7 @@ const AuthForm = ({ data }: FormProps) => {
               </div>
             )}
           </div>
+          {path === '/auth/login' && <SignCaption subUrl={subUrl} subName={subName} />}
           <div className={styles.formButtonWrapper}>
             {path === '/auth/signup' && (
               <FormButton
@@ -118,13 +119,7 @@ const AuthForm = ({ data }: FormProps) => {
           </div>
         </form>
       )}
-      {path === '/auth/login' && (
-        <div className={styles.captionWrapper}>
-          <Link className={styles.caption} href={subUrl || ''}>
-            {subName}
-          </Link>
-        </div>
-      )}
+
       <div>{path === '/auth/success' && <FormButton url={url} btnSubName={buttonSubName} />}</div>
     </div>
   );
