@@ -6,10 +6,10 @@ import useAuthState from '@/shared/store/session';
 import { Tables } from '@/types/supabase';
 import moment from 'moment';
 import { useEffect } from 'react';
+import { formatToCalendarData, sortMinMaxData } from '../../dateCalculator/dateCalculator';
 import CellItem from '../cellItem/CellItem';
 import styles from './styles/cell.module.css';
 
-type FormatCalendarReturnType = (data: Map<string, Tables<'sales'>[]>) => { sales: number; date: string }[];
 export interface CalendarDataType {
   sales: number;
   date: string;
@@ -17,7 +17,6 @@ export interface CalendarDataType {
   max?: boolean;
 }
 
-type SortMinMaxDataReturnType = (target: CalendarDataType[]) => CalendarDataType[];
 const Cell = () => {
   const {
     date: { currentDate, today },
@@ -32,28 +31,6 @@ const Cell = () => {
   const startDay = currentDate.clone().startOf('month').startOf('week'); // monthStart가 속한 주의 시작 주
   const endDay = currentDate.clone().endOf('month').endOf('week'); // monthStart가 속한 마지막 주
 
-  const formatToCalendarData: FormatCalendarReturnType = data => {
-    const refinedData = [...data.entries()].map(([key, value]) => {
-      const data = {
-        sales: value.reduce((acc, cur) => acc + cur.product_ea * cur.product_price, 0),
-        date: key,
-      };
-      return data;
-    });
-    return refinedData;
-  };
-
-  const sortMinMaxData: SortMinMaxDataReturnType = target => {
-    const sortedData = target.toSorted((min, max) => (min.sales < max.sales ? 1 : -1));
-    if (sortedData.length > 1) {
-      sortedData[0].max = true;
-      sortedData[target.length - 1].min = true;
-    }
-    if (sortedData.length === 1) {
-      sortedData[0].max = true;
-    }
-    return sortedData;
-  };
   const storeId = useAuthState(state => state.storeId);
   useEffect(() => {
     if (!isChangeView) {
