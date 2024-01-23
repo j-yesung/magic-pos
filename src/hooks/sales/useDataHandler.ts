@@ -25,6 +25,7 @@ export const useDataHandler = () => {
         dateType: 'day',
       });
     }
+
     setCalendarCurrentDate(today);
     setCalendarSelectedDate(today);
   };
@@ -75,7 +76,9 @@ export const useDataHandler = () => {
   const clickMonthsChartHandler = async () => {
     const { sales, dateType, formatType } = await getMonthsSales(utcStandardDate.clone(), storeId!);
     if (sales.length !== 0) {
+      console.log(dateType);
       const { result, recordData } = formatData(sales, dateType, today, formatType!);
+      console.log(recordData);
 
       if (result && recordData) {
         setChartData(result);

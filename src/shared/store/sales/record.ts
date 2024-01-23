@@ -1,19 +1,17 @@
+import { RecordType } from '@/types/sales';
 import { create } from 'zustand';
 interface RecordStore {
-  record: {
-    currentSales: number;
-    dateType: string;
-  };
+  record: RecordType;
 }
 
 const useRecordStore = create<RecordStore>()(() => ({
   record: {
     currentSales: 0,
-    dateType: '',
+    dateType: 'day',
   },
 }));
 
-export const setRecordData = (sales: { currentSales: number; dateType: string }) =>
+export const setRecordData = (sales: RecordType) =>
   useRecordStore.setState(state => ({
     ...state,
     record: {
@@ -26,7 +24,7 @@ export const resetRecordData = () =>
   useRecordStore.setState(() => ({
     record: {
       currentSales: 0,
-      dateType: '',
+      dateType: 'day',
     },
   }));
 export default useRecordStore;

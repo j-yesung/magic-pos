@@ -10,12 +10,17 @@ const Record = () => {
   const selectedDate = useCalendarStore(state => state.selectedDate);
   const dateRef = useRef<Moment | null>(null);
 
-  const SALES_TYPE = {
-    day: moment().isSame(dateRef.current, 'date') ? '오늘' : dateRef.current?.format('M월 D일'),
-    week: '이번 주',
-    month: '이번 달',
-  } as const;
+  const formattedType = (dateType: 'day' | 'week' | 'month', formatType: 'M월 D일' | 'YYYY년 M월 D일') => {
+    const SALES_TYPE = {
+      day: moment().isSame(dateRef.current, 'date') ? '오늘' : dateRef.current?.format(formatType),
+      week: '이번 주',
+      month: '이번 달',
+    };
+
+    return SALES_TYPE[dateType];
+  };
   useEffect(() => {
+    console.log('dffffffffffffffff');
     if (!dateRef.current) {
       dateRef.current = selectedDate;
     }
@@ -25,14 +30,14 @@ const Record = () => {
       }
     };
   }, [selectedDate]);
-
+  console.log(record);
   return (
     <div className={styles.recordContainer}>
       <div className={styles.recordSalesWrapper}>
-        {SALES_TYPE[record.dateType as keyof typeof SALES_TYPE]}의 매출은
+        {formattedType(record.dateType, 'M월 D일')}의 매출은
         <span className={styles.recordSales}>{convertNumberToWon(record.currentSales)}</span>입니다.
       </div>
-      <div className={styles.recordDate}>{selectedDate.format('YYYY년 M월 D일')}</div>
+      <div className={styles.recordDate}>{formattedType(record.dateType, 'YYYY년 M월 D일')}</div>
       <div>{/* 위 태그를 가운데로 맞추려고 일부러 넣은 div */}</div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { CalendarDataType, DateFormatType, FormatType } from '@/types/sales';
+import { CalendarDataType, DateFormatType, FormatType, RecordType } from '@/types/sales';
 import { Tables, TablesInsert } from '@/types/supabase';
 import moment, { Moment } from 'moment';
 import { getStartWeeks } from './dateCalculator';
@@ -49,13 +49,10 @@ export const formatData = (
 ) => {
   const dateContainer = getDates(dateType, selectedDateType, formatType);
   const groupByDate = getGroupByDate(dateContainer);
-  console.log(groupByDate);
   const formattedData = getDataWithFormatingDate(salesData, dateType, formatType);
-
   const groupBybindingData = insertDataGroupByDate(formattedData, groupByDate);
-  console.log(groupBybindingData);
   const recordData = getRecordData(groupBybindingData, dateType, selectedDateType);
-
+  console.log(recordData);
   const result = [...groupBybindingData.entries()]
     .map(([key, value]) => {
       return {
@@ -144,10 +141,14 @@ const insertDataGroupByDate = (formattedTarget: CommonType[], groupMap: Map<stri
   return groupMap;
 };
 
-const getRecordData = (toExtracted: Map<string, CommonType[]>, dateType: DateParamType, selectedDateType: Moment) => {
-  const extractedData = {
+const getRecordData = (
+  toExtracted: Map<string, CommonType[]>,
+  dateType: DateParamType,
+  selectedDateType: Moment,
+): RecordType => {
+  const extractedData: RecordType = {
     currentSales: 0,
-    dateType: '',
+    dateType: 'day',
   };
   for (const [_, value] of toExtracted) {
     if (value.length >= 1) {
@@ -158,5 +159,6 @@ const getRecordData = (toExtracted: Map<string, CommonType[]>, dateType: DatePar
     }
   }
   extractedData.dateType = dateType;
+
   return extractedData;
 };

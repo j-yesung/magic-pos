@@ -22,7 +22,7 @@ const CalendarToggle = () => {
       }
     };
   }, [isShow]);
-
+  console.log(dateRef.current?.format('YY MM DD'));
   return (
     <div className={isChangeView ? styles.calendarWrapper : styles.hiddenComponent} onClick={clickShowCalendarHandler}>
       <span className={styles.dateText}>{dateRef.current?.format('YYYY-MM-DD')}</span>
