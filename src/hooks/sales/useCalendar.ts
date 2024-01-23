@@ -52,7 +52,7 @@ export const useCalendar = () => {
 
   // sales/stauts에서 click하면 calendar를 보여주는 함수
   const clickShowCalendarHandler = () => setIsShow(true);
-
+  const clickHiddenCalendarHandler = () => setIsShow(false);
   const clickMoveTodayHandler = async () => {
     const { sales, formatType } = await getTodaySales(utcStandardDate.clone(), storeId!);
     if (sales.length !== 0) {
@@ -114,5 +114,6 @@ export const useCalendar = () => {
     clickMoveTodayHandler,
     clickWeeksChartHandler,
     clickMonthsChartHandler,
+    clickHiddenCalendarHandler,
   };
 };
