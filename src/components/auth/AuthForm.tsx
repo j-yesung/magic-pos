@@ -3,6 +3,7 @@ import { useInput } from '@/hooks/auth/useInput';
 import { useSetAuth } from '@/hooks/auth/useSetAuth';
 import { useValid } from '@/hooks/auth/useValid';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { IoIosCheckmarkCircleOutline } from 'react-icons/io';
 import Button from '../common/Button';
 import Input from './Input';
@@ -42,11 +43,21 @@ const AuthForm = ({ data }: FormProps) => {
   });
   const { isBusinessNumberValid } = useValid(value);
   const { isPasswordValid } = useErrorMessage(value);
+  const [isCheckbox, setIsCheckbox] = useState(false);
 
   const clickCheckSignupHandler = async (value: Record<string, string>) => {
     const isChecked = await checkEmail(value);
     if (!isChecked) signup(value);
   };
+
+  // 이메일 저장 정보 가져오기
+  useEffect(() => {
+    const email = localStorage.getItem('email');
+    if (email) {
+      value.email = email;
+      setIsCheckbox(true);
+    }
+  }, [value]);
 
   return (
     <div className={styles.wrapper}>
@@ -98,7 +109,15 @@ const AuthForm = ({ data }: FormProps) => {
               </div>
             )}
           </div>
-          {path === '/auth/login' && <SignCaption subUrl={subUrl} subName={subName} />}
+          {path === '/auth/login' && (
+            <SignCaption
+              subUrl={subUrl}
+              subName={subName}
+              value={value}
+              isCheckbox={isCheckbox}
+              setIsCheckbox={setIsCheckbox}
+            />
+          )}
           <div className={styles.formButtonWrapper}>
             {path === '/auth/signup' && (
               <FormButton
