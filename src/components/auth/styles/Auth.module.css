@@ -46,7 +46,9 @@
   width: 40rem;
   gap: 1rem;
   display: flex;
+  align-items: center;
   flex-direction: column;
+  justify-content: center;
 }
 .form-inner-wrapper {
   gap: 1rem;
@@ -64,15 +66,15 @@
   gap: 1rem;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
 }
 .form-business input {
-  width: 29rem;
+  width: 160%;
 }
 
 .form-button-wrapper {
   gap: 1rem;
-  margin-top: 2rem;
+  width: 100%;
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
 }
@@ -89,10 +91,11 @@
   font-size: 1.4rem;
 }
 .push-button {
+  width: 100%;
   border: none;
   cursor: pointer;
-  color: #191919;
-  padding: 2rem 1.5rem;
+  color: var(--main-color);
+  padding: 2rem;
   border-radius: 1rem;
   background-color: var(--bg-p);
 }
@@ -104,6 +107,7 @@
 }
 
 .disabledButton {
+  width: 100%;
   border: none;
   cursor: pointer;
   padding: 2rem;
@@ -165,7 +169,9 @@
   font-style: normal;
   color: var(--text2);
 }
-
+.form-inner-wrapper div:nth-child(3) input {
+  margin-bottom: 2rem;
+}
 /* errorMessage */
 .error {
   font-size: 1.2rem;
@@ -175,9 +181,17 @@
 }
 .match {
   font-size: 1.2rem;
-  margin: 0.5rem 0 2rem 0;
+  margin: 0rem 0 2rem 0;
   display: inline-block;
   color: var(--point-100);
+}
+
+.pw-check-icon svg {
+  margin-right: 1rem;
+  color: var(--main-color);
+}
+.bno-check-icon svg {
+  color: var(--main-color);
 }
 
 .success-image {

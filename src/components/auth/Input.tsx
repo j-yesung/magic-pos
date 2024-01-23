@@ -11,6 +11,7 @@ import {
 import { useErrorMessage } from '@/hooks/auth/useErrorMessage';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
+import { FaCheck } from 'react-icons/fa6';
 import styles from './styles/Auth.module.css';
 
 interface InputProps {
@@ -72,13 +73,16 @@ const Input = ({ value, onChangeHandler, onKeyDownHandler }: InputProps) => {
                 disabled={input.disabled}
                 required
               />
-              {input.name === 'passwordConfirm' && (
-                <span
-                  className={isPasswordConfirm && value['password'] && isPasswordValid ? styles.match : styles.error}
-                >
-                  {isPasswordConfirm && value['password'] ? passwordValidationMessage : <>&nbsp;</>}
-                </span>
-              )}
+              <div className={styles.pwCheckIcon}>
+                {isPasswordConfirm && value['password'] && isPasswordValid ? <FaCheck /> : null}
+                {input.name === 'passwordConfirm' && (
+                  <span
+                    className={isPasswordConfirm && value['password'] && isPasswordValid ? styles.match : styles.error}
+                  >
+                    {isPasswordConfirm && value['password'] ? passwordValidationMessage : <>&nbsp;</>}
+                  </span>
+                )}
+              </div>
             </div>
           );
         }

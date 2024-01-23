@@ -4,6 +4,7 @@ import { useSetAuth } from '@/hooks/auth/useSetAuth';
 import { useValid } from '@/hooks/auth/useValid';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { FaCheck } from 'react-icons/fa6';
 import { IoIosCheckmarkCircleOutline as Success } from 'react-icons/io';
 import Button from '../common/Button';
 import Input from './Input';
@@ -111,7 +112,10 @@ const AuthForm = ({ data }: FormProps) => {
                     {subButtonName}
                   </Button>
                 </div>
-                <span className={isSuccess ? styles.match : styles.error}>{message}</span>
+                <div className={styles.bnoCheckIcon}>
+                  {isSuccess && <FaCheck />}
+                  <span className={isSuccess ? styles.match : styles.error}>{message}</span>
+                </div>
               </div>
             )}
           </div>
