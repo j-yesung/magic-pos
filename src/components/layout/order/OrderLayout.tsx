@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import styles from './styles/OrderLayout.module.css';
 import Footer from '@/components/layout/order/footer/Footer';
 import { SwiperRef } from 'swiper/react';

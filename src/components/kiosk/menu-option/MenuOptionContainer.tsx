@@ -1,4 +1,3 @@
-import React from 'react';
 import useKioskState from '@/shared/store/kiosk';
 import Image from 'next/image';
 import styles from './styles/MenuOptionContainer.module.css';

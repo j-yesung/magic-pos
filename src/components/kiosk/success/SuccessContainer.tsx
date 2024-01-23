@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSalesQuery } from '@/hooks/sales/useSalesQuery';
 import useKioskState, { addOrderId, getTotalPrice, ORDER_STEP, setOrderNumber, setStep } from '@/shared/store/kiosk';
 import { groupByKey } from '@/shared/helper';

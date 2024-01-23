@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './style/MenuHeader.module.css';
 import useKioskState, { ORDER_STEP } from '@/shared/store/kiosk';
 

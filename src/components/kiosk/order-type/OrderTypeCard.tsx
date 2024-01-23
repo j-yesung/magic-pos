@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSwiper } from 'swiper/react';
 import { goNextStep, setOrderType } from '@/shared/store/kiosk';
 import styles from './styles/OrderTypeButton.module.css';

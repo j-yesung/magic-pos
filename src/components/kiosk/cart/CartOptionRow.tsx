@@ -1,4 +1,3 @@
-import React from 'react';
 import { MenuItemWithOption } from '@/types/supabase';
 import styles from './styles/CartOptionRow.module.css';
 import { useGetOptionText } from '@/hooks/service/useKiosk';
