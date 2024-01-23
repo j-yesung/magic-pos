@@ -49,7 +49,7 @@ const Tab = () => {
   }, []);
   return (
     <div className={styles.wrapper}>
-      <div className={isChangeView ? styles.dateWrapper : styles.salesCalendar}>
+      <div className={isChangeView ? styles.dateWrapper : styles.hiddenComponent}>
         <span
           className={clsx(styles.dateButton, {
             [styles.active]: clickedTab === TODAY,
@@ -78,7 +78,10 @@ const Tab = () => {
         </span>
       </div>
 
-      <div className={isChangeView ? styles.calendarWrapper : styles.salesCalendar} onClick={clickShowCalendarHandler}>
+      <div
+        className={isChangeView ? styles.calendarWrapper : styles.hiddenComponent}
+        onClick={clickShowCalendarHandler}
+      >
         <span className={styles.dateText}>{dateRef.current?.format('YYYY-MM-DD')}</span>
         <IoCalendarClearOutline className={styles.calendarIcon} />
       </div>

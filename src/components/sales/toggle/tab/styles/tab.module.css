@@ -67,6 +67,6 @@
 
 /*sales-calendar 일때 display none */
 
-.sales-calendar {
+.hidden-component {
   display: none;
 }
