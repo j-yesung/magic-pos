@@ -15,10 +15,6 @@ interface SalesStore {
 
 const useSalesStore = create<SalesStore>()(set => ({
   isShow: false,
-  record: {
-    currentSales: 0,
-    dateType: '',
-  },
   calendarData: [],
   salesSum: null,
   isChangeView: false,
