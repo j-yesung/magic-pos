@@ -1,7 +1,21 @@
+/* 
+view port의 vh가 낮은 모니터 화면때문에 scroll을 넣었고 
+scroll을 숨겼습니다.
+*/
+
+.sales-container {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.sales-container::-webkit-scrollbar {
+  display: none;
+}
+
 .title-wrapper {
   position: absolute;
   right: 19.4rem;
-  top: 12.4rem;
+  top: 10.4rem;
   z-index: 99;
 }
 
@@ -35,4 +49,10 @@
   font-weight: 500;
   line-height: 1.8rem; /* 100% */
   letter-spacing: -0.036rem;
+}
+
+/* sales-calendar 탭일 때*/
+
+.sales-calendar {
+  top: 8.4rem;
 }

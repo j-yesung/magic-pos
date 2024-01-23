@@ -10,6 +10,7 @@ const Record = () => {
     date: { selectedDate },
   } = useSalesStore();
   const dateRef = useRef<Moment | null>(null);
+
   const SALES_TYPE = {
     days: moment().isSame(dateRef.current, 'date') ? '오늘' : dateRef.current?.format('MM월 DD일'),
     weeks: '이번 주',
