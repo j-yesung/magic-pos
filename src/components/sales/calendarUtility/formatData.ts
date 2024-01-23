@@ -2,28 +2,9 @@ import { DateFormatType } from '@/server/api/supabase/sales';
 import { Tables, TablesInsert } from '@/types/supabase';
 import moment, { Moment } from 'moment';
 import { CalendarDataType } from '../calendar/cell/Cell';
-
+import { getStartWeeks } from './dateCalculator';
 type FormatCalendarReturnType = (data: Map<string, Tables<'sales'>[]>) => { sales: number; date: string }[];
 type SortMinMaxDataReturnType = (target: CalendarDataType[]) => CalendarDataType[];
-
-/**
- *
- * @param date moment객체
- * @param format 변형하고싶은 년도,월,일
- * @returns
- */
-export const momentToString = (date: moment.Moment, format: string) => {
-  return date.format(format);
-};
-
-/**
- *
- * @param year
- * @returns
- */
-const getStartWeeks = (year: number) => {
-  return new Array(12).fill(false).map((_, index) => moment().year(year).month(index).startOf('months').week());
-};
 
 export const formatToCalendarData: FormatCalendarReturnType = data => {
   const refinedData = [...data.entries()].map(([key, value]) => {
@@ -54,7 +35,6 @@ export const sortMinMaxData: SortMinMaxDataReturnType = target => {
  * @param formatType 'days', 'weeks' , 'months' 를 받습니다.
  * @returns  { x: string, y: number, moment?:Moment}[]
  */
-
 export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormatType, selectedDateType?: Moment) => {
   if (salesData && formatType) {
     const recordData = {

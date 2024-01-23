@@ -6,7 +6,8 @@ import useAuthState from '@/shared/store/session';
 import { Tables } from '@/types/supabase';
 import moment from 'moment';
 import { useEffect } from 'react';
-import { formatToCalendarData, sortMinMaxData } from '../../dateCalculator/dateCalculator';
+
+import { formatToCalendarData, sortMinMaxData } from '../../calendarUtility/formatData';
 import CellItem from '../cellItem/CellItem';
 import styles from './styles/cell.module.css';
 
