@@ -1,4 +1,5 @@
 import { StoreWithOrderInfo } from '@/types/supabase';
+import { TbPaperBag } from 'react-icons/tb';
 import PackagingListItem from './PackagingListItem';
 import styles from './styles/PackagingContainer.module.css';
 
@@ -6,7 +7,9 @@ const PackagingContainer = ({ managementData }: { managementData?: StoreWithOrde
   return (
     <div className={styles['packaging-container']}>
       <div className={styles['packaging-title']}>
-        포장 관리<p>{managementData?.[0].order_number.length}</p>
+        <TbPaperBag size={28} />
+        <span>포장 관리</span>
+        <p>{managementData?.[0].order_number.length}</p>
       </div>
       <div className={styles['packaging-list-wrap']}>
         <div className={styles['packaging-list']}>

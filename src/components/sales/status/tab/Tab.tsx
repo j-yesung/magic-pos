@@ -14,6 +14,7 @@ const Tab = () => {
     date: { currentDate },
     isShow,
     setIsShow,
+    isChangeView,
   } = useSalesStore();
 
   const { clickMoveTodayHandler, clickWeeksChartHandler, clickMonthsChartHandler, clickShowCalendarHandler } =
@@ -48,7 +49,7 @@ const Tab = () => {
   }, []);
   return (
     <div className={styles.wrapper}>
-      <div className={styles.dateWrapper}>
+      <div className={isChangeView ? styles.dateWrapper : styles.salesCalendar}>
         <span
           className={clsx(styles.dateButton, {
             [styles.active]: clickedTab === TODAY,
@@ -77,10 +78,11 @@ const Tab = () => {
         </span>
       </div>
 
-      <div className={styles.calendarWrapper} onClick={clickShowCalendarHandler}>
+      <div className={isChangeView ? styles.calendarWrapper : styles.salesCalendar} onClick={clickShowCalendarHandler}>
         <span className={styles.dateText}>{dateRef.current?.format('YYYY-MM-DD')}</span>
         <IoCalendarClearOutline className={styles.calendarIcon} />
       </div>
+
       {isShow && (
         <Fragment>
           <div className={styles.calendarBg} onClick={clickCloseCalendar}></div>

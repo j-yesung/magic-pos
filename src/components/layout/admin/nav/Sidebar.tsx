@@ -1,5 +1,5 @@
 import Button from '@/components/common/Button';
-import QrCodeModal from '@/components/management/qrCodeModal/QrCodeModal';
+import QrCodeModal from '@/components/qrCodeModal/QrCodeModal';
 import { modeSubText, modeText } from '@/data/admin';
 import { useSetAuth } from '@/hooks/auth/useSetAuth';
 import { useModal } from '@/hooks/modal/useModal';

@@ -4,7 +4,7 @@ import useTableStore from '@/shared/store/table';
 import { Tables } from '@/types/supabase';
 import clsx from 'clsx';
 import { FiAlertCircle } from 'react-icons/fi';
-import TableEditModal from './styles/TableEditModal/TableEditModal';
+import TableEditModal from './TableEditModal/TableEditModal';
 import styles from './styles/TableListItem.module.css';
 import CloseButton from '/public/icons/close.svg';
 import EditButton from '/public/icons/pencil.svg';
