@@ -3,10 +3,10 @@ import styles from './styles/ReceiptContainer.module.css';
 import useOrderState, { ORDER_STEP, setStep, setStoreName } from '@/shared/store/order';
 import { OrderDataWithStoreName } from '@/types/supabase';
 import { useRouter } from 'next/router';
-import ReceiptOrder from '@/components/order/receipt/ReceiptOrder';
+import ReceiptOrder from '@/components/kiosk/receipt/ReceiptOrder';
 import { useStoreOrderFetchQuery } from '@/hooks/order/useStoreOrderFetchQuery';
 import { useNumberOrderFetchQuery } from '@/hooks/order/useNumberOrderFetchQuery';
-import MenuHeader from '@/components/order/common/MenuHeader';
+import MenuHeader from '@/components/kiosk/common/MenuHeader';
 import { useGetQuery } from '@/hooks/store/useGetQuery';
 
 const ReceiptContainer = () => {

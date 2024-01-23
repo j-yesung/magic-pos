@@ -3,7 +3,7 @@ import styles from './styles/ReceiptOrderRow.module.css';
 import Image from 'next/image';
 import { MenuItemWithOption } from '@/types/supabase';
 import { convertNumberToWon, groupByKey } from '@/shared/helper';
-import CartOptionRow from '@/components/order/cart/CartOptionRow';
+import CartOptionRow from '@/components/kiosk/cart/CartOptionRow';
 import { getOptionPriceByList } from '@/shared/store/order';
 
 const ReceiptOrderRow = ({ itemList }: { itemList: MenuItemWithOption[] }) => {

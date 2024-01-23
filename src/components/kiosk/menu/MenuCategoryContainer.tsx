@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import { CategoryWithMenuItemWithStore } from '@/types/supabase';
 import styles from './styles/MenuCategoryContainer.module.css';
-import MenuCategory from '@/components/order/menu/MenuCategory';
+import MenuCategory from '@/components/kiosk/menu/MenuCategory';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Virtual } from 'swiper/modules';
 import { isEmptyObject } from '@/shared/helper';

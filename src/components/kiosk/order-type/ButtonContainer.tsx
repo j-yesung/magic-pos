@@ -1,5 +1,5 @@
 import React from 'react';
-import OrderTypeCard from '@/components/order/order-type/OrderTypeCard';
+import OrderTypeCard from '@/components/kiosk/order-type/OrderTypeCard';
 import styles from './styles/ButtonContainer.module.css';
 
 const ButtonContainer = () => {

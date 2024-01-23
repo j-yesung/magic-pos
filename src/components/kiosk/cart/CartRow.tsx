@@ -4,8 +4,8 @@ import { MenuItemWithOption } from '@/types/supabase';
 import { convertNumberToWon } from '@/shared/helper';
 import { getOptionPriceByList } from '@/shared/store/order';
 import Image from 'next/image';
-import CartOptionRow from '@/components/order/cart/CartOptionRow';
-import CartAmount from '@/components/order/cart/CartAmount';
+import CartOptionRow from '@/components/kiosk/cart/CartOptionRow';
+import CartAmount from '@/components/kiosk/cart/CartAmount';
 
 const CartRow = ({ itemList }: { itemList: MenuItemWithOption[] }) => {
   return (

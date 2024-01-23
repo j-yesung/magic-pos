@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import styles from './styles/PaymentContainer.module.css';
 import useOrderState, { getTotalPrice, ORDER_STEP } from '@/shared/store/order';
 import { usePaymentWidget } from '@/hooks/order/usePaymentWidget';
-import MenuHeader from '@/components/order/common/MenuHeader';
+import MenuHeader from '@/components/kiosk/common/MenuHeader';
 
 /**
  * STEP4: 토스 결제 화면

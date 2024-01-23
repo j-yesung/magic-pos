@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '@/components/order/cart/styles/CartAmount.module.css';
+import styles from '@/components/kiosk/cart/styles/CartAmount.module.css';
 import { MenuItemWithOption } from '@/types/supabase';
 import { addOrderList, subtractOrderList } from '@/shared/store/order';
 import { FaMinus, FaPlus } from 'react-icons/fa6';

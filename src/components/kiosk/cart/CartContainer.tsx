@@ -1,14 +1,14 @@
 import React from 'react';
 import useOrderState from '@/shared/store/order';
-import CartRow from '@/components/order/cart/CartRow';
+import CartRow from '@/components/kiosk/cart/CartRow';
 import styles from './styles/CartContainer.module.css';
 import { groupByKey } from '@/shared/helper';
 import { MenuItemWithOption } from '@/types/supabase';
-import WarningNoOrderList from '@/components/order/cart/WarningNoOrderList';
-import StoreInfo from '@/components/order/common/StoreInfo';
-import TotalPrice from '@/components/order/common/TotalPrice';
-import MenuHeader from '@/components/order/common/MenuHeader';
-import CartMoreButton from '@/components/order/cart/CartMoreButton';
+import WarningNoOrderList from '@/components/kiosk/cart/WarningNoOrderList';
+import StoreInfo from '@/components/kiosk/common/StoreInfo';
+import TotalPrice from '@/components/kiosk/common/TotalPrice';
+import MenuHeader from '@/components/kiosk/common/MenuHeader';
+import CartMoreButton from '@/components/kiosk/cart/CartMoreButton';
 
 /**
  * STEP3: 담은 메뉴 보기

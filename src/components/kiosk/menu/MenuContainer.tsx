@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import useOrderState from '@/shared/store/order';
-import MenuCategoryContainer from '@/components/order/menu/MenuCategoryContainer';
+import MenuCategoryContainer from '@/components/kiosk/menu/MenuCategoryContainer';
 import styles from './styles/MenuContainer.module.css';
-import MenuCard from '@/components/order/menu/MenuCard';
+import MenuCard from '@/components/kiosk/menu/MenuCard';
 import { MenuItemWithOption } from '@/types/supabase';
-import StoreInfo from '@/components/order/common/StoreInfo';
+import StoreInfo from '@/components/kiosk/common/StoreInfo';
 
 /**
  * STEP2: 메뉴 탐색 및 선택

@@ -8,7 +8,7 @@ import { CategoryWithMenuItemWithStore } from '@/types/supabase';
 import useOrderState, { resetOrderList, setMenuData, setStoreId, setStoreName, setTableId } from '@/shared/store/order';
 import { isEmptyObject } from '@/shared/helper';
 import { useRouter } from 'next/router';
-import OrderContainer from '@/components/order/OrderContainer';
+import OrderContainer from '@/components/kiosk/OrderContainer';
 import { useModal } from '@/hooks/modal/useModal';
 import { useStoreOrderFetchQuery } from '@/hooks/order/useStoreOrderFetchQuery';
 import { useNumberOrderFetchQuery } from '@/hooks/order/useNumberOrderFetchQuery';

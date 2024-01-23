@@ -3,7 +3,7 @@ import styles from './styles/StepButton.module.css';
 import useOrderState, { addOrderList, resetSelectedMenu } from '@/shared/store/order';
 import { MenuItemWithOption } from '@/types/supabase';
 import { useModal } from '@/hooks/modal/useModal';
-import CartAlertModal from '@/components/order/cart/CartAlertModal';
+import CartAlertModal from '@/components/kiosk/cart/CartAlertModal';
 
 /**
  * 옵션, 수량 등을 정한 뒤 장바구니(orderList)에 담는다.

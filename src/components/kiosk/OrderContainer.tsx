@@ -1,13 +1,13 @@
 import React, { useEffect, useRef } from 'react';
-import OrderTypeContainer from '@/components/order/order-type/OrderTypeContainer';
-import MenuContainer from '@/components/order/menu/MenuContainer';
-import CartContainer from '@/components/order/cart/CartContainer';
-import PaymentContainer from '@/components/order/payment/PaymentContainer';
-import SuccessContainer from '@/components/order/success/SuccessContainer';
+import OrderTypeContainer from '@/components/kiosk/order-type/OrderTypeContainer';
+import MenuContainer from '@/components/kiosk/menu/MenuContainer';
+import CartContainer from '@/components/kiosk/cart/CartContainer';
+import PaymentContainer from '@/components/kiosk/payment/PaymentContainer';
+import SuccessContainer from '@/components/kiosk/success/SuccessContainer';
 import { Swiper, SwiperSlide, SwiperRef } from 'swiper/react';
 import { Virtual } from 'swiper/modules';
 import useOrderState, { setOptionSwiperRef } from '@/shared/store/order';
-import MenuOptionContainer from '@/components/order/menu-option/MenuOptionContainer';
+import MenuOptionContainer from '@/components/kiosk/menu-option/MenuOptionContainer';
 
 /**
  * 키오스크 화면을 전반적으로 감싸는 Container

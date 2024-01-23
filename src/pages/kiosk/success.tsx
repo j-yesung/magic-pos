@@ -1,10 +1,10 @@
 import React, { ReactNode, useEffect, useState } from 'react';
-import SuccessContainer from '@/components/order/success/SuccessContainer';
+import SuccessContainer from '@/components/kiosk/success/SuccessContainer';
 import { GetServerSideProps } from 'next';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import useOrderState from '@/shared/store/order';
-import Waiting from '@/components/order/success/Waiting';
+import Waiting from '@/components/kiosk/success/Waiting';
 import OrderLayout from '@/components/layout/order/OrderLayout';
 
 /**

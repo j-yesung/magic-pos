@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MenuOptionWithDetail, Tables } from '@/types/supabase';
 import styles from './styles/OptionRow.module.css';
-import OptionDetailRow from '@/components/order/menu-option/OptionDetailRow';
+import OptionDetailRow from '@/components/kiosk/menu-option/OptionDetailRow';
 
 /**
  * -- 로직 설명

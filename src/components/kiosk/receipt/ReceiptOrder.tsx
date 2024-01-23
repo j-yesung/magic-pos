@@ -1,10 +1,10 @@
 import React from 'react';
 import { MenuItemWithOption, OrderDataWithStoreName } from '@/types/supabase';
-import ReceiptOrderHeader from '@/components/order/receipt/ReceiptOrderHeader';
+import ReceiptOrderHeader from '@/components/kiosk/receipt/ReceiptOrderHeader';
 import { groupByKey } from '@/shared/helper';
-import ReceiptOrderRow from '@/components/order/receipt/ReceiptOrderRow';
+import ReceiptOrderRow from '@/components/kiosk/receipt/ReceiptOrderRow';
 import styles from './styles/ReceiptOrder.module.css';
-import ReceiptPrice from '@/components/order/receipt/ReceiptPrice';
+import ReceiptPrice from '@/components/kiosk/receipt/ReceiptPrice';
 
 const ReceiptOrder = ({ data }: { data: OrderDataWithStoreName }) => {
   const group = groupByKey<MenuItemWithOption>(data.menu_list, 'id');

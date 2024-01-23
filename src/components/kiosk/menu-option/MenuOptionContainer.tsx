@@ -2,10 +2,10 @@ import React from 'react';
 import useOrderState from '@/shared/store/order';
 import Image from 'next/image';
 import styles from './styles/MenuOptionContainer.module.css';
-import MenuInfo from '@/components/order/menu-option/MenuInfo';
-import OptionRow from '@/components/order/menu-option/OptionRow';
-import TotalPrice from '@/components/order/common/TotalPrice';
-import Amount from '@/components/order/menu-option/Amount';
+import MenuInfo from '@/components/kiosk/menu-option/MenuInfo';
+import OptionRow from '@/components/kiosk/menu-option/OptionRow';
+import TotalPrice from '@/components/kiosk/common/TotalPrice';
+import Amount from '@/components/kiosk/menu-option/Amount';
 
 const MenuOptionContainer = () => {
   const selectedMenu = useOrderState(state => state.selectedMenu);

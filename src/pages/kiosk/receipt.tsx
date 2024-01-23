@@ -1,7 +1,7 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import useOrderState from '@/shared/store/order';
 import { useRouter } from 'next/router';
-import ReceiptContainer from '@/components/order/receipt/ReceiptContainer';
+import ReceiptContainer from '@/components/kiosk/receipt/ReceiptContainer';
 import OrderLayout from '@/components/layout/order/OrderLayout';
 
 /**
