@@ -3,6 +3,7 @@ import useSalesStore from '@/shared/store/sales/sales';
 import { cva } from 'class-variance-authority';
 import moment, { Moment } from 'moment';
 
+import useCalendarStore from '@/shared/store/sales/calendar';
 import { CalendarDataType, GetMinMaxSalesReturnType } from '@/types/sales';
 import { getCalendarType, getDateType, getDayType, getMonthType } from '../../calendarUtility/cellItemType';
 import styles from './styles/cellItem.module.css';
@@ -17,10 +18,8 @@ interface CellItemProps {
 type Cell = (param: CellItemProps) => JSX.Element;
 
 const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDateHandler }) => {
-  const {
-    date: { currentDate, selectedDate, today },
-    isChangeView,
-  } = useSalesStore();
+  const isChangeView = useSalesStore(state => state.isChangeView);
+  const { currentDate, selectedDate, today } = useCalendarStore();
 
   const dateVariant = cva([styles.dateBase], {
     variants: {

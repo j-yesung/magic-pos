@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import styles from './styles/salesAmount.module.css';
 const SalesAmount = () => {
   const { salesSum } = useSalesStore();
-  console.log(salesSum);
+
   return (
     <div className={styles.container}>
       <div className={styles.sumSales}>

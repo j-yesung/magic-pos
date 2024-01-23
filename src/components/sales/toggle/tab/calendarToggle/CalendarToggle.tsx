@@ -1,4 +1,5 @@
 import { useCalendar } from '@/hooks/sales/useCalendar';
+import useCalendarStore from '@/shared/store/sales/calendar';
 import useSalesStore from '@/shared/store/sales/sales';
 import { Moment } from 'moment';
 import { useEffect, useRef } from 'react';
@@ -6,11 +7,8 @@ import { IoCalendarClearOutline } from 'react-icons/io5';
 import styles from './styles/calendarToggle.module.css';
 
 const CalendarToggle = () => {
-  const {
-    isChangeView,
-    isShow,
-    date: { currentDate },
-  } = useSalesStore();
+  const { isChangeView, isShow } = useSalesStore();
+  const currentDate = useCalendarStore(state => state.currentDate);
   const { clickShowCalendarHandler } = useCalendar();
 
   const dateRef = useRef<Moment | null>(null);

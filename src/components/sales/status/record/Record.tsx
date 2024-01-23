@@ -1,16 +1,15 @@
 import { convertNumberToWon } from '@/shared/helper';
+import useCalendarStore from '@/shared/store/sales/calendar';
 import useSalesStore from '@/shared/store/sales/sales';
 import moment, { Moment } from 'moment';
 import { useEffect, useRef } from 'react';
 import styles from './styles/Record.module.css';
 
 const Record = () => {
-  const {
-    record,
-    date: { selectedDate },
-  } = useSalesStore();
+  const { record } = useSalesStore();
+  const selectedDate = useCalendarStore(state => state.selectedDate);
   const dateRef = useRef<Moment | null>(null);
-  console.log(record);
+
   const SALES_TYPE = {
     day: moment().isSame(dateRef.current, 'date') ? '오늘' : dateRef.current?.format('M월 D일'),
     week: '이번 주',

@@ -7,20 +7,15 @@ import { Tables } from '@/types/supabase';
 import moment from 'moment';
 import { useEffect } from 'react';
 
+import useCalendarStore, { resetCurrentDate } from '@/shared/store/sales/calendar';
 import { getMinMaxSalesType } from '../../calendarUtility/cellItemType';
 import { formatToCalendarData, sortMinMaxData } from '../../calendarUtility/formatData';
 import CellItem from '../cellItem/CellItem';
 import styles from './styles/cell.module.css';
 
 const Cell = () => {
-  const {
-    date: { currentDate, today },
-    setCalendarData,
-    calendarData,
-    setSalesSum,
-    isChangeView,
-    setCurrentDate,
-  } = useSalesStore();
+  const { setCalendarData, calendarData, setSalesSum, isChangeView } = useSalesStore();
+  const currentDate = useCalendarStore(state => state.currentDate);
   const { clickShowDataOfDateHandler } = useCalendar();
 
   const startDay = currentDate.clone().startOf('month').startOf('week'); // monthStart가 속한 주의 시작 주
@@ -60,7 +55,7 @@ const Cell = () => {
 
   useEffect(() => {
     return () => {
-      setCurrentDate(today);
+      resetCurrentDate();
     };
   }, []);
 

@@ -1,4 +1,5 @@
 import { getDaySales } from '@/server/api/supabase/sales';
+import useCalendarStore, { setCalendarCurrentDate, setCalendarSelectedDate } from '@/shared/store/sales/calendar';
 import useSalesStore from '@/shared/store/sales/sales';
 import useAuthState from '@/shared/store/session';
 import { Tables } from '@/types/supabase';
@@ -9,13 +10,8 @@ import ChartBar from './chart/ChartBar';
 import Record from './record/Record';
 import styles from './styles/status.module.css';
 const SalesStatus = () => {
-  const {
-    date: { utcStandardDate, today },
-    setData,
-    setRecord,
-    setSelectedDate,
-    setCurrentDate,
-  } = useSalesStore();
+  const { setData, setRecord } = useSalesStore();
+  const { utcStandardDate, today } = useCalendarStore();
   const storeId = useAuthState(state => state.storeId);
   useEffect(() => {
     getDaySales(utcStandardDate.clone(), storeId!).then(data => {
@@ -42,8 +38,8 @@ const SalesStatus = () => {
         currentSales: 0,
         dateType: '',
       });
-      setSelectedDate(today);
-      setCurrentDate(today);
+      setCalendarSelectedDate(today);
+      setCalendarCurrentDate(today);
     };
   }, []);
 
