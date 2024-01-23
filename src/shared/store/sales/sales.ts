@@ -2,16 +2,12 @@ import { create } from 'zustand';
 
 interface SalesStore {
   isShow: boolean;
-  record: {
-    currentSales: number;
-    dateType: string;
-  };
 
   calendarData: { sales: number; date: string; min?: boolean; max?: boolean }[];
   salesSum: number | null;
   isChangeView: boolean;
   setIsShow: (param: boolean) => void;
-  setRecord: (sales: { currentSales: number; dateType: string }) => void;
+
   setCalendarData: <T extends { sales: number; date: string; min?: boolean; max?: boolean }[]>(param: T) => void;
   setSalesSum: (sales: { sales: number; date: string }[] | null) => void;
   setIsChangeView: (param: boolean) => void;
@@ -28,14 +24,7 @@ const useSalesStore = create<SalesStore>()(set => ({
   isChangeView: false,
   /**
    */
-  setRecord: prop =>
-    set(state => ({
-      ...state,
-      record: {
-        ...state.record,
-        ...prop,
-      },
-    })),
+
   setIsShow: prop =>
     set(state => ({
       ...state,

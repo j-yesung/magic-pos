@@ -2,13 +2,14 @@ import { formatData } from '@/components/sales/calendarUtility/formatData';
 import { getDaySales, getMonthsSales, getWeekSales } from '@/server/api/supabase/sales';
 import useCalendarStore, { setCalendarCurrentDate, setCalendarSelectedDate } from '@/shared/store/sales/calendar';
 import { setChartData } from '@/shared/store/sales/chart';
+import { setRecordData } from '@/shared/store/sales/record';
 
 import useSalesStore from '@/shared/store/sales/sales';
 import useAuthState from '@/shared/store/session';
 import { Moment } from 'moment';
 
 export const useCalendar = () => {
-  const { setIsShow, setRecord } = useSalesStore();
+  const setIsShow = useSalesStore(state => state.setIsShow);
   const { currentDate, today, utcStandardDate } = useCalendarStore();
   const storeId = useAuthState(state => state.storeId);
 
@@ -32,12 +33,12 @@ export const useCalendar = () => {
     if (sales.length !== 0) {
       const { result, recordData } = formatData(sales, dateType, day.clone(), formatType!);
       if (result && recordData) {
-        setRecord(recordData);
+        setRecordData(recordData);
         setChartData(result);
       }
     } else {
       setChartData([]);
-      setRecord({
+      setRecordData({
         currentSales: 0,
         dateType: 'day',
       });
@@ -57,10 +58,10 @@ export const useCalendar = () => {
       const { result, recordData } = formatData(sales, dateType, today, formatType!);
       if (result && recordData) {
         setChartData(result);
-        setRecord(recordData);
+        setRecordData(recordData);
       }
     } else {
-      setRecord({
+      setRecordData({
         currentSales: 0,
         dateType: 'day',
       });
@@ -75,12 +76,12 @@ export const useCalendar = () => {
       const { result, recordData } = formatData(sales, dateType, today, formatType!);
       if (result && recordData) {
         setChartData(result);
-        setRecord(recordData);
+        setRecordData(recordData);
       }
     }
 
     if (sales.length === 0) {
-      setRecord({
+      setRecordData({
         currentSales: 0,
         dateType: 'week',
       });
@@ -94,10 +95,10 @@ export const useCalendar = () => {
 
       if (result && recordData) {
         setChartData(result);
-        setRecord(recordData);
+        setRecordData(recordData);
       }
     } else {
-      setRecord({
+      setRecordData({
         currentSales: 0,
         dateType: 'month',
       });

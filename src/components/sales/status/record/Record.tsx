@@ -1,12 +1,12 @@
 import { convertNumberToWon } from '@/shared/helper';
 import useCalendarStore from '@/shared/store/sales/calendar';
-import useSalesStore from '@/shared/store/sales/sales';
+import useRecordStore from '@/shared/store/sales/record';
 import moment, { Moment } from 'moment';
 import { useEffect, useRef } from 'react';
 import styles from './styles/Record.module.css';
 
 const Record = () => {
-  const { record } = useSalesStore();
+  const record = useRecordStore(state => state.record);
   const selectedDate = useCalendarStore(state => state.selectedDate);
   const dateRef = useRef<Moment | null>(null);
 

@@ -1,7 +1,7 @@
 import { getDaySales } from '@/server/api/supabase/sales';
 import useCalendarStore, { setCalendarCurrentDate, setCalendarSelectedDate } from '@/shared/store/sales/calendar';
 import { setChartData } from '@/shared/store/sales/chart';
-import useSalesStore from '@/shared/store/sales/sales';
+import { resetRecordData, setRecordData } from '@/shared/store/sales/record';
 import useAuthState from '@/shared/store/session';
 import { Tables } from '@/types/supabase';
 import moment from 'moment';
@@ -11,7 +11,6 @@ import ChartBar from './chart/ChartBar';
 import Record from './record/Record';
 import styles from './styles/status.module.css';
 const SalesStatus = () => {
-  const { setRecord } = useSalesStore();
   const { utcStandardDate, today } = useCalendarStore();
   const storeId = useAuthState(state => state.storeId);
   useEffect(() => {
@@ -25,20 +24,21 @@ const SalesStatus = () => {
         );
         if (result) {
           setChartData(result);
-          setRecord(recordData);
+          setRecordData(recordData);
         }
       } else if (data.sales.length === 0) {
-        setRecord({
+        setRecordData({
           currentSales: 0,
           dateType: 'days',
         });
       }
     });
+  }, []);
+
+  // reset 하는 함수들
+  useEffect(() => {
     return () => {
-      setRecord({
-        currentSales: 0,
-        dateType: '',
-      });
+      resetRecordData();
       setCalendarSelectedDate(today);
       setCalendarCurrentDate(today);
     };
