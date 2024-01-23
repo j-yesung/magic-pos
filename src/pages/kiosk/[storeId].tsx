@@ -60,6 +60,11 @@ const OrderIndexPage = ({ menuData, storeId, tableId }: OrderIndexPageProps) => 
     }
     if (tableId) setTableId(tableId);
     setIsLoaded(true);
+
+    MagicModal.confirm({ content: 'hi' });
+    MagicModal.alert({ content: ' hhh' });
+    MagicModal.alert({ content: ' hh11h' });
+    MagicModal.alert({ content: ' hh1123h' });
   }, []);
 
   return (

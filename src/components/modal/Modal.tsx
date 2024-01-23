@@ -36,7 +36,9 @@ const Modal = () => {
           {modalList?.map(modal => (
             <div
               key={modal.id}
-              className={clsx(styles.modalContainer, styles.modalPositionCenter, styles.customZIndex)}
+              className={clsx(styles.modalContainer, styles.modalPositionCenter, styles.customZIndex, {
+                [styles.opacity10]: (alertList && alertList?.length > 0) || (confirmList && confirmList.length > 0),
+              })}
             >
               {React.cloneElement(modal.child, { modalId: modal.id })}
             </div>
@@ -44,7 +46,9 @@ const Modal = () => {
           {confirmList?.map(confirm => (
             <div
               key={confirm.id}
-              className={clsx(styles.modalContainer, styles.modalPositionCenter, styles.confirmZIndex)}
+              className={clsx(styles.modalContainer, styles.modalPositionCenter, styles.confirmZIndex, {
+                [styles.opacity10]: alertList && alertList.length > 0,
+              })}
             >
               <ConfirmModal confirmOption={confirm} />
             </div>
