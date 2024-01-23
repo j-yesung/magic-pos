@@ -6,7 +6,7 @@ import useAuthState from '@/shared/store/session';
 import { Tables } from '@/types/supabase';
 import moment from 'moment';
 import { useEffect } from 'react';
-import CellItem from './CellItem';
+import CellItem from '../cellItem/CellItem';
 import styles from './styles/cell.module.css';
 
 type FormatCalendarReturnType = (data: Map<string, Tables<'sales'>[]>) => { sales: number; date: string }[];

@@ -9,7 +9,7 @@ import {
 import useSalesStore from '@/shared/store/sales';
 import { cva } from 'class-variance-authority';
 import moment, { Moment } from 'moment';
-import { CalendarDataType } from './Cell';
+import { CalendarDataType } from '../cell/Cell';
 import styles from './styles/cellItem.module.css';
 
 interface CellItemProps {
