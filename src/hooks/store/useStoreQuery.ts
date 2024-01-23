@@ -1,9 +1,11 @@
 import { incrementOrderNumber, updateStoreTime } from '@/server/api/supabase/store';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import useToast from '../toast/useToast';
+import { updateStoreUseTable } from './../../server/api/supabase/store';
 
 const enum StoreKey {
   STORE_UPDATE_TIME = 'storeUpdateTime',
+  STORE_UPDATE_TABLE = 'storeUpdateTable',
 }
 
 /**
@@ -36,9 +38,26 @@ export const useStoreQuery = () => {
     },
   });
 
+  const updateStoreUseTableMutation = useMutation({
+    mutationFn: updateStoreUseTable,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [StoreKey.STORE_UPDATE_TABLE] });
+      toast('변경이 완료되었습니다.', {
+        type: 'success',
+        position: 'top-right',
+        showCloseButton: false,
+        autoClose: 2000,
+      });
+    },
+    onError: error => {
+      console.error(error);
+    },
+  });
+
   return {
     newOrderNumber: incrementResult?.orderNumber,
     incrementOrderNumber: incrementOrderNumberMutation,
     updateStoreTimeSet: updateStoreTimeSetMutation.mutate,
+    updateStoreUseTable: updateStoreUseTableMutation.mutate,
   };
 };

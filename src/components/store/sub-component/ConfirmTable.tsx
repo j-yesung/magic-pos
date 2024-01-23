@@ -1,3 +1,5 @@
+import { useStoreQuery } from '@/hooks/store/useStoreQuery';
+import useAuthState from '@/shared/store/session';
 import { useState } from 'react';
 import Select from 'react-select';
 import styles from '../styles/StroeContents.module.css';
@@ -10,9 +12,14 @@ const OPTIONS = [
 
 const ConfirmTable = () => {
   const [isTable, setIsTable] = useState('true');
+  const storeId = useAuthState(state => state.storeId);
+  const { updateStoreUseTable } = useStoreQuery();
 
   const changeTableStatusHandler = (selectedValue: string) => {
-    setIsTable(selectedValue);
+    if (storeId) {
+      setIsTable(selectedValue);
+      updateStoreUseTable({ storeId, useTable: selectedValue === 'true' });
+    }
   };
 
   return (

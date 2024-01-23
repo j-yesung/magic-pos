@@ -45,3 +45,14 @@ export const fetchStoreInfoById = async (storeId: string) => {
   const { data } = await supabase.from('store').select('*').eq('id', storeId).single();
   return data;
 };
+
+/**
+ * 테이블 사용 여부 변경
+ * @param storeId 가게 아이디
+ * @param useTable 테이블 사용 여부
+ */
+export const updateStoreUseTable = async ({ storeId, useTable }: { storeId: string; useTable: boolean }) => {
+  console.log('storeId, useTable: ', storeId, useTable);
+  const { error } = await supabase.from('store').update({ use_table: useTable }).eq('id', storeId);
+  if (error) throw error;
+};
