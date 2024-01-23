@@ -1,3 +1,8 @@
+declare interface OptionType {
+  value: string;
+  label: string;
+}
+
 declare type TimeState = Record<string, string>;
 
 interface BaseProps {
