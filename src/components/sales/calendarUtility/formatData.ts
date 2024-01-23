@@ -1,13 +1,12 @@
-import { DateFormatType, FormatType } from '@/server/api/supabase/sales';
+import { CalendarDataType, DateFormatType, FormatType } from '@/types/sales';
 import { Tables, TablesInsert } from '@/types/supabase';
 import moment, { Moment } from 'moment';
-import { CalendarDataType } from '../calendar/cell/Cell';
 import { getStartWeeks } from './dateCalculator';
+
 type FormatCalendarReturnType = (data: Map<string, Tables<'sales'>[]>) => { sales: number; date: string }[];
 type SortMinMaxDataReturnType = (target: CalendarDataType[]) => CalendarDataType[];
 type FormatDateParamType = 'YYYY-MM-DD' | 'YYYY년 MM월' | 'YYYY-MM';
 type DateParamType = 'day' | 'week' | 'month';
-
 type CommonType = TablesInsert<'sales'> & { moment?: Moment; original_date: Moment };
 
 export const formatToCalendarData: FormatCalendarReturnType = data => {
@@ -48,13 +47,13 @@ export const formatData = (
   selectedDateType: Moment,
   formatType: FormatType,
 ) => {
-  console.log(dateType);
   const dateContainer = getDates(dateType, selectedDateType, formatType);
-  const dateGroup = createGroupByMap();
-  const groupByDate = getGroupByDate(dateContainer, dateGroup);
+  const groupByDate = getGroupByDate(dateContainer);
+  console.log(groupByDate);
   const formattedData = getDataWithFormatingDate(salesData, dateType, formatType);
 
   const groupBybindingData = insertDataGroupByDate(formattedData, groupByDate);
+  console.log(groupBybindingData);
   const recordData = getRecordData(groupBybindingData, dateType, selectedDateType);
 
   const result = [...groupBybindingData.entries()]
@@ -124,16 +123,13 @@ const getDataWithFormatingDate = (
   return DataWithFormattedDate;
 };
 
-const createGroupByMap = () => {
+const getGroupByDate = (container: string[]) => {
   const mapGroup = new Map<string, CommonType[]>();
-  return mapGroup;
-};
 
-const getGroupByDate = (container: string[], map: Map<string, CommonType[]>) => {
   const group = container.reduce((acc, cur) => {
     acc.set(cur, []);
     return acc;
-  }, map);
+  }, mapGroup);
   return group;
 };
 

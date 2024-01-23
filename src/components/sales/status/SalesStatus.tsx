@@ -1,5 +1,4 @@
 import { getDaySales } from '@/server/api/supabase/sales';
-
 import useSalesStore from '@/shared/store/sales';
 import useAuthState from '@/shared/store/session';
 import { Tables } from '@/types/supabase';

@@ -1,22 +1,16 @@
 import { useCalendar } from '@/hooks/sales/useCalendar';
 import { getMonthSales } from '@/server/api/supabase/sales';
-import { getMinMaxSalesType, groupByKey } from '@/shared/helper';
+import { groupByKey } from '@/shared/helper';
 import useSalesStore from '@/shared/store/sales';
 import useAuthState from '@/shared/store/session';
 import { Tables } from '@/types/supabase';
 import moment from 'moment';
 import { useEffect } from 'react';
 
+import { getMinMaxSalesType } from '../../calendarUtility/cellItemType';
 import { formatToCalendarData, sortMinMaxData } from '../../calendarUtility/formatData';
 import CellItem from '../cellItem/CellItem';
 import styles from './styles/cell.module.css';
-
-export interface CalendarDataType {
-  sales: number;
-  date: string;
-  min?: boolean;
-  max?: boolean;
-}
 
 const Cell = () => {
   const {

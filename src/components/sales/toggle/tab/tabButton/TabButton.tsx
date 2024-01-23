@@ -6,8 +6,8 @@ import { useEffect, useState } from 'react';
 import styles from './styles/tabButton.module.css';
 const TabButton = () => {
   const TODAY = 'today';
-  const MONTHS = 'months';
-  const WEEKS = 'weeks';
+  const MONTH = 'month';
+  const WEEK = 'week';
 
   const isChangeView = useSalesStore(state => state.isChangeView);
   const { clickMoveTodayHandler, clickWeeksChartHandler, clickMonthsChartHandler } = useCalendar();
@@ -34,18 +34,18 @@ const TabButton = () => {
       <Button
         type="button"
         className={clsx(styles.dateButton, {
-          [styles.active]: clickedTab === WEEKS,
+          [styles.active]: clickedTab === WEEK,
         })}
-        onClick={async () => await clickWeeksChartHandler().then(() => setClickedTab(WEEKS))}
+        onClick={async () => await clickWeeksChartHandler().then(() => setClickedTab(WEEK))}
       >
         이번 주
       </Button>
       <Button
         type="button"
         className={clsx(styles.dateButton, {
-          [styles.active]: clickedTab === MONTHS,
+          [styles.active]: clickedTab === MONTH,
         })}
-        onClick={async () => clickMonthsChartHandler().then(() => setClickedTab(MONTHS))}
+        onClick={async () => clickMonthsChartHandler().then(() => setClickedTab(MONTH))}
       >
         이번 달
       </Button>

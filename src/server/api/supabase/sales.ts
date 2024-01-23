@@ -1,27 +1,9 @@
 import { momentToString } from '@/components/sales/calendarUtility/dateCalculator';
 import { supabase } from '@/shared/supabase';
+import { SalesDataReturnType } from '@/types/sales';
 import { Tables } from '@/types/supabase';
-import { PostgrestError } from '@supabase/supabase-js';
 import { Moment } from 'moment';
 
-/**
- * DateFormatType은 helper에서 데이터를 가공할 때 사용합니다.
- */
-export type DateFormatType = 'day' | 'week' | 'month';
-
-/**
- *  FORMAT_DAY_TYPE = 'YYYY-MM-DD';
- * FORMAT_WEEK_TYPE = 'YYYY년 MM월';
- * FORMAT_MONTHS_TYPE = 'YYYY-MM';
- */
-export type FormatType = 'YYYY-MM-DD' | 'YYYY년 MM월' | 'YYYY-MM';
-
-export interface SalesDataReturnType {
-  sales: Tables<'sales'>[];
-  error?: PostgrestError;
-  dateType: DateFormatType;
-  formatType?: FormatType;
-}
 type getSalesReturnType = (date: Moment, store_id: string) => Promise<SalesDataReturnType>;
 
 export const addSales = async (sales: Omit<Tables<'sales'>, 'id'>[]) => {

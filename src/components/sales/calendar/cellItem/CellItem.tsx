@@ -1,15 +1,10 @@
-import {
-  GetMinMaxSalesReturnType,
-  convertNumberToWon,
-  getCalendarType,
-  getDateType,
-  getDayType,
-  getMonthType,
-} from '@/shared/helper';
+import { convertNumberToWon } from '@/shared/helper';
 import useSalesStore from '@/shared/store/sales';
 import { cva } from 'class-variance-authority';
 import moment, { Moment } from 'moment';
-import { CalendarDataType } from '../cell/Cell';
+
+import { CalendarDataType, GetMinMaxSalesReturnType } from '@/types/sales';
+import { getCalendarType, getDateType, getDayType, getMonthType } from '../../calendarUtility/cellItemType';
 import styles from './styles/cellItem.module.css';
 
 interface CellItemProps {
