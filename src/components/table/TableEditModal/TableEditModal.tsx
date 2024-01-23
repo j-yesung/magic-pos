@@ -10,13 +10,14 @@ const TableEditModal = ({ modalId }: { modalId?: string }) => {
   const clickRemoveTableHandler = () => {
     MagicModal.hide(modalId ?? '');
   };
+
   return (
     <div className={styles['table-edit-modal-wrapper']}>
       <div className={styles['table-edit-modal-close-wrapper']}>
         <span>테이블 수정</span>
         <span onClick={clickRemoveTableHandler}>
           <CloseButton className={styles['close-button-svg']} width={26} height={26} />
-        </span>{' '}
+        </span>
       </div>
       <TableEditModalContainer />
       <TableEditModalButtonBox modalId={modalId!} />

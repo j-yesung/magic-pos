@@ -9,16 +9,9 @@
   width: calc((100% - 12.8rem) / 4);
   height: 21.8rem;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
+  flex-direction: column;
+  font-size: 2rem;
   border-radius: 1rem;
-  transition: 0.2s;
   background: var(--bg-g);
   cursor: pointer;
-  margin-bottom: 1.8rem;
-}
-
-.table-list-button:hover {
-  background-color: #ccf;
 }
