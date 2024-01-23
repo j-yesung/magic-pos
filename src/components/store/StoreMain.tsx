@@ -3,6 +3,7 @@ import useAuthState from '@/shared/store/session';
 import { useEffect, useState } from 'react';
 import Input from '../auth/Input';
 import styles from './styles/StroeContents.module.css';
+import ConfirmTable from './sub-component/ConfirmTable';
 import StoreTimeSet from './sub-component/StoreTimeSet';
 
 const StoreContents = () => {
@@ -25,6 +26,7 @@ const StoreContents = () => {
       {isLoaded && session && (
         <>
           <Input value={value} onChangeHandler={changeHandler} />
+          <ConfirmTable />
           <StoreTimeSet userId={userId} />
         </>
       )}
