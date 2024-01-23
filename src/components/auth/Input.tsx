@@ -16,6 +16,7 @@ import styles from './styles/Auth.module.css';
 interface InputProps {
   value: Record<string, string>;
   onChangeHandler?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyDownHandler?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 interface InputType {
@@ -29,7 +30,7 @@ interface InputType {
   placeholder?: string;
 }
 
-const Input = ({ value, onChangeHandler }: InputProps) => {
+const Input = ({ value, onChangeHandler, onKeyDownHandler }: InputProps) => {
   const path = useRouter().pathname;
   const { isPasswordValid, passwordValidationMessage } = useErrorMessage(value);
 
@@ -67,6 +68,7 @@ const Input = ({ value, onChangeHandler }: InputProps) => {
                 minLength={input.minLength}
                 maxLength={input.maxLength}
                 placeholder={input.placeholder}
+                onKeyDown={input.name === 'password' && path === '/auth/login' ? onKeyDownHandler : undefined}
                 disabled={input.disabled}
                 required
               />
