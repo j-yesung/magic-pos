@@ -4,7 +4,7 @@ import { useSetAuth } from '@/hooks/auth/useSetAuth';
 import { useValid } from '@/hooks/auth/useValid';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { IoIosCheckmarkCircleOutline } from 'react-icons/io';
+import { IoIosCheckmarkCircleOutline as Success } from 'react-icons/io';
 import Button from '../common/Button';
 import Input from './Input';
 import FormButton from './button/FormButton';
@@ -45,9 +45,15 @@ const AuthForm = ({ data }: FormProps) => {
   const { isPasswordValid } = useErrorMessage(value);
   const [isCheckbox, setIsCheckbox] = useState(false);
 
-  const clickCheckSignupHandler = async (value: Record<string, string>) => {
+  const clickCheckSignupHandler = async () => {
     const isChecked = await checkEmail(value);
     if (!isChecked) signup(value);
+  };
+  const clickLoginHandler = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      login(value);
+    }
   };
 
   // 이메일 저장 정보 가져오기
@@ -67,7 +73,7 @@ const AuthForm = ({ data }: FormProps) => {
       </div>
       {path === '/auth/success' && (
         <div className={styles.successImage}>
-          <IoIosCheckmarkCircleOutline size={200} className={styles.signupSuccess} />
+          <Success size={200} className={styles.signupSuccess} />
         </div>
       )}
       {path === '/auth/findPassword' || path === '/auth/reset' || path === '/auth/success' ? (
@@ -79,7 +85,7 @@ const AuthForm = ({ data }: FormProps) => {
       {path !== '/auth/success' && (
         <form className={styles.form}>
           <div className={styles.formInnerWrapper}>
-            <Input value={value} onChangeHandler={changeHandler} />
+            <Input value={value} onChangeHandler={changeHandler} onKeyDownHandler={clickLoginHandler} />
             {path === '/auth/signup' && (
               <div className={styles.formBusiness}>
                 <label htmlFor="businessNumber">{comment}</label>
