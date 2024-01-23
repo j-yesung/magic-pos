@@ -5,7 +5,7 @@ import OrderLayout from '@/components/layout/order/OrderLayout';
 import { fetchCategoriesWithMenuItemByStoreId } from '@/server/api/supabase/menu-category';
 import { GetServerSideProps } from 'next';
 import { CategoryWithMenuItemWithStore } from '@/types/supabase';
-import useOrderStore, { resetOrderList, setMenuData, setStoreId, setStoreName, setTableId } from '@/shared/store/order';
+import useOrderState, { resetOrderList, setMenuData, setStoreId, setStoreName, setTableId } from '@/shared/store/order';
 import { isEmptyObject } from '@/shared/helper';
 import { useRouter } from 'next/router';
 import OrderContainer from '@/components/order/OrderContainer';
@@ -24,8 +24,8 @@ const OrderIndexPage = ({
   storeId: string;
   tableId: string;
 }) => {
-  const orderIdList = useOrderStore(state => state.orderIdList);
-  const prevStoreId = useOrderStore(state => state.storeId);
+  const orderIdList = useOrderState(state => state.orderIdList);
+  const prevStoreId = useOrderState(state => state.storeId);
   const { storeInfo } = useGetQuery({ storeId: storeId });
   const { tableInfo } = useFetchTable({ tableId: tableId, storeId });
   const { storeOrderData } = useStoreOrderFetchQuery(orderIdList, storeId);

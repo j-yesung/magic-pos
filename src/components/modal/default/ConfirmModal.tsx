@@ -1,13 +1,11 @@
 import React from 'react';
-import useModalStore from '@/shared/store/modal';
+import { hideConfirm } from '@/shared/store/modal';
 import styles from './styles/ConfirmModal.module.css';
 import { ModalConfirmTypeOption } from '@/types/common';
 import { IoClose } from 'react-icons/io5';
 import Image from 'next/image';
 
 const ConfirmModal = ({ confirmOption }: { confirmOption: ModalConfirmTypeOption }) => {
-  const { hideConfirm } = useModalStore();
-
   const handleClickCancel = () => {
     if (confirmOption.cancelButtonCallback) confirmOption.cancelButtonCallback();
     hideConfirm(confirmOption.id ?? '');

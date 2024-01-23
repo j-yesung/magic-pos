@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './styles/ReceiptContainer.module.css';
-import useOrderStore, { ORDER_STEP, setStep, setStoreName } from '@/shared/store/order';
+import useOrderState, { ORDER_STEP, setStep, setStoreName } from '@/shared/store/order';
 import { OrderDataWithStoreName } from '@/types/supabase';
 import { useRouter } from 'next/router';
 import ReceiptOrder from '@/components/order/receipt/ReceiptOrder';
@@ -10,8 +10,8 @@ import MenuHeader from '@/components/order/common/MenuHeader';
 import { useGetQuery } from '@/hooks/store/useGetQuery';
 
 const ReceiptContainer = () => {
-  const orderIdList = useOrderStore(state => state.orderIdList);
-  const storeId = useOrderStore(state => state.storeId) ?? '';
+  const orderIdList = useOrderState(state => state.orderIdList);
+  const storeId = useOrderState(state => state.storeId) ?? '';
   const { storeOrderData } = useStoreOrderFetchQuery(orderIdList, storeId);
   const { numberOrderData } = useNumberOrderFetchQuery(orderIdList, storeId);
   const [orderDataList, setOrderDataList] = useState<OrderDataWithStoreName[]>([]);

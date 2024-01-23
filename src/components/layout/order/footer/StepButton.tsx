@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { SwiperRef } from 'swiper/react';
-import useOrderStore, { getTotalPrice, goNextStep, ORDER_STEP, subtractOrderList } from '@/shared/store/order';
+import useOrderState, { getTotalPrice, goNextStep, ORDER_STEP, subtractOrderList } from '@/shared/store/order';
 import { usePaymentWidget } from '@/hooks/order/usePaymentWidget';
 import styles from './styles/StepButton.module.css';
 import { convertNumberToWon } from '@/shared/helper';
@@ -27,11 +27,11 @@ interface ButtonProps {
 export const SLIDE_MOVE_SPEED = 500;
 
 const StepButton = ({ sliderRef }: ButtonProps) => {
-  const orderList = useOrderStore(state => state.orderList);
-  const step = useOrderStore(state => state.step);
-  const optionSwiperRef = useOrderStore(state => state.optionSwiperRef);
-  const swiperRef = useOrderStore(state => state.swiperRef);
-  const selectedMenu = useOrderStore(state => state.selectedMenu);
+  const orderList = useOrderState(state => state.orderList);
+  const step = useOrderState(state => state.step);
+  const optionSwiperRef = useOrderState(state => state.optionSwiperRef);
+  const swiperRef = useOrderState(state => state.swiperRef);
+  const selectedMenu = useOrderState(state => state.selectedMenu);
   const { MagicModal } = useModal();
 
   const { paymentWidget, handlePaymentRequest } = usePaymentWidget();

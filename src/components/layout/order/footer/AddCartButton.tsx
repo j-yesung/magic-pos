@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './styles/StepButton.module.css';
-import useOrderStore, { addOrderList, resetSelectedMenu } from '@/shared/store/order';
+import useOrderState, { addOrderList, resetSelectedMenu } from '@/shared/store/order';
 import { MenuItemWithOption } from '@/types/supabase';
 import { useModal } from '@/hooks/modal/useModal';
 import CartAlertModal from '@/components/order/cart/CartAlertModal';
@@ -11,9 +11,9 @@ import CartAlertModal from '@/components/order/cart/CartAlertModal';
  * @constructor
  */
 const AddCartButton = ({ menu }: { menu: MenuItemWithOption | null }) => {
-  const optionSwiperRef = useOrderStore(state => state.optionSwiperRef);
-  const selectedOptions = useOrderStore(state => state.selectedOptions);
-  const amount = useOrderStore(state => state.amount);
+  const optionSwiperRef = useOrderState(state => state.optionSwiperRef);
+  const selectedOptions = useOrderState(state => state.selectedOptions);
+  const amount = useOrderState(state => state.amount);
   const { MagicModal } = useModal();
 
   /**

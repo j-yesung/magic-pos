@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import styles from './styles/PaymentContainer.module.css';
-import useOrderStore, { getTotalPrice, ORDER_STEP } from '@/shared/store/order';
+import useOrderState, { getTotalPrice, ORDER_STEP } from '@/shared/store/order';
 import { usePaymentWidget } from '@/hooks/order/usePaymentWidget';
 import MenuHeader from '@/components/order/common/MenuHeader';
 
@@ -11,8 +11,8 @@ import MenuHeader from '@/components/order/common/MenuHeader';
 const PaymentContainer = () => {
   const paymentMethodsWidgetRef = useRef<PaymentMethodsWidget>();
   const { paymentWidget } = usePaymentWidget();
-  const orderList = useOrderStore(state => state.orderList);
-  const step = useOrderStore(state => state.step);
+  const orderList = useOrderState(state => state.orderList);
+  const step = useOrderState(state => state.step);
 
   useEffect(() => {
     if (paymentWidget == null || step !== ORDER_STEP.PAYMENT) {

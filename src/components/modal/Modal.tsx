@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import styles from './styles/Modal.module.css';
 import clsx from 'clsx';
-import useModalStore from '@/shared/store/modal';
+import useModalState, { hideAlert, hideModal } from '@/shared/store/modal';
 import AlertModal from '@/components/modal/default/AlertModal';
 import ConfirmModal from '@/components/modal/default/ConfirmModal';
 
@@ -11,15 +11,15 @@ import ConfirmModal from '@/components/modal/default/ConfirmModal';
  * @constructor
  */
 const Modal = () => {
-  const { modalList, alertList, confirmList, hideAlert, hideModal } = useModalStore();
+  const { modalList, alertList, confirmList } = useModalState();
   // 모달 바깥쪽 Ref 지정
   const overlayRef = useRef(null);
 
   const handleClickOverlay = (e: React.MouseEvent) => {
     if (e.target === overlayRef.current) {
-      if (alertList && alertList.length > 0) {
+      if (alertList && alertList?.length > 0) {
         hideAlert(alertList.pop()?.id ?? '');
-      } else if (confirmList && confirmList.length > 0) {
+      } else if (confirmList && confirmList?.length > 0) {
         hideAlert(confirmList.pop()?.id ?? '');
       } else if (modalList && modalList?.length > 0) {
         hideModal(modalList.pop()?.id ?? '');
@@ -29,9 +29,9 @@ const Modal = () => {
 
   return (
     <>
-      {((modalList && modalList?.length > 0) ||
-        (alertList && alertList?.length > 0) ||
-        (confirmList && confirmList?.length > 0)) && (
+      {((modalList && modalList.length > 0) ||
+        (alertList && alertList.length > 0) ||
+        (confirmList && confirmList.length > 0)) && (
         <div className={styles['modal-overlay']} onClick={handleClickOverlay} ref={overlayRef}>
           {modalList?.map(modal => (
             <div

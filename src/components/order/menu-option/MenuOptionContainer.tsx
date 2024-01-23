@@ -1,5 +1,5 @@
 import React from 'react';
-import useOrderStore from '@/shared/store/order';
+import useOrderState from '@/shared/store/order';
 import Image from 'next/image';
 import styles from './styles/MenuOptionContainer.module.css';
 import MenuInfo from '@/components/order/menu-option/MenuInfo';
@@ -8,9 +8,9 @@ import TotalPrice from '@/components/order/common/TotalPrice';
 import Amount from '@/components/order/menu-option/Amount';
 
 const MenuOptionContainer = () => {
-  const selectedMenu = useOrderStore(state => state.selectedMenu);
-  const amount = useOrderStore(state => state.amount);
-  const selectedOptions = useOrderStore(state => state.selectedOptions);
+  const selectedMenu = useOrderState(state => state.selectedMenu);
+  const amount = useOrderState(state => state.amount);
+  const selectedOptions = useOrderState(state => state.selectedOptions);
 
   return (
     <>
