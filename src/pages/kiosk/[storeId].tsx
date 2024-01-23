@@ -47,7 +47,9 @@ const OrderIndexPage = ({ menuData, storeId, tableId }: OrderIndexPageProps) => 
     // 주소창에 uuid가 노출되는 것을 막기 위해 주소창의 URL만을 변경한다. (페이지 이동X)
     // window.history.replaceState({}, '/order', '/order');
     setMenuData(menuList);
-    setStoreName(menuData[0].store?.business_name ?? '');
+    if (menuData && menuData.length > 0) {
+      setStoreName(menuData[0].store?.business_name ?? '');
+    }
 
     if (storeId) {
       // 이전에 저장된 storeId가 현재 storeId와 다르면 다른 가게로 온것이므로 주문 목록 초기화 시킴
@@ -64,7 +66,7 @@ const OrderIndexPage = ({ menuData, storeId, tableId }: OrderIndexPageProps) => 
     <>
       {isInvalidURL && isLoaded && <KioskContainer />}
       {/* TODO: 유효 하지 않은 가게 디자인 */}
-      {!isInvalidURL && <div>유효 하지 않은 가게입니다.</div>}
+      {!isInvalidURL && isLoaded && <div>유효 하지 않은 가게입니다.</div>}
     </>
   );
 };

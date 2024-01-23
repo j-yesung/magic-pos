@@ -63,6 +63,7 @@ export const useIsInvalidURL = ({ tableId, storeId }: { tableId?: string; storeI
 };
 
 export const useMakeMenuData = (menuData: CategoryWithMenuItemWithStore[], storeId: string) => {
+  if (isEmptyObject(menuData)) return [];
   const menuList = [...menuData];
 
   // TODO: 에러 처리
