@@ -49,6 +49,8 @@ const Cell = () => {
           const minMaxData = sortMinMaxData(formattedData);
           setCalendarData(minMaxData);
           setSalesSum(formattedData);
+        } else {
+          setSalesSum(null);
         }
       });
     }
