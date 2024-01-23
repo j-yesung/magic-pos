@@ -8,13 +8,20 @@ import moment from 'moment';
 import { useEffect } from 'react';
 
 import useCalendarStore, { resetCurrentDate } from '@/shared/store/sales/calendar';
+import useDataStore, {
+  resetCalendarBindingData,
+  resetSalesSum,
+  setCalendarBindingData,
+  setSalesSum,
+} from '@/shared/store/sales/data';
 import { getMinMaxSalesType } from '../../calendarUtility/cellItemType';
 import { formatToCalendarData, sortMinMaxData } from '../../calendarUtility/formatData';
 import CellItem from '../cellItem/CellItem';
 import styles from './styles/cell.module.css';
 
 const Cell = () => {
-  const { setCalendarData, calendarData, setSalesSum, isChangeView } = useSalesStore();
+  const isChangeView = useSalesStore(state => state.isChangeView);
+  const calendarDataBindingData = useDataStore(state => state.calendarBindingData);
   const currentDate = useCalendarStore(state => state.currentDate);
   const { clickShowDataOfDateHandler } = useCalendar();
 
@@ -36,7 +43,7 @@ const Cell = () => {
 
           const formattedData = formatToCalendarData(group);
           const minMaxData = sortMinMaxData(formattedData);
-          setCalendarData(minMaxData);
+          setCalendarBindingData(minMaxData);
           setSalesSum(formattedData);
         } else {
           setSalesSum(null);
@@ -45,9 +52,9 @@ const Cell = () => {
     }
 
     return () => {
-      if (calendarData.length !== 0) {
-        setCalendarData([]);
-        setSalesSum(null);
+      if (calendarDataBindingData.length !== 0) {
+        resetCalendarBindingData();
+        resetSalesSum();
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -65,7 +72,7 @@ const Cell = () => {
   while (day <= endDay) {
     for (let i = 0; i < 7; i++) {
       const itemKey = day.clone().format('YY MM DD');
-      const salesData = calendarData?.filter(target => target.date === itemKey);
+      const salesData = calendarDataBindingData?.filter(target => target.date === itemKey);
 
       days.push(
         <CellItem

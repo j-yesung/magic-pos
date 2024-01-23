@@ -1,9 +1,9 @@
 import { convertNumberToWon } from '@/shared/helper';
-import useSalesStore from '@/shared/store/sales/sales';
+import useDataStore from '@/shared/store/sales/data';
 import clsx from 'clsx';
 import styles from './styles/salesAmount.module.css';
 const SalesAmount = () => {
-  const { salesSum } = useSalesStore();
+  const salesSum = useDataStore(state => state.salesSum);
 
   return (
     <div className={styles.container}>
