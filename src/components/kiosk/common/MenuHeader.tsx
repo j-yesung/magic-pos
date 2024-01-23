@@ -15,7 +15,7 @@ const MenuHeader = () => {
   return (
     <header className={styles.container}>
       {step === ORDER_STEP.RECEIPT && <h1>{storeName}</h1>}
-      <div>{TITLE[step]}</div>
+      {step !== ORDER_STEP.RECEIPT && <div>{TITLE[step]}</div>}
     </header>
   );
 };
