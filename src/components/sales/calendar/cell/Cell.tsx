@@ -1,12 +1,6 @@
-import { useCalendar } from '@/hooks/sales/useCalendar';
+import { useDataHandler } from '@/hooks/sales/useDataHandler';
 import { getMonthSales } from '@/server/api/supabase/sales';
 import { groupByKey } from '@/shared/helper';
-import useSalesStore from '@/shared/store/sales/sales';
-import useAuthState from '@/shared/store/session';
-import { Tables } from '@/types/supabase';
-import moment from 'moment';
-import { useEffect } from 'react';
-
 import useCalendarStore, { resetCurrentDate } from '@/shared/store/sales/calendar';
 import useDataStore, {
   resetCalendarBindingData,
@@ -14,6 +8,11 @@ import useDataStore, {
   setCalendarBindingData,
   setSalesSum,
 } from '@/shared/store/sales/data';
+import useSalesStore from '@/shared/store/sales/sales';
+import useAuthState from '@/shared/store/session';
+import { Tables } from '@/types/supabase';
+import moment from 'moment';
+import { useEffect } from 'react';
 import { getMinMaxSalesType } from '../../calendarUtility/cellItemType';
 import { formatToCalendarData, sortMinMaxData } from '../../calendarUtility/formatData';
 import CellItem from '../cellItem/CellItem';
@@ -23,7 +22,7 @@ const Cell = () => {
   const isChangeView = useSalesStore(state => state.isChangeView);
   const calendarDataBindingData = useDataStore(state => state.calendarBindingData);
   const currentDate = useCalendarStore(state => state.currentDate);
-  const { clickShowDataOfDateHandler } = useCalendar();
+  const { clickShowDataOfDateHandler } = useDataHandler();
 
   const startDay = currentDate.clone().startOf('month').startOf('week'); // monthStart가 속한 주의 시작 주
   const endDay = currentDate.clone().endOf('month').endOf('week'); // monthStart가 속한 마지막 주

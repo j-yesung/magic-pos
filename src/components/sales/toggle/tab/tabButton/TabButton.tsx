@@ -1,5 +1,5 @@
 import Button from '@/components/common/Button';
-import { useCalendar } from '@/hooks/sales/useCalendar';
+import { useDataHandler } from '@/hooks/sales/useDataHandler';
 import useSalesStore from '@/shared/store/sales/sales';
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
@@ -10,7 +10,7 @@ const TabButton = () => {
   const WEEK = 'week';
 
   const isChangeView = useSalesStore(state => state.isChangeView);
-  const { clickMoveTodayHandler, clickWeeksChartHandler, clickMonthsChartHandler } = useCalendar();
+  const { clickMoveTodayHandler, clickWeeksChartHandler, clickMonthsChartHandler } = useDataHandler();
 
   const [clickedTab, setClickedTab] = useState(TODAY);
   useEffect(() => {
