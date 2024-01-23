@@ -7,6 +7,7 @@ export const useStoreOrderFetchQuery = (orderId: string[], storeId: string) => {
 
   const { data: storeOrderData } = useQuery({
     queryKey: [QUERY_KEY, orderId],
+    enabled: orderId.length > 0,
     queryFn: () => {
       return fetchStoreOrderByOrderIdWithStoreName(orderId, storeId);
     },
