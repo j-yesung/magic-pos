@@ -7,7 +7,7 @@ import useKioskState, { ORDER_STEP, setSwiperRef } from '@/shared/store/kiosk';
 import { useRouter } from 'next/router';
 import OrderPrevButton from '@/components/layout/order/OrderPrevButton';
 
-const DONT_RENDER_FOOTER_PATH_LIST = ['/order/success', '/order/receipt', '/order/fail'];
+const DONT_RENDER_FOOTER_PATH_LIST = ['/kiosk/success', '/kiosk/receipt', '/kiosk/fail'];
 /**
  * 일반인 KIOSK 레이아웃
  * @constructor

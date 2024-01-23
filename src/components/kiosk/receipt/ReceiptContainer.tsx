@@ -20,7 +20,7 @@ const ReceiptContainer = () => {
 
   const clickOrderMoreHandler = () => {
     setStep(ORDER_STEP.CHOOSE_ORDER_TYPE);
-    router.push(`/order/${storeId}`);
+    router.push(`/kiosk/${storeId}`);
   };
 
   // order_store 테이블과 order_togo 테이블에서 주문 내역 데이터를 가져온다.
