@@ -1,4 +1,3 @@
-import React from 'react';
 import useKioskState from '@/shared/store/kiosk';
 import CartRow from '@/components/kiosk/cart/CartRow';
 import styles from './styles/CartContainer.module.css';

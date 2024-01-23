@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './styles/ReceiptPrice.module.css';
 import { MenuItemWithOption } from '@/types/supabase';
 import { getTotalPrice } from '@/shared/store/kiosk';

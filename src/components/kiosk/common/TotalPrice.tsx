@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './style/TotalPrice.module.css';
 import { convertNumberToWon } from '@/shared/helper';
 import { MenuItemWithOption } from '@/types/supabase';

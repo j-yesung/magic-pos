@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './styles/Footer.module.css';
 import StepButton from '@/components/layout/order/footer/StepButton';
 import useKioskState, { ORDER_STEP } from '@/shared/store/kiosk';

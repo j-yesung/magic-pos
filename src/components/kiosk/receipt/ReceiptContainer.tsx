@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './styles/ReceiptContainer.module.css';
 import useKioskState, { ORDER_STEP, setStep, setStoreName } from '@/shared/store/kiosk';
 import { OrderDataWithStoreName } from '@/types/supabase';

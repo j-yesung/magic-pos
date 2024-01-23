@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './styles/MenuCard.module.css';
 import { MenuItemWithOption } from '@/types/supabase';
 import Image from 'next/image';

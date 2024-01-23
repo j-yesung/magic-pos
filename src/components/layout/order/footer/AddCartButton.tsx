@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './styles/StepButton.module.css';
 import useKioskState, { addOrderList, getTotalPrice, resetSelectedMenu } from '@/shared/store/kiosk';
 import { MenuItemWithOption } from '@/types/supabase';

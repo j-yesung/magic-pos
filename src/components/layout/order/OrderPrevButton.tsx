@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import styles from '@/components/layout/order/styles/OrderLayout.module.css';
 import useKioskState, {
   goPrevStep,

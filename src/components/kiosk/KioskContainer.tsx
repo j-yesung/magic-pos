@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import OrderTypeContainer from '@/components/kiosk/order-type/OrderTypeContainer';
 import MenuContainer from '@/components/kiosk/menu/MenuContainer';
 import CartContainer from '@/components/kiosk/cart/CartContainer';

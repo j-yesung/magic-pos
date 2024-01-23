@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './styles/CartRow.module.css';
 import { MenuItemWithOption } from '@/types/supabase';
 import { convertNumberToWon } from '@/shared/helper';

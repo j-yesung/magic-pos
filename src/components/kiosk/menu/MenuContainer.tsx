@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import useKioskState from '@/shared/store/kiosk';
 import MenuCategoryContainer from '@/components/kiosk/menu/MenuCategoryContainer';
 import styles from './styles/MenuContainer.module.css';
