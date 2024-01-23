@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import ChartBar from './chart/ChartBar';
 import Record from './record/Record';
 import styles from './styles/status.module.css';
-const Status = () => {
+const SalesStatus = () => {
   const {
     date: { utcStandardDate, today },
     setData,
@@ -50,4 +50,4 @@ const Status = () => {
   );
 };
 
-export default Status;
+export default SalesStatus;

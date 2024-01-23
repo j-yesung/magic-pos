@@ -9,7 +9,7 @@ const TabButton = () => {
   const MONTHS = 'months';
   const WEEKS = 'weeks';
 
-  const isChangeView = useSalesStore();
+  const isChangeView = useSalesStore(state => state.isChangeView);
   const { clickMoveTodayHandler, clickWeeksChartHandler, clickMonthsChartHandler } = useCalendar();
 
   const [clickedTab, setClickedTab] = useState(TODAY);

@@ -1,0 +1,40 @@
+.btn-group button {
+  border: 1px solid transparent;
+  padding: 0.8rem 1.4rem;
+  margin-right: 1rem;
+  display: inline-block;
+  font-size: 1rem;
+  cursor: pointer;
+  background: var(--bg-g, #f7f7f7);
+}
+
+.btn-group button:hover {
+  border: 1px solid transparent;
+  color: var(--text2);
+  background-color: var(--bg-g);
+  transition: all 0.1s;
+}
+
+.calendar-header-text {
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.calendar-btn {
+  display: flex;
+  width: 5.5rem;
+  height: 5.5rem;
+  padding: 1rem !important;
+  margin: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 0.8rem;
+  border-radius: 0.8rem;
+  background: var(--bg-g, #f7f7f7);
+}
+
+.calendar-btn :hover {
+  opacity: 0.8;
+}

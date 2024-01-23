@@ -1,4 +1,4 @@
-.header {
+.header-container {
   display: flex;
   width: 100%;
   align-items: center;
@@ -6,69 +6,16 @@
   margin-bottom: 0.8rem;
   padding-bottom: 0.2rem;
 }
-/*매출관리 일때 header*/
+
+/*매출현황일 때*/
 .status-header {
   justify-content: space-between;
 }
-.header-text {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  font-size: 1.4rem;
-  color: var(--text1);
-}
-.text-year {
-  font-size: 2rem;
-}
 
-.btn-group span {
-  border: 1px solid transparent;
-  padding: 0.8rem 1.4rem;
-  margin-right: 1rem;
-  display: inline-block;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.btn-group span:hover {
-  border: 1px solid transparent;
-  color: var(--text2);
-  background-color: var(--bg-g);
-  transition: all 0.1s;
-}
-
-/*매출달력 일 때 header*/
+/*매출 달력 일 때*/
 .calendar-header {
   width: 16rem;
   gap: 2rem;
   flex-direction: column;
   align-items: start;
-}
-
-.calendar-header-text {
-  font-weight: bold;
-  font-size: 2rem;
-}
-
-.calendar-text-year {
-  font-size: 2rem;
-}
-
-.calendar-btn {
-  display: flex;
-  width: 5.5rem;
-  height: 5.5rem;
-  padding: 1rem !important;
-  margin: 0;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  border-radius: 0.8rem;
-  border-radius: 0.8rem;
-  background: var(--bg-g, #f7f7f7);
-}
-
-.calendar-btn :hover {
-  opacity: 0.8;
 }

@@ -1,7 +1,7 @@
 import Calendar from '../calendar/Calendar';
 import SalesAmount from './salesAmount/SalesAmount';
 
-const SalesDeatilWithCalendar = () => {
+const SalesCalendar = () => {
   return (
     <Calendar>
       <SalesAmount />
@@ -9,4 +9,4 @@ const SalesDeatilWithCalendar = () => {
   );
 };
 
-export default SalesDeatilWithCalendar;
+export default SalesCalendar;

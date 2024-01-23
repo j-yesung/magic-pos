@@ -7,7 +7,6 @@ import styles from './styles/tab.module.css';
 import TabButton from './tabButton/TabButton';
 const Tab = () => {
   const isShow = useSalesStore(state => state.isShow);
-
   const { clickHiddenCalendarHandler } = useCalendar();
 
   useEffect(() => {
@@ -16,6 +15,7 @@ const Tab = () => {
       clickHiddenCalendarHandler();
     };
   }, []);
+
   return (
     <div className={styles.wrapper}>
       <TabButton />

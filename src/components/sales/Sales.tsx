@@ -1,6 +1,6 @@
 import useSalesStore from '@/shared/store/sales';
-import SalesDeatilWithCalendar from './salesCalendar/SalesDetailWithCalendar';
-import Status from './status/Status';
+import SalesCalendar from './salesCalendar/SalesCalendar';
+import SalesStatus from './status/SalesStatus';
 import styles from './styles/sales.module.css';
 import Toggle from './toggle/Toggle';
 
@@ -10,7 +10,7 @@ const Sales = () => {
   return (
     <div className={styles.salesContainer}>
       <Toggle />
-      {isChangeView ? <Status /> : <SalesDeatilWithCalendar />}
+      {isChangeView ? <SalesStatus /> : <SalesCalendar />}
     </div>
   );
 };
