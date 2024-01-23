@@ -1,5 +1,5 @@
 import { convertNumberToWon } from '@/shared/helper';
-import useSalesStore from '@/shared/store/sales';
+import useSalesStore from '@/shared/store/sales/sales';
 import moment, { Moment } from 'moment';
 import { useEffect, useRef } from 'react';
 import styles from './styles/Record.module.css';

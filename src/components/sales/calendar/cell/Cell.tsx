@@ -1,7 +1,7 @@
 import { useCalendar } from '@/hooks/sales/useCalendar';
 import { getMonthSales } from '@/server/api/supabase/sales';
 import { groupByKey } from '@/shared/helper';
-import useSalesStore from '@/shared/store/sales';
+import useSalesStore from '@/shared/store/sales/sales';
 import useAuthState from '@/shared/store/session';
 import { Tables } from '@/types/supabase';
 import moment from 'moment';

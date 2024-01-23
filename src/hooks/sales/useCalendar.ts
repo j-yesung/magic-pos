@@ -1,7 +1,7 @@
 import { formatData } from '@/components/sales/calendarUtility/formatData';
 import { getDaySales, getMonthsSales, getWeekSales } from '@/server/api/supabase/sales';
 
-import useSalesStore from '@/shared/store/sales';
+import useSalesStore from '@/shared/store/sales/sales';
 import useAuthState from '@/shared/store/session';
 import { Moment } from 'moment';
 

@@ -1,5 +1,5 @@
 import Button from '@/components/common/Button';
-import useSalesStore from '@/shared/store/sales';
+import useSalesStore from '@/shared/store/sales/sales';
 import clsx from 'clsx';
 import styles from './styles/toggleButton.module.css';
 

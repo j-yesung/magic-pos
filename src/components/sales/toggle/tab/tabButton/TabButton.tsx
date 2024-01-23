@@ -1,6 +1,6 @@
 import Button from '@/components/common/Button';
 import { useCalendar } from '@/hooks/sales/useCalendar';
-import useSalesStore from '@/shared/store/sales';
+import useSalesStore from '@/shared/store/sales/sales';
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import styles from './styles/tabButton.module.css';

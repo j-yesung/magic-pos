@@ -1,4 +1,4 @@
-import useSalesStore from '@/shared/store/sales';
+import useSalesStore from '@/shared/store/sales/sales';
 import SalesCalendar from './salesCalendar/SalesCalendar';
 import SalesStatus from './status/SalesStatus';
 import styles from './styles/sales.module.css';

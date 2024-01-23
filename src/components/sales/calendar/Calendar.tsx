@@ -1,4 +1,4 @@
-import useSalesStore from '@/shared/store/sales';
+import useSalesStore from '@/shared/store/sales/sales';
 import 'moment/locale/ko';
 import Cell from './cell/Cell';
 import Days from './days/Days';

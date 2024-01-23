@@ -1,4 +1,4 @@
-import useSalesStore from '@/shared/store/sales';
+import useSalesStore from '@/shared/store/sales/sales';
 import styles from './styles/days.module.css';
 const Days = () => {
   const days = ['일', '월', '화', '수', '목', '금', '토'];

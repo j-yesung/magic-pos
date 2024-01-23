@@ -1,5 +1,5 @@
 import { useCalendar } from '@/hooks/sales/useCalendar';
-import useSalesStore from '@/shared/store/sales';
+import useSalesStore from '@/shared/store/sales/sales';
 import { Moment } from 'moment';
 import { useEffect, useRef } from 'react';
 import { IoCalendarClearOutline } from 'react-icons/io5';

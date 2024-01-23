@@ -1,5 +1,5 @@
 import { convertNumberToWon } from '@/shared/helper';
-import useSalesStore from '@/shared/store/sales';
+import useSalesStore from '@/shared/store/sales/sales';
 import { cva } from 'class-variance-authority';
 import moment, { Moment } from 'moment';
 

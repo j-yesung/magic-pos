@@ -1,5 +1,5 @@
 import { convertNumberToWon } from '@/shared/helper';
-import useSalesStore from '@/shared/store/sales';
+import useSalesStore from '@/shared/store/sales/sales';
 import clsx from 'clsx';
 import styles from './styles/salesAmount.module.css';
 const SalesAmount = () => {
