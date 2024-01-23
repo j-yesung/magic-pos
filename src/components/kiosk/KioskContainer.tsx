@@ -6,7 +6,7 @@ import PaymentContainer from '@/components/kiosk/payment/PaymentContainer';
 import SuccessContainer from '@/components/kiosk/success/SuccessContainer';
 import { Swiper, SwiperSlide, SwiperRef } from 'swiper/react';
 import { Virtual } from 'swiper/modules';
-import useOrderState, { setOptionSwiperRef } from '@/shared/store/order';
+import useKioskState, { setOptionSwiperRef } from '@/shared/store/kiosk';
 import MenuOptionContainer from '@/components/kiosk/menu-option/MenuOptionContainer';
 
 /**
@@ -14,8 +14,8 @@ import MenuOptionContainer from '@/components/kiosk/menu-option/MenuOptionContai
  * 모든 화면은 Swiper 컴포넌트 안에 있으며, 메뉴 선택의 경우에는 Swiper안에 Swiper로 되어있다.
  * @constructor
  */
-const OrderContainer = () => {
-  const swiperRef = useOrderState(state => state.swiperRef);
+const KioskContainer = () => {
+  const swiperRef = useKioskState(state => state.swiperRef);
   const optionSwiperRef = useRef<SwiperRef>(null);
   useEffect(() => {
     if (optionSwiperRef) setOptionSwiperRef(optionSwiperRef);
@@ -56,4 +56,4 @@ const OrderContainer = () => {
   );
 };
 
-export default OrderContainer;
+export default KioskContainer;

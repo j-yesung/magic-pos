@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSalesQuery } from '@/hooks/sales/useSalesQuery';
-import useOrderState, { addOrderId, getTotalPrice, ORDER_STEP, setOrderNumber, setStep } from '@/shared/store/order';
+import useKioskState, { addOrderId, getTotalPrice, ORDER_STEP, setOrderNumber, setStep } from '@/shared/store/kiosk';
 import { groupByKey } from '@/shared/helper';
 import { Tables } from '@/types/supabase';
 import { useStoreQuery } from '@/hooks/store/useStoreQuery';
@@ -15,12 +15,12 @@ import MenuHeader from '../common/MenuHeader';
 import { IoBagCheckOutline } from 'react-icons/io5';
 
 const SuccessContainer = ({ payment }: { payment?: Payment }) => {
-  const orderList = useOrderState(state => state.orderList);
-  const storeId = useOrderState(state => state.storeId);
-  const tableId = useOrderState(state => state.tableId);
-  const menuData = useOrderState(state => state.menuData);
-  const orderNumber = useOrderState(state => state.orderNumber);
-  const orderType = useOrderState(state => state.orderType);
+  const orderList = useKioskState(state => state.orderList);
+  const storeId = useKioskState(state => state.storeId);
+  const tableId = useKioskState(state => state.tableId);
+  const menuData = useKioskState(state => state.menuData);
+  const orderNumber = useKioskState(state => state.orderNumber);
+  const orderType = useKioskState(state => state.orderType);
 
   const { addSales } = useSalesQuery();
   const { addStoreOrder } = useStoreOrderSetQuery();

@@ -5,10 +5,10 @@ import OrderLayout from '@/components/layout/order/OrderLayout';
 import { fetchCategoriesWithMenuItemByStoreId } from '@/server/api/supabase/menu-category';
 import { GetServerSideProps } from 'next';
 import { CategoryWithMenuItemWithStore } from '@/types/supabase';
-import useOrderState, { resetOrderList, setMenuData, setStoreId, setStoreName, setTableId } from '@/shared/store/order';
+import useKioskState, { resetOrderList, setMenuData, setStoreId, setStoreName, setTableId } from '@/shared/store/kiosk';
 import { isEmptyObject } from '@/shared/helper';
 import { useRouter } from 'next/router';
-import OrderContainer from '@/components/kiosk/OrderContainer';
+import KioskContainer from '@/components/kiosk/KioskContainer';
 import { useModal } from '@/hooks/modal/useModal';
 import { useStoreOrderFetchQuery } from '@/hooks/order/useStoreOrderFetchQuery';
 import { useNumberOrderFetchQuery } from '@/hooks/order/useNumberOrderFetchQuery';
@@ -24,8 +24,8 @@ const OrderIndexPage = ({
   storeId: string;
   tableId: string;
 }) => {
-  const orderIdList = useOrderState(state => state.orderIdList);
-  const prevStoreId = useOrderState(state => state.storeId);
+  const orderIdList = useKioskState(state => state.orderIdList);
+  const prevStoreId = useKioskState(state => state.storeId);
   const { storeInfo } = useGetQuery({ storeId: storeId });
   const { tableInfo } = useFetchTable({ tableId: tableId, storeId });
   const { storeOrderData } = useStoreOrderFetchQuery(orderIdList, storeId);
@@ -131,7 +131,7 @@ const OrderIndexPage = ({
 
   return (
     <>
-      {isInvalidURL && isLoaded && <OrderContainer />}
+      {isInvalidURL && isLoaded && <KioskContainer />}
       {/* TODO: 유효 하지 않은 가게 디자인 */}
       {!isInvalidURL && <div>유효 하지 않은 가게입니다.</div>}
     </>

@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect, useState } from 'react';
-import useOrderState from '@/shared/store/order';
+import useKioskState from '@/shared/store/kiosk';
 import { useRouter } from 'next/router';
 import ReceiptContainer from '@/components/kiosk/receipt/ReceiptContainer';
 import OrderLayout from '@/components/layout/order/OrderLayout';
@@ -9,7 +9,7 @@ import OrderLayout from '@/components/layout/order/OrderLayout';
  * @constructor
  */
 const OrderReceiptPage = () => {
-  const orderId = useOrderState(state => state.orderIdList);
+  const orderId = useKioskState(state => state.orderIdList);
   const [isLoaded, setIsLoaded] = useState(false);
   const router = useRouter();
 

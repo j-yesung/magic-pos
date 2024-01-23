@@ -3,7 +3,7 @@ import SuccessContainer from '@/components/kiosk/success/SuccessContainer';
 import { GetServerSideProps } from 'next';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import useOrderState from '@/shared/store/order';
+import useKioskState from '@/shared/store/kiosk';
 import Waiting from '@/components/kiosk/success/Waiting';
 import OrderLayout from '@/components/layout/order/OrderLayout';
 
@@ -18,7 +18,7 @@ import OrderLayout from '@/components/layout/order/OrderLayout';
 const OrderSuccessPage = ({ payment, isError }: { payment: Payment; isError: boolean }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isPaymentDone, setIsPaymentDone] = useState(false);
-  const orderNumber = useOrderState(state => state.orderNumber);
+  const orderNumber = useKioskState(state => state.orderNumber);
   const router = useRouter();
 
   useEffect(() => {

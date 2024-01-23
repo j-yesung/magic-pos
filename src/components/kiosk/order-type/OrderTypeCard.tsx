@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSwiper } from 'swiper/react';
-import { goNextStep, setOrderType } from '@/shared/store/order';
+import { goNextStep, setOrderType } from '@/shared/store/kiosk';
 import styles from './styles/OrderTypeButton.module.css';
 import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButton';
 import { MdOutlineTableBar } from 'react-icons/md';

@@ -1,10 +1,10 @@
 import React from 'react';
-import useOrderState from '@/shared/store/order';
+import useKioskState from '@/shared/store/kiosk';
 import styles from './styles/MenuInfo.module.css';
 import { convertNumberToWon } from '@/shared/helper';
 
 const MenuInfo = () => {
-  const selectedMenu = useOrderState(state => state.selectedMenu);
+  const selectedMenu = useKioskState(state => state.selectedMenu);
 
   return (
     <div className={styles.container}>

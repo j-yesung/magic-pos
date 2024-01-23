@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { MenuItemWithOption } from '@/types/supabase';
 import { convertNumberToWon, groupByKey } from '@/shared/helper';
 import CartOptionRow from '@/components/kiosk/cart/CartOptionRow';
-import { getOptionPriceByList } from '@/shared/store/order';
+import { getOptionPriceByList } from '@/shared/store/kiosk';
 
 const ReceiptOrderRow = ({ itemList }: { itemList: MenuItemWithOption[] }) => {
   const group = groupByKey<MenuItemWithOption>(itemList, 'unique');

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './styles/ReceiptPrice.module.css';
 import { MenuItemWithOption } from '@/types/supabase';
-import { getTotalPrice } from '@/shared/store/order';
+import { getTotalPrice } from '@/shared/store/kiosk';
 import { convertNumberToWon } from '@/shared/helper';
 
 const ReceiptPrice = ({ itemList }: { itemList: MenuItemWithOption[] }) => {

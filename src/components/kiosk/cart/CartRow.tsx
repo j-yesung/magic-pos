@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './styles/CartRow.module.css';
 import { MenuItemWithOption } from '@/types/supabase';
 import { convertNumberToWon } from '@/shared/helper';
-import { getOptionPriceByList } from '@/shared/store/order';
+import { getOptionPriceByList } from '@/shared/store/kiosk';
 import Image from 'next/image';
 import CartOptionRow from '@/components/kiosk/cart/CartOptionRow';
 import CartAmount from '@/components/kiosk/cart/CartAmount';

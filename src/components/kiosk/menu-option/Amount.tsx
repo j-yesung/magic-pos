@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import styles from './styles/Amount.module.css';
-import useOrderState, { addAmount, resetAmount, subtractAmount } from '@/shared/store/order';
+import useKioskState, { addAmount, resetAmount, subtractAmount } from '@/shared/store/kiosk';
 import { FaMinus, FaPlus } from 'react-icons/fa6';
 
 const Amount = () => {
-  const amount = useOrderState(state => state.amount);
+  const amount = useKioskState(state => state.amount);
 
   useEffect(() => {
     return () => {

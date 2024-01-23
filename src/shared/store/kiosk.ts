@@ -37,7 +37,7 @@ interface OrderState {
   isOptionPage: boolean;
 }
 
-export const useOrderState = create<OrderState>()(
+export const useKioskState = create<OrderState>()(
   persist(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     get => ({
@@ -86,26 +86,26 @@ export const useOrderState = create<OrderState>()(
 );
 
 // ACTIONS !!
-export const setOrderNumber = (orderNumber: number) => useOrderState.setState(() => ({ orderNumber }));
-export const setIsOptionPage = (isOptionPage: boolean) => useOrderState.setState(() => ({ isOptionPage }));
-export const goNextStep = () => useOrderState.setState(state => ({ step: Math.min(state.step + 1, state.maxStep) }));
-export const goPrevStep = () => useOrderState.setState(state => ({ step: Math.max(state.step - 1, 0) }));
-export const setStep = (step: number) => useOrderState.setState(() => ({ step }));
-export const setStoreId = (storeId: string) => useOrderState.setState(() => ({ storeId }));
-export const setTableId = (tableId: string) => useOrderState.setState(() => ({ tableId }));
-export const setOrderType = (orderType: OrderType) => useOrderState.setState(() => ({ orderType }));
+export const setOrderNumber = (orderNumber: number) => useKioskState.setState(() => ({ orderNumber }));
+export const setIsOptionPage = (isOptionPage: boolean) => useKioskState.setState(() => ({ isOptionPage }));
+export const goNextStep = () => useKioskState.setState(state => ({ step: Math.min(state.step + 1, state.maxStep) }));
+export const goPrevStep = () => useKioskState.setState(state => ({ step: Math.max(state.step - 1, 0) }));
+export const setStep = (step: number) => useKioskState.setState(() => ({ step }));
+export const setStoreId = (storeId: string) => useKioskState.setState(() => ({ storeId }));
+export const setTableId = (tableId: string) => useKioskState.setState(() => ({ tableId }));
+export const setOrderType = (orderType: OrderType) => useKioskState.setState(() => ({ orderType }));
 export const setMenuData = (data: CategoryWithMenuItemWithStore[]) =>
-  useOrderState.setState(state => {
+  useKioskState.setState(state => {
     if (state.menuData === null) {
       return { menuData: data };
     }
     return { menuData: state.menuData };
   });
-export const resetOrderList = () => useOrderState.setState({ orderList: [] });
+export const resetOrderList = () => useKioskState.setState({ orderList: [] });
 export const addOrderList = (menu: MenuItemWithOption[]) =>
-  useOrderState.setState(state => ({ orderList: [...state.orderList, ...menu] }));
+  useKioskState.setState(state => ({ orderList: [...state.orderList, ...menu] }));
 export const subtractOrderList = (menuId: string) =>
-  useOrderState.setState(state => {
+  useKioskState.setState(state => {
     const findIndex = state.orderList.findLastIndex(o => o.id === menuId);
     const newOrderList = [...state.orderList];
     newOrderList.splice(findIndex, 1);
@@ -132,17 +132,17 @@ export const getOptionPriceByList = (list: MenuOptionWithDetail[]) => {
     )
     .reduce((acc, cur) => acc + cur, 0);
 };
-export const setSwiperRef = (swiperRef: React.RefObject<SwiperRef>) => useOrderState.setState(() => ({ swiperRef }));
+export const setSwiperRef = (swiperRef: React.RefObject<SwiperRef>) => useKioskState.setState(() => ({ swiperRef }));
 export const setOptionSwiperRef = (optionSwiperRef: React.RefObject<SwiperRef>) =>
-  useOrderState.setState(() => ({ optionSwiperRef }));
-export const setStoreName = (storeName: string) => useOrderState.setState(() => ({ storeName }));
+  useKioskState.setState(() => ({ optionSwiperRef }));
+export const setStoreName = (storeName: string) => useKioskState.setState(() => ({ storeName }));
 export const addOrderId = (orderId: string) =>
-  useOrderState.setState(state => ({ orderIdList: [...state.orderIdList, orderId] }));
+  useKioskState.setState(state => ({ orderIdList: [...state.orderIdList, orderId] }));
 export const setSelectedMenu = (selectedMenu: MenuItemWithOption | null) =>
-  useOrderState.setState(() => ({ selectedMenu }));
+  useKioskState.setState(() => ({ selectedMenu }));
 // 옵션 추가
 export const addSelectedOption = (param: MenuOptionWithDetail) =>
-  useOrderState.setState(state => {
+  useKioskState.setState(state => {
     let newSelectedOptions = [...state.selectedOptions];
     // 이미 옵션이 있다면 기존 옵션에서 details만 갈아끼우고, 옵션이 없다면 새로 만든다.
     if (newSelectedOptions.length === 0) newSelectedOptions = [param];
@@ -164,7 +164,7 @@ export const addSelectedOption = (param: MenuOptionWithDetail) =>
   });
 // 옵션 제거
 export const subtractSelectedOption = (detailId: string) =>
-  useOrderState.setState(state => ({
+  useKioskState.setState(state => ({
     selectedOptions: state.selectedOptions
       ?.map(option => {
         option.menu_option_detail = option.menu_option_detail.filter(detail => detail.id !== detailId);
@@ -173,10 +173,10 @@ export const subtractSelectedOption = (detailId: string) =>
       .filter(o => o.menu_option_detail.length > 0),
   }));
 // 옵션 초기화
-export const resetSelectedOptions = () => useOrderState.setState({ selectedOptions: [] });
-export const addAmount = () => useOrderState.setState(state => ({ amount: state.amount + 1 }));
-export const subtractAmount = () => useOrderState.setState(state => ({ amount: Math.max(state.amount - 1, 1) }));
-export const resetAmount = () => useOrderState.setState({ amount: 1 });
+export const resetSelectedOptions = () => useKioskState.setState({ selectedOptions: [] });
+export const addAmount = () => useKioskState.setState(state => ({ amount: state.amount + 1 }));
+export const subtractAmount = () => useKioskState.setState(state => ({ amount: Math.max(state.amount - 1, 1) }));
+export const resetAmount = () => useKioskState.setState({ amount: 1 });
 export const resetSelectedMenu = () => {
   resetAmount();
   resetSelectedOptions();
@@ -184,4 +184,4 @@ export const resetSelectedMenu = () => {
   setIsOptionPage(false);
 };
 
-export default useOrderState;
+export default useKioskState;

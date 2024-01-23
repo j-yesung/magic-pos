@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import styles from '@/components/layout/order/styles/OrderLayout.module.css';
-import useOrderState, {
+import useKioskState, {
   goPrevStep,
   ORDER_STEP,
   resetSelectedOptions,
   setIsOptionPage,
   setSelectedMenu,
-} from '@/shared/store/order';
+} from '@/shared/store/kiosk';
 import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButton';
 import { PiCaretLeft } from 'react-icons/pi';
 import clsx from 'clsx';
 
 const OrderPrevButton = () => {
-  const optionSwiperRef = useOrderState(state => state.optionSwiperRef);
-  const swiperRef = useOrderState(state => state.swiperRef);
-  const isOptionPage = useOrderState(state => state.isOptionPage);
+  const optionSwiperRef = useKioskState(state => state.optionSwiperRef);
+  const swiperRef = useKioskState(state => state.swiperRef);
+  const isOptionPage = useKioskState(state => state.isOptionPage);
 
   const clickPrevButtonHandler = () => {
     if (optionSwiperRef?.current?.swiper?.activeIndex === ORDER_STEP.SELECT_MENU) {
