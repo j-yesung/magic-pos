@@ -1,6 +1,6 @@
 import { momentToString } from '@/shared/helper';
 import { supabase } from '@/shared/supabase';
-import { Tables } from '@/types/supabase';
+import { Tables, TablesInsert } from '@/types/supabase';
 import { PostgrestError } from '@supabase/supabase-js';
 import { Moment } from 'moment';
 
@@ -15,7 +15,7 @@ export interface SalesDataReturnType {
 }
 type getSalesReturnType = (date: Moment, store_id: string) => Promise<SalesDataReturnType>;
 
-export const addSales = async (sales: Omit<Tables<'sales'>, 'id'>[]) => {
+export const addSales = async (sales: TablesInsert<'sales'>[]) => {
   const { error } = await supabase.from('sales').insert(sales).select();
 
   if (error) console.error(error);

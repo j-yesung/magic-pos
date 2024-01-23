@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './styles/ReceiptOrderHeader.module.css';
 import clsx from 'clsx';
 import moment from 'moment';

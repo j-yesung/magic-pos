@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import styles from './styles/Amount.module.css';
 import useKioskState, { addAmount, resetAmount, subtractAmount } from '@/shared/store/kiosk';
 import { FaMinus, FaPlus } from 'react-icons/fa6';

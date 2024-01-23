@@ -1,4 +1,3 @@
-import React from 'react';
 import { MenuOptionWithDetail, Tables } from '@/types/supabase';
 import { addSelectedOption, subtractSelectedOption } from '@/shared/store/kiosk';
 import useToast from '@/hooks/toast/useToast';
