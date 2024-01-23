@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './style/MenuHeader.module.css';
-import useOrderStore, { ORDER_STEP } from '@/shared/store/order';
+import useOrderState, { ORDER_STEP } from '@/shared/store/order';
 
 const TITLE: { [key in number]: string } = {
   [ORDER_STEP.CHECK_MENU]: '장바구니',
@@ -10,8 +10,8 @@ const TITLE: { [key in number]: string } = {
 };
 
 const MenuHeader = () => {
-  const step = useOrderStore(state => state.step);
-  const storeName = useOrderStore(state => state.storeName);
+  const step = useOrderState(state => state.step);
+  const storeName = useOrderState(state => state.storeName);
 
   return (
     <header className={styles.container}>

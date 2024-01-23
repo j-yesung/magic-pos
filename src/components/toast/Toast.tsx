@@ -1,9 +1,9 @@
 import React from 'react';
-import useToastStore from '@/shared/store/toast';
+import useToastState from '@/shared/store/toast';
 import ToastContent from '@/components/toast/ToastContent';
 
 const Toast = () => {
-  const toastList = useToastStore(state => state.toastList);
+  const toastList = useToastState(state => state.toastList);
 
   // Toast의 옵션마다 다른 위치에 렌더링 시켜야 한다.
   const topRightList = toastList.filter(toast => toast.position === 'top-right');
