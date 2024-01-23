@@ -1,5 +1,4 @@
 import React, { ReactElement } from 'react';
-import { SwiperRef } from 'swiper/react';
 import useKioskState, { getTotalPrice, goNextStep, ORDER_STEP, subtractOrderList } from '@/shared/store/kiosk';
 import { usePaymentWidget } from '@/hooks/order/usePaymentWidget';
 import styles from './styles/StepButton.module.css';
@@ -19,13 +18,9 @@ class OrderError extends Error {
   }
 }
 
-interface ButtonProps {
-  sliderRef: React.RefObject<SwiperRef>;
-}
-
 export const SLIDE_MOVE_SPEED = 500;
 
-const StepButton = ({ sliderRef }: ButtonProps) => {
+const StepButton = () => {
   const orderList = useKioskState(state => state.orderList);
   const step = useKioskState(state => state.step);
   const optionSwiperRef = useKioskState(state => state.optionSwiperRef);
@@ -48,8 +43,6 @@ const StepButton = ({ sliderRef }: ButtonProps) => {
       </>
     ),
   };
-
-  console.log(step);
 
   const nextClickHandler = async () => {
     if (step === ORDER_STEP.PAYMENT && paymentWidget) {
@@ -75,7 +68,7 @@ const StepButton = ({ sliderRef }: ButtonProps) => {
       // 검사가 통과 되면 결제 진해행
       await handlePaymentRequest(orderList);
     } else {
-      sliderRef.current!.swiper.slideNext(SLIDE_MOVE_SPEED);
+      swiperRef?.current!.swiper.slideNext(SLIDE_MOVE_SPEED);
       goNextStep();
     }
   };
