@@ -10,10 +10,10 @@ const Record = () => {
     date: { selectedDate },
   } = useSalesStore();
   const dateRef = useRef<Moment | null>(null);
-
+  console.log(record);
   const SALES_TYPE = {
-    days: moment().isSame(dateRef.current, 'date') ? '오늘' : dateRef.current?.format('MM월 DD일'),
-    weeks: '이번 주',
+    day: moment().isSame(dateRef.current, 'date') ? '오늘' : dateRef.current?.format('M월 D일'),
+    week: '이번 주',
     month: '이번 달',
   } as const;
   useEffect(() => {

@@ -124,5 +124,6 @@ export const getMonthSales: getSalesReturnType = async (month, store_id) => {
   if (error) {
     return { sales: [], dateType: 'month', error };
   }
-  return { sales, dateType: 'month' };
+
+  return { sales, dateType: 'month', formatType: 'YYYY년 MM월' };
 };

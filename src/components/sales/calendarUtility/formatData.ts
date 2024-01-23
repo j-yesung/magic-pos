@@ -48,6 +48,7 @@ export const formatData = (
   selectedDateType: Moment,
   formatType: FormatType,
 ) => {
+  console.log(dateType);
   const dateContainer = getDates(dateType, selectedDateType, formatType);
   const dateGroup = createGroupByMap();
   const groupByDate = getGroupByDate(dateContainer, dateGroup);
