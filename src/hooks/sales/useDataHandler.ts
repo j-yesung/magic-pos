@@ -71,14 +71,14 @@ export const useDataHandler = () => {
         dateType: 'week',
       });
     }
+    setCalendarCurrentDate(today);
+    setCalendarSelectedDate(today);
   };
 
   const clickMonthsChartHandler = async () => {
     const { sales, dateType, formatType } = await getMonthsSales(utcStandardDate.clone(), storeId!);
     if (sales.length !== 0) {
-      console.log(dateType);
       const { result, recordData } = formatData(sales, dateType, today, formatType!);
-      console.log(recordData);
 
       if (result && recordData) {
         setChartData(result);
@@ -91,6 +91,8 @@ export const useDataHandler = () => {
         dateType: 'month',
       });
     }
+    setCalendarCurrentDate(today);
+    setCalendarSelectedDate(today);
   };
 
   return { clickMoveTodayHandler, clickShowDataOfDateHandler, clickWeeksChartHandler, clickMonthsChartHandler };

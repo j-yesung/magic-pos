@@ -21,7 +21,7 @@ const CalendarToggle = () => {
         dateRef.current = null;
       }
     };
-  }, [isShow]);
+  }, [currentDate]);
 
   return (
     <div className={isChangeView ? styles.calendarWrapper : styles.hiddenComponent} onClick={clickShowCalendarHandler}>

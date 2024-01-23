@@ -29,7 +29,7 @@ const SalesStatus = () => {
       } else if (data.sales.length === 0) {
         setRecordData({
           currentSales: 0,
-          dateType: 'days',
+          dateType: 'day',
         });
       }
     });

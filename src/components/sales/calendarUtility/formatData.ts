@@ -52,7 +52,7 @@ export const formatData = (
   const formattedData = getDataWithFormatingDate(salesData, dateType, formatType);
   const groupBybindingData = insertDataGroupByDate(formattedData, groupByDate);
   const recordData = getRecordData(groupBybindingData, dateType, selectedDateType);
-  console.log(recordData);
+
   const result = [...groupBybindingData.entries()]
     .map(([key, value]) => {
       return {
