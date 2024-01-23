@@ -18,6 +18,9 @@ interface CellItemProps {
 type Cell = (param: CellItemProps) => JSX.Element;
 
 const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDateHandler }) => {
+  const POINT = 'SELECTEDTYPE';
+  const COMPONENT_TYPE = 'CALENDAR';
+
   const isChangeView = useSalesStore(state => state.isChangeView);
   const { currentDate, selectedDate, today } = useCalendarStore();
 
@@ -65,10 +68,6 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
       },
     },
   });
-
-  const POINT = 'SELECTEDTYPE';
-
-  const COMPONENT_TYPE = 'CALENDAR';
 
   const formatDate = day.clone().format('YY MM D').substring(6);
 

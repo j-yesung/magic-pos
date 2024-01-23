@@ -1,7 +1,7 @@
 import { useDataHandler } from '@/hooks/sales/useDataHandler';
 import { getMonthSales } from '@/server/api/supabase/sales';
 import { groupByKey } from '@/shared/helper';
-import useCalendarStore, { resetCurrentDate } from '@/shared/store/sales/calendar';
+import useCalendarStore from '@/shared/store/sales/calendar';
 import useDataStore, {
   resetCalendarBindingData,
   resetSalesSum,
@@ -58,12 +58,6 @@ const Cell = () => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentDate]);
-
-  useEffect(() => {
-    return () => {
-      resetCurrentDate();
-    };
-  }, []);
 
   const row = [];
   let days = [];
