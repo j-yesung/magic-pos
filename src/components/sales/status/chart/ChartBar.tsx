@@ -1,5 +1,5 @@
 import { convertNumberToWon } from '@/shared/helper';
-import useSalesStore from '@/shared/store/sales/sales';
+import useChartStore from '@/shared/store/sales/chart';
 import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';
@@ -17,7 +17,7 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend,
 const CHART_MAIN_COLOR = '#7433FF';
 
 const ChartBar = () => {
-  const { data } = useSalesStore();
+  const { chartData: data } = useChartStore();
   return (
     <div className={styles.barWrapper}>
       {data.length !== 0 && (

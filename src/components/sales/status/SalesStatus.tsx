@@ -1,5 +1,6 @@
 import { getDaySales } from '@/server/api/supabase/sales';
 import useCalendarStore, { setCalendarCurrentDate, setCalendarSelectedDate } from '@/shared/store/sales/calendar';
+import { setChartData } from '@/shared/store/sales/chart';
 import useSalesStore from '@/shared/store/sales/sales';
 import useAuthState from '@/shared/store/session';
 import { Tables } from '@/types/supabase';
@@ -10,7 +11,7 @@ import ChartBar from './chart/ChartBar';
 import Record from './record/Record';
 import styles from './styles/status.module.css';
 const SalesStatus = () => {
-  const { setData, setRecord } = useSalesStore();
+  const { setRecord } = useSalesStore();
   const { utcStandardDate, today } = useCalendarStore();
   const storeId = useAuthState(state => state.storeId);
   useEffect(() => {
@@ -23,7 +24,7 @@ const SalesStatus = () => {
           data.formatType!,
         );
         if (result) {
-          setData(result);
+          setChartData(result);
           setRecord(recordData);
         }
       } else if (data.sales.length === 0) {

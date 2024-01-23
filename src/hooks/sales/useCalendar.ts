@@ -1,13 +1,14 @@
 import { formatData } from '@/components/sales/calendarUtility/formatData';
 import { getDaySales, getMonthsSales, getWeekSales } from '@/server/api/supabase/sales';
 import useCalendarStore, { setCalendarCurrentDate, setCalendarSelectedDate } from '@/shared/store/sales/calendar';
+import { setChartData } from '@/shared/store/sales/chart';
 
 import useSalesStore from '@/shared/store/sales/sales';
 import useAuthState from '@/shared/store/session';
 import { Moment } from 'moment';
 
 export const useCalendar = () => {
-  const { setIsShow, setData, setRecord } = useSalesStore();
+  const { setIsShow, setRecord } = useSalesStore();
   const { currentDate, today, utcStandardDate } = useCalendarStore();
   const storeId = useAuthState(state => state.storeId);
 
@@ -32,10 +33,10 @@ export const useCalendar = () => {
       const { result, recordData } = formatData(sales, dateType, day.clone(), formatType!);
       if (result && recordData) {
         setRecord(recordData);
-        setData(result);
+        setChartData(result);
       }
     } else {
-      setData([]);
+      setChartData([]);
       setRecord({
         currentSales: 0,
         dateType: 'day',
@@ -55,7 +56,7 @@ export const useCalendar = () => {
     if (sales.length !== 0) {
       const { result, recordData } = formatData(sales, dateType, today, formatType!);
       if (result && recordData) {
-        setData(result);
+        setChartData(result);
         setRecord(recordData);
       }
     } else {
@@ -73,7 +74,7 @@ export const useCalendar = () => {
     if (sales.length !== 0) {
       const { result, recordData } = formatData(sales, dateType, today, formatType!);
       if (result && recordData) {
-        setData(result);
+        setChartData(result);
         setRecord(recordData);
       }
     }
@@ -92,7 +93,7 @@ export const useCalendar = () => {
       const { result, recordData } = formatData(sales, dateType, today, formatType!);
 
       if (result && recordData) {
-        setData(result);
+        setChartData(result);
         setRecord(recordData);
       }
     } else {

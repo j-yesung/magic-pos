@@ -7,15 +7,10 @@ interface SalesStore {
     dateType: string;
   };
 
-  data: {
-    x: string;
-    y: number;
-  }[];
   calendarData: { sales: number; date: string; min?: boolean; max?: boolean }[];
   salesSum: number | null;
   isChangeView: boolean;
   setIsShow: (param: boolean) => void;
-  setData: (sales: { x: string; y: number }[]) => void;
   setRecord: (sales: { currentSales: number; dateType: string }) => void;
   setCalendarData: <T extends { sales: number; date: string; min?: boolean; max?: boolean }[]>(param: T) => void;
   setSalesSum: (sales: { sales: number; date: string }[] | null) => void;
@@ -23,7 +18,6 @@ interface SalesStore {
 }
 
 const useSalesStore = create<SalesStore>()(set => ({
-  data: [],
   isShow: false,
   record: {
     currentSales: 0,
@@ -41,11 +35,6 @@ const useSalesStore = create<SalesStore>()(set => ({
         ...state.record,
         ...prop,
       },
-    })),
-  setData: prop =>
-    set(state => ({
-      ...state,
-      data: prop,
     })),
   setIsShow: prop =>
     set(state => ({
