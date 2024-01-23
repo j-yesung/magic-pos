@@ -12,16 +12,9 @@ scroll을 숨겼습니다.
   display: none;
 }
 
-.title-wrapper {
-  position: absolute;
-  right: 19.4rem;
-  top: 10.4rem;
-  z-index: 99;
-}
-
-.title-wrapper h2 {
-  font-size: 5rem;
-  font-weight: bold;
+.toggle-wrapper {
+  display: flex;
+  justify-content: space-between;
 }
 
 .toggle-btn-wrapper {
@@ -49,10 +42,4 @@ scroll을 숨겼습니다.
   font-weight: 500;
   line-height: 1.8rem; /* 100% */
   letter-spacing: -0.036rem;
-}
-
-/* sales-calendar 탭일 때*/
-
-.sales-calendar {
-  top: 8.4rem;
 }

@@ -64,3 +64,9 @@
   width: 100%;
   height: 100%;
 }
+
+/*sales-calendar 일때 display none */
+
+.sales-calendar {
+  display: none;
+}
