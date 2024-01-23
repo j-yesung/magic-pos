@@ -1,5 +1,5 @@
 import React from 'react';
-import useOrderStore from '@/shared/store/order';
+import useOrderState from '@/shared/store/order';
 import CartRow from '@/components/order/cart/CartRow';
 import styles from './styles/CartContainer.module.css';
 import { groupByKey } from '@/shared/helper';
@@ -15,9 +15,9 @@ import CartMoreButton from '@/components/order/cart/CartMoreButton';
  * @constructor
  */
 const CartContainer = () => {
-  const orderList = useOrderStore(state => state.orderList);
-  const orderType = useOrderStore(state => state.orderType);
-  const storeName = useOrderStore(state => state.storeName);
+  const orderList = useOrderState(state => state.orderList);
+  const orderType = useOrderState(state => state.orderType);
+  const storeName = useOrderState(state => state.storeName);
 
   const group = groupByKey<MenuItemWithOption>(orderList, 'unique');
 

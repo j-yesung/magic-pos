@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import styles from './styles/Modal.module.css';
 import clsx from 'clsx';
-import useModalStore, { hideAlert, hideModal } from '@/shared/store/modal';
+import useModalState, { hideAlert, hideModal } from '@/shared/store/modal';
 import AlertModal from '@/components/modal/default/AlertModal';
 import ConfirmModal from '@/components/modal/default/ConfirmModal';
 
@@ -11,7 +11,7 @@ import ConfirmModal from '@/components/modal/default/ConfirmModal';
  * @constructor
  */
 const Modal = () => {
-  const { modalList, alertList, confirmList } = useModalStore();
+  const { modalList, alertList, confirmList } = useModalState();
   // 모달 바깥쪽 Ref 지정
   const overlayRef = useRef(null);
 

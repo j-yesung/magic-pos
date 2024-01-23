@@ -1,10 +1,10 @@
 import React from 'react';
-import useOrderStore from '@/shared/store/order';
+import useOrderState from '@/shared/store/order';
 import styles from './styles/MenuInfo.module.css';
 import { convertNumberToWon } from '@/shared/helper';
 
 const MenuInfo = () => {
-  const selectedMenu = useOrderStore(state => state.selectedMenu);
+  const selectedMenu = useOrderState(state => state.selectedMenu);
 
   return (
     <div className={styles.container}>

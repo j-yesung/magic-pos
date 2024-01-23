@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from '@/components/layout/order/styles/OrderLayout.module.css';
-import useOrderStore, {
+import useOrderState, {
   goPrevStep,
   ORDER_STEP,
   resetSelectedOptions,
@@ -12,9 +12,9 @@ import { PiCaretLeft } from 'react-icons/pi';
 import clsx from 'clsx';
 
 const OrderPrevButton = () => {
-  const optionSwiperRef = useOrderStore(state => state.optionSwiperRef);
-  const swiperRef = useOrderStore(state => state.swiperRef);
-  const isOptionPage = useOrderStore(state => state.isOptionPage);
+  const optionSwiperRef = useOrderState(state => state.optionSwiperRef);
+  const swiperRef = useOrderState(state => state.swiperRef);
+  const isOptionPage = useOrderState(state => state.isOptionPage);
 
   const clickPrevButtonHandler = () => {
     if (optionSwiperRef?.current?.swiper?.activeIndex === ORDER_STEP.SELECT_MENU) {

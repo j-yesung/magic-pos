@@ -9,23 +9,23 @@ interface ToastState {
   toastList: ToastTypeOption[];
 }
 
-const useToastStore = create<ToastState>()(set => ({
+const useToastState = create<ToastState>()(() => ({
   toastList: [],
 }));
 
 export const addToastList = (toast: ToastTypeOption) => {
-  useToastStore.setState(state => ({ toastList: [...state.toastList, toast] }));
+  useToastState.setState(state => ({ toastList: [...state.toastList, toast] }));
 };
 
 export const subtractToastList = (id: string) => {
-  useToastStore.setState(state => ({
+  useToastState.setState(state => ({
     toastList: state.toastList.filter(toast => toast.id !== id),
   }));
 };
 
 // 해당 Toast에게 어떤 종류의 애니메이션을 실행할지 지정합니다.
 export const setAnimation = (id: string, type: ToastAnimationType) => {
-  useToastStore.setState(state => ({
+  useToastState.setState(state => ({
     toastList: state.toastList.map(toast => {
       if (toast.id === id) return { ...toast, animation: type };
       return toast;
@@ -33,4 +33,4 @@ export const setAnimation = (id: string, type: ToastAnimationType) => {
   }));
 };
 
-export default useToastStore;
+export default useToastState;

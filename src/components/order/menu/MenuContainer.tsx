@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import useOrderStore from '@/shared/store/order';
+import useOrderState from '@/shared/store/order';
 import MenuCategoryContainer from '@/components/order/menu/MenuCategoryContainer';
 import styles from './styles/MenuContainer.module.css';
 import MenuCard from '@/components/order/menu/MenuCard';
@@ -11,9 +11,9 @@ import StoreInfo from '@/components/order/common/StoreInfo';
  * @constructor
  */
 const MenuContainer = () => {
-  const menuData = useOrderStore(state => state.menuData);
-  const orderType = useOrderStore(state => state.orderType);
-  const storeName = useOrderStore(state => state.storeName);
+  const menuData = useOrderState(state => state.menuData);
+  const orderType = useOrderState(state => state.orderType);
+  const storeName = useOrderState(state => state.storeName);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [menuItemList, setMenuItemList] = useState<MenuItemWithOption[]>([]);
 
