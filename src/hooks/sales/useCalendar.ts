@@ -32,9 +32,9 @@ export const useCalendar = () => {
    * @returns salesStore의 state값 변경으로 void 입니다.
    */
   const clickShowDataOfDateHandler = (day: Moment) => async () => {
-    const { sales, formatType } = await getDaySales(day.clone().hour(0).subtract(9, 'hour'), storeId!);
+    const { sales, dateType, formatType } = await getDaySales(day.clone().hour(0).subtract(9, 'hour'), storeId!);
     if (sales.length !== 0) {
-      const { result, recordData } = formatData(sales, formatType, day.clone());
+      const { result, recordData } = formatData(sales, dateType, day.clone(), formatType!);
       if (result && recordData) {
         setRecord(recordData);
         setData(result);
@@ -43,7 +43,7 @@ export const useCalendar = () => {
       setData([]);
       setRecord({
         currentSales: 0,
-        dateType: 'days',
+        dateType: 'day',
       });
     }
     setIsShow(false);
@@ -55,9 +55,9 @@ export const useCalendar = () => {
   const clickShowCalendarHandler = () => setIsShow(true);
   const clickHiddenCalendarHandler = () => setIsShow(false);
   const clickMoveTodayHandler = async () => {
-    const { sales, formatType } = await getDaySales(utcStandardDate.clone(), storeId!);
+    const { sales, dateType, formatType } = await getDaySales(utcStandardDate.clone(), storeId!);
     if (sales.length !== 0) {
-      const { result, recordData } = formatData(sales, formatType, today);
+      const { result, recordData } = formatData(sales, dateType, today, formatType!);
       if (result && recordData) {
         setData(result);
         setRecord(recordData);
@@ -65,7 +65,7 @@ export const useCalendar = () => {
     } else {
       setRecord({
         currentSales: 0,
-        dateType: 'days',
+        dateType: 'day',
       });
     }
     setCurrentDate(today);
@@ -73,9 +73,9 @@ export const useCalendar = () => {
   };
 
   const clickWeeksChartHandler = async () => {
-    const { sales, formatType } = await getWeekSales(utcStandardDate.clone(), storeId!);
+    const { sales, dateType, formatType } = await getWeekSales(utcStandardDate.clone(), storeId!);
     if (sales.length !== 0) {
-      const { result, recordData } = formatData(sales, formatType, today);
+      const { result, recordData } = formatData(sales, dateType, today, formatType!);
       if (result && recordData) {
         setData(result);
         setRecord(recordData);
@@ -85,15 +85,15 @@ export const useCalendar = () => {
     if (sales.length === 0) {
       setRecord({
         currentSales: 0,
-        dateType: 'weeks',
+        dateType: 'week',
       });
     }
   };
 
   const clickMonthsChartHandler = async () => {
-    const { sales, formatType } = await getMonthsSales(utcStandardDate.clone(), storeId!);
+    const { sales, dateType, formatType } = await getMonthsSales(utcStandardDate.clone(), storeId!);
     if (sales.length !== 0) {
-      const { result, recordData } = formatData(sales, formatType, today);
+      const { result, recordData } = formatData(sales, dateType, today, formatType!);
 
       if (result && recordData) {
         setData(result);

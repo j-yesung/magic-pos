@@ -1,4 +1,4 @@
-import { DateFormatType } from '@/server/api/supabase/sales';
+import { DateFormatType, FormatType } from '@/server/api/supabase/sales';
 import { Tables, TablesInsert } from '@/types/supabase';
 import moment, { Moment } from 'moment';
 import { CalendarDataType } from '../calendar/cell/Cell';
@@ -7,9 +7,8 @@ type FormatCalendarReturnType = (data: Map<string, Tables<'sales'>[]>) => { sale
 type SortMinMaxDataReturnType = (target: CalendarDataType[]) => CalendarDataType[];
 type FormatDateParamType = 'YYYY-MM-DD' | 'YYYY년 MM월' | 'YYYY-MM';
 type DateParamType = 'day' | 'week' | 'month';
-const DAY_TYPE = 'YYYY-MM-DD';
-const WEEK_TYPE = 'YYYY년 MM월';
-const MONTHS_TYPE = 'YYYY-MM';
+
+type CommonType = TablesInsert<'sales'> & { moment?: Moment; original_date: Moment };
 
 export const formatToCalendarData: FormatCalendarReturnType = data => {
   const refinedData = [...data.entries()].map(([key, value]) => {
@@ -36,114 +35,38 @@ export const sortMinMaxData: SortMinMaxDataReturnType = target => {
 
 /**
  *
- * @param salesData salesTable에서 조건부로 받아온 데이터
- * @param formatType 'days', 'weeks' , 'months' 를 받습니다.
- * @returns  { x: string, y: number, moment?:Moment}[]
+ * @param salesData supabase에서 받아온 데이터
+ * @param dateType   요일, 주, 월
+ * @param selectedDateType  moment.Moment -나중에 다시한번더 refactoring
+ * @param formatType chart의 x축에 보일 년,월,일을 표시해줄 타입
+ * @returns
  */
-export const formatData = (salesData: Tables<'sales'>[], formatType?: DateFormatType, selectedDateType?: Moment) => {
-  if (salesData && formatType) {
-    const recordData = {
-      currentSales: 0,
-      dateType: '',
-    };
-    if (formatType === 'day') {
-      // 일별로 데이터를 추출
 
-      const dateContainer = getDates(formatType, selectedDateType!, DAY_TYPE);
-      const dateGroup = createGroupByMap(formatType);
-      const groupByDate = getGroupByDate(dateContainer, dateGroup);
+export const formatData = (
+  salesData: Tables<'sales'>[],
+  dateType: DateFormatType,
+  selectedDateType: Moment,
+  formatType: FormatType,
+) => {
+  const dateContainer = getDates(dateType, selectedDateType, formatType);
+  const dateGroup = createGroupByMap();
+  const groupByDate = getGroupByDate(dateContainer, dateGroup);
+  const formattedData = getDataWithFormatingDate(salesData, dateType, formatType);
 
-      const formattedData = getDataWithFormatingDate(salesData, formatType, DAY_TYPE);
-      formattedData.forEach(data => {
-        for (const [key, _] of groupByDate) {
-          if (key === data.sales_date) {
-            dateGroup.get(key)?.push(data);
-          }
-        }
-      });
+  const groupBybindingData = insertDataGroupByDate(formattedData, groupByDate);
+  const recordData = getRecordData(groupBybindingData, dateType, selectedDateType);
 
-      for (const [key, value] of groupByDate) {
-        if (selectedDateType?.format('YYYY-MM-DD') === key) {
-          recordData.currentSales = value.reduce((acc, cur) => acc + cur.product_ea! * cur.product_price!, 0);
-        }
-      }
-      recordData.dateType = 'days';
+  const result = [...groupBybindingData.entries()]
+    .map(([key, value]) => {
+      return {
+        moment: value[0] ? value[0].original_date : moment(key).hour(0).minute(0).second(0).add(9, 'hours'),
+        x: key,
+        y: value.reduce((acc, cur) => acc + cur.product_price! * cur.product_ea!, 0),
+      };
+    })
+    .toSorted((a, b) => (moment(a.x).isAfter(moment(b.x)) ? 1 : -1));
 
-      const result = [...groupByDate.entries()]
-        .map(([key, value]) => {
-          return { x: key, y: value.reduce((acc, cur) => acc + cur.product_price! * cur.product_ea!, 0) };
-        })
-        .toSorted((a, b) => (moment(a.x).isAfter(moment(b.x)) ? 1 : -1));
-      return { result, recordData };
-    } else if (formatType === 'week') {
-      // 주별로 데이터를 추출
-
-      const dateContainer = getDates(formatType, selectedDateType!, WEEK_TYPE);
-      const dateGroup = createGroupByMap(formatType);
-      const groupByDate = getGroupByDate(dateContainer, dateGroup);
-
-      const formattedData = getDataWithFormatingDate(salesData, formatType, WEEK_TYPE);
-      formattedData.forEach(data => {
-        for (const [key] of groupByDate) {
-          if (key === data.sales_date) {
-            groupByDate.get(key)?.push(data);
-          }
-        }
-      });
-
-      for (const [value] of groupByDate) {
-        if (value.length >= 1) {
-          if (selectedDateType!.isSame(value[0].original_sales_date, 'weeks')) {
-            recordData.currentSales = value.reduce((acc, cur) => acc + cur.product_ea! * cur.product_price!, 0);
-            break;
-          }
-        }
-      }
-      recordData.dateType = 'weeks';
-      const result = [...groupByDate.entries()]
-        .map(([key, value]) => {
-          return {
-            moment: value[0] ? value[0].original_sales_date : moment(key).hour(0).minute(0).second(0).add(9, 'hours'),
-            x: key,
-            y: value.length >= 1 ? value.reduce((acc, cur) => acc + cur.product_price! * cur.product_ea!, 0) : 0,
-          };
-        })
-        .toSorted((a, b) => (moment(a.moment).isAfter(moment(b.moment)) ? 1 : -1));
-
-      return { result, recordData };
-    } else if (formatType === 'month') {
-      // 월별로 데이터를 추출
-
-      const dateContainer = getDates(formatType, selectedDateType!, MONTHS_TYPE);
-      const dateGroup = createGroupByMap(formatType);
-
-      const groupByDate = getGroupByDate(dateContainer, dateGroup);
-      const formattedData = getDataWithFormatingDate(salesData, formatType, MONTHS_TYPE);
-      formattedData.forEach(data => {
-        for (const [key] of groupByDate) {
-          if (key === data.sales_date) {
-            groupByDate.get(key)?.push(data);
-          }
-        }
-      });
-
-      for (const [key, value] of groupByDate) {
-        if (selectedDateType!.format('YYYY-MM') === key) {
-          recordData.currentSales = value.reduce((acc, cur) => acc + cur.product_ea! * cur.product_price!, 0);
-        }
-      }
-      recordData.dateType = 'month';
-
-      const result = [...groupByDate.entries()]
-        .map(([key, value]) => {
-          return { x: key, y: value.reduce((acc, cur) => acc + cur.product_price! * cur.product_ea!, 0) };
-        })
-        .toSorted((a, b) => (moment(a.x).isAfter(moment(b.x)) ? 1 : -1));
-
-      return { result, recordData };
-    }
-  }
-  return { result: null, recordData: null };
+  return { result, recordData };
 };
 
 const getDates = (dateType: DateParamType, selectedDateType: Moment, formatType: FormatDateParamType) => {
@@ -192,7 +115,7 @@ const getDataWithFormatingDate = (
   } else {
     DataWithFormattedDate = originalData.map(data => ({
       ...data,
-      original_date: data.sales_date,
+      original_date: moment(data.sales_date),
       sales_date: moment(data.sales_date).format(formatType),
     }));
   }
@@ -200,26 +123,43 @@ const getDataWithFormatingDate = (
   return DataWithFormattedDate;
 };
 
-const createGroupByMap = (dateType: DateParamType) => {
-  let mapGroup;
-  if (dateType === 'week') {
-    mapGroup = new Map<string, (TablesInsert<'sales'> & { moment?: Moment; original_sales_date?: Moment })[]>();
-
-    return mapGroup;
-  } else {
-    mapGroup = new Map<string, Tables<'sales'>[]>();
-
-    return mapGroup;
-  }
+const createGroupByMap = () => {
+  const mapGroup = new Map<string, CommonType[]>();
+  return mapGroup;
 };
 
-const getGroupByDate = (
-  container: string[],
-  map: Map<string, (TablesInsert<'sales'> & { moment?: Moment; original_sales_date?: Moment })[] | Tables<'sales'>[]>,
-) => {
-  const t = container.reduce((acc, cur) => {
+const getGroupByDate = (container: string[], map: Map<string, CommonType[]>) => {
+  const group = container.reduce((acc, cur) => {
     acc.set(cur, []);
     return acc;
   }, map);
-  return t;
+  return group;
+};
+
+const insertDataGroupByDate = (formattedTarget: CommonType[], groupMap: Map<string, CommonType[]>) => {
+  formattedTarget.forEach(data => {
+    for (const [key, _] of groupMap) {
+      if (key === data.sales_date) {
+        groupMap.get(key)?.push(data);
+      }
+    }
+  });
+  return groupMap;
+};
+
+const getRecordData = (toExtracted: Map<string, CommonType[]>, dateType: DateParamType, selectedDateType: Moment) => {
+  const extractedData = {
+    currentSales: 0,
+    dateType: '',
+  };
+  for (const [_, value] of toExtracted) {
+    if (value.length >= 1) {
+      if (selectedDateType.isSame(value[0].original_date, dateType)) {
+        extractedData.currentSales = value.reduce((acc, cur) => acc + cur.product_ea! * cur.product_price!, 0);
+        break;
+      }
+    }
+  }
+  extractedData.dateType = dateType;
+  return extractedData;
 };

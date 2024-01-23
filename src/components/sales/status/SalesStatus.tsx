@@ -21,7 +21,12 @@ const SalesStatus = () => {
   useEffect(() => {
     getDaySales(utcStandardDate.clone(), storeId!).then(data => {
       if (data.sales.length !== 0) {
-        const { result, recordData } = formatData(data.sales as Tables<'sales'>[], data.formatType, moment());
+        const { result, recordData } = formatData(
+          data.sales as Tables<'sales'>[],
+          data.dateType,
+          moment(),
+          data.formatType!,
+        );
         if (result) {
           setData(result);
           setRecord(recordData);

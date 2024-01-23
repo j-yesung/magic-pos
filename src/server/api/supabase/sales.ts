@@ -7,11 +7,20 @@ import { Moment } from 'moment';
 /**
  * DateFormatType은 helper에서 데이터를 가공할 때 사용합니다.
  */
-export type DateFormatType = 'day' | 'week' | 'month' | 'month';
+export type DateFormatType = 'day' | 'week' | 'month';
+
+/**
+ *  FORMAT_DAY_TYPE = 'YYYY-MM-DD';
+ * FORMAT_WEEK_TYPE = 'YYYY년 MM월';
+ * FORMAT_MONTHS_TYPE = 'YYYY-MM';
+ */
+export type FormatType = 'YYYY-MM-DD' | 'YYYY년 MM월' | 'YYYY-MM';
+
 export interface SalesDataReturnType {
   sales: Tables<'sales'>[];
   error?: PostgrestError;
-  formatType?: DateFormatType;
+  dateType: DateFormatType;
+  formatType?: FormatType;
 }
 type getSalesReturnType = (date: Moment, store_id: string) => Promise<SalesDataReturnType>;
 
@@ -48,10 +57,10 @@ export const getDaySales: getSalesReturnType = async (day, store_id) => {
     .lt('sales_date', momentToString(day.clone().add(1, 'day'), TIME_FORMAT))
     .eq('store_id', store_id);
   if (error) {
-    return { sales: [], error };
+    return { sales: [], dateType: 'day', error };
   }
 
-  return { sales, formatType: 'day' };
+  return { sales, dateType: 'day', formatType: 'YYYY-MM-DD' };
 };
 
 /**
@@ -72,9 +81,9 @@ export const getWeekSales: getSalesReturnType = async (week, store_id) => {
     .eq('store_id', store_id);
 
   if (error) {
-    return { sales: [], error };
+    return { sales: [], dateType: 'week', error };
   }
-  return { sales, formatType: 'week' };
+  return { sales, dateType: 'week', formatType: 'YYYY-MM' };
 };
 
 /**
@@ -94,9 +103,9 @@ export const getMonthsSales: getSalesReturnType = async (month, store_id) => {
     .lte('sales_date', momentToString(month.clone().endOf('month'), TIME_FORMAT))
     .eq('store_id', store_id);
   if (error) {
-    return { sales: [], error };
+    return { sales: [], dateType: 'month', error };
   }
-  return { sales, formatType: 'month' };
+  return { sales, dateType: 'month', formatType: 'YYYY년 MM월' };
 };
 
 /**
@@ -113,7 +122,7 @@ export const getMonthSales: getSalesReturnType = async (month, store_id) => {
     .lte('sales_date', momentToString(month.clone().endOf('month'), TIME_FORMAT))
     .eq('store_id', store_id);
   if (error) {
-    return { sales: [], error };
+    return { sales: [], dateType: 'month', error };
   }
-  return { sales, formatType: 'month' };
+  return { sales, dateType: 'month' };
 };
