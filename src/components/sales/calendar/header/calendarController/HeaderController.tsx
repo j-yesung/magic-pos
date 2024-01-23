@@ -9,12 +9,20 @@ const HeaderController = () => {
   const isChangeView = useSalesStore(state => state.isChangeView);
   const { clickPreMonthHandler, clickNextMonthHandler } = useCalendar();
   return (
-    <div className={clsx(styles.btnGroup, !isChangeView && styles.calendarBtnGroup)}>
-      <Button type="button" className={clsx(!isChangeView && styles.calendarBtn)} onClick={clickPreMonthHandler}>
+    <div className={clsx(!isChangeView && styles.salesCalendarGroup)}>
+      <Button
+        type="button"
+        className={clsx(styles.statusBtn, styles.statusBtnLeft, !isChangeView && styles.calendarBtn)}
+        onClick={clickPreMonthHandler}
+      >
         <ArrowLeft />
       </Button>
 
-      <Button type="button" className={clsx(!isChangeView && styles.calendarBtn)} onClick={clickNextMonthHandler}>
+      <Button
+        type="button"
+        className={clsx(styles.statusBtn, styles.statusBtnRight, !isChangeView && styles.calendarBtn)}
+        onClick={clickNextMonthHandler}
+      >
         <ArrowRight />
       </Button>
     </div>

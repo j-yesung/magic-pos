@@ -11,7 +11,9 @@
   border: 1px solid var(--line, #ededed);
   background: #fff;
 }
-
+.status-header-wrapper {
+  width: 100%;
+}
 .calendar-body-wrapper {
   display: flex;
   flex-direction: column;

@@ -9,7 +9,8 @@
 
 /*매출현황일 때*/
 .status-header {
-  justify-content: space-between;
+  position: relative;
+  justify-content: center;
 }
 
 /*매출 달력 일 때*/

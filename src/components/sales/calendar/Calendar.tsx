@@ -13,7 +13,7 @@ const Calendar = ({ children }: { children?: React.ReactNode }) => {
 
   return (
     <div className={isChangeView ? styles.salesStatus : styles.showCalendar}>
-      <div className={!isChangeView ? styles.calendarHeaderWrapper : ''}>
+      <div className={isChangeView ? styles.statusHeaderWrapper : styles.calendarHeaderWrapper}>
         <Header />
         {children}
       </div>
