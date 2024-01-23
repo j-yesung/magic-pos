@@ -1,4 +1,5 @@
 import { StoreWithOrderInfo, Tables } from '@/types/supabase';
+import { MdOutlineTableBar } from 'react-icons/md';
 import ShopListItem from './ShopListItem';
 import styles from './styles/ShopContainer.module.css';
 
@@ -29,7 +30,9 @@ const ShopContainer = ({ managementData }: { managementData?: StoreWithOrderInfo
   return (
     <div className={styles['shop-container']}>
       <div className={styles['shop-title']}>
-        매장 관리<p>{storeOrder?.length}</p>
+        <MdOutlineTableBar size={28} />
+        <span>매장 관리</span>
+        <p>{storeOrder?.length}</p>
       </div>
       <div className={styles['shop-list-wrap']}>
         <div className={styles['shop-list']}>
