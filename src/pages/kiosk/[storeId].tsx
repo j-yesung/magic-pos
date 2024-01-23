@@ -62,27 +62,6 @@ const OrderIndexPage = ({ menuData, storeId, tableId }: OrderIndexPageProps) => 
     }
     if (tableId) setTableId(tableId);
     setIsLoaded(true);
-
-    toast('test', {
-      type: 'info',
-      position: 'top-center',
-    });
-
-    toast('test', {
-      type: 'danger',
-      position: 'top-left',
-    });
-
-    toast('test', {
-      type: 'warn',
-      position: 'top-right',
-    });
-
-    toast('test', {
-      type: 'info',
-      position: 'top-right',
-      autoClose: 4000,
-    });
   }, []);
 
   return (
