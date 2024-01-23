@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import styles from './styles/OrderLayout.module.css';
 import Footer from '@/components/layout/order/footer/Footer';
 import { SwiperRef } from 'swiper/react';
-import useOrderState, { ORDER_STEP, setSwiperRef } from '@/shared/store/order';
+import useKioskState, { ORDER_STEP, setSwiperRef } from '@/shared/store/kiosk';
 import { useRouter } from 'next/router';
 import OrderPrevButton from '@/components/layout/order/OrderPrevButton';
 
@@ -14,7 +14,7 @@ const DONT_RENDER_FOOTER_PATH_LIST = ['/order/success', '/order/receipt', '/orde
  */
 const OrderLayout = ({ children }: { children: React.ReactNode }) => {
   // slide에 사용될 컴포넌트를 담습니다.
-  const step = useOrderState(state => state.step);
+  const step = useKioskState(state => state.step);
   const sliderRef = useRef<SwiperRef>(null);
   const { pathname } = useRouter();
 

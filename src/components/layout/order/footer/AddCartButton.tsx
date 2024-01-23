@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './styles/StepButton.module.css';
-import useOrderState, { addOrderList, resetSelectedMenu } from '@/shared/store/order';
+import useKioskState, { addOrderList, resetSelectedMenu } from '@/shared/store/kiosk';
 import { MenuItemWithOption } from '@/types/supabase';
 import { useModal } from '@/hooks/modal/useModal';
-import CartAlertModal from '@/components/order/cart/CartAlertModal';
+import CartAlertModal from '@/components/kiosk/cart/CartAlertModal';
 
 /**
  * 옵션, 수량 등을 정한 뒤 장바구니(orderList)에 담는다.
@@ -11,9 +11,9 @@ import CartAlertModal from '@/components/order/cart/CartAlertModal';
  * @constructor
  */
 const AddCartButton = ({ menu }: { menu: MenuItemWithOption | null }) => {
-  const optionSwiperRef = useOrderState(state => state.optionSwiperRef);
-  const selectedOptions = useOrderState(state => state.selectedOptions);
-  const amount = useOrderState(state => state.amount);
+  const optionSwiperRef = useKioskState(state => state.optionSwiperRef);
+  const selectedOptions = useKioskState(state => state.selectedOptions);
+  const amount = useKioskState(state => state.amount);
   const { MagicModal } = useModal();
 
   /**
