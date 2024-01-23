@@ -1,0 +1,25 @@
+.date-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.1rem;
+  font-size: 1.4rem;
+}
+.date-button {
+  display: flex;
+  padding: 1rem 2rem;
+  align-items: flex-start;
+  gap: 1rem;
+  border-radius: 5rem;
+  cursor: pointer;
+  background-color: var(--bg-g);
+  color: var(--text2);
+}
+.active {
+  color: var(--text5);
+  border-radius: 5rem;
+  background: var(--point1-80);
+}
+/*sales-calendar 일때 display none */
+.hidden-component {
+  display: none;
+}
