@@ -18,8 +18,8 @@
 
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.10);
 
-  @media screen and (min-width: 76.8rem  /* 768/10 */) {
-    min-width: 25vw;
+  @media screen and (max-width: 76.8rem  /* 768/10 */) {
+    width: 30rem;
   }
 }
 
