@@ -20,13 +20,12 @@ export interface CalendarDataType {
 type SortMinMaxDataReturnType = (target: CalendarDataType[]) => CalendarDataType[];
 const Cell = () => {
   const {
-    date: { currentDate, today, selectedDate },
+    date: { currentDate, today },
     setCalendarData,
     calendarData,
     setSalesSum,
     isChangeView,
     setCurrentDate,
-    setSelectedDate,
   } = useSalesStore();
   const { clickShowDataOfDateHandler } = useCalendar();
 
