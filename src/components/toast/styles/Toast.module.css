@@ -4,24 +4,39 @@
 }
 
 .toast-content {
-  margin: 1rem;
+  margin: 1.5rem;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  flex-direction: column;
-  width: 20vw;
-  height: 4rem /* 40/10 */;
   background-color: white;
-  border-radius: 1rem /* 15/10 */;
-  padding: 1rem;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  width: 35rem;
+  height: 5.5rem;
+  gap: 1rem;
+  flex-shrink: 0;
 
   @media screen and (min-width: 76.8rem  /* 768/10 */) {
     min-width: 25vw;
   }
 }
 
+.toast-content span {
+  color: var(--white, #FFF);
+  text-align: center;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.4rem; /* 100% */
+}
+
+.toast-content button {
+  color: var(--white);
+}
+
 .danger {
-  box-shadow: rgba(0, 0, 0, 0.05) 0 0.6rem 0.24rem 0, red 0 0 0 0.1rem;
+  background: linear-gradient(90deg, #FF5656 0.11%, #F88 99.87%);
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.10);
 }
 
 .info {

@@ -10,6 +10,7 @@ import { useRouter } from 'next/router';
 import KioskContainer from '@/components/kiosk/KioskContainer';
 import { useModal } from '@/hooks/modal/useModal';
 import { useIsInvalidURL, useIsOrderAllReady, useMakeMenuData } from '@/hooks/service/useKiosk';
+import useToast from '@/hooks/toast/useToast';
 
 interface OrderIndexPageProps {
   menuData: CategoryWithMenuItemWithStore[];
@@ -26,6 +27,7 @@ const OrderIndexPage = ({ menuData, storeId, tableId }: OrderIndexPageProps) => 
   const menuList = useMakeMenuData(menuData, storeId);
   const { MagicModal } = useModal();
   const router = useRouter();
+  const { toast } = useToast();
 
   useEffect(() => {
     if (orderIdList.length > 0 && !isOrderAllReady) {
@@ -60,6 +62,27 @@ const OrderIndexPage = ({ menuData, storeId, tableId }: OrderIndexPageProps) => 
     }
     if (tableId) setTableId(tableId);
     setIsLoaded(true);
+
+    toast('test', {
+      type: 'info',
+      position: 'top-center',
+    });
+
+    toast('test', {
+      type: 'danger',
+      position: 'top-left',
+    });
+
+    toast('test', {
+      type: 'warn',
+      position: 'top-right',
+    });
+
+    toast('test', {
+      type: 'info',
+      position: 'top-right',
+      autoClose: 4000,
+    });
   }, []);
 
   return (
