@@ -1,7 +1,11 @@
 .container {
     margin-top: 3rem;
-    padding-left: 1.5rem;
+    padding-left: .5rem;
     height: var(--kiosk-header-height);
+
+    @media screen and (min-width: 960px) {
+        padding-left: 1.5rem;
+    }
 }
 
 .container > div {

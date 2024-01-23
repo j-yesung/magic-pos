@@ -5,7 +5,6 @@ import { usePaymentWidget } from '@/hooks/order/usePaymentWidget';
 import styles from './styles/StepButton.module.css';
 import { convertNumberToWon } from '@/shared/helper';
 import AddCartButton from '@/components/layout/order/footer/AddCartButton';
-import { IoCart } from 'react-icons/io5';
 import { readRemainEaByMenuId } from '@/server/api/supabase/menu-item';
 import { useModal } from '@/hooks/modal/useModal';
 import { PiBagSimpleFill } from 'react-icons/pi';
@@ -88,21 +87,18 @@ const StepButton = ({ sliderRef }: ButtonProps) => {
               {orderList.length === 0 ? (
                 <span>담은 상품이 없습니다.</span>
               ) : (
-                <>
-                  <span>
-                    {BUTTON_OPTIONS[step]}
-
-                    {step === ORDER_STEP.SELECT_MENU && (
-                      <>
-                        <BiSolidCircle size={2} />
-                        <div className={styles.iconWrapper}>
-                          <PiBagSimpleFill size={20} />
-                          <span>{orderList.length}</span>
-                        </div>
-                      </>
-                    )}
-                  </span>
-                </>
+                <span>
+                  {BUTTON_OPTIONS[step]}
+                  {step === ORDER_STEP.SELECT_MENU && (
+                    <>
+                      <BiSolidCircle size={2} />
+                      <div className={styles.iconWrapper}>
+                        <PiBagSimpleFill size={20} />
+                        <span>{orderList.length}</span>
+                      </div>
+                    </>
+                  )}
+                </span>
               )}
             </button>
           ) : (
