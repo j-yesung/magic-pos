@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSalesQuery } from '@/hooks/sales/useSalesQuery';
 import useKioskState, { addOrderId, getTotalPrice, ORDER_STEP, setOrderNumber, setStep } from '@/shared/store/kiosk';
 import { groupByKey } from '@/shared/helper';
-import { Tables } from '@/types/supabase';
+import { Tables, TablesInsert } from '@/types/supabase';
 import { useStoreQuery } from '@/hooks/store/useStoreQuery';
 import { useStoreOrderSetQuery } from '@/hooks/order/useStoreOrderSetQuery';
 import { useNumberOrderSetQuery } from '@/hooks/order/useNumberOrderSetQuery';
 import styles from './styles/SuccessContainer.module.css';
-import Image from 'next/image';
-import image from '@/../public/images/image-success.png';
 import { useRouter } from 'next/router';
 import { decrementRemainEaByMenuId } from '@/server/api/supabase/menu-item';
 import MenuHeader from '../common/MenuHeader';
@@ -26,11 +24,11 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const { addStoreOrder } = useStoreOrderSetQuery();
   const { addNumberOrder } = useNumberOrderSetQuery();
   const { incrementOrderNumber, newOrderNumber } = useStoreQuery();
-  const [isPageLoading, setIsPageLoading] = useState(false);
+  const [isPageLoading, setIsPageLoading] = useState(true);
   const router = useRouter();
 
   const clickCheckOrderHandler = () => {
-    router.push('/order/receipt');
+    router.push('/kiosk/receipt');
   };
 
   useEffect(() => {
@@ -47,14 +45,14 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
 
       // 결제 승인시 sales테이블에 담아놓은 orderList 데이터를 insert 한다.
       const group = groupByKey<Tables<'menu_item'>>(orderList, 'id');
-      const salesData = [...group].map(([, value]) => ({
+      const salesData: TablesInsert<'sales'>[] = [...group].map(([, value]) => ({
         store_id: storeId,
         sales_date: payment.approvedAt,
         product_name: value[0].name,
         product_ea: value.length,
-        product_category: menuData?.find(menu => menu.id === value[0].category_id)!.name,
+        product_category: menuData?.find(menu => menu.id === value[0].category_id)?.name,
         product_price: value[0].price,
-      })) as Omit<Tables<'sales'>, 'id'>[];
+      }));
 
       addSales(salesData);
       incrementOrderNumber(storeId);
@@ -99,31 +97,29 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   }, [newOrderNumber]);
 
   useEffect(() => {
-    setIsPageLoading(true);
+    setIsPageLoading(false);
   }, []);
 
   return (
     <>
-      {isPageLoading && (
-        <>
-          <div className={styles.container}>
-            <MenuHeader />
-            <div className={styles.wrapper}>
-              <div className={styles.content}>
-                <h1>주문이 완료되었어요</h1>
-                <div>
-                  <IoBagCheckOutline size={100} />
-                </div>
-                <div className={styles.orderNumber}>
-                  주문 번호 <strong>{orderNumber}</strong>
-                </div>
-                <div className={styles.checkOrder} onClick={clickCheckOrderHandler}>
-                  주문 확인하기
-                </div>
+      {!isPageLoading && (
+        <div className={styles.container}>
+          <MenuHeader />
+          <div className={styles.wrapper}>
+            <div className={styles.content}>
+              <h1>주문이 완료되었어요</h1>
+              <div>
+                <IoBagCheckOutline size={100} />
+              </div>
+              <div className={styles.orderNumber}>
+                주문 번호 <strong>{orderNumber}</strong>
+              </div>
+              <div className={styles.checkOrder} onClick={clickCheckOrderHandler}>
+                주문 확인하기
               </div>
             </div>
           </div>
-        </>
+        </div>
       )}
     </>
   );

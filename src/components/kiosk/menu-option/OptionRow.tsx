@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MenuOptionWithDetail, Tables } from '@/types/supabase';
 import styles from './styles/OptionRow.module.css';
 import OptionDetailRow from '@/components/kiosk/menu-option/OptionDetailRow';

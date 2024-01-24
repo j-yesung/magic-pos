@@ -1,4 +1,3 @@
-import React from 'react';
 import useKioskState from '@/shared/store/kiosk';
 import styles from './styles/MenuInfo.module.css';
 import { convertNumberToWon } from '@/shared/helper';

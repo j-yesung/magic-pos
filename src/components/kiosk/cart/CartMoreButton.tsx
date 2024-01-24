@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './styles/CartMoreButton.module.css';
 import { HiOutlinePlus } from 'react-icons/hi2';
 

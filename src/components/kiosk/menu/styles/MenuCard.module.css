@@ -14,17 +14,20 @@
 
     cursor: pointer;
 
-    @media screen and (min-width: 76.8rem  /* 768/10 */) {
-        --image-height: 15rem  /* 150/10 */;
-        --span-height: 3rem  /* 30/10 */;
+    @media screen and (min-width: 960px) {
+        --image-height: 15rem;
+        --span-height: 3rem;
     }
 }
 
 .card img {
     object-fit: cover;
-    width: 100%;
+    width: 12.3rem;
     height: var(--image-height);
-    border-radius: 1rem  /* 10/10 */;
+    border-radius: .5rem;
+    @media screen and (min-width: 960px) {
+        width: 16rem;
+    }
 }
 
 .card span {

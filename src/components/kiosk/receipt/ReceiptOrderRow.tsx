@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './styles/ReceiptOrderRow.module.css';
 import Image from 'next/image';
 import { MenuItemWithOption } from '@/types/supabase';

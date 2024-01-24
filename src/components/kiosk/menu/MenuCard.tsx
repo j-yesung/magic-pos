@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './styles/MenuCard.module.css';
 import { MenuItemWithOption } from '@/types/supabase';
 import Image from 'next/image';
@@ -22,7 +21,7 @@ const MenuCard = ({ menu }: MenuCardProps) => {
 
   return (
     <div className={styles.card} onClick={handleClickCard}>
-      <Image src={menu.image_url ?? ''} alt={menu.name ?? ''} width={125} height={125} priority={true} />
+      <Image src={menu.image_url ?? ''} alt={menu.name ?? ''} width={123} height={125} priority={true} />
       <div className={styles.menuInfo}>
         <span>{menu.name}</span>
         <span>{convertNumberToWon(menu.price)}</span>

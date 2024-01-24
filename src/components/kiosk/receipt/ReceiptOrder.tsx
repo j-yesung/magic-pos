@@ -1,4 +1,3 @@
-import React from 'react';
 import { MenuItemWithOption, OrderDataWithStoreName } from '@/types/supabase';
 import ReceiptOrderHeader from '@/components/kiosk/receipt/ReceiptOrderHeader';
 import { groupByKey } from '@/shared/helper';

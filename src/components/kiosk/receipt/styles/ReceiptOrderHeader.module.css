@@ -58,26 +58,22 @@
     line-height: 1.3rem  /* 13/10 */; /* 100% */
 }
 
-.order-type {
+.time-wrapper {
     display: flex;
-    padding: 0.6rem 1rem;
-    justify-content: flex-end;
-    align-items: flex-end;
-    gap: 1rem;
-
-    border-radius: 0.5rem;
-    background: var(--point-80);
+    align-items: center;
+    gap: 10px;
 }
 
-.order-type span {
-    color: var(--white);
+.order-type {
+    color: var(--point1-80);
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 15px;
     font-style: normal;
-    font-weight: 00;
-    line-height: 1.5rem; /* 100% */
-    letter-spacing: -0.03rem;
+    font-weight: 600;
+    line-height: 15px; /* 100% */
+    letter-spacing: -0.3px;
 }
+
 
 .order-time {
     color: var(--text2);

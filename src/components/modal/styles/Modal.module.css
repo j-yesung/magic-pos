@@ -41,3 +41,7 @@
 .alert-z-index {
     z-index: var(--level-5-z-index);
 }
+
+.opacity-10 {
+    filter: opacity(10%);
+}

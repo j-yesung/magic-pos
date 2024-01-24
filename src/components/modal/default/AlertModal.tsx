@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
-import useModalState from '@/shared/store/modal';
 import styles from './styles/DefaultModal.module.css';
 import { ModalAlertTypeOption } from '@/types/common';
+import { hideAlert } from '@/shared/store/modal';
 
 const AlertModal = ({ alert }: { alert: ModalAlertTypeOption }) => {
-  const { hideAlert } = useModalState();
-
   useEffect(() => {
     if (alert.timeout) {
       setTimeout(() => {
