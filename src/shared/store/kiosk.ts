@@ -35,6 +35,7 @@ interface OrderState {
   amount: number;
   selectedMenu: MenuItemWithOption | null;
   isOptionPage: boolean;
+  selectedLanguage: string;
 }
 
 export const useKioskState = create<OrderState>()(
@@ -69,6 +70,7 @@ export const useKioskState = create<OrderState>()(
       // 메뉴 하나 수량
       amount: 1,
       isOptionPage: false,
+      selectedLanguage: 'lang-ko',
     }),
     {
       name: 'order-storage',
@@ -172,6 +174,7 @@ export const subtractSelectedOption = (detailId: string) =>
       })
       .filter(o => o.menu_option_detail.length > 0),
   }));
+export const setSelectedLanguage = (selectedLanguage: string) => useKioskState.setState(() => ({ selectedLanguage }));
 // 옵션 초기화
 export const resetSelectedOptions = () => useKioskState.setState({ selectedOptions: [] });
 export const addAmount = () => useKioskState.setState(state => ({ amount: state.amount + 1 }));

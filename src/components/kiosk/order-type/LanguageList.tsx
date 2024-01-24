@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import styles from './styles/LanguageList.module.css';
 import { useTranslation } from 'react-i18next';
 import { FaCheck } from 'react-icons/fa6';
+import { setSelectedLanguage, useKioskState } from '@/shared/store/kiosk';
 
 const LANGUAGE_LIST = [
   {
@@ -24,7 +25,7 @@ const LANGUAGE_LIST = [
 
 const LanguageList = () => {
   const { i18n } = useTranslation();
-  const [selectedLanguage, setSelectedLanguage] = useState('lang-ko');
+  const selectedLanguage = useKioskState(state => state.selectedLanguage);
 
   const handleClickLanguage = (e: React.MouseEvent<HTMLLIElement>) => {
     const id = e.currentTarget.id;
