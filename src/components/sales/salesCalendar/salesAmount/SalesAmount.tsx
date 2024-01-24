@@ -1,10 +1,18 @@
 import { convertNumberToWon } from '@/shared/helper';
-import useDataStore from '@/shared/store/sales/data';
+import { resetCurrentDate } from '@/shared/store/sales/calendar';
+import useDataStore, { resetCalendarBindingData, resetSalesSum } from '@/shared/store/sales/data';
 import clsx from 'clsx';
+import { useEffect } from 'react';
 import styles from './styles/salesAmount.module.css';
 const SalesAmount = () => {
   const salesSum = useDataStore(state => state.salesSum);
-
+  useEffect(() => {
+    return () => {
+      resetCurrentDate();
+      resetCalendarBindingData();
+      resetSalesSum();
+    };
+  }, []);
   return (
     <div className={styles.container}>
       <div className={styles.sumSales}>

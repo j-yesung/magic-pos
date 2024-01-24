@@ -5,7 +5,14 @@ import moment, { Moment } from 'moment';
 
 import useCalendarStore from '@/shared/store/sales/calendar';
 import { CalendarDataType, GetMinMaxSalesReturnType } from '@/types/sales';
-import { getCalendarType, getDateType, getDayType, getMonthType } from '../../calendarUtility/cellItemType';
+import {
+  getCalendarDateType,
+  getCalendarMonthType,
+  getStatusCalendarType,
+  getStatusDateType,
+  getStatusDayType,
+  getStatusMonthType,
+} from '../../calendarUtility/cellItemType';
 import styles from './styles/cellItem.module.css';
 
 interface CellItemProps {
@@ -18,57 +25,69 @@ interface CellItemProps {
 type Cell = (param: CellItemProps) => JSX.Element;
 
 const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDateHandler }) => {
-  const POINT = 'SELECTEDTYPE';
-  const COMPONENT_TYPE = 'CALENDAR';
-  const SELECT_DAY = 'SELECT';
-
+  const SELECTED_DAY = 'SELECTEDTYPE';
+  const SALES_NONE = 'NONE';
   const isChangeView = useSalesStore(state => state.isChangeView);
   const { currentDate, selectedDate, today } = useCalendarStore();
 
-  const dateVariant = cva([styles.dateBase], {
+  const statusVariant = cva([styles.statusCalendarBase], {
     variants: {
-      monthType: {
-        PREV: styles.prevMonth,
-        CURRENT: styles.currentMonth,
-        AFTER: styles.afterMonth,
-      },
       calendarType: {
-        CURRENTCALENDAR: styles.current,
-        PREVCALENDAR: styles.prev,
-        AFTERCALENDAR: styles.after,
+        CURRENT: styles.currentCalendar,
+        NOT_CURRENT: styles.notCurrentCalendar,
+      },
+      monthType: {
+        CURRENT: styles.statusCurrentMonth,
+        NOT_CURRENT: styles.statusNotCurrent,
       },
       dateType: {
-        PREV: styles.prevDate,
-        CURRENT: styles.currentDate,
-        AFTER: styles.afterDate,
-      },
-      selectedDateType: {
-        SELECTEDTYPE: styles.pointDate,
-      },
-      componentType: {
-        CALENDAR: styles.calendarCell,
+        PREV: styles.statusPrevDate,
+        CURRENT: styles.statusCurrentDate,
+        AFTER: styles.statusAfterDate,
       },
     },
   });
-
-  const dayVariant = cva([styles.dayBase], {
+  const statusDayVariant = cva([styles.statusDayBase], {
     variants: {
       dayType: {
-        SATURADAY: styles.saturaday,
-        SUNDAY: styles.sunday,
-        DAY: styles.day,
+        SATURADAY: styles.statusSaturaday,
+        SUNDAY: styles.statusSunday,
+        DAY: styles.statusDay,
       },
-      currentType: {
-        SELECT: styles.selectedDate,
+      seletedDayType: {
+        SELECTEDTYPE: styles.statusSelectedDate,
       },
     },
   });
 
+  const calendarVariant = cva([styles.calendarBase], {
+    variants: {
+      calendarType: {
+        CURRENT: styles.calendarCurrent,
+      },
+      monthType: {
+        CURRENT: styles.calendarCurrentMonth,
+        NOT_CURRENT: styles.calendarNotCurrentMonth,
+      },
+      dateType: {
+        PREV: styles.statusPrevDate,
+        CURRENT: styles.calendarCurrentDate,
+        AFTER: styles.statusAfterDate,
+      },
+      sales: {
+        NONE: styles.salesNone,
+      },
+    },
+  });
+  /**
+   * 매출 최고 최저 숫자 color
+   */
   const salesVariant = cva([styles.salesBase], {
     variants: {
       sales: {
         MAX: styles.salesMax,
         MIN: styles.salesMin,
+        NONE: styles.salesNone,
       },
     },
   });
@@ -76,41 +95,51 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
   const formatDate = day.clone().format('YY MM D').substring(6);
 
   return (
-    <div
-      className={dateVariant({
-        calendarType: getCalendarType(day, currentDate),
-        monthType: getMonthType(day, currentDate),
-        dateType: getDateType(day),
-        selectedDateType: isChangeView && day.isSame(selectedDate, 'day') ? POINT : null,
-        componentType: !isChangeView ? COMPONENT_TYPE : null,
-      })}
-      onClick={
-        isChangeView
-          ? day.isSame(today, 'D') || day.isBefore(today, 'D')
-            ? clickShowDataOfDateHandler?.(day.clone())
-            : undefined
-          : undefined
-      }
-    >
-      <span
-        className={dayVariant({
-          dayType: getDayType(day.clone()),
-          currentType: selectedDate !== today && selectedDate === currentDate ? SELECT_DAY : null,
-        })}
-      >
-        {formatDate}
-      </span>
+    <>
+      {/* sales/Status일 때 보여줄 날 css */}
+      {isChangeView && (
+        <div
+          className={statusVariant({
+            calendarType: getStatusCalendarType(day, currentDate),
+            monthType: getStatusMonthType(currentDate, day),
+            dateType: getStatusDateType(day),
+          })}
+          {...((day.isSame(today, 'D') || day.isBefore(today, 'D')) && {
+            onClick: clickShowDataOfDateHandler?.(day.clone()),
+          })}
+        >
+          <span
+            className={statusDayVariant({
+              dayType: getStatusDayType(day),
+              seletedDayType: day.isSame(selectedDate, 'day') ? SELECTED_DAY : null,
+            })}
+          >
+            {formatDate}
+          </span>
+        </div>
+      )}
 
-      {/* sales/calendar에서 보여줄 날짜별 매출과 최저 최고 매출 CSS class입니다. */}
-
-      <span
-        className={salesVariant({
-          sales: salesData && getMinMaxSalesType?.(salesData),
-        })}
-      >
-        {!isChangeView && salesData?.sales && convertNumberToWon(salesData.sales)}
-      </span>
-    </div>
+      {/* sales/Calendar일 때 보여줄 날 css */}
+      {!isChangeView && (
+        <div
+          className={calendarVariant({
+            monthType: getCalendarMonthType(day, currentDate),
+            dateType: getCalendarDateType(day),
+            sales: !salesData ? SALES_NONE : null,
+          })}
+        >
+          <span
+            className={salesVariant({
+              sales: salesData && getMinMaxSalesType?.(salesData),
+            })}
+          >
+            {formatDate}
+          </span>
+          {/* sales/calendar에서 보여줄 날짜별 매출과 최저 최고 매출 CSS class입니다. */}
+          <span>{salesData?.sales ? convertNumberToWon(salesData.sales) : '-'}</span>
+        </div>
+      )}
+    </>
   );
 };
 

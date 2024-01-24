@@ -44,17 +44,13 @@ const Cell = () => {
           const minMaxData = sortMinMaxData(formattedData);
           setCalendarBindingData(minMaxData);
           setSalesSum(formattedData);
-        } else {
-          setSalesSum(null);
         }
       });
     }
 
     return () => {
-      if (calendarDataBindingData.length !== 0) {
-        resetCalendarBindingData();
-        resetSalesSum();
-      }
+      resetCalendarBindingData();
+      resetSalesSum();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentDate]);
