@@ -3,7 +3,7 @@ import QrCodeModal from '@/components/qrCodeModal/QrCodeModal';
 import { modeSubText, modeText } from '@/data/admin';
 import { useSetAuth } from '@/hooks/auth/useSetAuth';
 import { useModal } from '@/hooks/modal/useModal';
-import useSideBar from '@/shared/store/sidebar';
+import useSideBar, { setIsSideBarOpen } from '@/shared/store/sidebar';
 import useToggleState from '@/shared/store/toggle';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
@@ -17,7 +17,7 @@ import Ellipse from '/public/icons/ellipse.svg';
 
 const Sidebar = (adminInfo: AdminCategories) => {
   const [navList, setNavList] = useState(adminInfo.adminCategories);
-  const { isSideBarOpen, setIsSideBarOpen } = useSideBar();
+  const isSideBarOpen = useSideBar(state => state.isSideBarOpen);
   const isMode = useToggleState(state => state.isChecked);
   const targetRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
@@ -34,7 +34,7 @@ const Sidebar = (adminInfo: AdminCategories) => {
       if (url) router.push(url);
       setIsSideBarOpen(false);
     },
-    [navList, router, setIsSideBarOpen],
+    [navList, router],
   );
 
   const clickQrModalOpenHandler = () => {
@@ -63,7 +63,7 @@ const Sidebar = (adminInfo: AdminCategories) => {
       window.removeEventListener('mousedown', closeSideBar);
       setIsSideBarOpen(false);
     };
-  }, [router.events, setIsSideBarOpen]);
+  }, [router.events]);
 
   return (
     <aside className={sidebarClass} ref={targetRef}>
