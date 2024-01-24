@@ -1,4 +1,4 @@
-import { useFetchQuery } from '@/hooks/store/useFetchQuery';
+import { useFetchQuery } from '@/hooks/query/store/useFetchQuery';
 import { Fragment, useEffect, useState } from 'react';
 import { convertTimeFormat, timeSet } from '../../../utils/time-format';
 import styles from '../styles/StroeContents.module.css';

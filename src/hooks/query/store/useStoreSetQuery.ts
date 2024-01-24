@@ -1,7 +1,7 @@
 import { incrementOrderNumber, updateStoreTime } from '@/server/api/supabase/store';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateStoreUseTable } from '../../server/api/supabase/store';
-import useToast from '../toast/useToast';
+import { updateStoreUseTable } from '../../../server/api/supabase/store';
+import useToast from '../../toast/useToast';
 
 const enum StoreKey {
   STORE_UPDATE_TIME = 'storeUpdateTime',

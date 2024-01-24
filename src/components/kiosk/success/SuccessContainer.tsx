@@ -1,7 +1,7 @@
 import { useNumberOrderSetQuery } from '@/hooks/order/useNumberOrderSetQuery';
 import { useStoreOrderSetQuery } from '@/hooks/order/useStoreOrderSetQuery';
+import { useStoreSetQuery } from '@/hooks/query/store/useStoreSetQuery';
 import { useSalesQuery } from '@/hooks/sales/useSalesQuery';
-import { useStoreSetQuery } from '@/hooks/store/useStoreSetQuery';
 import { decrementRemainEaByMenuId } from '@/server/api/supabase/menu-item';
 import { groupByKey } from '@/shared/helper';
 import useKioskState, { ORDER_STEP, addOrderId, getTotalPrice, setOrderNumber, setStep } from '@/shared/store/kiosk';

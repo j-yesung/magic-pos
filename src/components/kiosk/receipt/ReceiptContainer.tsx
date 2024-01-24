@@ -2,7 +2,7 @@ import MenuHeader from '@/components/kiosk/common/MenuHeader';
 import ReceiptOrder from '@/components/kiosk/receipt/ReceiptOrder';
 import { useNumberOrderFetchQuery } from '@/hooks/order/useNumberOrderFetchQuery';
 import { useStoreOrderFetchQuery } from '@/hooks/order/useStoreOrderFetchQuery';
-import { useFetchQuery } from '@/hooks/store/useFetchQuery';
+import { useFetchQuery } from '@/hooks/query/store/useFetchQuery';
 import useKioskState, { ORDER_STEP, setStep, setStoreName } from '@/shared/store/kiosk';
 import { OrderDataWithStoreName } from '@/types/supabase';
 import { useRouter } from 'next/router';

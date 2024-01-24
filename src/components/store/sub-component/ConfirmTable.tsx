@@ -1,4 +1,4 @@
-import { useStoreSetQuery } from '@/hooks/store/useStoreSetQuery';
+import { useStoreSetQuery } from '@/hooks/query/store/useStoreSetQuery';
 import useAuthState from '@/shared/store/session';
 import { useState } from 'react';
 import Select from 'react-select';

@@ -1,4 +1,4 @@
-import { useAuthSetQuery } from '@/hooks/auth/useAuthSetQuery';
+import { useAuthSetQuery } from '@/hooks/query/auth/useAuthSetQuery';
 import useAuthState from '@/shared/store/session';
 import Link from 'next/link';
 import { useRouter } from 'next/router';

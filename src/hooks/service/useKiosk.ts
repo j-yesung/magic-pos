@@ -1,6 +1,6 @@
 import { useNumberOrderFetchQuery } from '@/hooks/order/useNumberOrderFetchQuery';
 import { useStoreOrderFetchQuery } from '@/hooks/order/useStoreOrderFetchQuery';
-import { useGetQuery } from '@/hooks/store/useFetchQuery';
+import { useFetchQuery } from '@/hooks/query/store/useFetchQuery';
 import useFetchTable from '@/hooks/table/useFetchTable';
 import { isEmptyObject } from '@/shared/helper';
 import { CategoryWithMenuItemWithStore, MenuItemWithOption } from '@/types/supabase';
@@ -39,7 +39,7 @@ export const useIsOrderAllReady = (orderIdList: string[], storeId: string) => {
 };
 
 export const useIsInvalidURL = ({ tableId, storeId }: { tableId?: string; storeId?: string }) => {
-  const { storeInfo } = useGetQuery({ storeId: storeId });
+  const { storeInfo } = useFetchQuery({ storeId: storeId });
   const { tableInfo } = useFetchTable({ tableId: tableId, storeId });
   const [isInvalidURL, setIsInvalidURL] = useState(true);
 

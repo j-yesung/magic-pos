@@ -1,4 +1,4 @@
-import { useAuthSetQuery } from '@/hooks/auth/useAuthSetQuery';
+import { useAuthSetQuery } from '@/hooks/query/auth/useAuthSetQuery';
 import { useErrorMessage } from '@/hooks/service/auth/useErrorMessage';
 import { useInput } from '@/hooks/service/auth/useInput';
 import { useValid } from '@/hooks/service/auth/useValid';

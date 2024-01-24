@@ -1,4 +1,4 @@
-import { useStoreSetQuery } from '@/hooks/store/useStoreSetQuery';
+import { useStoreSetQuery } from '@/hooks/query/store/useStoreSetQuery';
 import { useCallback } from 'react';
 import Button from '../../common/Button';
 import styles from '../styles/StroeContents.module.css';
