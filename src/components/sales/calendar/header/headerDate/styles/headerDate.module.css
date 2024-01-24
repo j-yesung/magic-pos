@@ -1,0 +1,14 @@
+.header-text {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.4rem;
+  color: var(--text1);
+}
+.text-year {
+  font-size: 2rem;
+}
+
+.calendar-text-year {
+  font-size: 2rem;
+}
