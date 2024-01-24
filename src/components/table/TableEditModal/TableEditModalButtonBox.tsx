@@ -1,3 +1,4 @@
+import Button from '@/components/common/Button';
 import { useModal } from '@/hooks/modal/useModal';
 import useSetTable from '@/hooks/table/useSetTable';
 import useAuthState from '@/shared/store/session';
@@ -40,14 +41,15 @@ const TableEditModalButtonBox = ({ modalId }: { modalId: string }) => {
   const clickRemoveTableHandler = () => {
     MagicModal.hide(modalId ?? '');
   };
+
   return (
     <div className={styles['modal-button-box']}>
-      <button type="button" onClick={clickRemoveTableHandler} className={styles['close-button']}>
+      <Button type="button" className={styles.closeButton} onClick={clickRemoveTableHandler}>
         취소
-      </button>
-      <button type="button" className={styles['edit-button']} onClick={clickUpdateTableHandler}>
+      </Button>
+      <Button type="button" className={styles.editButton} onClick={clickUpdateTableHandler}>
         확인
-      </button>
+      </Button>
     </div>
   );
 };

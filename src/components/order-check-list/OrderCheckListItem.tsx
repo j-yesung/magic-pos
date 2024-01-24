@@ -1,8 +1,8 @@
+import { groupByKey } from '@/shared/helper';
 import { MenuItemWithOption, StoreOrderWithStoreName, Tables } from '@/types/supabase';
 import clsx from 'clsx';
 import moment from 'moment';
 import styles from './styles/OrderCheckListItem.module.css';
-import { groupByKey } from '@/shared/helper';
 
 const OrderCheckListItem = ({ orderData }: { orderData?: Tables<'order_store'> | Tables<'order_number'> }) => {
   const { is_togo, menu_list, order_number, is_done, order_time } = orderData as StoreOrderWithStoreName;

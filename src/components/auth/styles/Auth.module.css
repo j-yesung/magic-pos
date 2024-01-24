@@ -81,7 +81,7 @@
 
 .button {
   border: none;
-  color: white;
+  color: #fff;
   padding: 2rem;
   cursor: pointer;
   border-radius: 1rem;
@@ -98,12 +98,6 @@
   padding: 2rem;
   border-radius: 1rem;
   background-color: var(--bg-p);
-}
-
-/* table Button */
-.table-close-button {
-  margin: 5rem;
-  background-color: #000;
 }
 
 .disabledButton {
