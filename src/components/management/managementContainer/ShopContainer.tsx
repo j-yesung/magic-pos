@@ -34,12 +34,10 @@ const ShopContainer = ({ managementData }: { managementData?: StoreWithOrderInfo
         <span>매장 관리</span>
         <p>{storeOrder?.length}</p>
       </div>
-      <div className={styles['shop-list-wrap']}>
-        <div className={styles['shop-list']}>
-          {storeTableSort?.map((item: Tables<'store_table'>, index: number) => {
-            return <ShopListItem key={item.id} index={index} storeOrderData={storeOrder} shopData={item} />;
-          })}
-        </div>
+      <div className={styles['shop-list']}>
+        {storeTableSort?.map((item: Tables<'store_table'>) => {
+          return <ShopListItem key={item.id} storeOrderData={storeOrder} shopData={item} />;
+        })}
       </div>
     </div>
   );

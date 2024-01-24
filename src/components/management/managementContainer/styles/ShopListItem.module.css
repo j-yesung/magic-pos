@@ -4,17 +4,13 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 2rem;
-  min-width: 22.5rem;
-  min-height: 21.8rem;
+  width: 22.5rem;
+  height: 21.8rem;
 
   border-radius: 1rem;
   background: var(--bg-g);
 
   cursor: pointer;
-}
-
-.shop-list-item.list-item-row {
-  margin-right: -0.6rem;
 }
 
 .shop-list-item:hover {
@@ -49,7 +45,6 @@ div.item-menu {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
 }
 
 .item-menu span {
@@ -69,4 +64,15 @@ div.item-menu {
   font-weight: 700;
   line-height: 15px; /* 100% */
   letter-spacing: -0.3px;
+}
+
+@media only all and (max-width: 1320px) {
+  .shop-list-item {
+    width: 31%;
+  }
+}
+@media only all and (max-width: 1010px) {
+  .shop-list-item {
+    width: 48%;
+  }
 }

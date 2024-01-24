@@ -1,10 +1,10 @@
 import useSetManagement from '@/hooks/management/useSetManagement';
 import { useModal } from '@/hooks/modal/useModal';
+import { groupByKey } from '@/shared/helper';
 import { MenuItemWithOption, OrderDataWithStoreName } from '@/types/supabase';
 import moment from 'moment';
 import { IoCheckmark } from 'react-icons/io5';
 import styles from './styles/OrderItem.module.css';
-import { groupByKey } from '@/shared/helper';
 
 const OrderItem = ({ orderData }: { orderData: OrderDataWithStoreName }) => {
   const { id, order_number, order_time, menu_list, total_price, is_togo } = orderData;
@@ -48,7 +48,7 @@ const OrderItem = ({ orderData }: { orderData: OrderDataWithStoreName }) => {
                 {item?.map(option => {
                   return (
                     <span key={option.id}>
-                      {option.menu_option[0]?.menu_option_detail.map(detail => detail.name).join('/')}
+                      {option.menu_option?.[0]?.menu_option_detail.map(detail => detail.name).join('/')}
                     </span>
                   );
                 })}

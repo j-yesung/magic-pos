@@ -42,3 +42,9 @@
 .close-button {
   cursor: pointer;
 }
+
+@media only all and (max-width: 1520px) {
+  .side-bar-wrapper{
+    padding-right: 0;
+  }
+}

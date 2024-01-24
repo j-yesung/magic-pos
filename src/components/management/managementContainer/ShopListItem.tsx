@@ -8,11 +8,10 @@ import styles from './styles/ShopListItem.module.css';
 
 interface propsType {
   shopData: Tables<'store_table'>;
-  index: number;
   storeOrderData?: Tables<'order_store'>[];
 }
 
-const ShopListItem = ({ shopData, index, storeOrderData }: propsType) => {
+const ShopListItem = ({ shopData, storeOrderData }: propsType) => {
   const [storeOrderInTable, setStoreOrderInTable] = useState<Tables<'order_store'>[]>([]);
   const [storeOrderInTableById, setStoreOrderInTableById] = useState<string[]>([]);
   const [storeOrderInTableByMenuList, setStoreOrderInTableByMenuList] = useState<MenuItemWithOption[]>([]);
@@ -24,7 +23,7 @@ const ShopListItem = ({ shopData, index, storeOrderData }: propsType) => {
       toast('주문내역이 없습니다 ', {
         type: 'danger',
         position: 'top-center',
-        showCloseButton: faltse,
+        showCloseButton: false,
         autoClose: 3000,
       });
     } else {
@@ -49,10 +48,7 @@ const ShopListItem = ({ shopData, index, storeOrderData }: propsType) => {
   }, [shopData, storeOrderData]);
 
   return (
-    <div
-      className={clsx(styles['shop-list-item'], index % 3 === 2 && styles['list-item-row'])}
-      onClick={clickOrderDataReFetchHandler}
-    >
+    <div className={clsx(styles['shop-list-item'])} onClick={clickOrderDataReFetchHandler}>
       <div className={styles['item-table']}>테이블 {shopData.position}</div>
       <div className={styles['item-menu-box']}>
         {[...groupByKey<MenuItemWithOption>(storeOrderInTableByMenuList, 'unique')].map(([key, menu]) => {
