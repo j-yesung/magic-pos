@@ -20,6 +20,7 @@ type Cell = (param: CellItemProps) => JSX.Element;
 const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDateHandler }) => {
   const POINT = 'SELECTEDTYPE';
   const COMPONENT_TYPE = 'CALENDAR';
+  const SELECT_DAY = 'SELECT';
 
   const isChangeView = useSalesStore(state => state.isChangeView);
   const { currentDate, selectedDate, today } = useCalendarStore();
@@ -57,6 +58,9 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
         SUNDAY: styles.sunday,
         DAY: styles.day,
       },
+      currentType: {
+        SELECT: styles.selectedDate,
+      },
     },
   });
 
@@ -91,9 +95,10 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
       <span
         className={dayVariant({
           dayType: getDayType(day.clone()),
+          currentType: selectedDate !== today && selectedDate === currentDate ? SELECT_DAY : null,
         })}
       >
-        {day.isSame(today, 'D') ? 'today' : formatDate}
+        {formatDate}
       </span>
 
       {/* sales/calendar에서 보여줄 날짜별 매출과 최저 최고 매출 CSS class입니다. */}

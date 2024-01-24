@@ -1,11 +1,7 @@
 import { momentToString } from '@/components/sales/calendarUtility/dateCalculator';
 import { supabase } from '@/shared/supabase';
-
 import { SalesDataReturnType } from '@/types/sales';
-import { Tables } from '@/types/supabase';
-=======
-import { Tables, TablesInsert } from '@/types/supabase';
-import { PostgrestError } from '@supabase/supabase-js';
+import { TablesInsert } from '@/types/supabase';
 
 import { Moment } from 'moment';
 

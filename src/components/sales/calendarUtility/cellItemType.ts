@@ -25,7 +25,7 @@ const DATE = {
 const DAY = {
   SATURADAY: 'SATURADAY',
   SUNDAY: 'SUNDAY',
-  DAY: 'DAY', // 일반 날
+  DAY: 'DAY', // 일반 날,
 } as const;
 
 const SALES = {

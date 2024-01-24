@@ -16,7 +16,6 @@ const Record = () => {
         <span className={styles.recordSales}>{convertNumberToWon(record.currentSales)}</span>입니다.
       </div>
       <div className={styles.recordDate}>{formattedRecordType(currentDate, record.dateType, 'YYYY년 M월 D일')}</div>
-      <div>{/* 위 태그를 가운데로 맞추려고 일부러 넣은 div */}</div>
     </div>
   );
 };

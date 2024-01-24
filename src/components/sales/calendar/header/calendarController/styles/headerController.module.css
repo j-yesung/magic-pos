@@ -7,10 +7,12 @@
   justify-content: center;
   align-items: center;
   width: 1.2rem;
+  padding: 0;
 }
 
 .status-btn p svg {
-  stroke: #5c5c5c;
+  stroke-width: 1px;
+  stroke: var(--text2, #5c5c5c);
 }
 .status-btn-right {
   right: 0;
