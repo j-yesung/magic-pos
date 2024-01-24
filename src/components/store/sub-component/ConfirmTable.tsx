@@ -1,6 +1,6 @@
 import { useStoreSetQuery } from '@/hooks/query/store/useStoreSetQuery';
 import useAuthState from '@/shared/store/session';
-import { useState } from 'react';
+import useTableStore, { setIsUseTable } from '@/shared/store/table';
 import Select from 'react-select';
 import styles from '../styles/StroeContents.module.css';
 import { customStyles } from './StoreSelectBox';
@@ -11,13 +11,13 @@ const OPTIONS = [
 ];
 
 const ConfirmTable = () => {
-  const [isTable, setIsTable] = useState('true');
+  const isUseTable = useTableStore(state => state.isUseTable);
   const storeId = useAuthState(state => state.storeId);
   const { updateStoreUseTable } = useStoreSetQuery();
 
   const changeTableStatusHandler = (selectedValue: string) => {
     if (storeId) {
-      setIsTable(selectedValue);
+      setIsUseTable(selectedValue);
       updateStoreUseTable({ storeId, useTable: selectedValue === 'true' });
     }
   };
@@ -28,7 +28,7 @@ const ConfirmTable = () => {
       <Select
         id="confirm-table"
         styles={customStyles}
-        value={OPTIONS.find(option => option.value === isTable)}
+        value={OPTIONS.find(option => option.value === isUseTable)}
         options={OPTIONS}
         onChange={select => changeTableStatusHandler(select?.value ?? '')}
       />
