@@ -82,6 +82,7 @@ export const useKioskState = create<OrderState>()(
         orderNumber: state.orderNumber,
         orderList: state.orderList,
         tableId: state.tableId,
+        selectedLanguage: state.selectedLanguage,
       }),
     },
   ),

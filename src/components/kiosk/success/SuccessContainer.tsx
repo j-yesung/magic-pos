@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import { IoBagCheckOutline } from 'react-icons/io5';
 import MenuHeader from '../common/MenuHeader';
 import styles from './styles/SuccessContainer.module.css';
+import { useTranslation } from 'react-i18next';
 
 const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const orderList = useKioskState(state => state.orderList);
@@ -19,6 +20,7 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const menuData = useKioskState(state => state.menuData);
   const orderNumber = useKioskState(state => state.orderNumber);
   const orderType = useKioskState(state => state.orderType);
+  const selectedLanguage = useKioskState(state => state.selectedLanguage);
 
   const { addSales } = useSalesQuery();
   const { addStoreOrder } = useStoreOrderSetQuery();
@@ -26,6 +28,7 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const { incrementOrderNumber, newOrderNumber } = useStoreSetQuery();
   const [isPageLoading, setIsPageLoading] = useState(true);
   const router = useRouter();
+  const { t, i18n } = useTranslation();
 
   const clickCheckOrderHandler = () => {
     router.push('/kiosk/receipt');
@@ -97,6 +100,7 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   }, [newOrderNumber]);
 
   useEffect(() => {
+    i18n.changeLanguage(selectedLanguage.split('-')[1]);
     setIsPageLoading(false);
   }, []);
 
@@ -107,15 +111,15 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
           <MenuHeader />
           <div className={styles.wrapper}>
             <div className={styles.content}>
-              <h1>주문이 완료되었어요</h1>
+              <h1>{t('order-success')}</h1>
               <div>
                 <IoBagCheckOutline size={100} />
               </div>
               <div className={styles.orderNumber}>
-                주문 번호 <strong>{orderNumber}</strong>
+                {t('order-number')} <strong>{orderNumber}</strong>
               </div>
               <div className={styles.checkOrder} onClick={clickCheckOrderHandler}>
-                주문 확인하기
+                {t('footer.check-order')}
               </div>
             </div>
           </div>

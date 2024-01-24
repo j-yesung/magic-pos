@@ -35,8 +35,8 @@ const OrderTypeContainer = () => {
   return (
     <div className={styles.container}>
       <h1>
-        {t('order-type-title-1')} <br />
-        {t('order-type-title-2')}
+        {t('order-type.title-1')} <br />
+        {t('order-type.title-2')}
       </h1>
       <ButtonContainer />
       <div className={styles.languageWrapper} ref={languageRef}>

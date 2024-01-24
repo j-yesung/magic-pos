@@ -1,11 +1,14 @@
 import styles from './styles/CartMoreButton.module.css';
 import { HiOutlinePlus } from 'react-icons/hi2';
+import { useTranslation } from 'react-i18next';
 
 const CartMoreButton = () => {
+  const { t } = useTranslation();
+
   return (
     <div className={styles.container}>
       <HiOutlinePlus size={20} />
-      <span>더 담으러 가기</span>
+      <span>{t('add-more')}</span>
     </div>
   );
 };

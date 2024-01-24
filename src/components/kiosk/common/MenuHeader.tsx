@@ -1,16 +1,18 @@
 import styles from './style/MenuHeader.module.css';
 import useKioskState, { ORDER_STEP } from '@/shared/store/kiosk';
-
-const TITLE: { [key in number]: string } = {
-  [ORDER_STEP.CHECK_MENU]: '장바구니',
-  [ORDER_STEP.PAYMENT]: '결제 하기',
-  [ORDER_STEP.SUCCESS]: '주문 완료',
-  [ORDER_STEP.RECEIPT]: '주문 확인',
-};
+import { useTranslation } from 'react-i18next';
 
 const MenuHeader = () => {
   const step = useKioskState(state => state.step);
   const storeName = useKioskState(state => state.storeName);
+  const { t } = useTranslation();
+
+  const TITLE: { [key in number]: string } = {
+    [ORDER_STEP.CHECK_MENU]: t('header.cart'),
+    [ORDER_STEP.PAYMENT]: t('header.payment'),
+    [ORDER_STEP.SUCCESS]: t('header.success'),
+    [ORDER_STEP.RECEIPT]: t('header.receipt'),
+  };
 
   return (
     <header className={styles.container}>

@@ -5,6 +5,7 @@ import { useModal } from '@/hooks/modal/useModal';
 import CartAlertModal from '@/components/kiosk/cart/CartAlertModal';
 import { convertNumberToWon } from '@/shared/helper';
 import { BiSolidCircle } from 'react-icons/bi';
+import { useTranslation } from 'react-i18next';
 
 /**
  * 옵션, 수량 등을 정한 뒤 장바구니(orderList)에 담는다.
@@ -16,6 +17,7 @@ const AddCartButton = ({ menu }: { menu: MenuItemWithOption | null }) => {
   const optionSwiperRef = useKioskState(state => state.optionSwiperRef);
   const selectedOptions = useKioskState(state => state.selectedOptions);
   const amount = useKioskState(state => state.amount);
+  const { t } = useTranslation();
   const { MagicModal } = useModal();
 
   const itemList: MenuItemWithOption[] = new Array(amount).fill(true).map(() => {
@@ -46,7 +48,7 @@ const AddCartButton = ({ menu }: { menu: MenuItemWithOption | null }) => {
   return (
     <button className={styles.button} onClick={handleClickAddCart}>
       <span>
-        {convertNumberToWon(totalPrice)} <BiSolidCircle size={2} /> 담기
+        {convertNumberToWon(totalPrice)} <BiSolidCircle size={2} /> {t('footer.add')}
       </span>
     </button>
   );
