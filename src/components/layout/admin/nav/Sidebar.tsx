@@ -1,7 +1,7 @@
 import Button from '@/components/common/Button';
 import QrCodeModal from '@/components/qrCodeModal/QrCodeModal';
 import { modeSubText, modeText } from '@/data/admin';
-import { useSetAuth } from '@/hooks/auth/useSetAuth';
+import { useAuthSetQuery } from '@/hooks/auth/useAuthSetQuery';
 import { useModal } from '@/hooks/modal/useModal';
 import useSideBar, { setIsSideBarOpen } from '@/shared/store/sidebar';
 import useToggleState from '@/shared/store/toggle';
@@ -21,7 +21,7 @@ const Sidebar = (adminInfo: AdminCategories) => {
   const isMode = useToggleState(state => state.isChecked);
   const targetRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
-  const { logout } = useSetAuth();
+  const { logout } = useAuthSetQuery();
   const sidebarClass = clsx(styles.navWrapper, {
     [styles.closeNav]: !isSideBarOpen,
   });
