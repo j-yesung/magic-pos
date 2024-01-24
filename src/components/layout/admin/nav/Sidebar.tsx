@@ -11,6 +11,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { IoLogOutOutline, IoMailOutline, IoQrCodeOutline } from 'react-icons/io5';
 import HeaderToggleButton from '../header/HeaderToggleButton';
 import styles from '../styles/AdminLayout.module.css';
+import SendMail from './SendMail';
 import SidebarList from './SidebarList';
 import CloseButton from '/public/icons/close.svg';
 import Ellipse from '/public/icons/ellipse.svg';
@@ -40,6 +41,11 @@ const Sidebar = (adminInfo: AdminCategories) => {
   const clickQrModalOpenHandler = () => {
     setIsSideBarOpen(false);
     MagicModal.fire(<QrCodeModal />);
+  };
+
+  const clickSendMailHandler = () => {
+    setIsSideBarOpen(false);
+    MagicModal.fire(<SendMail />);
   };
 
   useEffect(() => {
@@ -88,7 +94,7 @@ const Sidebar = (adminInfo: AdminCategories) => {
       </div>
       <div className={styles.buttonWrapper}>
         <div className={styles.actionButtonWrapper}>
-          <Button type="button">
+          <Button type="button" onClick={clickSendMailHandler}>
             <IoMailOutline size={25} />
             문의하기
           </Button>
