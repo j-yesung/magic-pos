@@ -20,3 +20,7 @@
   flex-shrink: 0;
   mix-blend-mode: multiply;
 }
+
+.date-text {
+  font-size: 1.5rem;
+}

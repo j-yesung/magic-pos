@@ -1,8 +1,8 @@
 .record-container {
   display: flex;
   align-items: center;
-  gap: 37.2rem;
   justify-content: space-between;
+  width: 50%;
 
   color: var(--text1, #121416);
   text-align: center;

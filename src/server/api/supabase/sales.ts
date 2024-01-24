@@ -1,6 +1,5 @@
 import { momentToString } from '@/components/sales/calendarUtility/dateCalculator';
 import { supabase } from '@/shared/supabase';
-
 import { SalesDataReturnType } from '@/types/sales';
 import { TablesInsert } from '@/types/supabase';
 
