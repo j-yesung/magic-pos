@@ -9,7 +9,10 @@ import useKioskState, { resetOrderList, setMenuData, setStoreId, setStoreName, s
 import { useRouter } from 'next/router';
 import KioskContainer from '@/components/kiosk/KioskContainer';
 import { useModal } from '@/hooks/modal/useModal';
-import { useIsInvalidURL, useIsOrderAllReady, useMakeMenuData } from '@/hooks/service/useKiosk';
+import { useIsInvalidURL, useIsOrderAllReady } from '@/hooks/service/useKiosk';
+import { translateMenuData } from '@/server/service/translate';
+import { TargetLanguageCode } from 'deepl-node';
+import { makeMenuData } from '@/utils/kiosk-helper';
 
 interface OrderIndexPageProps {
   menuData: CategoryWithMenuItemWithStore[];
@@ -23,7 +26,6 @@ const OrderIndexPage = ({ menuData, storeId, tableId }: OrderIndexPageProps) => 
   const [isLoaded, setIsLoaded] = useState(false);
   const isInvalidURL = useIsInvalidURL({ storeId, tableId });
   const isOrderAllReady = useIsOrderAllReady(orderIdList, storeId);
-  const menuList = useMakeMenuData(menuData, storeId);
   const { MagicModal } = useModal();
   const router = useRouter();
 
@@ -44,9 +46,13 @@ const OrderIndexPage = ({ menuData, storeId, tableId }: OrderIndexPageProps) => 
   }, [isOrderAllReady]);
 
   useEffect(() => {
+    const menuList = makeMenuData(menuData, storeId);
+    setMenuData(menuList);
+  }, [menuData]);
+
+  useEffect(() => {
     // 주소창에 uuid가 노출되는 것을 막기 위해 주소창의 URL만을 변경한다. (페이지 이동X)
     // window.history.replaceState({}, '/order', '/order');
-    setMenuData(menuList);
     if (menuData && menuData.length > 0) {
       setStoreName(menuData[0].store?.business_name ?? '');
     }
@@ -76,8 +82,12 @@ OrderIndexPage.getLayout = (page: ReactNode) => <OrderLayout>{page}</OrderLayout
 export default OrderIndexPage;
 
 export const getServerSideProps: GetServerSideProps = async context => {
-  const { storeId, tableId = null } = context.query;
-  const { data: menuData } = await fetchCategoriesWithMenuItemByStoreId((storeId || '').toString());
+  const { storeId, tableId = null, lang = 'ko' } = context.query;
+  let { data: menuData } = await fetchCategoriesWithMenuItemByStoreId((storeId || '').toString());
+
+  if (lang !== 'ko') {
+    menuData = await translateMenuData(menuData, lang as TargetLanguageCode);
+  }
 
   return {
     props: {
