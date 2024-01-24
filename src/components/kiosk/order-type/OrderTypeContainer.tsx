@@ -1,7 +1,5 @@
-import React from 'react';
 import ButtonContainer from '@/components/kiosk/order-type/ButtonContainer';
 import styles from './styles/OrderTypeContainer.module.css';
-import Image from 'next/image';
 import { MdOutlineLanguage } from 'react-icons/md';
 
 /**

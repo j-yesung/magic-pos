@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './styles/ReceiptContainer.module.css';
 import useKioskState, { ORDER_STEP, setStep, setStoreName } from '@/shared/store/kiosk';
 import { OrderDataWithStoreName } from '@/types/supabase';
@@ -20,23 +20,20 @@ const ReceiptContainer = () => {
 
   const clickOrderMoreHandler = () => {
     setStep(ORDER_STEP.CHOOSE_ORDER_TYPE);
-    router.push(`/order/${storeId}`);
+    router.push(`/kiosk/${storeId}`);
   };
 
   // order_store 테이블과 order_togo 테이블에서 주문 내역 데이터를 가져온다.
   useEffect(() => {
     // 매장 주문
-
-    if (storeOrderData?.data && storeOrderData.data?.length > 0) {
+    if (storeOrderData?.data) {
       storeOrderData.data.forEach(d => {
-        if (orderDataList.find(o => o.id === d.id)) return;
         setOrderDataList(prev => [...prev, d]);
       });
     }
 
-    if (numberOrderData?.data && numberOrderData.data?.length > 0) {
+    if (numberOrderData?.data) {
       numberOrderData.data.forEach(d => {
-        if (orderDataList.find(o => o.id === d.id)) return;
         setOrderDataList(prev => [...prev, d]);
       });
     }

@@ -12,7 +12,7 @@
     max-height: 37.5rem;
     max-width: 40rem;
     margin: 0 auto;
-    object-fit: contain;
+    object-fit: cover;
     background: var(--bg-g);
 }
 

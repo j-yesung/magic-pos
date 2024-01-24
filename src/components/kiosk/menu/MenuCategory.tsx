@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import styles from './styles/MenuCategory.module.css';
 import { Tables } from '@/types/supabase';
 import clsx from 'clsx';

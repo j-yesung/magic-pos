@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import styles from './styles/OrderLayout.module.css';
 import Footer from '@/components/layout/order/footer/Footer';
 import { SwiperRef } from 'swiper/react';
@@ -7,7 +7,7 @@ import useKioskState, { ORDER_STEP, setSwiperRef } from '@/shared/store/kiosk';
 import { useRouter } from 'next/router';
 import OrderPrevButton from '@/components/layout/order/OrderPrevButton';
 
-const DONT_RENDER_FOOTER_PATH_LIST = ['/order/success', '/order/receipt', '/order/fail'];
+const DONT_RENDER_FOOTER_PATH_LIST = ['/kiosk/success', '/kiosk/receipt', '/kiosk/fail'];
 /**
  * 일반인 KIOSK 레이아웃
  * @constructor
@@ -32,7 +32,7 @@ const OrderLayout = ({ children }: { children: React.ReactNode }) => {
           {step > ORDER_STEP.CHOOSE_ORDER_TYPE && step < ORDER_STEP.SUCCESS && <OrderPrevButton />}
           {children}
         </article>
-        {!DONT_RENDER_FOOTER_PATH_LIST.includes(pathname) && <Footer sliderRef={sliderRef} />}
+        {!DONT_RENDER_FOOTER_PATH_LIST.includes(pathname) && <Footer />}
       </section>
     </>
   );

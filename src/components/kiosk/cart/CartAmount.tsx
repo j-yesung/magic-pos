@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from '@/components/kiosk/cart/styles/CartAmount.module.css';
 import { MenuItemWithOption } from '@/types/supabase';
 import { addOrderList, subtractOrderList } from '@/shared/store/kiosk';

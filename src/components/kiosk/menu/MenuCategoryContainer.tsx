@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { CategoryWithMenuItemWithStore } from '@/types/supabase';
 import styles from './styles/MenuCategoryContainer.module.css';
 import MenuCategory from '@/components/kiosk/menu/MenuCategory';

@@ -28,8 +28,8 @@ export const usePaymentWidget = () => {
       await paymentWidget?.requestPayment({
         orderId: nanoid(),
         orderName: orderList.length > 1 ? `${orderList[0].name} 외 ${orderList.length - 1}개` : `${orderList[0].name}`,
-        successUrl: `${window.location.origin}/order/success`,
-        failUrl: `${window.location.origin}/order/fail`,
+        successUrl: `${window.location.origin}/kiosk/success`,
+        failUrl: `${window.location.origin}/kiosk/fail`,
       });
     } catch (error) {
       console.error('Error requesting payment:', error);

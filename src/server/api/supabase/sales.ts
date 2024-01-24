@@ -1,12 +1,17 @@
 import { momentToString } from '@/components/sales/calendarUtility/dateCalculator';
 import { supabase } from '@/shared/supabase';
+
 import { SalesDataReturnType } from '@/types/sales';
 import { Tables } from '@/types/supabase';
+=======
+import { Tables, TablesInsert } from '@/types/supabase';
+import { PostgrestError } from '@supabase/supabase-js';
+
 import { Moment } from 'moment';
 
 type getSalesReturnType = (date: Moment, store_id: string) => Promise<SalesDataReturnType>;
 
-export const addSales = async (sales: Omit<Tables<'sales'>, 'id'>[]) => {
+export const addSales = async (sales: TablesInsert<'sales'>[]) => {
   const { error } = await supabase.from('sales').insert(sales).select();
 
   if (error) console.error(error);

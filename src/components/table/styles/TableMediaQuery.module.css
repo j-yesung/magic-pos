@@ -1,0 +1,5 @@
+@media only all and (max-width: 1520px) {
+  .table-list-item {
+    width: 1rem;
+  }
+}

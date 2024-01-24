@@ -2,6 +2,7 @@ import useSetTable from '@/hooks/table/useSetTable';
 import { StoreWithStoreTable, Tables, TablesInsert } from '@/types/supabase';
 import TableListItem from './TableListItem';
 import styles from './styles/TableContainer.module.css';
+import PlusButton from '/public/icons/plus.svg';
 
 const TableContainer = ({ storeData }: { storeData: StoreWithStoreTable[] }) => {
   const { addMutate } = useSetTable();
@@ -28,7 +29,6 @@ const TableContainer = ({ storeData }: { storeData: StoreWithStoreTable[] }) => 
       addMutate(newStoreTableData);
     }
   };
-
   return (
     <div className={styles['table-container']}>
       {storeData?.[0]?.store_table
@@ -42,7 +42,7 @@ const TableContainer = ({ storeData }: { storeData: StoreWithStoreTable[] }) => 
           return <TableListItem key={item.id} storeTableData={item} index={index} />;
         })}
       <div className={styles['table-list-button']} onClick={clickAddStoreTableHandler}>
-        +
+        <PlusButton width="41" height="41" />
       </div>
     </div>
   );

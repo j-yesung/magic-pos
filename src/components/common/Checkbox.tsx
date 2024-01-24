@@ -1,13 +1,14 @@
-import React from 'react';
 import clsx from 'clsx';
-import styles from './styles/Checkbox.module.css';
-import { FaCheck } from 'react-icons/fa6';
 import { nanoid } from 'nanoid';
+import React from 'react';
+import { FaCheck } from 'react-icons/fa6';
+import styles from './styles/Checkbox.module.css';
 
 interface CheckboxProps {
   onClick?: (e: React.MouseEvent<HTMLInputElement>) => void;
   className?: string;
   disabled?: boolean;
+  defaultChecked?: boolean;
 }
 
 const Checkbox = (props: CheckboxProps) => {
@@ -18,6 +19,7 @@ const Checkbox = (props: CheckboxProps) => {
         id={`checkbox_${id}`}
         type="checkbox"
         onClick={props.onClick}
+        defaultChecked={props.defaultChecked}
         className={clsx(styles.checkbox, props.className)}
       />
       <label htmlFor={`checkbox_${id}`}>

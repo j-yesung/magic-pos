@@ -24,7 +24,7 @@ const OrderSuccessPage = ({ payment, isError }: { payment: Payment; isError: boo
   useEffect(() => {
     // 에러이면서 주문번호가 있으면 주문 내역 화면을 보여줍니다.
     if (isError && orderNumber) {
-      router.push(`/order/receipt`);
+      router.push(`/kiosk/receipt`);
       return;
     } else if (isError) {
       // 에러만 있다면 에러 화면을 보여줍니다.
@@ -97,7 +97,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
 
     return {
       redirect: {
-        destination: `/order/fail?code=${error.response.data.code}&message=${encodeURIComponent(
+        destination: `/kiosk/fail?code=${error.response.data.code}&message=${encodeURIComponent(
           error.response.data.message,
         )}`,
         permanent: false,
