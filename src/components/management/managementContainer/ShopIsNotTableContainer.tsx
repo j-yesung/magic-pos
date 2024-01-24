@@ -1,20 +1,20 @@
 import { StoreWithOrderInfo } from '@/types/supabase';
 import { TbPaperBag } from 'react-icons/tb';
-import PackagingListItem from './PackagingListItem';
-import styles from './styles/PackagingContainer.module.css';
+import ShopIsNotTableListItem from './ShopIsNotTableListItem';
+import styles from './styles/ShopIsNotTableContainer.module.css';
 
 const PackagingContainer = ({ managementData }: { managementData?: StoreWithOrderInfo[] }) => {
   return (
-    <div className={styles['packaging-container']}>
-      <div className={styles['packaging-title']}>
+    <div className={styles['shop-container']}>
+      <div className={styles['shop-title']}>
         <TbPaperBag size={28} />
-        <span>포장 관리</span>
-        <p>{managementData?.[0].order_number.filter(item => item.is_togo === true).length}</p>
+        <span>매장 관리</span>
+        <p>{managementData?.[0].order_number.filter(item => item.is_togo === false).length}</p>
       </div>
-      <div className={styles['packaging-list-wrap']}>
-        <div className={styles['packaging-list']}>
+      <div className={styles['shop-list-wrap']}>
+        <div className={styles['shop-list']}>
           {managementData?.[0]?.order_number
-            .filter(item => item.is_togo === true)
+            .filter(item => item.is_togo === false)
             .sort((a, b) => {
               if (a.order_time && b.order_time) {
                 return a.order_time < b.order_time ? -1 : 1;
@@ -22,7 +22,7 @@ const PackagingContainer = ({ managementData }: { managementData?: StoreWithOrde
               return 0;
             })
             .map(item => {
-              return <PackagingListItem key={item.id} packagingData={item} />;
+              return <ShopIsNotTableListItem key={item.id} packagingData={item} />;
             })}
         </div>
       </div>

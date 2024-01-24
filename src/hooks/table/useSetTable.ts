@@ -1,10 +1,8 @@
 import { addStoreTable, deleteStoreTable, updateStoreTable } from '@/server/api/supabase/store-table';
-import useTableStore from '@/shared/store/table';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useRef } from 'react';
 
 export const useSetTable = () => {
-  const { refSideBar, refDummySideBar, refSideBarBg } = useTableStore();
   const didMount = useRef(false);
   const queryClient = useQueryClient();
   const {
@@ -43,18 +41,13 @@ export const useSetTable = () => {
     },
   });
 
-  useEffect(() => {
-    if (didMount.current) {
-      if (addIsPending || updateIsPending || deleteIsPending) {
-        refSideBar?.current?.style.setProperty('right', '-18%');
-        refDummySideBar?.current?.style.setProperty('width', '0%');
-        refSideBarBg?.current?.style.setProperty('visibility', 'hidden');
-        refSideBarBg?.current?.style.setProperty('opacity', '0%');
-      }
-    } else {
-      didMount.current = true;
-    }
-  }, [addIsPending, deleteIsPending, refDummySideBar, refSideBar, refSideBarBg, updateIsPending]);
+  // useEffect(() => {
+  //   if (didMount.current) {
+  //     console.log(addIsPending)
+  //   } else {
+  //     didMount.current = true;
+  //   }
+  // }, [addIsPending, deleteIsPending, updateIsPending]);
 
   useEffect(() => {
     if (addIsError) {
