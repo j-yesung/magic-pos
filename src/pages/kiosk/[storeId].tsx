@@ -72,7 +72,7 @@ const OrderIndexPage = ({ menuData, storeId, tableId }: OrderIndexPageProps) => 
       setStoreId(storeId);
     }
     if (tableId) setTableId(tableId);
-    console.log(router.query.lang);
+
     if (router.query.lang) {
       setSelectedLanguage(`lang-${router.query.lang}`);
     } else {
