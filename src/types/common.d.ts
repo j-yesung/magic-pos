@@ -32,13 +32,14 @@ type ToastAnimationType =
   | 'hide-bottom-left'
   | null;
 type ToastPositionType = 'top-right' | 'top-left' | 'top-center' | 'bottom-right' | 'bottom-left';
+type ToastType = 'info' | 'success' | 'warn' | 'danger';
 interface ToastTypeOption {
   id: string;
   content: string;
-  showCloseButton: boolean;
+  showCloseButton?: boolean;
   position: ToastPositionType;
-  type: 'info' | 'success' | 'warn' | 'danger';
-  autoClose: number;
+  type: ToastType;
+  autoClose?: number;
   animation: ToastAnimationType;
 }
 

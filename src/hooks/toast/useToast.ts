@@ -46,16 +46,19 @@ const useToast = () => {
         break;
     }
 
-    setTimeout(() => {
-      setAnimation(toastId, hideAnimationType);
+    setTimeout(
+      () => {
+        setAnimation(toastId, hideAnimationType);
 
-      // 애니메이션을 실행하기 위해 CSS를 통해 화면에서 사라지고, 실제로 데이터가 사라지기 사이에 시간을 준다.
-      setTimeout(() => {
+        // 애니메이션을 실행하기 위해 CSS를 통해 화면에서 사라지고, 실제로 데이터가 사라지기 사이에 시간을 준다.
         setTimeout(() => {
-          subtractToastList(toastId);
+          setTimeout(() => {
+            subtractToastList(toastId);
+          }, ANIMATION_TERM_TIME);
         }, ANIMATION_TERM_TIME);
-      }, ANIMATION_TERM_TIME);
-    }, option.autoClose - ANIMATION_TERM_TIME);
+      },
+      option.autoClose ?? 2000 - ANIMATION_TERM_TIME,
+    );
   };
 
   return { toast };
