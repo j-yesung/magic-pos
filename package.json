@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emailjs/browser": "^3.12.1",
     "@supabase/supabase-js": "^2.39.2",
     "@tanstack/react-query": "^5.17.1",
     "@tosspayments/payment-widget-sdk": "^0.10.2",
