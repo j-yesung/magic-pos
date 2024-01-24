@@ -5,7 +5,14 @@ import OrderLayout from '@/components/layout/order/OrderLayout';
 import { fetchCategoriesWithMenuItemByStoreId } from '@/server/api/supabase/menu-category';
 import { GetServerSideProps } from 'next';
 import { CategoryWithMenuItemWithStore } from '@/types/supabase';
-import useKioskState, { resetOrderList, setMenuData, setStoreId, setStoreName, setTableId } from '@/shared/store/kiosk';
+import useKioskState, {
+  resetOrderList,
+  setMenuData,
+  setSelectedLanguage,
+  setStoreId,
+  setStoreName,
+  setTableId,
+} from '@/shared/store/kiosk';
 import { useRouter } from 'next/router';
 import KioskContainer from '@/components/kiosk/KioskContainer';
 import { useModal } from '@/hooks/modal/useModal';
@@ -65,6 +72,13 @@ const OrderIndexPage = ({ menuData, storeId, tableId }: OrderIndexPageProps) => 
       setStoreId(storeId);
     }
     if (tableId) setTableId(tableId);
+    console.log(router.query.lang);
+    if (router.query.lang) {
+      setSelectedLanguage(`lang-${router.query.lang}`);
+    } else {
+      setSelectedLanguage(`lang-ko`);
+    }
+
     setIsLoaded(true);
   }, []);
 
