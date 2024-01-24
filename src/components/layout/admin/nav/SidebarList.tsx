@@ -1,3 +1,4 @@
+import useTableStore from '@/shared/store/table';
 import styles from '../styles/AdminLayout.module.css';
 
 interface NavListType {
@@ -13,6 +14,11 @@ interface NavList {
 }
 
 const SidebarList = ({ navList, clickFn }: NavList) => {
+  const isUseTable = useTableStore(state => state.isUseTable);
+  const isUse = Boolean(isUseTable);
+
+  if (isUse) navList = navList.filter(list => list.id !== 4);
+
   return (
     <>
       {navList.map(list => (
