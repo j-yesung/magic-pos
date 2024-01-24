@@ -1,0 +1,36 @@
+.container {
+    position: absolute;
+    left: 0;
+    bottom: 4rem;
+    display: inline-flex;
+    padding: 1.5rem 2rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+
+    border-radius: 0.8rem;
+    background: #FFF;
+    box-shadow: 0 0 1rem 0 rgba(68, 9, 194, 0.10);
+}
+
+.container li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .8rem;
+
+}
+
+.container li span {
+    color: var(--text2, #5C5C5C);
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.6rem; /* 100% */
+    white-space: pre;
+}
+
+.container li svg {
+    stroke-width: 0.2rem;
+    color: var(--point1-80, #7433FF);
+}
