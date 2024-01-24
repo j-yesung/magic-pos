@@ -29,7 +29,6 @@ const TableContainer = ({ storeData }: { storeData: StoreWithStoreTable[] }) => 
       addMutate(newStoreTableData);
     }
   };
-
   return (
     <div className={styles['table-container']}>
       {storeData?.[0]?.store_table

@@ -1,5 +1,5 @@
 .table-container {
-  gap: 1.5rem;
+  gap: 2.11%;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -14,4 +14,7 @@
   border-radius: 1rem;
   background: var(--bg-g);
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
