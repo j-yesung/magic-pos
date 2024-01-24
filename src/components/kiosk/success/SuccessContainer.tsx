@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
-import { useSalesQuery } from '@/hooks/sales/useSalesQuery';
-import useKioskState, { addOrderId, getTotalPrice, ORDER_STEP, setOrderNumber, setStep } from '@/shared/store/kiosk';
-import { groupByKey } from '@/shared/helper';
-import { Tables, TablesInsert } from '@/types/supabase';
-import { useStoreQuery } from '@/hooks/store/useStoreQuery';
-import { useStoreOrderSetQuery } from '@/hooks/order/useStoreOrderSetQuery';
 import { useNumberOrderSetQuery } from '@/hooks/order/useNumberOrderSetQuery';
-import styles from './styles/SuccessContainer.module.css';
-import { useRouter } from 'next/router';
+import { useStoreOrderSetQuery } from '@/hooks/order/useStoreOrderSetQuery';
+import { useStoreSetQuery } from '@/hooks/query/store/useStoreSetQuery';
+import { useSalesQuery } from '@/hooks/sales/useSalesQuery';
 import { decrementRemainEaByMenuId } from '@/server/api/supabase/menu-item';
-import MenuHeader from '../common/MenuHeader';
+import { groupByKey } from '@/shared/helper';
+import useKioskState, { ORDER_STEP, addOrderId, getTotalPrice, setOrderNumber, setStep } from '@/shared/store/kiosk';
+import { Tables, TablesInsert } from '@/types/supabase';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { IoBagCheckOutline } from 'react-icons/io5';
+import MenuHeader from '../common/MenuHeader';
+import styles from './styles/SuccessContainer.module.css';
 
 const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const orderList = useKioskState(state => state.orderList);
@@ -23,7 +23,7 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const { addSales } = useSalesQuery();
   const { addStoreOrder } = useStoreOrderSetQuery();
   const { addNumberOrder } = useNumberOrderSetQuery();
-  const { incrementOrderNumber, newOrderNumber } = useStoreQuery();
+  const { incrementOrderNumber, newOrderNumber } = useStoreSetQuery();
   const [isPageLoading, setIsPageLoading] = useState(true);
   const router = useRouter();
 

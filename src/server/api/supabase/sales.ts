@@ -2,6 +2,7 @@ import { momentToString } from '@/components/sales/calendarUtility/dateCalculato
 import { supabase } from '@/shared/supabase';
 import { SalesDataReturnType } from '@/types/sales';
 import { TablesInsert } from '@/types/supabase';
+
 import { Moment } from 'moment';
 
 type getSalesReturnType = (date: Moment, store_id: string) => Promise<SalesDataReturnType>;

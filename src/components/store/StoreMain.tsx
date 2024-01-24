@@ -1,4 +1,4 @@
-import { useInput } from '@/hooks/auth/useInput';
+import { useInput } from '@/hooks/service/auth/useInput';
 import useAuthState from '@/shared/store/session';
 import { useEffect, useState } from 'react';
 import Input from '../auth/Input';

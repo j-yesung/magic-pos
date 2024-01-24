@@ -1,7 +1,7 @@
-import { useErrorMessage } from '@/hooks/auth/useErrorMessage';
-import { useInput } from '@/hooks/auth/useInput';
-import { useSetAuth } from '@/hooks/auth/useSetAuth';
-import { useValid } from '@/hooks/auth/useValid';
+import { useAuthSetQuery } from '@/hooks/query/auth/useAuthSetQuery';
+import { useErrorMessage } from '@/hooks/service/auth/useErrorMessage';
+import { useInput } from '@/hooks/service/auth/useInput';
+import { useValid } from '@/hooks/service/auth/useValid';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { FaCheck } from 'react-icons/fa6';
@@ -33,7 +33,7 @@ const AuthForm = ({ data }: FormProps) => {
     comment,
   } = data;
   const { login, signup, businessNumberCheck, sendResetPasswordEmail, updatePassword, status, message, checkEmail } =
-    useSetAuth();
+    useAuthSetQuery();
   const isSuccess = status.data === '사업자등록번호가 인증되었습니다.' ? true : false;
   const { value, changeHandler, keyDownHandler } = useInput({
     email: '',

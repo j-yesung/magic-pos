@@ -8,7 +8,7 @@ import {
   storeBusineesNameInput,
   storeEmailInput,
 } from '@/data/input-props';
-import { useErrorMessage } from '@/hooks/auth/useErrorMessage';
+import { useErrorMessage } from '@/hooks/service/auth/useErrorMessage';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import { FaCheck } from 'react-icons/fa6';

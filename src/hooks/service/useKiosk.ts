@@ -1,10 +1,10 @@
-import { useStoreOrderFetchQuery } from '@/hooks/order/useStoreOrderFetchQuery';
 import { useNumberOrderFetchQuery } from '@/hooks/order/useNumberOrderFetchQuery';
-import { useEffect, useState } from 'react';
-import { useGetQuery } from '@/hooks/store/useGetQuery';
+import { useStoreOrderFetchQuery } from '@/hooks/order/useStoreOrderFetchQuery';
+import { useFetchQuery } from '@/hooks/query/store/useFetchQuery';
 import useFetchTable from '@/hooks/table/useFetchTable';
-import { CategoryWithMenuItemWithStore, MenuItemWithOption } from '@/types/supabase';
 import { isEmptyObject } from '@/shared/helper';
+import { CategoryWithMenuItemWithStore, MenuItemWithOption } from '@/types/supabase';
+import { useEffect, useState } from 'react';
 
 export const useIsOrderAllReady = (orderIdList: string[], storeId: string) => {
   // numberOrderData: 번호표 주문 (포장, 테이블 번호가 없는 매장 주문)
@@ -39,7 +39,7 @@ export const useIsOrderAllReady = (orderIdList: string[], storeId: string) => {
 };
 
 export const useIsInvalidURL = ({ tableId, storeId }: { tableId?: string; storeId?: string }) => {
-  const { storeInfo } = useGetQuery({ storeId: storeId });
+  const { storeInfo } = useFetchQuery({ storeId: storeId });
   const { tableInfo } = useFetchTable({ tableId: tableId, storeId });
   const [isInvalidURL, setIsInvalidURL] = useState(true);
 
