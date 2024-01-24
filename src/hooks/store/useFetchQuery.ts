@@ -5,7 +5,7 @@ const enum QueryKey {
   STORE = 'store',
 }
 
-export const useGetQuery = ({ userId, storeId }: { userId?: string; storeId?: string }) => {
+export const useFetchQuery = ({ userId, storeId }: { userId?: string; storeId?: string }) => {
   const { data } = useQuery({
     queryKey: [QueryKey.STORE, userId],
     enabled: !!userId,

@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
-import styles from './styles/ReceiptContainer.module.css';
+import MenuHeader from '@/components/kiosk/common/MenuHeader';
+import ReceiptOrder from '@/components/kiosk/receipt/ReceiptOrder';
+import { useNumberOrderFetchQuery } from '@/hooks/order/useNumberOrderFetchQuery';
+import { useStoreOrderFetchQuery } from '@/hooks/order/useStoreOrderFetchQuery';
+import { useFetchQuery } from '@/hooks/store/useFetchQuery';
 import useKioskState, { ORDER_STEP, setStep, setStoreName } from '@/shared/store/kiosk';
 import { OrderDataWithStoreName } from '@/types/supabase';
 import { useRouter } from 'next/router';
-import ReceiptOrder from '@/components/kiosk/receipt/ReceiptOrder';
-import { useStoreOrderFetchQuery } from '@/hooks/order/useStoreOrderFetchQuery';
-import { useNumberOrderFetchQuery } from '@/hooks/order/useNumberOrderFetchQuery';
-import MenuHeader from '@/components/kiosk/common/MenuHeader';
-import { useGetQuery } from '@/hooks/store/useGetQuery';
+import { useEffect, useState } from 'react';
+import styles from './styles/ReceiptContainer.module.css';
 
 const ReceiptContainer = () => {
   const orderIdList = useKioskState(state => state.orderIdList);
@@ -16,7 +16,7 @@ const ReceiptContainer = () => {
   const { numberOrderData } = useNumberOrderFetchQuery(orderIdList, storeId);
   const [orderDataList, setOrderDataList] = useState<OrderDataWithStoreName[]>([]);
   const router = useRouter();
-  const { storeInfo } = useGetQuery({ storeId });
+  const { storeInfo } = useFetchQuery({ storeId });
 
   const clickOrderMoreHandler = () => {
     setStep(ORDER_STEP.CHOOSE_ORDER_TYPE);

@@ -1,4 +1,4 @@
-import { useGetQuery } from '@/hooks/store/useGetQuery';
+import { useFetchQuery } from '@/hooks/store/useFetchQuery';
 import { Fragment, useEffect, useState } from 'react';
 import { convertTimeFormat, timeSet } from '../../../utils/time-format';
 import styles from '../styles/StroeContents.module.css';
@@ -6,7 +6,7 @@ import StoreSelectBox from './StoreSelectBox';
 import StoreSetButton from './StoreSetButton';
 
 const StoreTimeSet = ({ userId }: { userId: string }) => {
-  const { data } = useGetQuery({ userId });
+  const { data } = useFetchQuery({ userId });
   const [times, setTimes] = useState<TimeState>({ startTime: '', endTime: '' });
   const openTime = convertTimeFormat(times.startTime).convertedTime;
   const closeTime = convertTimeFormat(times.endTime).convertedTime;
