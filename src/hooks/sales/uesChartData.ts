@@ -10,8 +10,7 @@ const useChartData = () => {
     {
       x: string;
       y: number;
-    }[],
-    unknown
+    }[]
   > = {
     datasets: [
       {
@@ -25,7 +24,7 @@ const useChartData = () => {
     ],
   };
 
-  const options: ChartOptions = {
+  const options: ChartOptions<'bar'> = {
     elements: {
       bar: {
         borderRadius: 10,
