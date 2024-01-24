@@ -93,7 +93,7 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
   });
 
   const formatDate = day.clone().format('YY MM D').substring(6);
-  console.log(salesData);
+
   return (
     <>
       {/* sales/Status일 때 보여줄 날 css */}
