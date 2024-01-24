@@ -1,4 +1,4 @@
-import { useStoreQuery } from '@/hooks/store/useStoreQuery';
+import { useStoreSetQuery } from '@/hooks/store/useStoreSetQuery';
 import useAuthState from '@/shared/store/session';
 import { useState } from 'react';
 import Select from 'react-select';
@@ -13,7 +13,7 @@ const OPTIONS = [
 const ConfirmTable = () => {
   const [isTable, setIsTable] = useState('true');
   const storeId = useAuthState(state => state.storeId);
-  const { updateStoreUseTable } = useStoreQuery();
+  const { updateStoreUseTable } = useStoreSetQuery();
 
   const changeTableStatusHandler = (selectedValue: string) => {
     if (storeId) {
