@@ -9,12 +9,12 @@ const PackagingContainer = ({ managementData }: { managementData?: StoreWithOrde
       <div className={styles['shop-title']}>
         <TbPaperBag size={28} />
         <span>매장 관리</span>
-        <p>{managementData?.[0].order_number.filter(item => item.is_togo === false).length}</p>
+        <p>{managementData?.[0].order_number.filter(item => !item.is_togo).length}</p>
       </div>
       <div className={styles['shop-list-wrap']}>
         <div className={styles['shop-list']}>
           {managementData?.[0]?.order_number
-            .filter(item => item.is_togo === false)
+            .filter(item => !item.is_togo)
             .sort((a, b) => {
               if (a.order_time && b.order_time) {
                 return a.order_time < b.order_time ? -1 : 1;
