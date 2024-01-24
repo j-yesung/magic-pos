@@ -1,4 +1,4 @@
-.packaging-list-item {
+.shop-list-item {
   display: flex;
   width: 100%;
   padding: 2rem;
@@ -46,7 +46,7 @@
   letter-spacing: -0.03rem;
 }
 
-.packaging-list-item:hover {
+.shop-list-item:hover {
   background-color: #ccf;
 }
 div.item-menu-list {

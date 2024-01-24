@@ -9,7 +9,7 @@ const PackagingContainer = ({ managementData }: { managementData?: StoreWithOrde
       <div className={styles['packaging-title']}>
         <TbPaperBag size={28} />
         <span>포장 관리</span>
-        <p>{managementData?.[0].order_number.length}</p>
+        <p>{managementData?.[0].order_number.filter(item => item.is_togo).length}</p>
       </div>
       <div className={styles['packaging-list-wrap']}>
         <div className={styles['packaging-list']}>
