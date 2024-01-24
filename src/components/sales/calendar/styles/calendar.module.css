@@ -3,16 +3,19 @@
   top: 5rem;
   left: 30rem;
   display: inline-flex;
-  padding: 1.5rem;
+  padding: 2rem;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1rem;
+  gap: 1.5rem;
   border-radius: 0.5rem;
   border: 1px solid var(--line, #ededed);
   background: #fff;
 }
 .status-header-wrapper {
+  display: flex;
   width: 100%;
+  justify-content: space-between;
+  align-items: center;
 }
 .calendar-body-wrapper {
   display: flex;

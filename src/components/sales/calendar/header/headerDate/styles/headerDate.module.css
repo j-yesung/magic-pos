@@ -1,14 +1,20 @@
 .header-text {
   display: flex;
-  align-items: center;
+
   gap: 1rem;
-  font-size: 1.4rem;
-  color: var(--text1);
+  color: var(--text1, #121416);
+
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: bold;
+  line-height: 1.8rem; /* 100% */
+  letter-spacing: -0.036rem;
 }
 .text-year {
-  font-size: 2rem;
+  line-height: 1.8rem;
+  font-size: 1.8rem;
+  font-weight: bold;
 }
-
 .calendar-text-year {
   font-size: 2rem;
 }

@@ -7,7 +7,7 @@ const Days = () => {
     <div className={isChangeView ? styles.statusDays : styles.salesCalendarDays}>
       {days.map((day, idx) => (
         <span key={day + idx} className={isChangeView ? styles.statusDay : styles.salesCalendarDay}>
-          {day}
+          <span className={isChangeView ? styles.statusDayText : ''}>{day}</span>
         </span>
       ))}
     </div>
