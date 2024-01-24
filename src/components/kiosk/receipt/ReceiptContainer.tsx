@@ -8,15 +8,18 @@ import { OrderDataWithStoreName } from '@/types/supabase';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styles from './styles/ReceiptContainer.module.css';
+import { useTranslation } from 'react-i18next';
 
 const ReceiptContainer = () => {
   const orderIdList = useKioskState(state => state.orderIdList);
+  const selectedLanguage = useKioskState(state => state.selectedLanguage);
   const storeId = useKioskState(state => state.storeId) ?? '';
   const { storeOrderData } = useStoreOrderFetchQuery(orderIdList, storeId);
   const { numberOrderData } = useNumberOrderFetchQuery(orderIdList, storeId);
   const [orderDataList, setOrderDataList] = useState<OrderDataWithStoreName[]>([]);
   const router = useRouter();
   const { storeInfo } = useFetchQuery({ storeId });
+  const { t, i18n } = useTranslation();
 
   const clickOrderMoreHandler = () => {
     setStep(ORDER_STEP.CHOOSE_ORDER_TYPE);
@@ -47,6 +50,7 @@ const ReceiptContainer = () => {
 
   useEffect(() => {
     setStep(ORDER_STEP.RECEIPT);
+    i18n.changeLanguage(selectedLanguage.split('-')[1]);
   }, []);
 
   return (
@@ -58,7 +62,7 @@ const ReceiptContainer = () => {
         ))}
       </section>
       <button className={styles.orderMoreButton} onClick={clickOrderMoreHandler}>
-        더 주문 하러 가기
+        {t('order-more')}
       </button>
     </div>
   );

@@ -1,5 +1,6 @@
 import styles from './style/StoreInfo.module.css';
 import clsx from 'clsx';
+import { useTranslation } from 'react-i18next';
 
 interface StoreInfoProps {
   orderType: OrderType;
@@ -9,11 +10,13 @@ interface StoreInfoProps {
 }
 
 const StoreInfo = ({ orderType, storeName, className, amount }: StoreInfoProps) => {
+  const { t } = useTranslation();
+
   return (
     <div className={clsx(styles.storeInfo, className)}>
       <div className={styles.wrapper}>
         <div className={styles.orderType}>
-          <span>{orderType.type === 'togo' ? '포장' : '매장'}</span>
+          <span>{orderType.type === 'togo' ? t('order-type.togo-short') : t('order-type.store-short')}</span>
         </div>
         <span className={styles.storeName}>{storeName}</span>
       </div>

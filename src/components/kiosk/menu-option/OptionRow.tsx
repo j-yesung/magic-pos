@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { MenuOptionWithDetail, Tables } from '@/types/supabase';
 import styles from './styles/OptionRow.module.css';
 import OptionDetailRow from '@/components/kiosk/menu-option/OptionDetailRow';
+import { useTranslation } from 'react-i18next';
+import useKioskState from '@/shared/store/kiosk';
 
 /**
  * -- 로직 설명
@@ -13,6 +15,13 @@ import OptionDetailRow from '@/components/kiosk/menu-option/OptionDetailRow';
  */
 const OptionRow = ({ option }: { option: MenuOptionWithDetail }) => {
   const [selectedDetail, setSelectedDetail] = useState<Tables<'menu_option_detail'>[]>([]);
+  const selectedLanguage = useKioskState(state => state.selectedLanguage);
+  const { t } = useTranslation();
+
+  const maxOptionMessage: { [key: string]: string } = {
+    'lang-ko': `(${t('max')} ${option.max_detail_count}${t('max-available-option')})`,
+    'lang-en': `(${t('max-available-option')} ${option.max_detail_count})`,
+  };
 
   useEffect(() => {
     return () => {
@@ -26,7 +35,7 @@ const OptionRow = ({ option }: { option: MenuOptionWithDetail }) => {
         <div className={styles.container}>
           <div className={styles.optionTitle}>
             <h3>{option.name}</h3>
-            <span className={styles.maxOptionAmount}>(최대 {option.max_detail_count}개 선택 가능)</span>
+            <span className={styles.maxOptionAmount}>{maxOptionMessage[selectedLanguage]}</span>
           </div>
           <div>
             {option.menu_option_detail.map(detail => (

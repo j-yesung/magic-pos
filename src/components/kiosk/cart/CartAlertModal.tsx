@@ -2,9 +2,11 @@ import { useModal } from '@/hooks/modal/useModal';
 import { useEffect } from 'react';
 import { FaCheck } from 'react-icons/fa6';
 import styles from './styles/CartAlertModal.module.css';
+import { useTranslation } from 'react-i18next';
 
 const CartAlertModal = ({ modalId }: { modalId?: string }) => {
   const { MagicModal } = useModal();
+  const { t } = useTranslation();
 
   useEffect(() => {
     setTimeout(() => {
@@ -15,7 +17,7 @@ const CartAlertModal = ({ modalId }: { modalId?: string }) => {
   return (
     <div className={styles.container}>
       <FaCheck size={40} />
-      <p>상품을 장바구니에 담았어요</p>
+      <p>{t('modal.add-cart-success')}</p>
     </div>
   );
 };

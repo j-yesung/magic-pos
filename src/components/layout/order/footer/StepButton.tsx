@@ -8,6 +8,7 @@ import { readRemainEaByMenuId } from '@/server/api/supabase/menu-item';
 import { useModal } from '@/hooks/modal/useModal';
 import { PiBagSimpleFill } from 'react-icons/pi';
 import { BiSolidCircle } from 'react-icons/bi';
+import { useTranslation } from 'react-i18next';
 
 class OrderError extends Error {
   readonly id: string;
@@ -27,6 +28,7 @@ const StepButton = () => {
   const swiperRef = useKioskState(state => state.swiperRef);
   const selectedMenu = useKioskState(state => state.selectedMenu);
   const { MagicModal } = useModal();
+  const { t } = useTranslation();
 
   const { paymentWidget, handlePaymentRequest } = usePaymentWidget();
 
@@ -34,12 +36,12 @@ const StepButton = () => {
     1: <>{convertNumberToWon(getTotalPrice(orderList))}</>,
     2: (
       <>
-        {convertNumberToWon(getTotalPrice(orderList))} {<BiSolidCircle size={2} />} 결제 하기
+        {convertNumberToWon(getTotalPrice(orderList))} {<BiSolidCircle size={2} />} {t('footer.payment')}
       </>
     ),
     3: (
       <>
-        {convertNumberToWon(getTotalPrice(orderList))} {<BiSolidCircle size={2} />} 결제 하기
+        {convertNumberToWon(getTotalPrice(orderList))} {<BiSolidCircle size={2} />} {t('footer.payment')}
       </>
     ),
   };
@@ -51,7 +53,7 @@ const StepButton = () => {
         order =>
           new Promise((res, rej) => {
             readRemainEaByMenuId(order.id).then(result => {
-              if (result.remain_ea === 0) rej(new OrderError(`${result.name}이 품절 되었습니다. 😭`, result.id));
+              if (result.remain_ea === 0) rej(new OrderError(`${result.name} ${t('sold-out')} 😭`, result.id));
               else res(result.remain_ea);
             });
           }),
@@ -80,7 +82,7 @@ const StepButton = () => {
           {optionSwiperRef?.current!.swiper?.realIndex !== 1 ? (
             <button className={styles.button} onClick={nextClickHandler} disabled={orderList.length === 0}>
               {orderList.length === 0 ? (
-                <span>담은 상품이 없습니다.</span>
+                <span>{t('footer.no-item')}</span>
               ) : (
                 <span>
                   {BUTTON_OPTIONS[step]}

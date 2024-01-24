@@ -4,6 +4,7 @@ import { MdOutlineLanguage } from 'react-icons/md';
 import { useTranslation } from 'react-i18next';
 import LanguageList from '@/components/kiosk/order-type/LanguageList';
 import { useEffect, useRef, useState } from 'react';
+import useKioskState from '@/shared/store/kiosk';
 
 /**
  * STEP1: 포장 / 매장 선택
@@ -11,7 +12,8 @@ import { useEffect, useRef, useState } from 'react';
  */
 const OrderTypeContainer = () => {
   const [showLanguageList, setShowLanguageList] = useState(false);
-  const { t } = useTranslation();
+  const selectedLanguage = useKioskState(state => state.selectedLanguage);
+  const { t, i18n } = useTranslation();
   const languageRef = useRef<HTMLDivElement>(null);
 
   const handleClickLanguage = () => {
@@ -25,6 +27,10 @@ const OrderTypeContainer = () => {
       }
     };
 
+    if (selectedLanguage) {
+      i18n.changeLanguage(selectedLanguage.split('-')[1]);
+    }
+
     window.addEventListener('click', handleClickOutsideRef);
 
     return () => {
@@ -35,12 +41,12 @@ const OrderTypeContainer = () => {
   return (
     <div className={styles.container}>
       <h1>
-        {t('order-type-title-1')} <br />
-        {t('order-type-title-2')}
+        {t('order-type.title-1')} <br />
+        {t('order-type.title-2')}
       </h1>
       <ButtonContainer />
       <div className={styles.languageWrapper} ref={languageRef}>
-        {showLanguageList && <LanguageList />}
+        {showLanguageList && <LanguageList setShowLanguageList={setShowLanguageList} />}
         <MdOutlineLanguage size={20} onClick={handleClickLanguage} />
         <button onClick={handleClickLanguage}>Language</button>
       </div>

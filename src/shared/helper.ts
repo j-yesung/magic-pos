@@ -11,7 +11,7 @@ export const isEmptyObject = (obj: object) => {
  * @param num
  */
 export const convertNumberToWon = (num: number) => {
-  return `${new Intl.NumberFormat('ko-KO', { style: 'decimal', currency: 'KRW' }).format(num)}원`;
+  return `${new Intl.NumberFormat('ko-KO', { style: 'decimal', currency: 'KRW' }).format(num)}₩`;
 };
 
 /**

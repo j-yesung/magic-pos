@@ -2,9 +2,11 @@ import { useEffect } from 'react';
 import styles from './styles/Amount.module.css';
 import useKioskState, { addAmount, resetAmount, subtractAmount } from '@/shared/store/kiosk';
 import { FaMinus, FaPlus } from 'react-icons/fa6';
+import { useTranslation } from 'react-i18next';
 
 const Amount = () => {
   const amount = useKioskState(state => state.amount);
+  const { t } = useTranslation();
 
   useEffect(() => {
     return () => {
@@ -14,7 +16,7 @@ const Amount = () => {
 
   return (
     <div className={styles.container}>
-      <span>수량</span>
+      <span>{t('amount')}</span>
       <div className={styles.buttonWrapper}>
         <button onClick={subtractAmount}>
           <FaMinus size={20} />
