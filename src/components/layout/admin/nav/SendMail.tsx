@@ -3,20 +3,17 @@ import { useRef } from 'react';
 
 const SendMail = () => {
   const form = useRef<HTMLFormElement>(null);
-  const { sendEmail } = useSendMail({ form });
+  const { sendEmail } = useSendMail({ ref: form });
 
   return (
     <form ref={form} onSubmit={sendEmail}>
-      <label>Subject</label>
+      <label>상호명</label>
       <input type="text" name="to_name" value="삼성전자" readOnly />
 
-      <label>Name</label>
-      <input type="text" name="from_name" />
-
-      <label>Email</label>
+      <label>답변 받으실 이메일을 작성해 주세요.</label>
       <input type="email" name="user_email" />
 
-      <label>Message</label>
+      <label>문의하실 내용을 작성해 주세요.</label>
       <textarea name="message" />
 
       <input type="submit" value="Send" />

@@ -3,21 +3,21 @@ import { MutableRefObject } from 'react';
 import useToast from '../toast/useToast';
 
 interface SendMailProps {
-  form: MutableRefObject<HTMLFormElement | null>;
+  ref: MutableRefObject<HTMLFormElement | null>;
 }
 
-export const useSendMail = ({ form }: SendMailProps) => {
+export const useSendMail = ({ ref }: SendMailProps) => {
   const { toast } = useToast();
 
   const sendEmail = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!form.current) return;
+    if (!ref.current) return;
 
     emailjs
       .sendForm(
         `${process.env.NEXT_PUBLIC_SERVICE_ID}`,
         `${process.env.NEXT_PUBLIC_TEMPLATE_ID}`,
-        form.current,
+        ref.current,
         `${process.env.NEXT_PUBLIC_PUBLIC_KEY}`,
       )
       .then(
