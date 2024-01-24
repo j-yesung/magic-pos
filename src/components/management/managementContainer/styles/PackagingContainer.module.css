@@ -28,7 +28,7 @@
   margin-left: 1rem;
 }
 .packaging-list-wrap {
-  height: calc(100% - 10rem);
+  height: 100%;
   overflow-y: scroll;
 }
 .packaging-list-wrap::-webkit-scrollbar {

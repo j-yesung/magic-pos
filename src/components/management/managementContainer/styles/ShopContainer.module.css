@@ -27,7 +27,7 @@
   margin-left: 1rem;
 }
 .shop-list-wrap {
-  height: calc(100% - 10rem);
+  height: 100%;
   overflow-y: scroll;
 }
 .shop-list-wrap::-webkit-scrollbar {
