@@ -1,0 +1,51 @@
+.status-btn {
+  background-color: transparent;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.2rem;
+}
+
+.status-btn p svg {
+  stroke: #5c5c5c;
+}
+.status-btn-right {
+  right: 0;
+}
+
+.status-btn-left {
+  left: 0;
+}
+
+.sales-calendar-group {
+  display: flex;
+  gap: 1rem;
+}
+.calendar-header-text {
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.calendar-btn {
+  position: static;
+  display: flex;
+  width: 5.5rem;
+  height: 5.5rem;
+  transform: translateY(0);
+  padding: 1rem !important;
+  margin: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 0.8rem;
+  border-radius: 0.8rem;
+  background: var(--bg-g, #f7f7f7);
+}
+
+.calendar-btn :hover {
+  opacity: 0.8;
+}

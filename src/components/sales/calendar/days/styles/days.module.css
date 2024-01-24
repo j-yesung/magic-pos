@@ -1,12 +1,12 @@
 /*status Days*/
 
-.days {
+.status-days {
   display: flex;
   align-items: flex-start;
   gap: 1rem;
 }
 
-.day {
+.status-day {
   display: flex;
   width: 3rem;
   height: 3rem;

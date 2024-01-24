@@ -1,4 +1,4 @@
-import useSalesStore from '@/shared/store/sales';
+import useSalesStore from '@/shared/store/sales/sales';
 import 'moment/locale/ko';
 import Cell from './cell/Cell';
 import Days from './days/Days';
@@ -13,7 +13,7 @@ const Calendar = ({ children }: { children?: React.ReactNode }) => {
 
   return (
     <div className={isChangeView ? styles.salesStatus : styles.showCalendar}>
-      <div className={!isChangeView ? styles.calendarHeaderWrapper : ''}>
+      <div className={isChangeView ? styles.statusHeaderWrapper : styles.calendarHeaderWrapper}>
         <Header />
         {children}
       </div>
