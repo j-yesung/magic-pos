@@ -22,6 +22,7 @@
     "file-saver": "^2.0.5",
     "html2canvas": "^1.4.1",
     "i18next": "^23.7.18",
+    "i18next-http-backend": "^2.4.2",
     "immer": "^10.0.3",
     "lodash": "^4.17.21",
     "moment": "^2.30.1",
