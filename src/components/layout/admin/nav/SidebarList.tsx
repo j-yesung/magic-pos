@@ -21,7 +21,7 @@ const SidebarList = ({ navList, clickFn }: NavList) => {
   const isUseTable = useTableStore(state => state.isUseTable);
 
   useEffect(() => {
-    if (isUseTable === 'true') {
+    if (isUseTable) {
       setFilteredNavList(navList);
     } else {
       setFilteredNavList(navList.filter(list => list.id !== TABLE_MANAGEMENT_NUMBER));
