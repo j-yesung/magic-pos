@@ -21,7 +21,7 @@ const OrderTypeCard = ({ order }: { order: OrderType }) => {
       <div className={styles.iconWrapper}>
         {order.type === 'togo' ? <TbPaperBag size={31} /> : <MdOutlineTableBar size={31} />}
       </div>
-      <span>{order.type === 'togo' ? t('order-type.store') : t('order-type.togo')}</span>
+      <span>{order.type === 'togo' ? t('order-type.togo') : t('order-type.store')}</span>
     </div>
   );
 };

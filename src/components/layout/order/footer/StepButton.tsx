@@ -82,7 +82,7 @@ const StepButton = () => {
           {optionSwiperRef?.current!.swiper?.realIndex !== 1 ? (
             <button className={styles.button} onClick={nextClickHandler} disabled={orderList.length === 0}>
               {orderList.length === 0 ? (
-                <span>담은 상품이 없습니다.</span>
+                <span>{t('footer.no-item')}</span>
               ) : (
                 <span>
                   {BUTTON_OPTIONS[step]}

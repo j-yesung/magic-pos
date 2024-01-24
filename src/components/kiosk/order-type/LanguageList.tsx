@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { Dispatch, SetStateAction, useRef } from 'react';
 import styles from './styles/LanguageList.module.css';
 import { useTranslation } from 'react-i18next';
 import { FaCheck } from 'react-icons/fa6';
@@ -23,7 +23,7 @@ const LANGUAGE_LIST = [
   },
 ];
 
-const LanguageList = () => {
+const LanguageList = ({ setShowLanguageList }: { setShowLanguageList: Dispatch<SetStateAction<boolean>> }) => {
   const { i18n } = useTranslation();
   const selectedLanguage = useKioskState(state => state.selectedLanguage);
 
@@ -32,6 +32,7 @@ const LanguageList = () => {
     if (id) {
       setSelectedLanguage(id);
       i18n.changeLanguage(id.split('-')[1]);
+      setShowLanguageList(false);
     }
   };
 

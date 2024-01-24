@@ -34,6 +34,7 @@
   "footer": {
     "add": "Add to cart",
     "payment": "Let's Pay",
-    "check-order": "Check your order"
+    "check-order": "Check your order",
+    "no-item": "There is no product in it"
   }
 }

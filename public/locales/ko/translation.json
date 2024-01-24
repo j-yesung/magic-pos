@@ -34,6 +34,7 @@
   "footer": {
     "add": "담기",
     "payment": "결제 하기",
-    "check-order": "주문 확인하기"
+    "check-order": "주문 확인하기",
+    "no-item": "담은 상품이 없습니다."
   }
 }
