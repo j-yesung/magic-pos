@@ -3,8 +3,19 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  overflow-y: scroll;
 }
 
+
+.table-container::-webkit-scrollbar {
+  width: 0.5rem;
+}
+.table-container::-webkit-scrollbar-thumb {
+  background: var(--point-50);
+}
+.table-container::-webkit-scrollbar-track {
+  background: none;
+}
 .table-list-button {
   width: calc((100% - 12.8rem) / 4);
   height: 21.8rem;

@@ -19,7 +19,6 @@
   transition: all 0.4s;
   padding: 5rem 2rem;
   padding-right: 20rem;
-  cursor: pointer;
   z-index: 600;
   background-color: #fff;
 }
