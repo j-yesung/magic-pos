@@ -60,6 +60,7 @@ export const translateMenuData = async (menuData: CategoryWithMenuItem[], lang: 
 
   // 번역할 단어 목록을 생성한다.
   menuData.forEach(menu => {
+    // 번역의 정확도를 위해 (가게 메뉴)라는 키워드를 넣어서 보낸다. 이후 괄호와 괄호안 텍스트를 제거하는 작업이 추가적으로 필요하다.
     if (menu.name) categoryList.push('(가게 메뉴)' + menu.name);
     menu.menu_item.forEach(item => {
       if (item.name) menuList.push(item.name);
@@ -83,21 +84,12 @@ export const translateMenuData = async (menuData: CategoryWithMenuItem[], lang: 
   );
 
   let categoryIndex = 0;
-  for await (const result of translatedCategory) {
-    const endBracketIndex = result.text.indexOf(')');
-    const endOtherBracketIndex = result.text.indexOf('）');
-    let bracketIndex = endBracketIndex;
-    if (endBracketIndex === -1) bracketIndex = endOtherBracketIndex;
-
-    menuData[categoryIndex].name = result.text.substring(bracketIndex + 1);
-    categoryIndex++;
-  }
-
   let menuIndex = 0;
   let optionIndex = 0;
   let optionDetailIndex = 0;
   menuData.forEach(menu => {
-    return menu.menu_item.forEach(item => {
+    menu.name = translatedCategory[categoryIndex].text;
+    menu.menu_item.forEach(item => {
       item.name = translatedMenu[menuIndex].text;
       menuIndex++;
 
@@ -111,6 +103,7 @@ export const translateMenuData = async (menuData: CategoryWithMenuItem[], lang: 
         });
       });
     });
+    categoryIndex++;
   });
 
   return menuData;
