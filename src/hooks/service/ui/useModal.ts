@@ -30,7 +30,7 @@ export const useModal = () => {
      * usage: MagicModal.confirm({ content: '안녕하세요', confirmButtonCallback: () => {alert('yes!!')} });
      * @param option
      */
-    static confirm(option: ModalConfirmTypeOption) {
+    static confirm(option: Omit<ModalConfirmTypeOption, 'id'>) {
       const id = nanoid();
       addConfirm({ ...option, id });
       return id;
@@ -42,7 +42,7 @@ export const useModal = () => {
      * usage: MagicModal.alert({content: '안녕하세요', showButton: false, timeout: 2000});
      * @param option
      */
-    static alert(option: ModalAlertTypeOption) {
+    static alert(option: Omit<ModalAlertTypeOption, 'id'>) {
       const id = nanoid();
       addAlert({ ...option, id });
       return id;
