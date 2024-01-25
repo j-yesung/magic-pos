@@ -43,5 +43,6 @@
 }
 
 .opacity-10 {
+    pointer-events: none;
     filter: opacity(10%);
 }
