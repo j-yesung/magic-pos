@@ -13,10 +13,6 @@
   cursor: pointer;
 }
 
-.shop-list-item:hover {
-  background-color: #ccf;
-}
-
 .shop-list-item > div {
   width: 100%;
   display: flex;

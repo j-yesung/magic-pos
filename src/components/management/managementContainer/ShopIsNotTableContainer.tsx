@@ -22,7 +22,7 @@ const ShopIsNotTableContainer = ({ managementData }: { managementData?: StoreWit
               return 0;
             })
             .map(item => {
-              return <ShopIsNotTableListItem key={item.id} packagingData={item} />;
+              return <ShopIsNotTableListItem key={item.id} shopData={item} />;
             })}
         </div>
       </div>
