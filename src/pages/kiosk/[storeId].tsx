@@ -4,7 +4,7 @@ import 'swiper/css/virtual';
 import OrderLayout from '@/components/layout/order/OrderLayout';
 import { fetchCategoriesWithMenuItemByStoreId } from '@/server/api/supabase/menu-category';
 import { GetServerSideProps } from 'next';
-import { CategoryWithMenuItem, CategoryWithMenuItemWithStore } from '@/types/supabase';
+import { CategoryWithMenuItemWithStore } from '@/types/supabase';
 import useKioskState, {
   resetOrderList,
   setMenuData,
@@ -100,7 +100,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
   let { data: menuData } = await fetchCategoriesWithMenuItemByStoreId((storeId || '').toString());
 
   if (storeId) {
-    menuData = await translateMenuData(menuData, lang as TargetLanguageCode, storeId.toString());
+    menuData = await translateMenuData(menuData, lang.toString(), storeId.toString());
   }
 
   return {

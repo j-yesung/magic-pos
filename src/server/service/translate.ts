@@ -4,15 +4,13 @@ import { TargetLanguageCode } from 'deepl-node';
 
 type MenuDataType = {
   [key: string]: {
-    [key in string]: CategoryWithMenuItem[];
+    data: {
+      [key in string]: CategoryWithMenuItem[];
+    };
+    origin: string;
   };
 };
 
-const DEFAULT_DATA = {
-  en: [],
-  zh: [],
-  ja: [],
-};
 const CACHED_MENU_DATA: MenuDataType = {};
 
 const AUTH_KEY = process.env.NEXT_PUBLIC_DEEPL_API_KEY as string; // Replace with your key
@@ -30,16 +28,28 @@ export const translateMenuData = async (menuData: CategoryWithMenuItem[], lang: 
 
   // storeMenuData가 초기화 되지 않았다면 초기화 해준다.
   if (!storeMenuData) {
-    CACHED_MENU_DATA[storeId] = { ...DEFAULT_DATA };
+    CACHED_MENU_DATA[storeId] = {
+      data: {
+        en: [],
+        ja: [],
+        zh: [],
+      },
+      origin: '',
+    };
     storeMenuData = CACHED_MENU_DATA[storeId];
   }
 
   if (lang && lang !== 'ko' && lang !== '' && lang !== 'origin') {
-    if (storeMenuData[lang] && storeMenuData[lang]?.length === 0) {
-      storeMenuData[lang] = menuData;
-      // storeMenuData.origin = JSON.stringify(menuData);
-    } else {
-      return CACHED_MENU_DATA[storeId][lang];
+    if (storeMenuData.data[lang] && storeMenuData.data[lang]?.length === 0) {
+      storeMenuData.data[lang] = menuData;
+
+      // origin에 menuData를 직렬화해서 담는다.
+      storeMenuData.origin = JSON.stringify(menuData);
+
+      // menuData가 바뀌지 않았으면 이전에 저장해놓은 데이터를 보여준다.
+      // 그렇지 않으면 새로 번역을 시작한다.
+    } else if (JSON.stringify(menuData) === CACHED_MENU_DATA[storeId].origin) {
+      return CACHED_MENU_DATA[storeId].data[lang];
     }
   }
 
