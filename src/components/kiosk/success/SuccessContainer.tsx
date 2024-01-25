@@ -55,6 +55,7 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
         product_ea: value.length,
         product_category: menuData?.find(menu => menu.id === value[0].category_id)?.name,
         product_price: value[0].price,
+        order_type: orderType.type,
       }));
 
       addSales(salesData);
