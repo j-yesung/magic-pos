@@ -1,108 +1,17 @@
-import { downloadPlatFormImageUrl, insertPlatFormRow, uploadPlatFormImage } from '@/server/api/supabase/platform';
-import { Tables } from '@/types/supabase';
-import moment from 'moment';
-import { ChangeEvent, FormEvent, SetStateAction } from 'react';
-import { AddFormType } from '../PlatFormWrapper';
-import ImgForm from './img/ImgForm';
+import usePlatForm from '@/hooks/platform/usePlatForm';
+import usePlatFormStore from '@/shared/store/platform';
+import FormButton from './FormButton/FormButton';
+import FormBody from './formBody/FormBody';
+import FormHeader from './formHeader/FormHeader';
 import styles from './styles/form.module.css';
-export interface FormProps {
-  setAddForm: React.Dispatch<SetStateAction<AddFormType>>;
-  addForm: AddFormType;
-  setIsRegist: React.Dispatch<SetStateAction<boolean>>;
-  setFecthDataList: React.Dispatch<SetStateAction<Tables<'platform'>[]>>;
-  setClickedTab: React.Dispatch<SetStateAction<string>>;
-}
-
-const Form = ({ setAddForm, addForm, setIsRegist, setFecthDataList, setClickedTab }: FormProps) => {
-  const changeLinkValue = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-
-    setAddForm(pre => ({
-      ...pre,
-      [name]: value,
-    }));
-  };
-  const changeTitleValue = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setAddForm(pre => ({
-      ...pre,
-      [name]: value,
-    }));
-  };
-
-  const submitAddCard = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    let updateData: AddFormType = { ...addForm, createdAt: moment().toISOString() };
-
-    if (!addForm.name.trim() || !addForm.link_url.trim()) return alert('써라');
-
-    if (updateData.file) {
-      await uploadPlatFormImage(updateData);
-      const { publicUrl: image_url } = downloadPlatFormImageUrl(updateData);
-
-      updateData = {
-        ...addForm,
-        image_url,
-      };
-      const { data } = await insertPlatFormRow(updateData);
-      setFecthDataList(pre => [...pre, ...data!]);
-    } else {
-      const { data } = await insertPlatFormRow(updateData);
-      setFecthDataList(pre => [...pre, ...data!]);
-    }
-    setAddForm(pre => ({
-      ...pre,
-      name: '',
-      link_url: '',
-      createdAt: '',
-      file: null,
-    }));
-    setIsRegist(pre => !pre);
-  };
-
-  const closeAddFormModal = () => {
-    setIsRegist(pre => !pre);
-    setAddForm(pre => ({
-      ...pre,
-      name: '',
-      link_url: '',
-      createdAt: '',
-      file: null,
-    }));
-    setClickedTab('');
-  };
-
+const Form = () => {
+  const isEdit = usePlatFormStore(state => state.isEdit);
+  const { submitAddCard, submitEditCard } = usePlatForm();
   return (
-    <form onSubmit={submitAddCard} className={styles.formContainer}>
-      <div className={styles.formWrapper}>
-        <ImgForm setAddForm={setAddForm} />
-
-        <div className={styles.inputWrapper}>
-          <input
-            className={styles.input}
-            onChange={changeLinkValue}
-            name="link_url"
-            type="text"
-            placeholder="link를 넣어주세요"
-          />
-          <input
-            className={styles.input}
-            onChange={changeTitleValue}
-            name="name"
-            type="text"
-            placeholder="어디사이트인가요?"
-          />
-        </div>
-      </div>
-
-      <div className={styles.buttonGroup}>
-        <button type="button" className={styles.button} onClick={closeAddFormModal}>
-          <p>취소</p>
-        </button>
-        <button type="submit" className={styles.button}>
-          <p>등록</p>
-        </button>
-      </div>
+    <form onSubmit={!isEdit ? submitAddCard : submitEditCard} className={styles.formContainer}>
+      <FormHeader mode={isEdit} />
+      <FormBody mode={isEdit} />
+      <FormButton mode={isEdit} />
     </form>
   );
 };
