@@ -23,7 +23,7 @@ const MenuContainer = () => {
       const list = menuData.find(m => m.id === selectedCategory);
       if (list) setMenuItemList(list.menu_item);
     }
-  }, [selectedCategory]);
+  }, [selectedCategory, menuData]);
 
   // 현재 선택된 카테고리를 첫번째 값으로 초기화 한다.
   useEffect(() => {
