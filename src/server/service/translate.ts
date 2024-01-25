@@ -2,6 +2,17 @@ import { CategoryWithMenuItem } from '@/types/supabase';
 import * as deepl from 'deepl-node';
 import { TargetLanguageCode } from 'deepl-node';
 
+type MenuDataType = {
+  [key: string]: {
+    data: {
+      [key in string]: CategoryWithMenuItem[];
+    };
+    origin: string;
+  };
+};
+
+const CACHED_MENU_DATA: MenuDataType = {};
+
 const AUTH_KEY = process.env.NEXT_PUBLIC_DEEPL_API_KEY as string; // Replace with your key
 const TRANSLATOR = new deepl.Translator(AUTH_KEY);
 
@@ -9,14 +20,47 @@ const TRANSLATOR = new deepl.Translator(AUTH_KEY);
  * 메뉴 데이터를 DeepL API를 이용하여 지정된 언어로 번역한다.
  * @param menuData
  * @param lang
+ * @param storeId
  */
-export const translateMenuData = async (menuData: CategoryWithMenuItem[], lang: string) => {
+export const translateMenuData = async (menuData: CategoryWithMenuItem[], lang: string, storeId: string) => {
+  // API 반복 호출을 막기 위해 한 가게에 대하여 한번 번역을 했으면 그 이후로는 번역된 데이터를 꺼내서 가져온다
+  let storeMenuData = CACHED_MENU_DATA[storeId];
+
+  // storeMenuData가 초기화 되지 않았다면 초기화 해준다.
+  if (!storeMenuData) {
+    CACHED_MENU_DATA[storeId] = {
+      data: {
+        en: [],
+        ja: [],
+        zh: [],
+      },
+      origin: '',
+    };
+    storeMenuData = CACHED_MENU_DATA[storeId];
+  }
+
+  if (lang && lang !== 'ko' && lang !== '' && lang !== 'origin') {
+    if (storeMenuData.data[lang] && storeMenuData.data[lang]?.length === 0) {
+      storeMenuData.data[lang] = menuData;
+
+      // origin에 menuData를 직렬화해서 담는다.
+      storeMenuData.origin = JSON.stringify(menuData);
+
+      // menuData가 바뀌지 않았으면 이전에 저장해놓은 데이터를 보여준다.
+      // 그렇지 않으면 새로 번역을 시작한다.
+    } else if (JSON.stringify(menuData) === CACHED_MENU_DATA[storeId].origin) {
+      return CACHED_MENU_DATA[storeId].data[lang];
+    }
+  }
+
   const categoryList: string[] = [];
   const menuList: string[] = [];
   const optionList: string[] = [];
   const optionDetailList: string[] = [];
 
+  // 번역할 단어 목록을 생성한다.
   menuData.forEach(menu => {
+    // 번역의 정확도를 위해 (가게 메뉴)라는 키워드를 넣어서 보낸다. 이후 괄호와 괄호안 텍스트를 제거하는 작업이 추가적으로 필요하다.
     if (menu.name) categoryList.push('(가게 메뉴)' + menu.name);
     menu.menu_item.forEach(item => {
       if (item.name) menuList.push(item.name);
@@ -29,6 +73,7 @@ export const translateMenuData = async (menuData: CategoryWithMenuItem[], lang: 
     });
   });
 
+  console.log(`storeID: ${storeId}에서 ${lang}에 대한 번역을 시작합니다...`);
   const translatedCategory = await TRANSLATOR.translateText(categoryList, 'ko', stringToTargetLanguageCode(lang));
   const translatedMenu = await TRANSLATOR.translateText(menuList, 'ko', stringToTargetLanguageCode(lang));
   const translatedOption = await TRANSLATOR.translateText(optionList, 'ko', stringToTargetLanguageCode(lang));
@@ -39,22 +84,12 @@ export const translateMenuData = async (menuData: CategoryWithMenuItem[], lang: 
   );
 
   let categoryIndex = 0;
-
-  for await (const result of translatedCategory) {
-    const endBracketIndex = result.text.indexOf(')');
-    const endOtherBracketIndex = result.text.indexOf('）');
-    let bracketIndex = endBracketIndex;
-    if (endBracketIndex === -1) bracketIndex = endOtherBracketIndex;
-
-    menuData[categoryIndex].name = result.text.substring(bracketIndex + 1);
-    categoryIndex++;
-  }
-
   let menuIndex = 0;
   let optionIndex = 0;
   let optionDetailIndex = 0;
   menuData.forEach(menu => {
-    return menu.menu_item.forEach(item => {
+    menu.name = translatedCategory[categoryIndex].text;
+    menu.menu_item.forEach(item => {
       item.name = translatedMenu[menuIndex].text;
       menuIndex++;
 
@@ -68,6 +103,7 @@ export const translateMenuData = async (menuData: CategoryWithMenuItem[], lang: 
         });
       });
     });
+    categoryIndex++;
   });
 
   return menuData;

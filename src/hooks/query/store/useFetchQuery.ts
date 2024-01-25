@@ -12,11 +12,11 @@ export const useFetchQuery = ({ userId, storeId }: { userId?: string; storeId?: 
     queryFn: () => getStore(userId ?? ''),
   });
 
-  const { data: storeInfo } = useQuery({
+  const { data: storeInfo, isFetching: isStoreFetching } = useQuery({
     queryKey: [QueryKey.STORE, storeId],
     enabled: !!storeId,
     queryFn: () => fetchStoreInfoById(storeId ?? ''),
   });
 
-  return { data, storeInfo };
+  return { data, storeInfo, isStoreFetching };
 };
