@@ -3,7 +3,7 @@ import { TbPaperBag } from 'react-icons/tb';
 import ShopIsNotTableListItem from './ShopIsNotTableListItem';
 import styles from './styles/ShopIsNotTableContainer.module.css';
 
-const PackagingContainer = ({ managementData }: { managementData?: StoreWithOrderInfo[] }) => {
+const ShopIsNotTableContainer = ({ managementData }: { managementData?: StoreWithOrderInfo[] }) => {
   return (
     <div className={styles['shop-container']}>
       <div className={styles['shop-title']}>
@@ -22,7 +22,7 @@ const PackagingContainer = ({ managementData }: { managementData?: StoreWithOrde
               return 0;
             })
             .map(item => {
-              return <ShopIsNotTableListItem key={item.id} packagingData={item} />;
+              return <ShopIsNotTableListItem key={item.id} shopData={item} />;
             })}
         </div>
       </div>
@@ -30,4 +30,4 @@ const PackagingContainer = ({ managementData }: { managementData?: StoreWithOrde
   );
 };
 
-export default PackagingContainer;
+export default ShopIsNotTableContainer;
