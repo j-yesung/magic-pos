@@ -1,5 +1,5 @@
 import useSetCategories from '@/hooks/menu/menu-category/useSetCategories';
-import useCategoriesStore from '@/shared/store/menu-category';
+import useCategoriesStore, { setCategory } from '@/shared/store/menu-category';
 import { TablesInsert } from '@/types/supabase';
 import styles from './styles/form.module.css';
 
@@ -8,7 +8,9 @@ interface MenuCategoryModal {
 }
 
 const CategoryFormPage: React.FC<MenuCategoryModal> = props => {
-  const { isEdit, category, setCategory, categories } = useCategoriesStore();
+  const isEdit = useCategoriesStore(state => state.isEdit);
+  const category = useCategoriesStore(state => state.category);
+  const categories = useCategoriesStore(state => state.categories);
   const { addMutate, updateNameMutate } = useSetCategories();
 
   // 카테고리 input handler

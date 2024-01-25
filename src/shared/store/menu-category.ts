@@ -6,30 +6,33 @@ import { create } from 'zustand';
  */
 
 interface CategoriesStoreType {
-  isShow: boolean;
-  toggleShow: (item: boolean) => void;
+  // state
   isEdit: boolean;
-  setIsEdit: (item: boolean) => void;
   category: Tables<'menu_category'>;
-  setCategory: (item: Tables<'menu_category'>) => void;
   categories: Tables<'menu_category'>[];
-  setCategories: (item: Tables<'menu_category'>[]) => void;
 }
 
-const useCategoriesStore = create<CategoriesStoreType>(set => ({
-  isShow: false,
-  toggleShow: item => set({ isShow: item }),
+/**
+ * VALUE
+ */
+const useCategoriesStore = create<CategoriesStoreType>()(() => ({
   isEdit: false,
-  setIsEdit: item => set({ isEdit: item }),
   category: {
     id: '',
     store_id: '',
     name: '',
     position: 0,
   },
-  setCategory: (item: Tables<'menu_category'>) => set(prev => ({ category: { ...prev.category, ...item } })),
   categories: [],
-  setCategories: (item: Tables<'menu_category'>[]) => set({ categories: item }),
 }));
+
+/**
+ * ACTIONS
+ */
+export const setIsEdit = (isEdit: boolean) => useCategoriesStore.setState(() => ({ isEdit }));
+export const setCategory = (item: Tables<'menu_category'>) =>
+  useCategoriesStore.setState(state => ({ ...state, category: item }));
+export const setCategories = (item: Tables<'menu_category'>[]) =>
+  useCategoriesStore.setState(state => ({ ...state, categories: item }));
 
 export default useCategoriesStore;
