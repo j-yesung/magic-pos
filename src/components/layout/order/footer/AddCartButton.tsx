@@ -1,7 +1,7 @@
 import styles from './styles/StepButton.module.css';
 import useKioskState, { addOrderList, getTotalPrice, resetSelectedMenu } from '@/shared/store/kiosk';
 import { MenuItemWithOption } from '@/types/supabase';
-import { useModal } from '@/hooks/modal/useModal';
+import { useModal } from '@/hooks/service/ui/useModal';
 import CartAlertModal from '@/components/kiosk/cart/CartAlertModal';
 import { convertNumberToWon } from '@/shared/helper';
 import { BiSolidCircle } from 'react-icons/bi';

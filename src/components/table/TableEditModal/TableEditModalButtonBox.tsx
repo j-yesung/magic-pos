@@ -1,5 +1,5 @@
 import Button from '@/components/common/Button';
-import { useModal } from '@/hooks/modal/useModal';
+import { useModal } from '@/hooks/service/ui/useModal';
 import useSetTable from '@/hooks/table/useSetTable';
 import useAuthState from '@/shared/store/session';
 import useTableStore from '@/shared/store/table';
