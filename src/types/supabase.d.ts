@@ -317,6 +317,7 @@ export interface Database {
       sales: {
         Row: {
           id: string;
+          order_type: string | null;
           product_category: string | null;
           product_ea: number;
           product_name: string | null;
@@ -326,6 +327,7 @@ export interface Database {
         };
         Insert: {
           id?: string;
+          order_type?: string | null;
           product_category?: string | null;
           product_ea?: number;
           product_name?: string | null;
@@ -335,6 +337,7 @@ export interface Database {
         };
         Update: {
           id?: string;
+          order_type?: string | null;
           product_category?: string | null;
           product_ea?: number;
           product_name?: string | null;
