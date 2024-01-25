@@ -32,8 +32,8 @@ interface MenuItemStoreType {
   setOrigineMenuOptions: (item: MenuOptionWithDetail[]) => void;
   changeMenuOptions: MenuOptionWithDetail[];
   setChangeMenuOptions: (item: MenuOptionWithDetail[]) => void;
-  updateChangeMenuOptionsStore: (item: (prev: MenuOptionWithDetail[]) => MenuOptionWithDetail[]) => void;
-  removeChangeMenuOptionsStore: (item: MenuOptionWithDetail) => void;
+  removeMenuOptions: MenuOptionWithDetail[];
+  setRemoveMenuOptions: (item: MenuOptionWithDetail[]) => void;
   // 메뉴 옵션 디테일
   menuOptionDetailList: Tables<'menu_option_detail'>[];
   setMenuOptionDetailList: (item: Tables<'menu_option_detail'>[]) => void;
@@ -91,12 +91,8 @@ const useMenuItemStore = create<MenuItemStoreType>(set => ({
   setOrigineMenuOptions: (item: MenuOptionWithDetail[]) => set({ origineMenuOptions: item }),
   changeMenuOptions: [],
   setChangeMenuOptions: (item: MenuOptionWithDetail[]) => set({ changeMenuOptions: item }),
-  updateChangeMenuOptionsStore: item => set(state => ({ changeMenuOptions: item(state.changeMenuOptions) })),
-  removeChangeMenuOptionsStore: (item: MenuOptionWithDetail) => {
-    set(state => ({
-      origineMenuOptions: state.origineMenuOptions.filter(menu => menu.id !== item.id),
-    }));
-  },
+  removeMenuOptions: [],
+  setRemoveMenuOptions: (item: MenuOptionWithDetail[]) => set({ removeMenuOptions: item }),
   menuOptionDetailList: [],
   setMenuOptionDetailList: (item: Tables<'menu_option_detail'>[]) => set({ menuOptionDetailList: item }),
   menuOptionIndex: 0,

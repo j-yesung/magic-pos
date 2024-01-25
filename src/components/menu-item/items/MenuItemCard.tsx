@@ -5,7 +5,7 @@ import useMenuItemStore from '@/shared/store/menu-item';
 import { Tables } from '@/types/supabase';
 import clsx from 'clsx';
 import Image from 'next/image';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import styles from '../styles/menu-item-card.module.css';
 import MenuItemModal from './MenuItemModal';
@@ -35,6 +35,7 @@ const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
     setMenuOptions,
     origineMenuOptions,
   } = useMenuItemStore();
+  const [isDragging, setIsDragging] = useState(false);
 
   // 메뉴 선택
   const clickChoiceCategoryHandler = (item: Tables<'menu_item'>) => {
@@ -77,8 +78,20 @@ const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
     dragOverRef.current = index;
     setDropNum(index);
   };
+
+  // 드래그 중인 요소 위로 이동할 때 스타일 변경
+  const handleDragOver = () => {
+    setIsDragging(true);
+  };
+
+  // 드래그 중인 요소가 영역을 떠날 때 스타일 초기화
+  const handleDragLeave = () => {
+    setIsDragging(false);
+  };
+
   // 드랍 (커서 뗐을 때)
   const dropHandler = async () => {
+    setIsDragging(false);
     const filterIndex: number = categoryWithMenuItemList.findIndex(list => list.id === categoryWithMenuItem.id);
     const newList = [...categoryWithMenuItemList[filterIndex].menu_item];
     const dragItemValue = newList[dragItemRef.current];
@@ -106,8 +119,13 @@ const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
         draggable
         onDragStart={e => dragStartHandler(e, idx)}
         onDragEnter={e => dragEnterHandler(e, idx)}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
         onDragEnd={dropHandler}
         onClick={() => clickChoiceCategoryHandler(item)}
+        className={clsx(styles.draggable, {
+          [styles.dragging]: isDragging,
+        })}
       >
         <span className={styles['img']}>
           <Image src={item.image_url ?? sampleImage} alt={item.name ?? 'Sample Image'} width={100} height={100} />

@@ -1,10 +1,6 @@
 import useSetMenuItem from '@/hooks/menu/menu-item/useSetMenuItems';
-import {
-  addMenuOption,
-  addUpsertMenuOptionDetail,
-  removeMenuOption,
-  updateMenuOption,
-} from '@/server/api/supabase/menu-item';
+import useSetMenuOption from '@/hooks/menu/menu-item/useSetMenuOption';
+import useSetMenuOptionDetail from '@/hooks/menu/menu-item/useSetMenuOptionDetail';
 import useMenuItemStore from '@/shared/store/menu-item';
 import { MenuOptionWithDetail, Tables, TablesInsert } from '@/types/supabase';
 import moment from 'moment';
@@ -18,6 +14,8 @@ interface MenuItemModal {
 
 const MenuItemFormPage: React.FC<MenuItemModal> = props => {
   const { addMutate, updateNameMutate, uploadImageMutate } = useSetMenuItem();
+  const { addOptionMutate, updateOptionMutate, removeOptionMutate } = useSetMenuOption();
+  const { addUpsertOptionDetailMutate } = useSetMenuOptionDetail();
 
   const {
     isEdit,
@@ -25,13 +23,15 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
     setMenuItem,
     menuItemImgFile,
     setMenuItemImgFile,
+    categoryWithMenuItem,
+    setCategoryWithMenuItem,
+    menuOption,
+    setMenuOption,
     menuOptions,
     setMenuOptions,
     origineMenuOptions,
     changeMenuOptions,
     setChangeMenuOptions,
-    updateChangeMenuOptionsStore,
-    removeChangeMenuOptionsStore,
   } = useMenuItemStore();
 
   // 메뉴 추가 and 수정
@@ -48,8 +48,9 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
     };
     if (!isEdit) {
       const addData = await addMutate.mutateAsync(newMenuItemData);
-      setMenuItem({ ...menuItem, id: addData[0].id });
+      setMenuItem(addData[0]);
       newMenuItemData.id = addData[0].id;
+      setMenuOptions([...menuOptions, { menu_id: addData[0].id }] as MenuOptionWithDetail[]);
     } else {
       newMenuItemData.id = menuItem.id;
     }
@@ -70,7 +71,6 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
     updateNameMutate(newMenuItemData);
     props.clickItemModalHide();
     setMenuItemImgFile(null);
-    setMenuItem({ ...menuItem, id: '' });
 
     // 옵션 업데이트 부분
     removerOptionHandler();
@@ -84,11 +84,16 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
       menuOptions.some(menu => menu.menu_id === item.menu_id),
     );
     const missingItems = missingInMenuOptions.filter(item => !menuOptions.some(menu => menu.id === item.id));
+    // 옵션이 전부 삭제 됐을 때 처리
+    const missingInOrigineOptions = origineMenuOptions.filter(item => item.menu_id === menuItem.id);
 
-    if (missingItems.length > 0) {
+    if (missingItems.length === 0 && menuOptions.length === 0 && missingInOrigineOptions.length !== 0) {
+      missingInOrigineOptions.forEach(async item => {
+        removeOptionMutate(item.id);
+      });
+    } else if (missingItems.length > 0) {
       missingItems.forEach(async item => {
-        removeChangeMenuOptionsStore(item);
-        await removeMenuOption(item.id);
+        removeOptionMutate(item.id);
       });
     }
   };
@@ -105,7 +110,7 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
           max_detail_count: item.max_detail_count,
           menu_id: item.menu_id,
         };
-        const { data: optionData } = await addMenuOption(newOption);
+        const { data: optionData } = await addOptionMutate.mutateAsync(newOption);
 
         // 해당 data 받아서 그 option_id로 detail들 추가
         item.menu_option_detail.map(async option => {
@@ -114,7 +119,7 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
             option_id: optionData[0].id,
             price: option.price,
           };
-          await addUpsertMenuOptionDetail(addOptionForm);
+          addUpsertOptionDetailMutate(addOptionForm);
         });
         const newOptionList: MenuOptionWithDetail = {
           id: optionData[0].id,
@@ -127,7 +132,7 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
         setChangeMenuOptions([...changeMenuOptions, { ...newOptionList }]);
       } else {
         // 옵션은 있는거니까 해당 detail을 옵션 아이디로 supabase 추가
-        await updateMenuOption(item);
+        updateOptionMutate(item);
         const newOptionList: MenuOptionWithDetail = {
           id: item.id,
           name: item.name,
@@ -146,20 +151,8 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
 
           if (option.id !== '') (addOptionForm as Tables<'menu_option_detail'>).id = option.id;
 
-          await addUpsertMenuOptionDetail(addOptionForm);
+          addUpsertOptionDetailMutate(addOptionForm);
         });
-        updateChangeMenuOptionsStore(prevMenuOptions =>
-          prevMenuOptions.map(option =>
-            option.id === item.id
-              ? {
-                  ...item,
-                  name: item.name ?? '',
-                  is_use: item.is_use ?? false,
-                  max_detail_count: item.max_detail_count ?? 1,
-                }
-              : item,
-          ),
-        );
       }
     });
   };

@@ -81,6 +81,8 @@ const MenuOptionModalInput = () => {
             placeholder="옵션이름"
             value={menuOption.name ?? ''}
             onChange={changeMenuOptionHandler}
+            minLength={1}
+            maxLength={20}
           />
         </p>
       </div>
@@ -104,7 +106,7 @@ const MenuOptionModalInput = () => {
               id="detailPrice"
               name="detailPrice"
               className={styles['input']}
-              value={optionDetail.detailPrice === 0 ? '' : optionDetail.detailPrice}
+              value={optionDetail.detailPrice}
               placeholder="옵션 가격을 입력하세요."
               onChange={e => changeMenuOptionItemHandler(e)}
             />
@@ -143,7 +145,7 @@ const MenuOptionModalInput = () => {
             type="number"
             name="max_detail_count"
             className={clsx(styles['input'], styles['max-count'])}
-            value={menuOption.max_detail_count === 0 ? '' : menuOption.max_detail_count}
+            value={menuOption.max_detail_count}
             placeholder="옵션 최대 선택 갯수"
             onChange={e => changeMenuOptionHandler(e)}
           />

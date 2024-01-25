@@ -38,7 +38,7 @@ const MenuItemFormOption = () => {
   const clickAddOptionHandler = async () => {
     const newOption: MenuOptionWithDetail = {
       id: '',
-      is_use: false,
+      is_use: true,
       menu_id: menuItem.id,
       name: '',
       menu_option_detail: [],
@@ -51,7 +51,8 @@ const MenuItemFormOption = () => {
   };
 
   // 옵션 삭제
-  const removeOptionDetailHandler = async () => {
+  const removeOptionDetailHandler = async (menuOptionIndex: number) => {
+    setMenuOptionIndex(menuOptionIndex);
     MagicModal.confirm({
       icon: <FiAlertCircle size={50} />,
       content: '옵션을 삭제하시겠습니까?',
@@ -73,12 +74,12 @@ const MenuItemFormOption = () => {
               <span className={styles['mini-edit-btn']} onClick={() => clickUpdateOptionHandler(item, index)}>
                 <EditButton width={16} height={16} />
               </span>
-              <span className={styles['mini-remove-btn']} onClick={() => removeOptionDetailHandler()}>
+              <span className={styles['mini-remove-btn']} onClick={() => removeOptionDetailHandler(index)}>
                 <CloseButton width={12} height={12} />
               </span>
             </button>
           ))}
-          <button type="button" onClick={clickAddOptionHandler}>
+          <button type="button" className={styles['mini-plus-btn']} onClick={clickAddOptionHandler}>
             <PlusButton width={13} height={13} />
           </button>
         </div>
