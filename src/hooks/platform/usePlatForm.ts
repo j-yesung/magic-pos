@@ -8,7 +8,7 @@ import {
   uploadPlatFormImage,
 } from '@/server/api/supabase/platform';
 import { isEmptyObject } from '@/shared/helper';
-import usePlatFormStore, {
+import usePlatFormState, {
   resetAddPlatForm,
   resetEditPlatForm,
   resetIsRegist,
@@ -23,7 +23,7 @@ import moment from 'moment';
 import { FormEvent } from 'react';
 
 const usePlatForm = () => {
-  const { addPlatForm, editPlatForm, prevData, prevImg, store_id } = usePlatFormStore();
+  const { addPlatForm, editPlatForm, prevData, prevImg, store_id } = usePlatFormState();
 
   const submitAddCard = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

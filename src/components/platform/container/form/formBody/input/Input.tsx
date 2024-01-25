@@ -1,8 +1,8 @@
-import usePlatFormStore, { setAddPlatForm, setEditPlatForm } from '@/shared/store/platform';
+import usePlatFormState, { setAddPlatForm, setEditPlatForm } from '@/shared/store/platform';
 import styles from './styles/input.module.css';
 
 const Input = ({ mode }: { mode: boolean }) => {
-  const editPlatForm = usePlatFormStore(state => state.editPlatForm);
+  const editPlatForm = usePlatFormState(state => state.editPlatForm);
   console.log(editPlatForm);
   return (
     <div className={styles.inputWrapper}>

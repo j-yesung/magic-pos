@@ -1,7 +1,7 @@
 //platform.ts
 
-import { AddFormType, EditPlatFormType } from '@/components/platform/container/PlatFormWrapper';
 import { supabase } from '@/shared/supabase';
+import { AddPlatFormType, EditPlatFormType } from '@/types/platform';
 import { TablesInsert } from '@/types/supabase';
 
 /**
@@ -65,7 +65,7 @@ export const addPlatForm = async (param: TablesInsert<'platform'>) => {
   return { platform, error };
 };
 
-export const uploadPlatFormImage = async (param: AddFormType | EditPlatFormType) => {
+export const uploadPlatFormImage = async (param: AddPlatFormType | EditPlatFormType) => {
   const { data, error } = await supabase.storage
     .from('images')
     .upload(`platform/${param.store_id}/${param.createdAt}`, param.file!);
@@ -74,7 +74,7 @@ export const uploadPlatFormImage = async (param: AddFormType | EditPlatFormType)
   return { data, error };
 };
 
-export const downloadPlatFormImageUrl = (param: AddFormType | EditPlatFormType) => {
+export const downloadPlatFormImageUrl = (param: AddPlatFormType | EditPlatFormType) => {
   try {
     const { data } = supabase.storage.from('images').getPublicUrl(`platform/${param.store_id}/${param.createdAt}`);
 
@@ -85,7 +85,7 @@ export const downloadPlatFormImageUrl = (param: AddFormType | EditPlatFormType) 
   }
 };
 
-export const insertPlatFormRow = async (param: AddFormType | EditPlatFormType) => {
+export const insertPlatFormRow = async (param: AddPlatFormType | EditPlatFormType) => {
   const { data, error } = await supabase
     .from('platform')
     .insert([
