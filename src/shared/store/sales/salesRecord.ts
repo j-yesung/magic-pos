@@ -1,7 +1,7 @@
-import { RecordType } from '@/types/sales';
+import { SalesRecordType } from '@/types/sales';
 import { create } from 'zustand';
 interface RecordStore {
-  record: RecordType;
+  record: SalesRecordType;
 }
 
 const useSalesRecordState = create<RecordStore>()(() => ({
@@ -11,7 +11,7 @@ const useSalesRecordState = create<RecordStore>()(() => ({
   },
 }));
 
-export const setRecordData = (sales: RecordType) =>
+export const setRecordData = (sales: SalesRecordType) =>
   useSalesRecordState.setState(state => ({
     ...state,
     record: {

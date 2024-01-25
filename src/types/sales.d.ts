@@ -31,7 +31,7 @@ export interface SalesDataReturnType {
   formatType?: FormatType;
 }
 
-export type RecordType = {
+export type SalesRecordType = {
   currentSales: number;
   dateType: 'day' | 'month' | 'week';
 };
