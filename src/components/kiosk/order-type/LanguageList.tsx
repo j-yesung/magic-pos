@@ -3,6 +3,7 @@ import styles from './styles/LanguageList.module.css';
 import { useTranslation } from 'react-i18next';
 import { FaCheck } from 'react-icons/fa6';
 import { setSelectedLanguage, useKioskState } from '@/shared/store/kiosk';
+import { useRouter } from 'next/router';
 
 const LANGUAGE_LIST = [
   {
@@ -18,7 +19,7 @@ const LANGUAGE_LIST = [
     text: '中文',
   },
   {
-    id: 'lang-jp',
+    id: 'lang-ja',
     text: '日本語',
   },
 ];
@@ -26,13 +27,26 @@ const LANGUAGE_LIST = [
 const LanguageList = ({ setShowLanguageList }: { setShowLanguageList: Dispatch<SetStateAction<boolean>> }) => {
   const { i18n } = useTranslation();
   const selectedLanguage = useKioskState(state => state.selectedLanguage);
+  const storeId = useKioskState(state => state.storeId);
+  const tableId = useKioskState(state => state.tableId);
+  const router = useRouter();
 
   const handleClickLanguage = (e: React.MouseEvent<HTMLLIElement>) => {
     const id = e.currentTarget.id;
     if (id) {
       setSelectedLanguage(id);
-      i18n.changeLanguage(id.split('-')[1]);
+      const lang = id.split('-')[1];
+      i18n.changeLanguage(lang);
       setShowLanguageList(false);
+      let newURL = `/kiosk/${storeId}`;
+
+      if (tableId && tableId !== 'null') {
+        newURL += `?tableId=${tableId}&lang=${lang}`;
+      } else {
+        newURL += `?lang=${lang}`;
+      }
+
+      router.push(newURL);
     }
   };
 

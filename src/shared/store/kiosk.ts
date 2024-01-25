@@ -97,12 +97,9 @@ export const setStep = (step: number) => useKioskState.setState(() => ({ step })
 export const setStoreId = (storeId: string) => useKioskState.setState(() => ({ storeId }));
 export const setTableId = (tableId: string) => useKioskState.setState(() => ({ tableId }));
 export const setOrderType = (orderType: OrderType) => useKioskState.setState(() => ({ orderType }));
-export const setMenuData = (data: CategoryWithMenuItemWithStore[]) =>
-  useKioskState.setState(state => {
-    if (state.menuData === null) {
-      return { menuData: data };
-    }
-    return { menuData: state.menuData };
+export const setMenuData = (menuData: CategoryWithMenuItemWithStore[]) =>
+  useKioskState.setState(() => {
+    return { menuData };
   });
 export const resetOrderList = () => useKioskState.setState({ orderList: [] });
 export const addOrderList = (menu: MenuItemWithOption[]) =>
