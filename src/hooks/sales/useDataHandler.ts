@@ -1,7 +1,8 @@
 import { formatData } from '@/components/sales/calendarUtility/formatData';
 import { getDaySales, getMonthsSales, getWeekSales } from '@/server/api/supabase/sales';
-import useCalendarStore, { setCalendarCurrentDate, setCalendarSelectedDate } from '@/shared/store/sales/calendar';
+import { setCalendarCurrentDate } from '@/shared/store/sales/calendar';
 import { setChartData } from '@/shared/store/sales/chart';
+import useDayState, { setSelectedDate } from '@/shared/store/sales/day';
 import { setRecordData } from '@/shared/store/sales/record';
 import { setIsShow } from '@/shared/store/sales/sales';
 import useAuthState from '@/shared/store/session';
@@ -9,7 +10,7 @@ import { Moment } from 'moment';
 
 export const useDataHandler = () => {
   const storeId = useAuthState(state => state.storeId);
-  const { utcStandardDate, today } = useCalendarStore();
+  const { utcStandardDate, today } = useDayState();
   const clickMoveTodayHandler = async () => {
     const { sales, dateType, formatType } = await getDaySales(utcStandardDate.clone(), storeId!);
     if (sales.length !== 0) {
@@ -27,7 +28,7 @@ export const useDataHandler = () => {
     }
 
     setCalendarCurrentDate(today);
-    setCalendarSelectedDate(today);
+    setSelectedDate(today);
   };
   //sales/status에 있는 calendar에서 날짜를 클릭하면 그 날 기준 7일 데이터를 받아옵니다.
   /**
@@ -51,8 +52,8 @@ export const useDataHandler = () => {
       });
     }
     setIsShow(false);
+    setSelectedDate(day.clone());
     setCalendarCurrentDate(day.clone());
-    setCalendarSelectedDate(day.clone());
   };
 
   const clickWeeksChartHandler = async () => {
@@ -72,7 +73,7 @@ export const useDataHandler = () => {
       });
     }
     setCalendarCurrentDate(today);
-    setCalendarSelectedDate(today);
+    setSelectedDate(today);
   };
 
   const clickMonthsChartHandler = async () => {
@@ -92,7 +93,7 @@ export const useDataHandler = () => {
       });
     }
     setCalendarCurrentDate(today);
-    setCalendarSelectedDate(today);
+    setSelectedDate(today);
   };
 
   return { clickMoveTodayHandler, clickShowDataOfDateHandler, clickWeeksChartHandler, clickMonthsChartHandler };
