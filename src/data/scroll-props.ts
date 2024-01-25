@@ -1,3 +1,6 @@
+import Iphone from '/public/images/iphone.svg';
+import StartScreen from '/public/images/start-screen.svg';
+
 export const TITLES = ['스파르타코딩클럽', '내일배움캠프', '파워레인조', '최종프로젝트'];
 export const SCROLL_THRESHOLDS = [1000, 1500, 2000, 2500];
 export const SUB_TITLES = [
@@ -6,3 +9,5 @@ export const SUB_TITLES = [
   '만난 팀 중 최고였습니다.',
   '끝나고 나서도 취업 화이팅이고 조만간 만납시다.',
 ];
+
+export const iphones = [Iphone, StartScreen, Iphone, StartScreen];
