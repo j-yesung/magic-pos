@@ -22,6 +22,7 @@
   "order-time": "주문 시간",
   "prepare": "준비중",
   "complete": "완료",
+  "recommended": "추천 메뉴",
   "modal": {
     "add-cart-success": "상품을 장바구니에 담았어요"
   },

@@ -22,6 +22,7 @@
   "order-time": "注文時間",
   "prepare": "準備中",
   "complete": "完了",
+  "recommended": "おすすめメニュー",
   "modal": {
     "add-cart-success": "カートに追加されました。"
   },

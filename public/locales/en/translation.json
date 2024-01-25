@@ -22,6 +22,7 @@
   "order-time": "Ordered At",
   "prepare": "Preparing",
   "complete": "Complete",
+  "recommended": "Recommended menu",
   "modal": {
     "add-cart-success": "Item has been added to my cart"
   },
