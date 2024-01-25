@@ -38,28 +38,26 @@ export const useIsOrderAllReady = (orderIdList: string[], storeId: string) => {
   return isAllReady;
 };
 
-export const useIsInvalidURL = ({ tableId, storeId }: { tableId?: string; storeId?: string }) => {
-  const { storeInfo } = useFetchQuery({ storeId: storeId });
-  const { tableInfo } = useFetchTable({ tableId: tableId, storeId });
-  const [isInvalidURL, setIsInvalidURL] = useState(true);
+export const useIsValidURL = ({ tableId, storeId }: { tableId?: string; storeId?: string }) => {
+  const { storeInfo, isStoreFetching } = useFetchQuery({ storeId: storeId });
+  const { tableInfo, isTableFetching } = useFetchTable({ tableId: tableId, storeId });
+  const [isValidURL, setIsValidURL] = useState(true);
 
   useEffect(() => {
-    if (!storeInfo) {
-      setIsInvalidURL(false);
-    } else {
-      setIsInvalidURL(true);
-    }
-
     if (tableId) {
-      if (!tableInfo) {
-        setIsInvalidURL(false);
-      } else {
-        setIsInvalidURL(true);
+      if (!isTableFetching && !tableInfo) {
+        setIsValidURL(false);
       }
     }
-  }, [storeInfo, tableInfo]);
+  }, [tableInfo]);
 
-  return isInvalidURL;
+  useEffect(() => {
+    if (!isStoreFetching && !storeInfo) {
+      setIsValidURL(false);
+    }
+  }, [storeInfo]);
+
+  return isValidURL;
 };
 
 export const useGetOptionText = () => {

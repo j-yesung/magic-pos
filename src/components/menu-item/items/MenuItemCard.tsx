@@ -1,5 +1,5 @@
 import useSetMenuItem from '@/hooks/menu/menu-item/useSetMenuItems';
-import { useModal } from '@/hooks/modal/useModal';
+import { useModal } from '@/hooks/service/ui/useModal';
 import { convertNumberToWon } from '@/shared/helper';
 import useMenuItemStore from '@/shared/store/menu-item';
 import { Tables } from '@/types/supabase';

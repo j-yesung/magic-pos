@@ -1,4 +1,4 @@
-import { useModal } from '@/hooks/modal/useModal';
+import { useModal } from '@/hooks/service/ui/useModal';
 import useSetTable from '@/hooks/table/useSetTable';
 import useTableStore from '@/shared/store/table';
 import { Tables } from '@/types/supabase';

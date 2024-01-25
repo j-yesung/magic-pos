@@ -1,5 +1,5 @@
-import { useModal } from '@/hooks/modal/useModal';
-import useToast from '@/hooks/toast/useToast';
+import { useModal } from '@/hooks/service/ui/useModal';
+import useToast from '@/hooks/service/ui/useToast';
 import useMenuItemStore from '@/shared/store/menu-item';
 import { MenuOptionWithDetail, TablesUpdate } from '@/types/supabase';
 import styles from '../styles/menu-option-modal.module.css';

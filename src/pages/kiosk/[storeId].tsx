@@ -15,10 +15,9 @@ import useKioskState, {
 } from '@/shared/store/kiosk';
 import { useRouter } from 'next/router';
 import KioskContainer from '@/components/kiosk/KioskContainer';
-import { useModal } from '@/hooks/modal/useModal';
-import { useIsInvalidURL, useIsOrderAllReady } from '@/hooks/service/useKiosk';
+import { useModal } from '@/hooks/service/ui/useModal';
+import { useIsValidURL, useIsOrderAllReady } from '@/hooks/service/useKiosk';
 import { translateMenuData } from '@/server/service/translate';
-import { TargetLanguageCode } from 'deepl-node';
 import { makeMenuData } from '@/utils/kiosk-helper';
 
 interface OrderIndexPageProps {
@@ -31,7 +30,7 @@ const OrderIndexPage = ({ menuData, storeId, tableId }: OrderIndexPageProps) => 
   const orderIdList = useKioskState(state => state.orderIdList);
   const prevStoreId = useKioskState(state => state.storeId);
   const [isLoaded, setIsLoaded] = useState(false);
-  const isInvalidURL = useIsInvalidURL({ storeId, tableId });
+  const isInvalidURL = useIsValidURL({ storeId, tableId });
   const isOrderAllReady = useIsOrderAllReady(orderIdList, storeId);
   const { MagicModal } = useModal();
   const router = useRouter();
@@ -99,8 +98,8 @@ export const getServerSideProps: GetServerSideProps = async context => {
   const { storeId, tableId = null, lang = 'ko' } = context.query;
   let { data: menuData } = await fetchCategoriesWithMenuItemByStoreId((storeId || '').toString());
 
-  if (lang !== 'ko') {
-    menuData = await translateMenuData(menuData, lang as TargetLanguageCode);
+  if (storeId && lang !== 'ko') {
+    menuData = await translateMenuData(menuData, lang.toString(), storeId.toString());
   }
 
   return {

@@ -5,7 +5,7 @@ import styles from './styles/StepButton.module.css';
 import { convertNumberToWon } from '@/shared/helper';
 import AddCartButton from '@/components/layout/order/footer/AddCartButton';
 import { readRemainEaByMenuId } from '@/server/api/supabase/menu-item';
-import { useModal } from '@/hooks/modal/useModal';
+import { useModal } from '@/hooks/service/ui/useModal';
 import { PiBagSimpleFill } from 'react-icons/pi';
 import { BiSolidCircle } from 'react-icons/bi';
 import { useTranslation } from 'react-i18next';

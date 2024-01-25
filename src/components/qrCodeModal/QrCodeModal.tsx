@@ -1,5 +1,5 @@
 import useQRCodeDownLoad from '@/hooks/management/useQRCodeDownLoad';
-import { useModal } from '@/hooks/modal/useModal';
+import { useModal } from '@/hooks/service/ui/useModal';
 import useManagementStore from '@/shared/store/management';
 import { useState } from 'react';
 import PackagingQrCodeContainer from './packagingQrCodeContainer/PackagingQrCodeContainer';

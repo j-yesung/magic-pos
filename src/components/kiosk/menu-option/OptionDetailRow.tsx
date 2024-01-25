@@ -1,6 +1,6 @@
 import { MenuOptionWithDetail, Tables } from '@/types/supabase';
 import { addSelectedOption, subtractSelectedOption } from '@/shared/store/kiosk';
-import useToast from '@/hooks/toast/useToast';
+import useToast from '@/hooks/service/ui/useToast';
 import { convertNumberToWon } from '@/shared/helper';
 import styles from './styles/OptionDetailRow.module.css';
 import Checkbox from '@/components/common/Checkbox';

@@ -1,4 +1,4 @@
-import { useModal } from '@/hooks/modal/useModal';
+import { useModal } from '@/hooks/service/ui/useModal';
 import useMenuItemStore from '@/shared/store/menu-item';
 import styles from '../styles/modal.module.css';
 import MenuItemFormPage from './MenuItemForm';

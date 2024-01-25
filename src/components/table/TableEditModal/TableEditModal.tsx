@@ -1,4 +1,4 @@
-import { useModal } from '@/hooks/modal/useModal';
+import { useModal } from '@/hooks/service/ui/useModal';
 import TableEditModalButtonBox from './TableEditModalButtonBox';
 import TableEditModalContainer from './TableEditModalContainer';
 import styles from './styles/TableEditModal.module.css';
