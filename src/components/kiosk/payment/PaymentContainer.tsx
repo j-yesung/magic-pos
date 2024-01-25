@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import styles from './styles/PaymentContainer.module.css';
 import useKioskState, { getTotalPrice, ORDER_STEP } from '@/shared/store/kiosk';
-import { usePaymentWidget } from '@/hooks/order/usePaymentWidget';
+import { usePaymentWidget } from '@/hooks/query/order/usePaymentWidget';
 import MenuHeader from '@/components/kiosk/common/MenuHeader';
 
 /**

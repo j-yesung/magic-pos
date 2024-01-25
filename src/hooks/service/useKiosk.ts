@@ -1,5 +1,5 @@
-import { useNumberOrderFetchQuery } from '@/hooks/order/useNumberOrderFetchQuery';
-import { useStoreOrderFetchQuery } from '@/hooks/order/useStoreOrderFetchQuery';
+import { useNumberOrderFetchQuery } from '@/hooks/query/order/useNumberOrderFetchQuery';
+import { useStoreOrderFetchQuery } from '@/hooks/query/order/useStoreOrderFetchQuery';
 import { useFetchQuery } from '@/hooks/query/store/useFetchQuery';
 import useFetchTable from '@/hooks/table/useFetchTable';
 import { isEmptyObject } from '@/shared/helper';
