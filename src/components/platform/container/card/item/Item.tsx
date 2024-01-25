@@ -29,7 +29,7 @@ const Item = ({ link, title, id, imgUrl }: ItemProps) => {
     }
   };
 
-  const clickShowEditPlatFormMoal = () => {
+  const clickShowEditPlatFormMode = () => {
     setPrevData({
       id,
       link_url: link,
@@ -62,7 +62,7 @@ const Item = ({ link, title, id, imgUrl }: ItemProps) => {
           <span>이동하기</span>
         </div>
       </Link>
-      <button onClick={clickShowEditPlatFormMoal} type="button" className={styles.editWrapper} ref={editRef}>
+      <button onClick={clickShowEditPlatFormMode} type="button" className={styles.editWrapper} ref={editRef}>
         <Pencil />
       </button>
     </div>

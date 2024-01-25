@@ -15,13 +15,14 @@
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 53.76%);
   background: var(--text3);
   cursor: pointer;
+  overflow: hidden;
+  border-radius: 1rem;
 }
 
 .item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 1rem;
 }
 
 .default-img {
