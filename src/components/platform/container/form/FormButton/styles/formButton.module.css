@@ -1,0 +1,32 @@
+.button-group {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.button-group button:hover {
+  opacity: 0.8;
+}
+
+.button {
+  all: unset;
+  display: flex;
+  width: 22.5rem;
+  height: 4.6rem;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+  border-radius: 0.5rem;
+  background: var(--bg-g, #f7f7f7);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+.add-button {
+  color: #fff;
+  background: var(--point1-80, #7433ff);
+  box-shadow: 0px 0px 10px 0px rgba(68, 9, 194, 0.1);
+}

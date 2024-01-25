@@ -2,7 +2,7 @@ import { resetPlatFormFile, setPlatFormFile } from '@/shared/store/platform';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { ChangeEvent, useState } from 'react';
-import styles from './styles/img.module.css';
+import styles from './styles/imgForm.module.css';
 import CloseButton from '/public/icons/close.svg';
 import Pencil from '/public/icons/pencil.svg';
 const ImgForm = () => {
@@ -38,7 +38,13 @@ const ImgForm = () => {
         >
           <CloseButton />
         </button>
-        <Image className={styles.img} src={preImage ?? DEFAULT_IMG} alt="default image" width={1000} height={1000} />
+        <Image
+          className={clsx(preImage ? styles.img : styles.defaultImg)}
+          src={preImage ?? DEFAULT_IMG}
+          alt="default image"
+          width={1000}
+          height={1000}
+        />
         <div className={styles.editIconWrapper}>
           <Pencil />
         </div>
