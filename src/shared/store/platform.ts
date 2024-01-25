@@ -19,8 +19,28 @@ interface PlatformStore {
     file?: File | null;
     createdAt?: string;
   };
+  prevData: {
+    id: string;
+    name: string;
+    link_url: string;
+    store_id?: string | null;
+    image_url?: string | null;
+    file?: File | null;
+    createdAt?: string;
+  };
   isEdit: boolean;
   fetchPlatFormData: Tables<'platform'>[];
+  prevImg: string | null;
+}
+
+interface PrevDataType {
+  id: string;
+  name: string;
+  link_url: string;
+  store_id?: string | null;
+  image_url?: string | null;
+  file?: File | null;
+  createdAt?: string;
 }
 
 const initialAddPlatform = {
@@ -37,6 +57,16 @@ const initialEditPlatForm = {
   file: null,
 };
 
+const initialPrevData = {
+  id: '',
+  name: '',
+  link_url: '',
+  image_url: null,
+  file: null,
+};
+
+const initialPrevImg = null;
+
 const initialFetchPlatForm: Tables<'platform'>[] = [];
 
 const usePlatFormStore = create<PlatformStore>()(() => ({
@@ -44,7 +74,9 @@ const usePlatFormStore = create<PlatformStore>()(() => ({
   isEdit: false,
   addPlatForm: initialAddPlatform,
   editPlatForm: initialEditPlatForm,
+  prevData: initialPrevData,
   fetchPlatFormData: initialFetchPlatForm,
+  prevImg: initialPrevImg,
 }));
 
 export default usePlatFormStore;
@@ -101,6 +133,22 @@ export const setPlatFormFile = (file: File) =>
   }));
 
 /**
+ *@parma 편집버튼 누르면 기존 데이터를 담는 함수
+ */
+
+export const setPrevData = (param: PrevDataType) =>
+  usePlatFormStore.setState(state => ({
+    ...state,
+    prevData: { ...state.prevData, ...param },
+  }));
+
+export const setPrevImg = (url: string) =>
+  usePlatFormStore.setState(state => ({
+    ...state,
+    prevImg: url ?? null,
+  }));
+
+/**
  *
  * @param data initial data저장 할 state
  * @returns
@@ -144,4 +192,15 @@ export const resetEditPlatForm = () =>
   usePlatFormStore.setState(state => ({
     ...state,
     editPlatForm: initialEditPlatForm,
+  }));
+
+export const resetIsEditMode = () =>
+  usePlatFormStore.setState(state => ({
+    ...state,
+    isEdit: false,
+  }));
+export const resetIsRegist = () =>
+  usePlatFormStore.setState(state => ({
+    ...state,
+    isRegist: false,
   }));

@@ -1,3 +1,4 @@
+import { setIsEdit, setIsRegist, setPrevData } from '@/shared/store/platform';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRef } from 'react';
@@ -19,6 +20,7 @@ interface ItemProps {
 const Item = ({ link, title, id, setEditTarget, imgUrl, setIsShowEditForm, setPreImage }: ItemProps) => {
   const editRef = useRef<HTMLButtonElement>(null);
   const linkRef = useRef<HTMLDivElement>(null);
+
   const editForm = () => {
     setEditTarget(pre => ({
       ...pre,
@@ -44,6 +46,17 @@ const Item = ({ link, title, id, setEditTarget, imgUrl, setIsShowEditForm, setPr
       editRef.current.style.display = 'none';
     }
   };
+
+  const clickShowEditPlatFormMoal = () => {
+    setPrevData({
+      id,
+      link_url: link,
+      name: title,
+      image_url: imgUrl ?? null,
+    });
+    setIsRegist(true);
+    setIsEdit(true);
+  };
   return (
     <div
       className={styles.itemWrapper}
@@ -67,7 +80,7 @@ const Item = ({ link, title, id, setEditTarget, imgUrl, setIsShowEditForm, setPr
           <span>이동하기</span>
         </div>
       </Link>
-      <button type="button" className={styles.editWrapper} ref={editRef}>
+      <button onClick={clickShowEditPlatFormMoal} type="button" className={styles.editWrapper} ref={editRef}>
         <Pencil />
       </button>
 

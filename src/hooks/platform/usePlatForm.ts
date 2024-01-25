@@ -1,5 +1,11 @@
 import { downloadPlatFormImageUrl, insertPlatFormRow, uploadPlatFormImage } from '@/server/api/supabase/platform';
-import usePlatFormStore, { resetAddPlatForm, setAddDataToFetchPlatForm, setIsRegist } from '@/shared/store/platform';
+import usePlatFormStore, {
+  resetAddPlatForm,
+  resetEditPlatForm,
+  resetIsRegist,
+  setAddDataToFetchPlatForm,
+  setIsRegist,
+} from '@/shared/store/platform';
 import { AddPlatFormType } from '@/types/platform';
 import moment from 'moment';
 import { FormEvent } from 'react';
@@ -33,14 +39,20 @@ const usePlatForm = () => {
     setIsRegist(false);
   };
 
-  const closeAddFormModal = () => {
-    setIsRegist(false);
-    resetAddPlatForm();
+  const closePlatFormModal = (mode: string) => {
+    if (mode === '새 플랫폼 등록') {
+      resetIsRegist();
+      resetAddPlatForm();
+    }
+    if (mode === '플랫폼 수정하기') {
+      resetIsRegist();
+      resetEditPlatForm();
+    }
   };
 
   return {
     submitAddCard,
-    closeAddFormModal,
+    closePlatFormModal,
   };
 };
 
