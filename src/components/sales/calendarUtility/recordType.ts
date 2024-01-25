@@ -1,8 +1,9 @@
+import { DateFormatType } from '@/types/sales';
 import moment, { Moment } from 'moment';
 
 export const formattedRecordType = (
   date: Moment | null,
-  dateType: 'day' | 'week' | 'month',
+  dateType: DateFormatType,
   formatType: 'M월 D일' | 'YYYY년 M월 D일',
 ) => {
   const SALES_TYPE = {

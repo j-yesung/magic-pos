@@ -1,11 +1,11 @@
 import { convertNumberToWon } from '@/shared/helper';
-import useDayState from '@/shared/store/sales/day';
-import useRecordStore from '@/shared/store/sales/record';
+import useDayState from '@/shared/store/sales/salesDay';
+import useSalesRecordState from '@/shared/store/sales/salesRecord';
 import { formattedRecordType } from '../../calendarUtility/recordType';
 import styles from './styles/Record.module.css';
 
 const Record = () => {
-  const record = useRecordStore(state => state.record);
+  const record = useSalesRecordState(state => state.record);
   // const selectedDate = useCalendarStore(state => state.selectedDate);
   const selectedDate = useDayState(state => state.selectedDate);
 

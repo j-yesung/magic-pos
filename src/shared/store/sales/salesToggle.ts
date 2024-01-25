@@ -8,7 +8,7 @@ interface SalesStore {
 /**
  * Value
  */
-const useSalesStore = create<SalesStore>()(() => ({
+const useSalesToggle = create<SalesStore>()(() => ({
   // calendar toggle
   isShow: false,
   // component 매출달력, 매출현황 toggle
@@ -20,26 +20,26 @@ const useSalesStore = create<SalesStore>()(() => ({
  */
 
 export const setIsShow = (param: boolean) =>
-  useSalesStore.setState(state => ({
+  useSalesToggle.setState(state => ({
     ...state,
     isShow: param,
   }));
 
 export const setIsChangeView = (param: boolean) =>
-  useSalesStore.setState(state => ({
+  useSalesToggle.setState(state => ({
     ...state,
     isChangeView: param,
   }));
 
 export const resetIsShow = () =>
-  useSalesStore.setState(state => ({
+  useSalesToggle.setState(state => ({
     ...state,
     isShow: false,
   }));
 
 export const resetIsChangeView = () =>
-  useSalesStore.setState(state => ({
+  useSalesToggle.setState(state => ({
     ...state,
     isChangeView: false,
   }));
-export default useSalesStore;
+export default useSalesToggle;

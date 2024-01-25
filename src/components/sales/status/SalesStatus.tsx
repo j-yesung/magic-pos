@@ -1,8 +1,8 @@
 import { getDaySales } from '@/server/api/supabase/sales';
-import { setCalendarCurrentDate } from '@/shared/store/sales/calendar';
-import { setChartData } from '@/shared/store/sales/chart';
-import useDayState, { resetSelectedDate } from '@/shared/store/sales/day';
-import { resetRecordData, setRecordData } from '@/shared/store/sales/record';
+import { setCalendarCurrentDate } from '@/shared/store/sales/salesCalendar';
+import { setChartData } from '@/shared/store/sales/salesChart';
+import useDayState, { resetSelectedDate } from '@/shared/store/sales/salesDay';
+import { resetRecordData, setRecordData } from '@/shared/store/sales/salesRecord';
 import useAuthState from '@/shared/store/session';
 import { Tables } from '@/types/supabase';
 import moment from 'moment';

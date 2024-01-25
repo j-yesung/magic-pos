@@ -1,9 +1,9 @@
-import useCalendarStore, { setCalendarCurrentDate } from '@/shared/store/sales/calendar';
-import useDayState from '@/shared/store/sales/day';
-import { setIsShow } from '@/shared/store/sales/sales';
+import useCalendarState, { setCalendarCurrentDate } from '@/shared/store/sales/salesCalendar';
+import useDayState from '@/shared/store/sales/salesDay';
+import { setIsShow } from '@/shared/store/sales/salesToggle';
 
 export const useCalendar = () => {
-  const currentDate = useCalendarStore(state => state.currentDate);
+  const currentDate = useCalendarState(state => state.currentDate);
   const selectedDate = useDayState(state => state.selectedDate);
 
   // 날짜 클릭하면 그 날짜를 기준으로 1주일 전꺼 까지 Data를 불러오는 함수입니다.

@@ -1,10 +1,10 @@
 import { convertNumberToWon } from '@/shared/helper';
-import useSalesStore from '@/shared/store/sales/sales';
+import useSalesToggle from '@/shared/store/sales/salesToggle';
 import { cva } from 'class-variance-authority';
 import moment, { Moment } from 'moment';
 
-import useCalendarStore from '@/shared/store/sales/calendar';
-import useDayState from '@/shared/store/sales/day';
+import useCalendarState from '@/shared/store/sales/salesCalendar';
+import useDayState from '@/shared/store/sales/salesDay';
 import { CalendarDataType, GetMinMaxSalesReturnType } from '@/types/sales';
 import {
   getCalendarDateType,
@@ -28,8 +28,8 @@ type Cell = (param: CellItemProps) => JSX.Element;
 const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDateHandler }) => {
   const SELECTED_DAY = 'SELECTEDTYPE';
   const SALES_NONE = 'NONE';
-  const isChangeView = useSalesStore(state => state.isChangeView);
-  const currentDate = useCalendarStore(staet => staet.currentDate);
+  const isChangeView = useSalesToggle(state => state.isChangeView);
+  const currentDate = useCalendarState(staet => staet.currentDate);
   const { selectedDate, today } = useDayState();
 
   const statusVariant = cva([styles.statusCalendarBase], {

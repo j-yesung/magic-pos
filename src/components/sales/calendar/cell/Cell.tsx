@@ -1,14 +1,14 @@
 import { useDataHandler } from '@/hooks/sales/useDataHandler';
 import { getMonthSales } from '@/server/api/supabase/sales';
 import { groupByKey } from '@/shared/helper';
-import useCalendarStore from '@/shared/store/sales/calendar';
-import useDataStore, {
+import useCalendarState from '@/shared/store/sales/salesCalendar';
+import useSalesDataState, {
   resetCalendarBindingData,
   resetSalesSum,
   setCalendarBindingData,
   setSalesSum,
-} from '@/shared/store/sales/data';
-import useSalesStore from '@/shared/store/sales/sales';
+} from '@/shared/store/sales/salesData';
+import useSalesToggle from '@/shared/store/sales/salesToggle';
 import useAuthState from '@/shared/store/session';
 import { Tables } from '@/types/supabase';
 import moment from 'moment';
@@ -19,9 +19,9 @@ import CellItem from '../cellItem/CellItem';
 import styles from './styles/cell.module.css';
 
 const Cell = () => {
-  const isChangeView = useSalesStore(state => state.isChangeView);
-  const calendarDataBindingData = useDataStore(state => state.calendarBindingData);
-  const currentDate = useCalendarStore(state => state.currentDate);
+  const isChangeView = useSalesToggle(state => state.isChangeView);
+  const calendarDataBindingData = useSalesDataState(state => state.calendarBindingData);
+  const currentDate = useCalendarState(state => state.currentDate);
   const { clickShowDataOfDateHandler } = useDataHandler();
 
   const startDay = currentDate.clone().startOf('month').startOf('week'); // monthStart가 속한 주의 시작 주

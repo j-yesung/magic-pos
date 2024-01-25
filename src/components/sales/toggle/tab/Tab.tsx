@@ -1,14 +1,14 @@
 import { useCalendar } from '@/hooks/sales/useCalendar';
-import useSalesStore from '@/shared/store/sales/sales';
+import useSalesToggle from '@/shared/store/sales/salesToggle';
 import { Fragment, useEffect } from 'react';
 import Calendar from '../../calendar/Calendar';
 import CalendarToggle from './calendarToggle/CalendarToggle';
 import styles from './styles/tab.module.css';
 import TabButton from './tabButton/TabButton';
 const Tab = () => {
-  const isShow = useSalesStore(state => state.isShow);
+  const isShow = useSalesToggle(state => state.isShow);
   const { clickHiddenCalendarHandler } = useCalendar();
-  const isChangeView = useSalesStore(state => state.isChangeView);
+  const isChangeView = useSalesToggle(state => state.isChangeView);
   useEffect(() => {
     /*reset*/
     return () => {

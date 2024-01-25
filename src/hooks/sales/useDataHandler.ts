@@ -1,10 +1,10 @@
 import { formatData } from '@/components/sales/calendarUtility/formatData';
 import { getDaySales, getMonthsSales, getWeekSales } from '@/server/api/supabase/sales';
-import { setCalendarCurrentDate } from '@/shared/store/sales/calendar';
-import { setChartData } from '@/shared/store/sales/chart';
-import useDayState, { setSelectedDate } from '@/shared/store/sales/day';
-import { setRecordData } from '@/shared/store/sales/record';
-import { setIsShow } from '@/shared/store/sales/sales';
+import { setCalendarCurrentDate } from '@/shared/store/sales/salesCalendar';
+import { setChartData } from '@/shared/store/sales/salesChart';
+import useDayState, { setSelectedDate } from '@/shared/store/sales/salesDay';
+import { setRecordData } from '@/shared/store/sales/salesRecord';
+import { setIsShow } from '@/shared/store/sales/salesToggle';
 import useAuthState from '@/shared/store/session';
 import { Moment } from 'moment';
 

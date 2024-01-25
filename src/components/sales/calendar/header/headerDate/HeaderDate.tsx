@@ -1,11 +1,11 @@
-import useCalendarStore from '@/shared/store/sales/calendar';
-import useSalesStore from '@/shared/store/sales/sales';
+import useCalendarState from '@/shared/store/sales/salesCalendar';
+import useSalesToggle from '@/shared/store/sales/salesToggle';
 import clsx from 'clsx';
 import { Fragment } from 'react';
 import styles from './styles/headerDate.module.css';
 const HeaderDate = () => {
-  const isChangeView = useSalesStore(state => state.isChangeView);
-  const currentDate = useCalendarStore(state => state.currentDate);
+  const isChangeView = useSalesToggle(state => state.isChangeView);
+  const currentDate = useCalendarState(state => state.currentDate);
   return (
     <Fragment>
       <span className={clsx(styles.headerText, !isChangeView && styles.calendarHeaderText)}>
