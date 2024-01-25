@@ -9,9 +9,9 @@ import {
 import { isEmptyObject } from '@/shared/helper';
 import usePlatFormStore, {
   resetEditPlatForm,
-  setAddPlatFormStoreId,
   setEditPlatForm,
   setFetchPlatFormData,
+  setPlatFormStoreId,
 } from '@/shared/store/platform';
 import useAuthState from '@/shared/store/session';
 import { TablesInsert } from '@/types/supabase';
@@ -47,7 +47,7 @@ export interface EditFormType {
 
 const PlatFormWrapper = () => {
   const storeId = useAuthState(state => state.storeId);
-  setAddPlatFormStoreId(storeId!);
+  setPlatFormStoreId(storeId!);
 
   const isRegist = usePlatFormStore(state => state.isRegist);
 

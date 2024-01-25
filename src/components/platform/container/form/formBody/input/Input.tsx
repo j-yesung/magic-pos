@@ -1,14 +1,29 @@
-import { setAddPlatForm } from '@/shared/store/platform';
+import usePlatFormStore, { setAddPlatForm, setEditPlatForm } from '@/shared/store/platform';
+import styles from './styles/input.module.css';
 
-interface InputType {
-  name: string;
-  type: string;
-  placeholder: string;
-  className: string;
-}
-const Input = (props: InputType) => {
-  const { name, type, placeholder, className } = props;
-  return <input type={type} className={className} name={name} placeholder={placeholder} onChange={setAddPlatForm} />;
+const Input = ({ mode }: { mode: boolean }) => {
+  const editPlatForm = usePlatFormStore(state => state.editPlatForm);
+  console.log(editPlatForm);
+  return (
+    <div className={styles.inputWrapper}>
+      <input
+        name="link_url"
+        type="text"
+        placeholder="link를 넣어주세요"
+        className={styles.input}
+        onChange={!mode ? setAddPlatForm : setEditPlatForm}
+        {...(mode && { value: editPlatForm.link_url })}
+      />
+      <input
+        className={styles.input}
+        name="name"
+        type="text"
+        placeholder="사이트 주소"
+        onChange={!mode ? setAddPlatForm : setEditPlatForm}
+        {...(mode && { value: editPlatForm.name })}
+      />
+    </div>
+  );
 };
 
 export default Input;

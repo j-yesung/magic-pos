@@ -10,8 +10,8 @@ const Form = () => {
   return (
     <form onSubmit={submitAddCard} className={styles.formContainer}>
       <FormHeader mode={isEdit} />
-      <FormBody />
-      <FormButton />
+      <FormBody mode={isEdit} />
+      <FormButton mode={isEdit} />
     </form>
   );
 };

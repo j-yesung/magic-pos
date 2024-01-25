@@ -1,33 +1,15 @@
+import { EditFormType } from '@/components/platform/container/PlatFormWrapper';
+import { AddPlatFormType, EditPlatFormType } from '@/types/platform';
 import { Tables } from '@/types/supabase';
 import { ChangeEvent } from 'react';
 import { create } from 'zustand';
 
 interface PlatformStore {
+  store_id: string | null;
   isRegist: boolean;
-  addPlatForm: {
-    file: File | null;
-    name: string;
-    store_id: string;
-    link_url: string;
-  };
-  editPlatForm: {
-    id: string;
-    name: string;
-    link_url: string;
-    store_id?: string | null;
-    image_url?: string | null;
-    file?: File | null;
-    createdAt?: string;
-  };
-  prevData: {
-    id: string;
-    name: string;
-    link_url: string;
-    store_id?: string | null;
-    image_url?: string | null;
-    file?: File | null;
-    createdAt?: string;
-  };
+  addPlatForm: AddPlatFormType;
+  editPlatForm: EditPlatFormType;
+  prevData: EditFormType;
   isEdit: boolean;
   fetchPlatFormData: Tables<'platform'>[];
   prevImg: string | null;
@@ -55,6 +37,7 @@ const initialEditPlatForm = {
   link_url: '',
   image_url: null,
   file: null,
+  store_id: null,
 };
 
 const initialPrevData = {
@@ -63,6 +46,7 @@ const initialPrevData = {
   link_url: '',
   image_url: null,
   file: null,
+  store_id: null,
 };
 
 const initialPrevImg = null;
@@ -70,6 +54,7 @@ const initialPrevImg = null;
 const initialFetchPlatForm: Tables<'platform'>[] = [];
 
 const usePlatFormStore = create<PlatformStore>()(() => ({
+  store_id: null,
   isRegist: false,
   isEdit: false,
   addPlatForm: initialAddPlatform,
@@ -95,6 +80,20 @@ export const setIsEdit = (param: boolean) =>
     isEdit: param,
   }));
 
+export const setPlatFormStoreId = (store_id: string) =>
+  usePlatFormStore.setState(state => ({
+    ...state,
+    store_id,
+    addPlatForm: {
+      ...state.addPlatForm,
+      store_id,
+    },
+    editPlatForm: {
+      ...state.editPlatForm,
+      store_id,
+    },
+  }));
+
 /**
  *
  * @param e AddForm
@@ -107,15 +106,6 @@ export const setAddPlatForm = (e: ChangeEvent<HTMLInputElement>) => {
   }));
 };
 
-export const setAddPlatFormStoreId = (store_id: string) =>
-  usePlatFormStore.setState(state => ({
-    ...state,
-    addPlatForm: {
-      ...state.addPlatForm,
-      store_id,
-    },
-  }));
-
 /**
  *  수정할 데이터
  */
@@ -126,11 +116,26 @@ export const setEditPlatForm = (e: ChangeEvent<HTMLInputElement>) => {
     editPlatForm: { ...state.editPlatForm, [name]: value },
   }));
 };
-export const setPlatFormFile = (file: File) =>
-  usePlatFormStore.setState(state => ({
-    ...state,
-    addPlatForm: { ...state.addPlatForm, file },
-  }));
+
+/**
+ *
+ * @param file
+ * @param mode mode가 true 면 edit일 때, mode가 false 이면 add 일 때
+ */
+export const setPlatFormFile = (file: File, mode: boolean) => {
+  if (!mode) {
+    usePlatFormStore.setState(state => ({
+      ...state,
+      addPlatForm: { ...state.addPlatForm, file },
+    }));
+  }
+  if (mode) {
+    usePlatFormStore.setState(state => ({
+      ...state,
+      editPlatForm: { ...state.editPlatForm, file },
+    }));
+  }
+};
 
 /**
  *@parma 편집버튼 누르면 기존 데이터를 담는 함수
@@ -140,6 +145,8 @@ export const setPrevData = (param: PrevDataType) =>
   usePlatFormStore.setState(state => ({
     ...state,
     prevData: { ...state.prevData, ...param },
+    editPlatForm: { ...state.editPlatForm, ...param },
+    prevImg: param.image_url,
   }));
 
 export const setPrevImg = (url: string) =>
@@ -165,7 +172,6 @@ export const setFetchPlatFormData = (data: Tables<'platform'>[]) =>
  * @returns
  */
 export const setAddDataToFetchPlatForm = (data: Tables<'platform'>[]) => {
-  console.log(data);
   usePlatFormStore.setState(state => ({
     ...state,
     fetchPlatFormData: [...state.fetchPlatFormData, ...data],
@@ -174,13 +180,22 @@ export const setAddDataToFetchPlatForm = (data: Tables<'platform'>[]) => {
 
 /**
  *
- * @returns state값 reset입니다.
+ * @param mode false 면 카드 등록 할 때 file true면 편집할 때 file을 초기화
  */
-export const resetPlatFormFile = () =>
-  usePlatFormStore.setState(state => ({
-    ...state,
-    addPlatForm: { ...state.addPlatForm, file: null },
-  }));
+export const resetPlatFormFile = (mode: boolean) => {
+  if (!mode) {
+    usePlatFormStore.setState(state => ({
+      ...state,
+      addPlatForm: { ...state.addPlatForm, file: null },
+    }));
+  }
+  if (mode) {
+    usePlatFormStore.setState(state => ({
+      ...state,
+      editPlatForm: { ...state.editPlatForm, file: null, image_url: null },
+    }));
+  }
+};
 
 export const resetAddPlatForm = () =>
   usePlatFormStore.setState(state => ({
@@ -203,4 +218,16 @@ export const resetIsRegist = () =>
   usePlatFormStore.setState(state => ({
     ...state,
     isRegist: false,
+  }));
+
+export const resetPrevImg = () =>
+  usePlatFormStore.setState(state => ({
+    ...state,
+    prevImg: null,
+  }));
+
+export const resetPrevData = () =>
+  usePlatFormStore.setState(state => ({
+    ...state,
+    prevData: initialPrevData,
   }));

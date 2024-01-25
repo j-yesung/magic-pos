@@ -2,6 +2,7 @@
 
 import { AddFormType, EditFormType } from '@/components/platform/container/PlatFormWrapper';
 import { supabase } from '@/shared/supabase';
+import { EditPlatFormType } from '@/types/platform';
 import { TablesInsert } from '@/types/supabase';
 
 /**
@@ -104,6 +105,7 @@ export const insertPlatFormRow = async (param: AddFormType | EditFormType) => {
 };
 
 export const fetchPlatForm = async (store_id: string) => {
+  console.log(store_id);
   const { data: platform, error } = await supabase
     .from('platform')
     .select('*')
@@ -115,7 +117,8 @@ export const fetchPlatForm = async (store_id: string) => {
   return { platform, error };
 };
 
-export const removePlatFormImage = async (param: EditFormType) => {
+export const removePlatFormImage = async (param: EditPlatFormType) => {
+  if (!param.image_url) return;
   const imagePath = param?.image_url?.split('/').slice(-1)[0];
   const { error, data } = await supabase.storage.from('images').remove([`platform/${param.store_id}/${imagePath}`]);
 };
