@@ -14,6 +14,7 @@
   align-items: center;
   gap: 1rem;
   width: 10rem;
+
   color: var(--text1);
   text-align: center;
   font-size: 2rem;
@@ -45,6 +46,9 @@
   letter-spacing: -0.03rem;
 }
 
+.shop-list-item:hover {
+  background-color: #ccf;
+}
 div.item-menu-list {
   width: 100%;
   display: flex;
