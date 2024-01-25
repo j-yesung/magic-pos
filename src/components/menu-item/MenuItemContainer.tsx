@@ -5,19 +5,17 @@ import useMenuItemStore from '@/shared/store/menu-item';
 import useAuthState from '@/shared/store/session';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import MenuItemListPage from './items/MenuItemList';
 import styles from './styles/menu-item-container.module.css';
 
 const MenuItemsComponentPage = () => {
   const storeId = useAuthState(state => state.storeId);
-  const { data: categoryWithMenuData } = useFetchMenuItems(storeId ?? '');
-  const { data: menuOptionData } = useFetchMenuOptions();
+  const { data: categoryWithMenuData, isLoading: menuItemLoading } = useFetchMenuItems(storeId ?? '');
+  const { data: menuOptionData, isLoading: menuOptionLoading } = useFetchMenuOptions();
   const router = useRouter();
 
   const {
-    menuItem,
-    setMenuItem,
     setMenuItemList,
     categoryWithMenuItem,
     setCategoryWithMenuItem,
@@ -28,9 +26,14 @@ const MenuItemsComponentPage = () => {
     changeMenuOptions,
   } = useMenuItemStore();
 
+  const choicefetchData = useRef(false);
+
   useEffect(() => {
     if (categoryWithMenuData?.error === null) {
       setCategoryWithMenuItemList(categoryWithMenuData?.data);
+      if (choicefetchData.current === false && choicefetchData.current !== undefined) {
+        choicefetchData.current = true;
+      }
     }
     if (menuOptionData?.error === null) {
       setMenuOptions(menuOptionData?.data);
@@ -52,8 +55,9 @@ const MenuItemsComponentPage = () => {
         setMenuItemList(categoryWithMenuData?.data[0].menu_item);
       }
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [choicefetchData]);
 
   useEffect(() => {
     fetchData();
@@ -66,6 +70,11 @@ const MenuItemsComponentPage = () => {
     setOrigineMenuOptions(data);
     return data;
   };
+
+  if (menuItemLoading || menuOptionLoading) {
+    // 데이터 로딩 중일 때
+    return <div></div>;
+  }
 
   return (
     <div

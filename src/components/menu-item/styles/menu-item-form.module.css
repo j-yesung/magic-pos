@@ -197,6 +197,9 @@
 
 /* 메뉴 옵션 미니 버튼들 */
 
+.mini-plus-btn {
+  cursor: pointer;
+}
 .mini-edit-btn {
   width: 2.9rem;
   height: 2.9rem;

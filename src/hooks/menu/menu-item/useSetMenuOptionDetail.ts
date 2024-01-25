@@ -48,10 +48,10 @@ export const useSetMenuOptionDetail = () => {
   });
 
   return {
-    addMutate: addMutate.mutate,
-    addUpsertMutate: addUpsertMutate.mutate,
-    updateMutate: updateMutate.mutate,
-    deleteMutate: deleteMutate.mutate,
+    addOptionDetailMutate: addMutate.mutate,
+    addUpsertOptionDetailMutate: addUpsertMutate.mutate,
+    updateOptionDetailMutate: updateMutate.mutate,
+    removeOptionDetailMutate: deleteMutate.mutate,
   };
 };
 

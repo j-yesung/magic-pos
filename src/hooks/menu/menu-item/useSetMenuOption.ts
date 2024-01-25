@@ -25,7 +25,7 @@ export const useSetMenuOption = () => {
     },
   });
 
-  const deleteMutate = useMutation({
+  const removeMutate = useMutation({
     mutationFn: removeMenuOption,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.MENU_OPTION] });
@@ -33,9 +33,9 @@ export const useSetMenuOption = () => {
   });
 
   return {
-    addMutate: addMutate.mutate,
-    updateNameMutate: updateMutate.mutate,
-    deleteMutate: deleteMutate.mutate,
+    addOptionMutate: addMutate,
+    updateOptionMutate: updateMutate.mutate,
+    removeOptionMutate: removeMutate.mutate,
   };
 };
 
