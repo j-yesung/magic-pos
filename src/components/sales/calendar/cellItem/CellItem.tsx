@@ -4,6 +4,7 @@ import { cva } from 'class-variance-authority';
 import moment, { Moment } from 'moment';
 
 import useCalendarStore from '@/shared/store/sales/calendar';
+import useDayState from '@/shared/store/sales/day';
 import { CalendarDataType, GetMinMaxSalesReturnType } from '@/types/sales';
 import {
   getCalendarDateType,
@@ -28,7 +29,8 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
   const SELECTED_DAY = 'SELECTEDTYPE';
   const SALES_NONE = 'NONE';
   const isChangeView = useSalesStore(state => state.isChangeView);
-  const { currentDate, selectedDate, today } = useCalendarStore();
+  const currentDate = useCalendarStore(staet => staet.currentDate);
+  const { selectedDate, today } = useDayState();
 
   const statusVariant = cva([styles.statusCalendarBase], {
     variants: {
