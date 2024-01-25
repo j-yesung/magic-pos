@@ -37,9 +37,7 @@ const OrderItem = ({ orderData }: { orderData: OrderDataWithStoreName }) => {
         {[...group]?.map(([key, item]) => {
           return (
             <li key={key} className={styles['menu-list-item']}>
-              {/* <span>
-                  <Image src={item.image_url ?? ''} alt="" width="30" height="30" />
-                </span> */}
+              
               <div className={styles['menu-name']}>
                 <span>{item[0].name}</span>
                 <span>{item.length}</span>

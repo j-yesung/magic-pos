@@ -5,18 +5,13 @@ import { ReactNode } from 'react';
 
 const ManagementPage = () => {
   return (
-    <div>
+    <>
       <style jsx global>{`
         @media only all and (max-width: 1520px) {
           html {
             font-size: 8px;
           }
         }
-        // @media only all and (max-width: 1320px) {
-        //   html {
-        //     font-size: 7px;
-        //   }
-        // }
       `}</style>
       <Head>
         <title>magic pos 운영모드</title>
@@ -24,7 +19,7 @@ const ManagementPage = () => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Management />
-    </div>
+    </>
   );
 };
 ManagementPage.getLayout = (page: ReactNode) => <AdminLayout>{page}</AdminLayout>;
