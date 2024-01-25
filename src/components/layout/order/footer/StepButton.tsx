@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import useKioskState, { getTotalPrice, goNextStep, ORDER_STEP, subtractOrderList } from '@/shared/store/kiosk';
-import { usePaymentWidget } from '@/hooks/order/usePaymentWidget';
+import { usePaymentWidget } from '@/hooks/query/order/usePaymentWidget';
 import styles from './styles/StepButton.module.css';
 import { convertNumberToWon } from '@/shared/helper';
 import AddCartButton from '@/components/layout/order/footer/AddCartButton';

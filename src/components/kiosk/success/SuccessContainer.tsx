@@ -1,5 +1,5 @@
-import { useNumberOrderSetQuery } from '@/hooks/order/useNumberOrderSetQuery';
-import { useStoreOrderSetQuery } from '@/hooks/order/useStoreOrderSetQuery';
+import { useNumberOrderSetQuery } from '@/hooks/query/order/useNumberOrderSetQuery';
+import { useStoreOrderSetQuery } from '@/hooks/query/order/useStoreOrderSetQuery';
 import { useStoreSetQuery } from '@/hooks/query/store/useStoreSetQuery';
 import { useSalesQuery } from '@/hooks/sales/useSalesQuery';
 import { decrementRemainEaByMenuId } from '@/server/api/supabase/menu-item';
