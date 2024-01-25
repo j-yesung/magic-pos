@@ -1,5 +1,4 @@
-import { EditPlatFormType } from '@/components/platform/container/PlatFormWrapper';
-import { AddPlatFormType } from '@/types/platform';
+import { AddPlatFormType, EditPlatFormType } from '@/types/platform';
 import { Tables } from '@/types/supabase';
 import { ChangeEvent } from 'react';
 import { create } from 'zustand';
