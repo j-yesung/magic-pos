@@ -6,6 +6,7 @@ const FormButton = ({ mode }: { mode: boolean }) => {
   const REMOVE_MODE = '삭제';
 
   const { closePlatFormModal, clickRemoveData } = usePlatForm();
+
   return (
     <div className={styles.buttonGroup}>
       <button
@@ -13,13 +14,8 @@ const FormButton = ({ mode }: { mode: boolean }) => {
         className={clsx(styles.button, {
           [styles.removeButton]: mode,
         })}
-        onClick={
-          !mode
-            ? () => closePlatFormModal(mode)
-            : async () => {
-                await clickRemoveData();
-              }
-        }
+        {...(!mode && { onClick: () => closePlatFormModal(mode) })}
+        {...(mode && { onClick: async () => clickRemoveData() })}
       >
         {!mode ? CANCEL_MODE : REMOVE_MODE}
       </button>
