@@ -1,9 +1,9 @@
 import { convertNumberToWon } from '@/shared/helper';
-import useChartStore from '@/shared/store/sales/chart';
+import useChartState from '@/shared/store/sales/salesChart';
 import { ChartData, ChartOptions } from 'chart.js';
 const useChartData = () => {
   const CHART_MAIN_COLOR = '#7433FF';
-  const chartData = useChartStore(state => state.chartData);
+  const chartData = useChartState(state => state.chartData);
 
   const data: ChartData<
     'bar',

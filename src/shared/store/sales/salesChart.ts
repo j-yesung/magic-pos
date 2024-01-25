@@ -7,18 +7,18 @@ interface ChartStore {
   }[];
 }
 
-const useChartStore = create<ChartStore>()(() => ({
+const useChartState = create<ChartStore>()(() => ({
   chartData: [],
 }));
 
 export const setChartData = (sales: { x: string; y: number }[]) =>
-  useChartStore.setState(state => ({
+  useChartState.setState(state => ({
     ...state,
     chartData: sales,
   }));
 export const resetChartData = () =>
-  useChartStore.setState(state => ({
+  useChartState.setState(state => ({
     ...state,
     chartData: [],
   }));
-export default useChartStore;
+export default useChartState;

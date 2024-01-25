@@ -8,7 +8,7 @@ interface CalendarStore {
 /**
  * Value
  */
-const useCalendarStore = create<CalendarStore>()(() => ({
+const useCalendarState = create<CalendarStore>()(() => ({
   currentDate: moment(),
 }));
 
@@ -16,10 +16,10 @@ const useCalendarStore = create<CalendarStore>()(() => ({
  * Action
  */
 export const setCalendarCurrentDate = (currentDate: Moment) =>
-  useCalendarStore.setState(state => ({
+  useCalendarState.setState(state => ({
     ...state,
     currentDate,
   }));
 
-export const resetCurrentDate = () => useCalendarStore.setState(state => ({ ...state, currentDate: moment() }));
-export default useCalendarStore;
+export const resetCurrentDate = () => useCalendarState.setState(state => ({ ...state, currentDate: moment() }));
+export default useCalendarState;

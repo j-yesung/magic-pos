@@ -4,7 +4,7 @@ interface RecordStore {
   record: RecordType;
 }
 
-const useRecordStore = create<RecordStore>()(() => ({
+const useSalesRecordState = create<RecordStore>()(() => ({
   record: {
     currentSales: 0,
     dateType: 'day',
@@ -12,7 +12,7 @@ const useRecordStore = create<RecordStore>()(() => ({
 }));
 
 export const setRecordData = (sales: RecordType) =>
-  useRecordStore.setState(state => ({
+  useSalesRecordState.setState(state => ({
     ...state,
     record: {
       currentSales: sales.currentSales,
@@ -21,10 +21,10 @@ export const setRecordData = (sales: RecordType) =>
   }));
 
 export const resetRecordData = () =>
-  useRecordStore.setState(() => ({
+  useSalesRecordState.setState(() => ({
     record: {
       currentSales: 0,
       dateType: 'day',
     },
   }));
-export default useRecordStore;
+export default useSalesRecordState;

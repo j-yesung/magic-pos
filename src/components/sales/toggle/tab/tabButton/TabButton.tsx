@@ -1,6 +1,6 @@
 import Button from '@/components/common/Button';
 import { useDataHandler } from '@/hooks/sales/useDataHandler';
-import useDayState from '@/shared/store/sales/day';
+import useDayState from '@/shared/store/sales/salesDay';
 import clsx from 'clsx';
 import moment from 'moment';
 import { useEffect, useState } from 'react';

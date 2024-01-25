@@ -1,4 +1,4 @@
-import useSalesStore from '@/shared/store/sales/sales';
+import useSalesToggle from '@/shared/store/sales/salesToggle';
 import 'moment/locale/ko';
 import Cell from './cell/Cell';
 import Days from './days/Days';
@@ -9,7 +9,7 @@ import styles from './styles/calendar.module.css';
  */
 
 const Calendar = ({ children }: { children?: React.ReactNode }) => {
-  const isChangeView = useSalesStore(state => state.isChangeView);
+  const isChangeView = useSalesToggle(state => state.isChangeView);
 
   return (
     <div className={isChangeView ? styles.salesStatus : styles.showCalendar}>

@@ -1,11 +1,11 @@
 import { useCalendar } from '@/hooks/sales/useCalendar';
-import useDayState from '@/shared/store/sales/day';
-import useSalesStore from '@/shared/store/sales/sales';
+import useDayState from '@/shared/store/sales/salesDay';
+import useSalesToggle from '@/shared/store/sales/salesToggle';
 import { IoCalendarClearOutline } from 'react-icons/io5';
 import styles from './styles/calendarToggle.module.css';
 
 const CalendarToggle = () => {
-  const isChangeView = useSalesStore(state => state.isChangeView);
+  const isChangeView = useSalesToggle(state => state.isChangeView);
   const selectedDate = useDayState(state => state.selectedDate);
   const { clickShowCalendarHandler } = useCalendar();
 
