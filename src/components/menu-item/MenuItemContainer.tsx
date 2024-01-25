@@ -3,12 +3,20 @@ import useFetchMenuOptions from '@/hooks/menu/menu-item/useFetchMenuOption';
 import { fetchMenuOptions } from '@/server/api/supabase/menu-item';
 import useMenuItemStore from '@/shared/store/menu-item';
 import useAuthState from '@/shared/store/session';
+import { MenuItemWithOption } from '@/types/supabase';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
 import MenuItemListPage from './items/MenuItemList';
 import styles from './styles/menu-item-container.module.css';
 
+interface CategoryWithType {
+  menu_item: MenuItemWithOption[];
+  id: string;
+  name: string | null;
+  position: number | null;
+  store_id: string;
+}
 const MenuItemsComponentPage = () => {
   const storeId = useAuthState(state => state.storeId);
   const { data: categoryWithMenuData, isLoading: menuItemLoading } = useFetchMenuItems(storeId ?? '');
@@ -26,13 +34,15 @@ const MenuItemsComponentPage = () => {
     changeMenuOptions,
   } = useMenuItemStore();
 
-  const choicefetchData = useRef(false);
+  const dummyFetchData = useRef<CategoryWithType[]>([]);
+  const choiceFetchData = useRef(false);
 
   useEffect(() => {
     if (categoryWithMenuData?.error === null) {
       setCategoryWithMenuItemList(categoryWithMenuData?.data);
-      if (choicefetchData.current === false && choicefetchData.current !== undefined) {
-        choicefetchData.current = true;
+      if (choiceFetchData.current === false && dummyFetchData.current !== undefined) {
+        dummyFetchData.current = categoryWithMenuData?.data;
+        choiceFetchData.current = true;
       }
     }
     if (menuOptionData?.error === null) {
@@ -57,7 +67,7 @@ const MenuItemsComponentPage = () => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [choicefetchData]);
+  }, [dummyFetchData]);
 
   useEffect(() => {
     fetchData();
