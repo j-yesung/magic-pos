@@ -8,26 +8,22 @@ import CloseButton from '/public/icons/close.svg';
 const ManagementSideBar = ({ managementData }: { managementData?: StoreWithOrderInfo[] }) => {
   const { isSideBar, orderStatus, tableNumber, setIsSideBar } = useManagementStore();
 
+  const clickCloseSideBarHandler = () => {
+    setIsSideBar();
+  };
+
   return (
     <>
       <div
         className={clsx(styles['side-bar-background'], isSideBar && styles['show-side-bar-bg'])}
-        onClick={() => {
-          setIsSideBar();
-        }}
+        onClick={clickCloseSideBarHandler}
       ></div>
       <div className={clsx(styles['side-bar-wrapper'], isSideBar && styles['show-side-bar'])}>
         <div className={styles['side-bar-title']}>
           <span>
-            {' '}
             {orderStatus} {tableNumber}
           </span>
-          <span
-            className={styles['close-button']}
-            onClick={() => {
-              setIsSideBar();
-            }}
-          >
+          <span className={styles['close-button']} onClick={clickCloseSideBarHandler}>
             <CloseButton width={40} height={40} />
           </span>
         </div>
