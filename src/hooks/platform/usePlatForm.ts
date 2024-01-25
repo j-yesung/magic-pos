@@ -12,6 +12,7 @@ const usePlatForm = () => {
 
     // image 경로로 사용하기 위해 createdAt를 넣었습니다.
     let updateData: AddPlatFormType = { ...addPlatform, createdAt: moment().toISOString() };
+
     /**useModal 사용하기 */
     if (!addPlatform.name.trim() || !addPlatform.link_url.trim()) return alert('써라');
 
@@ -25,7 +26,6 @@ const usePlatForm = () => {
       const { data } = await insertPlatFormRow(updateData);
       setAddDataToFetchPlatForm(data!);
     } else {
-      const { file, createdAt, ...insertData } = updateData;
       const { data } = await insertPlatFormRow(updateData);
       setAddDataToFetchPlatForm(data!);
     }
