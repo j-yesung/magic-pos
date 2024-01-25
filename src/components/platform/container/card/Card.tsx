@@ -1,17 +1,10 @@
 import { fetchPlatForm } from '@/server/api/supabase/platform';
 import usePlatFormStore, { setFetchPlatFormData } from '@/shared/store/platform';
 import { useEffect } from 'react';
-import { EditFormType } from '../PlatFormWrapper';
 import Item from './item/Item';
 import styles from './styles/card.module.css';
 
-interface CardPropsType {
-  isEdit: boolean;
-  setEditTarget: React.Dispatch<React.SetStateAction<EditFormType>>;
-  setIsShowEditForm: React.Dispatch<React.SetStateAction<boolean>>;
-  setPreImage: React.Dispatch<React.SetStateAction<string | null>>;
-}
-const Card = ({ isEdit, setEditTarget, setIsShowEditForm, setPreImage }: CardPropsType) => {
+const Card = () => {
   const {
     addPlatForm: { store_id },
     fetchPlatFormData,
@@ -38,12 +31,8 @@ const Card = ({ isEdit, setEditTarget, setIsShowEditForm, setPreImage }: CardPro
               key={`${card.created_at + card.name}`}
               link={card.link_url!}
               title={card.name!}
-              isEdit={isEdit}
               id={card.id}
               imgUrl={card.image_url}
-              setEditTarget={setEditTarget}
-              setIsShowEditForm={setIsShowEditForm}
-              setPreImage={setPreImage}
             />
           );
         })}

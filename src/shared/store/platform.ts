@@ -1,5 +1,5 @@
-import { EditFormType } from '@/components/platform/container/PlatFormWrapper';
-import { AddPlatFormType, EditPlatFormType } from '@/types/platform';
+import { EditPlatFormType } from '@/components/platform/container/PlatFormWrapper';
+import { AddPlatFormType } from '@/types/platform';
 import { Tables } from '@/types/supabase';
 import { ChangeEvent } from 'react';
 import { create } from 'zustand';
@@ -9,7 +9,7 @@ interface PlatformStore {
   isRegist: boolean;
   addPlatForm: AddPlatFormType;
   editPlatForm: EditPlatFormType;
-  prevData: EditFormType;
+  prevData: EditPlatFormType;
   isEdit: boolean;
   fetchPlatFormData: Tables<'platform'>[];
   prevImg: string | null;

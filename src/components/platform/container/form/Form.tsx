@@ -6,9 +6,9 @@ import FormHeader from './formHeader/FormHeader';
 import styles from './styles/form.module.css';
 const Form = () => {
   const isEdit = usePlatFormStore(state => state.isEdit);
-  const { submitAddCard } = usePlatForm();
+  const { submitAddCard, submitEditCard } = usePlatForm();
   return (
-    <form onSubmit={submitAddCard} className={styles.formContainer}>
+    <form onSubmit={!isEdit ? submitAddCard : submitEditCard} className={styles.formContainer}>
       <FormHeader mode={isEdit} />
       <FormBody mode={isEdit} />
       <FormButton mode={isEdit} />

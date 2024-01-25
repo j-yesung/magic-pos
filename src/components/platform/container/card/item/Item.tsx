@@ -3,36 +3,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRef } from 'react';
 import { LuExternalLink } from 'react-icons/lu';
-import { EditFormType } from '../../PlatFormWrapper';
 import styles from './styles/item.module.css';
 import Pencil from '/public/icons/pencil.svg';
 import Default from '/public/whiteLogo.svg';
 interface ItemProps {
   link: string;
   title: string;
-  isEdit: boolean;
   id: string;
-  setEditTarget: React.Dispatch<React.SetStateAction<EditFormType>>;
   imgUrl: string | null;
-  setIsShowEditForm: React.Dispatch<React.SetStateAction<boolean>>;
-  setPreImage: React.Dispatch<React.SetStateAction<string | null>>;
 }
-const Item = ({ link, title, id, setEditTarget, imgUrl, setIsShowEditForm, setPreImage }: ItemProps) => {
+const Item = ({ link, title, id, imgUrl }: ItemProps) => {
   const editRef = useRef<HTMLButtonElement>(null);
   const linkRef = useRef<HTMLDivElement>(null);
-
-  const editForm = () => {
-    setEditTarget(pre => ({
-      ...pre,
-      id,
-      link_url: link,
-      name: title,
-      image_url: imgUrl ?? null,
-    }));
-
-    setPreImage(imgUrl);
-    setIsShowEditForm(true);
-  };
 
   const mouseEnterShowEditButton = () => {
     if (editRef.current && linkRef.current) {
@@ -83,8 +65,6 @@ const Item = ({ link, title, id, setEditTarget, imgUrl, setIsShowEditForm, setPr
       <button onClick={clickShowEditPlatFormMoal} type="button" className={styles.editWrapper} ref={editRef}>
         <Pencil />
       </button>
-
-      {/* {isEdit && <span onClick={editForm} className={styles.edit}></span>} */}
     </div>
   );
 };
