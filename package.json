@@ -21,6 +21,7 @@
     "deepl-node": "^1.11.0",
     "file-loader": "^6.2.0",
     "file-saver": "^2.0.5",
+    "framer-motion": "^11.0.3",
     "html2canvas": "^1.4.1",
     "i18next": "^23.7.18",
     "i18next-http-backend": "^2.4.2",

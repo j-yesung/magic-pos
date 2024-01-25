@@ -1,6 +1,7 @@
 import { createDummyData } from '@/data/dummy';
 import { useEffect, useState } from 'react';
 import styles from '../styles/Home.module.css';
+import WateMark from './WateMark';
 
 const SliderArea = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -38,6 +39,7 @@ const SliderArea = () => {
               </ul>
             </div>
           ))}
+          <WateMark />
         </section>
       )}
     </>
