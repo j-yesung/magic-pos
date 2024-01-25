@@ -1,7 +1,7 @@
 import Button from '@/components/common/Button';
 import QrCodeModal from '@/components/qrCodeModal/QrCodeModal';
 import { modeSubText, modeText } from '@/data/admin';
-import { useModal } from '@/hooks/modal/useModal';
+import { useModal } from '@/hooks/service/ui/useModal';
 import { useAuthSetQuery } from '@/hooks/query/auth/useAuthSetQuery';
 import useSideBar, { setIsSideBarOpen } from '@/shared/store/sidebar';
 import useToggleState from '@/shared/store/toggle';

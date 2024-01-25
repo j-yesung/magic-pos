@@ -15,7 +15,7 @@ import useKioskState, {
 } from '@/shared/store/kiosk';
 import { useRouter } from 'next/router';
 import KioskContainer from '@/components/kiosk/KioskContainer';
-import { useModal } from '@/hooks/modal/useModal';
+import { useModal } from '@/hooks/service/ui/useModal';
 import { useIsInvalidURL, useIsOrderAllReady } from '@/hooks/service/useKiosk';
 import { translateMenuData } from '@/server/service/translate';
 import { TargetLanguageCode } from 'deepl-node';

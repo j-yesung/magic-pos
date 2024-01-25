@@ -1,4 +1,4 @@
-import { useModal } from '@/hooks/modal/useModal';
+import { useModal } from '@/hooks/service/ui/useModal';
 import { useEffect } from 'react';
 import { FaCheck } from 'react-icons/fa6';
 import styles from './styles/CartAlertModal.module.css';

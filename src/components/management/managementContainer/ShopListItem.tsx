@@ -1,4 +1,4 @@
-import useToast from '@/hooks/toast/useToast';
+import useToast from '@/hooks/service/ui/useToast';
 import { groupByKey } from '@/shared/helper';
 import useManagementStore from '@/shared/store/management';
 import { MenuItemWithOption, Tables } from '@/types/supabase';

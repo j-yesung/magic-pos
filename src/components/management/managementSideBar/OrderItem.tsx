@@ -1,5 +1,5 @@
 import useSetManagement from '@/hooks/management/useSetManagement';
-import { useModal } from '@/hooks/modal/useModal';
+import { useModal } from '@/hooks/service/ui/useModal';
 import { groupByKey } from '@/shared/helper';
 import { MenuItemWithOption, OrderDataWithStoreName } from '@/types/supabase';
 import moment from 'moment';
@@ -37,7 +37,6 @@ const OrderItem = ({ orderData }: { orderData: OrderDataWithStoreName }) => {
         {[...group]?.map(([key, item]) => {
           return (
             <li key={key} className={styles['menu-list-item']}>
-              
               <div className={styles['menu-name']}>
                 <span>{item[0].name}</span>
                 <span>{item.length}</span>

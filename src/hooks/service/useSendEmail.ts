@@ -1,6 +1,6 @@
 import emailjs from '@emailjs/browser';
 import { MutableRefObject } from 'react';
-import useToast from '../toast/useToast';
+import useToast from './ui/useToast';
 
 interface SendMailProps {
   ref: MutableRefObject<HTMLFormElement | null>;

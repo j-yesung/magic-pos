@@ -1,5 +1,5 @@
 import useSetCategories from '@/hooks/menu/menu-category/useSetCategories';
-import { useModal } from '@/hooks/modal/useModal';
+import { useModal } from '@/hooks/service/ui/useModal';
 import useCategoriesStore from '@/shared/store/menu-category';
 import { Tables } from '@/types/supabase';
 import clsx from 'clsx';

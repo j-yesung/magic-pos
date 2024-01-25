@@ -1,4 +1,4 @@
-import { useModal } from '@/hooks/modal/useModal';
+import { useModal } from '@/hooks/service/ui/useModal';
 import useCategoriesStore from '@/shared/store/menu-category';
 import CategoryFormPage from '../Form';
 import styles from '../styles/modal.module.css';
