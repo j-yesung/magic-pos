@@ -31,6 +31,10 @@
   align-items: center;
 }
 
+.close-button{
+  cursor: pointer;
+}
+
 .qr-code-box {
   gap: 3rem;
   width: 100%;
