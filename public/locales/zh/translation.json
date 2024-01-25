@@ -22,6 +22,7 @@
   "order-time": "订货时间",
   "prepare": "准备中",
   "complete": "完",
+  "recommended": "推荐菜",
   "modal": {
     "add-cart-success": "把商品装进购物车了"
   },

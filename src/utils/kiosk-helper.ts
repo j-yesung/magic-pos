@@ -1,9 +1,10 @@
 import { CategoryWithMenuItemWithStore } from '@/types/supabase';
 import { isEmptyObject } from '@/shared/helper';
+import i18next from 'i18next';
 
 export const makeMenuData = (menuData: CategoryWithMenuItemWithStore[], storeId: string) => {
   if (isEmptyObject(menuData)) return [];
-  const menuList = [...menuData];
+  const menuList = [];
 
   // TODO: 에러 처리
   if (isEmptyObject(menuData)) console.error('something wrong');
@@ -17,13 +18,15 @@ export const makeMenuData = (menuData: CategoryWithMenuItemWithStore[], storeId:
     if (recommendedList.length > 0) {
       menuList.push({
         id: 'recommended',
-        name: '추천 메뉴',
+        name: i18next.t('recommended'),
         position: 0,
         store: menuData[0].store,
         store_id: storeId,
         menu_item: recommendedList,
       });
     }
+
+    menuList.push(...menuData);
   }
 
   return menuList;
