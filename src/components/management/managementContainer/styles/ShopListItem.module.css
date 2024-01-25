@@ -66,13 +66,13 @@ div.item-menu {
   letter-spacing: -0.3px;
 }
 
-@media only all and (max-width: 1320px) {
+@media only all and (max-width: 1520px) {
   .shop-list-item {
-    width: 31%;
+    width: 30%;
   }
 }
 @media only all and (max-width: 1010px) {
   .shop-list-item {
-    width: 48%;
+    width: 46%;
   }
 }
