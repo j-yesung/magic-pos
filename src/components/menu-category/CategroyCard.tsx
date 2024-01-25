@@ -1,6 +1,6 @@
 import useSetCategories from '@/hooks/menu/menu-category/useSetCategories';
 import { useModal } from '@/hooks/service/ui/useModal';
-import useCategoriesStore, { setCategory, setIsEdit } from '@/shared/store/menu-category';
+import useCategoriesStore, { setCategory, setIsEdit } from '@/shared/store/menu/menu-category';
 import { Tables } from '@/types/supabase';
 import clsx from 'clsx';
 import { useRef, useState } from 'react';

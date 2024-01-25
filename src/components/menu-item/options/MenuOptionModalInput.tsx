@@ -1,5 +1,5 @@
 import { useModal } from '@/hooks/service/ui/useModal';
-import useMenuItemStore from '@/shared/store/menu-item';
+import useMenuOptionStore from '@/shared/store/menu/menu-option';
 import clsx from 'clsx';
 import React, { useState } from 'react';
 import { FaCheck } from 'react-icons/fa6';
@@ -8,7 +8,7 @@ import PlusButton from '/public/icons/plus.svg';
 
 const MenuOptionModalInput = () => {
   const { MagicModal } = useModal();
-  const { menuOption, setMenuOption, menuOptionDetailList, setMenuOptionDetailList } = useMenuItemStore();
+  const { menuOption, setMenuOption, menuOptionDetailList, setMenuOptionDetailList } = useMenuOptionStore();
 
   const defaultOptionDetail = {
     detailName: '',

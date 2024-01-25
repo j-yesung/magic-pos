@@ -1,6 +1,6 @@
 import { useModal } from '@/hooks/service/ui/useModal';
 import useToast from '@/hooks/service/ui/useToast';
-import useMenuItemStore from '@/shared/store/menu-item';
+import useMenuOptionStore from '@/shared/store/menu/menu-option';
 import { MenuOptionWithDetail, TablesUpdate } from '@/types/supabase';
 import styles from '../styles/menu-option-modal.module.css';
 
@@ -9,8 +9,7 @@ const MenuOptionModalButton = ({ modalId }: { modalId?: string }) => {
   const { toast } = useToast();
 
   const { menuOption, menuOptions, setMenuOptions, updateMenuOptionsStore, menuOptionDetailList, menuOptionIndex } =
-    useMenuItemStore();
-
+    useMenuOptionStore();
   // 옵션 수정
   const updateOptionDetailHandler = async (menuOption: TablesUpdate<'menu_option'>) => {
     if (menuOption.name === '') {

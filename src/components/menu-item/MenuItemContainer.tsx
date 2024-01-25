@@ -1,7 +1,12 @@
 import useFetchMenuItems from '@/hooks/menu/menu-item/useFetchMenuItems';
 import useFetchMenuOptions from '@/hooks/menu/menu-item/useFetchMenuOption';
 import { fetchMenuOptions } from '@/server/api/supabase/menu-item';
-import useMenuItemStore from '@/shared/store/menu-item';
+import useMenuItemStore, {
+  setCategoryWithMenuItem,
+  setCategoryWithMenuItemList,
+  setMenuItemList,
+} from '@/shared/store/menu/menu-item';
+import useMenuOptionStore from '@/shared/store/menu/menu-option';
 import useAuthState from '@/shared/store/session';
 import { MenuItemWithOption } from '@/types/supabase';
 import clsx from 'clsx';
@@ -23,16 +28,9 @@ const MenuItemsComponentPage = () => {
   const { data: menuOptionData, isLoading: menuOptionLoading } = useFetchMenuOptions();
   const router = useRouter();
 
-  const {
-    setMenuItemList,
-    categoryWithMenuItem,
-    setCategoryWithMenuItem,
-    categoryWithMenuItemList,
-    setCategoryWithMenuItemList,
-    setMenuOptions,
-    setOrigineMenuOptions,
-    changeMenuOptions,
-  } = useMenuItemStore();
+  const categoryWithMenuItem = useMenuItemStore(state => state.categoryWithMenuItem);
+  const categoryWithMenuItemList = useMenuItemStore(state => state.categoryWithMenuItemList);
+  const { setMenuOptions, changeMenuOptions, setOrigineMenuOptions } = useMenuOptionStore();
 
   const dummyFetchData = useRef<CategoryWithType[]>([]);
   const choiceFetchData = useRef(false);

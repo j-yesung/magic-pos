@@ -1,5 +1,5 @@
 import { useModal } from '@/hooks/service/ui/useModal';
-import useCategoriesStore, { setCategory, setIsEdit } from '@/shared/store/menu-category';
+import useCategoriesStore, { setCategory, setIsEdit } from '@/shared/store/menu/menu-category';
 import { useState } from 'react';
 import MenuCategoryModal from './modal/MenuCategoryModal';
 import styles from './styles/category.module.css';

@@ -5,8 +5,10 @@ import { create } from 'zustand';
  * 관리자 메뉴 추가를 위한 카테고리 관리 store
  */
 
+/**
+ * STATE
+ */
 interface CategoriesStoreType {
-  // state
   isEdit: boolean;
   category: Tables<'menu_category'>;
   categories: Tables<'menu_category'>[];

@@ -1,5 +1,5 @@
 import { useModal } from '@/hooks/service/ui/useModal';
-import useMenuItemStore from '@/shared/store/menu-item';
+import useMenuItemStore from '@/shared/store/menu/menu-item';
 import styles from '../styles/modal.module.css';
 import MenuItemFormPage from './MenuItemForm';
 import CloseButton from '/public/icons/close.svg';

@@ -1,5 +1,5 @@
 import { useModal } from '@/hooks/service/ui/useModal';
-import useMenuItemStore from '@/shared/store/menu-item';
+import useMenuItemStore, { setMenuItem, setMenuItemImgFile, setMenuItemSampleImg } from '@/shared/store/menu/menu-item';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { ChangeEvent } from 'react';
@@ -9,16 +9,11 @@ import styles from '../styles/menu-item-form.module.css';
 
 const MenuItemFormInput = () => {
   const { MagicModal } = useModal();
-  const {
-    sampleImage,
-    menuItem,
-    setMenuItem,
-    categoryWithMenuItem,
-    categoryWithMenuItemList,
-    setMenuItemImgFile,
-    menuItemSampleImg,
-    setMenuItemSampleImg,
-  } = useMenuItemStore();
+  const sampleImage = useMenuItemStore(state => state.sampleImage);
+  const menuItem = useMenuItemStore(state => state.menuItem);
+  const categoryWithMenuItem = useMenuItemStore(state => state.categoryWithMenuItem);
+  const categoryWithMenuItemList = useMenuItemStore(state => state.categoryWithMenuItemList);
+  const menuItemSampleImg = useMenuItemStore(state => state.menuItemSampleImg);
 
   // 썸네일 이미지 보여주기
   const handleChangeImg = async (e: ChangeEvent<HTMLInputElement>) => {

@@ -1,5 +1,5 @@
 import useSetCategories from '@/hooks/menu/menu-category/useSetCategories';
-import useCategoriesStore, { setCategory } from '@/shared/store/menu-category';
+import useCategoriesStore, { setCategory } from '@/shared/store/menu/menu-category';
 import { TablesInsert } from '@/types/supabase';
 import styles from './styles/form.module.css';
 

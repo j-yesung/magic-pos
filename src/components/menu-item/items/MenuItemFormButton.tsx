@@ -1,6 +1,6 @@
 import useSetMenuItem from '@/hooks/menu/menu-item/useSetMenuItems';
 import { useModal } from '@/hooks/service/ui/useModal';
-import useMenuItemStore from '@/shared/store/menu-item';
+import useMenuItemStore from '@/shared/store/menu/menu-item';
 import { FiAlertCircle } from 'react-icons/fi';
 import styles from '../styles/menu-item-form.module.css';
 
@@ -10,7 +10,8 @@ interface MenuItemModal {
 const MenuItemFormButton: React.FC<MenuItemModal> = props => {
   const { MagicModal } = useModal();
   const { deleteMutate } = useSetMenuItem();
-  const { isEdit, menuItem } = useMenuItemStore();
+  const isEdit = useMenuItemStore(state => state.isEdit);
+  const menuItem = useMenuItemStore(state => state.menuItem);
 
   // 메뉴 삭제
   const clickRemoveCategoryHandler = async () => {
