@@ -7,15 +7,21 @@ import {
   uploadPlatFormImage,
 } from '@/server/api/supabase/platform';
 import { isEmptyObject } from '@/shared/helper';
+import usePlatFormStore, {
+  resetEditPlatForm,
+  setAddPlatFormStoreId,
+  setEditPlatForm,
+  setFetchPlatFormData,
+} from '@/shared/store/platform';
 import useAuthState from '@/shared/store/session';
-import { Tables, TablesInsert } from '@/types/supabase';
+import { TablesInsert } from '@/types/supabase';
 import clsx from 'clsx';
 import moment from 'moment';
 import Image from 'next/image';
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
 import Card from './card/Card';
 import Form from './form/Form';
-import Button from './form/button/Button';
+import AddButton from './form/button/Button';
 import styles from './styles/container.module.css';
 import EditButton from '/public/icons/pencil.svg';
 import Logo from '/public/logo.svg';
@@ -41,27 +47,9 @@ export interface EditFormType {
 
 const PlatFormWrapper = () => {
   const storeId = useAuthState(state => state.storeId);
-  const [fetchDataList, setFecthDataList] = useState<Tables<'platform'>[]>([]);
-  const [addForm, setAddForm] = useState<AddFormType>({
-    name: '',
-    link_url: '',
-    store_id: storeId!,
-  });
+  setAddPlatFormStoreId(storeId!);
 
-  const getPlatFormDataFromSupabase = async () => {
-    const { platform, error } = await fetchPlatForm(storeId!);
-    if (error) throw error;
-    return platform;
-  };
-  useEffect(() => {
-    getPlatFormDataFromSupabase().then(result => {
-      if (result) {
-        setFecthDataList(result);
-      }
-    });
-  }, []);
-
-  const [isRegist, setIsRegist] = useState(false);
+  const isRegist = usePlatFormStore(state => state.isRegist);
 
   /**
    * 수정기능 Start
@@ -87,6 +75,8 @@ const PlatFormWrapper = () => {
       image_url: preImage ?? null,
       file: null,
     }));
+
+    resetEditPlatForm();
     setIsShowEditForm(false);
     setClickedTab('');
   };
@@ -107,18 +97,7 @@ const PlatFormWrapper = () => {
 
   const removeImage = () => {
     setPreImage(null);
-
-    setEditTarget(pre => ({
-      ...pre,
-      file: null,
-    }));
-  };
-  const changeEditForm = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setEditTarget(pre => ({
-      ...pre,
-      [name]: value,
-    }));
+    resetEditPlatForm();
   };
   const updatePlatForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -128,12 +107,6 @@ const PlatFormWrapper = () => {
 
     // object의 각 value 값을 비교해서 틀린 값만을 추출하기
     let comparedData = Object.entries(editData).reduce((acc, [key, value]) => {
-      // 조금더 이해하기 위해 주석을 지우지 않았습니다.
-      // for (const key in editRef.current) {
-      //   if (editRef.current[key as keyof EditFormType] !== value) {
-      //     acc[key] = value;
-      //   }
-      // }
       if (editRef.current![key as keyof EditFormType] !== value) {
         acc[key as keyof EditFormType] = value;
       }
@@ -186,14 +159,14 @@ const PlatFormWrapper = () => {
       const { file, createdAt, ...updateTarget } = comparedData;
       await updatePlatFormData({ ...updateTarget, image_url: null } as TablesInsert<'platform'>);
       const { platform, error } = await fetchPlatForm(storeId!);
-      setFecthDataList(platform);
+      setFetchPlatFormData(platform);
       setIsShowEditForm(false);
       return;
     }
     const { file, createdAt, ...updateTarget } = comparedData;
     await updatePlatFormData(updateTarget as TablesInsert<'platform'>);
     const { platform, error } = await fetchPlatForm(storeId!);
-    setFecthDataList(platform);
+    setFetchPlatFormData(platform);
     setIsShowEditForm(false);
   };
 
@@ -218,40 +191,22 @@ const PlatFormWrapper = () => {
     await removePlatFormData(editTarget.id);
     await removePlatFormImage(editTarget);
     const { platform } = await fetchPlatForm(editTarget.store_id!);
-    setFecthDataList(platform);
+    setFetchPlatFormData(platform);
     setIsShowEditForm(false);
   };
 
   return (
     <div className={styles.container}>
-      <Button
-        setIsRegist={setIsRegist}
-        fetchDataList={fetchDataList}
-        buttonType="regist"
-        setIsEdit={setIsEdit}
-        isEdit={isEdit}
-        setIsShowEditForm={setIsShowEditForm}
-        setClickedTab={setClickedTab}
-        clikcedTab={clikcedTab}
-      />
+      <AddButton />
 
       <Card
-        fetchDataList={fetchDataList}
         isEdit={isEdit}
         setEditTarget={setEditTarget}
         setIsShowEditForm={setIsShowEditForm}
         setPreImage={setPreImage}
       />
 
-      {isRegist && (
-        <Form
-          addForm={addForm}
-          setFecthDataList={setFecthDataList}
-          setAddForm={setAddForm}
-          setIsRegist={setIsRegist}
-          setClickedTab={setClickedTab}
-        />
-      )}
+      {isRegist && <Form />}
 
       {isShowEditForm && (
         <form onSubmit={updatePlatForm} className={styles.formContainer}>
@@ -290,7 +245,7 @@ const PlatFormWrapper = () => {
                 value={editTarget.link_url}
                 placeholder="link를 넣어주세요"
                 name="link_url"
-                onChange={changeEditForm}
+                onChange={setEditPlatForm}
               />
               <input
                 className={styles.input}
@@ -298,7 +253,7 @@ const PlatFormWrapper = () => {
                 name="name"
                 placeholder="어디사이트인가여"
                 value={editTarget.name}
-                onChange={changeEditForm}
+                onChange={setEditPlatForm}
               />
             </div>
           </div>

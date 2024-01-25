@@ -1,107 +1,78 @@
+import Button from '@/components/common/Button';
 import { downloadPlatFormImageUrl, insertPlatFormRow, uploadPlatFormImage } from '@/server/api/supabase/platform';
-import { Tables } from '@/types/supabase';
+import {
+  resetAddPlatForm,
+  setAddDataToFetchPlatForm,
+  setIsRegist,
+  default as usePlatformStore,
+} from '@/shared/store/platform';
+import { AddPlatFormType } from '@/types/platform';
+import clsx from 'clsx';
 import moment from 'moment';
-import { ChangeEvent, FormEvent, SetStateAction } from 'react';
-import { AddFormType } from '../PlatFormWrapper';
+import { FormEvent } from 'react';
 import ImgForm from './img/ImgForm';
+import Input from './input/Input';
 import styles from './styles/form.module.css';
-export interface FormProps {
-  setAddForm: React.Dispatch<SetStateAction<AddFormType>>;
-  addForm: AddFormType;
-  setIsRegist: React.Dispatch<SetStateAction<boolean>>;
-  setFecthDataList: React.Dispatch<SetStateAction<Tables<'platform'>[]>>;
-  setClickedTab: React.Dispatch<SetStateAction<string>>;
-}
-
-const Form = ({ setAddForm, addForm, setIsRegist, setFecthDataList, setClickedTab }: FormProps) => {
-  const changeLinkValue = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-
-    setAddForm(pre => ({
-      ...pre,
-      [name]: value,
-    }));
-  };
-  const changeTitleValue = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setAddForm(pre => ({
-      ...pre,
-      [name]: value,
-    }));
-  };
+import CloseButton from '/public/icons/close.svg';
+const Form = () => {
+  const addPlatform = usePlatformStore(state => state.addPlatForm);
 
   const submitAddCard = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    let updateData: AddFormType = { ...addForm, createdAt: moment().toISOString() };
 
-    if (!addForm.name.trim() || !addForm.link_url.trim()) return alert('써라');
+    // image 경로로 사용하기 위해 createdAt를 넣었습니다.
+    let updateData: AddPlatFormType = { ...addPlatform, createdAt: moment().toISOString() };
+    /**useModal 사용하기 */
+    if (!addPlatform.name.trim() || !addPlatform.link_url.trim()) return alert('써라');
 
     if (updateData.file) {
       await uploadPlatFormImage(updateData);
       const { publicUrl: image_url } = downloadPlatFormImageUrl(updateData);
-
       updateData = {
-        ...addForm,
+        ...addPlatform,
         image_url,
       };
       const { data } = await insertPlatFormRow(updateData);
-      setFecthDataList(pre => [...pre, ...data!]);
+      setAddDataToFetchPlatForm(data!);
     } else {
+      console.log(updateData);
+      const { file, createdAt, ...insertData } = updateData;
+      console.log(insertData);
       const { data } = await insertPlatFormRow(updateData);
-      setFecthDataList(pre => [...pre, ...data!]);
+      setAddDataToFetchPlatForm(data!);
     }
-    setAddForm(pre => ({
-      ...pre,
-      name: '',
-      link_url: '',
-      createdAt: '',
-      file: null,
-    }));
-    setIsRegist(pre => !pre);
+    resetAddPlatForm();
+    setIsRegist(false);
   };
 
   const closeAddFormModal = () => {
-    setIsRegist(pre => !pre);
-    setAddForm(pre => ({
-      ...pre,
-      name: '',
-      link_url: '',
-      createdAt: '',
-      file: null,
-    }));
-    setClickedTab('');
+    setIsRegist(false);
+    resetAddPlatForm();
   };
 
   return (
     <form onSubmit={submitAddCard} className={styles.formContainer}>
+      <div className={styles.formHeader}>
+        <p className={styles.formHeaderTitle}>새 플랫폼 등록</p>
+        <button type="button" className={styles.closeButton} onClick={closeAddFormModal}>
+          <CloseButton />
+        </button>
+      </div>
       <div className={styles.formWrapper}>
-        <ImgForm setAddForm={setAddForm} />
-
+        <ImgForm />
         <div className={styles.inputWrapper}>
-          <input
-            className={styles.input}
-            onChange={changeLinkValue}
-            name="link_url"
-            type="text"
-            placeholder="link를 넣어주세요"
-          />
-          <input
-            className={styles.input}
-            onChange={changeTitleValue}
-            name="name"
-            type="text"
-            placeholder="어디사이트인가요?"
-          />
+          <Input name="link_url" type="text" placeholder="link를 넣어주세요" className={styles.input} />
+          <Input className={styles.input} name="name" type="text" placeholder="어디사이트인가요?" />
         </div>
       </div>
 
       <div className={styles.buttonGroup}>
-        <button type="button" className={styles.button} onClick={closeAddFormModal}>
-          <p>취소</p>
-        </button>
-        <button type="submit" className={styles.button}>
-          <p>등록</p>
-        </button>
+        <Button type="button" className={styles.button} onClick={closeAddFormModal}>
+          취소
+        </Button>
+        <Button type="submit" className={clsx(styles.button, styles.addButton)}>
+          등록
+        </Button>
       </div>
     </form>
   );

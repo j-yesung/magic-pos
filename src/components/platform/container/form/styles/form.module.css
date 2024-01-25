@@ -1,14 +1,14 @@
 .form-container {
-  display: flex;
-  justify-content: center;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 3rem 6rem;
-  border: 1px solid #ccc;
-  gap: 2.4rem;
+
+  display: inline-flex;
+  padding: 2rem;
   flex-direction: column;
+  align-items: center;
+  gap: 3rem;
   border-radius: 1rem;
   background: var(--white, #fff);
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
@@ -19,6 +19,33 @@
   justify-content: flex-end;
   align-items: flex-start;
   gap: 1.5rem;
+}
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.form-header-title {
+  color: var(--text1, #121416);
+  text-align: center;
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.8rem; /* 100% */
+  letter-spacing: -0.036rem;
+}
+
+.close-button {
+  width: 3.6rem;
+  height: 3.6rem;
+  cursor: pointer;
+}
+
+.close-button path {
+  stroke: var(--text1);
 }
 
 .input-wrapper {
@@ -35,7 +62,7 @@
   gap: 1rem;
   border-radius: 0.5rem;
   border: 1px solid var(--line, #ededed);
-  background: #fff;
+  background: var(--white);
 }
 .input:focus {
   outline: none;
@@ -54,6 +81,10 @@
   gap: 1rem;
 }
 
+.button-group button:hover {
+  opacity: 0.8;
+}
+
 .button {
   all: unset;
   display: flex;
@@ -69,11 +100,7 @@
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
-.button p {
-  font-size: 1.4rem;
-}
-
-.button:hover {
+.add-button {
   color: #fff;
   background: var(--point1-80, #7433ff);
   box-shadow: 0px 0px 10px 0px rgba(68, 9, 194, 0.1);

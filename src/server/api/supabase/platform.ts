@@ -104,7 +104,11 @@ export const insertPlatFormRow = async (param: AddFormType | EditFormType) => {
 };
 
 export const fetchPlatForm = async (store_id: string) => {
-  const { data: platform, error } = await supabase.from('platform').select('*').eq('store_id', store_id);
+  const { data: platform, error } = await supabase
+    .from('platform')
+    .select('*')
+    .eq('store_id', store_id)
+    .order('created_at', { ascending: true });
 
   if (error) return { platform: [], error };
 

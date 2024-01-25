@@ -1,14 +1,11 @@
+import { resetPlatFormFile, setPlatFormFile } from '@/shared/store/platform';
 import clsx from 'clsx';
 import Image from 'next/image';
-import { ChangeEvent, SetStateAction, useState } from 'react';
-import { AddFormType } from '../../PlatFormWrapper';
+import { ChangeEvent, useState } from 'react';
 import styles from './styles/img.module.css';
+import CloseButton from '/public/icons/close.svg';
 import Pencil from '/public/icons/pencil.svg';
-
-interface ImgProps {
-  setAddForm: React.Dispatch<SetStateAction<AddFormType>>;
-}
-const ImgForm = ({ setAddForm }: ImgProps) => {
+const ImgForm = () => {
   const [preImage, setPreImage] = useState<string | null>();
 
   const changePreview = (e: ChangeEvent<HTMLInputElement>) => {
@@ -18,20 +15,13 @@ const ImgForm = ({ setAddForm }: ImgProps) => {
       const currentImgUrl = URL.createObjectURL(file);
 
       setPreImage(currentImgUrl);
-      setAddForm(pre => ({
-        ...pre,
-        file,
-      }));
+      setPlatFormFile(file);
     }
   };
 
   const removeImage = () => {
     setPreImage(null);
-    setAddForm(pre => ({
-      ...pre,
-      // file type은 file?:File | null인데 아래 보다 더 좋은 방법이 있을까..
-      file: null,
-    }));
+    resetPlatFormFile();
   };
 
   // 사진이 있을 때, onMouesOver 하면 x 표시가 보이고, onMouseleave 하면 x 표시가 안보이고 preImage && styles.hasDeleteButton
@@ -46,7 +36,7 @@ const ImgForm = ({ setAddForm }: ImgProps) => {
           name="delete-img"
           onClick={removeImage}
         >
-          X
+          <CloseButton />
         </button>
         <Image className={styles.img} src={preImage ?? DEFAULT_IMG} alt="default image" width={1000} height={1000} />
         <div className={styles.editIconWrapper}>
@@ -54,7 +44,7 @@ const ImgForm = ({ setAddForm }: ImgProps) => {
         </div>
       </label>
 
-      <input type="file" id="file" className={styles.file} onChange={changePreview} />
+      <input type="file" id="file" name="file" className={styles.file} onChange={changePreview} />
     </div>
   );
 };

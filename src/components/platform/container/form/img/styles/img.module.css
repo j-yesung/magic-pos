@@ -2,15 +2,18 @@
   display: none;
 }
 .img-wrapper {
-  display: inline-block;
-  width: 18rem;
-  height: 100%;
+  width: 20.4rem;
+  height: 11.7rem;
+  flex-shrink: 0;
+  border-radius: 0.5rem;
 }
 
 .img-label {
+  width: 100%;
   display: inline-block;
   height: 100%;
   position: relative;
+  cursor: pointer;
 }
 
 .img {
@@ -30,6 +33,15 @@
   padding: 1rem;
   top: -1.8rem;
   cursor: pointer;
+}
+
+.default-delete-button svg {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+.default-delete-button svg path {
+  stroke: var(--text1);
 }
 .has-delete-button {
   display: block;

@@ -1,4 +1,4 @@
-export interface AddFormType {
+export interface AddPlatFormType {
   file?: File | null;
   image_url?: string;
   name: string;
@@ -8,7 +8,7 @@ export interface AddFormType {
   id?: string | null;
 }
 
-export interface EditFormType {
+export interface EditPlatFormType {
   id: string;
   name: string;
   link_url: string;
