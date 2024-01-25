@@ -52,7 +52,7 @@ const initialPrevImg = null;
 
 const initialFetchPlatForm: Tables<'platform'>[] = [];
 
-const usePlatFormStore = create<PlatformStore>()(() => ({
+const usePlatFormState = create<PlatformStore>()(() => ({
   store_id: null,
   isRegist: false,
   isEdit: false,
@@ -63,24 +63,24 @@ const usePlatFormStore = create<PlatformStore>()(() => ({
   prevImg: initialPrevImg,
 }));
 
-export default usePlatFormStore;
+export default usePlatFormState;
 
 /**
  * toggle
  */
 export const setIsRegist = (param: boolean) =>
-  usePlatFormStore.setState(state => ({
+  usePlatFormState.setState(state => ({
     ...state,
     isRegist: param,
   }));
 export const setIsEdit = (param: boolean) =>
-  usePlatFormStore.setState(state => ({
+  usePlatFormState.setState(state => ({
     ...state,
     isEdit: param,
   }));
 
 export const setPlatFormStoreId = (store_id: string) =>
-  usePlatFormStore.setState(state => ({
+  usePlatFormState.setState(state => ({
     ...state,
     store_id,
     addPlatForm: {
@@ -99,7 +99,7 @@ export const setPlatFormStoreId = (store_id: string) =>
  */
 export const setAddPlatForm = (e: ChangeEvent<HTMLInputElement>) => {
   const { name, value } = e.target;
-  usePlatFormStore.setState(state => ({
+  usePlatFormState.setState(state => ({
     ...state,
     addPlatForm: { ...state.addPlatForm, [name]: value },
   }));
@@ -110,7 +110,7 @@ export const setAddPlatForm = (e: ChangeEvent<HTMLInputElement>) => {
  */
 export const setEditPlatForm = (e: ChangeEvent<HTMLInputElement>) => {
   const { name, value } = e.target;
-  usePlatFormStore.setState(state => ({
+  usePlatFormState.setState(state => ({
     ...state,
     editPlatForm: { ...state.editPlatForm, [name]: value },
   }));
@@ -123,13 +123,13 @@ export const setEditPlatForm = (e: ChangeEvent<HTMLInputElement>) => {
  */
 export const setPlatFormFile = (file: File, mode: boolean) => {
   if (!mode) {
-    usePlatFormStore.setState(state => ({
+    usePlatFormState.setState(state => ({
       ...state,
       addPlatForm: { ...state.addPlatForm, file },
     }));
   }
   if (mode) {
-    usePlatFormStore.setState(state => ({
+    usePlatFormState.setState(state => ({
       ...state,
       editPlatForm: { ...state.editPlatForm, file },
     }));
@@ -141,7 +141,7 @@ export const setPlatFormFile = (file: File, mode: boolean) => {
  */
 
 export const setPrevData = (param: PrevDataType) =>
-  usePlatFormStore.setState(state => ({
+  usePlatFormState.setState(state => ({
     ...state,
     prevData: { ...state.prevData, ...param },
     editPlatForm: { ...state.editPlatForm, ...param },
@@ -149,7 +149,7 @@ export const setPrevData = (param: PrevDataType) =>
   }));
 
 export const setPrevImg = (url: string) =>
-  usePlatFormStore.setState(state => ({
+  usePlatFormState.setState(state => ({
     ...state,
     prevImg: url ?? null,
   }));
@@ -160,7 +160,7 @@ export const setPrevImg = (url: string) =>
  * @returns
  */
 export const setFetchPlatFormData = (data: Tables<'platform'>[]) =>
-  usePlatFormStore.setState(state => ({
+  usePlatFormState.setState(state => ({
     ...state,
     fetchPlatFormData: data,
   }));
@@ -171,7 +171,7 @@ export const setFetchPlatFormData = (data: Tables<'platform'>[]) =>
  * @returns
  */
 export const setAddDataToFetchPlatForm = (data: Tables<'platform'>[]) => {
-  usePlatFormStore.setState(state => ({
+  usePlatFormState.setState(state => ({
     ...state,
     fetchPlatFormData: [...state.fetchPlatFormData, ...data],
   }));
@@ -183,13 +183,13 @@ export const setAddDataToFetchPlatForm = (data: Tables<'platform'>[]) => {
  */
 export const resetPlatFormFile = (mode: boolean) => {
   if (!mode) {
-    usePlatFormStore.setState(state => ({
+    usePlatFormState.setState(state => ({
       ...state,
       addPlatForm: { ...state.addPlatForm, file: null },
     }));
   }
   if (mode) {
-    usePlatFormStore.setState(state => ({
+    usePlatFormState.setState(state => ({
       ...state,
       editPlatForm: { ...state.editPlatForm, file: null, image_url: null },
     }));
@@ -197,36 +197,36 @@ export const resetPlatFormFile = (mode: boolean) => {
 };
 
 export const resetAddPlatForm = () =>
-  usePlatFormStore.setState(state => ({
+  usePlatFormState.setState(state => ({
     ...state,
     addPlatForm: initialAddPlatform,
   }));
 
 export const resetEditPlatForm = () =>
-  usePlatFormStore.setState(state => ({
+  usePlatFormState.setState(state => ({
     ...state,
     editPlatForm: initialEditPlatForm,
   }));
 
 export const resetIsEditMode = () =>
-  usePlatFormStore.setState(state => ({
+  usePlatFormState.setState(state => ({
     ...state,
     isEdit: false,
   }));
 export const resetIsRegist = () =>
-  usePlatFormStore.setState(state => ({
+  usePlatFormState.setState(state => ({
     ...state,
     isRegist: false,
   }));
 
 export const resetPrevImg = () =>
-  usePlatFormStore.setState(state => ({
+  usePlatFormState.setState(state => ({
     ...state,
     prevImg: null,
   }));
 
 export const resetPrevData = () =>
-  usePlatFormStore.setState(state => ({
+  usePlatFormState.setState(state => ({
     ...state,
     prevData: initialPrevData,
   }));

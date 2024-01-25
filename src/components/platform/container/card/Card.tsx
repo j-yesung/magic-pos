@@ -1,5 +1,5 @@
 import { fetchPlatForm } from '@/server/api/supabase/platform';
-import usePlatFormStore, { setFetchPlatFormData } from '@/shared/store/platform';
+import usePlatFormState, { setFetchPlatFormData } from '@/shared/store/platform';
 import { useEffect } from 'react';
 import Item from './item/Item';
 import styles from './styles/card.module.css';
@@ -8,7 +8,7 @@ const Card = () => {
   const {
     addPlatForm: { store_id },
     fetchPlatFormData,
-  } = usePlatFormStore();
+  } = usePlatFormState();
 
   const getPlatFormDataFromSupabase = async () => {
     const { platform, error } = await fetchPlatForm(store_id!);

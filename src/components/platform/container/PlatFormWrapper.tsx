@@ -1,4 +1,4 @@
-import usePlatFormStore, { resetIsEditMode, resetIsRegist, setPlatFormStoreId } from '@/shared/store/platform';
+import usePlatFormState, { resetIsEditMode, resetIsRegist, setPlatFormStoreId } from '@/shared/store/platform';
 import useAuthState from '@/shared/store/session';
 import { useEffect } from 'react';
 import Card from './card/Card';
@@ -9,7 +9,7 @@ import styles from './styles/container.module.css';
 const PlatFormWrapper = () => {
   const storeId = useAuthState(state => state.storeId);
   setPlatFormStoreId(storeId!);
-  const isRegist = usePlatFormStore(state => state.isRegist);
+  const isRegist = usePlatFormState(state => state.isRegist);
 
   useEffect(() => {
     return () => {

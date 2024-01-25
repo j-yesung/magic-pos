@@ -1,4 +1,4 @@
-import usePlatFormStore, {
+import usePlatFormState, {
   resetPlatFormFile,
   resetPrevImg,
   setPlatFormFile,
@@ -15,7 +15,7 @@ const ImgForm = ({ mode }: { mode: boolean }) => {
   // 사진이 없을 때는 onMouseOver || onMouseleave 안보이고
   const DEFAULT_IMG = '/logo.svg';
 
-  const prevImg = usePlatFormStore(state => state.prevImg);
+  const prevImg = usePlatFormState(state => state.prevImg);
   const changePreview = (e: ChangeEvent<HTMLInputElement>) => {
     const fileList = e.target.files || [];
     if (fileList?.length !== 0) {
