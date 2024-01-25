@@ -1,4 +1,4 @@
-import useToggleState from '@/shared/store/toggle';
+import useToggleState, { resetToggle } from '@/shared/store/toggle';
 import { useEffect } from 'react';
 import Footer from './footer/Footer';
 import Header from './header/Header';
@@ -6,7 +6,7 @@ import Contents from './main/Contents';
 import styles from './styles/Home.module.css';
 
 const HomeLayout = ({ children }: { children: React.ReactNode }) => {
-  const { isChecked, resetToggle } = useToggleState();
+  const isChecked = useToggleState(state => state.isChecked);
 
   useEffect(() => {
     return () => {
