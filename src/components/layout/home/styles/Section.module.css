@@ -16,19 +16,27 @@
   display: flex;
   position: sticky;
 }
+.iphone-box {
+  filter: drop-shadow(rgba(47, 47, 47, 0.34) 0px 28px 40px);
+}
 .title-box {
-  gap: 10rem;
-  width: 50rem;
-  height: 100%;
+  gap: 7rem;
+  width: 60em;
+  height: 76%;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  justify-content: center;
+  align-items: flex-start;
   flex-direction: column;
 }
 /* 메인 제목 */
 .title-box .t1 {
+  background: linear-gradient(to right, var(--main-color), #ffa800);
   font-size: 7rem;
   font-weight: 700;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
 }
 /* 설명 */
 .sub-title {
