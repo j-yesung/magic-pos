@@ -11,6 +11,7 @@ export const getUserToken = async (orderId: string) => {
   const { data: token, error } = await supabase.from('user_token').select('*').eq('order_id', orderId);
   if (error) throw error;
   return token;
+}
 
   
 export const addUserToken = async (data: TablesInsert<'user_tokens'>) => {
