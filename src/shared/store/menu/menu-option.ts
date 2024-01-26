@@ -1,4 +1,4 @@
-import { NewMenuOptionWithDetail, Tables } from '@/types/supabase';
+import { Tables } from '@/types/supabase';
 import { create } from 'zustand';
 
 /**
