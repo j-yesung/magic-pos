@@ -1,30 +1,17 @@
 import { fetchManagement } from '@/server/api/supabase/management';
 import { useQuery } from '@tanstack/react-query';
-import { useEffect } from 'react';
 
 const enum QUERY_KEY {
   MANAGEMENT = 'management',
 }
 
 const useFetchManagement = (id?: string) => {
-
-  const { data, isError, isLoading, error, refetch } = useQuery({
+  const { data, isError, isLoading, refetch } = useQuery({
     queryKey: [QUERY_KEY.MANAGEMENT],
     queryFn: () => fetchManagement(id),
   });
 
-
-
-
-
-
-  useEffect(() => {
-    if (isError) {
-      console.error(error.message);
-    }
-  }, [isError, error]);
-
-  return { data, isLoading, refetch };
+  return { data, isError, isLoading, refetch };
 };
 
 export default useFetchManagement;

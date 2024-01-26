@@ -1,6 +1,6 @@
 import { Session } from '@supabase/supabase-js';
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
 interface UserAuth {
   session: Session | null;
@@ -19,7 +19,7 @@ const useAuthState = create<UserAuth>()(
     }),
     {
       name: 'auth-storage',
-      getStorage: () => sessionStorage,
+      storage: createJSONStorage(() => sessionStorage),
     },
   ),
 );
