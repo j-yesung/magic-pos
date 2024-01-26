@@ -91,10 +91,11 @@ const StepButton = () => {
                 <span>{t('footer.no-item')}</span>
               ) : (
                 <span>
-                  {step === ORDER_STEP.PAYMENT && isWidgetRendering && (
-                    <LoadingSpinner boxSize={2} ballSize={0.4} interval={1.5} />
+                  {step === ORDER_STEP.PAYMENT && isWidgetRendering ? (
+                    <LoadingSpinner boxSize={2} ballSize={0.4} interval={1.5} color={'#000'} />
+                  ) : (
+                    BUTTON_OPTIONS[step]
                   )}
-                  {BUTTON_OPTIONS[step]}
                   {step === ORDER_STEP.SELECT_MENU && (
                     <>
                       <BiSolidCircle size={2} />
