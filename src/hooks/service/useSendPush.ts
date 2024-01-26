@@ -13,7 +13,7 @@ const useSendPush = () => {
       data: {
         title,
         body,
-        image: '/public/icons/icon-192x192.png',
+        image: '/public/icons/manifest/icon-192x192.png',
         click_action,
       },
     };
