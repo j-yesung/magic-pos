@@ -7,10 +7,11 @@
     "worker": true
   },
   "extends": [
-    "eslint:recommended", // eslint에서 권장하는 규칙들을 사용하겠다는 의미입니다.
+    // "eslint:recommended", // eslint에서 권장하는 규칙들을 사용하겠다는 의미입니다.
     "plugin:@typescript-eslint/recommended",
-    "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
+    // "plugin:react/recommended",
+    // "plugin:@typescript-eslint/recommended", // typescript 플러그인과 충돌되서 "eslint:recommended" 는 주석처리했습니다.
+    "plugin:react-hooks/recommended", // "plugin:react/recommended" 는 이미 해당 플러그인에 포함되어 있습니다.
     "next/core-web-vitals" // next.js에서 권장하는 규칙들을 사용하겠다는 의미입니다.
   ],
   "parser": "@typescript-eslint/parser", // eslint가 typescript를 이해할 수 있게 해줍니다.
