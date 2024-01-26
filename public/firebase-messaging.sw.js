@@ -3,8 +3,6 @@
 importScripts('https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js');
 importScripts('https://www.gstatic.com/firebasejs/9.0.2/firebase-messaging-compat.js');
 
-/* eslint-enable */
-
 firebase.initializeApp({
   apiKey: 'AIzaSyCHk7ehe1E_bNsvRrhuxWLzGpCHFr8upQc',
   authDomain: 'sparta-1e500.firebaseapp.com',
