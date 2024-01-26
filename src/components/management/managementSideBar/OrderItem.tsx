@@ -1,6 +1,8 @@
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import useSetManagement from '@/hooks/management/useSetManagement';
+import { useUserTokenFetchQuery } from '@/hooks/query/user-token/useUserTokenFetchQuery';
 import { useModal } from '@/hooks/service/ui/useModal';
+import useSendPush from '@/hooks/service/useSendPush';
 import { groupByKey } from '@/shared/helper';
 import { MenuItemWithOption, OrderDataWithStoreName } from '@/types/supabase';
 import moment from 'moment';
@@ -8,12 +10,16 @@ import { IoCheckmark } from 'react-icons/io5';
 import styles from './styles/OrderItem.module.css';
 
 const OrderItem = ({ orderData }: { orderData: OrderDataWithStoreName }) => {
-  const { id, order_number, order_time, menu_list, total_price, is_togo } = orderData;
+  const { id, order_number, order_id, order_time, menu_list, is_togo } = orderData;
   const menuList: MenuItemWithOption[] = JSON.parse(JSON.stringify(menu_list));
   const { MagicModal } = useModal();
   const { mutate, isPending } = useSetManagement();
+  const { userToken } = useUserTokenFetchQuery(order_id);
+  const sendPush = useSendPush();
 
   const group = groupByKey<MenuItemWithOption>(menuList, 'unique');
+  const menuName = [...group]?.[0][1].map(item => item.name).join('');
+  const otherMenuNum = [...group]?.[0].length - 1;
 
   const clickOrderConfirmHandler = () => {
     MagicModal.confirm({
@@ -24,6 +30,12 @@ const OrderItem = ({ orderData }: { orderData: OrderDataWithStoreName }) => {
         } else if (typeof is_togo === 'boolean') {
           mutate({ id: id, isTogo: true });
         }
+        sendPush({
+          title: `${order_number}번 주문이 완료되었습니다.`,
+          body: `${menuName} 외 ${otherMenuNum}개`,
+          token: userToken?.token || '',
+          click_action: '/',
+        });
       },
     });
   };
@@ -68,7 +80,7 @@ const OrderItem = ({ orderData }: { orderData: OrderDataWithStoreName }) => {
             <LoadingSpinner boxSize={2} ballSize={0.4} interval={1.5} />
           ) : (
             <>
-              <IoCheckmark className={styles['check-icon']} />
+              <IoCheckmark />
               <span>주문완료하기</span>
             </>
           )}

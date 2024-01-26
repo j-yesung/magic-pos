@@ -1,12 +1,21 @@
 import axios from 'axios';
 
+interface Message {
+  title: string;
+  body: string;
+  token: string;
+  click_action: string;
+}
+
 const useSendPush = () => {
-  const sendPush = async ({ title, body, click_action }: { title: string; body: string; click_action: string }) => {
+  const sendPush = async (props: Message) => {
+    const { title, body, token, click_action } = props;
     const message = {
       data: {
         title,
         body,
         image: '/public/icons/manifest/icon-192x192.png',
+        token,
         click_action,
       },
     };
