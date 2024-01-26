@@ -4,17 +4,21 @@ interface LoadingSpinnerType {
   boxSize: number;
   ballSize: number;
   interval?: number;
+  color?: string;
 }
 
 /**
  * 로딩 스피너 컴포넌트 입니다.
  * props로 boxSize, ballSize, interval를 입력합니다.
  * boxSize는 로딩스피너 전체사이즈, ballSize는 로딩시 돌아가는 공 하나하나를 의미합니다.
- * interval은 공과 공사이의 간격과 회전 시간 입니다. (interval은 입력하지 않으면 기본값 1로 설정됩니다. )
- * 필수입력 : boxSize, ballSize, 선택 입력 = interval
+ * interval은 공과 공사이의 간격 입니다. (interval은 입력하지 않으면 기본값 1로 설정됩니다. )
+ * color는 회전하는 공의 색깔입니다. 색상코드(16진법)으로 입력하면 됩니다.(e.g color={f00})
+ * color의 기본값은 fff(white)입니다.
+ * 필수입력 : boxSize, ballSize, 선택 입력 = interval, color
+ * 타입 : boxSize, ballSize, interval = number , color = string
  * 크기는 rem 단위 입니다.
  */
-const LoadingSpinner = ({ boxSize, ballSize, interval }: LoadingSpinnerType) => {
+const LoadingSpinner = ({ boxSize, ballSize, interval, color }: LoadingSpinnerType) => {
   return (
     <>
       <div className={'busy-loader'}>
@@ -60,7 +64,7 @@ const LoadingSpinner = ({ boxSize, ballSize, interval }: LoadingSpinnerType) => 
           width: ${ballSize}rem;
           height: ${ballSize}rem;
           position: absolute;
-          background: #ffffff;
+          background: #${color ? color : 'fff'};
           left: 0px;
           top: 0px;
           -moz-border-radius: 1.1rem;

@@ -1,4 +1,4 @@
-import useQRCodeDownLoad from '@/hooks/management/useQRCodeDownLoad';
+import useQRCodeDownLoad from '@/hooks/qrCode/useQRCodeDownLoad';
 import useManagementStore from '@/shared/store/management';
 import { StoreWithOrderInfo, Tables } from '@/types/supabase';
 import { useQueryClient } from '@tanstack/react-query';
@@ -21,10 +21,10 @@ const QrCodeListItem = ({ storeTable, orderType }: propsType) => {
   const [isQrClick, setIsQrClick] = useState(false);
   const QRImage = useRef<HTMLDivElement[]>([]);
   const qrUrl = storeTable
-    ? `${process.env.NEXT_PUBLIC_SUPACE_REDIRECT_TO}/order/${storeId}/${storeTable.id}`
-    : `${process.env.NEXT_PUBLIC_SUPACE_REDIRECT_TO}/order/${storeId}`;
+    ? `${process.env.NEXT_PUBLIC_SUPACE_REDIRECT_TO}/kiosk/${storeId}/${storeTable.id}`
+    : `${process.env.NEXT_PUBLIC_SUPACE_REDIRECT_TO}/kiosk/${storeId}`;
   const { setQrData, qrData } = useManagementStore();
-  const qrDownLoad = useQRCodeDownLoad();
+  const { mutate } = useQRCodeDownLoad();
   const clickQrDownLoadHandler = () => {
     setIsQrClick(true);
   };
@@ -42,10 +42,12 @@ const QrCodeListItem = ({ storeTable, orderType }: propsType) => {
   }, [QRImage, qrUrl, storeId]);
   useEffect(() => {
     if (isQrClick) {
-      qrDownLoad({
-        qrRef: QRImage.current[0],
-        orderType,
-      });
+      mutate([
+        {
+          qrRef: QRImage.current[0],
+          orderType,
+        },
+      ]);
     }
     setIsQrClick(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps

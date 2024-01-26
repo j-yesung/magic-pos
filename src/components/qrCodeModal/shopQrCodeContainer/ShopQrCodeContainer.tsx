@@ -1,12 +1,9 @@
 import { StoreWithOrderInfo } from '@/types/supabase';
-import { useQueryClient } from '@tanstack/react-query';
 import clsx from 'clsx';
 import QrCodeListItem from '../qrCodelistItem/QrCodeListItem';
 import styles from './styles/ShopQrCodeContainer.module.css';
 
-const ShopQrCodeContainer = () => {
-  const queryClient = useQueryClient();
-  const data = queryClient.getQueryData<StoreWithOrderInfo[]>(['management']);
+const ShopQrCodeContainer = ({ data }: { data?: StoreWithOrderInfo[] }) => {
   const storeTable = data && data[0].store_table;
 
   return (
@@ -23,7 +20,7 @@ const ShopQrCodeContainer = () => {
       >
         {storeTable
           ?.sort((a, b) => (a.position && b.position && a.position > b.position ? 1 : -1))
-          .map((item, index) => {
+          .map(item => {
             return <QrCodeListItem key={item.id} storeTable={item} orderType={`table${item.position}`} />;
           })}
       </div>

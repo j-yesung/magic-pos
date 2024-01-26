@@ -1,10 +1,8 @@
-import React, { ReactNode, useEffect, useState } from 'react';
-import 'swiper/css';
-import 'swiper/css/virtual';
+import KioskContainer from '@/components/kiosk/KioskContainer';
 import OrderLayout from '@/components/layout/order/OrderLayout';
+import { useModal } from '@/hooks/service/ui/useModal';
+import { useIsOrderAllReady, useIsValidURL } from '@/hooks/service/useKiosk';
 import { fetchCategoriesWithMenuItemByStoreId } from '@/server/api/supabase/menu-category';
-import { GetServerSideProps } from 'next';
-import { CategoryWithMenuItemWithStore } from '@/types/supabase';
 import useKioskState, {
   resetOrderList,
   setMenuData,
@@ -13,12 +11,13 @@ import useKioskState, {
   setStoreName,
   setTableId,
 } from '@/shared/store/kiosk';
-import { useRouter } from 'next/router';
-import KioskContainer from '@/components/kiosk/KioskContainer';
-import { useModal } from '@/hooks/service/ui/useModal';
-import { useIsValidURL, useIsOrderAllReady } from '@/hooks/service/useKiosk';
-import { translateMenuData } from '@/server/service/translate';
+import { CategoryWithMenuItemWithStore } from '@/types/supabase';
 import { makeMenuData } from '@/utils/kiosk-helper';
+import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
+import { ReactNode, useEffect, useState } from 'react';
+import 'swiper/css';
+import 'swiper/css/virtual';
 
 interface OrderIndexPageProps {
   menuData: CategoryWithMenuItemWithStore[];
@@ -96,11 +95,11 @@ export default OrderIndexPage;
 
 export const getServerSideProps: GetServerSideProps = async context => {
   const { storeId, tableId = null, lang = 'ko' } = context.query;
-  let { data: menuData } = await fetchCategoriesWithMenuItemByStoreId((storeId || '').toString());
+  const { data: menuData } = await fetchCategoriesWithMenuItemByStoreId((storeId || '').toString());
 
-  if (storeId && lang !== 'ko') {
-    menuData = await translateMenuData(menuData, lang.toString(), storeId.toString());
-  }
+  // if (storeId && lang !== 'ko') {
+  //   menuData = await translateMenuData(menuData, lang.toString(), storeId.toString());
+  // }
 
   return {
     props: {
