@@ -91,7 +91,6 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
 
   const filterOptionHandler = () => {
     const differences = findDifferences(menuOptions, origineMenuOptions);
-    console.log(differences, 'differences');
     differences.map(async item => {
       if (item.id === '') {
         // 옵션 항목 supabase에 추가

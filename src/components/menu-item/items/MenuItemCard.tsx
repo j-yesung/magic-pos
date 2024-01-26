@@ -38,7 +38,6 @@ const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
   // 메뉴 선택
   const clickChoiceCategoryHandler = (item: Tables<'menu_item'>) => {
     setIsEdit(true);
-    console.log();
     MagicModal.fire(<MenuItemModal />);
     setMenuItem({
       ...menuItem,

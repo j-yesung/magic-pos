@@ -1,7 +1,7 @@
 import { useModal } from '@/hooks/service/ui/useModal';
 import useToast from '@/hooks/service/ui/useToast';
-import useMenuOptionStore from '@/shared/store/menu/menu-option';
-import { MenuOptionWithDetail, TablesUpdate } from '@/types/supabase';
+import useMenuOptionStore, { NewMenuOptionWithDetail } from '@/shared/store/menu/menu-option';
+import { TablesUpdate } from '@/types/supabase';
 import styles from '../styles/menu-option-modal.module.css';
 
 const MenuOptionModalButton = ({ modalId }: { modalId?: string }) => {
@@ -22,8 +22,21 @@ const MenuOptionModalButton = ({ modalId }: { modalId?: string }) => {
       return;
     }
 
+    //  옵션 디테일 내용 없는거 필터링
+    const emptyOptionDetailName = menuOptionDetailList.filter(item => item.name === '');
+    const emptyOptionDetailPrice = menuOptionDetailList.filter(item => item.price === '');
+    if (emptyOptionDetailName.length > 0 || emptyOptionDetailPrice.length > 0) {
+      toast('옵션 항목 내용을 입력해주세요.', {
+        type: 'warn',
+        position: 'top-center',
+        showCloseButton: false,
+        autoClose: 2000,
+      });
+      return;
+    }
+
     if (menuOptionIndex === -1) {
-      const newOptionDetail: MenuOptionWithDetail = {
+      const newOptionDetail: NewMenuOptionWithDetail = {
         id: '',
         name: menuOption.name ?? '',
         is_use: menuOption.is_use ?? false,

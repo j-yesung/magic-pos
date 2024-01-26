@@ -1,4 +1,4 @@
-import { useModal } from '@/hooks/service/ui/useModal';
+import useToast from '@/hooks/service/ui/useToast';
 import useMenuItemStore, { setMenuItem, setMenuItemImgFile, setMenuItemSampleImg } from '@/shared/store/menu/menu-item';
 import clsx from 'clsx';
 import Image from 'next/image';
@@ -8,7 +8,7 @@ import MenuItemFormOption from '../options/MenuItemFormOption';
 import styles from '../styles/menu-item-form.module.css';
 
 const MenuItemFormInput = () => {
-  const { MagicModal } = useModal();
+  const { toast } = useToast();
   const sampleImage = useMenuItemStore(state => state.sampleImage);
   const menuItem = useMenuItemStore(state => state.menuItem);
   const categoryWithMenuItem = useMenuItemStore(state => state.categoryWithMenuItem);
@@ -45,11 +45,21 @@ const MenuItemFormInput = () => {
 
       if (recommendedItem.length > 0) {
         if (recommendedNum > 4 && !recommendedItem[0].recommended) {
-          MagicModal.alert({ content: '추천 메뉴는 최대 5개입니다.' });
+          toast('추천 메뉴는 최대 5개입니다.', {
+            type: 'warn',
+            position: 'top-center',
+            showCloseButton: false,
+            autoClose: 2000,
+          });
           return;
         }
       } else if (recommendedNum > 4 && !menuItem.recommended) {
-        MagicModal.alert({ content: '추천 메뉴는 최대 5개입니다.' });
+        toast('추천 메뉴는 최대 5개입니다.', {
+          type: 'warn',
+          position: 'top-center',
+          showCloseButton: false,
+          autoClose: 2000,
+        });
         return;
       }
 
