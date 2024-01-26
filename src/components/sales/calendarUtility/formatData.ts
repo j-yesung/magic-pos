@@ -1,21 +1,14 @@
-import { CalendarDataType, DateFormatType, FormatType, SalesRecordType } from '@/types/sales';
+import { CalendarDataType, DateFormatType, FormatType, IsTakeOutType, SalesRecordType } from '@/types/sales';
 import { Tables, TablesInsert } from '@/types/supabase';
 import moment, { Moment } from 'moment';
 import { getStartWeeks } from './dateCalculator';
-
-interface IsTakeOutType {
-  product_name: string;
-  product_ea: number;
-  product_price: number;
-  original_data: Tables<'sales'>[];
-}
 
 type OrderType = 'togo' | 'store';
 
 type FormatCalendarReturnType = (
   data: Map<string, Tables<'sales'>[]>,
 ) => { sales: number; date: string; to_go: IsTakeOutType[] | null; store: IsTakeOutType[] | null }[];
-type SortMinMaxDataReturnType = (target: CalendarDataType[]) => CalendarDataType[];
+type SortMinMaxDataReturnType = <T extends CalendarDataType>(target: CalendarDataType[]) => CalendarDataType[];
 type FormatDateParamType = 'YYYY-MM-DD' | 'YYYY년 MM월' | 'YYYY-MM';
 
 type SalesCommonType = TablesInsert<'sales'> & { moment?: Moment; original_date: Moment };
@@ -28,7 +21,6 @@ type SalesCommonType = TablesInsert<'sales'> & { moment?: Moment; original_date:
 // product_name이 같지 않으면 새로운 객체를 만들어줘야합니다.
 
 export const formatToCalendarData: FormatCalendarReturnType = data => {
-  console.log(...data.entries());
   const refinedData = [...data.entries()].map(([key, value]) => {
     const data = {
       sales: value.reduce((acc, cur) => acc + cur.product_ea * cur.product_price, 0),

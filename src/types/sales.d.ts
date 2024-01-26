@@ -17,6 +17,8 @@ export interface CalendarDataType {
   date: string;
   min?: boolean;
   max?: boolean;
+  to_go: IsTakeOutType[] | null;
+  store: IsTakeOutType[] | null;
 }
 
 /**
@@ -35,3 +37,10 @@ export type SalesRecordType = {
   currentSales: number;
   dateType: 'day' | 'month' | 'week';
 };
+
+export interface IsTakeOutType {
+  product_name: string;
+  product_ea: number;
+  product_price: number;
+  original_data: Tables<'sales'>[];
+}
