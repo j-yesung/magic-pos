@@ -1,14 +1,7 @@
 import axios from 'axios';
 
-interface Message {
-  title: string;
-  body: string;
-  click_action: string;
-}
-
 const useSendPush = () => {
-  const sendPush = async (props: Message) => {
-    const { title, body, click_action } = props;
+  const sendPush = async ({ title, body, click_action }: { title: string; body: string; click_action: string }) => {
     const message = {
       data: {
         title,

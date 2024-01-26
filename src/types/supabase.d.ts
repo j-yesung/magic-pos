@@ -428,6 +428,39 @@ export interface Database {
           },
         ];
       };
+      user_tokens: {
+        Row: {
+          id: string;
+          order_id: string;
+          token: string;
+        };
+        Insert: {
+          id?: string;
+          order_id: string;
+          token: string;
+        };
+        Update: {
+          id?: string;
+          order_id?: string;
+          token?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'constraint_order_number';
+            columns: ['order_id'];
+            isOneToOne: false;
+            referencedRelation: 'order_number';
+            referencedColumns: ['order_id'];
+          },
+          {
+            foreignKeyName: 'user_tokens_order_id_fkey';
+            columns: ['order_id'];
+            isOneToOne: false;
+            referencedRelation: 'order_store';
+            referencedColumns: ['order_id'];
+          },
+        ];
+      };
     };
     Views: {
       [_ in never]: never;
