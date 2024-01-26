@@ -77,6 +77,10 @@
   display: flex;
   flex-wrap: wrap;
   flex: 1;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 }
 
 .wrap .txt-wrap .input-wrap > p {
@@ -158,7 +162,11 @@
 
 .option-container .option-wrap {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
+  @media screen and (max-width: 768px) {
+    width: 40rem;
+  }
 }
 .option-container .option-wrap button {
   padding: 1.5rem;

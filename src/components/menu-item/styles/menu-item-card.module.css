@@ -25,12 +25,19 @@
 }
 
 .wrap li {
-  width: 39.2rem;
+  width: calc(33% - 1rem);
   height: 15.9rem;
   display: flex;
   justify-content: center;
   align-items: center;
   background: var(--text5);
+
+  @media screen and (max-width: 1250px) {
+    width: calc(50% - 1rem);
+  }
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 }
 
 .wrap li {
@@ -142,6 +149,11 @@
   font-weight: 600;
   line-height: 1.8rem;
   letter-spacing: -0.036rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 .wrap li button > span.txt > span.price-wrap {
@@ -178,8 +190,6 @@
 .wrap li button > span.txt > span.option > span {
   border-radius: 0.3rem;
   background: var(--bg-g);
-  font-size: 1.3rem;
-  font-weight: 500;
   padding: 0.8rem 1rem;
   color: var(--text2);
   font-size: 1.4rem;
@@ -187,4 +197,11 @@
   font-weight: 400;
   line-height: 1.4rem;
   letter-spacing: -0.028rem;
+}
+.wrap li button > span.txt > span.option > span > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }

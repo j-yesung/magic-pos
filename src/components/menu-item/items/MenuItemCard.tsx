@@ -138,7 +138,9 @@ const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
             {origineMenuOptions
               .filter(options => options.menu_id === item.id)
               .map((option: Tables<'menu_option'>) => (
-                <span key={option.id}>{option.name}</span>
+                <span key={option.id}>
+                  <span>{option.name}</span>
+                </span>
               ))}
           </span>
         </span>
