@@ -53,6 +53,10 @@ const ReceiptContainer = () => {
     i18n.changeLanguage(selectedLanguage.split('-')[1]);
   }, []);
 
+  useEffect(() => {
+    if (orderDataList.length === 0) router.push(`/kiosk/`);
+  }, []);
+
   return (
     <div className={styles.container}>
       <MenuHeader />

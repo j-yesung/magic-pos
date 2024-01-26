@@ -1,20 +1,55 @@
-import { useModal } from '@/hooks/service/ui/useModal';
-import useMenuItemStore from '@/shared/store/menu-item';
+import useToast from '@/hooks/service/ui/useToast';
+import useMenuOptionStore, { NewOptionDetailType } from '@/shared/store/menu/menu-option';
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { FaCheck } from 'react-icons/fa6';
 import styles from '../styles/menu-option-modal.module.css';
 import PlusButton from '/public/icons/plus.svg';
 
 const MenuOptionModalInput = () => {
-  const { MagicModal } = useModal();
-  const { menuOption, setMenuOption, menuOptionDetailList, setMenuOptionDetailList } = useMenuItemStore();
+  const { toast } = useToast();
 
-  const defaultOptionDetail = {
-    detailName: '',
-    detailPrice: 0,
+  const {
+    menuOption,
+    setMenuOption,
+    menuOptionDetail,
+    menuOptionDetailList,
+    setMenuOptionDetailList,
+    menuOptionIndex,
+  } = useMenuOptionStore();
+
+  useEffect(() => {
+    if (menuOptionIndex === -1) addOptionDetailInputHandler();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // 옵션 디테일추가
+  const addOptionDetailInputHandler = () => {
+    if (menuOptionDetailList.length > 4) {
+      toast('옵션 항목은 최대 5개입니다.', {
+        type: 'warn',
+        position: 'top-center',
+        showCloseButton: false,
+        autoClose: 2000,
+      });
+      return;
+    }
+    setMenuOptionDetailList([...menuOptionDetailList, { ...menuOptionDetail, price: '' }]);
   };
-  const [optionDetail, setOptionDetail] = useState(defaultOptionDetail);
+
+  // 옵션 디테일 onchange handler
+  const changeMenuOptionItemHandler = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const inputItemsCopy: NewOptionDetailType[] = [...menuOptionDetailList];
+    const { value, name } = e.target;
+
+    if (name === 'detailName') inputItemsCopy[index].name = value;
+    else if (name === 'detailPrice') {
+      const newValue = value.replace(/[^0-9e]/gi, '');
+      if (newValue.includes('e')) return;
+      inputItemsCopy[index].price = newValue;
+    }
+    setMenuOptionDetailList(inputItemsCopy);
+  };
 
   // 옵션 onchange handler
   const changeMenuOptionHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,7 +59,7 @@ const MenuOptionModalInput = () => {
       setMenuOption({ ...menuOption, is_use: !menuOption.is_use });
     } else {
       if (type === 'number') {
-        const newValue = value.replace(/[^0-9]/g, '');
+        const newValue = value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
         setMenuOption({ ...menuOption, [name]: newValue });
       } else {
         setMenuOption({ ...menuOption, [name]: value });
@@ -32,106 +67,60 @@ const MenuOptionModalInput = () => {
     }
   };
 
-  // 옵션 디테일 onchange handler
-  const changeMenuOptionItemHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type } = e.target;
-    if (type === 'number') {
-      const newValue = value.replace(/[^0-9]/g, '');
-      setOptionDetail({ ...optionDetail, [name]: newValue });
-    } else {
-      setOptionDetail({ ...optionDetail, [name]: value });
-    }
-  };
-
-  // 옵션 detail 추가
-  const AddDetailHandler = async () => {
-    if (optionDetail.detailName === '') return MagicModal.alert({ content: '최소 1글자는 입력해주세요' });
-    const addOptionForm = {
-      id: '',
-      name: optionDetail.detailName,
-      option_id: menuOption.id,
-      price: optionDetail.detailPrice,
-    };
-    setMenuOptionDetailList([...menuOptionDetailList, { ...addOptionForm }]);
-    setOptionDetail({
-      ...optionDetail,
-      detailName: '',
-      detailPrice: 0,
-    });
-  };
-
   // 옵션 detail 삭제
-  const handleRemoveOptionDetail = async (optionDetailId: string, optionDetailIndex: number) => {
+  const removeOptionDetailhandler = async (optionDetailIndex: number) => {
     const removedItemList = menuOptionDetailList.filter((_, index) => index !== optionDetailIndex);
     setMenuOptionDetailList(removedItemList);
   };
 
   return (
     <div className={styles['wrap']}>
-      <div>
-        <p className={styles['input-wrap']}>
-          <label className={styles['input-name']} htmlFor="name">
-            옵션명
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            className={styles['input']}
-            placeholder="옵션이름"
-            value={menuOption.name ?? ''}
-            onChange={changeMenuOptionHandler}
-            minLength={1}
-            maxLength={20}
-          />
-        </p>
-      </div>
-      <div>
-        <p className={styles['input-name']}>옵션 추가</p>
-        <div className={styles['option-three-wrap']}>
-          <p className={styles['input-wrap']}>
-            <input
-              type="text"
-              id="detailName"
-              name="detailName"
-              className={styles['input']}
-              value={optionDetail.detailName}
-              placeholder="옵션 내용을 입력하세요."
-              onChange={e => changeMenuOptionItemHandler(e)}
-            />
-          </p>
-          <p className={styles['input-wrap']}>
-            <input
-              type="number"
-              id="detailPrice"
-              name="detailPrice"
-              className={styles['input']}
-              value={optionDetail.detailPrice}
-              placeholder="옵션 가격을 입력하세요."
-              onChange={e => changeMenuOptionItemHandler(e)}
-            />
-          </p>
-          <p>
-            <button type="button" onClick={AddDetailHandler}>
-              <PlusButton width={25} height={25} />
-            </button>
-          </p>
+      <p className={styles['input-wrap']}>
+        <label className={styles['input-name']} htmlFor="name">
+          옵션명
+        </label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          className={styles['input']}
+          placeholder="옵션이름"
+          value={menuOption.name ?? ''}
+          onChange={changeMenuOptionHandler}
+          minLength={1}
+          maxLength={20}
+        />
+      </p>
+      <div className={styles['option-detail-wrap']}>
+        <div className={styles['top']}>
+          <p className={styles['input-name']}>옵션 추가</p>
+          <button className={styles['plus-btn']} onClick={addOptionDetailInputHandler}>
+            <span className={styles['img']}>
+              <PlusButton width={14} height={14} />
+            </span>
+            <span className={styles['txt']}>항목 추가하기</span>
+          </button>
         </div>
-        <div className={styles['line']}></div>
-        <div className={styles['option-list-wrap']}>
-          {menuOptionDetailList.map((option, index) => (
-            <div key={index} className={styles['option-three-wrap']}>
-              <p className={styles['option-list']}>{option.name}</p>
-              <p className={styles['option-list']}>{option.price}</p>
-              <p>
-                <button
-                  className={styles['option-btn']}
-                  type="button"
-                  onClick={() => handleRemoveOptionDetail(option.id, index)}
-                >
-                  삭제
-                </button>
-              </p>
+        <div className={styles['option-three-wrap']}>
+          {menuOptionDetailList.map((item, index) => (
+            <div key={index} className={styles['input-wrap']}>
+              <input
+                name="detailName"
+                type="text"
+                className={styles['input']}
+                onChange={e => changeMenuOptionItemHandler(e, index)}
+                value={item.name}
+                placeholder="옵션 내용"
+              />
+              <input
+                name="detailPrice"
+                type="text"
+                className={styles['input']}
+                onChange={e => changeMenuOptionItemHandler(e, index)}
+                value={item.price}
+                placeholder="옵션 가격"
+              />
+              <button onClick={() => removeOptionDetailhandler(index)}>삭제</button>
             </div>
           ))}
         </div>

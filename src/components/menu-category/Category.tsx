@@ -1,5 +1,5 @@
 import { useModal } from '@/hooks/service/ui/useModal';
-import useCategoriesStore from '@/shared/store/menu-category';
+import useCategoriesStore, { setCategory, setIsEdit } from '@/shared/store/menu/menu-category';
 import { useState } from 'react';
 import MenuCategoryModal from './modal/MenuCategoryModal';
 import styles from './styles/category.module.css';
@@ -9,7 +9,8 @@ import PlusButton from '/public/icons/plus.svg';
 
 const CategoryComponentPage = () => {
   const { MagicModal } = useModal();
-  const { setIsEdit, category, setCategory, categories } = useCategoriesStore();
+  const category = useCategoriesStore(state => state.category);
+  const categories = useCategoriesStore(state => state.categories);
   const [dropNum, setDropNum] = useState(0);
 
   // 카테고리 플러스

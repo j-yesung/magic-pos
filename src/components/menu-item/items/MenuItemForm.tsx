@@ -1,7 +1,8 @@
 import useSetMenuItem from '@/hooks/menu/menu-item/useSetMenuItems';
 import useSetMenuOption from '@/hooks/menu/menu-item/useSetMenuOption';
 import useSetMenuOptionDetail from '@/hooks/menu/menu-item/useSetMenuOptionDetail';
-import useMenuItemStore from '@/shared/store/menu-item';
+import useMenuItemStore, { setMenuItem, setMenuItemImgFile } from '@/shared/store/menu/menu-item';
+import useMenuOptionStore from '@/shared/store/menu/menu-option';
 import { MenuOptionWithDetail, Tables, TablesInsert } from '@/types/supabase';
 import moment from 'moment';
 import styles from '../styles/menu-item-form.module.css';
@@ -17,22 +18,11 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
   const { addOptionMutate, updateOptionMutate, removeOptionMutate } = useSetMenuOption();
   const { addUpsertOptionDetailMutate } = useSetMenuOptionDetail();
 
-  const {
-    isEdit,
-    menuItem,
-    setMenuItem,
-    menuItemImgFile,
-    setMenuItemImgFile,
-    categoryWithMenuItem,
-    setCategoryWithMenuItem,
-    menuOption,
-    setMenuOption,
-    menuOptions,
-    setMenuOptions,
-    origineMenuOptions,
-    changeMenuOptions,
-    setChangeMenuOptions,
-  } = useMenuItemStore();
+  const isEdit = useMenuItemStore(state => state.isEdit);
+  const menuItem = useMenuItemStore(state => state.menuItem);
+  const menuItemImgFile = useMenuItemStore(state => state.menuItemImgFile);
+  const { menuOptions, setMenuOptions, origineMenuOptions, changeMenuOptions, setChangeMenuOptions } =
+    useMenuOptionStore();
 
   // 메뉴 추가 and 수정
   const submitupdateMenuItemHandler = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -50,7 +40,8 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
       const addData = await addMutate.mutateAsync(newMenuItemData);
       setMenuItem(addData[0]);
       newMenuItemData.id = addData[0].id;
-      setMenuOptions([...menuOptions, { menu_id: addData[0].id }] as MenuOptionWithDetail[]);
+      const newMenuOptions = menuOptions.map(option => (option.menu_id = addData[0].id));
+      setMenuOptions([...menuOptions, newMenuOptions] as MenuOptionWithDetail[]);
     } else {
       newMenuItemData.id = menuItem.id;
     }
@@ -100,7 +91,6 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
 
   const filterOptionHandler = () => {
     const differences = findDifferences(menuOptions, origineMenuOptions);
-
     differences.map(async item => {
       if (item.id === '') {
         // 옵션 항목 supabase에 추가
