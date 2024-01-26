@@ -1,4 +1,4 @@
-import useMenuItemStore from '@/shared/store/menu-item';
+import useMenuItemStore, { setCategoryWithMenuItem, setMenuItemList } from '@/shared/store/menu/menu-item';
 import { CategoryWithMenuItem } from '@/types/supabase';
 import clsx from 'clsx';
 import { useState } from 'react';
@@ -9,8 +9,8 @@ import { Swiper as swipers } from 'swiper/types';
 import styles from '../styles/menu-item-category.module.css';
 
 const MenuItemCategoryPage = () => {
-  const { setMenuItemList, categoryWithMenuItem, setCategoryWithMenuItem, categoryWithMenuItemList } =
-    useMenuItemStore();
+  const categoryWithMenuItem = useMenuItemStore(state => state.categoryWithMenuItem);
+  const categoryWithMenuItemList = useMenuItemStore(state => state.categoryWithMenuItemList);
   const [onSwiperIndex, setOnSwiperIndex] = useState(0);
 
   // 카테고리 선택

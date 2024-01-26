@@ -1,7 +1,13 @@
 import useSetMenuItem from '@/hooks/menu/menu-item/useSetMenuItems';
 import { useModal } from '@/hooks/service/ui/useModal';
 import { convertNumberToWon } from '@/shared/helper';
-import useMenuItemStore from '@/shared/store/menu-item';
+import useMenuItemStore, {
+  setIsEdit,
+  setMenuItem,
+  setMenuItemImgFile,
+  setMenuItemSampleImg,
+} from '@/shared/store/menu/menu-item';
+import useMenuOptionStore from '@/shared/store/menu/menu-option';
 import { Tables } from '@/types/supabase';
 import clsx from 'clsx';
 import Image from 'next/image';
@@ -21,20 +27,12 @@ interface PropsType {
 const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
   const { MagicModal } = useModal();
   const { updatePositionMutate } = useSetMenuItem();
-  const {
-    setIsEdit,
-    sampleImage,
-    menuItem,
-    setMenuItem,
-    categoryWithMenuItem,
-    categoryWithMenuItemList,
-    setMenuItemSampleImg,
-    setMenuItemImgFile,
-    menuOption,
-    setMenuOption,
-    setMenuOptions,
-    origineMenuOptions,
-  } = useMenuItemStore();
+  const sampleImage = useMenuItemStore(state => state.sampleImage);
+  const menuItem = useMenuItemStore(state => state.menuItem);
+  const categoryWithMenuItem = useMenuItemStore(state => state.categoryWithMenuItem);
+  const categoryWithMenuItemList = useMenuItemStore(state => state.categoryWithMenuItemList);
+  const { menuOption, setMenuOption, setMenuOptions, origineMenuOptions } = useMenuOptionStore();
+
   const [isDragging, setIsDragging] = useState(false);
 
   // 메뉴 선택
@@ -140,7 +138,9 @@ const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
             {origineMenuOptions
               .filter(options => options.menu_id === item.id)
               .map((option: Tables<'menu_option'>) => (
-                <span key={option.id}>{option.name}</span>
+                <span key={option.id}>
+                  <span>{option.name}</span>
+                </span>
               ))}
           </span>
         </span>

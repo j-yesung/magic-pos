@@ -6,6 +6,7 @@ import { convertNumberToWon } from '@/shared/helper';
 import useKioskState, { getTotalPrice, goNextStep, ORDER_STEP, subtractOrderList } from '@/shared/store/kiosk';
 import { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { BiSolidCircle } from 'react-icons/bi';
 import { PiBagSimpleFill } from 'react-icons/pi';
 import styles from './styles/StepButton.module.css';
@@ -27,6 +28,7 @@ const StepButton = () => {
   const optionSwiperRef = useKioskState(state => state.optionSwiperRef);
   const swiperRef = useKioskState(state => state.swiperRef);
   const selectedMenu = useKioskState(state => state.selectedMenu);
+  const isWidgetRendering = useKioskState(state => state.isWidgetRendering);
   const { MagicModal } = useModal();
   const { t } = useTranslation();
 
@@ -80,12 +82,20 @@ const StepButton = () => {
       {step > ORDER_STEP.CHOOSE_ORDER_TYPE && step < ORDER_STEP.SUCCESS && (
         <div className={styles.container}>
           {optionSwiperRef?.current!.swiper?.realIndex !== 1 ? (
-            <button className={styles.button} onClick={nextClickHandler} disabled={orderList.length === 0}>
+            <button
+              className={styles.button}
+              onClick={nextClickHandler}
+              disabled={orderList.length === 0 || (step === ORDER_STEP.PAYMENT && isWidgetRendering)}
+            >
               {orderList.length === 0 ? (
                 <span>{t('footer.no-item')}</span>
               ) : (
                 <span>
-                  {BUTTON_OPTIONS[step]}
+                  {step === ORDER_STEP.PAYMENT && isWidgetRendering ? (
+                    <LoadingSpinner boxSize={2} ballSize={0.4} interval={1.5} color={'#000'} />
+                  ) : (
+                    BUTTON_OPTIONS[step]
+                  )}
                   {step === ORDER_STEP.SELECT_MENU && (
                     <>
                       <BiSolidCircle size={2} />

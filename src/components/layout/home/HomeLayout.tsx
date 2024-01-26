@@ -11,7 +11,7 @@ const HomeLayout = ({ children }: { children: React.ReactNode }) => {
     return () => {
       if (!isChecked) resetToggle();
     };
-  }, []);
+  }, [isChecked]);
 
   return (
     <div className={styles.wrapper}>

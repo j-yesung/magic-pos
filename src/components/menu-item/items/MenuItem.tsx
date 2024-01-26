@@ -1,5 +1,11 @@
 import { useModal } from '@/hooks/service/ui/useModal';
-import useMenuItemStore from '@/shared/store/menu-item';
+import useMenuItemStore, {
+  setIsEdit,
+  setMenuItem,
+  setMenuItemImgFile,
+  setMenuItemSampleImg,
+} from '@/shared/store/menu/menu-item';
+import useMenuOptionStore from '@/shared/store/menu/menu-option';
 import { Tables } from '@/types/supabase';
 import clsx from 'clsx';
 import { useState } from 'react';
@@ -10,17 +16,11 @@ import PlusButton from '/public/icons/plus.svg';
 
 const MenuItemPage = () => {
   const { MagicModal } = useModal();
-  const {
-    setIsEdit,
-    sampleImage,
-    menuItem,
-    setMenuItem,
-    categoryWithMenuItem,
-    categoryWithMenuItemList,
-    setMenuItemImgFile,
-    setMenuItemSampleImg,
-    setMenuOptions,
-  } = useMenuItemStore();
+  const sampleImage = useMenuItemStore(state => state.sampleImage);
+  const menuItem = useMenuItemStore(state => state.menuItem);
+  const categoryWithMenuItem = useMenuItemStore(state => state.categoryWithMenuItem);
+  const categoryWithMenuItemList = useMenuItemStore(state => state.categoryWithMenuItemList);
+  const { setMenuOptions } = useMenuOptionStore();
 
   const [dropNum, setDropNum] = useState(0);
 

@@ -1,8 +1,9 @@
 import useSetMenuItem from '@/hooks/menu/menu-item/useSetMenuItems';
 import useSetMenuOption from '@/hooks/menu/menu-item/useSetMenuOption';
 import useSetMenuOptionDetail from '@/hooks/menu/menu-item/useSetMenuOptionDetail';
-import useMenuItemStore from '@/shared/store/menu-item';
-import { MenuOptionWithDetail, Tables, TablesInsert } from '@/types/supabase';
+import useMenuItemStore, { setMenuItem, setMenuItemImgFile } from '@/shared/store/menu/menu-item';
+import useMenuOptionStore, { NewMenuOptionWithDetail, NewOptionDetailType } from '@/shared/store/menu/menu-option';
+import { Tables, TablesInsert } from '@/types/supabase';
 import moment from 'moment';
 import styles from '../styles/menu-item-form.module.css';
 import MenuItemFormButton from './MenuItemFormButton';
@@ -17,22 +18,11 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
   const { addOptionMutate, updateOptionMutate, removeOptionMutate } = useSetMenuOption();
   const { addUpsertOptionDetailMutate } = useSetMenuOptionDetail();
 
-  const {
-    isEdit,
-    menuItem,
-    setMenuItem,
-    menuItemImgFile,
-    setMenuItemImgFile,
-    categoryWithMenuItem,
-    setCategoryWithMenuItem,
-    menuOption,
-    setMenuOption,
-    menuOptions,
-    setMenuOptions,
-    origineMenuOptions,
-    changeMenuOptions,
-    setChangeMenuOptions,
-  } = useMenuItemStore();
+  const isEdit = useMenuItemStore(state => state.isEdit);
+  const menuItem = useMenuItemStore(state => state.menuItem);
+  const menuItemImgFile = useMenuItemStore(state => state.menuItemImgFile);
+  const { menuOptions, setMenuOptions, origineMenuOptions, changeMenuOptions, setChangeMenuOptions } =
+    useMenuOptionStore();
 
   // 메뉴 추가 and 수정
   const submitupdateMenuItemHandler = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -50,7 +40,8 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
       const addData = await addMutate.mutateAsync(newMenuItemData);
       setMenuItem(addData[0]);
       newMenuItemData.id = addData[0].id;
-      setMenuOptions([...menuOptions, { menu_id: addData[0].id }] as MenuOptionWithDetail[]);
+      const newMenuOptions = menuOptions.map(option => (option.menu_id = addData[0].id));
+      setMenuOptions([...menuOptions, newMenuOptions] as NewMenuOptionWithDetail[]);
     } else {
       newMenuItemData.id = menuItem.id;
     }
@@ -100,7 +91,6 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
 
   const filterOptionHandler = () => {
     const differences = findDifferences(menuOptions, origineMenuOptions);
-
     differences.map(async item => {
       if (item.id === '') {
         // 옵션 항목 supabase에 추가
@@ -117,11 +107,11 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
           const addOptionForm: Omit<Tables<'menu_option_detail'>, 'id'> = {
             name: option.name,
             option_id: optionData[0].id,
-            price: option.price,
+            price: Number(option.price),
           };
           addUpsertOptionDetailMutate(addOptionForm);
         });
-        const newOptionList: MenuOptionWithDetail = {
+        const newOptionList: NewMenuOptionWithDetail = {
           id: optionData[0].id,
           name: optionData[0].name,
           is_use: optionData[0].is_use,
@@ -133,7 +123,7 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
       } else {
         // 옵션은 있는거니까 해당 detail을 옵션 아이디로 supabase 추가
         updateOptionMutate(item);
-        const newOptionList: MenuOptionWithDetail = {
+        const newOptionList: NewMenuOptionWithDetail = {
           id: item.id,
           name: item.name,
           is_use: item.is_use,
@@ -146,7 +136,7 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
           const addOptionForm: Omit<Tables<'menu_option_detail'>, 'id'> | Tables<'menu_option_detail'> = {
             name: option.name,
             option_id: newOptionList.id,
-            price: option.price,
+            price: Number(option.price),
           };
 
           if (option.id !== '') (addOptionForm as Tables<'menu_option_detail'>).id = option.id;
@@ -158,8 +148,8 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
   };
 
   // 옵션 비교 함수
-  const findDifferences = (optionNowArray: MenuOptionWithDetail[], optionOriginArray: MenuOptionWithDetail[]) => {
-    const differentArray: MenuOptionWithDetail[] = [];
+  const findDifferences = (optionNowArray: NewMenuOptionWithDetail[], optionOriginArray: NewMenuOptionWithDetail[]) => {
+    const differentArray: NewMenuOptionWithDetail[] = [];
 
     optionNowArray.forEach(itemNum1 => {
       const itemNum2 = optionOriginArray.find(findItem => findItem.id === itemNum1.id);
@@ -179,10 +169,7 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
   };
 
   // 옵션 디테일 배열을 비교하는 함수
-  const compareMenuOptions = (
-    optionNowArray: Tables<'menu_option_detail'>[],
-    optionOriginArray: Tables<'menu_option_detail'>[],
-  ) => {
+  const compareMenuOptions = (optionNowArray: NewOptionDetailType[], optionOriginArray: NewOptionDetailType[]) => {
     const newItems = [];
 
     optionNowArray.forEach(itemNum1 => {

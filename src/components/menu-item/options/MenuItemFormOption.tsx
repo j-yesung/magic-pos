@@ -1,5 +1,6 @@
 import { useModal } from '@/hooks/service/ui/useModal';
-import useMenuItemStore from '@/shared/store/menu-item';
+import useMenuItemStore from '@/shared/store/menu/menu-item';
+import useMenuOptionStore, { NewMenuOptionWithDetail } from '@/shared/store/menu/menu-option';
 import { MenuOptionWithDetail } from '@/types/supabase';
 import { FiAlertCircle } from 'react-icons/fi';
 import MenuOptionModal from '../options/MenuOptionModal';
@@ -10,18 +11,12 @@ import PlusButton from '/public/icons/plus.svg';
 
 const MenuItemFormOption = () => {
   const { MagicModal } = useModal();
-  const {
-    menuItem,
-    menuOption,
-    setMenuOption,
-    menuOptions,
-    setMenuOptions,
-    setMenuOptionDetailList,
-    menuOptionIndex,
-    setMenuOptionIndex,
-  } = useMenuItemStore();
+  const menuItem = useMenuItemStore(state => state.menuItem);
+  const { menuOption, setMenuOption, menuOptions, setMenuOptions, setMenuOptionDetailList, setMenuOptionIndex } =
+    useMenuOptionStore();
+
   // 옵션 수정
-  const clickUpdateOptionHandler = (item: MenuOptionWithDetail, index: number) => {
+  const clickUpdateOptionHandler = (item: NewMenuOptionWithDetail, index: number) => {
     setMenuOptionDetailList(item.menu_option_detail);
     setMenuOption({
       ...menuOption,

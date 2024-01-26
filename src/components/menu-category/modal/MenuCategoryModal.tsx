@@ -1,12 +1,12 @@
 import { useModal } from '@/hooks/service/ui/useModal';
-import useCategoriesStore from '@/shared/store/menu-category';
+import useCategoriesStore from '@/shared/store/menu/menu-category';
 import CategoryFormPage from '../Form';
 import styles from '../styles/modal.module.css';
 import CloseButton from '/public/icons/close.svg';
 
 const MenuCategoryModal = ({ modalId }: { modalId?: string }) => {
   const { MagicModal } = useModal();
-  const { isEdit } = useCategoriesStore();
+  const isEdit = useCategoriesStore(state => state.isEdit);
 
   const clickCategoryModalHide = () => {
     MagicModal.hide(modalId ?? '');
