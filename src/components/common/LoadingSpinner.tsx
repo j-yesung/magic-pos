@@ -18,7 +18,7 @@ interface LoadingSpinnerType {
  * 타입 : boxSize, ballSize, interval = number , color = string
  * 크기는 rem 단위 입니다.
  */
-const LoadingSpinner = ({ boxSize, ballSize, interval, color }: LoadingSpinnerType) => {
+const LoadingSpinner = ({ boxSize, ballSize, interval, color = '#fff' }: LoadingSpinnerType) => {
   return (
     <>
       <div className={'busy-loader'}>
@@ -64,7 +64,7 @@ const LoadingSpinner = ({ boxSize, ballSize, interval, color }: LoadingSpinnerTy
           width: ${ballSize}rem;
           height: ${ballSize}rem;
           position: absolute;
-          background: #${color ? color : 'fff'};
+          background: ${color};
           left: 0px;
           top: 0px;
           -moz-border-radius: 1.1rem;
