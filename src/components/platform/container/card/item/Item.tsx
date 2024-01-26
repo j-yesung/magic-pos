@@ -1,46 +1,55 @@
-import clsx from 'clsx';
+import { setIsEdit, setIsRegist, setPrevData } from '@/shared/store/platform';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRef } from 'react';
 import { LuExternalLink } from 'react-icons/lu';
-import { EditFormType } from '../../PlatFormWrapper';
 import styles from './styles/item.module.css';
-import Default from '/public/logo.svg';
+import Pencil from '/public/icons/pencil.svg';
+import Default from '/public/whiteLogo.svg';
 interface ItemProps {
   link: string;
   title: string;
-  isEdit: boolean;
   id: string;
-  setEditTarget: React.Dispatch<React.SetStateAction<EditFormType>>;
   imgUrl: string | null;
-  setIsShowEditForm: React.Dispatch<React.SetStateAction<boolean>>;
-  setPreImage: React.Dispatch<React.SetStateAction<string | null>>;
 }
-const Item = ({ link, title, isEdit, id, setEditTarget, imgUrl, setIsShowEditForm, setPreImage }: ItemProps) => {
-  const editForm = () => {
-    setEditTarget(pre => ({
-      ...pre,
+const Item = ({ link, title, id, imgUrl }: ItemProps) => {
+  const editRef = useRef<HTMLButtonElement>(null);
+  const linkRef = useRef<HTMLDivElement>(null);
+
+  const mouseEnterShowEditButton = () => {
+    if (editRef.current && linkRef.current) {
+      linkRef.current.style.display = 'flex';
+      editRef.current.style.display = 'flex';
+    }
+  };
+  const mouseLeaveHiddenEditButton = () => {
+    if (editRef.current && linkRef.current) {
+      linkRef.current.style.display = 'none';
+      editRef.current.style.display = 'none';
+    }
+  };
+
+  const clickShowEditPlatFormMode = () => {
+    setPrevData({
       id,
       link_url: link,
       name: title,
       image_url: imgUrl ?? null,
-    }));
-
-    setPreImage(imgUrl);
-    setIsShowEditForm(true);
+    });
+    setIsRegist(true);
+    setIsEdit(true);
   };
   return (
-    <div className={styles.itemWrapper}>
-      <Link
-        target="_blank"
-        className={clsx(styles.item, {
-          [styles.editItem]: isEdit,
-        })}
-        href={link}
-      >
+    <div
+      className={styles.itemWrapper}
+      onMouseEnter={mouseEnterShowEditButton}
+      onMouseLeave={mouseLeaveHiddenEditButton}
+    >
+      <Link target="_blank" className={styles.item} href={link}>
         {imgUrl ? (
           <Image src={imgUrl} width={1000} height={1000} alt={title} />
         ) : (
-          <div className={styles.defaultImgContainer}>
+          <div className={styles.defaultImg}>
             <Default />
           </div>
         )}
@@ -48,12 +57,14 @@ const Item = ({ link, title, isEdit, id, setEditTarget, imgUrl, setIsShowEditFor
         <div className={styles.itemHeader}>
           <span className={styles.itemTitle}>{title}</span>
         </div>
-        <div className={styles.externalLink}>
+        <div className={styles.externalLink} ref={linkRef}>
           <LuExternalLink />
           <span>이동하기</span>
         </div>
       </Link>
-      {isEdit && <span onClick={editForm} className={styles.edit}></span>}
+      <button onClick={clickShowEditPlatFormMode} type="button" className={styles.editWrapper} ref={editRef}>
+        <Pencil />
+      </button>
     </div>
   );
 };

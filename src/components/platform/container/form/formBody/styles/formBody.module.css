@@ -1,0 +1,6 @@
+.form-body {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 1.5rem;
+}

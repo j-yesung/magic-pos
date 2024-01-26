@@ -1,10 +1,10 @@
 import Button from '@/components/common/Button';
-import useSalesStore, { setIsChangeView } from '@/shared/store/sales/sales';
+import useSalesToggle, { setIsChangeView } from '@/shared/store/sales/salesToggle';
 import clsx from 'clsx';
 import styles from './styles/toggleButton.module.css';
 
 const ToggleButton = () => {
-  const isChangeView = useSalesStore(state => state.isChangeView);
+  const isChangeView = useSalesToggle(state => state.isChangeView);
 
   const clickShowChart = () => setIsChangeView(true);
   const clickShowCalendar = () => setIsChangeView(false);

@@ -88,7 +88,13 @@ export const translateMenuData = async (menuData: CategoryWithMenuItem[], lang: 
   let optionIndex = 0;
   let optionDetailIndex = 0;
   menuData.forEach(menu => {
-    menu.name = translatedCategory[categoryIndex].text;
+    const translatedCategoryText = translatedCategory[categoryIndex].text;
+    const endBracketIndex = translatedCategoryText.indexOf(')');
+    const endOtherBracketIndex = translatedCategoryText.indexOf('）');
+    let bracketIndex = endBracketIndex;
+    if (endBracketIndex === -1) bracketIndex = endOtherBracketIndex;
+
+    menu.name = translatedCategoryText.substring(bracketIndex + 1);
     menu.menu_item.forEach(item => {
       item.name = translatedMenu[menuIndex].text;
       menuIndex++;

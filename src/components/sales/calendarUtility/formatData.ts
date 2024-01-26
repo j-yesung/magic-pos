@@ -1,4 +1,4 @@
-import { CalendarDataType, DateFormatType, FormatType, RecordType } from '@/types/sales';
+import { CalendarDataType, DateFormatType, FormatType, SalesRecordType } from '@/types/sales';
 import { Tables, TablesInsert } from '@/types/supabase';
 import moment, { Moment } from 'moment';
 import { getStartWeeks } from './dateCalculator';
@@ -6,8 +6,8 @@ import { getStartWeeks } from './dateCalculator';
 type FormatCalendarReturnType = (data: Map<string, Tables<'sales'>[]>) => { sales: number; date: string }[];
 type SortMinMaxDataReturnType = (target: CalendarDataType[]) => CalendarDataType[];
 type FormatDateParamType = 'YYYY-MM-DD' | 'YYYY년 MM월' | 'YYYY-MM';
-type DateParamType = 'day' | 'week' | 'month';
-type CommonType = TablesInsert<'sales'> & { moment?: Moment; original_date: Moment };
+
+type SalesCommonType = TablesInsert<'sales'> & { moment?: Moment; original_date: Moment };
 
 export const formatToCalendarData: FormatCalendarReturnType = data => {
   const refinedData = [...data.entries()].map(([key, value]) => {
@@ -66,7 +66,7 @@ export const formatData = (
   return { result, recordData };
 };
 
-const getDates = (dateType: DateParamType, selectedDateType: Moment, formatType: FormatDateParamType) => {
+const getDates = (dateType: DateFormatType, selectedDateType: Moment, formatType: FormatDateParamType) => {
   const dateContainer = [];
   if (dateType === 'week') {
     for (let i = 0; i < 7; i++) {
@@ -90,7 +90,7 @@ const getDates = (dateType: DateParamType, selectedDateType: Moment, formatType:
 
 const getDataWithFormatingDate = (
   originalData: Tables<'sales'>[],
-  dateType: DateParamType,
+  dateType: DateFormatType,
   formatType: FormatDateParamType,
 ) => {
   let DataWithFormattedDate;
@@ -121,7 +121,7 @@ const getDataWithFormatingDate = (
 };
 
 const getGroupByDate = (container: string[]) => {
-  const mapGroup = new Map<string, CommonType[]>();
+  const mapGroup = new Map<string, SalesCommonType[]>();
 
   const group = container.reduce((acc, cur) => {
     acc.set(cur, []);
@@ -130,7 +130,7 @@ const getGroupByDate = (container: string[]) => {
   return group;
 };
 
-const insertDataGroupByDate = (formattedTarget: CommonType[], groupMap: Map<string, CommonType[]>) => {
+const insertDataGroupByDate = (formattedTarget: SalesCommonType[], groupMap: Map<string, SalesCommonType[]>) => {
   formattedTarget.forEach(data => {
     for (const [key, _] of groupMap) {
       if (key === data.sales_date) {
@@ -142,11 +142,11 @@ const insertDataGroupByDate = (formattedTarget: CommonType[], groupMap: Map<stri
 };
 
 const getRecordData = (
-  toExtracted: Map<string, CommonType[]>,
-  dateType: DateParamType,
+  toExtracted: Map<string, SalesCommonType[]>,
+  dateType: DateFormatType,
   selectedDateType: Moment,
-): RecordType => {
-  const extractedData: RecordType = {
+): SalesRecordType => {
+  const extractedData: SalesRecordType = {
     currentSales: 0,
     dateType: 'day',
   };

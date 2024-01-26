@@ -1,5 +1,5 @@
-import { useNumberOrderSetQuery } from '@/hooks/order/useNumberOrderSetQuery';
-import { useStoreOrderSetQuery } from '@/hooks/order/useStoreOrderSetQuery';
+import { useNumberOrderSetQuery } from '@/hooks/query/order/useNumberOrderSetQuery';
+import { useStoreOrderSetQuery } from '@/hooks/query/order/useStoreOrderSetQuery';
 import { useStoreSetQuery } from '@/hooks/query/store/useStoreSetQuery';
 import { useSalesQuery } from '@/hooks/sales/useSalesQuery';
 import { decrementRemainEaByMenuId } from '@/server/api/supabase/menu-item';
@@ -55,6 +55,7 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
         product_ea: value.length,
         product_category: menuData?.find(menu => menu.id === value[0].category_id)?.name,
         product_price: value[0].price,
+        order_type: orderType.type,
       }));
 
       addSales(salesData);

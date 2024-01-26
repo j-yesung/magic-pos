@@ -36,6 +36,7 @@ interface OrderState {
   selectedMenu: MenuItemWithOption | null;
   isOptionPage: boolean;
   selectedLanguage: string;
+  isWidgetRendering: boolean;
 }
 
 export const useKioskState = create<OrderState>()(
@@ -69,8 +70,12 @@ export const useKioskState = create<OrderState>()(
       selectedOptions: [],
       // 메뉴 하나 수량
       amount: 1,
+      // 현재 페이지가 옵션 페이지인지 (옵션페이지 안에 Swiper가 하나 더 있어 구분하기 위함)
       isOptionPage: false,
+      // 선택 언어
       selectedLanguage: 'lang-ko',
+      // 토스 위젯 렌더링 여부
+      isWidgetRendering: true,
     }),
     {
       name: 'order-storage',
@@ -83,6 +88,7 @@ export const useKioskState = create<OrderState>()(
         orderList: state.orderList,
         tableId: state.tableId,
         selectedLanguage: state.selectedLanguage,
+        menuData: state.menuData,
       }),
     },
   ),
@@ -184,5 +190,6 @@ export const resetSelectedMenu = () => {
   setSelectedMenu(null);
   setIsOptionPage(false);
 };
+export const setIsWidgetRendering = (isWidgetRendering: boolean) => useKioskState.setState({ isWidgetRendering });
 
 export default useKioskState;

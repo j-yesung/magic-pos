@@ -105,7 +105,7 @@
 }
 
 .calendar-not-current-month {
-  opacity: 0.5;
+  visibility: hidden;
   background-color: var(--point-2);
 }
 /*calendar date*/

@@ -1,14 +1,15 @@
-import { ReactElement } from 'react';
-import useKioskState, { getTotalPrice, goNextStep, ORDER_STEP, subtractOrderList } from '@/shared/store/kiosk';
-import { usePaymentWidget } from '@/hooks/order/usePaymentWidget';
-import styles from './styles/StepButton.module.css';
-import { convertNumberToWon } from '@/shared/helper';
 import AddCartButton from '@/components/layout/order/footer/AddCartButton';
-import { readRemainEaByMenuId } from '@/server/api/supabase/menu-item';
+import { usePaymentWidget } from '@/hooks/query/order/usePaymentWidget';
 import { useModal } from '@/hooks/service/ui/useModal';
-import { PiBagSimpleFill } from 'react-icons/pi';
-import { BiSolidCircle } from 'react-icons/bi';
+import { readRemainEaByMenuId } from '@/server/api/supabase/menu-item';
+import { convertNumberToWon } from '@/shared/helper';
+import useKioskState, { getTotalPrice, goNextStep, ORDER_STEP, subtractOrderList } from '@/shared/store/kiosk';
+import { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
+import { BiSolidCircle } from 'react-icons/bi';
+import { PiBagSimpleFill } from 'react-icons/pi';
+import styles from './styles/StepButton.module.css';
 
 class OrderError extends Error {
   readonly id: string;
@@ -27,6 +28,7 @@ const StepButton = () => {
   const optionSwiperRef = useKioskState(state => state.optionSwiperRef);
   const swiperRef = useKioskState(state => state.swiperRef);
   const selectedMenu = useKioskState(state => state.selectedMenu);
+  const isWidgetRendering = useKioskState(state => state.isWidgetRendering);
   const { MagicModal } = useModal();
   const { t } = useTranslation();
 
@@ -80,11 +82,18 @@ const StepButton = () => {
       {step > ORDER_STEP.CHOOSE_ORDER_TYPE && step < ORDER_STEP.SUCCESS && (
         <div className={styles.container}>
           {optionSwiperRef?.current!.swiper?.realIndex !== 1 ? (
-            <button className={styles.button} onClick={nextClickHandler} disabled={orderList.length === 0}>
+            <button
+              className={styles.button}
+              onClick={nextClickHandler}
+              disabled={orderList.length === 0 || (step === ORDER_STEP.PAYMENT && isWidgetRendering)}
+            >
               {orderList.length === 0 ? (
                 <span>{t('footer.no-item')}</span>
               ) : (
                 <span>
+                  {step === ORDER_STEP.PAYMENT && isWidgetRendering && (
+                    <LoadingSpinner boxSize={2} ballSize={0.4} interval={1.5} />
+                  )}
                   {BUTTON_OPTIONS[step]}
                   {step === ORDER_STEP.SELECT_MENU && (
                     <>

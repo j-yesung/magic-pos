@@ -22,7 +22,9 @@ const OrderPrevButton = () => {
       resetSelectedOptions();
     } else {
       swiperRef!.current?.swiper.slidePrev(SLIDE_MOVE_SPEED);
-      goPrevStep();
+      setTimeout(() => {
+        goPrevStep();
+      }, SLIDE_MOVE_SPEED);
     }
     setIsOptionPage(false);
   };

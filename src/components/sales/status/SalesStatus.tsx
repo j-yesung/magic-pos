@@ -1,7 +1,8 @@
 import { getDaySales } from '@/server/api/supabase/sales';
-import useCalendarStore, { setCalendarCurrentDate, setCalendarSelectedDate } from '@/shared/store/sales/calendar';
-import { setChartData } from '@/shared/store/sales/chart';
-import { resetRecordData, setRecordData } from '@/shared/store/sales/record';
+import { setCalendarCurrentDate } from '@/shared/store/sales/salesCalendar';
+import { setChartData } from '@/shared/store/sales/salesChart';
+import useDayState, { resetSelectedDate } from '@/shared/store/sales/salesDay';
+import { resetRecordData, setRecordData } from '@/shared/store/sales/salesRecord';
 import useAuthState from '@/shared/store/session';
 import { Tables } from '@/types/supabase';
 import moment from 'moment';
@@ -11,7 +12,7 @@ import ChartBar from './chart/ChartBar';
 import Record from './record/Record';
 import styles from './styles/status.module.css';
 const SalesStatus = () => {
-  const { utcStandardDate, today } = useCalendarStore();
+  const { utcStandardDate, today } = useDayState();
   const storeId = useAuthState(state => state.storeId);
   useEffect(() => {
     getDaySales(utcStandardDate.clone(), storeId!).then(data => {
@@ -39,7 +40,7 @@ const SalesStatus = () => {
   useEffect(() => {
     return () => {
       resetRecordData();
-      setCalendarSelectedDate(today);
+      resetSelectedDate();
       setCalendarCurrentDate(today);
     };
   }, []);
