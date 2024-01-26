@@ -14,13 +14,16 @@ interface MenuItemModal {
 }
 
 const MenuItemFormPage: React.FC<MenuItemModal> = props => {
-  const { addMutate, updateNameMutate, uploadImageMutate } = useSetMenuItem();
+  const { addMutate, updateNameMutate, uploadImageMutate, removeImageMutate } = useSetMenuItem();
   const { addOptionMutate, updateOptionMutate, removeOptionMutate } = useSetMenuOption();
   const { addUpsertOptionDetailMutate } = useSetMenuOptionDetail();
 
   const isEdit = useMenuItemStore(state => state.isEdit);
   const menuItem = useMenuItemStore(state => state.menuItem);
+  const sampleImage = useMenuItemStore(state => state.sampleImage);
+  const menuItemSampleImg = useMenuItemStore(state => state.menuItemSampleImg);
   const menuItemImgFile = useMenuItemStore(state => state.menuItemImgFile);
+
   const { menuOptions, setMenuOptions, origineMenuOptions, changeMenuOptions, setChangeMenuOptions } =
     useMenuOptionStore();
 
@@ -47,17 +50,23 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
     }
 
     let uploadedMenuImage = '';
+    const formattedDate = moment().toISOString();
+    const uploadImageGroup = {
+      menuId: newMenuItemData.id,
+      categoryId: menuItem.category_id,
+      createAt: formattedDate,
+      selectedFile: menuItemImgFile!,
+    };
+    // 이미지가 새로 업로드 됐다면
     if (menuItemImgFile !== null) {
-      const formattedDate = moment().toISOString();
-      const uploadImageGroup = {
-        menuId: newMenuItemData.id,
-        categoryId: menuItem.category_id,
-        createAt: formattedDate,
-        selectedFile: menuItemImgFile,
-      };
+      if (isEdit) removeImageMutate(uploadImageGroup);
       uploadedMenuImage = await uploadImageMutate.mutateAsync(uploadImageGroup);
       setMenuItem({ ...menuItem, image_url: uploadedMenuImage });
       newMenuItemData.image_url = uploadedMenuImage;
+    } else if (menuItemSampleImg === sampleImage && menuItemSampleImg !== menuItem.image_url) {
+      setMenuItem({ ...menuItem, image_url: null });
+      removeImageMutate(uploadImageGroup);
+      newMenuItemData.image_url = null;
     }
     updateNameMutate(newMenuItemData);
     props.clickItemModalHide();

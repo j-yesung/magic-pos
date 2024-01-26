@@ -6,6 +6,8 @@ import { ChangeEvent } from 'react';
 import { FaCheck } from 'react-icons/fa6';
 import MenuItemFormOption from '../options/MenuItemFormOption';
 import styles from '../styles/menu-item-form.module.css';
+import CloseButton from '/public/icons/close.svg';
+import EditButton from '/public/icons/pencil.svg';
 
 const MenuItemFormInput = () => {
   const { toast } = useToast();
@@ -20,19 +22,17 @@ const MenuItemFormInput = () => {
     const fileList = e.target.files || [];
     if (fileList?.length !== 0) {
       const file = fileList[0];
-      if (file && file.type.substring(0, 5) === 'image') {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        setMenuItemImgFile(file);
-        reader.onloadend = async () => {
-          setMenuItemSampleImg(reader.result as string);
-        };
-      } else {
-        e.target.value = '';
-        setMenuItemImgFile(null);
-        setMenuItemSampleImg(menuItem.image_url ?? '');
-      }
+      const currentImgUrl = URL.createObjectURL(file);
+
+      setMenuItemImgFile(file);
+      setMenuItemSampleImg(currentImgUrl);
     }
+  };
+
+  // 썸네일 지우기
+  const removeMenuImage = () => {
+    setMenuItemImgFile(null);
+    setMenuItemSampleImg('');
   };
 
   // 메뉴 input handler
@@ -75,8 +75,16 @@ const MenuItemFormInput = () => {
   return (
     <>
       <div className={styles['img-txt-wrap']}>
-        <div className={styles['img-wrap']}>
-          <label htmlFor="sampleImg"></label>
+        <div
+          className={clsx(styles['img-wrap'], {
+            [styles.active]: menuItemSampleImg.length !== 0,
+          })}
+        >
+          <label htmlFor="sampleImg">
+            <span className={styles['edit-img']}>
+              <EditButton width={26} height={26} />
+            </span>
+          </label>
           <Image
             src={menuItemSampleImg === '' ? sampleImage : menuItemSampleImg}
             alt={menuItem.name ?? 'Sample Image'}
@@ -97,6 +105,9 @@ const MenuItemFormInput = () => {
             name="imageUrl"
             value={menuItem.image_url ?? ''}
           />
+          <button className={styles['remove-img-button']} type="button" onClick={removeMenuImage}>
+            <CloseButton width={26} height={26} />
+          </button>
         </div>
         <div className={styles['txt-wrap']}>
           <div className={clsx(styles['input-wrap'], styles['bottom'])}>
