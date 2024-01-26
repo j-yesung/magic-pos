@@ -5,7 +5,7 @@ import Button from '../common/Button';
 import LoadingSpinner from '../common/LoadingSpinner';
 import styles from './styles/QrCodeModal.module.css';
 
-const QrCodeButtonBox = () => {
+const QrCodeButtonBox = ({ modalId }: { modalId?: string }) => {
   const { qrData } = useManagementStore();
   const { mutate, isPending } = useQRCodeDownLoad();
   const clickQrDownLoadHandler = () => {
