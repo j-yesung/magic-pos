@@ -21,7 +21,9 @@ export const addSales = async (sales: TablesInsert<'sales'>[]) => {
   const tomorrow = moment().hour(0).subtract(9, 'hour').add(1, 'day').format('YYYY-MM-DD HH:00');
  */
 
-const TIME_FORMAT = 'YYYY-MM-DD HH:00';
+// const TIME_FORMAT = 'YYYY-MM-DD 00:00';
+// today.format(TIME_FORMAT) = 2024-01-25 00:00
+const TIME_FORMAT = 'YYYY-MM-DD 00:00';
 
 /** const today = moment().hour(0).subtract(9, 'hour');
  * .gte(...,  momentToString(today.clone().subtract(6,'day')))
@@ -60,7 +62,7 @@ export const getWeekSales: getSalesReturnType = async (week, store_id) => {
     .from('sales')
     .select('*')
     .gte('sales_date', momentToString(week.clone().subtract(6, 'week'), TIME_FORMAT))
-    .lte('sales_date', momentToString(week.clone(), TIME_FORMAT))
+    .lt('sales_date', momentToString(week.clone().add(1, 'day'), TIME_FORMAT))
     .eq('store_id', store_id);
 
   if (error) {
