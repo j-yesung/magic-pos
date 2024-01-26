@@ -1,4 +1,4 @@
-import { useAuth } from '@/hooks/auth/useAuth';
+import { useAuthSetQuery } from '@/hooks/query/auth/useAuthSetQuery';
 import useAuthState from '@/shared/store/session';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -9,7 +9,7 @@ import Logo from '/public/logo.svg';
 
 const StickBar = () => {
   const router = useRouter();
-  const { logout } = useAuth();
+  const { logout } = useAuthSetQuery();
   const session = useAuthState(state => state.session);
   const [isLoaded, setIsLoaded] = useState(false);
 

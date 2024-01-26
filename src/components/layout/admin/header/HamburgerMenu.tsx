@@ -1,11 +1,10 @@
-import useSideBar from '@/shared/store/sidebar';
-import useToggleState from '@/shared/store/toggle';
+import { toggleIsSideBarOpen } from '@/shared/store/sidebar';
+import useToggleState, { changeToggle } from '@/shared/store/toggle';
 import styles from '../styles/AdminLayout.module.css';
 import Hamburger from '/public/icons/hamburger.svg';
 
 const HamburgerMenu = () => {
-  const toggleIsSideBarOpen = useSideBar(state => state.toggleIsSideBarOpen);
-  const { isChecked, changeToggle } = useToggleState();
+  const isChecked = useToggleState(state => state.isChecked);
 
   const clickSideBarOpenHandler = () => {
     toggleIsSideBarOpen();

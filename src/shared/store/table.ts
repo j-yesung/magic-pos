@@ -1,4 +1,3 @@
-import { RefObject } from 'react';
 import { create } from 'zustand';
 
 type valueType = {
@@ -14,16 +13,11 @@ interface TableStoreType {
   maxGuest: number | null;
   isDisabled: number | null;
   isClick: boolean;
-  refSideBar: RefObject<HTMLDivElement> | null,
-  refDummySideBar: RefObject<HTMLDivElement> | null;
-  refSideBarBg: RefObject<HTMLDivElement> | null,
+  isUseTable: boolean;
 
   TableItemClick: (value: valueType) => void;
   setMaxGuest: (value: number) => void;
   setIsDisabled: (value: number) => void;
-  setSideBarRef: (value: RefObject<HTMLDivElement>) => void;
-  setDummySideBarRef: (value: RefObject<HTMLDivElement>) => void;
-  setSideBarBgRef: (value: RefObject<HTMLDivElement>) => void;
 }
 
 const useTableStore = create<TableStoreType>(set => ({
@@ -33,9 +27,7 @@ const useTableStore = create<TableStoreType>(set => ({
   maxGuest: 0,
   isDisabled: 0,
   isClick: false,
-  refSideBar: null,
-  refDummySideBar: null,
-  refSideBarBg: null,
+  isUseTable: false,
 
   // setState함수 영역
   TableItemClick: value =>
@@ -54,18 +46,8 @@ const useTableStore = create<TableStoreType>(set => ({
     set(() => ({
       isDisabled: value,
     })),
-  setSideBarRef: value =>
-    set(() => ({
-      refSideBar: value,
-    })),
-  setDummySideBarRef: value =>
-    set(() => ({
-      refDummySideBar: value,
-    })),
-  setSideBarBgRef: value =>
-    set(() => ({
-      refSideBarBg: value,
-    })),
 }));
+
+export const setIsUseTable = (value: boolean) => useTableStore.setState({ isUseTable: value });
 
 export default useTableStore;

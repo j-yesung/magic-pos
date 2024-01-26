@@ -1,4 +1,4 @@
-import { useModal } from '@/hooks/modal/useModal';
+import { useModal } from '@/hooks/service/ui/useModal';
 import useMenuItemStore from '@/shared/store/menu-item';
 import clsx from 'clsx';
 import Image from 'next/image';
@@ -14,6 +14,7 @@ const MenuItemFormInput = () => {
     menuItem,
     setMenuItem,
     categoryWithMenuItem,
+    categoryWithMenuItemList,
     setMenuItemImgFile,
     menuItemSampleImg,
     setMenuItemSampleImg,
@@ -43,16 +44,21 @@ const MenuItemFormInput = () => {
   const changeMenuItemHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, maxLength, name, type } = e.target;
     if (name === 'recommended') {
-      let isCheckRecommended: boolean = false;
+      const recommendedList = categoryWithMenuItemList.filter(list => list.id === categoryWithMenuItem.id);
+      const recommendedNum = recommendedList[0].menu_item.filter(item => item.recommended).length;
+      const recommendedItem = recommendedList[0].menu_item.filter(item => item.id === menuItem.id);
 
-      const redcommendedNum = categoryWithMenuItem.menu_item.filter(item => item.recommended).length;
-
-      if (redcommendedNum > 4 && !menuItem.recommended) {
+      if (recommendedItem.length > 0) {
+        if (recommendedNum > 4 && !recommendedItem[0].recommended) {
+          MagicModal.alert({ content: '추천 메뉴는 최대 5개입니다.' });
+          return;
+        }
+      } else if (recommendedNum > 4 && !menuItem.recommended) {
         MagicModal.alert({ content: '추천 메뉴는 최대 5개입니다.' });
-        return (isCheckRecommended = true);
+        return;
       }
 
-      if (!isCheckRecommended) setMenuItem({ ...menuItem, recommended: !menuItem.recommended });
+      setMenuItem({ ...menuItem, recommended: !menuItem.recommended });
     } else if (type === 'number') {
       const newValue = value.replace(/[^0-9e]/gi, '');
       setMenuItem({ ...menuItem, [name]: newValue.slice(0, maxLength) });
@@ -118,7 +124,7 @@ const MenuItemFormInput = () => {
                 onChange={changeMenuItemHandler}
                 id="price"
                 name="price"
-                value={menuItem.price === 0 ? '' : menuItem.price}
+                value={menuItem.price}
                 minLength={1}
                 maxLength={20}
                 placeholder="가격을 입력해주세요."
@@ -134,7 +140,7 @@ const MenuItemFormInput = () => {
                 className={styles['input']}
                 onChange={changeMenuItemHandler}
                 name="remain_ea"
-                value={menuItem.remain_ea === 0 ? '' : menuItem.remain_ea ?? ''}
+                value={menuItem.remain_ea ?? 0}
                 minLength={1}
                 maxLength={20}
                 placeholder="수량을 입력해주세요."

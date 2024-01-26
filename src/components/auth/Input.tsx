@@ -8,14 +8,16 @@ import {
   storeBusineesNameInput,
   storeEmailInput,
 } from '@/data/input-props';
-import { useErrorMessage } from '@/hooks/auth/useErrorMessage';
+import { useErrorMessage } from '@/hooks/service/auth/useErrorMessage';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
+import { FaCheck } from 'react-icons/fa6';
 import styles from './styles/Auth.module.css';
 
 interface InputProps {
   value: Record<string, string>;
   onChangeHandler?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyDownHandler?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 interface InputType {
@@ -29,7 +31,7 @@ interface InputType {
   placeholder?: string;
 }
 
-const Input = ({ value, onChangeHandler }: InputProps) => {
+const Input = ({ value, onChangeHandler, onKeyDownHandler }: InputProps) => {
   const path = useRouter().pathname;
   const { isPasswordValid, passwordValidationMessage } = useErrorMessage(value);
 
@@ -67,16 +69,20 @@ const Input = ({ value, onChangeHandler }: InputProps) => {
                 minLength={input.minLength}
                 maxLength={input.maxLength}
                 placeholder={input.placeholder}
+                onKeyDown={input.name === 'password' && path === '/auth/login' ? onKeyDownHandler : undefined}
                 disabled={input.disabled}
                 required
               />
-              {input.name === 'passwordConfirm' && (
-                <span
-                  className={isPasswordConfirm && value['password'] && isPasswordValid ? styles.match : styles.error}
-                >
-                  {isPasswordConfirm && value['password'] ? passwordValidationMessage : <>&nbsp;</>}
-                </span>
-              )}
+              <div className={styles.pwCheckIcon}>
+                {isPasswordConfirm && value['password'] && isPasswordValid ? <FaCheck /> : null}
+                {input.name === 'passwordConfirm' && (
+                  <span
+                    className={isPasswordConfirm && value['password'] && isPasswordValid ? styles.match : styles.error}
+                  >
+                    {isPasswordConfirm && value['password'] ? passwordValidationMessage : <>&nbsp;</>}
+                  </span>
+                )}
+              </div>
             </div>
           );
         }

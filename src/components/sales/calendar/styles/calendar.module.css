@@ -3,44 +3,38 @@
   top: 5rem;
   left: 30rem;
   display: inline-flex;
-  padding: 1.5rem;
+  padding: 2rem;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1rem;
+  gap: 1.5rem;
   border-radius: 0.5rem;
   border: 1px solid var(--line, #ededed);
   background: #fff;
 }
-
-/*
-calendar component를 감싸는 div의 class css입니다.
-*/
-.show-calendar {
-  display: grid;
-  gap: 1rem;
-  padding: 1rem;
-  position: relative;
-  margin-top: 12rem;
-}
-
-.hidden-calendar {
-  display: none;
-}
-
-.calendar-body {
-  position: absolute;
-  top: 2rem;
-  right: 10rem;
-}
-
-.calendar-border {
-  position: absolute;
-  right: -1rem;
+.status-header-wrapper {
   display: flex;
-  padding: 3rem;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+.calendar-body-wrapper {
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 2rem;
+  max-width: 152rem;
+  margin: 0 auto;
+  padding: 3rem;
   border-radius: 2rem;
   border: 1px solid var(--line, #ededed);
+}
+/*sales/calendar 일 때*/
+.show-calendar {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 2rem;
+  padding-bottom: 5rem;
+}
+.calendar-header-wrapper {
+  /**/
 }

@@ -1,24 +1,31 @@
 .table-container {
-  gap: 1.5rem;
+  gap: 2.11%;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  overflow-y: scroll;
 }
 
+
+.table-container::-webkit-scrollbar {
+  width: 0.5rem;
+}
+.table-container::-webkit-scrollbar-thumb {
+  background: var(--point-50);
+}
+.table-container::-webkit-scrollbar-track {
+  background: none;
+}
 .table-list-button {
   width: calc((100% - 12.8rem) / 4);
   height: 21.8rem;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
+  flex-direction: column;
+  font-size: 2rem;
   border-radius: 1rem;
-  transition: 0.2s;
   background: var(--bg-g);
   cursor: pointer;
-  margin-bottom: 1.8rem;
-}
-
-.table-list-button:hover {
-  background-color: #ccf;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

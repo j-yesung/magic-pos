@@ -1,0 +1,41 @@
+{
+  "order-type": {
+    "title-1":  "店舗の食事または",
+    "title-2": "ラッピングを選択してください",
+    "store": "食べて行きます",
+    "togo": "包装します",
+    "store-short": "店",
+    "togo-short": "舗装"
+  },
+  "price": "価格",
+  "amount": "数量",
+  "won": "ウォン",
+  "sold-out": "売り切れました",
+  "add-more": "カートに入れる",
+  "order-more": "もっと注文する",
+  "total-price": "総決済金額",
+  "total-order-price": "総注文金額",
+  "max": "最大",
+  "max-available-option": "つ選択可能",
+  "order-number": "注文番号",
+  "order-success": "注文が成功しました",
+  "order-time": "注文時間",
+  "prepare": "準備中",
+  "complete": "完了",
+  "recommended": "おすすめメニュー",
+  "modal": {
+    "add-cart-success": "カートに追加されました。"
+  },
+  "header": {
+    "cart": "買い物かご",
+    "payment": "決済",
+    "success": "注文完了",
+    "receipt": "注文確認"
+  },
+  "footer": {
+    "add": "カートに入れる",
+    "payment": "決済する",
+    "check-order": "注文の確認",
+    "no-item": "詰め込んだ商品がありません"
+  }
+}

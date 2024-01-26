@@ -61,9 +61,14 @@
 .time-caption {
   font-size: 1.4rem;
   color: var(--text2);
-  padding-left: 15rem;
 }
 
 .time-caption strong {
   color: var(--point1-50);
+}
+.wrapper .table-select-box {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 }

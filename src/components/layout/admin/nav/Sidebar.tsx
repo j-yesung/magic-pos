@@ -1,9 +1,9 @@
 import Button from '@/components/common/Button';
-import QrCodeModal from '@/components/management/qrCodeModal/QrCodeModal';
+import QrCodeModal from '@/components/qrCodeModal/QrCodeModal';
 import { modeSubText, modeText } from '@/data/admin';
-import { useAuth } from '@/hooks/auth/useAuth';
-import { useModal } from '@/hooks/modal/useModal';
-import useSideBar from '@/shared/store/sidebar';
+import { useModal } from '@/hooks/service/ui/useModal';
+import { useAuthSetQuery } from '@/hooks/query/auth/useAuthSetQuery';
+import useSideBar, { setIsSideBarOpen } from '@/shared/store/sidebar';
 import useToggleState from '@/shared/store/toggle';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
@@ -11,17 +11,18 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { IoLogOutOutline, IoMailOutline, IoQrCodeOutline } from 'react-icons/io5';
 import HeaderToggleButton from '../header/HeaderToggleButton';
 import styles from '../styles/AdminLayout.module.css';
+import SendMail from './SendMail';
 import SidebarList from './SidebarList';
 import CloseButton from '/public/icons/close.svg';
 import Ellipse from '/public/icons/ellipse.svg';
 
 const Sidebar = (adminInfo: AdminCategories) => {
   const [navList, setNavList] = useState(adminInfo.adminCategories);
-  const { isSideBarOpen, setIsSideBarOpen } = useSideBar();
+  const isSideBarOpen = useSideBar(state => state.isSideBarOpen);
   const isMode = useToggleState(state => state.isChecked);
   const targetRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
-  const { logout } = useAuth();
+  const { logout } = useAuthSetQuery();
   const sidebarClass = clsx(styles.navWrapper, {
     [styles.closeNav]: !isSideBarOpen,
   });
@@ -34,12 +35,17 @@ const Sidebar = (adminInfo: AdminCategories) => {
       if (url) router.push(url);
       setIsSideBarOpen(false);
     },
-    [navList, router, setIsSideBarOpen],
+    [navList, router],
   );
 
   const clickQrModalOpenHandler = () => {
     setIsSideBarOpen(false);
     MagicModal.fire(<QrCodeModal />);
+  };
+
+  const clickSendMailHandler = () => {
+    setIsSideBarOpen(false);
+    MagicModal.fire(<SendMail />);
   };
 
   useEffect(() => {
@@ -63,7 +69,7 @@ const Sidebar = (adminInfo: AdminCategories) => {
       window.removeEventListener('mousedown', closeSideBar);
       setIsSideBarOpen(false);
     };
-  }, [router.events, setIsSideBarOpen]);
+  }, [router.events]);
 
   return (
     <aside className={sidebarClass} ref={targetRef}>
@@ -88,7 +94,7 @@ const Sidebar = (adminInfo: AdminCategories) => {
       </div>
       <div className={styles.buttonWrapper}>
         <div className={styles.actionButtonWrapper}>
-          <Button type="button">
+          <Button type="button" onClick={clickSendMailHandler}>
             <IoMailOutline size={25} />
             문의하기
           </Button>

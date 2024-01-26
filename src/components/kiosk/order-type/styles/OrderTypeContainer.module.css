@@ -1,0 +1,40 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding-top: 2.675rem;
+}
+
+.container h1 {
+    color: var(--text1);
+    font-family: Pretendard, sans-serif;
+    font-style: normal;
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 500;
+    line-height: 160%; /* 2.5rem */
+    margin: 11rem 5rem 0 5rem;
+}
+
+.language-wrapper {
+    position: fixed;
+    bottom: 4.5rem  /* 20/10 */;
+    left: 2rem  /* 20/10 */;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+.language-wrapper svg {
+    width: 2.3rem  /* 23/10 */;
+    height: 2.3rem  /* 23/10 */;
+}
+
+.language-wrapper button {
+    color: var(--text2);
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.6rem; /* 100% */
+    cursor: pointer;
+}

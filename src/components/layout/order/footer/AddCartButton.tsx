@@ -1,9 +1,11 @@
-import React from 'react';
 import styles from './styles/StepButton.module.css';
-import useOrderStore, { addOrderList, resetSelectedMenu } from '@/shared/store/order';
+import useKioskState, { addOrderList, getTotalPrice, resetSelectedMenu } from '@/shared/store/kiosk';
 import { MenuItemWithOption } from '@/types/supabase';
-import { useModal } from '@/hooks/modal/useModal';
-import CartAlertModal from '@/components/order/cart/CartAlertModal';
+import { useModal } from '@/hooks/service/ui/useModal';
+import CartAlertModal from '@/components/kiosk/cart/CartAlertModal';
+import { convertNumberToWon } from '@/shared/helper';
+import { BiSolidCircle } from 'react-icons/bi';
+import { useTranslation } from 'react-i18next';
 
 /**
  * 옵션, 수량 등을 정한 뒤 장바구니(orderList)에 담는다.
@@ -11,10 +13,20 @@ import CartAlertModal from '@/components/order/cart/CartAlertModal';
  * @constructor
  */
 const AddCartButton = ({ menu }: { menu: MenuItemWithOption | null }) => {
-  const optionSwiperRef = useOrderStore(state => state.optionSwiperRef);
-  const selectedOptions = useOrderStore(state => state.selectedOptions);
-  const amount = useOrderStore(state => state.amount);
+  const selectedMenu = useKioskState(state => state.selectedMenu);
+  const optionSwiperRef = useKioskState(state => state.optionSwiperRef);
+  const selectedOptions = useKioskState(state => state.selectedOptions);
+  const amount = useKioskState(state => state.amount);
+  const { t } = useTranslation();
   const { MagicModal } = useModal();
+
+  const itemList: MenuItemWithOption[] = new Array(amount).fill(true).map(() => {
+    const menu = { ...selectedMenu } as MenuItemWithOption;
+    menu.menu_option = selectedOptions;
+    return menu;
+  });
+
+  const totalPrice = getTotalPrice(itemList);
 
   /**
    * 주문 목록에 메뉴를 담는다.
@@ -35,7 +47,9 @@ const AddCartButton = ({ menu }: { menu: MenuItemWithOption | null }) => {
 
   return (
     <button className={styles.button} onClick={handleClickAddCart}>
-      <span>담기</span>
+      <span>
+        {convertNumberToWon(totalPrice)} <BiSolidCircle size={2} /> {t('footer.add')}
+      </span>
     </button>
   );
 };

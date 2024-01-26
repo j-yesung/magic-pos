@@ -1,33 +1,16 @@
-import useSalesStore from '@/shared/store/sales';
-import clsx from 'clsx';
-import SalesDeatilWithCalendar from './salesCalendar/SalesDetailWithCalendar';
-import Status from './status/Status';
+import useSalesToggle from '@/shared/store/sales/salesToggle';
+import SalesCalendar from './salesCalendar/SalesCalendar';
+import SalesStatus from './status/SalesStatus';
 import styles from './styles/sales.module.css';
+import Toggle from './toggle/Toggle';
 
 const Sales = () => {
-  const { isChangeView, setIsChangeView } = useSalesStore();
+  const isChangeView = useSalesToggle(state => state.isChangeView);
 
-  const clickShowChart = () => setIsChangeView(true);
-  const clickShowCalendar = () => setIsChangeView(false);
   return (
-    <div>
-      <div className={styles.titleWrapper}>
-        <div className={styles.toggleBtnWrapper}>
-          <button
-            className={clsx(styles.toggleButton, { [styles.clickedToggle]: isChangeView })}
-            onClick={clickShowChart}
-          >
-            매출관리
-          </button>
-          <button
-            className={clsx(styles.toggleButton, { [styles.clickedToggle]: !isChangeView })}
-            onClick={clickShowCalendar}
-          >
-            매출달력
-          </button>
-        </div>
-      </div>
-      {isChangeView ? <Status /> : <SalesDeatilWithCalendar />}
+    <div className={styles.salesContainer}>
+      <Toggle />
+      {isChangeView ? <SalesStatus /> : <SalesCalendar />}
     </div>
   );
 };

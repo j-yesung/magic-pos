@@ -1,0 +1,41 @@
+{
+  "order-type": {
+    "title-1":  "Please choose",
+    "title-2": "store meal or takeout",
+    "store": "Eat it at the store",
+    "togo": "Wrap it up",
+    "store-short": "STORE",
+    "togo-short": "TO-GO"
+  },
+  "price": "Price",
+  "amount": "Amount",
+  "won": "won",
+  "sold-out": "is sold out.",
+  "add-more": "Going to put more in",
+  "order-more": "Going to Order More",
+  "total-price": "Total payment amount",
+  "total-order-price": "Total payment amount",
+  "max": "max",
+  "max-available-option": "You can select up to",
+  "order-number": "Number",
+  "order-success": "Order has been completed",
+  "order-time": "Ordered At",
+  "prepare": "Preparing",
+  "complete": "Complete",
+  "recommended": "Recommended menu",
+  "modal": {
+    "add-cart-success": "Item has been added to my cart"
+  },
+  "header": {
+    "cart": "Cart",
+    "payment": "Paying",
+    "success": "Order Complete",
+    "receipt": "Order Confirmation"
+  },
+  "footer": {
+    "add": "Add to cart",
+    "payment": "Let's Pay",
+    "check-order": "Check your order",
+    "no-item": "There is no product in it"
+  }
+}

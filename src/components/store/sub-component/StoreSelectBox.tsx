@@ -1,12 +1,7 @@
 import Select, { StylesConfig } from 'react-select';
-import { createTimeOptions, timeOption } from '../../utils/time-format';
+import { createTimeOptions, timeOption } from '../../../utils/time-format';
 
-interface OptionType {
-  value: string;
-  label: string;
-}
-
-const customStyles: StylesConfig<OptionType, false> = {
+export const customStyles: StylesConfig<OptionType, false> = {
   control: provided => ({
     ...provided,
     width: '16rem',

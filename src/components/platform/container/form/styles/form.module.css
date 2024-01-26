@@ -1,80 +1,15 @@
 .form-container {
-  display: flex;
-  justify-content: center;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 3rem 6rem;
-  border: 1px solid #ccc;
-  gap: 2.4rem;
+
+  display: inline-flex;
+  padding: 2rem;
   flex-direction: column;
+  align-items: center;
+  gap: 3rem;
   border-radius: 1rem;
   background: var(--white, #fff);
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-}
-
-.form-wrapper {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-  gap: 1.5rem;
-}
-
-.input-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2.1rem;
-}
-.input {
-  display: flex;
-  width: 35rem;
-  padding: 1.6rem 1.5rem;
-  align-items: center;
-  gap: 1rem;
-  border-radius: 0.5rem;
-  border: 1px solid var(--line, #ededed);
-  background: #fff;
-}
-.input:focus {
-  outline: none;
-  border: 2px solid #864af9;
-}
-.input::placeholder {
-  color: #ccc;
-  font-size: 1.3rem;
-}
-
-.button-group {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.button {
-  all: unset;
-  display: flex;
-  width: 22.5rem;
-  height: 4.6rem;
-  padding: 1rem;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  flex-shrink: 0;
-  border-radius: 0.5rem;
-  background: var(--bg-g, #f7f7f7);
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-}
-.button p {
-  font-size: 1.4rem;
-}
-
-.button:hover {
-  color: #fff;
-  background: var(--point1-80, #7433ff);
-  box-shadow: 0px 0px 10px 0px rgba(68, 9, 194, 0.1);
 }

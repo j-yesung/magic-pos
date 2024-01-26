@@ -1,4 +1,4 @@
-import useToast from '@/hooks/toast/useToast';
+import useToast from '@/hooks/service/ui/useToast';
 import useAuthState from '@/shared/store/session';
 import { useRouter } from 'next/router';
 import styles from '../styles/Home.module.css';

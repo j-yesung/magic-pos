@@ -1,0 +1,40 @@
+.container {
+    position: relative;
+    display: flex;
+    padding: 1.5rem 2rem;
+    align-items: center;
+    justify-content: flex-end;
+
+    border-bottom: 0.1rem solid var(--bg-line);
+    background: var(--white);
+}
+
+.container div {
+    display: flex;
+    padding: 0.8rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    color: var(--text2);
+    text-align: center;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.6rem; /* 100% */
+    letter-spacing: -0.032rem;
+
+    border-radius: 0.3rem;
+    background: var(--bg-g);
+}
+
+.container h1 {
+    color: var(--text2);
+    text-align: center;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.6rem; /* 100% */
+    letter-spacing: -0.032rem;
+    margin: 0.6rem 0;
+}

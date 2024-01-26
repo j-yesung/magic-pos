@@ -99,6 +99,9 @@
   border: 1px solid var(--line);
   transition: all 0.3s;
 }
+.wrap li button.dragging {
+  background-color: var(--text3);
+}
 
 .wrap li button.plus {
   display: flex;
@@ -122,6 +125,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  -webkit-user-drag: none;
 }
 
 .wrap li button > span.txt {

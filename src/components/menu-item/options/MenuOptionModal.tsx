@@ -1,4 +1,4 @@
-import { useModal } from '@/hooks/modal/useModal';
+import { useModal } from '@/hooks/service/ui/useModal';
 import styles from '../styles/modal.module.css';
 import MenuOptionModalButton from './MenuOptionModalButton';
 import MenuOptionModalInput from './MenuOptionModalInput';

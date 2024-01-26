@@ -1,5 +1,5 @@
 import useSetMenuItem from '@/hooks/menu/menu-item/useSetMenuItems';
-import { useModal } from '@/hooks/modal/useModal';
+import { useModal } from '@/hooks/service/ui/useModal';
 import useMenuItemStore from '@/shared/store/menu-item';
 import { FiAlertCircle } from 'react-icons/fi';
 import styles from '../styles/menu-item-form.module.css';

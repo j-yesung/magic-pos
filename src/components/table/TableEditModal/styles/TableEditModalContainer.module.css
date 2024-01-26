@@ -1,0 +1,125 @@
+.modal-container {
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+.modal-container > div {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 1.4rem;
+  letter-spacing: -0.28px;
+  padding: 0 2rem;
+}
+
+.modal-container > div > div {
+  display: flex;
+  align-items: center;
+}
+
+.table-name-box {
+  width: 100%;
+  height: 5.4rem;
+  display: flex;
+}
+.table-name-title {
+  width: 12rem;
+  height: 100%;
+}
+.table-name-content {
+  width: 38rem;
+  height: 100%;
+  border-radius: 1rem;
+  padding-left: 2rem;
+  box-shadow: 0px 0px 1rem 0px rgba(0, 0, 0, 0.1);
+}
+
+.table-max-gest-box {
+  width: 100%;
+  height: 5.4rem;
+  margin: 2rem 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 1.4rem;
+  padding: 0 2rem;
+  letter-spacing: -0.28px;
+}
+
+.table-max-gest-title {
+  width: 12rem;
+  height: 100%;
+}
+.table-max-gest-content {
+  width: 38rem;
+  height: 100%;
+  border-radius: 1rem;
+  border: 0;
+  padding-left: 2rem;
+  transition: 0.2s;
+  box-shadow: 0px 0px 1rem 0px rgba(0, 0, 0, 0.1);
+}
+.table-max-gest-content:focus {
+  outline: none;
+}
+
+.table-disabled-box {
+  width: 100%;
+  height: 4.5rem;
+}
+
+.table-disabled-title {
+  width: 12rem;
+  height: 100%;
+}
+.table-disabled-content {
+  width: 10rem;
+  height: 3.5rem;
+  border-radius: 5rem;
+  background-color: var(--point1-80);
+  color: #fff;
+  position: relative;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.table-disabled-content > .isDisabled-name {
+  position: absolute;
+  top: 50%;
+  left: 2rem;
+  transform: translateY(-50%);
+  transition: 0.2s;
+}
+.table-disabled-content > .isDisabled-button {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 4rem;
+  height: 4rem;
+  background-color: #fff;
+  border-radius: 20rem;
+  transition: 0.2s;
+  filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.2));
+}
+
+.table-disabled-content.table-is-disabled > .isDisabled-name {
+  position: absolute;
+  top: 50%;
+  left: calc(100% - 5.2rem);
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: flex-end;
+  transition: 0.2s;
+}
+.table-disabled-content.table-is-disabled > .isDisabled-button {
+  position: absolute;
+  top: 50%;
+  right: calc(100% - 4rem);
+  transform: translateY(-50%);
+  width: 4rem;
+  height: 4rem;
+  background-color: #fff;
+  border-radius: 20rem;
+  transition: 0.2s;
+  filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.2));
+}

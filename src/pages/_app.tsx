@@ -7,8 +7,9 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { AppProps } from 'next/app';
 import localFont from 'next/font/local';
+import '@/shared/i18n';
 
-const myFont = localFont({ src: './fonts/PretendardVariable.woff2', variable: '--main-font' });
+const myFont = localFont({ src: '../../public/fonts/PretendardVariable.woff2', variable: '--main-font' });
 
 const queryClient = new QueryClient();
 

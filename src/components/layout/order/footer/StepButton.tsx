@@ -1,15 +1,14 @@
-import React, { ReactElement } from 'react';
-import { SwiperRef } from 'swiper/react';
-import useOrderStore, { getTotalPrice, goNextStep, ORDER_STEP, subtractOrderList } from '@/shared/store/order';
-import { usePaymentWidget } from '@/hooks/order/usePaymentWidget';
+import { ReactElement } from 'react';
+import useKioskState, { getTotalPrice, goNextStep, ORDER_STEP, subtractOrderList } from '@/shared/store/kiosk';
+import { usePaymentWidget } from '@/hooks/query/order/usePaymentWidget';
 import styles from './styles/StepButton.module.css';
 import { convertNumberToWon } from '@/shared/helper';
 import AddCartButton from '@/components/layout/order/footer/AddCartButton';
-import { IoCart } from 'react-icons/io5';
 import { readRemainEaByMenuId } from '@/server/api/supabase/menu-item';
-import { useModal } from '@/hooks/modal/useModal';
+import { useModal } from '@/hooks/service/ui/useModal';
 import { PiBagSimpleFill } from 'react-icons/pi';
 import { BiSolidCircle } from 'react-icons/bi';
+import { useTranslation } from 'react-i18next';
 
 class OrderError extends Error {
   readonly id: string;
@@ -20,19 +19,16 @@ class OrderError extends Error {
   }
 }
 
-interface ButtonProps {
-  sliderRef: React.RefObject<SwiperRef>;
-}
-
 export const SLIDE_MOVE_SPEED = 500;
 
-const StepButton = ({ sliderRef }: ButtonProps) => {
-  const orderList = useOrderStore(state => state.orderList);
-  const step = useOrderStore(state => state.step);
-  const optionSwiperRef = useOrderStore(state => state.optionSwiperRef);
-  const swiperRef = useOrderStore(state => state.swiperRef);
-  const selectedMenu = useOrderStore(state => state.selectedMenu);
+const StepButton = () => {
+  const orderList = useKioskState(state => state.orderList);
+  const step = useKioskState(state => state.step);
+  const optionSwiperRef = useKioskState(state => state.optionSwiperRef);
+  const swiperRef = useKioskState(state => state.swiperRef);
+  const selectedMenu = useKioskState(state => state.selectedMenu);
   const { MagicModal } = useModal();
+  const { t } = useTranslation();
 
   const { paymentWidget, handlePaymentRequest } = usePaymentWidget();
 
@@ -40,12 +36,12 @@ const StepButton = ({ sliderRef }: ButtonProps) => {
     1: <>{convertNumberToWon(getTotalPrice(orderList))}</>,
     2: (
       <>
-        {convertNumberToWon(getTotalPrice(orderList))} {<BiSolidCircle size={2} />} 결제 하기
+        {convertNumberToWon(getTotalPrice(orderList))} {<BiSolidCircle size={2} />} {t('footer.payment')}
       </>
     ),
     3: (
       <>
-        {convertNumberToWon(getTotalPrice(orderList))} {<BiSolidCircle size={2} />} 결제 하기
+        {convertNumberToWon(getTotalPrice(orderList))} {<BiSolidCircle size={2} />} {t('footer.payment')}
       </>
     ),
   };
@@ -57,7 +53,7 @@ const StepButton = ({ sliderRef }: ButtonProps) => {
         order =>
           new Promise((res, rej) => {
             readRemainEaByMenuId(order.id).then(result => {
-              if (result.remain_ea === 0) rej(new OrderError(`${result.name}이 품절 되었습니다. 😭`, result.id));
+              if (result.remain_ea === 0) rej(new OrderError(`${result.name} ${t('sold-out')} 😭`, result.id));
               else res(result.remain_ea);
             });
           }),
@@ -74,35 +70,32 @@ const StepButton = ({ sliderRef }: ButtonProps) => {
       // 검사가 통과 되면 결제 진해행
       await handlePaymentRequest(orderList);
     } else {
-      sliderRef.current!.swiper.slideNext(SLIDE_MOVE_SPEED);
+      swiperRef?.current!.swiper.slideNext(SLIDE_MOVE_SPEED);
       goNextStep();
     }
   };
 
   return (
     <>
-      {step > ORDER_STEP.CHOOSE_ORDER_TYPE && (
+      {step > ORDER_STEP.CHOOSE_ORDER_TYPE && step < ORDER_STEP.SUCCESS && (
         <div className={styles.container}>
           {optionSwiperRef?.current!.swiper?.realIndex !== 1 ? (
             <button className={styles.button} onClick={nextClickHandler} disabled={orderList.length === 0}>
               {orderList.length === 0 ? (
-                <span>담은 상품이 없습니다.</span>
+                <span>{t('footer.no-item')}</span>
               ) : (
-                <>
-                  <span>
-                    {BUTTON_OPTIONS[step]}
-
-                    {step === ORDER_STEP.SELECT_MENU && (
-                      <>
-                        <BiSolidCircle size={2} />
-                        <div className={styles.iconWrapper}>
-                          <PiBagSimpleFill size={20} />
-                          <span>{orderList.length}</span>
-                        </div>
-                      </>
-                    )}
-                  </span>
-                </>
+                <span>
+                  {BUTTON_OPTIONS[step]}
+                  {step === ORDER_STEP.SELECT_MENU && (
+                    <>
+                      <BiSolidCircle size={2} />
+                      <div className={styles.iconWrapper}>
+                        <PiBagSimpleFill size={20} />
+                        <span>{orderList.length}</span>
+                      </div>
+                    </>
+                  )}
+                </span>
               )}
             </button>
           ) : (

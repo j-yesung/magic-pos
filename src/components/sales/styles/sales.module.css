@@ -1,38 +1,13 @@
-.title-wrapper {
-  position: absolute;
-  right: 19.4rem;
-  top: 12.4rem;
-  z-index: 99;
+/* 
+view port의 vh가 낮은 모니터 화면때문에 scroll을 넣었고 
+scroll을 숨겼습니다.
+*/
+
+.sales-container {
+  height: 100%;
+  overflow-y: scroll;
 }
 
-.title-wrapper h2 {
-  font-size: 5rem;
-  font-weight: bold;
-}
-
-.toggle-btn-wrapper {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-}
-
-.toggle-button {
-  display: flex;
-  padding: 1rem 4rem;
-  align-items: flex-start;
-  gap: 1rem;
-  border-radius: 0.5rem;
-  background: var(--bg-g);
-  cursor: pointer;
-}
-.clickedToggle {
-  border-radius: 0.5rem;
-  background: var(--point1-80);
-  color: var(--text5);
-  text-align: center;
-  font-family: Pretendard;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 1.8rem; /* 100% */
-  letter-spacing: -0.036rem;
+.sales-container::-webkit-scrollbar {
+  display: none;
 }

@@ -1,0 +1,223 @@
+/*status calendar에 들어갈 class css*/
+.status-calendar-base {
+  display: flex;
+  width: 3rem;
+  height: 4.4rem;
+  padding: 0.5rem 1rem 1rem 1rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.4rem;
+}
+
+.status-calendar-base span {
+  padding: 0.6rem;
+}
+
+/*calendar type*/
+.current-calendar {
+  opacity: 1 !important;
+}
+
+.status-not-current-month {
+  opacity: 0.5;
+  background-color: var(--point-2);
+}
+
+.status-current-month {
+  opacity: 1;
+}
+
+/*
+     date 관련 class css 입니다.
+    */
+.status-prev-date {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.status-current-date {
+  cursor: pointer;
+  opacity: 1;
+}
+.status-current-date span {
+  border-radius: 50%;
+  background: rgba(255, 168, 0, 0.5);
+  color: #000 !important;
+}
+
+.status-after-date {
+  opacity: 0.5 !important;
+}
+
+/*
+    day 관련 class css 입니다.
+    */
+.status-day-base {
+  display: flex;
+  width: 2.3rem;
+  height: 2.3rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+.status-saturaday {
+  color: blue;
+}
+
+.status-sunday {
+  color: red;
+}
+
+.status-day {
+  color: #000;
+}
+
+/*선택한 날짜일 때 UI*/
+.status-selected-date {
+  color: var(--main-color);
+}
+
+/* sales/calendar의 cellItem의 기본 일자 css*/
+.calendar-base {
+  font-size: 2rem;
+  display: flex;
+  min-width: 12rem;
+  min-height: 12rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  font-size: 1.4rem;
+  cursor: default;
+}
+
+/*calendar type*/
+.calendar-current {
+  opacity: 1;
+  background-color: #fff;
+}
+
+/* month type*/
+.calendar-current-month {
+  opacity: 1;
+}
+
+.calendar-not-current-month {
+  visibility: hidden;
+  background-color: var(--point-2);
+}
+/*calendar date*/
+
+.calendar-current-date {
+  opacity: 1;
+  position: relative;
+}
+
+.calendar-current-date::after {
+  content: '오늘' !important;
+  position: absolute !important;
+  display: flex !important;
+  padding: 0.5rem 1rem !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 1rem !important;
+  color: #fff !important;
+  top: -0.3rem !important;
+  left: 4rem !important;
+  border-radius: 50rem !important;
+  width: auto !important;
+  height: auto !important;
+  background: var(--point2, #ffa800) !important;
+}
+
+.calendar-prev-date {
+  opacity: 0.5;
+}
+
+.calendar-after-date {
+  opacity: 0.5;
+}
+/*
+    sales/calendar에서 매출 CSS 입니다.
+    */
+
+.sales-base {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  color: var(--text1, #121416);
+  text-align: center;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2rem; /* 100% */
+  letter-spacing: -0.04rem;
+}
+
+.sales-base + span {
+  font-size: 1.8rem;
+}
+
+.sales-none {
+  position: relative;
+  opacity: 0.4;
+}
+
+.sales-none::after {
+  content: '';
+  position: absolute;
+  top: -0.5rem;
+  left: 3.5rem;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: var(--text3);
+}
+
+.sales-max {
+  color: var(--red, #ff5656);
+  font-size: 1.8rem;
+  position: relative;
+}
+
+.sales-max + span {
+  position: relative;
+  font-size: 1.8rem;
+  color: var(--red, #ff5656);
+}
+
+.sales-max + span::before {
+  content: '';
+  position: absolute;
+  top: -4.5rem;
+  left: 3rem;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: var(--red, #ff5656);
+}
+
+.sales-min {
+  color: #2382f1;
+  font-size: 1.8rem;
+}
+
+.sales-min + span {
+  position: relative;
+  font-size: 1.8rem;
+  color: #2382f1;
+}
+
+.sales-min + span::before {
+  content: '';
+  position: absolute;
+  top: -4.5rem;
+  left: 3rem;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: #2382f1;
+}

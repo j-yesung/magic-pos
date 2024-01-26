@@ -32,7 +32,7 @@ const useSetManagement = () => {
     }
   }, [isError, error]);
 
-  return { mutate };
+  return { mutate, isPending };
 };
 
 export default useSetManagement;

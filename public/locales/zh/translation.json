@@ -1,0 +1,41 @@
+{
+  "order-type": {
+    "title-1": "请选择卖场",
+    "title-2": "用餐或包装。",
+    "store": "吃完再走",
+    "togo": "我要打包了",
+    "store-short": "卖场",
+    "togo-short": "包装"
+  },
+  "price": "价格",
+  "amount": "数量",
+  "won": "元韩币",
+  "sold-out": "断货了",
+  "add-more": "去添加更多",
+  "order-more": "添加订单",
+  "total-price": "结算总额",
+  "total-order-price": "总订货金额",
+  "max": "最大",
+  "max-available-option": "可选择个",
+  "order-number": "订单号码",
+  "order-success": "订单完成",
+  "order-time": "订货时间",
+  "prepare": "准备中",
+  "complete": "完",
+  "recommended": "推荐菜",
+  "modal": {
+    "add-cart-success": "把商品装进购物车了"
+  },
+  "header": {
+    "cart": "菜篮子",
+    "payment": "结算",
+    "success": "订购完毕",
+    "receipt": "确认订单"
+  },
+  "footer": {
+    "add": "追加",
+    "payment": "结算",
+    "check-order": "确认订单",
+    "no-item": "没有包含的商品。"
+  }
+}

@@ -1,0 +1,86 @@
+.container {
+    display: flex;
+    padding: 1.5rem;
+    justify-content: space-between;
+    align-items: center;
+
+    background: var(--bg-g);
+}
+
+.order-number-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.ready-box{
+    display: flex;
+    padding: 0.5rem 0.8rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+
+    border-radius: 0.3rem;
+
+    text-align: center;
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.4rem; /* 100% */
+    letter-spacing: -0.0284rem;
+}
+
+.not-ready {
+    color: var(--white);
+    background: var(--point1-80);
+}
+
+.ready {
+    background: var(--bg-p);
+    color: var(--point1-80);
+}
+
+.order-number {
+    color: var(--text1);
+    text-align: center;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.6rem; /* 100% */
+    letter-spacing: -0.032rem;
+}
+
+.order-store-name {
+    color: var(--text2);
+    font-size: 1.3rem  /* 13/10 */;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.3rem  /* 13/10 */; /* 100% */
+}
+
+.time-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.order-type {
+    color: var(--point1-80);
+    text-align: center;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 15px; /* 100% */
+    letter-spacing: -0.3px;
+}
+
+
+.order-time {
+    color: var(--text2);
+    text-align: center;
+    font-size: 1.3rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.3rem; /* 100% */
+    letter-spacing: -0.026rem;
+}

@@ -1,4 +1,4 @@
-import { useModal } from '@/hooks/modal/useModal';
+import { useModal } from '@/hooks/service/ui/useModal';
 import useMenuItemStore from '@/shared/store/menu-item';
 import { Tables } from '@/types/supabase';
 import clsx from 'clsx';
@@ -26,6 +26,8 @@ const MenuItemPage = () => {
 
   // 메뉴 플러스
   const clickAddMenuItemHandler = async () => {
+    const filterMenuItem = categoryWithMenuItemList.filter(item => item.id === categoryWithMenuItem.id);
+    const checkMenuItem = filterMenuItem[0].menu_item;
     setIsEdit(false);
     MagicModal.fire(<MenuItemModal />);
     const newMenuItem: Tables<'menu_item'> = {
@@ -36,10 +38,7 @@ const MenuItemPage = () => {
       price: 0,
       remain_ea: 0,
       recommended: false,
-      position:
-        categoryWithMenuItem.menu_item.length === 0
-          ? 0
-          : categoryWithMenuItem.menu_item[categoryWithMenuItem.menu_item.length - 1].position + 1,
+      position: checkMenuItem.length === 0 ? 0 : checkMenuItem[checkMenuItem.length - 1].position + 1,
     };
     setMenuItem(newMenuItem);
     setMenuItemSampleImg(sampleImage);

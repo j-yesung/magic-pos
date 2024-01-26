@@ -1,12 +1,12 @@
-import { useGetQuery } from '@/hooks/store/useGetQuery';
+import { useFetchQuery } from '@/hooks/query/store/useFetchQuery';
 import { Fragment, useEffect, useState } from 'react';
-import { convertTimeFormat, timeSet } from '../../utils/time-format';
+import { convertTimeFormat, timeSet } from '../../../utils/time-format';
 import styles from '../styles/StroeContents.module.css';
 import StoreSelectBox from './StoreSelectBox';
 import StoreSetButton from './StoreSetButton';
 
 const StoreTimeSet = ({ userId }: { userId: string }) => {
-  const { data } = useGetQuery({ userId });
+  const { data } = useFetchQuery({ userId });
   const [times, setTimes] = useState<TimeState>({ startTime: '', endTime: '' });
   const openTime = convertTimeFormat(times.startTime).convertedTime;
   const closeTime = convertTimeFormat(times.endTime).convertedTime;
@@ -40,15 +40,17 @@ const StoreTimeSet = ({ userId }: { userId: string }) => {
         </div>
         <StoreSetButton times={times} userId={userId} />
       </div>
-      <p className={styles.timeCaption}>
-        {isTimeSet ? (
-          '영업시간을 선택해 주세요.'
-        ) : (
-          <>
-            영업시간은 현재 <strong>{`${openTime} ~ ${closeTime}`}</strong> 까지입니다.
-          </>
-        )}
-      </p>
+      <div>
+        <p className={styles.timeCaption}>
+          {isTimeSet ? (
+            '영업시간을 선택해 주세요.'
+          ) : (
+            <>
+              영업시간은 현재 <strong>{`${openTime} ~ ${closeTime}`}</strong> 까지입니다.
+            </>
+          )}
+        </p>
+      </div>
     </>
   );
 };

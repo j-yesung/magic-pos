@@ -1,21 +1,13 @@
-import { momentToString } from '@/shared/helper';
+import { momentToString } from '@/components/sales/calendarUtility/dateCalculator';
 import { supabase } from '@/shared/supabase';
-import { Tables } from '@/types/supabase';
-import { PostgrestError } from '@supabase/supabase-js';
+import { SalesDataReturnType } from '@/types/sales';
+import { TablesInsert } from '@/types/supabase';
+
 import { Moment } from 'moment';
 
-/**
- * DateFormatType은 helper에서 데이터를 가공할 때 사용합니다.
- */
-export type DateFormatType = 'days' | 'weeks' | 'months' | 'month';
-export interface SalesDataReturnType {
-  sales: Tables<'sales'>[];
-  error?: PostgrestError;
-  formatType?: DateFormatType;
-}
 type getSalesReturnType = (date: Moment, store_id: string) => Promise<SalesDataReturnType>;
 
-export const addSales = async (sales: Omit<Tables<'sales'>, 'id'>[]) => {
+export const addSales = async (sales: TablesInsert<'sales'>[]) => {
   const { error } = await supabase.from('sales').insert(sales).select();
 
   if (error) console.error(error);
@@ -29,7 +21,9 @@ export const addSales = async (sales: Omit<Tables<'sales'>, 'id'>[]) => {
   const tomorrow = moment().hour(0).subtract(9, 'hour').add(1, 'day').format('YYYY-MM-DD HH:00');
  */
 
-const TIME_FORMAT = 'YYYY-MM-DD HH:00';
+// const TIME_FORMAT = 'YYYY-MM-DD 00:00';
+// today.format(TIME_FORMAT) = 2024-01-25 00:00
+const TIME_FORMAT = 'YYYY-MM-DD 00:00';
 
 /** const today = moment().hour(0).subtract(9, 'hour');
  * .gte(...,  momentToString(today.clone().subtract(6,'day')))
@@ -40,7 +34,7 @@ const TIME_FORMAT = 'YYYY-MM-DD HH:00';
  * @returns
  */
 
-export const getTodaySales: getSalesReturnType = async (day, store_id) => {
+export const getDaySales: getSalesReturnType = async (day, store_id) => {
   const { data: sales, error } = await supabase
     .from('sales')
     .select('*')
@@ -48,10 +42,10 @@ export const getTodaySales: getSalesReturnType = async (day, store_id) => {
     .lt('sales_date', momentToString(day.clone().add(1, 'day'), TIME_FORMAT))
     .eq('store_id', store_id);
   if (error) {
-    return { sales: [], error };
+    return { sales: [], dateType: 'day', error };
   }
 
-  return { sales, formatType: 'days' };
+  return { sales, dateType: 'day', formatType: 'YYYY-MM-DD' };
 };
 
 /**
@@ -68,13 +62,13 @@ export const getWeekSales: getSalesReturnType = async (week, store_id) => {
     .from('sales')
     .select('*')
     .gte('sales_date', momentToString(week.clone().subtract(6, 'week'), TIME_FORMAT))
-    .lte('sales_date', momentToString(week.clone(), TIME_FORMAT))
+    .lt('sales_date', momentToString(week.clone().add(1, 'day'), TIME_FORMAT))
     .eq('store_id', store_id);
 
   if (error) {
-    return { sales: [], error };
+    return { sales: [], dateType: 'week', error };
   }
-  return { sales, formatType: 'weeks' };
+  return { sales, dateType: 'week', formatType: 'YYYY-MM' };
 };
 
 /**
@@ -94,9 +88,9 @@ export const getMonthsSales: getSalesReturnType = async (month, store_id) => {
     .lte('sales_date', momentToString(month.clone().endOf('month'), TIME_FORMAT))
     .eq('store_id', store_id);
   if (error) {
-    return { sales: [], error };
+    return { sales: [], dateType: 'month', error };
   }
-  return { sales, formatType: 'months' };
+  return { sales, dateType: 'month', formatType: 'YYYY년 MM월' };
 };
 
 /**
@@ -113,7 +107,8 @@ export const getMonthSales: getSalesReturnType = async (month, store_id) => {
     .lte('sales_date', momentToString(month.clone().endOf('month'), TIME_FORMAT))
     .eq('store_id', store_id);
   if (error) {
-    return { sales: [], error };
+    return { sales: [], dateType: 'month', error };
   }
-  return { sales, formatType: 'month' };
+
+  return { sales, dateType: 'month', formatType: 'YYYY년 MM월' };
 };

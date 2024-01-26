@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React from 'react';
 import styles from '../auth/styles/Auth.module.css';
 
@@ -14,7 +15,10 @@ const Button = (props: ButtonProps) => {
 
   return (
     <button
-      className={!disabled ? `${styles.button} ${className}` : styles.disabledButton}
+      className={clsx(styles.button, {
+        [className]: !disabled,
+        [styles.disabledButton]: disabled,
+      })}
       type={type}
       onClick={onClick}
       disabled={disabled}

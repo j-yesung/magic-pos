@@ -1,0 +1,26 @@
+/*sales-calendar 일때 display none */
+.hidden-component {
+  display: none;
+}
+.calendar-wrapper {
+  display: flex;
+  height: 4.4rem;
+  padding: 1.3rem 1.5rem;
+  align-items: center;
+  gap: 5rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--line, #ededed);
+  background: #fff;
+  cursor: pointer;
+}
+
+.calendar-icon {
+  width: 2rem;
+  height: 1.8947rem;
+  flex-shrink: 0;
+  mix-blend-mode: multiply;
+}
+
+.date-text {
+  font-size: 1.5rem;
+}

@@ -298,3 +298,13 @@
   margin-bottom: 1rem;
   align-items: center;
 }
+@media only all and (max-width: 1520px) {
+  .header-wrapper {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+  .main-wrapper {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}

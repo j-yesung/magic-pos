@@ -57,7 +57,7 @@ div.item-content > div {
   gap: 1rem;
 }
 
- .menu-title {
+.menu-title {
   display: inline-flex;
   font-weight: 500;
   padding: 0.5rem 1rem;
@@ -65,12 +65,11 @@ div.item-content > div {
   background: var(--bg-g);
   width: fit-content;
   gap: 0.5rem;
-   align-items: center;
+  align-items: center;
 }
 
-
 .menu-title span:last-child {
-  color: var(--point1-80, #7433FF);
+  color: var(--point1-80, #7433ff);
   text-align: center;
   font-size: 1.5rem;
   font-style: normal;

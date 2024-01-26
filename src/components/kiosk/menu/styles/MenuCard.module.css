@@ -1,0 +1,87 @@
+.card {
+    --image-height: 12.5rem;
+    --span-height: 3rem  /* 30/10 */;
+    position: relative;
+    display: flex;
+    padding: 2rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+
+    border-radius: 1rem;
+    border: 0.1rem solid var(--bg-line);
+    background: var(--white);
+
+    cursor: pointer;
+
+    @media screen and (min-width: 960px) {
+        --image-height: 15rem;
+        --span-height: 3rem;
+    }
+}
+
+.card img {
+    object-fit: cover;
+    width: 12.3rem;
+    height: var(--image-height);
+    border-radius: .5rem;
+    @media screen and (min-width: 960px) {
+        width: 16rem;
+    }
+}
+
+.card span {
+    color: var(--text1);
+    font-family: Pretendard, sans-serif;
+    font-size: 1.4rem  /* 14/10 */;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 1rem  /* 10/10 */;
+
+    display: flex;
+    align-items: center;
+    height: var(--span-height);
+}
+
+.sold-out {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: calc(100% - 4rem);
+    height: 12.5rem;
+    border-radius: 1rem;
+    background: var(--shadow-color-20);
+}
+
+.sold-out p {
+    color: white;
+    font-size: 3rem;
+    text-align: center;
+}
+
+.menu-info {
+
+}
+
+.menu-info span {
+    color: var(--text1);
+    text-align: center;
+    margin: 0;
+    font-weight: 500;
+    font-style: normal;
+
+}
+
+.menu-info span:nth-child(1) {
+    font-size: 1.5rem;
+    line-height: 1.5rem; /* 100% */
+    letter-spacing: -0.03rem;
+}
+
+.menu-info span:nth-child(2) {
+    font-size: 1.4rem;
+    line-height: 1.4rem; /* 100% */
+    letter-spacing: -0.0284rem;
+}

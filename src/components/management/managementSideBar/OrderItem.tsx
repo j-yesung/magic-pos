@@ -1,16 +1,17 @@
+import LoadingSpinner from '@/components/common/LoadingSpinner';
 import useSetManagement from '@/hooks/management/useSetManagement';
-import { useModal } from '@/hooks/modal/useModal';
+import { useModal } from '@/hooks/service/ui/useModal';
+import { groupByKey } from '@/shared/helper';
 import { MenuItemWithOption, OrderDataWithStoreName } from '@/types/supabase';
 import moment from 'moment';
 import { IoCheckmark } from 'react-icons/io5';
 import styles from './styles/OrderItem.module.css';
-import { groupByKey } from '@/shared/helper';
 
 const OrderItem = ({ orderData }: { orderData: OrderDataWithStoreName }) => {
   const { id, order_number, order_time, menu_list, total_price, is_togo } = orderData;
   const menuList: MenuItemWithOption[] = JSON.parse(JSON.stringify(menu_list));
   const { MagicModal } = useModal();
-  const { mutate } = useSetManagement();
+  const { mutate, isPending } = useSetManagement();
 
   const group = groupByKey<MenuItemWithOption>(menuList, 'unique');
 
@@ -37,9 +38,6 @@ const OrderItem = ({ orderData }: { orderData: OrderDataWithStoreName }) => {
         {[...group]?.map(([key, item]) => {
           return (
             <li key={key} className={styles['menu-list-item']}>
-              {/* <span>
-                  <Image src={item.image_url ?? ''} alt="" width="30" height="30" />
-                </span> */}
               <div className={styles['menu-name']}>
                 <span>{item[0].name}</span>
                 <span>{item.length}</span>
@@ -48,7 +46,7 @@ const OrderItem = ({ orderData }: { orderData: OrderDataWithStoreName }) => {
                 {item?.map(option => {
                   return (
                     <span key={option.id}>
-                      {option.menu_option[0]?.menu_option_detail.map(detail => detail.name).join('/')}
+                      {option.menu_option?.[0]?.menu_option_detail.map(detail => detail.name).join('/')}
                     </span>
                   );
                 })}
@@ -66,8 +64,14 @@ const OrderItem = ({ orderData }: { orderData: OrderDataWithStoreName }) => {
         {/*  <span>{total_price} 원</span>*/}
         {/*</div>*/}
         <button onClick={clickOrderConfirmHandler}>
-          <IoCheckmark className={styles['check-icon']} />
-          주문완료하기
+          {isPending ? (
+            <LoadingSpinner boxSize={2} ballSize={0.4} interval={1.5} />
+          ) : (
+            <>
+              <IoCheckmark className={styles['check-icon']} />
+              <span>주문완료하기</span>
+            </>
+          )}
         </button>
       </div>
     </li>

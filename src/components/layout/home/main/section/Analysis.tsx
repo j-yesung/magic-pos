@@ -1,4 +1,4 @@
-import { useObserver } from '@/hooks/ui/useObserver';
+import { useObserver } from '@/hooks/service/useObserver';
 import { useRef } from 'react';
 import styles from '../../styles/Section.module.css';
 import SliderImage from './SliderImage';
