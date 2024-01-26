@@ -7,6 +7,7 @@ import useCalendarState from '@/shared/store/sales/salesCalendar';
 import useDayState from '@/shared/store/sales/salesDay';
 import { CalendarDataType, GetMinMaxSalesReturnType } from '@/types/sales';
 import {
+  FORMAT_CELL_DATE_TYPE,
   getCalendarDateType,
   getCalendarMonthType,
   getStatusCalendarType,
@@ -130,7 +131,7 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
             dateType: getCalendarDateType(day),
             sales: salesData ? SALES_HAVE : SALES_NONE,
           })}
-          {...(day.format('YY MM DD') === salesData?.date && { onClick: () => console.log(salesData) })}
+          {...(day.format(FORMAT_CELL_DATE_TYPE) === salesData?.date && { onClick: () => console.log(salesData) })}
         >
           <span
             className={salesVariant({

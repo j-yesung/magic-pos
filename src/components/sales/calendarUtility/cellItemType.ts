@@ -76,3 +76,6 @@ export function getCalendarDateType(date: Moment) {
   if (date.isSame(today, 'D')) return DATE['CURRENT'];
   return date.isBefore(today, 'D') ? DATE['PREV'] : DATE['AFTER'];
 }
+
+// Cell, CellITEM 에서 쓰이는 FORMAT TYPE 입니다.
+export const FORMAT_CELL_DATE_TYPE = 'YY MM DD';
