@@ -1,6 +1,5 @@
-import { TablesInsert } from '@/types/supabase';
 import { supabase } from '@/shared/supabase';
-
+import { TablesInsert } from '@/types/supabase';
 
 /**
  * 주문별 토큰 값 조회
@@ -8,12 +7,11 @@ import { supabase } from '@/shared/supabase';
  * @returns 주문별 토큰 값
  */
 export const getUserToken = async (orderId: string) => {
-  const { data: token, error } = await supabase.from('user_token').select('*').eq('order_id', orderId);
+  const { data, error } = await supabase.from('user_tokens').select('*').eq('order_id', orderId).single();
   if (error) throw error;
-  return token;
-}
+  return data;
+};
 
-  
 export const addUserToken = async (data: TablesInsert<'user_tokens'>) => {
   const { error } = await supabase.from('user_tokens').insert(data);
   console.error(error);
