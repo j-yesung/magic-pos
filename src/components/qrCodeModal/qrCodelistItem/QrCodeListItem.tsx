@@ -65,7 +65,7 @@ const QrCodeListItem = ({ storeTable, orderType }: propsType) => {
           <IoPrintOutline />
           <span>출력하기</span>
         </div>
-        <QRCodeSVG value={qrUrl ?? ''} width={110} height={110} />
+        <QRCodeSVG value={qrUrl ?? ''} width={125} height={125} />
       </div>
     </div>
   );
