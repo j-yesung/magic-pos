@@ -5,7 +5,7 @@ import OrderItem from './OrderItem';
 import styles from './styles/SideBarContainer.module.css';
 
 const SideBarContainer = ({ managementData }: { managementData?: StoreWithOrderInfo[] }) => {
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [, setTotalPrice] = useState(0);
   const { orderData, orderId, setOrderData } = useManagementStore();
 
   useEffect(() => {

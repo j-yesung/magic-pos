@@ -11,6 +11,7 @@ interface UserAuth {
 
 const useAuthState = create<UserAuth>()(
   persist(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     get => ({
       session: null,
       storeId: null,

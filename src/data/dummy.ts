@@ -1,4 +1,3 @@
-const reviewContents = ['This is review number 1', 'This is review number 2', 'This is review number 3'];
 const icons = ['🐶', '🐻', '🐮', '🐻‍❄️', '🐵'];
 const storeNames = ['스타벅스', '이디야', '투썸플레이스', '커피빈', '할리스'];
 const bgColors = ['#E1FFE2', '#FFEFEF', '#E6F6FF'];
