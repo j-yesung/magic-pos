@@ -6,7 +6,7 @@
     "node": true
   },
   "extends": [
-    "eslint:recommended", // eslint에서 권장하는 규칙들을 사용하겠다는 의미입니다.
+    // "eslint:recommended", // eslint에서 권장하는 규칙들을 사용하겠다는 의미입니다.
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",

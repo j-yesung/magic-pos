@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 importScripts('https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js');
 importScripts('https://www.gstatic.com/firebasejs/9.0.2/firebase-messaging-compat.js');
 
