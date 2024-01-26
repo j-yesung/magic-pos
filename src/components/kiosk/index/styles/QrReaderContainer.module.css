@@ -1,0 +1,11 @@
+.container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.qr-reader {
+    width: 30rem;
+    height: 30rem;
+    border: 3px solid red;
+}
