@@ -45,57 +45,7 @@
 .wrap > div {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-}
-.line {
-  width: 100%;
-  height: 1px;
-  background-color: var(--line);
-}
-/* option input 3개 짜리 */
-.option-list-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-.option-three-wrap {
-  display: flex;
-  gap: 1rem;
-}
-.option-three-wrap .input-wrap {
-  flex: 1;
-}
-.option-three-wrap button {
-  display: flex;
-  width: 5rem;
-  height: 5.4rem;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  border-radius: 1rem;
-  background-color: var(--point1-80);
-  cursor: pointer;
-}
-.option-three-wrap button path {
-  stroke: #fff;
-}
-.option-three-wrap .option-list {
-  border: var(--input-border);
-  border-radius: var(--input-border-radius);
-  box-shadow: var(--input-box-shadow);
-  padding: var(--input-padding);
-  width: 50%;
-  background-color: var(--bg-p);
-  font-size: 1.4rem;
-}
-.option-three-wrap .option-btn {
-  background-color: var(--text4);
-  font-size: 1.4rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1.4rem; /* 100% */
-  letter-spacing: -0.028rem;
-  color: #fff;
+  gap: 2rem;
 }
 /* option 버튼 부분 */
 .wrap .btn-wrap button {
@@ -197,4 +147,73 @@
 }
 .btn-wrap button.basic-btn {
   background-color: var(--bg-g);
+}
+
+/* 옵션 디테일 설정 */
+.wrap > div.option-detail-wrap {
+  position: relative;
+}
+.option-detail-wrap .top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.option-detail-wrap .plus-btn {
+  border-radius: 0.5rem;
+  background: var(--bg-p2, #f9f6ff);
+  display: flex;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+}
+.option-detail-wrap .plus-btn .img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.option-detail-wrap .plus-btn .img path {
+  stroke: var(--point1-80);
+}
+.option-detail-wrap .plus-btn .txt {
+  color: var(--point1-80, #7433ff);
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1.4rem; /* 100% */
+  letter-spacing: -0.028rem;
+}
+/* option input 3개 짜리 */
+.option-detail-wrap .option-three-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.option-detail-wrap .option-three-wrap .input-wrap {
+  display: flex;
+  flex-direction: row;
+}
+.option-detail-wrap .option-three-wrap .input-wrap .input:nth-child(1) {
+  flex: 1;
+}
+.option-detail-wrap .option-three-wrap .input-wrap .input:nth-child(2) {
+  width: 14rem;
+}
+.option-detail-wrap .option-three-wrap .input-wrap button {
+  display: flex;
+  width: 5rem;
+  height: 5.4rem;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 1rem;
+  background: var(--red, #ff5656);
+  cursor: pointer;
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.1);
+  color: var(--white, #fff);
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.4rem; /* 100% */
+  letter-spacing: -0.028rem;
 }

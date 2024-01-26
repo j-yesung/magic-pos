@@ -1,6 +1,6 @@
 import useSetCategories from '@/hooks/menu/menu-category/useSetCategories';
 import { useModal } from '@/hooks/service/ui/useModal';
-import useCategoriesStore from '@/shared/store/menu-category';
+import useCategoriesStore, { setCategory, setIsEdit } from '@/shared/store/menu/menu-category';
 import { Tables } from '@/types/supabase';
 import clsx from 'clsx';
 import { useRef, useState } from 'react';
@@ -20,7 +20,8 @@ interface PropsType {
 const CategroyCardPage = ({ item, idx, dropNum, setDropNum }: PropsType) => {
   const { MagicModal } = useModal();
   const { updatePositionMutate, deleteMutate } = useSetCategories();
-  const { setIsEdit, category, setCategory, categories } = useCategoriesStore();
+  const category = useCategoriesStore(state => state.category);
+  const categories = useCategoriesStore(state => state.categories);
   const [isDragging, setIsDragging] = useState(false);
 
   // 카테고리 수정
