@@ -41,6 +41,7 @@ const Cell = () => {
           );
 
           const formattedData = formatToCalendarData(group);
+          console.log(formattedData);
           const minMaxData = sortMinMaxData(formattedData);
           setCalendarBindingData(minMaxData);
           setSalesSum(formattedData);

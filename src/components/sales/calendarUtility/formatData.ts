@@ -3,21 +3,78 @@ import { Tables, TablesInsert } from '@/types/supabase';
 import moment, { Moment } from 'moment';
 import { getStartWeeks } from './dateCalculator';
 
-type FormatCalendarReturnType = (data: Map<string, Tables<'sales'>[]>) => { sales: number; date: string }[];
+interface IsTakeOutType {
+  product_name: string;
+  product_ea: number;
+  product_price: number;
+  original_data: Tables<'sales'>[];
+}
+
+type OrderType = 'togo' | 'store';
+
+type FormatCalendarReturnType = (
+  data: Map<string, Tables<'sales'>[]>,
+) => { sales: number; date: string; to_go: IsTakeOutType[] | null; store: IsTakeOutType[] | null }[];
 type SortMinMaxDataReturnType = (target: CalendarDataType[]) => CalendarDataType[];
 type FormatDateParamType = 'YYYY-MM-DD' | 'YYYY년 MM월' | 'YYYY-MM';
 
 type SalesCommonType = TablesInsert<'sales'> & { moment?: Moment; original_date: Moment };
 
+// value를 순회하면서 order_type 이 takeout 인지 매장 인지
+// 2개의 객체 배열로 나눈다음에
+// 각각의 객체 배열을 새로운 객체 배열로 만들어 줘야 합니다.
+// 객체 배열안에 있는 객체의 key값에 있는 product_name을 가지고 객체 배열을 순회하면서 product_name이 같으면 그 해당 객체에 product_ea를 + , product_price 도 +를 해주고
+
+// product_name이 같지 않으면 새로운 객체를 만들어줘야합니다.
+
 export const formatToCalendarData: FormatCalendarReturnType = data => {
+  console.log(...data.entries());
   const refinedData = [...data.entries()].map(([key, value]) => {
     const data = {
       sales: value.reduce((acc, cur) => acc + cur.product_ea * cur.product_price, 0),
       date: key,
+      to_go: sortedMainIsTogo(value, 'togo'),
+      store: sortedMainIsTogo(value, 'store'),
     };
     return data;
   });
   return refinedData;
+};
+
+// order_type 은
+const sortedMainIsTogo = (main: Tables<'sales'>[], order_type: OrderType) => {
+  const sortedMainData = main.filter(order => order.order_type === order_type);
+
+  const sortedCategoryData = sortedSubIsTogo(sortedMainData);
+  return sortedCategoryData;
+};
+
+const sortedSubIsTogo = (sub: Tables<'sales'>[]) => {
+  if (sub.length === 0) return null;
+
+  const groupByMap = new Map<string, Tables<'sales'>[]>();
+  sub.forEach(sales => {
+    const productName = sales.product_name!;
+    const isAlready = groupByMap.has(productName);
+    if (isAlready) {
+      groupByMap.get(productName)?.push(sales);
+    } else {
+      groupByMap.set(productName, [sales]);
+    }
+  });
+
+  const result = [...groupByMap.entries()].map(([key, value]) => {
+    const productName = key;
+    const salesByGroup = value;
+    const summary: IsTakeOutType = {
+      product_name: productName,
+      product_ea: salesByGroup.reduce((acc, cur) => acc + cur.product_ea, 0),
+      product_price: salesByGroup[0].product_price,
+      original_data: value,
+    };
+    return summary;
+  });
+  return result;
 };
 
 export const sortMinMaxData: SortMinMaxDataReturnType = target => {
