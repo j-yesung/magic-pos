@@ -23,7 +23,7 @@ const Button = (props: ButtonProps) => {
       onClick={onClick}
       disabled={disabled}
     >
-      <p>{children}</p>
+      {children}
     </button>
   );
 };
