@@ -13,7 +13,6 @@ firebase.initializeApp({
 });
 
 const messaging = firebase.messaging();
-console.log('messaging: ', messaging);
 
 // 푸시 이벤트 처리
 // 푸시 내용을 처리해서 알림으로 띄운다.
