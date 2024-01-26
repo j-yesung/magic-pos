@@ -1,16 +1,8 @@
-// importScripts('https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js');
-// importScripts('https://www.gstatic.com/firebasejs/9.0.2/firebase-messaging-compat.js');
-import { initializeApp } from 'firebase/app';
+importScripts('https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js');
+importScripts('https://www.gstatic.com/firebasejs/9.0.2/firebase-messaging-compat.js');
+// import { initializeApp } from 'firebase/app';
 
-const firebaseConfig = initializeApp({
-  apiKey: 'AIzaSyCHk7ehe1E_bNsvRrhuxWLzGpCHFr8upQc',
-  authDomain: 'sparta-1e500.firebaseapp.com',
-  projectId: 'sparta-1e500',
-  storageBucket: 'sparta-1e500.appspot.com',
-  messagingSenderId: '1083040765098',
-  appId: '1:1083040765098:web:cb44b1bf87199dc9bbecd3',
-});
-// firebase.initializeApp({
+// const firebaseConfig = initializeApp({
 //   apiKey: 'AIzaSyCHk7ehe1E_bNsvRrhuxWLzGpCHFr8upQc',
 //   authDomain: 'sparta-1e500.firebaseapp.com',
 //   projectId: 'sparta-1e500',
@@ -18,8 +10,16 @@ const firebaseConfig = initializeApp({
 //   messagingSenderId: '1083040765098',
 //   appId: '1:1083040765098:web:cb44b1bf87199dc9bbecd3',
 // });
+firebase.initializeApp({
+  apiKey: 'AIzaSyCHk7ehe1E_bNsvRrhuxWLzGpCHFr8upQc',
+  authDomain: 'sparta-1e500.firebaseapp.com',
+  projectId: 'sparta-1e500',
+  storageBucket: 'sparta-1e500.appspot.com',
+  messagingSenderId: '1083040765098',
+  appId: '1:1083040765098:web:cb44b1bf87199dc9bbecd3',
+});
 
-const messaging = firebaseConfig.messaging();
+const messaging = firebase.messaging();
 
 // 푸시 이벤트 처리
 // 푸시 내용을 처리해서 알림으로 띄운다.
