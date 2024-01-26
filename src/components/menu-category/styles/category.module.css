@@ -25,7 +25,7 @@
 }
 
 .wrap > ul li {
-  min-width: calc(28.8rem - 5.32rem);
+  min-width: calc(20% - 1.6rem);
   height: 5.6rem;
   border-radius: 1rem;
   display: flex;
@@ -39,7 +39,7 @@
   line-height: 1.4rem;
   letter-spacing: -0.028rem;
   overflow: hidden;
-  @media screen and (max-width: 64rem) {
+  @media screen and (max-width: 768px) {
     min-width: 100%;
   }
 }
