@@ -1,0 +1,32 @@
+{
+  "theme_color": "#7433ff",
+  "background_color": "#f69435",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "name": "Magic Pos",
+  "short_name": "Magic Pos",
+  "description": "\ud3b8\ub9ac\ud568\uc758 \uc2dc\uc791",
+  "icons": [
+    {
+      "src": "./icons/manifest/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/manifest/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/manifest/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/manifest/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
