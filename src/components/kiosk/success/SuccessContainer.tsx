@@ -12,6 +12,8 @@ import { IoBagCheckOutline } from 'react-icons/io5';
 import MenuHeader from '../common/MenuHeader';
 import styles from './styles/SuccessContainer.module.css';
 import { useTranslation } from 'react-i18next';
+import { getTokenHandler } from '@/shared/firebase';
+import { useUserTokenSetQuery } from '@/hooks/query/user-token/useUserTokenSetQuery';
 
 const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const orderList = useKioskState(state => state.orderList);
@@ -25,6 +27,7 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const { addSales } = useSalesQuery();
   const { addStoreOrder } = useStoreOrderSetQuery();
   const { addNumberOrder } = useNumberOrderSetQuery();
+  const { addUserToken } = useUserTokenSetQuery();
   const { incrementOrderNumber, newOrderNumber } = useStoreSetQuery();
   const [isPageLoading, setIsPageLoading] = useState(true);
   const router = useRouter();
@@ -95,6 +98,14 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
       orderList.forEach(menu => {
         decrementRemainEaByMenuId(menu.id);
       });
+
+      // 알림 발송을 위한 유저 토큰 생성 뒤 저장
+      getTokenHandler().then(res => {
+        if (res) {
+          addUserToken({ order_id: payment.orderId, token: res });
+        }
+      });
+
       setStep(ORDER_STEP.SUCCESS);
       setOrderNumber(newOrderNumber);
     }

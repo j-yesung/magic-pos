@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getMessaging, getToken } from 'firebase/messaging';
 
+const VAPID_KEY = process.env.NEXT_PUBLIC_VAPID_KEY;
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
@@ -18,21 +19,20 @@ const app = initializeApp(firebaseConfig);
  */
 export const getTokenHandler = async () => {
   const messaging = getMessaging(app);
-  await getToken(messaging, {
-    vapidKey: process.env.NEXT_PUBLIC_VAPID_KEY,
+  return await getToken(messaging, {
+    vapidKey: VAPID_KEY,
   })
     .then(async currentToken => {
       if (!currentToken) {
         // 토큰 생성 불가시 처리할 내용, 주로 브라우저 푸시 허용이 안된 경우에 해당한다.
-        alert('토큰 생성 불가');
+        console.error('토큰 생성 불가');
       } else {
         // 토큰을 받았다면 여기서 supabase 테이블의 저장하면 됩니다.
-        localStorage.setItem('token', currentToken);
+        console.log('currentToken', currentToken);
+        return currentToken;
       }
     })
     .catch(error => {
-      console.error(error);
+      console.error('token error', error);
     });
-  const curToken = localStorage.getItem('token');
-  return curToken;
 };
