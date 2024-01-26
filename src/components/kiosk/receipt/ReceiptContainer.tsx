@@ -54,7 +54,7 @@ const ReceiptContainer = () => {
   }, []);
 
   useEffect(() => {
-    if (orderDataList.length === 0) router.push(`/kiosk/`);
+    if (orderIdList.length === 0) router.push(`/kiosk/`);
   }, []);
 
   return (
