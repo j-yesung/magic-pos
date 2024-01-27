@@ -1,6 +1,7 @@
 import {
   addMenuItem,
   removeMenuItem,
+  removeMenuItemImage,
   updateMenuItem,
   updateMenuItemPosition,
   uploadMenuItemImage,
@@ -48,6 +49,12 @@ export const useSetMenuItem = () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.MENU_CATEGORY_WITH_ITEM] });
     },
   });
+  const removeImageMutate = useMutation({
+    mutationFn: removeMenuItemImage,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.MENU_CATEGORY_WITH_ITEM] });
+    },
+  });
 
   return {
     addMutate,
@@ -55,6 +62,7 @@ export const useSetMenuItem = () => {
     updatePositionMutate: updatePositionMutate.mutate,
     deleteMutate: deleteMutate.mutate,
     uploadImageMutate,
+    removeImageMutate: removeImageMutate.mutate,
   };
 };
 

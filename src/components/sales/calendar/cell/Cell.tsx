@@ -13,7 +13,7 @@ import useAuthState from '@/shared/store/session';
 import { Tables } from '@/types/supabase';
 import moment from 'moment';
 import { useEffect } from 'react';
-import { getMinMaxSalesType } from '../../calendarUtility/cellItemType';
+import { FORMAT_CELL_DATE_TYPE, getMinMaxSalesType } from '../../calendarUtility/cellItemType';
 import { formatToCalendarData, sortMinMaxData } from '../../calendarUtility/formatData';
 import CellItem from '../cellItem/CellItem';
 import styles from './styles/cell.module.css';
@@ -35,7 +35,7 @@ const Cell = () => {
           const group = groupByKey<Tables<'sales'>>(
             result.sales.map(data => ({
               ...data,
-              sales_date: moment(data.sales_date).format('YY MM DD'),
+              sales_date: moment(data.sales_date).format(FORMAT_CELL_DATE_TYPE),
             })),
             'sales_date',
           );
@@ -60,7 +60,7 @@ const Cell = () => {
   let day = startDay;
   while (day <= endDay) {
     for (let i = 0; i < 7; i++) {
-      const itemKey = day.clone().format('YY MM DD');
+      const itemKey = day.clone().format(FORMAT_CELL_DATE_TYPE);
       const salesData = calendarDataBindingData?.filter(target => target.date === itemKey);
 
       days.push(

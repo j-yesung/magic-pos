@@ -1,57 +1,72 @@
-import Button from '@/components/common/Button';
+import { useCalendar } from '@/hooks/sales/useCalendar';
 import { useDataHandler } from '@/hooks/sales/useDataHandler';
 import useDayState from '@/shared/store/sales/salesDay';
-import clsx from 'clsx';
-import moment from 'moment';
-import { useEffect, useState } from 'react';
+import Select, { StylesConfig } from 'react-select';
 import styles from './styles/tabButton.module.css';
+
+const TODAY = 'today';
+const MONTH = 'month';
+const WEEK = 'week';
+const SELECT = 'select';
+
+const OPTION_SELECT_TYPE = { value: 'select', label: '날짜 선택' };
+const OPTION_TODAY = { value: 'today', label: '오늘' };
+const OPTION_WEEK = { value: 'week', label: '이번 주' };
+const OPTION_MONTH = { value: 'month', label: '이번 달' };
+const OPTIONS = [OPTION_TODAY, OPTION_WEEK, OPTION_MONTH, OPTION_SELECT_TYPE];
+
+const customStyles: StylesConfig<OptionType, false> = {
+  control: provided => ({
+    ...provided,
+    width: '16rem',
+    height: '4rem',
+    fontWeight: '500',
+    fontSize: '1.5rem',
+    paddingLeft: '1rem',
+    textAlign: 'left',
+    color: '#000000',
+    background: '#fff',
+    borderRadius: '0.5rem',
+    boxShadow: '0 0 1rem 0 rgba(0, 0, 0, 0.10)',
+  }),
+  menu: provided => ({
+    ...provided,
+    width: '16rem',
+    fontWeight: '500',
+    fontSize: '1.5rem',
+    color: '#000000',
+    textAlign: 'center',
+    borderRadius: '0.5rem',
+  }),
+};
+
 const TabButton = () => {
-  const TODAY = 'today';
-  const MONTH = 'month';
-  const WEEK = 'week';
-
-  const selectedDate = useDayState(state => state.selectedDate);
-
   const { clickMoveTodayHandler, clickWeeksChartHandler, clickMonthsChartHandler } = useDataHandler();
+  const { clickShowCalendarHandler } = useCalendar();
+  const { selectedDate, today } = useDayState();
 
-  const [clickedTab, setClickedTab] = useState(TODAY);
+  const changeOptionDataHandler = async (type: string) => {
+    if (type === TODAY) await clickMoveTodayHandler();
+    if (type === WEEK) await clickWeeksChartHandler();
+    if (type === MONTH) await clickMonthsChartHandler();
+    if (type === SELECT) clickShowCalendarHandler();
+  };
 
-  useEffect(() => {
-    return () => {
-      setClickedTab(TODAY);
-    };
-  }, []);
+  const SELECT_DAY = {
+    value: 'select',
+    label: selectedDate.isSame(today, 'year') ? selectedDate.format(' M월 D일') : selectedDate.format('YY년 M월 D일'),
+  };
+
   return (
     <div className={styles.dateWrapper}>
-      <Button
-        type="button"
-        className={clsx(styles.dateButton, {
-          [styles.active]: clickedTab === TODAY && moment().isSame(selectedDate, 'day'),
-        })}
-        onClick={async () => {
-          await clickMoveTodayHandler().then(() => setClickedTab(TODAY));
-        }}
-      >
-        오늘
-      </Button>
-      <Button
-        type="button"
-        className={clsx(styles.dateButton, {
-          [styles.active]: clickedTab === WEEK && moment().isSame(selectedDate, 'week'),
-        })}
-        onClick={async () => await clickWeeksChartHandler().then(() => setClickedTab(WEEK))}
-      >
-        이번 주
-      </Button>
-      <Button
-        type="button"
-        className={clsx(styles.dateButton, {
-          [styles.active]: clickedTab === MONTH && moment().isSame(selectedDate, 'month'),
-        })}
-        onClick={async () => clickMonthsChartHandler().then(() => setClickedTab(MONTH))}
-      >
-        이번 달
-      </Button>
+      <Select
+        isSearchable={false}
+        {...(!selectedDate.isSame(today, 'day') && { value: SELECT_DAY })}
+        options={OPTIONS}
+        styles={customStyles}
+        defaultValue={OPTION_TODAY}
+        onChange={async option => await changeOptionDataHandler(option!.value)}
+      ></Select>
     </div>
   );
 };

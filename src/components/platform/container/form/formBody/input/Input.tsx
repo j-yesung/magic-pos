@@ -3,7 +3,7 @@ import styles from './styles/input.module.css';
 
 const Input = ({ mode }: { mode: boolean }) => {
   const editPlatForm = usePlatFormState(state => state.editPlatForm);
-  console.log(editPlatForm);
+
   return (
     <div className={styles.inputWrapper}>
       <input

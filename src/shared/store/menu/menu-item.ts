@@ -23,7 +23,7 @@ interface MenuItemStoreType {
  * VALUE
  */
 const useMenuItemStore = create<MenuItemStoreType>()(() => ({
-  sampleImage: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/menu_sample/2024-01-12T07:53:35.815Z`,
+  sampleImage: '/images/menu_samle.png',
   isEdit: false,
   categories: [],
   menuItem: {
