@@ -40,11 +40,16 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
       image_url: menuItem.image_url,
     };
     if (!isEdit) {
-      const addData = await addMutate.mutateAsync(newMenuItemData);
-      setMenuItem(addData[0]);
-      newMenuItemData.id = addData[0].id;
-      const newMenuOptions = menuOptions.map(option => (option.menu_id = addData[0].id));
-      setMenuOptions([...menuOptions, newMenuOptions] as NewMenuOptionWithDetail[]);
+      // const addData = await addMutate.mutateAsync(newMenuItemData);
+      try {
+        const addData = await addMutate.mutateAsync(newMenuItemData);
+        setMenuItem(addData[0]);
+        newMenuItemData.id = addData[0].id;
+        const newMenuOptions = menuOptions.map(option => (option.menu_id = addData[0].id));
+        setMenuOptions([...menuOptions, newMenuOptions] as NewMenuOptionWithDetail[]);
+      } catch (error) {
+        console.error(error);
+      }
     } else {
       newMenuItemData.id = menuItem.id;
     }
