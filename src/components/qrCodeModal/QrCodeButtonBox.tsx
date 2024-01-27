@@ -1,7 +1,6 @@
 import useQRCodeDownLoad from '@/hooks/qrCode/useQRCodeDownLoad';
 import useManagementStore from '@/shared/store/management';
 import Image from 'next/image';
-import { useEffect } from 'react';
 import Button from '../common/Button';
 import styles from './styles/QrCodeModal.module.css';
 import loading from '/public/images/loadingSpinner.gif';
@@ -12,10 +11,6 @@ const QrCodeButtonBox = () => {
   const clickQrDownLoadHandler = () => {
     mutate(qrData);
   };
-
-  useEffect(() => {
-    console.log(isPending);
-  }, [isPending]);
 
   return (
     <div className={styles.qrCodeButtonBox}>
