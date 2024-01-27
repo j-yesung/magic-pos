@@ -1,8 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { addSales } from '@/server/api/supabase/sales';
 
-const QUERY_KEY = 'sales';
-
 /**
  * sales table CRUD hook
  */

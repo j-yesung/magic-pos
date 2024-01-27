@@ -1,15 +1,13 @@
 import { addStoreTable, deleteStoreTable, updateStoreTable } from '@/server/api/supabase/store-table';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 export const useSetTable = () => {
-  const didMount = useRef(false);
   const queryClient = useQueryClient();
   const {
     mutate: addMutate,
     isError: addIsError,
     error: addError,
-    isPending: addIsPending,
   } = useMutation({
     mutationFn: addStoreTable,
     onSuccess: () => {
@@ -21,7 +19,6 @@ export const useSetTable = () => {
     mutate: updateMutate,
     isError: updateIsError,
     error: updateError,
-    isPending: updateIsPending,
   } = useMutation({
     mutationFn: updateStoreTable,
     onSuccess: () => {
@@ -33,7 +30,6 @@ export const useSetTable = () => {
     mutate: deleteMutate,
     isError: deleteIsError,
     error: deleteError,
-    isPending: deleteIsPending,
   } = useMutation({
     mutationFn: deleteStoreTable,
     onSuccess: () => {

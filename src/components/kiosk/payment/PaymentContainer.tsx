@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import styles from './styles/PaymentContainer.module.css';
 import useKioskState, { getTotalPrice, ORDER_STEP, setIsWidgetRendering } from '@/shared/store/kiosk';
 import { usePaymentWidget } from '@/hooks/query/order/usePaymentWidget';
