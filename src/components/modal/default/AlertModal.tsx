@@ -14,7 +14,7 @@ const AlertModal = ({ alert }: { alert: ModalAlertTypeOption }) => {
 
   return (
     <div className={styles.container}>
-      <span>{alert.content}</span>
+      <p>{alert.content}</p>
       {alert.showButton && <button onClick={hideAlert.bind(null, alert.id ?? '')}>{alert.buttonText ?? '확인'}</button>}
     </div>
   );
