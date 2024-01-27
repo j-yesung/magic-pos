@@ -1,3 +1,4 @@
+import { getOpenGraphMetaImage } from '@/server/api/external/openGraph';
 import { AddPlatFormType, EditPlatFormType } from '@/types/platform';
 import { Tables } from '@/types/supabase';
 import { ChangeEvent } from 'react';
@@ -97,8 +98,12 @@ export const setPlatFormStoreId = (store_id: string) =>
  *
  * @param e AddForm
  */
-export const setAddPlatForm = (e: ChangeEvent<HTMLInputElement>) => {
+export const setAddPlatForm = async (e: ChangeEvent<HTMLInputElement>) => {
   const { name, value } = e.target;
+  if (name === 'link_url' && !usePlatFormState.getState().prevImg) {
+    const prevImage = await getOpenGraphMetaImage(value);
+    setPrevImg(prevImage);
+  }
   usePlatFormState.setState(state => ({
     ...state,
     addPlatForm: { ...state.addPlatForm, [name]: value },
@@ -108,8 +113,12 @@ export const setAddPlatForm = (e: ChangeEvent<HTMLInputElement>) => {
 /**
  *  수정할 데이터
  */
-export const setEditPlatForm = (e: ChangeEvent<HTMLInputElement>) => {
+export const setEditPlatForm = async (e: ChangeEvent<HTMLInputElement>) => {
   const { name, value } = e.target;
+  if (name === 'link_url' && !usePlatFormState.getState().prevImg) {
+    const prevImage = await getOpenGraphMetaImage(value);
+    setPrevImg(prevImage);
+  }
   usePlatFormState.setState(state => ({
     ...state,
     editPlatForm: { ...state.editPlatForm, [name]: value },
