@@ -47,6 +47,7 @@
   width: 12.3rem;
   height: 12.3rem;
   position: relative;
+  background-color: var(--bg-g);
 }
 .wrap .img-wrap img {
   width: 100%;
@@ -64,6 +65,48 @@
   width: 0;
   height: 0;
   border: 0;
+}
+.wrap .img-wrap .edit-img {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  background-color: var(--bg-p);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: all 0.3s;
+}
+.wrap .img-wrap:hover .edit-img {
+  opacity: 1;
+}
+.wrap .img-wrap .remove-img-button {
+  position: absolute;
+  top: -1rem;
+  right: -1rem;
+  width: 3rem;
+  height: 3rem;
+  z-index: 2;
+  background-color: var(--text3);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.3s;
+}
+.wrap .img-wrap.active .remove-img-button {
+  z-index: 2;
+  opacity: 1;
+}
+.wrap .img-wrap .remove-img-button path {
+  stroke: #fff;
 }
 .wrap .txt-wrap {
   flex: 1;
