@@ -3,7 +3,7 @@ import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
 import JSZip from 'jszip';
 
-  export const QRDownload = async (qrData: QRdataType[]) => {
+  export const `QRDownload` = async (qrData: QRdataType[]) => {
     if (qrData) {
       try {
         const zip = new JSZip(); 
