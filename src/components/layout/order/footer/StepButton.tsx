@@ -5,7 +5,7 @@ import { readRemainEaByMenuId } from '@/server/api/supabase/menu-item';
 import { convertNumberToWon } from '@/shared/helper';
 import useKioskState, { getTotalPrice, goNextStep, ORDER_STEP, subtractOrderList } from '@/shared/store/kiosk';
 import { ReactElement } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { BiSolidCircle } from 'react-icons/bi';
 import { PiBagSimpleFill } from 'react-icons/pi';
