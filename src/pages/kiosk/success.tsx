@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import useKioskState from '@/shared/store/kiosk';
 import Waiting from '@/components/kiosk/success/Waiting';
 import OrderLayout from '@/components/layout/order/OrderLayout';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 /**
  * 결제 성공 페이지
@@ -53,7 +54,7 @@ export default OrderSuccessPage;
  */
 export const getServerSideProps: GetServerSideProps = async context => {
   const {
-    query: { paymentKey, orderId, amount },
+    query: { paymentKey, orderId, amount, lang },
   } = context;
 
   try {
@@ -83,7 +84,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
     );
 
     return {
-      props: { payment, isError: false },
+      props: { payment, isError: false, ...(await serverSideTranslations(lang ? lang.toString() : 'ko', ['common'])) },
     };
   } catch (err: unknown) {
     const error = err as ErrorResponse;
@@ -91,11 +92,14 @@ export const getServerSideProps: GetServerSideProps = async context => {
     // 이미 결제가 된 경우 에러를 표시합니다.
     if (error.response.data.code === 'ALREADY_PROCESSED_PAYMENT') {
       return {
-        props: { isError: true },
+        props: { isError: true, ...(await serverSideTranslations(lang ? lang.toString() : 'ko', ['common'])) },
       };
     }
 
     return {
+      props: {
+        ...(await serverSideTranslations(lang ? lang.toString() : 'ko', ['common'])),
+      },
       redirect: {
         destination: `/kiosk/fail?code=${error.response.data.code}&message=${encodeURIComponent(
           error.response.data.message,
