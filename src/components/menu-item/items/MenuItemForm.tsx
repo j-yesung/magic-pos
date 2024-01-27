@@ -30,57 +30,57 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
   // 메뉴 추가 and 수정
   const submitupdateMenuItemHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const newMenuItemData: TablesInsert<'menu_item'> | Tables<'menu_item'> = {
-      category_id: menuItem.category_id,
-      name: menuItem.name,
-      position: menuItem.position,
-      price: menuItem.price,
-      recommended: menuItem.recommended,
-      remain_ea: menuItem.remain_ea,
-      image_url: menuItem.image_url,
-    };
-    if (!isEdit) {
-      // const addData = await addMutate.mutateAsync(newMenuItemData);
-      try {
+    try {
+      const newMenuItemData: TablesInsert<'menu_item'> | Tables<'menu_item'> = {
+        category_id: menuItem.category_id,
+        name: menuItem.name,
+        position: menuItem.position,
+        price: menuItem.price,
+        recommended: menuItem.recommended,
+        remain_ea: menuItem.remain_ea,
+        image_url: menuItem.image_url,
+      };
+      if (!isEdit) {
+        // const addData = await addMutate.mutateAsync(newMenuItemData);
         const addData = await addMutate.mutateAsync(newMenuItemData);
         setMenuItem(addData[0]);
         newMenuItemData.id = addData[0].id;
         const newMenuOptions = menuOptions.map(option => (option.menu_id = addData[0].id));
         setMenuOptions([...menuOptions, newMenuOptions] as NewMenuOptionWithDetail[]);
-      } catch (error) {
-        console.error(error);
+      } else {
+        newMenuItemData.id = menuItem.id;
       }
-    } else {
-      newMenuItemData.id = menuItem.id;
-    }
 
-    let uploadedMenuImage = '';
-    const formattedDate = moment().toISOString();
-    const uploadImageGroup = {
-      menuId: newMenuItemData.id,
-      categoryId: menuItem.category_id,
-      createAt: formattedDate,
-      selectedFile: menuItemImgFile!,
-    };
-    // 이미지가 새로 업로드 됐다면
-    if (menuItemImgFile !== null) {
-      if (isEdit) removeImageMutate(uploadImageGroup);
-      uploadedMenuImage = await uploadImageMutate.mutateAsync(uploadImageGroup);
-      setMenuItem({ ...menuItem, image_url: uploadedMenuImage });
-      newMenuItemData.image_url = uploadedMenuImage;
-    } else if (menuItemSampleImg === sampleImage && menuItemSampleImg !== menuItem.image_url) {
-      setMenuItem({ ...menuItem, image_url: null });
-      removeImageMutate(uploadImageGroup);
-      newMenuItemData.image_url = null;
-    }
-    updateNameMutate(newMenuItemData);
-    props.clickItemModalHide();
-    setMenuItemImgFile(null);
+      let uploadedMenuImage = '';
+      const formattedDate = moment().toISOString();
+      const uploadImageGroup = {
+        menuId: newMenuItemData.id,
+        categoryId: menuItem.category_id,
+        createAt: formattedDate,
+        selectedFile: menuItemImgFile!,
+      };
+      // 이미지가 새로 업로드 됐다면
+      if (menuItemImgFile !== null) {
+        if (isEdit) removeImageMutate(uploadImageGroup);
+        uploadedMenuImage = await uploadImageMutate.mutateAsync(uploadImageGroup);
+        setMenuItem({ ...menuItem, image_url: uploadedMenuImage });
+        newMenuItemData.image_url = uploadedMenuImage;
+      } else if (menuItemSampleImg === sampleImage && menuItemSampleImg !== menuItem.image_url) {
+        setMenuItem({ ...menuItem, image_url: null });
+        removeImageMutate(uploadImageGroup);
+        newMenuItemData.image_url = null;
+      }
+      updateNameMutate(newMenuItemData);
+      props.clickItemModalHide();
+      setMenuItemImgFile(null);
 
-    // 옵션 업데이트 부분
-    removerOptionHandler();
-    filterOptionHandler();
-    setMenuOptions([]);
+      // 옵션 업데이트 부분
+      removerOptionHandler();
+      filterOptionHandler();
+      setMenuOptions([]);
+    } catch (error) {
+      console.error('Error adding data:', error);
+    }
   };
 
   // 옵션 삭제시 필터링
