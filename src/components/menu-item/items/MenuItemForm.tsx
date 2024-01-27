@@ -20,7 +20,6 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
 
   const isEdit = useMenuItemStore(state => state.isEdit);
   const menuItem = useMenuItemStore(state => state.menuItem);
-  const sampleImage = useMenuItemStore(state => state.sampleImage);
   const menuItemSampleImg = useMenuItemStore(state => state.menuItemSampleImg);
   const menuItemImgFile = useMenuItemStore(state => state.menuItemImgFile);
 
@@ -65,7 +64,7 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
         uploadedMenuImage = await uploadImageMutate.mutateAsync(uploadImageGroup);
         setMenuItem({ ...menuItem, image_url: uploadedMenuImage });
         newMenuItemData.image_url = uploadedMenuImage;
-      } else if (menuItemSampleImg === sampleImage && menuItemSampleImg !== menuItem.image_url) {
+      } else if (menuItemSampleImg === '' && menuItemSampleImg !== menuItem.image_url) {
         setMenuItem({ ...menuItem, image_url: null });
         removeImageMutate(uploadImageGroup);
         newMenuItemData.image_url = null;
@@ -79,7 +78,7 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
       filterOptionHandler();
       setMenuOptions([]);
     } catch (error) {
-      console.error('Error adding data:', error);
+      console.error(error);
     }
   };
 
