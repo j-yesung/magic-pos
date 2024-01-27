@@ -16,14 +16,14 @@ const SliderArea = () => {
   return (
     <>
       {isLoaded && (
-        <section>
+        <section className={styles.sliderBox}>
           {dataChunks.map((chunk, chunkIndex) => (
             <div key={chunkIndex} className={styles.cardWrapper}>
               <ul className={chunkIndex === 0 ? styles.cardList : styles.cardListDynamic}>
                 {chunk.map(review => (
                   <li key={review.id + chunkIndex * 10}>
                     <div className={styles.titleBox}>
-                      <div>
+                      <div className={styles.storeName}>
                         <span className={styles.icon}>{review.icon}</span>
                         <span className={styles.name}>{review.storeName}</span>
                       </div>
