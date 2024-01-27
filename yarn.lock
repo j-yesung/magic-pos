@@ -4495,6 +4495,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"core-js@npm:^3":
+  version: 3.35.1
+  resolution: "core-js@npm:3.35.1"
+  checksum: ebc8e22c36d13bcf2140cbc1d8ad65d1b08192bff4c43ade70c72eac103cb4dcfbc521f2b1ad1c74881b0a4353e64986537893ae4f07888e49228340efa13ae6
+  languageName: node
+  linkType: hard
+
+"core-util-is@npm:~1.0.0":
+  version: 1.0.3
+  resolution: "core-util-is@npm:1.0.3"
+  checksum: 90a0e40abbddfd7618f8ccd63a74d88deea94e77d0e8dbbea059fa7ebebb8fbb4e2909667fe26f3a467073de1a542ebe6ae4c73a73745ac5833786759cd906c9
+  languageName: node
+  linkType: hard
+
 "cosmiconfig@npm:^7.0.0":
   version: 7.1.0
   resolution: "cosmiconfig@npm:7.1.0"
@@ -6304,9 +6318,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^23.7.18":
-  version: 23.7.18
-  resolution: "i18next@npm:23.7.18"
+"i18next@npm:^23.7.20":
+  version: 23.7.20
+  resolution: "i18next@npm:23.7.20"
   dependencies:
     "@babel/runtime": "npm:^7.23.2"
   checksum: 95460fff030860af7b5c65485c966fc5894372bff09f0f2f6b3fb72f053763d0b253aba977f52ddf7e32f763bf463efcf025da17a108cb1010b85fe3bd278cbd
@@ -7344,8 +7358,7 @@ __metadata:
     firebase: "npm:^10.7.2"
     firebase-admin: "npm:^12.0.0"
     framer-motion: "npm:^11.0.3"
-    html2canvas: "npm:^1.4.1"
-    i18next: "npm:^23.7.18"
+    i18next: "npm:^23.7.20"
     i18next-http-backend: "npm:^2.4.2"
     immer: "npm:^10.0.3"
     jszip: "npm:^3.10.1"
@@ -8419,9 +8432,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-i18next@npm:^14.0.0":
-  version: 14.0.0
-  resolution: "react-i18next@npm:14.0.0"
+"react-i18next@npm:^14.0.1":
+  version: 14.0.1
+  resolution: "react-i18next@npm:14.0.1"
   dependencies:
     "@babel/runtime": "npm:^7.22.5"
     html-parse-stringify: "npm:^3.0.1"
