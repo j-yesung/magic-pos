@@ -1,7 +1,7 @@
 import KioskContainer from '@/components/kiosk/KioskContainer';
 import OrderLayout from '@/components/layout/order/OrderLayout';
 import { useModal } from '@/hooks/service/ui/useModal';
-import { useIsOrderAllReady, useIsValidURL } from '@/hooks/service/useKiosk';
+import { useIsOrderAllReady, useIsValidURL, useMakeMenuData } from '@/hooks/service/useKiosk';
 import { fetchCategoriesWithMenuItemByStoreId } from '@/server/api/supabase/menu-category';
 import useKioskState, {
   resetOrderList,
@@ -12,7 +12,6 @@ import useKioskState, {
   setTableId,
 } from '@/shared/store/kiosk';
 import { CategoryWithMenuItemWithStore } from '@/types/supabase';
-import { makeMenuData } from '@/utils/kiosk-helper';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { ReactNode, useEffect, useState } from 'react';
@@ -35,6 +34,7 @@ const OrderIndexPage = ({ menuData, storeId, tableId }: OrderIndexPageProps) => 
   const isOrderAllReady = useIsOrderAllReady(orderIdList, storeId);
   const { MagicModal } = useModal();
   const router = useRouter();
+  const makeMenuData = useMakeMenuData();
 
   useEffect(() => {
     if (orderIdList.length > 0 && !isOrderAllReady) {
