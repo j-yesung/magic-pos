@@ -1,5 +1,6 @@
 /* 전체 */
 .wrapper {
+  gap: 30rem;
   display: flex;
   /* overflow-x: hidden; */
   transition: all 0.4s;
@@ -66,7 +67,7 @@
 /* 메인 */
 .main-wrapper {
   display: flex;
-  margin-top: 15rem;
+  margin-top: 10rem;
   position: relative;
   align-items: center;
   flex-direction: column;
@@ -88,33 +89,38 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 3rem;
+  padding: 5rem;
   font-size: 1.7rem;
   font-weight: 400;
 }
 
 /* 시작하기 */
 .start-wrapper {
-  margin-bottom: 4rem;
+  width: 100%;
+  height: 8rem;
+  display: flex;
+  align-items: center;
+  margin: 3rem 0 8rem 0;
+  justify-content: center;
 }
 .start-wrapper button {
   width: 15rem;
-  height: 5rem;
+  height: 5.5rem;
   display: flex;
-  padding: 2rem;
+  padding: 1rem;
   cursor: pointer;
-  border-radius: 2rem;
+  border-radius: 5rem;
   align-items: center;
   justify-content: center;
-  background-color: #ffffff;
-  box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem rgba(0.1, 0.1, 0.1, 0.1);
+  background-color: #fff;
+  box-shadow: 0 0 1rem 0 rgba(48, 20, 109, 0.2);
 }
 .start-wrapper button:hover {
   background-color: #f8f5ff;
 }
 .start-wrapper p {
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .main-watemark {
@@ -131,20 +137,24 @@
 }
 
 /* 카드 영역 */
+.slider-box {
+  width: 100%;
+}
 .card-wrapper {
   margin: 0.7rem;
   position: relative;
   /* width: 2100px; */
+  padding: 1rem;
   width: 100vw;
   height: 20rem;
   overflow: hidden;
   border-radius: 3rem;
-  filter: drop-shadow(rgba(50, 83, 198, 0.34) 0px 18px 40px);
+  /* filter: drop-shadow(rgba(50, 83, 198, 0.34) 0px 18px 40px); */
 }
 
 .card-list,
 .card-list-dynamic {
-  gap: 1rem;
+  gap: 2rem;
   right: 0px;
   height: 100%;
   display: flex;
@@ -154,17 +164,16 @@
 }
 
 .card-wrapper li {
-  gap: 1rem;
+  gap: 2rem;
   width: 38rem;
   height: 100%;
   display: flex;
-  padding: 3rem;
+  padding: 4rem;
   border-radius: 1rem;
   flex-direction: column;
   justify-content: flex-start;
-  background-color: #ffffff;
-  border: 2px solid #d6d6d6;
-  box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem rgba(0.1, 0.1, 0.1, 0.1);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0px 0px 30px 0px rgba(68, 9, 194, 0.15);
 }
 .card-wrapper .rvBg {
   border-radius: 1rem;
@@ -178,6 +187,10 @@
   padding-bottom: 1, 5rem;
   justify-content: space-between;
 }
+.store-name {
+  gap: 1.5rem;
+  display: flex;
+}
 .title-box span {
   font-size: 2.6rem;
   font-weight: bold;
@@ -188,15 +201,17 @@
   font-weight: 700;
 }
 .card-wrapper .review-box {
-  height: 10rem;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 6;
-  -webkit-box-orient: vertical;
+  width: 30rem;
+  height: 8rem;
 }
 .review-box p {
+  width: 100%;
+  /* overflow: hidden; */
+  height: 100%;
+  line-height: 1.1;
   font-size: 1.7rem;
   font-weight: 400;
+  text-overflow: ellipsis;
 }
 
 .card-list,
