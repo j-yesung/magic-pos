@@ -1,6 +1,7 @@
 import useFetchManagement from '@/hooks/management/useFetchManagement';
 import { useModal } from '@/hooks/service/ui/useModal';
 import useAuthState from '@/shared/store/session';
+import clsx from 'clsx';
 import { useState } from 'react';
 import QrCodeButtonBox from './QrCodeButtonBox';
 import QrCodeTabButton from './QrCodeTabButton';
@@ -45,12 +46,18 @@ const QrCodeModal = ({ modalId }: { modalId?: string }) => {
 
       {/* QR코드 컨테이너 */}
       <div className={styles.qrCodeShowBox}>
-        {data?.[0]?.use_table && selectedComponent === 'shop' && <ShopQrCodeContainer data={data} />}
-        {selectedComponent === 'packaging' && <PackagingQrCodeContainer />}
+        {data?.[0]?.use_table && (
+          <div className={clsx(styles.qrCodeContainer, selectedComponent === 'shop' && styles.show)}>
+            <ShopQrCodeContainer data={data} />
+          </div>
+        )}
+        <div className={clsx(styles.qrCodeContainer, selectedComponent === 'packaging' && styles.show)}>
+          <PackagingQrCodeContainer />
+        </div>
       </div>
 
       {/* QR코드 버튼박스 */}
-      <QrCodeButtonBox modalId={modalId} />
+      <QrCodeButtonBox />
     </div>
   );
 };
