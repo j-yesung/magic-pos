@@ -4,7 +4,7 @@ import styles from './styles/OrderTypeButton.module.css';
 import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButton';
 import { MdOutlineTableBar } from 'react-icons/md';
 import { TbPaperBag } from 'react-icons/tb';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import useToast from '@/hooks/service/ui/useToast';
 
 const OrderTypeCard = ({ order }: { order: OrderType }) => {

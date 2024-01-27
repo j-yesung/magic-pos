@@ -8,6 +8,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { AppProps } from 'next/app';
 import localFont from 'next/font/local';
 import '@/shared/i18n';
+import { appWithTranslation } from 'next-i18next';
 
 const myFont = localFont({ src: '../../public/fonts/PretendardVariable.woff2', variable: '--main-font' });
 
@@ -17,7 +18,7 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
-export default function App({ Component, pageProps }: AppPropsWithLayout) {
+const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? (page => page);
   return (
     <QueryClientProvider client={queryClient}>
@@ -27,4 +28,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       <Toast />
     </QueryClientProvider>
   );
-}
+};
+
+export default appWithTranslation(App);

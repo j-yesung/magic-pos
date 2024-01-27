@@ -19,6 +19,7 @@ import { ReactNode, useEffect, useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/virtual';
 import { translateMenuData } from '@/server/service/translate';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 interface OrderIndexPageProps {
   menuData: CategoryWithMenuItemWithStore[];
@@ -107,6 +108,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
       menuData,
       storeId,
       tableId,
+      ...(await serverSideTranslations(lang ? lang.toString() : 'ko', ['common'])),
     },
   };
 };
