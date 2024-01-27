@@ -6,6 +6,7 @@ export interface AddPlatFormType {
   createdAt?: string;
   link_url: string;
   id?: string | null;
+  metaImage: string | null;
 }
 
 export interface EditPlatFormType {

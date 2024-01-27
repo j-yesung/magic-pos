@@ -13,6 +13,7 @@ interface PlatformStore {
   isEdit: boolean;
   fetchPlatFormData: Tables<'platform'>[];
   prevImg: string | null;
+  meta: boolean;
 }
 
 interface PrevDataType {
@@ -30,6 +31,7 @@ const initialAddPlatform = {
   link_url: '',
   file: null,
   store_id: '',
+  metaImage: null,
 };
 const initialEditPlatForm = {
   id: '',
@@ -53,6 +55,8 @@ const initialPrevImg = null;
 
 const initialFetchPlatForm: Tables<'platform'>[] = [];
 
+const initialMeta = false;
+
 const usePlatFormState = create<PlatformStore>()(() => ({
   store_id: null,
   isRegist: false,
@@ -62,6 +66,7 @@ const usePlatFormState = create<PlatformStore>()(() => ({
   prevData: initialPrevData,
   fetchPlatFormData: initialFetchPlatForm,
   prevImg: initialPrevImg,
+  meta: initialMeta,
 }));
 
 export default usePlatFormState;
@@ -100,9 +105,20 @@ export const setPlatFormStoreId = (store_id: string) =>
  */
 export const setAddPlatForm = async (e: ChangeEvent<HTMLInputElement>) => {
   const { name, value } = e.target;
-  if (name === 'link_url' && !usePlatFormState.getState().prevImg) {
-    const prevImage = await getOpenGraphMetaImage(value);
-    setPrevImg(prevImage);
+  if (name === 'link_url' && !usePlatFormState.getState().meta) {
+    const metaImage = await getOpenGraphMetaImage(value);
+    setPrevImg(metaImage);
+
+    if (metaImage) {
+      usePlatFormState.setState(state => ({
+        ...state,
+        addPlatForm: {
+          ...state.addPlatForm,
+          metaImage,
+        },
+      }));
+      setMeta(true);
+    }
   }
   usePlatFormState.setState(state => ({
     ...state,
@@ -161,6 +177,12 @@ export const setPrevImg = (url: string) =>
   usePlatFormState.setState(state => ({
     ...state,
     prevImg: url ?? null,
+  }));
+
+export const setMeta = (type: boolean) =>
+  usePlatFormState.setState(state => ({
+    ...state,
+    meta: type,
   }));
 
 /**
@@ -238,4 +260,14 @@ export const resetPrevData = () =>
   usePlatFormState.setState(state => ({
     ...state,
     prevData: initialPrevData,
+  }));
+
+export const resetMeta = () =>
+  usePlatFormState.setState(state => ({
+    ...state,
+    addPlatForm: {
+      ...state.addPlatForm,
+      metaImage: null,
+    },
+    meta: initialMeta,
   }));

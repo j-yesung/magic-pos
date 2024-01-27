@@ -12,6 +12,7 @@ import usePlatFormState, {
   resetAddPlatForm,
   resetEditPlatForm,
   resetIsRegist,
+  resetMeta,
   resetPrevData,
   setAddDataToFetchPlatForm,
   setFetchPlatFormData,
@@ -23,7 +24,7 @@ import moment from 'moment';
 import { FormEvent } from 'react';
 
 const usePlatForm = () => {
-  const { addPlatForm, editPlatForm, prevData, prevImg, store_id } = usePlatFormState();
+  const { addPlatForm, editPlatForm, prevData, prevImg, store_id, meta } = usePlatFormState();
 
   const submitAddCard = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,7 +34,14 @@ const usePlatForm = () => {
 
     /**useModal 사용하기 */
     if (!addPlatForm.name.trim() || !addPlatForm.link_url.trim()) return alert('써라');
-
+    if (meta) {
+      updateData = {
+        ...addPlatForm,
+        image_url: addPlatForm.metaImage!,
+      };
+      const { data } = await insertPlatFormRow(updateData);
+      setAddDataToFetchPlatForm(data!);
+    }
     if (updateData.file) {
       await uploadPlatFormImage(updateData);
       const { publicUrl: image_url } = downloadPlatFormImageUrl(updateData);
@@ -43,12 +51,13 @@ const usePlatForm = () => {
       };
       const { data } = await insertPlatFormRow(updateData);
       setAddDataToFetchPlatForm(data!);
-    } else {
+    } else if (!meta) {
       const { data } = await insertPlatFormRow(updateData);
       setAddDataToFetchPlatForm(data!);
     }
     resetAddPlatForm();
     setIsRegist(false);
+    resetMeta();
   };
   const clickRemoveData = async () => {
     await removePlatFormData(editPlatForm.id);
