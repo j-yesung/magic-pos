@@ -3,8 +3,10 @@ import styles from './styles/OrderTypeContainer.module.css';
 import { MdOutlineLanguage } from 'react-icons/md';
 import { useTranslation } from 'next-i18next';
 import LanguageList from '@/components/kiosk/order-type/LanguageList';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import useKioskState from '@/shared/store/kiosk';
+import { useModal } from '@/hooks/service/ui/useModal';
+import { IoInformationCircleOutline } from 'react-icons/io5';
 
 /**
  * STEP1: 포장 / 매장 선택
@@ -15,10 +17,26 @@ const OrderTypeContainer = () => {
   const selectedLanguage = useKioskState(state => state.selectedLanguage);
   const { t, i18n } = useTranslation();
   const languageRef = useRef<HTMLDivElement>(null);
+  const [isListenAlert, setIsListenAlert] = useState(false);
+  const { MagicModal } = useModal();
 
   const handleClickLanguage = () => {
     setShowLanguageList(prev => !prev);
   };
+
+  const handleClickHelp = () => {
+    MagicModal.alert({ content: 'test' });
+  };
+
+  useEffect(() => {
+    try {
+      if (Notification.permission === 'granted') {
+        setIsListenAlert(true);
+      }
+    } catch (err) {
+      setIsListenAlert(false);
+    }
+  }, []);
 
   useEffect(() => {
     const handleClickOutsideRef = (e: MouseEvent) => {
@@ -48,7 +66,15 @@ const OrderTypeContainer = () => {
       <div className={styles.languageWrapper} ref={languageRef}>
         {showLanguageList && <LanguageList setShowLanguageList={setShowLanguageList} />}
         <MdOutlineLanguage size={20} onClick={handleClickLanguage} />
-        <button onClick={handleClickLanguage}>Language</button>
+        <div className={styles.buttonContainer}>
+          <button onClick={handleClickLanguage}>Language</button>
+          {!isListenAlert && (
+            <div onClick={handleClickHelp}>
+              <div className={styles.balloon}>홈 화면에 등록하여 알림을 받아보세요.</div>
+              <IoInformationCircleOutline size={8} />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
