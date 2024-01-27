@@ -8,6 +8,7 @@ import { MenuItemWithOption, OrderDataWithStoreName } from '@/types/supabase';
 import moment from 'moment';
 import { IoCheckmark } from 'react-icons/io5';
 import styles from './styles/OrderItem.module.css';
+import useToast from '@/hooks/service/ui/useToast';
 
 const OrderItem = ({ orderData }: { orderData: OrderDataWithStoreName }) => {
   const { id, order_number, order_id, order_time, menu_list, is_togo } = orderData;
@@ -16,6 +17,7 @@ const OrderItem = ({ orderData }: { orderData: OrderDataWithStoreName }) => {
   const { mutate, isPending } = useSetManagement();
   const { userToken } = useUserTokenFetchQuery(order_id);
   const sendPush = useSendPush();
+  const { toast } = useToast();
 
   const group = groupByKey<MenuItemWithOption>(menuList, 'unique');
   const menuName = [...group]?.[0][1].map(item => item.name).join('');
@@ -25,17 +27,24 @@ const OrderItem = ({ orderData }: { orderData: OrderDataWithStoreName }) => {
     MagicModal.confirm({
       content: '주문을 완료할까요?',
       confirmButtonCallback: () => {
-        if (typeof is_togo === 'undefined') {
-          mutate({ id: id, isTogo: false });
-        } else if (typeof is_togo === 'boolean') {
-          mutate({ id: id, isTogo: true });
+        if (userToken) {
+          if (typeof is_togo === 'undefined') {
+            mutate({ id: id, isTogo: false });
+          } else if (typeof is_togo === 'boolean') {
+            mutate({ id: id, isTogo: true });
+          }
+          sendPush({
+            title: `${order_number}번 주문이 완료되었습니다.`,
+            body: `${menuName} 외 ${otherMenuNum}개`,
+            token: userToken?.token || '',
+            click_action: '/kiosk/receipt',
+          });
+        } else {
+          toast('토큰을 발급받을 수 없습니다. 관리자에게 문의하세요', {
+            type: 'danger',
+            position: 'top-right',
+          });
         }
-        sendPush({
-          title: `${order_number}번 주문이 완료되었습니다.`,
-          body: `${menuName} 외 ${otherMenuNum}개`,
-          token: userToken?.token || '',
-          click_action: '/',
-        });
       },
     });
   };
