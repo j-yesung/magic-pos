@@ -8,7 +8,7 @@ const Header = () => {
     <header className={styles.headerWrapper}>
       <div className={styles.leftContainer}>
         <HamburgerMenu />
-        <Logo className={styles.logo} width={200} height={30} />
+        <Logo className={styles.logo} width={'20rem'} height={'3rem'} />
       </div>
       <div className={styles.rightContainer}>
         <HeaderToggleButton />
