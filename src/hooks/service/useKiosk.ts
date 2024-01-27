@@ -2,8 +2,7 @@ import { useNumberOrderFetchQuery } from '@/hooks/query/order/useNumberOrderFetc
 import { useStoreOrderFetchQuery } from '@/hooks/query/order/useStoreOrderFetchQuery';
 import { useFetchQuery } from '@/hooks/query/store/useFetchQuery';
 import useFetchTable from '@/hooks/table/useFetchTable';
-import { isEmptyObject } from '@/shared/helper';
-import { CategoryWithMenuItemWithStore, MenuItemWithOption } from '@/types/supabase';
+import { MenuItemWithOption } from '@/types/supabase';
 import { useEffect, useState } from 'react';
 
 export const useIsOrderAllReady = (orderIdList: string[], storeId: string) => {
@@ -49,11 +48,10 @@ export const useIsValidURL = ({ tableId, storeId }: { tableId?: string; storeId?
         setIsValidURL(false);
       }
     }
-
     if (!isStoreFetching && !storeInfo) {
       setIsValidURL(false);
     }
-  }, [tableInfo, storeInfo]);
+  }, [isTableFetching, isStoreFetching]);
 
   return isValidURL;
 };
