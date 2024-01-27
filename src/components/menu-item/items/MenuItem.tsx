@@ -41,7 +41,7 @@ const MenuItemPage = () => {
       position: checkMenuItem.length === 0 ? 0 : checkMenuItem[checkMenuItem.length - 1].position + 1,
     };
     setMenuItem(newMenuItem);
-    setMenuItemSampleImg(sampleImage);
+    setMenuItemSampleImg('');
     setMenuOptions([]);
     setMenuItemImgFile(null);
   };

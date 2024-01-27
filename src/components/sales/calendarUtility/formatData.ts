@@ -1,10 +1,16 @@
-import { CalendarDataType, DateFormatType, FormatType, SalesRecordType } from '@/types/sales';
+import { CalendarDataType, DateFormatType, FormatType, IsTakeOutType, SalesRecordType } from '@/types/sales';
 import { Tables, TablesInsert } from '@/types/supabase';
 import moment, { Moment } from 'moment';
 import { getStartWeeks } from './dateCalculator';
 
-type FormatCalendarReturnType = (data: Map<string, Tables<'sales'>[]>) => { sales: number; date: string }[];
+type OrderType = 'togo' | 'store';
+
+type FormatCalendarReturnType = (
+  data: Map<string, Tables<'sales'>[]>,
+) => { sales: number; date: string; to_go: IsTakeOutType[] | null; store: IsTakeOutType[] | null }[];
+
 type SortMinMaxDataReturnType = (target: CalendarDataType[]) => CalendarDataType[];
+
 type FormatDateParamType = 'YYYY-MM-DD' | 'YYYY년 MM월' | 'YYYY-MM';
 
 type SalesCommonType = TablesInsert<'sales'> & { moment?: Moment; original_date: Moment };
@@ -14,10 +20,47 @@ export const formatToCalendarData: FormatCalendarReturnType = data => {
     const data = {
       sales: value.reduce((acc, cur) => acc + cur.product_ea * cur.product_price, 0),
       date: key,
+      to_go: sortedMainIsTogo(value, 'togo'),
+      store: sortedMainIsTogo(value, 'store'),
     };
     return data;
   });
   return refinedData;
+};
+
+const sortedMainIsTogo = (main: Tables<'sales'>[], order_type: OrderType) => {
+  const sortedMainData = main.filter(order => order.order_type === order_type);
+
+  const sortedCategoryData = sortedSubIsTogo(sortedMainData);
+  return sortedCategoryData;
+};
+
+const sortedSubIsTogo = (sub: Tables<'sales'>[]) => {
+  if (sub.length === 0) return null;
+
+  const groupByMap = new Map<string, Tables<'sales'>[]>();
+  sub.forEach(sales => {
+    const productName = sales.product_name!;
+    const isAlready = groupByMap.has(productName);
+    if (isAlready) {
+      groupByMap.get(productName)?.push(sales);
+    } else {
+      groupByMap.set(productName, [sales]);
+    }
+  });
+
+  const result = [...groupByMap.entries()].map(([key, value]) => {
+    const productName = key;
+    const salesByGroup = value;
+    const summary: IsTakeOutType = {
+      product_name: productName,
+      product_ea: salesByGroup.reduce((acc, cur) => acc + cur.product_ea, 0),
+      product_price: salesByGroup[0].product_price,
+      original_data: value,
+    };
+    return summary;
+  });
+  return result;
 };
 
 export const sortMinMaxData: SortMinMaxDataReturnType = target => {
