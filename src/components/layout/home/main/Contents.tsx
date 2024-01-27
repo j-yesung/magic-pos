@@ -1,4 +1,4 @@
-import { KioskField, SalesFiled, SliderArea, StartButton, StickBar, Title } from '../module-export';
+import { AdminField, KioskField, SalesFiled, SliderField, StartButton, StickBar, Title } from '../module-export';
 
 const Contents = () => {
   return (
@@ -6,9 +6,10 @@ const Contents = () => {
       <StickBar />
       <Title />
       <StartButton />
-      <SliderArea />
+      <SliderField />
       <KioskField />
       <SalesFiled />
+      <AdminField />
     </>
   );
 };

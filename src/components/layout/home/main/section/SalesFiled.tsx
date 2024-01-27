@@ -1,4 +1,4 @@
-import { CalendarSales, CurrentSales } from '@/data/module-export';
+import { CalendarSales, CurrentSales } from '@/data/screenshot-export';
 import { useObserver } from '@/hooks/service/useObserver';
 import { motion } from 'framer-motion';
 import { useRef } from 'react';
