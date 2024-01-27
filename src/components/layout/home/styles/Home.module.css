@@ -1,6 +1,6 @@
 /* 전체 */
 .wrapper {
-  gap: 30rem;
+  /* gap: 30rem; */
   display: flex;
   /* overflow-x: hidden; */
   transition: all 0.4s;
