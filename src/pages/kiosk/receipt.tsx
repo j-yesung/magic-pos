@@ -3,6 +3,8 @@ import useKioskState from '@/shared/store/kiosk';
 import { useRouter } from 'next/router';
 import ReceiptContainer from '@/components/kiosk/receipt/ReceiptContainer';
 import OrderLayout from '@/components/layout/order/OrderLayout';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { GetServerSideProps } from 'next';
 
 /**
  * 결제 후 주문 내역 확인 페이지
@@ -29,3 +31,15 @@ const OrderReceiptPage = () => {
 OrderReceiptPage.getLayout = (page: ReactNode) => <OrderLayout>{page}</OrderLayout>;
 
 export default OrderReceiptPage;
+
+export const getServerSideProps: GetServerSideProps = async context => {
+  const {
+    query: { lang },
+  } = context;
+
+  return {
+    props: {
+      ...(await serverSideTranslations(lang ? lang.toString() : 'ko', ['common'])),
+    },
+  };
+};
