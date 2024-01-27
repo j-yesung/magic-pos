@@ -21,7 +21,7 @@ const QrCodeListItem = ({ storeTable, orderType }: propsType) => {
   const [isQrClick, setIsQrClick] = useState(false);
   const QRImage = useRef<HTMLDivElement[]>([]);
   const qrUrl = storeTable
-    ? `${process.env.NEXT_PUBLIC_SUPACE_REDIRECT_TO}/kiosk/${storeId}/${storeTable.id}`
+    ? `${process.env.NEXT_PUBLIC_SUPACE_REDIRECT_TO}/kiosk/${storeId}?tableId=${storeTable.id}`
     : `${process.env.NEXT_PUBLIC_SUPACE_REDIRECT_TO}/kiosk/${storeId}`;
   const { setQrData, qrData } = useManagementStore();
   const { oneMutate } = useQRCodeDownLoad();
