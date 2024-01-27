@@ -1,6 +1,6 @@
 import { MenuShot, SelectShot, StartShot } from './module-export';
 
-export const SCROLL_THRESHOLDS = [1000, 1700, 2400];
+export const SCROLL_THRESHOLDS = [1200, 1900, 2600];
 export const MAIN_TITLES = ['편리함의 시작', '한 눈의 보는 메뉴', '다양한 옵션 선택까지'];
 export const FIRST_CAPTIONS = [
   '매직포스를 사용한다면',
