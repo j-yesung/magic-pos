@@ -1,20 +1,10 @@
 .packaging-qr-code-container {
   width: 100%;
   height: auto;
-  padding: 0 3rem;
   min-width: 50rem;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.packaging-qr-code-title {
-  width: 100%;
-  height: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 0;
-  font-size: 3rem;
 }
 
 .packaging-qr-code-item-box {
@@ -22,5 +12,4 @@
   height: auto;
   display: flex;
   justify-content: center;
-  padding: 2rem 0;
 }

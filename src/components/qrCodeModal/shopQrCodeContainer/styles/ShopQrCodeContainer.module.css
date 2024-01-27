@@ -4,15 +4,6 @@
   height: auto;
   margin: 0 auto;
 }
-.shop-qr-code-title {
-  width: 100%;
-  height: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 0;
-  font-size: 3rem;
-}
 .shop-qr-code-list-box {
   width: 100%;
   height: auto;
@@ -21,7 +12,6 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
   place-items: center;
-  padding: 2rem 0;
   overflow-y: scroll;
 }
 
@@ -44,4 +34,13 @@
 }
 .grid-row-3 {
   grid-template-columns: repeat(3, 1fr);
+}
+
+@media only all and (max-width: 1520px) {
+  .shop-qr-code-container {
+    min-height: 17rem;
+  }
+  .shop-qr-code-list-box{
+    max-height: 17rem;
+  }
 }

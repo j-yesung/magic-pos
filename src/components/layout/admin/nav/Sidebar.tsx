@@ -75,11 +75,11 @@ const Sidebar = (adminInfo: AdminCategories) => {
     <aside className={sidebarClass} ref={targetRef}>
       <div className={styles.contents}>
         <div className={styles.closeButton}>
-          <CloseButton width={40} height={40} onClick={() => setIsSideBarOpen(false)} />
+          <CloseButton width={'4rem'} height={'4rem'} onClick={() => setIsSideBarOpen(false)} />
         </div>
         <div className={styles.toggleButton}>
           <HeaderToggleButton />
-          <IoQrCodeOutline size={40} onClick={clickQrModalOpenHandler} />
+          <IoQrCodeOutline size={'4rem'} onClick={clickQrModalOpenHandler} />
         </div>
         <div className={styles.notification}>
           <Ellipse width={8} height={8} />
