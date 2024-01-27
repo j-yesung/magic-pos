@@ -1,6 +1,6 @@
 import styles from './style/MenuHeader.module.css';
 import useKioskState, { ORDER_STEP } from '@/shared/store/kiosk';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 const MenuHeader = () => {
   const step = useKioskState(state => state.step);

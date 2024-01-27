@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
 import { IoBagCheckOutline } from 'react-icons/io5';
 import MenuHeader from '../common/MenuHeader';
 import styles from './styles/SuccessContainer.module.css';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import { getTokenHandler } from '@/shared/firebase';
 import { useUserTokenSetQuery } from '@/hooks/query/user-token/useUserTokenSetQuery';
 

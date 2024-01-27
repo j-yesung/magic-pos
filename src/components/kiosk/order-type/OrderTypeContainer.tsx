@@ -1,7 +1,7 @@
 import ButtonContainer from '@/components/kiosk/order-type/ButtonContainer';
 import styles from './styles/OrderTypeContainer.module.css';
 import { MdOutlineLanguage } from 'react-icons/md';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import LanguageList from '@/components/kiosk/order-type/LanguageList';
 import { useEffect, useRef, useState } from 'react';
 import useKioskState from '@/shared/store/kiosk';
