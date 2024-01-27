@@ -8,17 +8,9 @@ interface Props {
 
 const TransitionBox = (props: Props) => {
   const { index } = props;
-  // const { scrollYProgress } = useViewportScroll();
-  // const y = useTransform(scrollYProgress, [0, 0.4], ['100%', '0%']);
 
   return (
-    <motion.div
-      // style={{ y }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 1 }}
-    >
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1 }}>
       {iphones.map((Iphone, i) => (
         <motion.div
           className={styles.iphoneBox}
