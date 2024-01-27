@@ -6,13 +6,6 @@ import { ReactNode } from 'react';
 const ManagementPage = () => {
   return (
     <>
-      <style jsx global>{`
-        @media only all and (max-width: 1520px) {
-          html {
-            font-size: 8px;
-          }
-        }
-      `}</style>
       <Head>
         <title>magic pos 운영모드</title>
         <meta name="description" content="NextJS Events" />
