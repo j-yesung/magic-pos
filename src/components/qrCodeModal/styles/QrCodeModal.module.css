@@ -97,7 +97,10 @@
 .qr-code-button-box > button p {
   font-size: 1.6rem;
 }
-
+.qr-button{
+  padding-top: 1.3rem;
+  padding-bottom: 1.3rem;
+}
 .not-active {
   color: var(--text2);
   padding: 1rem 2rem;

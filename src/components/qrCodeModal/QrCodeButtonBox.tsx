@@ -17,16 +17,9 @@ const QrCodeButtonBox = ({ modalId }: { modalId?: string }) => {
 
   return (
     <div className={styles.qrCodeButtonBox}>
-      <Button type="button" onClick={clickQrDownLoadHandler}>
+      <Button type="button" className={isPending ? styles.qrButton : ''} onClick={clickQrDownLoadHandler}>
         {isPending ? (
-          <Image
-            src={
-              'https://mblogthumb-phinf.pstatic.net/MjAxODEwMjNfNjAg/MDAxNTQwMjg2OTk2NTcw.mfWKPtzKVO1mJaBBIFKIkVBlMQQIF1Vc-yrlbbGaoP0g.KNJWAgMmhsfQrZI3n0UT-LMi_qpHAZls4qPMvbNaJBcg.GIF.chingguhl/Spinner-1s-200px.gif?type=w800'
-            }
-            alt=""
-            width={40}
-            height={40}
-          />
+          <Image src={'https://high.gwnu.ac.kr/contents/images/boxloading.gif'} alt="" width={32} height={32} />
         ) : (
           <span>전체 다운로드</span>
         )}
