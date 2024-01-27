@@ -20,7 +20,7 @@ const useSendPush = () => {
       },
     };
 
-    axios.request({
+    await axios.request({
       method: 'POST',
       url: window?.location?.origin + '/api/fcm',
       data: { message },
