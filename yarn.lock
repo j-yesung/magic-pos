@@ -3201,6 +3201,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/hoist-non-react-statics@npm:^3.3.4":
+  version: 3.3.5
+  resolution: "@types/hoist-non-react-statics@npm:3.3.5"
+  dependencies:
+    "@types/react": "npm:*"
+    hoist-non-react-statics: "npm:^3.3.0"
+  checksum: 2a3b64bf3d9817d7830afa60ee314493c475fb09570a64e7737084cd482d2177ebdddf888ce837350bac51741278b077683facc9541f052d4bbe8487b4e3e618
+  languageName: node
+  linkType: hard
+
 "@types/http-errors@npm:*":
   version: 2.0.4
   resolution: "@types/http-errors@npm:2.0.4"
@@ -4482,13 +4492,6 @@ __metadata:
   dependencies:
     browserslist: "npm:^4.22.2"
   checksum: c3b872e1f9703aa9554cce816207d85730da4703f1776c540b4da11bbbef6d9a1e6041625b5c1f58d2ada3d05f4a2b92897b7de5315c5ecd5d33d50dec86cca7
-  languageName: node
-  linkType: hard
-
-"core-util-is@npm:~1.0.0":
-  version: 1.0.3
-  resolution: "core-util-is@npm:1.0.3"
-  checksum: 90a0e40abbddfd7618f8ccd63a74d88deea94e77d0e8dbbea059fa7ebebb8fbb4e2909667fe26f3a467073de1a542ebe6ae4c73a73745ac5833786759cd906c9
   languageName: node
   linkType: hard
 
@@ -6212,7 +6215,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hoist-non-react-statics@npm:^3.3.1":
+"hoist-non-react-statics@npm:^3.3.0, hoist-non-react-statics@npm:^3.3.1, hoist-non-react-statics@npm:^3.3.2":
   version: 3.3.2
   resolution: "hoist-non-react-statics@npm:3.3.2"
   dependencies:
@@ -6285,6 +6288,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"i18next-fs-backend@npm:^2.3.1":
+  version: 2.3.1
+  resolution: "i18next-fs-backend@npm:2.3.1"
+  checksum: 6a4a6318ee13851436e17232afc6833d4e5c937a0fe15cf9454b4b7dd605154580a990716008ee734d582e8db7dd6a39389eb64474d42950093c938e50a80df9
+  languageName: node
+  linkType: hard
+
 "i18next-http-backend@npm:^2.4.2":
   version: 2.4.2
   resolution: "i18next-http-backend@npm:2.4.2"
@@ -6295,8 +6305,8 @@ __metadata:
   linkType: hard
 
 "i18next@npm:^23.7.18":
-  version: 23.7.20
-  resolution: "i18next@npm:23.7.20"
+  version: 23.7.18
+  resolution: "i18next@npm:23.7.18"
   dependencies:
     "@babel/runtime": "npm:^7.23.2"
   checksum: 95460fff030860af7b5c65485c966fc5894372bff09f0f2f6b3fb72f053763d0b253aba977f52ddf7e32f763bf463efcf025da17a108cb1010b85fe3bd278cbd
@@ -7334,6 +7344,7 @@ __metadata:
     firebase: "npm:^10.7.2"
     firebase-admin: "npm:^12.0.0"
     framer-motion: "npm:^11.0.3"
+    html2canvas: "npm:^1.4.1"
     i18next: "npm:^23.7.18"
     i18next-http-backend: "npm:^2.4.2"
     immer: "npm:^10.0.3"
@@ -7342,6 +7353,7 @@ __metadata:
     moment: "npm:^2.30.1"
     nanoid: "npm:^5.0.4"
     next: "npm:14.0.4"
+    next-i18next: "npm:^15.2.0"
     next-pwa: "npm:^5.6.0"
     postcss: "npm:^8"
     prettier: "npm:^3.2.2"
@@ -7349,7 +7361,7 @@ __metadata:
     react: "npm:^18"
     react-chartjs-2: "npm:^5.2.0"
     react-dom: "npm:^18"
-    react-i18next: "npm:^14.0.0"
+    react-i18next: "npm:^14.0.1"
     react-icons: "npm:^5.0.1"
     react-intersection-observer: "npm:^9.5.3"
     react-qr-reader: "npm:^3.0.0-beta-1"
@@ -7646,6 +7658,24 @@ __metadata:
   version: 0.6.3
   resolution: "negotiator@npm:0.6.3"
   checksum: 3ec9fd413e7bf071c937ae60d572bc67155262068ed522cf4b3be5edbe6ddf67d095ec03a3a14ebf8fc8e95f8e1d61be4869db0dbb0de696f6b837358bd43fc2
+  languageName: node
+  linkType: hard
+
+"next-i18next@npm:^15.2.0":
+  version: 15.2.0
+  resolution: "next-i18next@npm:15.2.0"
+  dependencies:
+    "@babel/runtime": "npm:^7.23.2"
+    "@types/hoist-non-react-statics": "npm:^3.3.4"
+    core-js: "npm:^3"
+    hoist-non-react-statics: "npm:^3.3.2"
+    i18next-fs-backend: "npm:^2.3.1"
+  peerDependencies:
+    i18next: ">= 23.7.13"
+    next: ">= 12.0.0"
+    react: ">= 17.0.2"
+    react-i18next: ">= 13.5.0"
+  checksum: 6b0c6dd00873e66b865085cc75c8da75ab94a6521e70846ef1274561ba2a249b3f0de2630920e97a4f8a280545d0175b3fd4a1213c42309f6086568906f30268
   languageName: node
   linkType: hard
 
@@ -8390,8 +8420,8 @@ __metadata:
   linkType: hard
 
 "react-i18next@npm:^14.0.0":
-  version: 14.0.1
-  resolution: "react-i18next@npm:14.0.1"
+  version: 14.0.0
+  resolution: "react-i18next@npm:14.0.0"
   dependencies:
     "@babel/runtime": "npm:^7.22.5"
     html-parse-stringify: "npm:^3.0.1"

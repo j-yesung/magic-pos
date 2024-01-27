@@ -8,7 +8,7 @@ import { OrderDataWithStoreName } from '@/types/supabase';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styles from './styles/ReceiptContainer.module.css';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 const ReceiptContainer = () => {
   const orderIdList = useKioskState(state => state.orderIdList);

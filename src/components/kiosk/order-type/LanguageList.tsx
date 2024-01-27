@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useRef } from 'react';
 import styles from './styles/LanguageList.module.css';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import { FaCheck } from 'react-icons/fa6';
 import { setSelectedLanguage, useKioskState } from '@/shared/store/kiosk';
 import { useRouter } from 'next/router';

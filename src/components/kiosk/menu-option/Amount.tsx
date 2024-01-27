@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import styles from './styles/Amount.module.css';
 import useKioskState, { addAmount, resetAmount, subtractAmount } from '@/shared/store/kiosk';
 import { FaMinus, FaPlus } from 'react-icons/fa6';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 const Amount = () => {
   const amount = useKioskState(state => state.amount);

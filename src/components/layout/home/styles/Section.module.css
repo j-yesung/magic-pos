@@ -1,6 +1,6 @@
 /* 키오스크 */
 .kiosk-box {
-  gap: 30rem;
+  /* gap: 30rem; */
   width: 100%;
   margin-top: 40rem;
   display: flex;
@@ -16,19 +16,27 @@
   display: flex;
   position: sticky;
 }
+.iphone-box {
+  filter: drop-shadow(rgba(47, 47, 47, 0.34) 0px 28px 40px);
+}
 .title-box {
-  gap: 10rem;
-  width: 50rem;
-  height: 100%;
+  gap: 7rem;
+  width: 60em;
+  height: 70%;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  justify-content: center;
+  align-items: flex-start;
   flex-direction: column;
 }
 /* 메인 제목 */
 .title-box .t1 {
+  background: linear-gradient(to right, var(--main-color), #ffa800);
   font-size: 7rem;
   font-weight: 700;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
 }
 /* 설명 */
 .sub-title {
@@ -147,4 +155,30 @@
   100% {
     opacity: 1;
   }
+}
+
+/*  */
+.sales-shot-box {
+  gap: 6rem;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sales-shot-box .first-section {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+.sales-shot-box .second-section {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.sales-shot-box svg {
+  width: 100%;
+  height: 80rem;
 }

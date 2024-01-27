@@ -2,9 +2,11 @@ import { useNumberOrderFetchQuery } from '@/hooks/query/order/useNumberOrderFetc
 import { useStoreOrderFetchQuery } from '@/hooks/query/order/useStoreOrderFetchQuery';
 import { useFetchQuery } from '@/hooks/query/store/useFetchQuery';
 import useFetchTable from '@/hooks/table/useFetchTable';
-import { isEmptyObject } from '@/shared/helper';
-import { CategoryWithMenuItemWithStore, MenuItemWithOption } from '@/types/supabase';
+import { MenuItemWithOption } from '@/types/supabase';
 import { useEffect, useState } from 'react';
+import { CategoryWithMenuItemWithStore } from '@/types/supabase';
+import { isEmptyObject } from '@/shared/helper';
+import { useTranslation } from 'next-i18next';
 
 export const useIsOrderAllReady = (orderIdList: string[], storeId: string) => {
   // numberOrderData: 번호표 주문 (포장, 테이블 번호가 없는 매장 주문)
@@ -49,13 +51,10 @@ export const useIsValidURL = ({ tableId, storeId }: { tableId?: string; storeId?
         setIsValidURL(false);
       }
     }
-  }, [tableInfo]);
-
-  useEffect(() => {
     if (!isStoreFetching && !storeInfo) {
       setIsValidURL(false);
     }
-  }, [storeInfo]);
+  }, [isTableFetching, isStoreFetching]);
 
   return isValidURL;
 };
@@ -74,4 +73,40 @@ export const useGetOptionText = () => {
   };
 
   return { getOptionList };
+};
+
+export const useMakeMenuData = () => {
+  const { t } = useTranslation();
+
+  const makeMenuData = (menuData: CategoryWithMenuItemWithStore[], storeId: string) => {
+    if (isEmptyObject(menuData)) return [];
+    const menuList = [];
+
+    // TODO: 에러 처리
+    if (isEmptyObject(menuData)) console.error('something wrong');
+    else {
+      const recommendedList = menuData
+        .map(menu => menu.menu_item)
+        .flat()
+        .filter(menu => menu.recommended);
+
+      // 추천 메뉴가 있을시 추천 메뉴 추가
+      if (recommendedList.length > 0) {
+        menuList.push({
+          id: 'recommended',
+          name: t('recommended'),
+          position: 0,
+          store: menuData[0].store,
+          store_id: storeId,
+          menu_item: recommendedList,
+        });
+      }
+
+      menuList.push(...menuData);
+    }
+
+    return menuList;
+  };
+
+  return makeMenuData;
 };

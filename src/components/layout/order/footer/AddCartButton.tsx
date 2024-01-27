@@ -5,7 +5,7 @@ import { useModal } from '@/hooks/service/ui/useModal';
 import CartAlertModal from '@/components/kiosk/cart/CartAlertModal';
 import { convertNumberToWon } from '@/shared/helper';
 import { BiSolidCircle } from 'react-icons/bi';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 /**
  * 옵션, 수량 등을 정한 뒤 장바구니(orderList)에 담는다.
