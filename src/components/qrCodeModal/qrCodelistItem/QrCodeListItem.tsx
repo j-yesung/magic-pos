@@ -24,7 +24,7 @@ const QrCodeListItem = ({ storeTable, orderType }: propsType) => {
     ? `${process.env.NEXT_PUBLIC_SUPACE_REDIRECT_TO}/kiosk/${storeId}/${storeTable.id}`
     : `${process.env.NEXT_PUBLIC_SUPACE_REDIRECT_TO}/kiosk/${storeId}`;
   const { setQrData, qrData } = useManagementStore();
-  const { mutate } = useQRCodeDownLoad();
+  const { oneMutate } = useQRCodeDownLoad();
   const clickQrDownLoadHandler = () => {
     setIsQrClick(true);
   };
@@ -42,12 +42,10 @@ const QrCodeListItem = ({ storeTable, orderType }: propsType) => {
   }, [QRImage, qrUrl, storeId]);
   useEffect(() => {
     if (isQrClick) {
-      mutate([
-        {
-          qrRef: QRImage.current[0],
-          orderType,
-        },
-      ]);
+      oneMutate({
+        qrRef: QRImage.current[0],
+        orderType,
+      });
     }
     setIsQrClick(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
