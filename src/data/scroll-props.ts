@@ -1,4 +1,4 @@
-import { MenuShot, SelectShot, StartShot } from './module-export';
+import { Menu, SelectShot, StartShot } from './screenshot-export';
 
 export const SCROLL_THRESHOLDS = [1200, 1900, 2600];
 export const MAIN_TITLES = ['편리함의 시작', '한 눈의 보는 메뉴', '다양한 옵션 선택까지'];
@@ -13,4 +13,4 @@ export const SECOND_CAPTIONS = [
   '번거롭게 말 할 필요 없이 몇 번의 터치 주문 완료!',
 ];
 
-export const iphones = [StartShot, MenuShot, SelectShot];
+export const iphones = [StartShot, Menu, SelectShot];
