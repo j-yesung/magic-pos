@@ -3,6 +3,7 @@
   align-items: flex-start;
   gap: 1.1rem;
   font-size: 1.4rem;
+  z-index: var(--level-1-z-index);
 }
 .date-button {
   display: flex;

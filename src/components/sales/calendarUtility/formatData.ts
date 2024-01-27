@@ -8,17 +8,12 @@ type OrderType = 'togo' | 'store';
 type FormatCalendarReturnType = (
   data: Map<string, Tables<'sales'>[]>,
 ) => { sales: number; date: string; to_go: IsTakeOutType[] | null; store: IsTakeOutType[] | null }[];
-type SortMinMaxDataReturnType = <T extends CalendarDataType>(target: CalendarDataType[]) => CalendarDataType[];
+
+type SortMinMaxDataReturnType = (target: CalendarDataType[]) => CalendarDataType[];
+
 type FormatDateParamType = 'YYYY-MM-DD' | 'YYYY년 MM월' | 'YYYY-MM';
 
 type SalesCommonType = TablesInsert<'sales'> & { moment?: Moment; original_date: Moment };
-
-// value를 순회하면서 order_type 이 takeout 인지 매장 인지
-// 2개의 객체 배열로 나눈다음에
-// 각각의 객체 배열을 새로운 객체 배열로 만들어 줘야 합니다.
-// 객체 배열안에 있는 객체의 key값에 있는 product_name을 가지고 객체 배열을 순회하면서 product_name이 같으면 그 해당 객체에 product_ea를 + , product_price 도 +를 해주고
-
-// product_name이 같지 않으면 새로운 객체를 만들어줘야합니다.
 
 export const formatToCalendarData: FormatCalendarReturnType = data => {
   const refinedData = [...data.entries()].map(([key, value]) => {
@@ -33,7 +28,6 @@ export const formatToCalendarData: FormatCalendarReturnType = data => {
   return refinedData;
 };
 
-// order_type 은
 const sortedMainIsTogo = (main: Tables<'sales'>[], order_type: OrderType) => {
   const sortedMainData = main.filter(order => order.order_type === order_type);
 
