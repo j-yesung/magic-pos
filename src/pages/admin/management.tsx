@@ -1,6 +1,7 @@
 import AdminLayout from '@/components/layout/admin/AdminLayout';
 import Management from '@/components/management/Management';
 import Head from 'next/head';
+import { ReactNode } from 'react';
 
 const ManagementPage = () => {
   return (
