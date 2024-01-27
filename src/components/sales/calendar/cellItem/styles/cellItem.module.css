@@ -161,6 +161,10 @@
   font-size: 1.8rem;
 }
 
+.sales-have {
+  cursor: pointer;
+}
+
 .sales-none {
   position: relative;
   opacity: 0.4;

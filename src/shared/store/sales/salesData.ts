@@ -1,6 +1,7 @@
+import { CalendarDataType } from '@/types/sales';
 import { create } from 'zustand';
 interface DataStore {
-  calendarBindingData: { sales: number; date: string; min?: boolean; max?: boolean }[];
+  calendarBindingData: CalendarDataType[];
   salesSum: number | null;
 }
 const useSalesDataState = create<DataStore>()(() => ({
@@ -8,7 +9,7 @@ const useSalesDataState = create<DataStore>()(() => ({
   salesSum: null,
 }));
 
-export const setCalendarBindingData = (data: { sales: number; date: string; min?: boolean; max?: boolean }[]) =>
+export const setCalendarBindingData = (data: CalendarDataType[]) =>
   useSalesDataState.setState(state => ({
     ...state,
     calendarBindingData: data,
