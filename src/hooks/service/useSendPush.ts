@@ -3,8 +3,8 @@ import axios from 'axios';
 interface Message {
   title: string;
   body: string;
-  token: string;
   click_action: string;
+  token: string;
 }
 
 const useSendPush = () => {
@@ -15,9 +15,9 @@ const useSendPush = () => {
         title,
         body,
         image: '/public/icons/manifest/icon-192x192.png',
-        token,
         click_action,
       },
+      token,
     };
 
     axios.request({
