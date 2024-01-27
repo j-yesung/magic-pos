@@ -18,6 +18,7 @@ import { useRouter } from 'next/router';
 import { ReactNode, useEffect, useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/virtual';
+import { translateMenuData } from '@/server/service/translate';
 
 interface OrderIndexPageProps {
   menuData: CategoryWithMenuItemWithStore[];
@@ -29,7 +30,7 @@ const OrderIndexPage = ({ menuData, storeId, tableId }: OrderIndexPageProps) => 
   const orderIdList = useKioskState(state => state.orderIdList);
   const prevStoreId = useKioskState(state => state.storeId);
   const [isLoaded, setIsLoaded] = useState(false);
-  const isInvalidURL = useIsValidURL({ storeId, tableId });
+  const isValidURL = useIsValidURL({ storeId, tableId });
   const isOrderAllReady = useIsOrderAllReady(orderIdList, storeId);
   const { MagicModal } = useModal();
   const router = useRouter();
@@ -82,9 +83,9 @@ const OrderIndexPage = ({ menuData, storeId, tableId }: OrderIndexPageProps) => 
 
   return (
     <>
-      {isInvalidURL && isLoaded && <KioskContainer />}
+      {isValidURL && isLoaded && <KioskContainer />}
       {/* TODO: 유효 하지 않은 가게 디자인 */}
-      {!isInvalidURL && isLoaded && <div>유효 하지 않은 가게입니다.</div>}
+      {!isValidURL && isLoaded && <div>유효 하지 않은 가게입니다.</div>}
     </>
   );
 };
@@ -95,11 +96,11 @@ export default OrderIndexPage;
 
 export const getServerSideProps: GetServerSideProps = async context => {
   const { storeId, tableId = null, lang = 'ko' } = context.query;
-  const { data: menuData } = await fetchCategoriesWithMenuItemByStoreId((storeId || '').toString());
+  let { data: menuData } = await fetchCategoriesWithMenuItemByStoreId((storeId || '').toString());
 
-  // if (storeId && lang !== 'ko') {
-  //   menuData = await translateMenuData(menuData, lang.toString(), storeId.toString());
-  // }
+  if (storeId && lang !== 'ko') {
+    menuData = await translateMenuData(menuData, lang.toString(), storeId.toString());
+  }
 
   return {
     props: {

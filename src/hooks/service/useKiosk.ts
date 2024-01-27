@@ -49,13 +49,11 @@ export const useIsValidURL = ({ tableId, storeId }: { tableId?: string; storeId?
         setIsValidURL(false);
       }
     }
-  }, [tableInfo]);
 
-  useEffect(() => {
     if (!isStoreFetching && !storeInfo) {
       setIsValidURL(false);
     }
-  }, [storeInfo]);
+  }, [tableInfo, storeInfo]);
 
   return isValidURL;
 };
