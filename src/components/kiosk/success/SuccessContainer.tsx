@@ -103,6 +103,8 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
       getTokenHandler().then(res => {
         if (res) {
           addUserToken({ order_id: payment.orderId, token: res });
+        } else {
+          console.error('토큰 발급에 실패하였습니다.');
         }
       });
 

@@ -1,6 +1,8 @@
 import React from 'react';
 import QrReaderContainer from '@/components/kiosk/index/QrReaderContainer';
 import styles from './styles/IndexPageContainer.module.css';
+import Logo from '/public/logo.svg';
+import { IoCameraOutline } from 'react-icons/io5';
 
 const IndexPageContainer = () => {
   const handler = async () => {
@@ -16,11 +18,19 @@ const IndexPageContainer = () => {
 
   return (
     <div className={styles.container}>
-      <h1>MAGIC POS</h1>
-      <button onClick={handler}>QR 코드 찍기</button>
-      <div>
-        <QrReaderContainer />
+      <header>
+        <Logo />
+      </header>
+      <div className={styles.description1} onClick={handler}>
+        <div>
+          <div className={styles.camera}>
+            <IoCameraOutline size={32} />
+          </div>
+        </div>
+        <p>QR코드를 촬영해 주세요</p>
       </div>
+      <QrReaderContainer />
+      <p className={styles.description2}>화면 안에 QR코드가 전부 들어오도록 촬영해 주세요.</p>
     </div>
   );
 };

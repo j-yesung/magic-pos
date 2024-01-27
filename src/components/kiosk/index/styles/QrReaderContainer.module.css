@@ -5,7 +5,7 @@
 }
 
 .qr-reader {
-    width: 30rem;
+    width: 100vw;
     height: 30rem;
-    border: 3px solid red;
+    background: rgba(0, 0, 0, 0.70);
 }
