@@ -16,6 +16,7 @@ const TableEditModalButtonBox = ({ modalId }: { modalId: string }) => {
   const client = useQueryClient();
   const data = client.getQueryData<StoreWithStoreTable[]>(['table', session?.user.id]);
   const storeData = data?.[0]?.store_table;
+  const tableIdInOrderStore = data?.[0]?.order_store.map(order => order.table_id);
   const tableData = storeData?.filter(x => x.id === tableId);
   const { toast } = useToast();
 
@@ -29,6 +30,13 @@ const TableEditModalButtonBox = ({ modalId }: { modalId: string }) => {
     if (tableData) {
       if (tableData?.[0]?.is_disabled === isDisabled && tableData?.[0]?.max_guest === maxGuest) {
         toast('수정사항이 없습니다', {
+          type: 'danger',
+          position: 'top-center',
+          showCloseButton: false,
+          autoClose: 2000,
+        });
+      } else if (tableId && tableIdInOrderStore?.includes(tableId)) {
+        toast('주문내역이 있는 테이블은 수정할 수 없습니다', {
           type: 'danger',
           position: 'top-center',
           showCloseButton: false,
