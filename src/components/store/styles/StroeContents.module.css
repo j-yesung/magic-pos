@@ -53,9 +53,10 @@
   color: var(--text1);
 }
 .wrapper .button-blank-area {
-  background: var(--point1-80);
   margin-left: 2rem;
+  color: var(--white);
   padding: 1.5rem 4rem;
+  background: var(--point1-80);
 }
 
 .time-caption {
