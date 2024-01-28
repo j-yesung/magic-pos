@@ -161,7 +161,8 @@
 
 /*  */
 .sales-shot-box {
-  gap: 6rem;
+  gap: 3rem;
+  padding: 5rem;
   height: 100vh;
   display: flex;
   align-items: center;
