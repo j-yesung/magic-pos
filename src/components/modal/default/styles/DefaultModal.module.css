@@ -8,8 +8,8 @@
     align-items: center;
     gap: 2rem;
 
-    @media screen and (max-width: 76.8rem) {
-        width: 90vw;
+    @media screen and (max-width: 960px) {
+        width: 50rem;
     }
 }
 
