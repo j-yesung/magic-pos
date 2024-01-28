@@ -4532,6 +4532,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chardet@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "chardet@npm:2.0.0"
+  checksum: e4d302e6116bf421d8dd0eaac09b5b3f9d88c17d9540f81ccde40e586c2a868c8a67a0dd4b1fe702f5ad63580623832884f65c43b9dffb6814e45eb005e26215
+  languageName: node
+  linkType: hard
+
 "chart.js@npm:^4.4.1":
   version: 4.4.1
   resolution: "chart.js@npm:4.4.1"
@@ -7608,6 +7615,7 @@ __metadata:
     nanoid: "npm:^5.0.4"
     next: "npm:14.0.4"
     next-pwa: "npm:^5.6.0"
+    open-graph-scraper: "npm:^6.3.3"
     postcss: "npm:^8"
     prettier: "npm:^3.2.2"
     qrcode.react: "npm:^3.1.0"
@@ -8252,6 +8260,18 @@ __metadata:
   dependencies:
     wrappy: "npm:1"
   checksum: 5d48aca287dfefabd756621c5dfce5c91a549a93e9fdb7b8246bc4c4790aa2ec17b34a260530474635147aeb631a2dcc8b32c613df0675f96041cbb8244517d0
+  languageName: node
+  linkType: hard
+
+"open-graph-scraper@npm:^6.3.3":
+  version: 6.3.3
+  resolution: "open-graph-scraper@npm:6.3.3"
+  dependencies:
+    chardet: "npm:^2.0.0"
+    cheerio: "npm:^1.0.0-rc.12"
+    undici: "npm:^6.4.0"
+    validator: "npm:^13.11.0"
+  checksum: 461d34308c7ceb9197292a0e77efab28642ea0b45838aab135cdf60b382deca4d3d18ee3ec0f5673432fb093db9640903a5b22cf5414bf26261faff1357276d2
   languageName: node
   linkType: hard
 
@@ -9905,6 +9925,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"undici@npm:^6.4.0":
+  version: 6.5.0
+  resolution: "undici@npm:6.5.0"
+  dependencies:
+    "@fastify/busboy": "npm:^2.0.0"
+  checksum: e8cbac03167276bfb6eddf1f381b71e73ba7dc6575a99f9ac2820f39570db3998ec8ca0f117ed420bfd9dfc4f1fb7d9bf0d1b66fbbfee0ef803ab62da2f57522
+  languageName: node
+  linkType: hard
+
 "unicode-canonical-property-names-ecmascript@npm:^2.0.0":
   version: 2.0.0
   resolution: "unicode-canonical-property-names-ecmascript@npm:2.0.0"
@@ -10052,6 +10081,13 @@ __metadata:
   bin:
     uuid: dist/bin/uuid
   checksum: 1607dd32ac7fc22f2d8f77051e6a64845c9bce5cd3dd8aa0070c074ec73e666a1f63c7b4e0f4bf2bc8b9d59dc85a15e17807446d9d2b17c8485fbc2147b27f9b
+  languageName: node
+  linkType: hard
+
+"validator@npm:^13.11.0":
+  version: 13.11.0
+  resolution: "validator@npm:13.11.0"
+  checksum: 0107da3add5a4ebc6391dac103c55f6d8ed055bbcc29a4c9cbf89eacfc39ba102a5618c470bdc33c6487d30847771a892134a8c791f06ef0962dd4b7a60ae0f5
   languageName: node
   linkType: hard
 
