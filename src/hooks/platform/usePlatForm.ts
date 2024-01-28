@@ -18,21 +18,36 @@ import usePlatFormState, {
   setAddDataToFetchPlatForm,
   setFetchPlatFormData,
   setIsRegist,
+  setIsValidUrl,
 } from '@/shared/store/platform';
 import { AddPlatFormType, EditPlatFormType } from '@/types/platform';
 import { TablesInsert } from '@/types/supabase';
 import moment from 'moment';
 import { FormEvent } from 'react';
 const SUPABASE_STORAGE_URL = 'https://lajnysuklrkrhdyqhotr.supabase.co';
+const HTTPS = 'https://';
 const usePlatForm = () => {
   const { addPlatForm, editPlatForm, prevData, prevImg, store_id, meta } = usePlatFormState();
+
+  // 링크 유효성 검사
+  const checkValidUrl = (url: string) => {
+    const regUrl = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+    return regUrl.test(url);
+  };
 
   const submitAddCard = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // image 경로로 사용하기 위해 createdAt를 넣었습니다.
     let updateData: AddPlatFormType = { ...addPlatForm, createdAt: moment().toISOString() };
+    if (!addPlatForm.link_url.includes('https://')) addPlatForm.link_url = HTTPS + addPlatForm.link_url;
+    const isValidUrl = checkValidUrl(addPlatForm.link_url);
 
+    if (!isValidUrl) {
+      setIsValidUrl(false);
+      e.currentTarget['link_url'].value = '';
+      return;
+    }
     /**useModal 사용하기 */
     if (!addPlatForm.name.trim() || !addPlatForm.link_url.trim()) return alert('써라');
     if (meta) {

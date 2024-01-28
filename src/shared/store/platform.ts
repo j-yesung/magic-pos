@@ -15,6 +15,7 @@ interface PlatformStore {
   fetchPlatFormData: Tables<'platform'>[];
   prevImg: string | null;
   meta: boolean;
+  isValidUrl: boolean;
 }
 
 interface PrevDataType {
@@ -70,6 +71,7 @@ const usePlatFormState = create<PlatformStore>()(() => ({
   fetchPlatFormData: initialFetchPlatForm,
   prevImg: initialPrevImg,
   meta: initialMeta,
+  isValidUrl: true,
 }));
 
 export default usePlatFormState;
@@ -102,6 +104,12 @@ export const setPlatFormStoreId = (store_id: string) =>
     },
   }));
 
+export const setIsValidUrl = (param: boolean) =>
+  usePlatFormState.setState(state => ({
+    ...state,
+    isValidUrl: param,
+  }));
+
 /**
  *
  * @param e AddForm
@@ -126,6 +134,7 @@ export const setAddPlatForm = debounce(async (e: ChangeEvent<HTMLInputElement>) 
       resetPrevImg();
     }
   }
+  if (!usePlatFormState.getState().isValidUrl) setIsValidUrl(true);
   usePlatFormState.setState(state => ({
     ...state,
     addPlatForm: { ...state.addPlatForm, [name]: value },
@@ -154,6 +163,7 @@ export const setEditPlatForm = debounce(async (e: ChangeEvent<HTMLInputElement>)
       resetPrevImg();
     }
   }
+
   usePlatFormState.setState(state => ({
     ...state,
     editPlatForm: { ...state.editPlatForm, [name]: value },
@@ -289,4 +299,10 @@ export const resetMeta = () =>
       metaImage: null,
     },
     meta: initialMeta,
+  }));
+
+export const resetIsValidUrl = () =>
+  usePlatFormState.setState(state => ({
+    ...state,
+    isValidUrl: true,
   }));
