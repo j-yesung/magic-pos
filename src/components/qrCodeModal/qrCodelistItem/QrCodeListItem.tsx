@@ -59,7 +59,13 @@ const QrCodeListItem = ({ storeTable, orderType }: propsType) => {
     >
       <div className={clsx(styles['qr-code'], isQrClick && styles['active'], !storeTable && styles['order-type-togo'])}>
         {storeTable && <div className={styles['table-number']}>{storeTable.position}번 테이블</div>}
-        <div className={clsx(styles['qr-print-icon'], !storeTable && styles['order-type-togo'])}>
+        <div
+          className={clsx(
+            styles['qr-print-icon'],
+            !storeTable && styles['order-type-togo'],
+            isQrClick && styles['active'],
+          )}
+        >
           <IoPrintOutline />
           <span>출력하기</span>
         </div>

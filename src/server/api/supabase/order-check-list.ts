@@ -20,8 +20,9 @@ export const fetchOrderCheckList = async (pageParam: number, id?: string) => {
     if (numberError) throw new Error(numberError.message);
 
     const resultData =  [...order_store, ...order_number]
-    .sort((a, b) => a && b && a.order_time < b.order_time ? 1 : -1)
-    .sort((a, b) => a && b && a.is_done === b.is_done ? 0 : a.is_done? 1 : -1)
+      .sort((a, b) => a && b && a.order_time < b.order_time ? 1 : -1)
+      .sort((a, b) => a && b && a.is_done === b.is_done ? 0 : a.is_done? 1 : -1)
+      
     return resultData;
   }
 };
