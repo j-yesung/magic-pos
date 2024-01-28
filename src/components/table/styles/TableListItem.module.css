@@ -55,7 +55,7 @@ div.edit-button {
   cursor: pointer;
 }
 .edit-button-svg > path {
-  stroke: var(point-80);
+  stroke: var(--point-80);
 }
 
 .table-list-item:hover > div.close-button {
@@ -65,6 +65,12 @@ div.edit-button {
 .table-list-item:hover > div.edit-button {
   opacity: 100;
   visibility: visible;
+}
+.edit-button-svg:hover {
+  background-color: var(--point-80);
+}
+.edit-button-svg:hover > path {
+  stroke: #fff;
 }
 
 
