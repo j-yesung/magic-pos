@@ -49,30 +49,77 @@
 /* 매출 분석 */
 .sales-shot-box {
   gap: 3rem;
+  width: 100%;
   padding: 5rem;
   height: 100vh;
   display: flex;
-  align-items: center;
   justify-content: center;
 }
-.sales-shot-box .first-section {
-  width: 100%;
-  height: 100%;
+.sales-shot-box .image-section {
+  width: 90rem;
   display: flex;
   justify-content: center;
 }
-.sales-shot-box .second-section {
-  width: 100%;
-  height: 100%;
+.image-container {
+  gap: 2rem;
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  padding: 4rem;
+  border-radius: 6rem;
+  flex-direction: column;
+  background: var(--bg-g);
 }
-.sales-shot-box svg {
-  width: 100%;
-  height: 80rem;
+.image-container h1 {
+  font-size: 3rem;
+  font-weight: 500;
 }
-
+.image-container .desc {
+  gap: 0.5rem;
+  display: flex;
+  font-weight: 300;
+  font-size: 1.6rem;
+  padding-bottom: 1rem;
+  flex-direction: column;
+}
+.sales-shot-box img {
+  height: 53rem;
+  max-width: 100%;
+  border-radius: 2rem;
+}
+.empty {
+  padding-top: 20rem;
+}
+@media (max-width: 1880px) {
+  .image-section {
+    width: 70rem;
+  }
+  .sales-shot-box img {
+    height: 33rem;
+    max-width: 100%;
+    border-radius: 2rem;
+  }
+}
+/* PC , 테블릿 가로 (해상도 768px ~ 1023px)*/
+@media all and (min-width: 768px) and (max-width: 1023px) {
+  .image-section {
+    width: 70rem;
+  }
+  .sales-shot-box img {
+    height: 33rem;
+    max-width: 100%;
+    border-radius: 2rem;
+  }
+}
+/* 테블릿 세로 (해상도 768px ~ 1023px)*/
+@media all and (min-width: 768px) and (max-width: 1023px) {
+  .image-section {
+    width: 70rem;
+  }
+  .sales-shot-box img {
+    height: 33rem;
+    max-width: 100%;
+    border-radius: 2rem;
+  }
+}
 /* 관리자 */
 .admin-box {
   position: relative;
@@ -94,7 +141,6 @@
 
 /* swiper */
 .swiper-wrapper {
-  width: 1900px;
   height: 100%;
   display: flex;
   align-items: flex-end;
@@ -128,6 +174,7 @@
   flex-direction: column;
 }
 .info-title {
+  /* width: 75rem; */
   padding-top: 3rem;
   font-size: 5rem;
   font-weight: 300;
