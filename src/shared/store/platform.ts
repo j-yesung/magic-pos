@@ -1,6 +1,7 @@
 import { getOpenGraphMetaImage } from '@/server/api/external/openGraph';
 import { AddPlatFormType, EditPlatFormType } from '@/types/platform';
 import { Tables } from '@/types/supabase';
+import { debounce } from 'lodash';
 import { ChangeEvent } from 'react';
 import { create } from 'zustand';
 
@@ -40,6 +41,7 @@ const initialEditPlatForm = {
   image_url: null,
   file: null,
   store_id: null,
+  metaImage: null,
 };
 
 const initialPrevData = {
@@ -49,6 +51,7 @@ const initialPrevData = {
   image_url: null,
   file: null,
   store_id: null,
+  metaImage: null,
 };
 
 const initialPrevImg = null;
@@ -103,11 +106,10 @@ export const setPlatFormStoreId = (store_id: string) =>
  *
  * @param e AddForm
  */
-export const setAddPlatForm = async (e: ChangeEvent<HTMLInputElement>) => {
+export const setAddPlatForm = debounce(async (e: ChangeEvent<HTMLInputElement>) => {
   const { name, value } = e.target;
-  if (name === 'link_url' && !usePlatFormState.getState().meta) {
+  if (name === 'link_url') {
     const metaImage = await getOpenGraphMetaImage(value);
-    setPrevImg(metaImage);
 
     if (metaImage) {
       usePlatFormState.setState(state => ({
@@ -118,28 +120,46 @@ export const setAddPlatForm = async (e: ChangeEvent<HTMLInputElement>) => {
         },
       }));
       setMeta(true);
+      setPrevImg(metaImage);
+    } else {
+      setMeta(false);
+      resetPrevImg();
     }
   }
   usePlatFormState.setState(state => ({
     ...state,
     addPlatForm: { ...state.addPlatForm, [name]: value },
   }));
-};
+}, 500);
 
 /**
  *  수정할 데이터
  */
-export const setEditPlatForm = async (e: ChangeEvent<HTMLInputElement>) => {
+export const setEditPlatForm = debounce(async (e: ChangeEvent<HTMLInputElement>) => {
   const { name, value } = e.target;
-  if (name === 'link_url' && !usePlatFormState.getState().prevImg) {
-    const prevImage = await getOpenGraphMetaImage(value);
-    setPrevImg(prevImage);
+  if (name === 'link_url') {
+    const metaImage = await getOpenGraphMetaImage(value);
+
+    if (metaImage) {
+      usePlatFormState.setState(state => ({
+        ...state,
+        editPlatForm: {
+          ...state.editPlatForm,
+          metaImage,
+        },
+      }));
+      setMeta(true);
+      setPrevImg(metaImage);
+    } else {
+      setMeta(false);
+      resetPrevImg();
+    }
   }
   usePlatFormState.setState(state => ({
     ...state,
     editPlatForm: { ...state.editPlatForm, [name]: value },
   }));
-};
+}, 500);
 
 /**
  *

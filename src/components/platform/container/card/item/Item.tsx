@@ -1,4 +1,4 @@
-import { setIsEdit, setIsRegist, setPrevData } from '@/shared/store/platform';
+import usePlatFormState, { setIsEdit, setIsRegist, setPrevData } from '@/shared/store/platform';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRef } from 'react';
@@ -15,7 +15,7 @@ interface ItemProps {
 const Item = ({ link, title, id, imgUrl }: ItemProps) => {
   const editRef = useRef<HTMLButtonElement>(null);
   const linkRef = useRef<HTMLDivElement>(null);
-
+  const store_id = usePlatFormState(state => state.store_id);
   const mouseEnterShowEditButton = () => {
     if (editRef.current && linkRef.current) {
       linkRef.current.style.display = 'flex';
@@ -35,6 +35,7 @@ const Item = ({ link, title, id, imgUrl }: ItemProps) => {
       link_url: link,
       name: title,
       image_url: imgUrl ?? null,
+      store_id,
     });
     setIsRegist(true);
     setIsEdit(true);

@@ -17,4 +17,5 @@ export interface EditPlatFormType {
   image_url?: string | null;
   file?: File | null;
   createdAt?: string;
+  metaImage?: string | null;
 }
