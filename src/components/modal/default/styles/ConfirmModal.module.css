@@ -8,7 +8,7 @@
     align-items: flex-end;
 
     @media screen and (min-width: 960px) {
-        width: 90vw;
+        width: 50rem;
     }
 }
 
