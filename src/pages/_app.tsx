@@ -19,7 +19,7 @@ import { makeTitle } from '@/shared/helper';
 const DESCRIPTION =
   'Magic POS는 가게와 고객 간 손쉬운 주문 및 결제를 위한 혁신적인 솔루션입니다. 사장님은 주문, 매출 관리등을 웹에서 간편하게 수행하며, 사용자는 직관적이고 빠른 주문 체험을 즐길 수 있습니다. 비즈니스 생산성과 소비자 만족도를 높이는 효과적인 어플리케이션 입니다!';
 const IMAGE =
-  'https://opengraph.b-cdn.net/production/documents/3a4e44d2-127e-4b7d-9c73-a8d7979179e1.svg?token=Nkw6igTCSzK5jA0sAxRXGb8iN-LlZlMm2i0dSr-_-jk&height=630&width=1200&expires=33242457699';
+  'https://opengraph.b-cdn.net/production/documents/4ecb8af4-b67b-42d0-b26a-0593317a1b02.png?token=7lAsUrvnBE60f81lzRzHhcBAlmUMCCZnGK946vcl2o0&height=630&width=1200&expires=33242459263';
 const URL = 'https://magic-pos.com/';
 const TITLE = 'Magic POS - 웹기반 POS & KIOSK 솔루션';
 
