@@ -1,22 +1,77 @@
 .wrapper {
   width: 100%;
   height: 100%;
-  padding: 2rem;
+  padding: 3rem 2rem;
+}
+.top {
+  display: flex;
+  align-items: center;
+  padding-bottom: 1.5rem;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+}
+.top h1 {
+  font-weight: 500;
+  font-size: 1.8rem;
+}
+.io-close {
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
 }
 .form-box {
   gap: 2rem;
   width: 50rem;
-  height: 30rem;
+  height: 100%;
   display: flex;
-  align-items: center;
+  padding-top: 3rem;
   flex-direction: column;
-  justify-content: center;
 }
-
 .input-box {
   gap: 1rem;
   width: 100%;
   display: flex;
-  align-items: center;
-  flex-direction: row;
+  flex-direction: column;
+}
+.input-box label {
+  font-size: 1.6rem;
+}
+.input-box input {
+  border: none;
+  padding: 2rem;
+  border-radius: 1rem;
+  background: var(--white);
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.1);
+}
+.input-box input:focus {
+  outline: none;
+}
+.input-box textarea {
+  resize: none;
+  border: none;
+  height: 15rem;
+  outline: none;
+  padding: 2rem;
+  border-radius: 1rem;
+  background: var(--white);
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.1);
+}
+.input-box textarea:focus {
+  outline: none;
+}
+.button-box {
+  gap: 1.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.button-box .close {
+  width: 100%;
+  background: var(--bg-g);
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.1);
+}
+.button-box .send {
+  width: 100%;
+  color: var(--white);
+  box-shadow: 0 0 1rem 0 rgba(68, 9, 194, 0.1);
 }

@@ -221,6 +221,22 @@
   cursor: pointer;
   background: none;
 }
+.qr-download {
+  gap: 1rem;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding: 5rem 0 3rem 0;
+  border-bottom: 2px solid var(--line);
+}
+.qr-download span {
+  font-size: 2rem;
+  font-weight: 600;
+}
+.qr-download:hover {
+  cursor: pointer;
+  color: var(--point-100);
+}
 
 /* @media-query */
 @media screen and (max-width: 1520px) {
