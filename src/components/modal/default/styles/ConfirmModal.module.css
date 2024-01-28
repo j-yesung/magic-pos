@@ -2,12 +2,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    width: 50rem;
+    width: 85vw;
     height: fit-content;
     padding: 2rem;
     align-items: flex-end;
 
-    @media screen and (min-width: 96rem) {
+    @media screen and (min-width: 960px) {
         width: 90vw;
     }
 }

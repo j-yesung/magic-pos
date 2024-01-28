@@ -8,12 +8,13 @@ import useKioskState, { ORDER_STEP, addOrderId, getTotalPrice, setOrderNumber, s
 import { Tables, TablesInsert } from '@/types/supabase';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { IoBagCheckOutline } from 'react-icons/io5';
 import MenuHeader from '../common/MenuHeader';
 import styles from './styles/SuccessContainer.module.css';
 import { useTranslation } from 'next-i18next';
 import { getTokenHandler } from '@/shared/firebase';
 import { useUserTokenSetQuery } from '@/hooks/query/user-token/useUserTokenSetQuery';
+import Success from '/public/icons/order-success.svg';
+import { motion } from 'framer-motion';
 
 const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const orderList = useKioskState(state => state.orderList);
@@ -23,6 +24,7 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const orderNumber = useKioskState(state => state.orderNumber);
   const orderType = useKioskState(state => state.orderType);
   const selectedLanguage = useKioskState(state => state.selectedLanguage);
+  const orderIdList = useKioskState(state => state.orderIdList);
 
   const { addSales } = useSalesQuery();
   const { addStoreOrder } = useStoreOrderSetQuery();
@@ -49,6 +51,7 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
         return;
       }
 
+      if (orderIdList.includes(payment.orderId)) return;
       // 결제 승인시 sales테이블에 담아놓은 orderList 데이터를 insert 한다.
       const group = groupByKey<Tables<'menu_item'>>(orderList, 'id');
       const salesData: TablesInsert<'sales'>[] = [...group].map(([, value]) => ({
@@ -126,9 +129,9 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
           <div className={styles.wrapper}>
             <div className={styles.content}>
               <h1>{t('order-success')}</h1>
-              <div>
-                <IoBagCheckOutline size={100} />
-              </div>
+              <motion.div initial={{ rotateY: 0 }} animate={{ rotateY: 358 }} transition={{ duration: 1, loop: 3 }}>
+                <Success />
+              </motion.div>
               <div className={styles.orderNumber}>
                 {t('order-number')} <strong>{orderNumber}</strong>
               </div>
