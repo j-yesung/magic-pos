@@ -85,6 +85,10 @@
     right: 5px;
 }
 
+.blur {
+    filter: blur(.3rem);
+}
+
 @keyframes up-down {
     25% {
         transform: translateY(.5rem);

@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    padding-bottom: 10rem;
+    gap: 2rem;
+    background: var(--shadow-color-20);
+    z-index: var(--level-4-z-index);
+}
+
+.container h1 {
+    top: 10%;
+    font-style: normal;
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 500;
+    line-height: 160%; /* 2.5rem */
+    margin: 11rem 5rem 0 5rem;
+
+    color: var(--point1-80);
+}
