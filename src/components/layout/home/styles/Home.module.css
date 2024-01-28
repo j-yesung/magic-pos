@@ -1,15 +1,8 @@
 /* 전체 */
 .wrapper {
-  /* gap: 30rem; */
   display: flex;
-  /* overflow-x: hidden; */
   transition: all 0.4s;
   flex-direction: column;
-}
-
-/* 로고 */
-.logo {
-  cursor: pointer;
 }
 
 /* 헤더 */
@@ -145,7 +138,6 @@
   position: relative;
   /* width: 2100px; */
   padding: 1rem;
-  width: 100vw;
   height: 20rem;
   overflow: hidden;
   border-radius: 3rem;
@@ -206,7 +198,6 @@
 }
 .review-box p {
   width: 100%;
-  /* overflow: hidden; */
   height: 100%;
   line-height: 1.1;
   font-size: 1.7rem;
