@@ -53,7 +53,7 @@ div.qr-print-icon {
   transform: translateX(-50%);
   font-size: 1.4rem;
   color: var(--print1-80);
-  width: 100px;
+  width: 10rem;
   height: auto;
   background-color: #fff;
   display: flex;
@@ -68,6 +68,9 @@ div.qr-print-icon {
 }
 .qr-code:hover > .qr-print-icon {
   display: flex;
+}
+.qr-code:hover > .qr-print-icon.active {
+  display: none;
 }
 
 div.qr-print-icon.order-type-togo {
