@@ -1,5 +1,8 @@
 import { Menu, SelectShot, StartShot } from './screenshot-export';
 
+/**
+ * @description 키오스크 스크롤에 따른 애니메이션 효과를 위한 상수
+ */
 export const SCROLL_THRESHOLDS = [1200, 1900, 2600];
 export const MAIN_TITLES = ['편리함의 시작', '한 눈의 보는 메뉴', '다양한 옵션 선택까지'];
 export const FIRST_CAPTIONS = [
