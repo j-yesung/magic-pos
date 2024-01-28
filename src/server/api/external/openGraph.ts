@@ -9,7 +9,9 @@ const HTTPS = 'https://';
 export const getOpenGraphMetaImage = async (link_string: string) => {
   try {
     const data = { url: link_string };
-    const { data: openGraphInfo } = await axios.post(process.env.NEXT_PUBLIC_META_API_KEY!, data);
+    // # OpenGraph API URL - local에서만 사용합니다.
+    //NEXT_PUBLIC_META_API_KEY=http://localhost:3000/api/open-graph 이거 안써두 된다
+    const { data: openGraphInfo } = await axios.post(window?.location?.origin + '/api/open-graph', data);
 
     return checkHttp(openGraphInfo);
   } catch (error) {
