@@ -1,15 +1,13 @@
 /* 키오스크 */
 .kiosk-box {
-  /* gap: 30rem; */
   width: 100%;
-  margin-top: 40rem;
   display: flex;
   height: 3088px;
   flex-direction: row;
   justify-content: center;
 }
 .sticky-box {
-  padding: 5%;
+  padding: 7% 5% 5% 5%;
   top: 10px;
   gap: 30rem;
   height: 100vh;
