@@ -1,0 +1,21 @@
+.button-container {
+  display: flex;
+  width: 41.5rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.button {
+  display: flex;
+  width: 22.5rem;
+  height: 5.6rem;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+  border-radius: 0.5rem;
+  background: var(--point1-80, #7433ff);
+  box-shadow: 0px 0px 10px 0px rgba(68, 9, 194, 0.1);
+}

@@ -118,7 +118,7 @@ export const setAddPlatForm = debounce(async (e: ChangeEvent<HTMLInputElement>) 
   const { name, value } = e.target;
   if (name === 'link_url') {
     const metaImage = await getOpenGraphMetaImage(value);
-
+    console.log(metaImage);
     if (metaImage) {
       usePlatFormState.setState(state => ({
         ...state,

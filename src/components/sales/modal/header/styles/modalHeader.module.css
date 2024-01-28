@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  padding: 1.5rem 2rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  width: 100%;
+  border-radius: 1rem 1rem 0rem 0rem;
+  border-bottom: 1px solid var(--line, #ededed);
+  background: var(--white, #fff);
+}
+
+.container p {
+  color: var(--text1, #121416);
+  text-align: center;
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.8rem; /* 100% */
+  letter-spacing: -0.036rem;
+}
+
+.close-button {
+  display: flex;
+  cursor: pointer;
+  justify-content: flex-end;
+}
+.close-button svg path {
+  stroke: var(--text1);
+}
