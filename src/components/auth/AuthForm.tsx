@@ -2,7 +2,7 @@ import { useAuthSetQuery } from '@/hooks/query/auth/useAuthSetQuery';
 import { useErrorMessage } from '@/hooks/service/auth/useErrorMessage';
 import { useInput } from '@/hooks/service/auth/useInput';
 import { useValid } from '@/hooks/service/auth/useValid';
-import useToggleState from '@/shared/store/toggle';
+import useToggleState, { defaultCheckBox } from '@/shared/store/toggle';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { FaCheck } from 'react-icons/fa6';
@@ -60,10 +60,11 @@ const AuthForm = ({ data }: FormProps) => {
   // 이메일 저장 정보 가져오기
   useEffect(() => {
     const email = localStorage.getItem('email');
-    if (email) {
+    if (email && path === '/auth/login') {
       value.email = email;
+      defaultCheckBox();
     }
-  }, []);
+  }, [path]);
 
   return (
     <div className={styles.wrapper}>
