@@ -18,6 +18,7 @@
 
 .language-wrapper {
     position: fixed;
+    width: calc(100% - 4rem);
     bottom: 4.5rem  /* 20/10 */;
     left: 2rem  /* 20/10 */;
     display: inline-flex;
@@ -37,4 +38,63 @@
     font-weight: 600;
     line-height: 1.6rem; /* 100% */
     cursor: pointer;
+}
+
+.button-container {
+    position: relative;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.balloon {
+    position: absolute;
+    bottom: 2.5rem;
+    right: 0;
+    display: inline-block;
+    background: var(--bg-g);
+    margin: 0 auto 10px;
+    padding: 1rem;
+    border: 1px solid var(--bg-p);
+    border-radius: 5rem;
+
+    color: var(--text2);
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.6rem; /* 100% */
+
+    animation: up-down 1s infinite;
+}
+.balloon:after {
+    content: '';
+    position: absolute;
+    border-top: 10px solid var(--bg-g);
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    bottom: -9px;
+    right: 5px;
+}
+.balloon:before {
+    content: '';
+    position: absolute;
+    border-top: 10px solid var(--bg-p);
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    bottom: -11px;
+    right: 5px;
+}
+
+.blur {
+    filter: blur(.3rem);
+}
+
+@keyframes up-down {
+    25% {
+        transform: translateY(.5rem);
+    }
+    50% {
+        transform: translateY(0);
+    }
+
 }

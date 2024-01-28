@@ -5,6 +5,7 @@ const withPWA = require('next-pwa')({
   register: true,
   skipWaiting: true,
 });
+const { i18n } = require('./next-i18next.config');
 
 const nextConfig = withPWA({
   images: {
@@ -15,6 +16,7 @@ const nextConfig = withPWA({
       },
     ],
   },
+  i18n,
   webpack: (config, options) => {
     config.module.rules
       .find(({ oneOf }) => !!oneOf)

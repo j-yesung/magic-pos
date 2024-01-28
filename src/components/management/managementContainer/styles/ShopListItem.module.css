@@ -6,10 +6,8 @@
   gap: 2rem;
   width: 22.5rem;
   height: 21.8rem;
-
   border-radius: 1rem;
   background: var(--bg-g);
-
   cursor: pointer;
 }
 

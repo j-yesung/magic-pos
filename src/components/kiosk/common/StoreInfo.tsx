@@ -1,6 +1,6 @@
 import styles from './style/StoreInfo.module.css';
 import clsx from 'clsx';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 interface StoreInfoProps {
   orderType: OrderType;

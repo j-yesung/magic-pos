@@ -1,7 +1,7 @@
 import useKioskState from '@/shared/store/kiosk';
 import styles from './styles/MenuInfo.module.css';
 import { convertNumberToWon } from '@/shared/helper';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 const MenuInfo = () => {
   const selectedMenu = useKioskState(state => state.selectedMenu);

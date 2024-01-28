@@ -1,13 +1,19 @@
-import Iphone from '/public/images/iphone.svg';
-import StartScreen from '/public/images/start-screen.svg';
+import { Menu, SelectShot, StartShot } from './screenshot-export';
 
-export const TITLES = ['스파르타코딩클럽', '내일배움캠프', '파워레인조', '최종프로젝트'];
-export const SCROLL_THRESHOLDS = [1000, 1500, 2000, 2500];
-export const SUB_TITLES = [
-  '스파르타코딩클럽 React 3기 프론트엔드 과정입니다.',
-  '정말 재밌고 유익했던 과정이었습니다.',
-  '만난 팀 중 최고였습니다.',
-  '끝나고 나서도 취업 화이팅이고 조만간 만납시다.',
+/**
+ * @description 키오스크 스크롤에 따른 애니메이션 효과를 위한 상수
+ */
+export const SCROLL_THRESHOLDS = [1200, 1900, 2600];
+export const MAIN_TITLES = ['편리함의 시작', '한 눈의 보는 메뉴', '다양한 옵션 선택까지'];
+export const FIRST_CAPTIONS = [
+  '매직포스를 사용한다면',
+  '이미지와 가격을 한 눈에 비교하고',
+  '메뉴를 선택하고 나만의 옵션을 추가해 보세요. ',
+];
+export const SECOND_CAPTIONS = [
+  '주문하러 카운터까지 갈 필요가 없어요.',
+  '간편하게 메뉴를 고를 수 있어요.',
+  '번거롭게 말 할 필요 없이 몇 번의 터치 주문 완료!',
 ];
 
-export const iphones = [Iphone, StartScreen, Iphone, StartScreen];
+export const iphones = [StartShot, Menu, SelectShot];

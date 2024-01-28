@@ -2,7 +2,7 @@ import styles from './styles/ReceiptPrice.module.css';
 import { MenuItemWithOption } from '@/types/supabase';
 import { getTotalPrice } from '@/shared/store/kiosk';
 import { convertNumberToWon } from '@/shared/helper';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 const ReceiptPrice = ({ itemList }: { itemList: MenuItemWithOption[] }) => {
   const { t } = useTranslation();

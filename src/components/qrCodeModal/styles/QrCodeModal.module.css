@@ -44,6 +44,22 @@
   justify-content: center;
 }
 
+.qr-code-container{
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.5s;
+  height: 0;
+}
+.qr-code-container.show{
+  opacity: 100%;
+  visibility: visible;
+  height: auto;
+}
+
+
+
 .qr-code-move-button {
   cursor: pointer;
   font-size: 1.6rem;
@@ -67,7 +83,7 @@
   gap: 2rem;
   width: 100%;
   height: auto;
-  padding: 5rem;
+  padding-bottom: 5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -77,11 +93,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 1.6rem;
 }
 .qr-code-button-box > button p {
   font-size: 1.6rem;
+  color: #fff;
 }
-
+.qr-button{
+  padding-top: 1.3rem;
+  padding-bottom: 1.3rem;
+}
 .not-active {
   color: var(--text2);
   padding: 1rem 2rem;

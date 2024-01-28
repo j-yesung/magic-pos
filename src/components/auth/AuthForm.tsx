@@ -2,16 +2,16 @@ import { useAuthSetQuery } from '@/hooks/query/auth/useAuthSetQuery';
 import { useErrorMessage } from '@/hooks/service/auth/useErrorMessage';
 import { useInput } from '@/hooks/service/auth/useInput';
 import { useValid } from '@/hooks/service/auth/useValid';
+import useToggleState from '@/shared/store/toggle';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { FaCheck } from 'react-icons/fa6';
-import { IoIosCheckmarkCircleOutline as Success } from 'react-icons/io';
 import Button from '../common/Button';
 import Input from './Input';
 import FormButton from './button/FormButton';
 import SignCaption from './element/SignCaption';
 import styles from './styles/Auth.module.css';
-import Logo from '/public/logo.svg';
+import Success from '/public/icons/success.svg';
 
 interface FormProps {
   data: Record<string, string>;
@@ -44,7 +44,7 @@ const AuthForm = ({ data }: FormProps) => {
   });
   const { isBusinessNumberValid } = useValid(value);
   const { isPasswordValid } = useErrorMessage(value);
-  const [isCheckbox, setIsCheckbox] = useState(false);
+  const isCheckbox = useToggleState(state => state.isCheckbox);
 
   const clickCheckSignupHandler = async () => {
     const isChecked = await checkEmail(value);
@@ -62,15 +62,13 @@ const AuthForm = ({ data }: FormProps) => {
     const email = localStorage.getItem('email');
     if (email) {
       value.email = email;
-      setIsCheckbox(true);
     }
-  }, [value]);
+  }, []);
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.titleWrapper} onClick={() => router.push('/')}>
         <h1 className={styles.title}>{title}</h1>
-        <Logo className={styles.logo} width={200} height={30} />
       </div>
       {path === '/auth/success' && (
         <div className={styles.successImage}>
@@ -120,13 +118,7 @@ const AuthForm = ({ data }: FormProps) => {
             )}
           </div>
           {path === '/auth/login' && (
-            <SignCaption
-              subUrl={subUrl}
-              subName={subName}
-              value={value}
-              isCheckbox={isCheckbox}
-              setIsCheckbox={setIsCheckbox}
-            />
+            <SignCaption subUrl={subUrl} subName={subName} value={value} isCheckbox={isCheckbox} />
           )}
           <div className={styles.formButtonWrapper}>
             {path === '/auth/signup' && (

@@ -18,7 +18,7 @@ const HamburgerMenu = () => {
 
   return (
     <div onClick={clickSideBarOpenHandler}>
-      <Hamburger className={styles.hamburger} width={30} height={30} />
+      <Hamburger className={styles.hamburger} width={'3rem'} height={'3rem'} />
     </div>
   );
 };

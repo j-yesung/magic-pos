@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { MenuOptionWithDetail, Tables } from '@/types/supabase';
 import styles from './styles/OptionRow.module.css';
 import OptionDetailRow from '@/components/kiosk/menu-option/OptionDetailRow';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import useKioskState from '@/shared/store/kiosk';
 
 /**

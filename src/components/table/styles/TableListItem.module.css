@@ -1,6 +1,7 @@
 .table-list-item {
-  width: 14.8%;
+  width: 22.5rem;
   height: 100%;
+  min-width: 22.5rem;
   min-height: 21.8rem;
   display: flex;
   flex-direction: column;
@@ -52,9 +53,10 @@ div.edit-button {
   padding: 1rem;
   border-radius: 50px;
   cursor: pointer;
+  transition: 0.2s;
 }
 .edit-button-svg > path {
-  stroke: var(point-80);
+  stroke: var(--point-80);
 }
 
 .table-list-item:hover > div.close-button {
@@ -64,4 +66,23 @@ div.edit-button {
 .table-list-item:hover > div.edit-button {
   opacity: 100;
   visibility: visible;
+}
+.edit-button-svg:hover {
+  background-color: var(--point-80);
+}
+.edit-button-svg:hover > path {
+  stroke: #fff;
+}
+
+
+@media only all and (max-width: 1520px) {
+  .table-list-item {
+    width: 18.3%;
+    /* min-width: 30rem; */
+  }
+}
+@media only all and (max-width: 1100px) {
+  .table-list-item {
+    width: 23.4%;
+  }
 }

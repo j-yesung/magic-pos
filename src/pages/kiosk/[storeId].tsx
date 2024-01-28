@@ -1,7 +1,7 @@
 import KioskContainer from '@/components/kiosk/KioskContainer';
 import OrderLayout from '@/components/layout/order/OrderLayout';
 import { useModal } from '@/hooks/service/ui/useModal';
-import { useIsOrderAllReady, useIsValidURL } from '@/hooks/service/useKiosk';
+import { useIsOrderAllReady, useIsValidURL, useMakeMenuData } from '@/hooks/service/useKiosk';
 import { fetchCategoriesWithMenuItemByStoreId } from '@/server/api/supabase/menu-category';
 import useKioskState, {
   resetOrderList,
@@ -12,12 +12,13 @@ import useKioskState, {
   setTableId,
 } from '@/shared/store/kiosk';
 import { CategoryWithMenuItemWithStore } from '@/types/supabase';
-import { makeMenuData } from '@/utils/kiosk-helper';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { ReactNode, useEffect, useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/virtual';
+import { translateMenuData } from '@/server/service/translate';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 interface OrderIndexPageProps {
   menuData: CategoryWithMenuItemWithStore[];
@@ -29,10 +30,11 @@ const OrderIndexPage = ({ menuData, storeId, tableId }: OrderIndexPageProps) => 
   const orderIdList = useKioskState(state => state.orderIdList);
   const prevStoreId = useKioskState(state => state.storeId);
   const [isLoaded, setIsLoaded] = useState(false);
-  const isInvalidURL = useIsValidURL({ storeId, tableId });
+  const isValidURL = useIsValidURL({ storeId, tableId });
   const isOrderAllReady = useIsOrderAllReady(orderIdList, storeId);
   const { MagicModal } = useModal();
   const router = useRouter();
+  const makeMenuData = useMakeMenuData();
 
   useEffect(() => {
     if (orderIdList.length > 0 && !isOrderAllReady) {
@@ -82,9 +84,9 @@ const OrderIndexPage = ({ menuData, storeId, tableId }: OrderIndexPageProps) => 
 
   return (
     <>
-      {isInvalidURL && isLoaded && <KioskContainer />}
+      {isValidURL && isLoaded && <KioskContainer />}
       {/* TODO: 유효 하지 않은 가게 디자인 */}
-      {!isInvalidURL && isLoaded && <div>유효 하지 않은 가게입니다.</div>}
+      {!isValidURL && isLoaded && <div>유효 하지 않은 가게입니다.</div>}
     </>
   );
 };
@@ -95,17 +97,18 @@ export default OrderIndexPage;
 
 export const getServerSideProps: GetServerSideProps = async context => {
   const { storeId, tableId = null, lang = 'ko' } = context.query;
-  const { data: menuData } = await fetchCategoriesWithMenuItemByStoreId((storeId || '').toString());
+  let { data: menuData } = await fetchCategoriesWithMenuItemByStoreId((storeId || '').toString());
 
-  // if (storeId && lang !== 'ko') {
-  //   menuData = await translateMenuData(menuData, lang.toString(), storeId.toString());
-  // }
+  if (storeId && lang !== 'ko') {
+    menuData = await translateMenuData(menuData, lang.toString(), storeId.toString());
+  }
 
   return {
     props: {
       menuData,
       storeId,
       tableId,
+      ...(await serverSideTranslations(lang ? lang.toString() : 'ko', ['common'])),
     },
   };
 };

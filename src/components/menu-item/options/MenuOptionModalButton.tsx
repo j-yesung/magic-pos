@@ -26,7 +26,7 @@ const MenuOptionModalButton = ({ modalId }: { modalId?: string }) => {
     const emptyOptionDetailName = menuOptionDetailList.filter(item => item.name === '');
     const emptyOptionDetailPrice = menuOptionDetailList.filter(item => item.price === '');
     if (emptyOptionDetailName.length > 0 || emptyOptionDetailPrice.length > 0) {
-      toast('옵션 항목 내용을 입력해주세요.', {
+      toast('옵션 항목 내용과 가격을 모두 입력해주세요.', {
         type: 'warn',
         position: 'top-center',
         showCloseButton: false,

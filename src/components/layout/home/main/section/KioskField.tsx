@@ -1,4 +1,4 @@
-import { SCROLL_THRESHOLDS, SUB_TITLES, TITLES } from '@/data/scroll-props';
+import { FIRST_CAPTIONS, MAIN_TITLES, SCROLL_THRESHOLDS, SECOND_CAPTIONS } from '@/data/scroll-props';
 import { throttle } from 'lodash';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -26,9 +26,10 @@ const KioskVideo = () => {
       <div className={styles.stickyBox}>
         <TransitionBox index={index} />
         <div className={styles.titleBox} ref={ref}>
-          <TransitionText className={styles.t1} text={TITLES[index]} index={index} />
+          <TransitionText className={styles.t1} text={MAIN_TITLES[index]} index={index} />
           <div className={styles.subTitle}>
-            <TransitionText text={SUB_TITLES[index]} index={index} />
+            <TransitionText text={FIRST_CAPTIONS[index]} index={index} />
+            <TransitionText text={SECOND_CAPTIONS[index]} index={index} />
           </div>
         </div>
       </div>

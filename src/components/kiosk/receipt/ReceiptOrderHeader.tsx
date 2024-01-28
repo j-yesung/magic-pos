@@ -1,7 +1,7 @@
 import styles from './styles/ReceiptOrderHeader.module.css';
 import clsx from 'clsx';
 import moment from 'moment';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 interface ReceiptHeaderProps {
   orderNumber: number;
