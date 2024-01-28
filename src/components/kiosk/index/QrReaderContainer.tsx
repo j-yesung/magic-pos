@@ -17,10 +17,16 @@ const QrReaderContainer = () => {
         <div className={styles.container}>
           <QrReader
             className={styles.qrReader}
+            videoContainerStyle={{ display: 'flex', justifyContent: 'center' }}
+            videoStyle={{ height: '30rem', width: 'fit-content' }}
             onResult={result => {
               if (result) {
                 const url = result.getText();
-                if (url.startsWith('https://magic-pos.vercel.app')) {
+                if (
+                  url.startsWith('https://magic-pos.vercel.app') ||
+                  url.startsWith('https://magic-pos.com') ||
+                  url.startsWith('http://localhost:3000')
+                ) {
                   router.push(url);
                 }
               }
