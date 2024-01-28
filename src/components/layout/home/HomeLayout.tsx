@@ -14,14 +14,22 @@ const HomeLayout = ({ children }: { children: React.ReactNode }) => {
   }, [isChecked]);
 
   return (
-    <div className={styles.wrapper}>
-      {/* <Header /> */}
-      <main className={styles.mainWrapper}>
-        <Contents />
-        {children}
-      </main>
-      <Footer />
-    </div>
+    <>
+      <style jsx global>{`
+        @media only all and (max-width: 1520px) {
+          html {
+            font-size: 8px;
+          }
+        }
+      `}</style>
+      <div className={styles.wrapper}>
+        <main className={styles.mainWrapper}>
+          <Contents />
+          {children}
+        </main>
+        <Footer />
+      </div>
+    </>
   );
 };
 

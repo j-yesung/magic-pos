@@ -4,7 +4,7 @@ import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import styles from '../../styles/Section.module.css';
 
@@ -49,13 +49,14 @@ const AdminField = () => {
       <div className={styles.wrapper}>
         <Swiper
           className={styles.swiperWrapper}
-          modules={[Navigation, Pagination, Autoplay]}
+          modules={[Navigation, Pagination]}
+          // modules={[Navigation, Pagination, Autoplay]}
           spaceBetween={50}
           slidesPerView={1}
-          autoplay={{
-            delay: 5000,
-            disableOnInteraction: false,
-          }}
+          // autoplay={{
+          //   delay: 5000,
+          //   disableOnInteraction: false,
+          // }}
           loop={true}
           ref={swiperRef}
         >
