@@ -1,6 +1,7 @@
 .table-list-item {
-  width: 14.8%;
+  width: 22.5rem;
   height: 100%;
+  min-width: 22.5rem;
   min-height: 21.8rem;
   display: flex;
   flex-direction: column;
@@ -64,4 +65,17 @@ div.edit-button {
 .table-list-item:hover > div.edit-button {
   opacity: 100;
   visibility: visible;
+}
+
+
+@media only all and (max-width: 1520px) {
+  .table-list-item {
+    width: 18.3%;
+    /* min-width: 30rem; */
+  }
+}
+@media only all and (max-width: 1100px) {
+  .table-list-item {
+    width: 23.4%;
+  }
 }

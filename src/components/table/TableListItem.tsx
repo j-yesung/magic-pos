@@ -1,4 +1,5 @@
 import { useModal } from '@/hooks/service/ui/useModal';
+import useToast from '@/hooks/service/ui/useToast';
 import useSetTable from '@/hooks/table/useSetTable';
 import useTableStore from '@/shared/store/table';
 import { Tables } from '@/types/supabase';
@@ -9,10 +10,17 @@ import styles from './styles/TableListItem.module.css';
 import CloseButton from '/public/icons/close.svg';
 import EditButton from '/public/icons/pencil.svg';
 
-const TableListItem = ({ storeTableData, index }: { storeTableData: Tables<'store_table'>; index: number }) => {
+const TableListItem = ({
+  storeTableData,
+  tableIdinOrderStore,
+}: {
+  storeTableData: Tables<'store_table'>;
+  tableIdinOrderStore: string[];
+}) => {
   const { deleteMutate } = useSetTable();
   const { TableItemClick } = useTableStore();
   const { MagicModal } = useModal();
+  const { toast } = useToast();
 
   const clickOpenEditModalHandler = () => {
     TableItemClick({
@@ -25,16 +33,25 @@ const TableListItem = ({ storeTableData, index }: { storeTableData: Tables<'stor
   };
 
   const clickDeleteTableHandler = () => {
-    MagicModal.confirm({
-      icon: <FiAlertCircle size={50} />,
-      content: '정말로 삭제하시겠습니까?',
-      confirmButtonCallback: () => {
-        deleteMutate(storeTableData.id);
-      },
-    });
+    if (tableIdinOrderStore.includes(storeTableData.id)) {
+      toast('주문이 있는 테이블은 삭제할 수 없습니다', {
+        type: 'danger',
+        position: 'top-center',
+        showCloseButton: false,
+        autoClose: 2000,
+      });
+    } else {
+      MagicModal.confirm({
+        icon: <FiAlertCircle size={50} />,
+        content: '정말로 삭제하시겠습니까?',
+        confirmButtonCallback: () => {
+          deleteMutate(storeTableData.id);
+        },
+      });
+    }
   };
   return (
-    <div className={clsx(styles['table-list-item'], index % 6 === 5 && styles['item-row-5'])}>
+    <div className={clsx(styles['table-list-item'])}>
       <div className={styles['close-button']} onClick={clickDeleteTableHandler}>
         <CloseButton className={styles['close-button-svg']} width={23} height={23} />
       </div>

@@ -6,6 +6,7 @@ import PlusButton from '/public/icons/plus.svg';
 
 const TableContainer = ({ storeData }: { storeData: StoreWithStoreTable[] }) => {
   const { addMutate } = useSetTable();
+  const tableIdinOrderStore = storeData?.[0]?.order_store.map(order => order.table_id);
   /**
    * position값중 가장 큰수 추출
    */
@@ -38,8 +39,8 @@ const TableContainer = ({ storeData }: { storeData: StoreWithStoreTable[] }) => 
           }
           return 0;
         })
-        .map((item: Tables<'store_table'>, index: number) => {
-          return <TableListItem key={item.id} storeTableData={item} index={index} />;
+        .map((item: Tables<'store_table'>) => {
+          return <TableListItem key={item.id} storeTableData={item} tableIdinOrderStore={tableIdinOrderStore} />;
         })}
       <div className={styles['table-list-button']} onClick={clickAddStoreTableHandler}>
         <PlusButton width="41" height="41" />
