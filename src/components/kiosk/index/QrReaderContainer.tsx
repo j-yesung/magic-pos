@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styles from './styles/QrReaderContainer.module.css';
-import { QrReader } from 'react-qr-reader';
 import { useRouter } from 'next/router';
+import { QrScanner } from '@yudiel/react-qr-scanner';
+import useToast from '@/hooks/service/ui/useToast';
 
 const QrReaderContainer = () => {
   const router = useRouter();
   const [isPageLoading, setIsPageLoading] = useState(true);
-  const [isVideoRendering, setIsVideoRendering] = useState(true);
+  const { toast } = useToast();
 
   useEffect(() => {
     setIsPageLoading(false);
@@ -16,16 +17,8 @@ const QrReaderContainer = () => {
     <>
       {!isPageLoading && (
         <div className={styles.container}>
-          <QrReader
-            className={styles.qrReader}
-            videoContainerStyle={{ display: 'flex', justifyContent: 'center', paddingTop: 0 }}
-            videoStyle={{ height: '30rem', width: 'fit-content' }}
+          <QrScanner
             onResult={result => {
-              if (!isVideoRendering) {
-                document.getElementById('qr-reader')!.setAttribute('crossorigin', 'true');
-                setIsVideoRendering(false);
-              }
-
               if (result) {
                 const url = result.getText();
                 if (
@@ -37,8 +30,16 @@ const QrReaderContainer = () => {
                 }
               }
             }}
+            onError={error => {
+              console.error(error);
+              toast(error.name, {
+                type: 'warn',
+                position: 'bottom-right',
+                autoClose: 3000,
+              });
+            }}
+            viewFinderBorder={0}
             constraints={{ facingMode: 'environment' }}
-            videoId={'qr-reader'}
           />
         </div>
       )}

@@ -3633,34 +3633,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@zxing/browser@npm:0.0.7":
-  version: 0.0.7
-  resolution: "@zxing/browser@npm:0.0.7"
+"@yudiel/react-qr-scanner@npm:^1.2.6":
+  version: 1.2.6
+  resolution: "@yudiel/react-qr-scanner@npm:1.2.6"
   dependencies:
-    "@zxing/text-encoding": "npm:^0.9.0"
+    "@zxing/library": "npm:^0.20.0"
   peerDependencies:
-    "@zxing/library": ^0.18.3
-  dependenciesMeta:
-    "@zxing/text-encoding":
-      optional: true
-  checksum: 184b3b518392949d1c28e0b7a7f5d3a73a56c0aee0fa818003830ced44e8e20a62f5bccfbdd513aea11ab69b3717179bb38bd034087f718b16241acdada7c6ea
+    react: ^18.0.0
+    react-dom: ^18.0.0
+  checksum: 56f03169cd90f8d5ab526d4b400be86a40d3436e5dd255516e27b3dd0cd3946087e94d4396395b56daac2241b14d4d0d68d1e3e5970ac0b6c8c27881c5612b98
   languageName: node
   linkType: hard
 
-"@zxing/library@npm:^0.18.3":
-  version: 0.18.6
-  resolution: "@zxing/library@npm:0.18.6"
+"@zxing/library@npm:^0.20.0":
+  version: 0.20.0
+  resolution: "@zxing/library@npm:0.20.0"
   dependencies:
     "@zxing/text-encoding": "npm:~0.9.0"
-    ts-custom-error: "npm:^3.0.0"
+    ts-custom-error: "npm:^3.2.1"
   dependenciesMeta:
     "@zxing/text-encoding":
       optional: true
-  checksum: 0194a9f45bb0980ff859c1ef92b8722cc54ad46a59335a080ac9e592a32f8645e848f47db796724ea875fa0da71b0998dcf8ea1f3eae434c5ea6f0fae4d8d7c7
+  checksum: 466c75d893f6a830de9296d7403f75b192dbd704849fc1ae550856441b85f4108b9ba3e85004c5e1f56df16bb33813941d51dad2d230aa60ea3f799d44551c86
   languageName: node
   linkType: hard
 
-"@zxing/text-encoding@npm:^0.9.0, @zxing/text-encoding@npm:~0.9.0":
+"@zxing/text-encoding@npm:~0.9.0":
   version: 0.9.0
   resolution: "@zxing/text-encoding@npm:0.9.0"
   checksum: d15bff181d46c2ab709e7242801a8d40408aa8c19b44462e5f60e766bf59105b44957914ab6baab60d10d466a5e965f21fe890c67dfdb7d5c7f940df457b4d0d
@@ -7335,6 +7333,7 @@ __metadata:
     "@types/react-dom": "npm:^18"
     "@typescript-eslint/eslint-plugin": "npm:^6.18.1"
     "@typescript-eslint/parser": "npm:^6.18.1"
+    "@yudiel/react-qr-scanner": "npm:^1.2.6"
     autoprefixer: "npm:^10.0.1"
     axios: "npm:^1.6.5"
     chart.js: "npm:^4.4.1"
@@ -7377,7 +7376,6 @@ __metadata:
     react-i18next: "npm:^14.0.1"
     react-icons: "npm:^5.0.1"
     react-intersection-observer: "npm:^9.5.3"
-    react-qr-reader: "npm:^3.0.0-beta-1"
     react-select: "npm:^5.8.0"
     supabase: "npm:1.127.4"
     swiper: "npm:^11.0.5"
@@ -8475,20 +8473,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-qr-reader@npm:^3.0.0-beta-1":
-  version: 3.0.0-beta-1
-  resolution: "react-qr-reader@npm:3.0.0-beta-1"
-  dependencies:
-    "@zxing/browser": "npm:0.0.7"
-    "@zxing/library": "npm:^0.18.3"
-    rollup: "npm:^2.67.2"
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0
-    react-dom: ^16.8.0 || ^17.0.0
-  checksum: 526773294319cd82eb4de857acc4ba752419bf8f9665dadad4f374129a9b71ec15d262cd0f4197ff7d0559d4b4673b6354302cd6da601e9f113830531141285a
-  languageName: node
-  linkType: hard
-
 "react-select@npm:^5.8.0":
   version: 5.8.0
   resolution: "react-select@npm:5.8.0"
@@ -8796,7 +8780,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup@npm:^2.43.1, rollup@npm:^2.67.2":
+"rollup@npm:^2.43.1":
   version: 2.79.1
   resolution: "rollup@npm:2.79.1"
   dependencies:
@@ -9538,7 +9522,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-custom-error@npm:^3.0.0":
+"ts-custom-error@npm:^3.2.1":
   version: 3.3.1
   resolution: "ts-custom-error@npm:3.3.1"
   checksum: 67cc807d03406d7eeb2b908408d455d253cc43b480d669e2e3ea028b9aaa2c78ad1b392425b86368bbbc3c43a15e4abe304312d87ed845091646ec1937bab982
