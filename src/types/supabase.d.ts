@@ -562,6 +562,7 @@ export type Enums<
 
 interface StoreWithStoreTable extends Tables<'store'> {
   store_table: Tables<'store_table'>[];
+  order_store: Tables<'order_store'>[];
 }
 
 interface StoreWithOrderInfo extends Tables<'store'> {

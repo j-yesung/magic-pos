@@ -1,11 +1,12 @@
 import useTableStore from '@/shared/store/table';
 import clsx from 'clsx';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './styles/TableEditModalContainer.module.css';
 
 const TableEditModalContainer = () => {
   const [isDisabledState, setIsDisabledState] = useState(false);
-  const { tableNumber, maxGuest, setMaxGuest, setIsDisabled } = useTableStore();
+  const didMount = useRef(false);
+  const { tableNumber, maxGuest, setMaxGuest, isDisabled, setIsDisabled } = useTableStore();
 
   const clickMaxGuestHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (+e.target.value <= 1) {
@@ -15,10 +16,18 @@ const TableEditModalContainer = () => {
     }
   };
   useEffect(() => {
-    setIsDisabled(isDisabledState ? 0 : 1);
+    if (didMount.current) {
+      setIsDisabled(!isDisabledState ? 0 : 1);
+    }
+    didMount.current = true;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isDisabledState]);
 
+  useEffect(() => {
+    return () => {
+      setIsDisabledState(false);
+    };
+  }, []);
   return (
     <div className={styles['modal-container']}>
       <div className={styles['table-name-box']}>
@@ -37,12 +46,12 @@ const TableEditModalContainer = () => {
       <div className={styles['table-disabled-box']}>
         <div className={styles['table-disabled-title']}>사용여부</div>
         <div
-          className={clsx(styles['table-disabled-content'], !isDisabledState && styles['table-is-disabled'])}
+          className={clsx(styles['table-disabled-content'], isDisabled === 1 && styles['table-is-disabled'])}
           onClick={() => {
             setIsDisabledState(!isDisabledState);
           }}
         >
-          <span className={styles['isDisabled-name']}>{isDisabledState ? '사용' : '미사용'}</span>
+          <span className={styles['isDisabled-name']}>{isDisabled === 0 ? '사용' : '미사용'}</span>
           <div className={styles['isDisabled-button']}></div>
         </div>
       </div>
