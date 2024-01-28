@@ -14,10 +14,10 @@ interface TableStoreType {
   isDisabled: number | null;
   isClick: boolean;
   isUseTable: boolean;
-
   TableItemClick: (value: valueType) => void;
   setMaxGuest: (value: number) => void;
   setIsDisabled: (value: number) => void;
+  resetTableState: () => void;
 }
 
 const useTableStore = create<TableStoreType>(set => ({
@@ -46,6 +46,14 @@ const useTableStore = create<TableStoreType>(set => ({
     set(() => ({
       isDisabled: value,
     })),
+  resetTableState: ()=>
+    set(()=>({
+      tableId: '',
+      tableNumber: 0,
+      maxGuest: 0,
+      isDisabled: 0,
+      isClick: false,
+    }))
 }));
 
 export const setIsUseTable = (value: boolean) => useTableStore.setState({ isUseTable: value });
