@@ -6,6 +6,7 @@ import { SwiperRef } from 'swiper/react';
 import useKioskState, { ORDER_STEP, setSwiperRef } from '@/shared/store/kiosk';
 import { useRouter } from 'next/router';
 import OrderPrevButton from '@/components/layout/order/OrderPrevButton';
+import { makeTitle } from '@/shared/helper';
 
 const DONT_RENDER_FOOTER_PATH_LIST = ['/kiosk/success', '/kiosk/receipt', '/kiosk/fail'];
 /**
@@ -25,7 +26,7 @@ const OrderLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Head>
-        <title>MAGIC-POS : 주문</title>
+        <title>{makeTitle('주문')}</title>
       </Head>
       <section className={styles.container}>
         <article className={styles.children}>

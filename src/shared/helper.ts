@@ -28,3 +28,12 @@ export const groupByKey = <T extends { [key: string | number]: unknown }>(arr: T
     return acc;
   }, new Map<string, T[]>());
 };
+
+/**
+ * 페이지에 적용될 공통 타이틀 양식을 반환합니다.
+ * @param title
+ */
+export const makeTitle = (title: string) => {
+  if (title === '') return 'Magic POS';
+  return `${title} - Magic POS`;
+};

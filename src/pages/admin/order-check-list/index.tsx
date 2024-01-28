@@ -2,12 +2,13 @@ import AdminLayout from '@/components/layout/admin/AdminLayout';
 import OrderCheckList from '@/components/order-check-list/OrderCheckList';
 import Head from 'next/head';
 import { ReactNode } from 'react';
+import { makeTitle } from '@/shared/helper';
 
 const OrderCheckListPage = () => {
   return (
     <>
       <Head>
-        <title>magic pos 테이블 관리</title>
+        <title>{makeTitle('주문 내역 확인')}</title>
         <meta name="description" content="NextJS Events" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="author" content="파워레인조" />
