@@ -118,7 +118,6 @@ const usePlatForm = () => {
         const { file, createdAt, metaImage, ...updateTarget } = comparedData;
 
         const data = { ...updateTarget, image_url: metaImage };
-        console.log(data);
         await updatePlatFormData(data as TablesInsert<'platform'>);
         const { platform } = await fetchPlatForm(store_id!);
         setFetchPlatFormData(platform);
@@ -135,7 +134,6 @@ const usePlatForm = () => {
 
         if (prevData.image_url.includes(SUPABASE_STORAGE_URL)) {
           //  opengraph 이미지가 아니면 삭제
-          console.log('삭제 되어야 한다. ............');
           await removePlatFormImage(prevData);
         }
 
