@@ -35,13 +35,18 @@ const usePlatForm = () => {
     return regUrl.test(url);
   };
 
+  const checkHttp = (url: string) => {
+    if (url.includes('https://')) return url;
+    if (!url.includes('https://')) return HTTPS + url;
+  };
+
   const submitAddCard = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // image 경로로 사용하기 위해 createdAt를 넣었습니다.
     let updateData: AddPlatFormType = { ...addPlatForm, createdAt: moment().toISOString() };
-    if (!addPlatForm.link_url.includes('https://')) addPlatForm.link_url = HTTPS + addPlatForm.link_url;
-    const isValidUrl = checkValidUrl(addPlatForm.link_url);
+    const validHttpUrl = checkHttp(addPlatForm.link_url);
+    const isValidUrl = checkValidUrl(validHttpUrl!);
 
     if (!isValidUrl) {
       setIsValidUrl(false);
