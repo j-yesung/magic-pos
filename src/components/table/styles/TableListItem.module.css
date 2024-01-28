@@ -53,6 +53,7 @@ div.edit-button {
   padding: 1rem;
   border-radius: 50px;
   cursor: pointer;
+  transition: 0.2s;
 }
 .edit-button-svg > path {
   stroke: var(--point-80);
