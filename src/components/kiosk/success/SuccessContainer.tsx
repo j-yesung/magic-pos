@@ -15,6 +15,8 @@ import { getTokenHandler } from '@/shared/firebase';
 import { useUserTokenSetQuery } from '@/hooks/query/user-token/useUserTokenSetQuery';
 import Success from '/public/icons/order-success.svg';
 import { motion } from 'framer-motion';
+import useToast from '@/hooks/service/ui/useToast';
+import { useModal } from '@/hooks/service/ui/useModal';
 
 const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const orderList = useKioskState(state => state.orderList);
@@ -34,6 +36,8 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const [isPageLoading, setIsPageLoading] = useState(true);
   const router = useRouter();
   const { t, i18n } = useTranslation();
+  const { toast } = useToast();
+  const { MagicModal } = useModal();
 
   const clickCheckOrderHandler = () => {
     router.push('/kiosk/receipt');
@@ -107,6 +111,40 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
         if (res) {
           addUserToken({ order_id: payment.orderId, token: res });
         } else {
+          try {
+            if (Notification.permission !== 'granted') {
+              MagicModal.confirm({
+                content: '알림을 허용해주어야 메뉴 준비 완료 메시지를 받을 수 있습니다!',
+                cancelButtonText: '알림 받지 않기',
+                confirmButtonText: '허용하고 알림 받기',
+                confirmButtonCallback: () => {
+                  Notification.requestPermission().then(permission => {
+                    if (permission !== 'granted') {
+                      toast('알림을 허용해주어야 메뉴 준비 완료 메시지를 받을 수 있습니다!', {
+                        type: 'warn',
+                        position: 'top-center',
+                        autoClose: 4000,
+                      });
+                    } else {
+                      // 푸시 승인됐을 때 처리할 내용
+                      console.log('푸시 승인됨');
+                      getTokenHandler().then(res => {
+                        if (res) addUserToken({ order_id: payment.orderId, token: res });
+                      });
+                    }
+                  });
+                },
+              });
+            }
+          } catch (err) {
+            toast('모바일 브라우저로 주문 하셨기 때문에 메뉴 준비 완료시 알림이 가지 않습니다.', {
+              position: 'top-center',
+              autoClose: 100000,
+              showCloseButton: true,
+              type: 'warn',
+            });
+          }
+
           console.error('토큰 발급에 실패하였습니다.');
         }
       });

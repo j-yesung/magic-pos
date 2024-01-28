@@ -34,17 +34,21 @@ const OrderItem = ({ orderData }: { orderData: OrderDataWithStoreName }) => {
             token: userToken?.token || '',
             click_action: '/',
           });
-
-          if (typeof is_togo === 'undefined') {
-            mutate({ id: id, isTogo: false });
-          } else if (typeof is_togo === 'boolean') {
-            mutate({ id: id, isTogo: true });
-          }
         } else {
           toast('토큰을 발급받을 수 없습니다. 관리자에게 문의해주세요', {
             type: 'danger',
             position: 'top-right',
           });
+          toast(`${order_number}번 주문이 고객에게 알림이 가지 않았습니다.`, {
+            type: 'warn',
+            position: 'top-right',
+          });
+        }
+
+        if (typeof is_togo === 'undefined') {
+          mutate({ id: id, isTogo: false });
+        } else if (typeof is_togo === 'boolean') {
+          mutate({ id: id, isTogo: true });
         }
       },
     });
