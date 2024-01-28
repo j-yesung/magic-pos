@@ -1,4 +1,5 @@
 import Checkbox from '@/components/common/Checkbox';
+import { changeCheckBox } from '@/shared/store/toggle';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import styles from '../styles/Auth.module.css';
@@ -6,18 +7,17 @@ import styles from '../styles/Auth.module.css';
 interface SignCaptionProps {
   subUrl: string;
   subName: string;
-  value: Record<string, string>;
   isCheckbox: boolean;
-  setIsCheckbox: React.Dispatch<React.SetStateAction<boolean>>;
+  value: Record<string, string>;
 }
 
 const SignCaption = (props: SignCaptionProps) => {
-  const { subUrl, subName, value, isCheckbox, setIsCheckbox } = props;
+  const { subUrl, subName, isCheckbox, value } = props;
   const { email } = value;
   const [isLoading, setIsLoading] = useState(false);
 
   const clickStorageSaveHandler = () => {
-    setIsCheckbox(prev => !prev);
+    changeCheckBox();
     isCheckbox ? localStorage.removeItem('email') : localStorage.setItem('email', email);
   };
 

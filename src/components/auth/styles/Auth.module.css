@@ -84,6 +84,7 @@
   padding: 2rem;
   cursor: pointer;
   border-radius: 1rem;
+  color: var(--white);
   background-color: var(--main-color);
 }
 .button p {
