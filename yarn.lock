@@ -7597,7 +7597,6 @@ __metadata:
     axios: "npm:^1.6.5"
     chart.js: "npm:^4.4.1"
     chartjs-plugin-datalabels: "npm:^2.2.0"
-    cheerio: "npm:^1.0.0-rc.12"
     class-variance-authority: "npm:^0.7.0"
     clsx: "npm:^2.1.0"
     deepl-node: "npm:^1.11.0"
