@@ -5,7 +5,6 @@ import Card from './card/Card';
 import Form from './form/Form';
 import AddButton from './form/button/Button';
 import styles from './styles/container.module.css';
-
 const PlatFormWrapper = () => {
   const storeId = useAuthState(state => state.storeId);
   setPlatFormStoreId(storeId!);
