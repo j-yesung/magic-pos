@@ -7,6 +7,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import useKioskState from '@/shared/store/kiosk';
 import { useModal } from '@/hooks/service/ui/useModal';
 import { IoInformationCircleOutline } from 'react-icons/io5';
+import HelpModal from '@/components/kiosk/order-type/HelpModal';
 
 /**
  * STEP1: 포장 / 매장 선택
@@ -25,7 +26,7 @@ const OrderTypeContainer = () => {
   };
 
   const handleClickHelp = () => {
-    MagicModal.alert({ content: 'test' });
+    MagicModal.fire(<HelpModal />);
   };
 
   useEffect(() => {

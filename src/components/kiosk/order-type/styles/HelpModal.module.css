@@ -1,0 +1,70 @@
+.container {
+    position: relative;
+    width: 90vw;
+    height: 90vh;
+    padding: 2rem;
+}
+
+.container div {
+    height: fit-content;
+}
+
+.container h1:not(.header h1) {
+    color: var(--text1);
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.6rem; /* 100% */
+    letter-spacing: -0.032rem;
+    margin-bottom: 1rem;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.header h1 {
+    color: var(--text2);
+    font-size: 1.3rem;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: -0.026rem;
+}
+
+
+
+.slide-content {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+
+
+.slide-content img {
+    width: 100%;
+    height: fit-content;
+    border-radius: 1rem;
+}
+
+.container button:not(.header button) {
+    position: absolute;
+    z-index: var(--level-1-z-index);
+    background: var(--point1-80);
+    color: var(--white);
+    border-radius: 50%;
+}
+
+.next-button {
+    right: 0;
+    top: 50%;
+}
+
+.prev-button {
+    left: 0;
+    top: 50%;
+}
