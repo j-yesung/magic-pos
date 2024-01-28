@@ -1,5 +1,7 @@
+import { getOpenGraphMetaImage } from '@/server/api/external/openGraph';
 import { AddPlatFormType, EditPlatFormType } from '@/types/platform';
 import { Tables } from '@/types/supabase';
+import { debounce } from 'lodash';
 import { ChangeEvent } from 'react';
 import { create } from 'zustand';
 
@@ -12,6 +14,8 @@ interface PlatformStore {
   isEdit: boolean;
   fetchPlatFormData: Tables<'platform'>[];
   prevImg: string | null;
+  meta: boolean;
+  isValidUrl: boolean;
 }
 
 interface PrevDataType {
@@ -29,6 +33,7 @@ const initialAddPlatform = {
   link_url: '',
   file: null,
   store_id: '',
+  metaImage: null,
 };
 const initialEditPlatForm = {
   id: '',
@@ -37,6 +42,7 @@ const initialEditPlatForm = {
   image_url: null,
   file: null,
   store_id: null,
+  metaImage: null,
 };
 
 const initialPrevData = {
@@ -46,11 +52,14 @@ const initialPrevData = {
   image_url: null,
   file: null,
   store_id: null,
+  metaImage: null,
 };
 
 const initialPrevImg = null;
 
 const initialFetchPlatForm: Tables<'platform'>[] = [];
+
+const initialMeta = false;
 
 const usePlatFormState = create<PlatformStore>()(() => ({
   store_id: null,
@@ -61,6 +70,8 @@ const usePlatFormState = create<PlatformStore>()(() => ({
   prevData: initialPrevData,
   fetchPlatFormData: initialFetchPlatForm,
   prevImg: initialPrevImg,
+  meta: initialMeta,
+  isValidUrl: true,
 }));
 
 export default usePlatFormState;
@@ -93,28 +104,71 @@ export const setPlatFormStoreId = (store_id: string) =>
     },
   }));
 
+export const setIsValidUrl = (param: boolean) =>
+  usePlatFormState.setState(state => ({
+    ...state,
+    isValidUrl: param,
+  }));
+
 /**
  *
  * @param e AddForm
  */
-export const setAddPlatForm = (e: ChangeEvent<HTMLInputElement>) => {
+export const setAddPlatForm = debounce(async (e: ChangeEvent<HTMLInputElement>) => {
   const { name, value } = e.target;
+  if (name === 'link_url') {
+    const metaImage = await getOpenGraphMetaImage(value);
+
+    if (metaImage) {
+      usePlatFormState.setState(state => ({
+        ...state,
+        addPlatForm: {
+          ...state.addPlatForm,
+          metaImage,
+        },
+      }));
+      setMeta(true);
+      setPrevImg(metaImage);
+    } else {
+      setMeta(false);
+      resetPrevImg();
+    }
+  }
+  if (!usePlatFormState.getState().isValidUrl) setIsValidUrl(true);
   usePlatFormState.setState(state => ({
     ...state,
     addPlatForm: { ...state.addPlatForm, [name]: value },
   }));
-};
+}, 500);
 
 /**
  *  수정할 데이터
  */
-export const setEditPlatForm = (e: ChangeEvent<HTMLInputElement>) => {
+export const setEditPlatForm = debounce(async (e: ChangeEvent<HTMLInputElement>) => {
   const { name, value } = e.target;
+  if (name === 'link_url') {
+    const metaImage = await getOpenGraphMetaImage(value);
+    if (metaImage) {
+      usePlatFormState.setState(state => ({
+        ...state,
+        editPlatForm: {
+          ...state.editPlatForm,
+          metaImage,
+        },
+      }));
+      setMeta(true);
+      setPrevImg(metaImage);
+    } else {
+      setMeta(false);
+      resetPrevImg();
+    }
+  }
+
   usePlatFormState.setState(state => ({
     ...state,
     editPlatForm: { ...state.editPlatForm, [name]: value },
   }));
-};
+}, 500);
 
 /**
  *
@@ -152,6 +206,12 @@ export const setPrevImg = (url: string) =>
   usePlatFormState.setState(state => ({
     ...state,
     prevImg: url ?? null,
+  }));
+
+export const setMeta = (type: boolean) =>
+  usePlatFormState.setState(state => ({
+    ...state,
+    meta: type,
   }));
 
 /**
@@ -229,4 +289,20 @@ export const resetPrevData = () =>
   usePlatFormState.setState(state => ({
     ...state,
     prevData: initialPrevData,
+  }));
+
+export const resetMeta = () =>
+  usePlatFormState.setState(state => ({
+    ...state,
+    addPlatForm: {
+      ...state.addPlatForm,
+      metaImage: null,
+    },
+    meta: initialMeta,
+  }));
+
+export const resetIsValidUrl = () =>
+  usePlatFormState.setState(state => ({
+    ...state,
+    isValidUrl: true,
   }));

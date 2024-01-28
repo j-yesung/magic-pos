@@ -104,7 +104,6 @@ export const insertPlatFormRow = async (param: AddPlatFormType | EditPlatFormTyp
 };
 
 export const fetchPlatForm = async (store_id: string) => {
-  console.log(store_id);
   const { data: platform, error } = await supabase
     .from('platform')
     .select('*')
