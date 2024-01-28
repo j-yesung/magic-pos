@@ -78,13 +78,16 @@ const Sidebar = (adminInfo: AdminCategories) => {
         </div>
         <div className={styles.toggleButton}>
           <HeaderToggleButton />
-          <IoQrCodeOutline size={'4rem'} onClick={clickQrModalOpenHandler} />
         </div>
         <div className={styles.notification}>
           <Ellipse width={8} height={8} />
           {isMode ? modeText[0] : modeText[1]}
         </div>
         <p>{isMode ? modeSubText[0] : modeSubText[1]}</p>
+        <div className={styles.qrDownload} onClick={clickQrModalOpenHandler}>
+          <IoQrCodeOutline size={'2rem'} />
+          <span>QR 코드 다운로드</span>
+        </div>
         <div className={styles.mediaScroll}>
           <ul>
             <SidebarList navList={navList} clickFn={clickMoveListHandler} />
