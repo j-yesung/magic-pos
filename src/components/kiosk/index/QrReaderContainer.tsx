@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 const QrReaderContainer = () => {
   const router = useRouter();
   const [isPageLoading, setIsPageLoading] = useState(true);
-  const [isVideoRendereing, setIsVideoRendereing] = useState(true);
+  const [isVideoRendering, setIsVideoRendering] = useState(true);
 
   useEffect(() => {
     setIsPageLoading(false);
@@ -18,18 +18,12 @@ const QrReaderContainer = () => {
         <div className={styles.container}>
           <QrReader
             className={styles.qrReader}
-            videoContainerStyle={{ display: 'flex', justifyContent: 'center' }}
+            videoContainerStyle={{ display: 'flex', justifyContent: 'center', paddingTop: 0 }}
             videoStyle={{ height: '30rem', width: 'fit-content' }}
             onResult={result => {
-              if (!isVideoRendereing) {
-                if (
-                  navigator.userAgent.indexOf('Safari') != -1 &&
-                  navigator.userAgent.indexOf('Mac') != -1 &&
-                  navigator.userAgent.indexOf('Chrome') == -1
-                ) {
-                  document.getElementById('qr-reader')!.setAttribute('crossorigin', 'true');
-                }
-                setIsVideoRendereing(false);
+              if (!isVideoRendering) {
+                document.getElementById('qr-reader')!.setAttribute('crossorigin', 'true');
+                setIsVideoRendering(false);
               }
 
               if (result) {

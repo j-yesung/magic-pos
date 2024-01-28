@@ -3,8 +3,10 @@ import QrReaderContainer from '@/components/kiosk/index/QrReaderContainer';
 import styles from './styles/IndexPageContainer.module.css';
 import Logo from '/public/logo.svg';
 import { IoCameraOutline } from 'react-icons/io5';
+import useToast from '@/hooks/service/ui/useToast';
 
 const IndexPageContainer = () => {
+  const { toast } = useToast();
   const handler = async () => {
     const constraints = {
       video: true,
@@ -13,12 +15,16 @@ const IndexPageContainer = () => {
     navigator.mediaDevices.getUserMedia(constraints).catch(err => {
       // always check for errors at the end.
       console.error(`${err.name}: ${err.message}`);
+      toast(`${err.name}: ${err.message}`, {
+        type: 'danger',
+        position: 'bottom-right',
+      });
     });
   };
 
   return (
     <div className={styles.container}>
-      <header>
+      <header onClick={handler}>
         <Logo />
       </header>
       <div className={styles.description1} onClick={handler}>
