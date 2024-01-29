@@ -5,8 +5,8 @@ import WateMark from './WateMark';
 
 const SliderArea = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const data1 = createDummyData(40);
-  const data2 = createDummyData(40);
+  const data1 = createDummyData(40, 1);
+  const data2 = createDummyData(40, 2);
   const dataChunks = [data1, data2];
 
   useEffect(() => {
