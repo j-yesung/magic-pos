@@ -9,14 +9,17 @@ const StartButton = () => {
   const { toast } = useToast();
 
   const clickStartHandler = () => {
-    session
-      ? router.push('/admin/management')
-      : toast('로그인 후 이용해 주세요.', {
-          type: 'warn',
-          position: 'top-center',
-          showCloseButton: false,
-          autoClose: 2000,
-        });
+    if (session) {
+      router.push('/admin/management');
+    } else {
+      toast('로그인 후 이용해 주세요.', {
+        type: 'warn',
+        position: 'top-center',
+        showCloseButton: false,
+        autoClose: 2000,
+      });
+      router.push('/auth/login');
+    }
   };
 
   return (
