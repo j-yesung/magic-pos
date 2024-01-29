@@ -43,7 +43,7 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
       if (!timer) {
         timer = setTimeout(() => {
           setIsPageLoading(true);
-        }, 100);
+        }, 150);
       }
     };
     const handleRouteComplete = () => {
