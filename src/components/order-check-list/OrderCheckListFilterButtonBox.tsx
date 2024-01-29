@@ -13,15 +13,18 @@ const OrderCheckListFilterButtonBox = () => {
     setIsDateButton(1);
   };
   const clickWeekButtonHandler = () => {
+    setListTYpe('week');
     setIsDateButton(2);
   };
   const clickMonthButtonHandler = () => {
+    setListTYpe('month');
     setIsDateButton(3);
   };
   const clickDateButtonHandler = () => {
     setIsDateButton(4);
   };
   const clickResetButtonHandler = () => {
+    setListTYpe('default');
     setIsDateButton(0);
   };
 
