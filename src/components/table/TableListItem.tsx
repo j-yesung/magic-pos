@@ -4,10 +4,10 @@ import useSetTable from '@/hooks/table/useSetTable';
 import useTableStore from '@/shared/store/table';
 import { Tables } from '@/types/supabase';
 import clsx from 'clsx';
-import { FiAlertCircle } from 'react-icons/fi';
 import TableEditModal from './TableEditModal/TableEditModal';
 import styles from './styles/TableListItem.module.css';
 import CloseButton from '/public/icons/close.svg';
+import ExclamationMark from '/public/icons/exclamation-mark.svg';
 import EditButton from '/public/icons/pencil.svg';
 
 const TableListItem = ({
@@ -42,7 +42,7 @@ const TableListItem = ({
       });
     } else {
       MagicModal.confirm({
-        icon: <FiAlertCircle size={50} />,
+        icon: <ExclamationMark width={50} height={50} />,
         content: '정말로 삭제하시겠습니까?',
         confirmButtonCallback: () => {
           deleteMutate(storeTableData.id);

@@ -2,10 +2,10 @@ import { useModal } from '@/hooks/service/ui/useModal';
 import useMenuItemStore from '@/shared/store/menu/menu-item';
 import useMenuOptionStore, { NewMenuOptionWithDetail } from '@/shared/store/menu/menu-option';
 import { MenuOptionWithDetail } from '@/types/supabase';
-import { FiAlertCircle } from 'react-icons/fi';
 import MenuOptionModal from '../options/MenuOptionModal';
 import styles from '../styles/menu-item-form.module.css';
 import CloseButton from '/public/icons/close.svg';
+import ExclamationMark from '/public/icons/exclamation-mark.svg';
 import EditButton from '/public/icons/pencil.svg';
 import PlusButton from '/public/icons/plus.svg';
 
@@ -49,8 +49,8 @@ const MenuItemFormOption = () => {
   const removeOptionDetailHandler = async (menuOptionIndex: number) => {
     setMenuOptionIndex(menuOptionIndex);
     MagicModal.confirm({
-      icon: <FiAlertCircle size={50} />,
-      content: '옵션을 삭제하시겠습니까?',
+      icon: <ExclamationMark width={50} height={50} />,
+      content: '옵션을 삭제할까요?',
       confirmButtonCallback: () => {
         const removedItemList = menuOptions.filter((_, index) => index !== menuOptionIndex);
         setMenuOptions(removedItemList);

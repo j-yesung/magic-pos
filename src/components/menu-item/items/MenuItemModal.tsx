@@ -14,10 +14,12 @@ const MenuItemModal = ({ modalId }: { modalId?: string }) => {
 
   return (
     <div className={styles['menu-modal-wrap']}>
-      {isEdit ? <h3 className={styles['title']}>메뉴 수정</h3> : <h3 className={styles['title']}>메뉴 등록</h3>}
+      <div className={styles['menu-modal-top']}>
+        {isEdit ? <h3 className={styles['title']}>메뉴 수정</h3> : <h3 className={styles['title']}>메뉴 등록</h3>}
 
-      <div className={styles['close-button']}>
-        <CloseButton width={26} height={26} onClick={clickItemModalHide} />
+        <div className={styles['close-button']}>
+          <CloseButton width={26} height={26} onClick={clickItemModalHide} />
+        </div>
       </div>
       <div className={styles['line']}></div>
       <div className={styles['box']}>

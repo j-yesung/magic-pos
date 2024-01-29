@@ -23,12 +23,11 @@ const MenuItemsComponentPage = () => {
 
   const categoryWithMenuItem = useMenuItemStore(state => state.categoryWithMenuItem);
   const categoryWithMenuItemList = useMenuItemStore(state => state.categoryWithMenuItemList);
-  const { menuOptions, setMenuOptions, changeMenuOptions, setOrigineMenuOptions } = useMenuOptionStore();
+  const { changeMenuOptions, setOrigineMenuOptions } = useMenuOptionStore();
 
   const [choiceFetchData, setChoiceFetchData] = useState(false);
 
   useEffect(() => {
-    console.log(categoryWithMenuData);
     if (categoryWithMenuData?.error === null) {
       setCategoryWithMenuItemList(categoryWithMenuData?.data);
       if (!isFetching) {
@@ -85,9 +84,7 @@ const MenuItemsComponentPage = () => {
       <div className={styles['menu-container']}>
         {categoryWithMenuItemList.length === 0 ? (
           <div>
-            <span>
-              <ExclamationMark width={6} height={50} />
-            </span>
+            <ExclamationMark width={121} height={121} />
             <h4>메뉴의 카테고리를 먼저 추가해주세요.</h4>
             <button type="button" onClick={() => router.push('/admin/menu-category')}>
               카테고리 페이지로 이동

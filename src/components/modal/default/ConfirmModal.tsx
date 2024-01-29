@@ -1,9 +1,8 @@
-import React from 'react';
 import { hideConfirm } from '@/shared/store/modal';
-import styles from './styles/ConfirmModal.module.css';
 import { ModalConfirmTypeOption } from '@/types/common';
-import { IoClose } from 'react-icons/io5';
 import Image from 'next/image';
+import styles from './styles/ConfirmModal.module.css';
+import CloseButton from '/public/icons/x.svg';
 
 const ConfirmModal = ({ confirmOption }: { confirmOption: ModalConfirmTypeOption }) => {
   const handleClickCancel = () => {
@@ -24,7 +23,7 @@ const ConfirmModal = ({ confirmOption }: { confirmOption: ModalConfirmTypeOption
     <div className={styles.container}>
       <header>
         <button onClick={handleClickCloseButton}>
-          <IoClose size={24} />
+          <CloseButton width={26} height={26} />
         </button>
       </header>
       <div className={styles.content}>
