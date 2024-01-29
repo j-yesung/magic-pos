@@ -30,20 +30,22 @@ const StepButton = () => {
   const selectedMenu = useKioskState(state => state.selectedMenu);
   const isWidgetRendering = useKioskState(state => state.isWidgetRendering);
   const { MagicModal } = useModal();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const { paymentWidget, handlePaymentRequest } = usePaymentWidget();
 
   const BUTTON_OPTIONS: { [key: number]: ReactElement } = {
-    1: <>{convertNumberToWon(getTotalPrice(orderList))}</>,
+    1: <>{convertNumberToWon(getTotalPrice(orderList), i18n.language === 'ko')}</>,
     2: (
       <>
-        {convertNumberToWon(getTotalPrice(orderList))} {<BiSolidCircle size={2} />} {t('footer.payment')}
+        {convertNumberToWon(getTotalPrice(orderList), i18n.language === 'ko')} {<BiSolidCircle size={2} />}{' '}
+        {t('footer.payment')}
       </>
     ),
     3: (
       <>
-        {convertNumberToWon(getTotalPrice(orderList))} {<BiSolidCircle size={2} />} {t('footer.payment')}
+        {convertNumberToWon(getTotalPrice(orderList), i18n.language === 'ko')} {<BiSolidCircle size={2} />}{' '}
+        {t('footer.payment')}
       </>
     ),
   };

@@ -9,9 +9,10 @@ export const isEmptyObject = (obj: object) => {
 /**
  * 숫자를 화폐 형식(원) 문자열로 바꿉니다.
  * @param num
+ * @param isKor 원으로 나타낼지 WON으로 나타낼지 정합니다.
  */
-export const convertNumberToWon = (num: number) => {
-  return `${new Intl.NumberFormat('ko-KO', { style: 'decimal', currency: 'KRW' }).format(num)}₩`;
+export const convertNumberToWon = (num: number, isKor: boolean = true) => {
+  return `${new Intl.NumberFormat('ko-KO', { style: 'decimal', currency: 'KRW' }).format(num)}${isKor ? '원' : '₩'}`;
 };
 
 /**

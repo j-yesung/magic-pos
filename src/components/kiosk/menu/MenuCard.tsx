@@ -4,6 +4,7 @@ import Image from 'next/image';
 import useKioskState, { setIsOptionPage, setSelectedMenu } from '@/shared/store/kiosk';
 import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButton';
 import { convertNumberToWon } from '@/shared/helper';
+import { useTranslation } from 'next-i18next';
 
 interface MenuCardProps {
   menu: MenuItemWithOption;
@@ -11,6 +12,7 @@ interface MenuCardProps {
 
 const MenuCard = ({ menu }: MenuCardProps) => {
   const optionSwiperRef = useKioskState(state => state.optionSwiperRef);
+  const { i18n } = useTranslation();
 
   const handleClickCard = () => {
     if (menu.remain_ea === 0) return;
@@ -24,7 +26,7 @@ const MenuCard = ({ menu }: MenuCardProps) => {
       <Image src={menu.image_url ?? ''} alt={menu.name ?? ''} width={123} height={125} priority={true} />
       <div className={styles.menuInfo}>
         <span>{menu.name}</span>
-        <span>{convertNumberToWon(menu.price)}</span>
+        <span>{convertNumberToWon(menu.price, i18n.language === 'ko')}</span>
       </div>
       {menu.remain_ea === 0 && (
         <div className={styles.soldOut}>

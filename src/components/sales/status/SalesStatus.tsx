@@ -1,6 +1,6 @@
 import { getDaySales } from '@/server/api/supabase/sales';
 import { setCalendarCurrentDate } from '@/shared/store/sales/salesCalendar';
-import { setChartData } from '@/shared/store/sales/salesChart';
+import { resetChartData, setChartData } from '@/shared/store/sales/salesChart';
 import useDayState, { resetSelectedDate } from '@/shared/store/sales/salesDay';
 import { resetRecordData, setRecordData } from '@/shared/store/sales/salesRecord';
 import useAuthState from '@/shared/store/session';
@@ -28,6 +28,7 @@ const SalesStatus = () => {
           setRecordData(recordData);
         }
       } else if (data.sales.length === 0) {
+        resetChartData();
         setRecordData({
           currentSales: 0,
           dateType: 'day',
@@ -35,10 +36,11 @@ const SalesStatus = () => {
       }
     });
   }, []);
-
+  console.log(moment('2024-01-09T14:46:43+00:00').format('YY MM DD HH'));
   // reset 하는 함수들
   useEffect(() => {
     return () => {
+      resetChartData();
       resetRecordData();
       resetSelectedDate();
       setCalendarCurrentDate(today);

@@ -4,10 +4,10 @@ import useCategoriesStore, { setCategory, setIsEdit } from '@/shared/store/menu/
 import { Tables } from '@/types/supabase';
 import clsx from 'clsx';
 import { useRef, useState } from 'react';
-import { FiAlertCircle } from 'react-icons/fi';
 import MenuCategoryModal from './modal/MenuCategoryModal';
 import styles from './styles/category.module.css';
 import CloseButton from '/public/icons/close.svg';
+import ExclamationMark from '/public/icons/exclamation-mark.svg';
 import EditButton from '/public/icons/pencil.svg';
 
 interface PropsType {
@@ -34,8 +34,8 @@ const CategroyCardPage = ({ item, idx, dropNum, setDropNum }: PropsType) => {
   // 카테고리 삭제
   const clickRemoveCategoryHandler = (item: Tables<'menu_category'>) => {
     MagicModal.confirm({
-      icon: <FiAlertCircle size={50} />,
-      content: '정말로 삭제하시겠습니까?',
+      icon: <ExclamationMark width={50} height={50} />,
+      content: '카테고리를 삭제할까요?',
       confirmButtonCallback: () => {
         deleteMutate(item.id);
         setCategory({ ...category, id: '', name: '' });

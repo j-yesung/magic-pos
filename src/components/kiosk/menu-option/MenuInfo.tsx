@@ -5,14 +5,14 @@ import { useTranslation } from 'next-i18next';
 
 const MenuInfo = () => {
   const selectedMenu = useKioskState(state => state.selectedMenu);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   return (
     <div className={styles.container}>
       <h2>{selectedMenu?.name}</h2>
       <div className={styles.priceWrapper}>
         <h3>{t('price')}</h3>
-        <span>{convertNumberToWon(selectedMenu?.price ?? 0)}</span>
+        <span>{convertNumberToWon(selectedMenu?.price ?? 0, i18n.language === 'ko')}</span>
       </div>
     </div>
   );

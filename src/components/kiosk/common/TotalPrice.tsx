@@ -5,12 +5,12 @@ import { getTotalPrice } from '@/shared/store/kiosk';
 import { useTranslation } from 'next-i18next';
 
 const TotalPrice = ({ itemList }: { itemList: MenuItemWithOption[] }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   return (
     <div className={styles.container}>
       <span>{t('total-price')}</span>
-      <span className={styles.totalPrice}>{convertNumberToWon(getTotalPrice(itemList))}</span>
+      <span className={styles.totalPrice}>{convertNumberToWon(getTotalPrice(itemList), i18n.language === 'ko')}</span>
     </div>
   );
 };

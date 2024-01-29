@@ -16,12 +16,19 @@
 
 .logo {
     margin-bottom: 10rem;
-    height: 5rem;
 }
 
 .magic-wind {
     height: 14.8rem;
-    margin-bottom: 5rem;
+    margin-bottom: 6rem;
+}
+
+.loading-spinner {
+    width: 100%;
+    display: flex;
+    gap: .7rem;
+    justify-content: center;
+    align-items: center;
 }
 
 .container p {

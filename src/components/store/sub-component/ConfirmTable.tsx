@@ -1,7 +1,6 @@
 import { useFetchQuery } from '@/hooks/query/store/useFetchQuery';
 import { useStoreSetQuery } from '@/hooks/query/store/useStoreSetQuery';
 import useAuthState from '@/shared/store/session';
-import { setIsUseTable } from '@/shared/store/table';
 import Select from 'react-select';
 import styles from '../styles/StroeContents.module.css';
 import { customStyles } from './StoreSelectBox';
@@ -21,7 +20,6 @@ const ConfirmTable = () => {
       const useTable = selectedValue === 'true';
       await updateStoreUseTable({ storeId, useTable });
       refetch();
-      setIsUseTable(useTable ? true : false);
     }
   };
 

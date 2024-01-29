@@ -1,48 +1,48 @@
 .modal-overlay {
-    display: grid;
-    grid-template-rows: repeat(3, 1fr);
-    grid-template-columns: repeat(3, 1fr);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 100;
-    background-color: rgba(255, 255, 255, 0.8);
-    align-items: center;
-    justify-items: center;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.8);
+  align-items: center;
+  justify-items: center;
 }
 
 .modal-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    min-width: 10rem;
-    width: max-content;
-    background-color: white;
-    border-radius: 1.5rem  /* 15/10 */;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.10);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-width: 10rem;
+  width: max-content;
+  background-color: white;
+  border-radius: 1rem /* 15/10 */;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 }
 
 .modal-position-center {
-    grid-column: 2;
-    grid-row: 2;
+  grid-column: 2;
+  grid-row: 2;
 }
 
 .custom-z-index {
-    z-index: var(--level-3-z-index);
+  z-index: var(--level-3-z-index);
 }
 
 .confirm-z-index {
-    z-index: var(--level-4-z-index);
+  z-index: var(--level-4-z-index);
 }
 
 .alert-z-index {
-    z-index: var(--level-5-z-index);
+  z-index: var(--level-5-z-index);
 }
 
 .opacity-10 {
-    pointer-events: none;
-    filter: opacity(10%);
+  pointer-events: none;
+  filter: opacity(10%);
 }
