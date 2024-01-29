@@ -8,64 +8,57 @@ import useMenuItemStore, {
 } from '@/shared/store/menu/menu-item';
 import useMenuOptionStore from '@/shared/store/menu/menu-option';
 import useAuthState from '@/shared/store/session';
-import { MenuItemWithOption } from '@/types/supabase';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
-import { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import MenuItemListPage from './items/MenuItemList';
 import styles from './styles/menu-item-container.module.css';
+import ExclamationMark from '/public/icons/exclamation-mark.svg';
 
-interface CategoryWithType {
-  menu_item: MenuItemWithOption[];
-  id: string;
-  name: string | null;
-  position: number | null;
-  store_id: string;
-}
 const MenuItemsComponentPage = () => {
   const storeId = useAuthState(state => state.storeId);
-  const { data: categoryWithMenuData, isLoading: menuItemLoading } = useFetchMenuItems(storeId ?? '');
+  const { data: categoryWithMenuData, isLoading: menuItemLoading, isFetching } = useFetchMenuItems(storeId ?? '');
   const { data: menuOptionData, isLoading: menuOptionLoading } = useFetchMenuOptions();
   const router = useRouter();
 
   const categoryWithMenuItem = useMenuItemStore(state => state.categoryWithMenuItem);
   const categoryWithMenuItemList = useMenuItemStore(state => state.categoryWithMenuItemList);
-  const { setMenuOptions, changeMenuOptions, setOrigineMenuOptions } = useMenuOptionStore();
+  const { menuOptions, setMenuOptions, changeMenuOptions, setOrigineMenuOptions } = useMenuOptionStore();
 
-  const dummyFetchData = useRef<CategoryWithType[]>([]);
-  const choiceFetchData = useRef(false);
+  const [choiceFetchData, setChoiceFetchData] = useState(false);
 
   useEffect(() => {
+    console.log(categoryWithMenuData);
     if (categoryWithMenuData?.error === null) {
       setCategoryWithMenuItemList(categoryWithMenuData?.data);
-      if (choiceFetchData.current === false && dummyFetchData.current !== undefined) {
-        dummyFetchData.current = categoryWithMenuData?.data;
-        choiceFetchData.current = true;
+      if (!isFetching) {
+        setChoiceFetchData(true);
       }
     }
     if (menuOptionData?.error === null) {
-      setMenuOptions(menuOptionData?.data);
       setOrigineMenuOptions(menuOptionData?.data);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [categoryWithMenuData, menuOptionData]);
+  }, [categoryWithMenuData, menuOptionData, isFetching]);
 
   useEffect(() => {
-    if (categoryWithMenuData?.error === null) {
-      if (categoryWithMenuData?.data.length > 0 && categoryWithMenuData?.data[0]) {
-        setCategoryWithMenuItem({
-          ...categoryWithMenuItem,
-          id: categoryWithMenuData?.data[0].id, // 초기값 첫 카테고리 선택
-          store_id: storeId ?? '',
-          position: categoryWithMenuData?.data.length,
-          menu_item: categoryWithMenuData?.data[0].menu_item, // 초기값 첫 카테고리 선택
-        });
-        setMenuItemList(categoryWithMenuData?.data[0].menu_item);
+    if (choiceFetchData === true) {
+      if (categoryWithMenuData?.error === null) {
+        if (categoryWithMenuData?.data.length > 0 && categoryWithMenuData?.data[0]) {
+          setCategoryWithMenuItem({
+            ...categoryWithMenuItem,
+            id: categoryWithMenuData?.data[0].id, // 초기값 첫 카테고리 선택
+            store_id: storeId ?? '',
+            position: categoryWithMenuData?.data.length,
+            menu_item: categoryWithMenuData?.data[0].menu_item, // 초기값 첫 카테고리 선택
+          });
+          setMenuItemList(categoryWithMenuData?.data[0].menu_item);
+        }
       }
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dummyFetchData]);
+  }, [choiceFetchData]);
 
   useEffect(() => {
     fetchData();
@@ -74,7 +67,6 @@ const MenuItemsComponentPage = () => {
 
   const fetchData = async () => {
     const { data } = await fetchMenuOptions();
-    setMenuOptions(data);
     setOrigineMenuOptions(data);
     return data;
   };
@@ -93,10 +85,10 @@ const MenuItemsComponentPage = () => {
       <div className={styles['menu-container']}>
         {categoryWithMenuItemList.length === 0 ? (
           <div>
-            <h4>
-              메뉴의 카테고리를 <br />
-              먼저 추가해주세요.
-            </h4>
+            <span>
+              <ExclamationMark width={6} height={50} />
+            </span>
+            <h4>메뉴의 카테고리를 먼저 추가해주세요.</h4>
             <button type="button" onClick={() => router.push('/admin/menu-category')}>
               카테고리 페이지로 이동
             </button>

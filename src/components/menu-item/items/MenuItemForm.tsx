@@ -40,7 +40,6 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
         image_url: menuItem.image_url,
       };
       if (!isEdit) {
-        // const addData = await addMutate.mutateAsync(newMenuItemData);
         const addData = await addMutate.mutateAsync(newMenuItemData);
         setMenuItem(addData[0]);
         newMenuItemData.id = addData[0].id;
@@ -70,13 +69,13 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
         newMenuItemData.image_url = null;
       }
       updateNameMutate(newMenuItemData);
-      props.clickItemModalHide();
       setMenuItemImgFile(null);
 
       // 옵션 업데이트 부분
       removerOptionHandler();
       filterOptionHandler();
       setMenuOptions([]);
+      props.clickItemModalHide();
     } catch (error) {
       console.error(error);
     }

@@ -1,8 +1,11 @@
+.wrap-container {
+  position: relative;
+  height: 100%;
+}
 .wrap {
   height: 100%;
   overflow-y: auto;
-  padding-right: 0.7rem;
-  overflow-y: scroll;
+  padding-right: 0;
 }
 
 .wrap::-webkit-scrollbar {
@@ -97,4 +100,12 @@
 
 .wrap > ul li button .btn-wrap .remove-btn path {
   stroke: #fff;
+}
+
+.drag-info {
+  position: absolute;
+  top: -2.5rem;
+  font-size: 1.4rem;
+  color: var(--text3);
+  right: 0;
 }

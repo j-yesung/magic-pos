@@ -9,10 +9,10 @@ const enum QUERY_KEY {
 
 const useFetchMenuItems = (id: string) => {
   const storeId = useAuthState(state => state.storeId);
-  const { data, isLoading, isError, error } = useQuery({
+  const { data, isLoading, isError, error, isFetching } = useQuery({
     queryKey: [QUERY_KEY.MENU_CATEGORY_WITH_ITEM, storeId],
     queryFn: () => fetchCategoriesWithMenuItemByStoreId(id),
-    enabled: !!id,
+    enabled: !!id && !!storeId,
   });
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const useFetchMenuItems = (id: string) => {
     }
   }, [isError, error]);
 
-  return { data, isLoading };
+  return { data, isLoading, isFetching };
 };
 
 export default useFetchMenuItems;
