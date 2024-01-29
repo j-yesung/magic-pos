@@ -8,8 +8,8 @@ import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import { Swiper as SwiperType } from 'swiper/types';
 import styles from '../../styles/Section.module.css';
-import PrevArrow from '/public/icons/arrow-left.svg';
-import NextArrow from '/public/icons/arrow-right.svg';
+import AdminFieldButton from './AdminFieldButton';
+import AdminFieldItem from './AdminFieldItem';
 
 const AdminField = () => {
   const swiperRef = useRef<SwiperRef>(null);
@@ -43,25 +43,11 @@ const AdminField = () => {
             </SwiperSlide>
           ))}
         </Swiper>
-        {/* <div className={styles.actionButton}>
-          <PrevArrow className={styles.arrow} width={80} onClick={goPrev} />
-          <NextArrow className={styles.arrow} width={80} onClick={goNext} />
-        </div> */}
       </div>
       {/* 현재 활성화된 슬라이드에 해당하는 설명만 보여줌 */}
       <div className={styles.description}>
-        <div className={styles.descriptionItem}>
-          <h1>{ADMIN_INFO[activeIndex].id}</h1>
-          <h2>{ADMIN_INFO[activeIndex].title}</h2>
-          <div className={styles.textBox}>
-            <p>{ADMIN_INFO[activeIndex].desc}</p>
-            <p>{ADMIN_INFO[activeIndex].caption}</p>
-          </div>
-        </div>
-        <div className={styles.actionButton}>
-          <PrevArrow className={styles.arrow} width={80} onClick={goPrev} />
-          <NextArrow className={styles.arrow} width={80} onClick={goNext} />
-        </div>
+        <AdminFieldItem activeIndex={activeIndex} />
+        <AdminFieldButton goPrev={goPrev} goNext={goNext} />
       </div>
     </section>
   );
