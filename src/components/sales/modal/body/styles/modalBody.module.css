@@ -1,0 +1,81 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 41.5rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  display: flex;
+  width: 41.5rem;
+  padding: 1.5rem;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 1rem 1rem 0rem 0rem;
+  border: 1px solid var(--line, #ededed);
+}
+
+.title-text {
+  color: var(--point1-80, #7433ff);
+  text-align: center;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: bold;
+  line-height: 1.6rem; /* 100% */
+  letter-spacing: -0.032rem;
+}
+
+.button-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.button {
+  display: flex;
+  width: 8rem;
+  height: 4rem;
+  padding: 1.2rem 1.5rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 0.5rem;
+  background: var(--bg-g, #f7f7f7);
+  color: var(--text1, #121416);
+}
+
+.button-active {
+  background: var(--point1-80, #7433ff);
+  color: var(--white, #fff);
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 1.6rem; /* 100% */
+}
+
+.body {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  height: 30rem;
+  padding: 0rem 1.5rem;
+  align-items: flex-start;
+  gap: 1rem;
+  border-radius: 0rem 0rem 1rem 1rem;
+  border-right: 1px solid var(--line, #ededed);
+  border-bottom: 1px solid var(--line, #ededed);
+  border-left: 1px solid var(--line, #ededed);
+  overflow-y: auto;
+}
+
+.body::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.body::-webkit-scrollbar-thumb {
+  background: var(--point1-50);
+  border-radius: 1rem;
+}
+
+.body::-webkit-scrollbar-track {
+  background: none;
+}

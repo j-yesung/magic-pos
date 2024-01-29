@@ -3,6 +3,7 @@ import useSalesToggle from '@/shared/store/sales/salesToggle';
 import { cva } from 'class-variance-authority';
 import moment, { Moment } from 'moment';
 
+import { useModal } from '@/hooks/service/ui/useModal';
 import useCalendarState from '@/shared/store/sales/salesCalendar';
 import useDayState from '@/shared/store/sales/salesDay';
 import { CalendarDataType, GetMinMaxSalesReturnType } from '@/types/sales';
@@ -15,6 +16,7 @@ import {
   getStatusDayType,
   getStatusMonthType,
 } from '../../calendarUtility/cellItemType';
+import SalesModal from '../../modal/SalesModal';
 import styles from './styles/cellItem.module.css';
 
 interface CellItemProps {
@@ -33,6 +35,8 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
   const isChangeView = useSalesToggle(state => state.isChangeView);
   const currentDate = useCalendarState(staet => staet.currentDate);
   const { selectedDate, today } = useDayState();
+
+  const { MagicModal } = useModal();
 
   const statusVariant = cva([styles.statusCalendarBase], {
     variants: {
@@ -131,7 +135,11 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
             dateType: getCalendarDateType(day),
             sales: salesData ? SALES_HAVE : SALES_NONE,
           })}
-          {...(day.format(FORMAT_CELL_DATE_TYPE) === salesData?.date && { onClick: () => console.log(salesData) })}
+          {...(day.format(FORMAT_CELL_DATE_TYPE) === salesData?.date && {
+            onClick: () => {
+              MagicModal.fire(<SalesModal specificData={salesData!} />);
+            },
+          })}
         >
           <span
             className={salesVariant({

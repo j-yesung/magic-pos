@@ -44,3 +44,11 @@ export interface IsTakeOutType {
   product_price: number;
   original_data: Tables<'sales'>[];
 }
+
+/**
+ *  매출 달력에서 모달 닫기
+ */
+
+export interface CloseModalType {
+  clickCloseModal: () => void;
+}
