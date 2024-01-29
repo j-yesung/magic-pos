@@ -168,9 +168,6 @@
   background: rgba(255, 255, 255, 0.9);
   box-shadow: 0px 0px 30px 0px rgba(68, 9, 194, 0.15);
 }
-.card-wrapper .rvBg {
-  border-radius: 1rem;
-}
 .card-wrapper .title-box {
   gap: 0.5rem;
   width: 100%;
@@ -190,8 +187,8 @@
 }
 .card-wrapper h1 {
   padding: 0.5rem;
+  font-weight: 500;
   font-size: 1.5rem;
-  font-weight: 700;
 }
 .card-wrapper .review-box {
   width: 30rem;
@@ -200,12 +197,15 @@
 .review-box p {
   width: 100%;
   height: 100%;
-  line-height: 1.1;
+  line-height: 1.6;
   font-size: 1.7rem;
   font-weight: 400;
   text-overflow: ellipsis;
 }
-
+.card-wrapper .rv-bg {
+  padding: 0.5rem;
+  border-radius: 1rem;
+}
 .card-list,
 .card-list-dynamic {
   animation-duration: 160s;
