@@ -38,7 +38,7 @@ const QrReaderContainer = () => {
                 autoClose: 3000,
               });
             }}
-            viewFinderBorder={0}
+            viewFinderBorder={120}
             constraints={{ facingMode: 'environment' }}
           />
         </div>

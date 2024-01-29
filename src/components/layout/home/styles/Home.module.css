@@ -135,22 +135,20 @@
 }
 .card-wrapper {
   margin: 0.7rem;
-  position: relative;
-  /* width: 2100px; */
-  padding: 1rem;
   height: 20rem;
   overflow: hidden;
-  border-radius: 3rem;
-  /* filter: drop-shadow(rgba(50, 83, 198, 0.34) 0px 18px 40px); */
+  position: relative;
+  filter: drop-shadow(rgba(50, 83, 198, 0.34) 0px 18px 40px);
 }
 
 .card-list,
 .card-list-dynamic {
   gap: 2rem;
-  right: 0px;
+  right: 0;
   height: 100%;
   display: flex;
   flex-wrap: nowrap;
+  padding-top: 1rem;
   position: absolute;
   flex-direction: row;
 }
@@ -165,7 +163,6 @@
   flex-direction: column;
   justify-content: flex-start;
   background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0px 0px 30px 0px rgba(68, 9, 194, 0.15);
 }
 .card-wrapper .rvBg {
   border-radius: 1rem;

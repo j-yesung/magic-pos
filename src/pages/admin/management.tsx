@@ -2,12 +2,13 @@ import AdminLayout from '@/components/layout/admin/AdminLayout';
 import Management from '@/components/management/Management';
 import Head from 'next/head';
 import { ReactNode } from 'react';
+import { makeTitle } from '@/shared/helper';
 
 const ManagementPage = () => {
   return (
     <>
       <Head>
-        <title>magic pos 운영모드</title>
+        <title>{makeTitle('운영 모드')}</title>
         <meta name="description" content="NextJS Events" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="author" content="파워레인조" />

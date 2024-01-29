@@ -2,12 +2,13 @@ import AdminLayout from '@/components/layout/admin/AdminLayout';
 import Table from '@/components/table/Table';
 import Head from 'next/head';
 import { ReactNode } from 'react';
+import { makeTitle } from '@/shared/helper';
 
 const TablePage = () => {
   return (
     <>
       <Head>
-        <title>magic pos 테이블 관리</title>
+        <title>{makeTitle('테이블 관리')}</title>
         <meta name="description" content="NextJS Events" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="author" content="파워레인조" />

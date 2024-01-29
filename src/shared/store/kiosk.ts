@@ -87,6 +87,7 @@ export const useKioskState = create<OrderState>()(
         orderNumber: state.orderNumber,
         orderList: state.orderList,
         tableId: state.tableId,
+        storeName: state.storeName,
         selectedLanguage: state.selectedLanguage,
         menuData: state.menuData,
       }),
