@@ -74,10 +74,8 @@ const Sidebar = (adminInfo: AdminCategories) => {
     <aside className={sidebarClass} ref={targetRef}>
       <div className={styles.contents}>
         <div className={styles.closeButton}>
-          <IoClose size={40} width={'4rem'} height={'4rem'} onClick={() => setIsSideBarOpen(false)} />
-        </div>
-        <div className={styles.toggleButton}>
           <HeaderToggleButton />
+          <IoClose size={40} width={'4rem'} height={'4rem'} onClick={() => setIsSideBarOpen(false)} />
         </div>
         <div className={styles.notification}>
           <Ellipse width={8} height={8} />
