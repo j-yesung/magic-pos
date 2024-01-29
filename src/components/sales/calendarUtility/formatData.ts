@@ -16,7 +16,6 @@ type FormatDateParamType = 'YYYY-MM-DD' | 'YYYY년 MM월' | 'YYYY-MM';
 type SalesCommonType = TablesInsert<'sales'> & { moment?: Moment; original_date: Moment };
 
 export const formatToCalendarData: FormatCalendarReturnType = data => {
-  console.log(data);
   const refinedData = [...data.entries()].map(([key, value]) => {
     const data = {
       sales: value.reduce((acc, cur) => acc + cur.product_ea * cur.product_price, 0),
