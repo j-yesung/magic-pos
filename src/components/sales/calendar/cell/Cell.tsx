@@ -20,7 +20,8 @@ import styles from './styles/cell.module.css';
 
 const Cell = () => {
   const isChangeView = useSalesToggle(state => state.isChangeView);
-  const calendarDataBindingData = useSalesDataState(state => state.calendarBindingData);
+  const { calendarBindingData, salesSum } = useSalesDataState();
+
   const currentDate = useCalendarState(state => state.currentDate);
   const { clickShowDataOfDateHandler } = useDataHandler();
 
@@ -61,7 +62,7 @@ const Cell = () => {
   while (day <= endDay) {
     for (let i = 0; i < 7; i++) {
       const itemKey = day.clone().format(FORMAT_CELL_DATE_TYPE);
-      const salesData = calendarDataBindingData?.filter(target => target.date === itemKey);
+      const salesData = calendarBindingData?.filter(target => target.date === itemKey);
 
       days.push(
         <CellItem
