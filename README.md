@@ -1,4 +1,5 @@
 # Magic POS
+운영: [magic-pos.com](magic-pos.com)
 
 ## 프로젝트 소개
 
