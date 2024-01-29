@@ -121,6 +121,7 @@
   display: flex;
   font-size: 30rem;
   font-weight: 900;
+  text-indent: 10rem;
   line-height: 17rem;
   align-items: center;
   letter-spacing: 10rem;
@@ -131,14 +132,17 @@
 
 /* 카드 영역 */
 .slider-box {
+  gap: 2rem;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .card-wrapper {
-  margin: 0.7rem;
+  display: flex;
   height: 20rem;
   overflow: hidden;
   position: relative;
-  filter: drop-shadow(rgba(50, 83, 198, 0.34) 0px 18px 40px);
+  box-shadow: 0px 0px 30px 0px rgba(68, 9, 194, 0.15);
 }
 
 .card-list,
@@ -148,7 +152,6 @@
   height: 100%;
   display: flex;
   flex-wrap: nowrap;
-  padding-top: 1rem;
   position: absolute;
   flex-direction: row;
 }
@@ -163,6 +166,7 @@
   flex-direction: column;
   justify-content: flex-start;
   background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0px 0px 30px 0px rgba(68, 9, 194, 0.15);
 }
 .card-wrapper .rvBg {
   border-radius: 1rem;
