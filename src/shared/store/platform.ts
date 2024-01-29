@@ -280,7 +280,7 @@ export const resetIsRegist = () =>
   }));
 
 export const resetPrevImg = () =>
-  usePlatFormState.setState(state => ({ 
+  usePlatFormState.setState(state => ({
     ...state,
     prevImg: null,
   }));
