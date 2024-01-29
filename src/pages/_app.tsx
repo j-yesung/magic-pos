@@ -87,7 +87,7 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
         <meta property={'twitter:image'} content={IMAGE} />
       </Head>
       <ReactQueryDevtools initialIsOpen={false} />
-      {true && <Loading />}
+      {isPageLoading && <Loading />}
       <main className={clsx(myFont.variable, { ['blur']: isPageLoading })}>
         {getLayout(<Component {...pageProps} />)}
       </main>
