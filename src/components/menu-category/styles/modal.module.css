@@ -1,20 +1,22 @@
 .menu-category-modal {
   width: 54rem;
   position: relative;
-  @media screen and (max-width: 64rem) {
-    width: 100%;
-  }
+}
+
+.menu-modal-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
 }
 
 .close-button {
-  position: absolute;
-  top: 1.5rem;
-  right: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
 }
+
 .close-button path {
   stroke: var(--text1);
 }
@@ -22,10 +24,9 @@
 .title {
   color: var(--text1);
   font-size: 1.8rem;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.8rem;
   letter-spacing: -0.036rem;
-  padding: 1.5rem 2rem;
 }
 
 .line {

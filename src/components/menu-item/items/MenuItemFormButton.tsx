@@ -2,9 +2,8 @@ import useSetMenuItem from '@/hooks/menu/menu-item/useSetMenuItems';
 import { useModal } from '@/hooks/service/ui/useModal';
 import useMenuItemStore from '@/shared/store/menu/menu-item';
 import moment from 'moment';
-import { FiAlertCircle } from 'react-icons/fi';
 import styles from '../styles/menu-item-form.module.css';
-
+import ExclamationMark from '/public/icons/exclamation-mark.svg';
 interface MenuItemModal {
   clickItemModalHide: () => void;
 }
@@ -21,8 +20,8 @@ const MenuItemFormButton: React.FC<MenuItemModal> = props => {
   // 메뉴 삭제
   const clickRemoveCategoryHandler = async () => {
     MagicModal.confirm({
-      icon: <FiAlertCircle size={50} />,
-      content: '정말로 삭제하시겠습니까?',
+      icon: <ExclamationMark width={50} height={50} />,
+      content: '메뉴를 삭제할까요?',
       confirmButtonCallback: () => {
         deleteMutate(menuItem.id);
         if (menuItemSampleImg !== sampleImage) {

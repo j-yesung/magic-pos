@@ -14,10 +14,15 @@ const MenuCategoryModal = ({ modalId }: { modalId?: string }) => {
 
   return (
     <div className={styles['menu-category-modal']}>
-      {isEdit ? <h3 className={styles['title']}>카테고리 수정</h3> : <h3 className={styles['title']}>카테고리 등록</h3>}
-
-      <div className={styles['close-button']}>
-        <CloseButton width={26} height={26} onClick={clickCategoryModalHide} />
+      <div className={styles['menu-modal-top']}>
+        {isEdit ? (
+          <h3 className={styles['title']}>카테고리 수정</h3>
+        ) : (
+          <h3 className={styles['title']}>카테고리 등록</h3>
+        )}
+        <div className={styles['close-button']}>
+          <CloseButton width={26} height={26} onClick={clickCategoryModalHide} />
+        </div>
       </div>
       <div className={styles['line']}></div>
       <div className={styles['box']}>

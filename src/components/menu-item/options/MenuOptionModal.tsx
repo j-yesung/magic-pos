@@ -12,12 +12,15 @@ const MenuOptionModal = ({ modalId }: { modalId?: string }) => {
   };
 
   return (
-    <div className={styles['menu-modal-wrap']}>
-      <h3 className={styles['title']}>옵션 상세 설정</h3>
+    <div className={styles['menu-option-modal-wrap']}>
+      <div className={styles['menu-modal-top']}>
+        <h3 className={styles['title']}>옵션 상세 설정</h3>
 
-      <div className={styles['close-button']}>
-        <CloseButton width={26} height={26} onClick={clickItemModalHide} />
+        <div className={styles['close-button']}>
+          <CloseButton width={26} height={26} onClick={clickItemModalHide} />
+        </div>
       </div>
+
       <div className={styles['line']}></div>
       <div className={styles['box']}>
         <MenuOptionModalInput />

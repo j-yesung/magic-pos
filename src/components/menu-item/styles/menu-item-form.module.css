@@ -44,8 +44,8 @@
   gap: 1rem;
 }
 .wrap .img-wrap {
-  width: 12.3rem;
-  height: 12.3rem;
+  width: 11.9rem;
+  height: 11.9rem;
   position: relative;
   background-color: var(--bg-g);
 }
@@ -118,30 +118,22 @@
 .wrap .txt-wrap .input-wrap {
   gap: 1.5rem 3rem;
   display: flex;
-  flex-wrap: wrap;
   flex: 1;
-
-  @media screen and (max-width: 768px) {
-    flex-direction: column;
-  }
 }
 
 .wrap .txt-wrap .input-wrap > p {
   display: flex;
   align-items: center;
   flex: 1;
-  gap: 1.9rem;
 }
-/* .wrap .txt-wrap .input-wrap.top > p:first-child {
-  flex: auto;
-  width: 60%;
+.wrap .txt-wrap .input-wrap.top > p:first-child input {
+  width: 12.6rem;
 }
-.wrap .txt-wrap .input-wrap.top > p:last-child {
-  flex: auto;
-  width: 30%;
-} */
+.wrap .txt-wrap .input-wrap.top > p:last-child input {
+  width: 10rem;
+}
 .wrap .txt-wrap .input-wrap > p label {
-  width: 4.8rem;
+  width: 6rem;
 }
 .wrap .txt-wrap .input-wrap > p input {
   flex: 1;
@@ -207,10 +199,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  width: 67rem;
-  @media screen and (max-width: 768px) {
-    width: 40rem;
-  }
+  width: 100%;
 }
 .option-container .option-wrap button {
   padding: 1.5rem;
@@ -228,6 +217,7 @@
 .wrap .btn-wrap {
   display: flex;
   gap: 1rem;
+  padding: 0 2.5rem;
 }
 .wrap .btn-wrap button {
   border-radius: 1rem;
