@@ -21,7 +21,7 @@ const StickBar = () => {
     <>
       {isLoaded && (
         <div className={styles.wrapper}>
-          <Logo className={styles.logo} width={200} height={20} onClick={() => router.push('/')} />
+          <Logo width={200} height={23} onClick={() => router.push('/')} />
           <div className={styles.tabArea}>
             <div>
               {session === null ? (
