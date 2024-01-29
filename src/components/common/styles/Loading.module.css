@@ -11,6 +11,7 @@
 
 .container svg {
     height: fit-content;
+    width: fit-content;
 }
 
 .logo {
