@@ -125,7 +125,9 @@ const usePlatForm = () => {
     if (comparedData.link_url) comparedData.id = editData.id;
     comparedData.store_id = editData.store_id;
     comparedData.createdAt;
+    comparedData.id = editData.id;
     if (meta) {
+      console.log('meta');
       // 기존 이미지가 있고 이미지 변경 했을 때
       if (prevData.image_url) {
         if (prevData.image_url.includes(SUPABASE_STORAGE_URL)) {
@@ -169,6 +171,7 @@ const usePlatForm = () => {
       }
     }
     if (!meta) {
+      console.log('!meta');
       // 기존이미지가 있고 이미지 변경 했을 때
       if (prevData.image_url && comparedData.file) {
         comparedData.createdAt = moment().toISOString();
@@ -204,6 +207,7 @@ const usePlatForm = () => {
 
       // 기존데이터에 이미지가 없을 때 이미지 등록을 할 때
       if (!prevData.image_url && comparedData.file) {
+        console.log('여기에 오니?');
         comparedData.createdAt = moment().toISOString();
         await uploadPlatFormImage(comparedData);
         const { publicUrl: image_url } = downloadPlatFormImageUrl(comparedData);
@@ -217,9 +221,11 @@ const usePlatForm = () => {
 
       // 수정할 때 이미지만 삭제 할 때 실행 되는 조건문
       if (!prevImg && !comparedData.link_url && !comparedData.name) {
+        console.log('여기에 오니?');
         // 수정할 이미지가 meta이미지이면
-        if (!prevData?.image_url!.includes(SUPABASE_STORAGE_URL)) {
+        if (!prevData?.image_url?.includes(SUPABASE_STORAGE_URL)) {
           const { file, createdAt, ...updateTarget } = comparedData;
+          console.log(updateTarget);
           await updatePlatFormData({ ...updateTarget, image_url: null } as TablesInsert<'platform'>);
           const { platform, error } = await fetchPlatForm(store_id!);
           setFetchPlatFormData(platform);
