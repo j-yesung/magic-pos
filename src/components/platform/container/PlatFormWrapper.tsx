@@ -1,6 +1,4 @@
 import usePlatFormState, {
-  resetAddPlatForm,
-  resetEditPlatForm,
   resetIsEditMode,
   resetIsRegist,
   setIsRegist,
@@ -17,10 +15,7 @@ const PlatFormWrapper = () => {
   setPlatFormStoreId(storeId!);
   const isRegist = usePlatFormState(state => state.isRegist);
   const clickCloseForm = () => setIsRegist(false);
-  useEffect(() => {
-    resetAddPlatForm();
-    resetEditPlatForm();
-  }, [isRegist]);
+
   useEffect(() => {
     return () => {
       resetIsRegist();

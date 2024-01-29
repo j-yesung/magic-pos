@@ -110,7 +110,8 @@ const usePlatForm = () => {
       if (prevData[key as keyof EditPlatFormType] !== value) {
         acc[key as keyof EditPlatFormType] = value;
       }
-      if (prevData.image_url) acc['image_url'] = prevData.image_url;
+      // 튜터님께 여쭤볼 주석
+      // if (prevData.image_url) acc['image_url'] = prevData.image_url;
       return acc;
     }, new Object() as EditPlatFormType);
 
@@ -121,7 +122,7 @@ const usePlatForm = () => {
       return;
     }
 
-    comparedData.id = editData.id;
+    if (comparedData.link_url) comparedData.id = editData.id;
     comparedData.store_id = editData.store_id;
     comparedData.createdAt;
     if (meta) {
