@@ -26,8 +26,8 @@ const HeaderToggleButton = () => {
 
   return (
     <>
-      <input className={styles.toggle} type="checkbox" id="toggle" checked={isChecked} />
-      <label className={styles.label} htmlFor="toggle" onClick={changeToggleHandler} />
+      <input className={styles.toggle} type="checkbox" id="toggle" checked={isChecked} onChange={changeToggleHandler} />
+      <label className={styles.label} htmlFor="toggle" />
     </>
   );
 };
