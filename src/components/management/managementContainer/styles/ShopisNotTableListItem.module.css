@@ -5,7 +5,7 @@
   align-items: center;
   margin-bottom: 2rem;
   border-radius: 1rem;
-  background: var(--bg-g, #f7f7f7);
+  background: var(--bg-g, #F7F7F7);
   cursor: pointer;
 }
 
@@ -33,7 +33,7 @@
   line-height: 1.8rem; /* 100% */
   letter-spacing: -0.036rem;
 
-  margin-right: 0.5rem;
+  margin-right: .5rem;
 }
 
 .item-name + span {
@@ -46,6 +46,9 @@
   letter-spacing: -0.03rem;
 }
 
+.shop-list-item:hover {
+  background-color: #ccf;
+}
 div.item-menu-list {
   width: 100%;
   display: flex;
@@ -58,7 +61,7 @@ div.item-menu-list > span {
 }
 
 .item-time {
-  color: var(--text2, #5c5c5c);
+  color: var(--text2, #5C5C5C);
   text-align: center;
   font-size: 1.4rem;
   font-style: normal;
