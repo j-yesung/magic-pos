@@ -24,11 +24,12 @@ import { AddPlatFormType, EditPlatFormType } from '@/types/platform';
 import { TablesInsert } from '@/types/supabase';
 import moment from 'moment';
 import { FormEvent } from 'react';
+import useToast from '../service/ui/useToast';
 const SUPABASE_STORAGE_URL = 'https://lajnysuklrkrhdyqhotr.supabase.co';
 const HTTPS = 'https://';
 const usePlatForm = () => {
   const { addPlatForm, editPlatForm, prevData, prevImg, store_id, meta } = usePlatFormState();
-
+  const { toast } = useToast();
   // 링크 유효성 검사
   const checkValidUrl = (url: string) => {
     const regUrl = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
@@ -131,6 +132,12 @@ const usePlatForm = () => {
         resetIsRegist();
         resetEditPlatForm();
         resetPrevData();
+        toast('수정이 완료 되었습니다.', {
+          type: 'info',
+          position: 'top-center',
+          showCloseButton: true,
+          autoClose: 300,
+        });
         return;
       }
       //기존 이미지가 없고 meta이미지만을 등록 할 때
@@ -144,6 +151,12 @@ const usePlatForm = () => {
         resetIsRegist();
         resetEditPlatForm();
         resetPrevData();
+        toast('수정이 완료 되었습니다.', {
+          type: 'info',
+          position: 'top-center',
+          showCloseButton: true,
+          autoClose: 300,
+        });
         return;
       }
     }
@@ -172,6 +185,12 @@ const usePlatForm = () => {
         resetIsRegist();
         resetEditPlatForm();
         resetPrevData();
+        toast('수정이 완료 되었습니다.', {
+          type: 'info',
+          position: 'top-center',
+          showCloseButton: true,
+          autoClose: 300,
+        });
         return;
       }
 
@@ -199,6 +218,12 @@ const usePlatForm = () => {
           resetIsRegist();
           resetEditPlatForm();
           resetPrevData();
+          toast('수정이 완료 되었습니다.', {
+            type: 'info',
+            position: 'top-center',
+            showCloseButton: true,
+            autoClose: 300,
+          });
           return;
         }
         // 수정할 이미지가 storage 이미지 이면
@@ -211,6 +236,12 @@ const usePlatForm = () => {
           resetIsRegist();
           resetEditPlatForm();
           resetPrevData();
+          toast('수정이 완료 되었습니다.', {
+            type: 'info',
+            position: 'top-center',
+            showCloseButton: true,
+            autoClose: 300,
+          });
           return;
         }
       }
@@ -222,6 +253,12 @@ const usePlatForm = () => {
     resetIsRegist();
     resetEditPlatForm();
     resetPrevData();
+    toast('수정이 완료 되었습니다.', {
+      type: 'info',
+      position: 'top-center',
+      showCloseButton: true,
+      autoClose: 300,
+    });
   };
   const closePlatFormModal = (mode: boolean) => {
     if (!mode) {
