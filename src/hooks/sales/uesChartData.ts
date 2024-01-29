@@ -64,21 +64,20 @@ const useChartData = () => {
         display: false,
       },
       datalabels: {
-        color: value => {
-          return value.dataset.data.length - 1 === value.dataIndex ? 'red' : ' #000';
-        }, // 바 위에 뜬 value에 대한 color 조절 입니다.
+        color: ' #000',
+
+        // 바 위에 뜬 value에 대한 color 조절 입니다.
         anchor: 'end', // datalabel 위치 조정
         align: 'top', // datalabel text 위치 조정
         offset: 0, // datalabel 위치 조정
         clamp: true,
-
         font: {
-          weight: 800,
-          size: 14,
+          weight: 600,
+          size: 18,
           lineHeight: '1.4rem',
         },
         formatter(value) {
-          return convertNumberToWon(value.y);
+          return convertNumberToWon(value.y).slice(0, -1);
         },
       },
     },
