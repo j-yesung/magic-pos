@@ -1,5 +1,5 @@
 import useToast from '@/hooks/service/ui/useToast';
-import usePlatFormState, { setAddPlatForm, setEditPlatForm } from '@/shared/store/platform';
+import usePlatFormState, { resetIsValidUrl, setAddPlatForm, setEditPlatForm } from '@/shared/store/platform';
 import { useEffect } from 'react';
 import styles from './styles/input.module.css';
 
@@ -14,6 +14,7 @@ const Input = ({ mode }: { mode: boolean }) => {
         showCloseButton: false,
         autoClose: 3000,
       });
+    resetIsValidUrl();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isValidUrl]);
   return (

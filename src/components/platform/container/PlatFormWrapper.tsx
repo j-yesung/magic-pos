@@ -1,4 +1,11 @@
-import usePlatFormState, { resetIsEditMode, resetIsRegist, setPlatFormStoreId } from '@/shared/store/platform';
+import usePlatFormState, {
+  resetAddPlatForm,
+  resetEditPlatForm,
+  resetIsEditMode,
+  resetIsRegist,
+  setIsRegist,
+  setPlatFormStoreId,
+} from '@/shared/store/platform';
 import useAuthState from '@/shared/store/session';
 import { useEffect } from 'react';
 import Card from './card/Card';
@@ -9,7 +16,11 @@ const PlatFormWrapper = () => {
   const storeId = useAuthState(state => state.storeId);
   setPlatFormStoreId(storeId!);
   const isRegist = usePlatFormState(state => state.isRegist);
-
+  const clickCloseForm = () => setIsRegist(false);
+  useEffect(() => {
+    resetAddPlatForm();
+    resetEditPlatForm();
+  }, [isRegist]);
   useEffect(() => {
     return () => {
       resetIsRegist();
@@ -21,6 +32,7 @@ const PlatFormWrapper = () => {
       <AddButton />
       <Card />
       {isRegist && <Form />}
+      {isRegist && <div className={styles.formBg} onClick={clickCloseForm}></div>}
     </div>
   );
 };
