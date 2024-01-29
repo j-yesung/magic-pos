@@ -17,21 +17,42 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 3rem;
+  gap: 5rem;
   height: 70%;
 }
-
+.wrap.empty .menu-container > div span {
+  width: 10rem;
+  height: 10rem;
+  background-color: var(--bg-p);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .wrap.empty .menu-container > div h4 {
+  color: var(--text1, #121416);
   font-size: 2rem;
-  line-height: 1.6;
-  color: var(--text4);
+  font-style: normal;
+  font-weight: 500;
+  line-height: 2rem; /* 100% */
+  letter-spacing: -0.04rem;
 }
 .wrap.empty .menu-container > div button {
+  display: flex;
+  width: 22.5rem;
+  height: 5.6rem;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 0.5rem;
+  background: var(--point1-80, #7433ff);
+  box-shadow: 0 0 1rem 0 rgba(68, 9, 194, 0.1);
+  color: var(--white, #fff);
   font-size: 1.6rem;
-  background-color: var(--point1-80);
-  color: var(--text5);
-  padding: 1rem 2rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 2.56rem;
+  letter-spacing: -0.032rem;
   cursor: pointer;
-  border-radius: 1rem;
-  font-weight: bold;
 }

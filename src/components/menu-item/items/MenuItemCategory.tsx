@@ -34,6 +34,7 @@ const MenuItemCategoryPage = () => {
 
   return (
     <div className={styles['wrap']}>
+      <div className={styles['drag-info']}>※ 드래그 앤 드롭으로 메뉴 순서를 변경해보세요.</div>
       <Swiper
         modules={[Virtual]}
         spaceBetween={15}

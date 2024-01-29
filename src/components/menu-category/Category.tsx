@@ -21,19 +21,22 @@ const CategoryComponentPage = () => {
   };
 
   return (
-    <div className={styles['wrap']}>
-      <ul>
-        {categories.map((category, idx) => {
-          return (
-            <CategroyCardPage dropNum={dropNum} setDropNum={setDropNum} key={category.id} item={category} idx={idx} />
-          );
-        })}
-        <li>
-          <button className={styles['plus-btn']} type="button" onClick={() => clickAddCategoryHandler()}>
-            <PlusButton width={22} height={22} />
-          </button>
-        </li>
-      </ul>
+    <div className={styles['wrap-container']}>
+      <div className={styles['wrap']}>
+        <div className={styles['drag-info']}>※ 드래그 앤 드롭으로 카테고리 순서를 변경해보세요.</div>
+        <ul>
+          {categories.map((category, idx) => {
+            return (
+              <CategroyCardPage dropNum={dropNum} setDropNum={setDropNum} key={category.id} item={category} idx={idx} />
+            );
+          })}
+          <li>
+            <button className={styles['plus-btn']} type="button" onClick={() => clickAddCategoryHandler()}>
+              <PlusButton width={22} height={22} />
+            </button>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 };
