@@ -1,4 +1,5 @@
-import useTableStore from '@/shared/store/table';
+import { useFetchQuery } from '@/hooks/query/store/useFetchQuery';
+import useAuthState from '@/shared/store/session';
 import { useEffect, useState } from 'react';
 import styles from '../styles/AdminLayout.module.css';
 
@@ -17,8 +18,10 @@ interface NavList {
 }
 
 const SidebarList = ({ navList, clickFn }: NavList) => {
+  const storeId = useAuthState(state => state.storeId);
+  const { storeInfo } = useFetchQuery({ storeId: storeId ?? '' });
+  const isUseTable = storeInfo?.use_table;
   const [filteredNavList, setFilteredNavList] = useState(navList);
-  const isUseTable = useTableStore(state => state.isUseTable);
 
   useEffect(() => {
     if (isUseTable) {
