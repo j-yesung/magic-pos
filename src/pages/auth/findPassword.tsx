@@ -1,6 +1,6 @@
 import User from '@/components/auth/User';
-import Head from 'next/head';
 import { makeTitle } from '@/shared/helper';
+import Head from 'next/head';
 
 const FindPasswordPage = () => {
   return (
