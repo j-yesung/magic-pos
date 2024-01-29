@@ -158,21 +158,55 @@
 }
 /* 관리자 */
 .admin-box {
-  position: relative;
+  gap: 3rem;
+  /* position: relative; */
   width: 100%;
   display: flex;
   margin-top: 20rem;
   background: var(--bg-g);
-  padding: 20rem 30rem 20rem 10rem;
+  padding: 2rem;
+  flex-direction: row;
 }
 .wrapper {
-  width: 100%;
+  width: 60%;
   height: 100%;
   display: flex;
   position: relative;
   align-items: center;
-  justify-content: space-between;
   flex-direction: row;
+}
+.description {
+  gap: 1rem;
+  width: 100%;
+  display: flex;
+  position: relative;
+  padding-bottom: 7rem;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.description-item {
+  gap: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+.description h1 {
+  font-size: 8rem;
+  font-weight: 100;
+  line-height: 8rem;
+  color: var(--main-color);
+}
+.description h2 {
+  font-size: 3rem;
+  font-weight: 600;
+}
+.text-box {
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.text-box p {
+  font-size: 1.6rem;
+  font-weight: 400;
 }
 
 /* swiper */
@@ -221,8 +255,8 @@
 
 /* swiper button */
 .action-button {
-  top: 0;
-  right: -222px;
+  top: 50px;
+  right: 0;
   display: flex;
   position: absolute;
   align-items: center;
