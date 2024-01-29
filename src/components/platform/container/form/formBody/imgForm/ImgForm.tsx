@@ -41,7 +41,7 @@ const ImgForm = ({ mode }: { mode: boolean }) => {
           name="delete-img"
           onClick={removeImage}
         >
-          <CloseButton />
+          <CloseButton width={26} height={26} />
         </button>
         {prevImg ? (
           <Image className={styles.img} src={prevImg} alt="prev-image" width={1000} height={1000} />

@@ -38,7 +38,7 @@ export const getDaySales: getSalesReturnType = async (day, store_id) => {
   const { data: sales, error } = await supabase
     .from('sales')
     .select('*')
-    .gte('sales_date', momentToString(day.clone().subtract(6, 'day'), TIME_FORMAT))
+    .gte('sales_date', momentToString(day.clone().subtract(5, 'day'), TIME_FORMAT))
     .lt('sales_date', momentToString(day.clone().add(1, 'day'), TIME_FORMAT))
     .eq('store_id', store_id);
   if (error) {

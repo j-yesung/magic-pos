@@ -12,7 +12,7 @@ const CalendarToggle = () => {
   return (
     <div className={isChangeView ? styles.calendarWrapper : styles.hiddenComponent} onClick={clickShowCalendarHandler}>
       <span className={styles.dateText}>{selectedDate?.format('YYYY-MM-DD')}</span>
-      <IoCalendarClearOutline className={styles.calendarIcon} />
+      <IoCalendarClearOutline className={styles.calendarIcon} width={26} height={26} />
     </div>
   );
 };

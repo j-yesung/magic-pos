@@ -95,6 +95,7 @@ export const formatData = (
   const dateContainer = getDates(dateType, selectedDateType, formatType);
   const groupByDate = getGroupByDate(dateContainer);
   const formattedData = getDataWithFormatingDate(salesData, dateType, formatType);
+
   const groupBybindingData = insertDataGroupByDate(formattedData, groupByDate);
   const recordData = getRecordData(groupBybindingData, dateType, selectedDateType);
 
@@ -161,7 +162,6 @@ const getDataWithFormatingDate = (
       sales_date: moment(data.sales_date).format(formatType),
     }));
   }
-
   return DataWithFormattedDate;
 };
 
