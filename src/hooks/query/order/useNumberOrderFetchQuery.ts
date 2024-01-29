@@ -6,7 +6,7 @@ const QUERY_KEY = 'number-order';
 export const useNumberOrderFetchQuery = (orderId: string[], storeId: string) => {
   const queryClient = useQueryClient();
 
-  const { data: numberOrderData } = useQuery({
+  const { data: numberOrderData, isFetching: isNumberOrderFetching } = useQuery({
     queryKey: [QUERY_KEY, orderId],
     enabled: orderId.length > 0,
     refetchOnWindowFocus: false,
@@ -19,5 +19,5 @@ export const useNumberOrderFetchQuery = (orderId: string[], storeId: string) => 
     queryClient.invalidateQueries({ queryKey: [QUERY_KEY] });
   };
 
-  return { numberOrderData, invalidateNumberOrderQuery };
+  return { numberOrderData, invalidateNumberOrderQuery, isNumberOrderFetching };
 };
