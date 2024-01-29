@@ -14,11 +14,10 @@ const ReceiptContainer = () => {
   const orderIdList = useKioskState(state => state.orderIdList);
   const selectedLanguage = useKioskState(state => state.selectedLanguage);
   const storeId = useKioskState(state => state.storeId) ?? '';
-  const { storeOrderData } = useStoreOrderFetchQuery(orderIdList, storeId);
-  const { numberOrderData } = useNumberOrderFetchQuery(orderIdList, storeId);
+  const { storeOrderData, isStoreOrderFetching } = useStoreOrderFetchQuery(orderIdList, storeId);
+  const { numberOrderData, isNumberOrderFetching } = useNumberOrderFetchQuery(orderIdList, storeId);
   const [orderDataList, setOrderDataList] = useState<OrderDataWithStoreName[]>([]);
   const router = useRouter();
-  const { storeInfo } = useFetchQuery({ storeId });
   const { t, i18n } = useTranslation();
 
   const clickOrderMoreHandler = () => {
@@ -28,25 +27,21 @@ const ReceiptContainer = () => {
 
   // order_store 테이블과 order_togo 테이블에서 주문 내역 데이터를 가져온다.
   useEffect(() => {
-    // 매장 주문
-    if (storeOrderData?.data) {
-      storeOrderData.data.forEach(d => {
-        setOrderDataList(prev => [...prev, d]);
-      });
-    }
+    if (!isStoreOrderFetching && !isNumberOrderFetching) {
+      // 매장 주문
+      if (storeOrderData?.data) {
+        storeOrderData.data.forEach(d => {
+          setOrderDataList(prev => [...prev, d]);
+        });
+      }
 
-    if (numberOrderData?.data) {
-      numberOrderData.data.forEach(d => {
-        setOrderDataList(prev => [...prev, d]);
-      });
+      if (numberOrderData?.data) {
+        numberOrderData.data.forEach(d => {
+          setOrderDataList(prev => [...prev, d]);
+        });
+      }
     }
-  }, [storeOrderData, numberOrderData]);
-
-  useEffect(() => {
-    if (storeInfo) {
-      setStoreName(storeInfo.business_name ?? '');
-    }
-  }, [storeInfo]);
+  }, [isNumberOrderFetching, isStoreOrderFetching, storeOrderData, numberOrderData]);
 
   useEffect(() => {
     setStep(ORDER_STEP.RECEIPT);
