@@ -8,11 +8,11 @@ const Loading = () => {
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
-        <Image src={'logo.svg'} alt={'logo'} width={252} height={50} />
+        <Image src={'/logo.svg'} alt={'logo'} width={252} height={50} />
       </div>
       <div className={styles.magicWind}>
         <motion.div animate={{ y: [0, -10, 0, 10, 0] }} transition={{ ease: 'linear', duration: 1, repeat: Infinity }}>
-          <Image src={'images/magic-wind.svg'} alt={'로딩'} width={148} height={147} />
+          <Image src={'/images/magic-wind.svg'} alt={'로딩'} width={148} height={147} />
           {/*<MagicWind />*/}
         </motion.div>
       </div>
