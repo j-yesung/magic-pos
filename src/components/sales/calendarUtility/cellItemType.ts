@@ -78,4 +78,4 @@ export function getCalendarDateType(date: Moment) {
 }
 
 // Cell, CellITEM 에서 쓰이는 FORMAT TYPE 입니다.
-export const FORMAT_CELL_DATE_TYPE = 'YY MM DD';
+export const FORMAT_CELL_DATE_TYPE = 'YYYY. MM. DD';
