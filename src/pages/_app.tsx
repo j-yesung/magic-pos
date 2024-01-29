@@ -40,9 +40,11 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
     // 로딩이 길어질 때만 로딩창이 뜨도록 변경
     let timer: ReturnType<typeof setTimeout>;
     const handleRouteStart = () => {
-      timer = setTimeout(() => {
-        setIsPageLoading(true);
-      }, 100);
+      if (!timer) {
+        timer = setTimeout(() => {
+          setIsPageLoading(true);
+        }, 100);
+      }
     };
     const handleRouteComplete = () => {
       if (timer) clearTimeout(timer);
