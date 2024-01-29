@@ -74,7 +74,6 @@ export const createDummyData = (num: number, index: number) => {
       nWeeksLater: n,
       reviewContent: reviewData[i % reviewData.length],
     };
-    console.log(reviewData.length % i);
 
     data.push(item);
   }
