@@ -21,6 +21,7 @@ export const useDataHandler = () => {
       }
     }
     if (sales.length === 0) {
+      setChartData([]);
       setRecordData({
         currentSales: 0,
         dateType: 'day',

@@ -4,7 +4,6 @@ import { ChartData, ChartOptions } from 'chart.js';
 const useChartData = () => {
   const CHART_MAIN_COLOR = '#7433FF';
   const chartData = useChartState(state => state.chartData);
-
   const data: ChartData<
     'bar',
     {
