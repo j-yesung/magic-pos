@@ -4,8 +4,10 @@ import { MenuItemWithOption } from '@/types/supabase';
 import { convertNumberToWon, groupByKey } from '@/shared/helper';
 import CartOptionRow from '@/components/kiosk/cart/CartOptionRow';
 import { getOptionPriceByList } from '@/shared/store/kiosk';
+import { useTranslation } from 'next-i18next';
 
 const ReceiptOrderRow = ({ itemList }: { itemList: MenuItemWithOption[] }) => {
+  const { i18n } = useTranslation();
   const group = groupByKey<MenuItemWithOption>(itemList, 'unique');
 
   return (
@@ -28,6 +30,7 @@ const ReceiptOrderRow = ({ itemList }: { itemList: MenuItemWithOption[] }) => {
               {convertNumberToWon(
                 value.reduce((acc, cur) => acc + cur.price, 0) +
                   getOptionPriceByList(value.map(item => item.menu_option).flat()),
+                i18n.language === 'ko',
               )}
             </span>
           </div>

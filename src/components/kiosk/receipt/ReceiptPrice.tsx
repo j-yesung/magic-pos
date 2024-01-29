@@ -5,12 +5,12 @@ import { convertNumberToWon } from '@/shared/helper';
 import { useTranslation } from 'next-i18next';
 
 const ReceiptPrice = ({ itemList }: { itemList: MenuItemWithOption[] }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   return (
     <div className={styles.container}>
       <span>{t('total-order-price')}</span>
-      <span>{convertNumberToWon(getTotalPrice(itemList))}</span>
+      <span>{convertNumberToWon(getTotalPrice(itemList), i18n.language === 'ko')}</span>
     </div>
   );
 };
