@@ -1,6 +1,6 @@
+import Button from '@/components/common/Button';
 import { debounce } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
-import { HiChevronDoubleUp as TopButton } from 'react-icons/hi';
 import styles from '../styles/StickBar.module.css';
 
 const ScrollTop = () => {
@@ -26,7 +26,9 @@ const ScrollTop = () => {
   return (
     showButton && (
       <div className={styles.scrollTopBox}>
-        <TopButton onClick={clickScrollTopHandler} />
+        <Button type="button" onClick={clickScrollTopHandler}>
+          TOP
+        </Button>
       </div>
     )
   );

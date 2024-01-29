@@ -1,22 +1,18 @@
 .wrapper {
-  z-index: 10;
-  width: 60%;
+  /* gap: 75rem; */
+  /* width: 60%; */
+  width: 110rem;
   display: flex;
   bottom: 2.5rem;
+  height: 6.9rem;
   position: fixed;
   align-items: center;
-  padding: 4rem;
-  height: 6rem;
-  border-radius: 3rem;
+  padding: 1.3rem 3rem 1.3rem 0;
+  border-radius: 2.5rem;
   background-color: #ffffff;
+  z-index: var(--level-5-z-index);
   justify-content: space-between;
   box-shadow: 0px 0px 20px 0px rgba(68, 9, 194, 0.1);
-}
-.wrapper .logo {
-  cursor: pointer;
-  color: var(--main-color);
-  font-weight: 700;
-  font-size: 2.5rem;
 }
 .wrapper .tab-area {
   gap: 2.5rem;
@@ -39,15 +35,16 @@
   align-items: center;
   justify-self: center;
 }
-.scroll-top-box svg {
-  width: 3rem;
-  height: 3rem;
+.scroll-top-box button {
+  width: 4rem;
+  height: 4rem;
   display: flex;
   cursor: pointer;
   padding: 0.5rem;
+  font-weight: 500;
   color: var(--white);
   align-items: center;
-  border-radius: 50rem;
+  border-radius: 30rem;
   justify-content: center;
   background-color: var(--main-color);
 }

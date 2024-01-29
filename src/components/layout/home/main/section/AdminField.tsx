@@ -1,13 +1,14 @@
 import { ADMIN_INFO } from '@/data/scroll-props';
 import Image from 'next/image';
 import { useRef } from 'react';
-import { MdArrowForwardIos as NextArrow, MdArrowBackIos as PrevArrow } from 'react-icons/md';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import styles from '../../styles/Section.module.css';
+import PrevArrow from '/public/icons/arrow-left.svg';
+import NextArrow from '/public/icons/arrow-right.svg';
 
 const AdminField = () => {
   const swiperRef = useRef<SwiperRef>(null);
@@ -39,8 +40,8 @@ const AdminField = () => {
           ))}
         </Swiper>
         <div className={styles.actionButton}>
-          <PrevArrow className={styles.arrow} size={70} onClick={goPrev} />
-          <NextArrow className={styles.arrow} size={70} onClick={goNext} />
+          <PrevArrow className={styles.arrow} width={80} onClick={goPrev} />
+          <NextArrow className={styles.arrow} width={80} onClick={goNext} />
         </div>
       </div>
     </section>
