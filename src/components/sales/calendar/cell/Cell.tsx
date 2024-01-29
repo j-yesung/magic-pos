@@ -4,7 +4,6 @@ import { groupByKey } from '@/shared/helper';
 import useCalendarState from '@/shared/store/sales/salesCalendar';
 import useSalesDataState, {
   resetCalendarBindingData,
-  resetSalesSum,
   setCalendarBindingData,
   setSalesSum,
 } from '@/shared/store/sales/salesData';
@@ -43,16 +42,16 @@ const Cell = () => {
 
           const formattedData = formatToCalendarData(group);
           const minMaxData = sortMinMaxData(formattedData);
-          setCalendarBindingData(minMaxData);
+
           setSalesSum(formattedData);
+          setCalendarBindingData(minMaxData);
+        } else {
+          // 불필요한 렌더링임... 최적화 필요!!
+          setSalesSum(null);
+          resetCalendarBindingData();
         }
       });
     }
-
-    return () => {
-      resetCalendarBindingData();
-      resetSalesSum();
-    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentDate]);
 
@@ -68,7 +67,7 @@ const Cell = () => {
         <CellItem
           key={itemKey}
           day={day}
-          salesData={salesData[0]}
+          salesData={salesData ? salesData[0] : undefined}
           // ... spreadOperator
           {...(!isChangeView && { getMinMaxSalesType: getMinMaxSalesType })}
           {...(isChangeView && { clickShowDataOfDateHandler: clickShowDataOfDateHandler })}
