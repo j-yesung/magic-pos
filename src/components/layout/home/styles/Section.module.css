@@ -1,29 +1,32 @@
 /* 키오스크 */
 .kiosk-box {
   width: 100%;
+  margin-top: 40rem;
   display: flex;
   height: 3088px;
   flex-direction: row;
   justify-content: center;
 }
 .sticky-box {
-  padding: 7% 5% 5% 5%;
-  top: 10px;
-  gap: 30rem;
+  padding: 5%;
+  top: -10rem;
+  gap: 20rem;
   height: 100vh;
   display: flex;
   position: sticky;
 }
 .iphone-box {
+  display: flex;
+  align-items: center;
   filter: drop-shadow(rgba(47, 47, 47, 0.34) 0px 28px 40px);
 }
 .title-box {
   gap: 7rem;
   width: 60em;
-  height: 70%;
+  height: 65%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: flex-start;
   flex-direction: column;
 }

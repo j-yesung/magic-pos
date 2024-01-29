@@ -1,4 +1,5 @@
-import { MenuOptionShot, MenuShot, OrderCheckShot, ProdShot } from '@/data/screenshot-export';
+import { ADMIN_INFO } from '@/data/scroll-props';
+import Image from 'next/image';
 import { useRef } from 'react';
 import { MdArrowForwardIos as NextArrow, MdArrowBackIos as PrevArrow } from 'react-icons/md';
 import 'swiper/css';
@@ -8,12 +9,6 @@ import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import styles from '../../styles/Section.module.css';
 
-const ADMIN_INFO = [
-  { id: 1, svg: <ProdShot /> },
-  { id: 2, svg: <OrderCheckShot /> },
-  { id: 3, svg: <MenuShot /> },
-  { id: 4, svg: <MenuOptionShot /> },
-];
 const AdminField = () => {
   const swiperRef = useRef<SwiperRef>(null);
 
@@ -37,7 +32,9 @@ const AdminField = () => {
         >
           {ADMIN_INFO.map(info => (
             <SwiperSlide key={info.id}>
-              <div className={styles.slideScreen}>{info.svg}</div>
+              <div className={styles.slideScreen}>
+                <Image src={info.src} width={1450} height={700} alt={info.alt} priority />
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
