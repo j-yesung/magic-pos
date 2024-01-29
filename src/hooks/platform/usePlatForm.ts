@@ -24,11 +24,13 @@ import { AddPlatFormType, EditPlatFormType } from '@/types/platform';
 import { TablesInsert } from '@/types/supabase';
 import moment from 'moment';
 import { FormEvent } from 'react';
+import useToast from '../service/ui/useToast';
 const SUPABASE_STORAGE_URL = 'https://lajnysuklrkrhdyqhotr.supabase.co';
 const HTTPS = 'https://';
 const usePlatForm = () => {
   const { addPlatForm, editPlatForm, prevData, prevImg, store_id, meta } = usePlatFormState();
 
+  const { toast } = useToast();
   // 링크 유효성 검사
   const checkValidUrl = (url: string) => {
     const regUrl = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
@@ -54,7 +56,13 @@ const usePlatForm = () => {
       return;
     }
     /**useModal 사용하기 */
-    if (!addPlatForm.name.trim() || !addPlatForm.link_url.trim()) return alert('써라');
+    if (!addPlatForm.name.trim() || !addPlatForm.link_url.trim())
+      return toast('내용을 다 채워주세요', {
+        type: 'info',
+        position: 'top-center',
+        showCloseButton: false,
+        autoClose: 3000,
+      });
     if (meta) {
       updateData = {
         ...addPlatForm,
@@ -102,7 +110,8 @@ const usePlatForm = () => {
       if (prevData[key as keyof EditPlatFormType] !== value) {
         acc[key as keyof EditPlatFormType] = value;
       }
-      if (prevData.image_url) acc['image_url'] = prevData.image_url;
+      // 튜터님께 여쭤볼 주석
+      // if (prevData.image_url) acc['image_url'] = prevData.image_url;
       return acc;
     }, new Object() as EditPlatFormType);
 
@@ -113,10 +122,12 @@ const usePlatForm = () => {
       return;
     }
 
-    comparedData.id = editData.id;
+    if (comparedData.link_url) comparedData.id = editData.id;
     comparedData.store_id = editData.store_id;
     comparedData.createdAt;
+    comparedData.id = editData.id;
     if (meta) {
+      console.log('meta');
       // 기존 이미지가 있고 이미지 변경 했을 때
       if (prevData.image_url) {
         if (prevData.image_url.includes(SUPABASE_STORAGE_URL)) {
@@ -131,6 +142,12 @@ const usePlatForm = () => {
         resetIsRegist();
         resetEditPlatForm();
         resetPrevData();
+        toast('수정이 완료 되었습니다.', {
+          type: 'info',
+          position: 'top-center',
+          showCloseButton: true,
+          autoClose: 300,
+        });
         return;
       }
       //기존 이미지가 없고 meta이미지만을 등록 할 때
@@ -144,10 +161,17 @@ const usePlatForm = () => {
         resetIsRegist();
         resetEditPlatForm();
         resetPrevData();
+        toast('수정이 완료 되었습니다.', {
+          type: 'info',
+          position: 'top-center',
+          showCloseButton: true,
+          autoClose: 300,
+        });
         return;
       }
     }
     if (!meta) {
+      console.log('!meta');
       // 기존이미지가 있고 이미지 변경 했을 때
       if (prevData.image_url && comparedData.file) {
         comparedData.createdAt = moment().toISOString();
@@ -172,11 +196,18 @@ const usePlatForm = () => {
         resetIsRegist();
         resetEditPlatForm();
         resetPrevData();
+        toast('수정이 완료 되었습니다.', {
+          type: 'info',
+          position: 'top-center',
+          showCloseButton: true,
+          autoClose: 300,
+        });
         return;
       }
 
       // 기존데이터에 이미지가 없을 때 이미지 등록을 할 때
       if (!prevData.image_url && comparedData.file) {
+        console.log('여기에 오니?');
         comparedData.createdAt = moment().toISOString();
         await uploadPlatFormImage(comparedData);
         const { publicUrl: image_url } = downloadPlatFormImageUrl(comparedData);
@@ -190,15 +221,23 @@ const usePlatForm = () => {
 
       // 수정할 때 이미지만 삭제 할 때 실행 되는 조건문
       if (!prevImg && !comparedData.link_url && !comparedData.name) {
+        console.log('여기에 오니?');
         // 수정할 이미지가 meta이미지이면
-        if (!prevData?.image_url!.includes(SUPABASE_STORAGE_URL)) {
+        if (!prevData?.image_url?.includes(SUPABASE_STORAGE_URL)) {
           const { file, createdAt, ...updateTarget } = comparedData;
+          console.log(updateTarget);
           await updatePlatFormData({ ...updateTarget, image_url: null } as TablesInsert<'platform'>);
           const { platform, error } = await fetchPlatForm(store_id!);
           setFetchPlatFormData(platform);
           resetIsRegist();
           resetEditPlatForm();
           resetPrevData();
+          toast('수정이 완료 되었습니다.', {
+            type: 'info',
+            position: 'top-center',
+            showCloseButton: true,
+            autoClose: 300,
+          });
           return;
         }
         // 수정할 이미지가 storage 이미지 이면
@@ -211,6 +250,12 @@ const usePlatForm = () => {
           resetIsRegist();
           resetEditPlatForm();
           resetPrevData();
+          toast('수정이 완료 되었습니다.', {
+            type: 'info',
+            position: 'top-center',
+            showCloseButton: true,
+            autoClose: 300,
+          });
           return;
         }
       }
@@ -222,6 +267,12 @@ const usePlatForm = () => {
     resetIsRegist();
     resetEditPlatForm();
     resetPrevData();
+    toast('수정이 완료 되었습니다.', {
+      type: 'info',
+      position: 'top-center',
+      showCloseButton: true,
+      autoClose: 300,
+    });
   };
   const closePlatFormModal = (mode: boolean) => {
     if (!mode) {

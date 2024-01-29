@@ -1,20 +1,20 @@
+import Loading from '@/components/common/Loading';
 import Modal from '@/components/modal/Modal';
 import Toast from '@/components/toast/Toast';
+import { makeTitle } from '@/shared/helper';
+import '@/shared/i18n';
 import '@/styles/globals.css';
 import '@/styles/reset.css';
 import { NextPageWithLayout } from '@/types/common';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import clsx from 'clsx';
+import { appWithTranslation } from 'next-i18next';
 import type { AppProps } from 'next/app';
 import localFont from 'next/font/local';
-import '@/shared/i18n';
-import { appWithTranslation } from 'next-i18next';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import Loading from '@/components/common/Loading';
-import clsx from 'clsx';
-import Head from 'next/head';
-import { makeTitle } from '@/shared/helper';
 
 const DESCRIPTION =
   'Magic POS는 가게와 고객 간 손쉬운 주문 및 결제를 위한 혁신적인 솔루션입니다. 사장님은 주문, 매출 관리등을 웹에서 간편하게 수행하며, 사용자는 직관적이고 빠른 주문 체험을 즐길 수 있습니다. 비즈니스 생산성과 소비자 만족도를 높이는 효과적인 어플리케이션 입니다!';
@@ -35,15 +35,28 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   const router = useRouter();
   const [isPageLoading, setIsPageLoading] = useState<boolean>(false);
   const getLayout = Component.getLayout ?? (page => page);
-  //
+
   useEffect(() => {
-    router.events.on('routeChangeStart', () => {
+    const handleRouteStart = () => {
       setIsPageLoading(true);
-    });
-    //
-    router.events.on('routeChangeComplete', () => {
+    };
+    const handleRouteComplete = () => {
       setIsPageLoading(false);
-    });
+    };
+
+    const handleRouteChangeError = () => {
+      setIsPageLoading(false);
+    };
+
+    router.events.on('routeChangeError', handleRouteChangeError);
+    router.events.on('routeChangeStart', handleRouteStart);
+    router.events.on('routeChangeComplete', handleRouteComplete);
+
+    return () => {
+      router.events.off('routeChangeStart', handleRouteStart);
+      router.events.off('routeChangeComplete', handleRouteComplete);
+      router.events.off('routeChangeError', handleRouteChangeError);
+    };
   }, [router]);
 
   return (

@@ -4,7 +4,6 @@ import { groupByKey } from '@/shared/helper';
 import useCalendarState from '@/shared/store/sales/salesCalendar';
 import useSalesDataState, {
   resetCalendarBindingData,
-  resetSalesSum,
   setCalendarBindingData,
   setSalesSum,
 } from '@/shared/store/sales/salesData';
@@ -20,7 +19,8 @@ import styles from './styles/cell.module.css';
 
 const Cell = () => {
   const isChangeView = useSalesToggle(state => state.isChangeView);
-  const calendarDataBindingData = useSalesDataState(state => state.calendarBindingData);
+  const { calendarBindingData, salesSum } = useSalesDataState();
+
   const currentDate = useCalendarState(state => state.currentDate);
   const { clickShowDataOfDateHandler } = useDataHandler();
 
@@ -42,16 +42,16 @@ const Cell = () => {
 
           const formattedData = formatToCalendarData(group);
           const minMaxData = sortMinMaxData(formattedData);
-          setCalendarBindingData(minMaxData);
+
           setSalesSum(formattedData);
+          setCalendarBindingData(minMaxData);
+        } else {
+          // 불필요한 렌더링임... 최적화 필요!!
+          setSalesSum(null);
+          resetCalendarBindingData();
         }
       });
     }
-
-    return () => {
-      resetCalendarBindingData();
-      resetSalesSum();
-    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentDate]);
 
@@ -61,13 +61,13 @@ const Cell = () => {
   while (day <= endDay) {
     for (let i = 0; i < 7; i++) {
       const itemKey = day.clone().format(FORMAT_CELL_DATE_TYPE);
-      const salesData = calendarDataBindingData?.filter(target => target.date === itemKey);
+      const salesData = calendarBindingData?.filter(target => target.date === itemKey);
 
       days.push(
         <CellItem
           key={itemKey}
           day={day}
-          salesData={salesData[0]}
+          salesData={salesData ? salesData[0] : undefined}
           // ... spreadOperator
           {...(!isChangeView && { getMinMaxSalesType: getMinMaxSalesType })}
           {...(isChangeView && { clickShowDataOfDateHandler: clickShowDataOfDateHandler })}

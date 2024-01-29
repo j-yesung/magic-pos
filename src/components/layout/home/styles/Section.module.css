@@ -23,13 +23,48 @@
 .title-box {
   gap: 7rem;
   width: 60em;
-  height: 65%;
+  height: 60rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
   align-items: flex-start;
   flex-direction: column;
 }
+/* 키오스크 @media-query */
+@media screen and (max-height: 965px) {
+  .sticky-box {
+    top: 6rem;
+  }
+  .title-box {
+    height: 45rem;
+  }
+  .iphone-box img {
+    height: 70rem;
+  }
+}
+@media screen and (max-height: 770px) {
+  .sticky-box {
+    top: 10rem;
+  }
+  .title-box {
+    height: 35rem;
+  }
+  .iphone-box img {
+    height: 55rem;
+  }
+}
+@media screen and (max-height: 690px) {
+  .sticky-box {
+    top: 10rem;
+  }
+  .title-box {
+    height: 30rem;
+  }
+  .iphone-box img {
+    height: 45rem;
+  }
+}
+
 /* 메인 제목 */
 .title-box .t1 {
   background: linear-gradient(to right, var(--main-color), #ffa800);
@@ -199,3 +234,4 @@
   cursor: pointer;
   color: var(--main-color);
 }
+/* 관리자 @media-query */
