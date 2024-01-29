@@ -1,27 +1,66 @@
+import useOrderCheckListStore from '@/shared/store/order-check-list';
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Button from '../common/Button';
 import styles from './styles/orderCheckListFilterButtonBox.module.css';
 
 const OrderCheckListFilterButtonBox = () => {
-  const [isDateBox, setIsDateBox] = useState(false);
+  const [isDateButton, setIsDateButton] = useState(0);
+  const { setListTYpe } = useOrderCheckListStore();
+
+  const clickDayButtonHandler = () => {
+    setListTYpe('day');
+    setIsDateButton(1);
+  };
+  const clickWeekButtonHandler = () => {
+    setIsDateButton(2);
+  };
+  const clickMonthButtonHandler = () => {
+    setIsDateButton(3);
+  };
+  const clickDateButtonHandler = () => {
+    setIsDateButton(4);
+  };
+  const clickResetButtonHandler = () => {
+    setIsDateButton(0);
+  };
 
   return (
     <>
       <div className={styles['order-check-list-filter-box']}>
-        <Button type="button">오늘</Button>
-        <Button type="button">이번 주</Button>
-        <Button type="button">이번 달</Button>
         <Button
           type="button"
-          onClick={() => {
-            setIsDateBox(!isDateBox);
-          }}
+          onClick={clickDayButtonHandler}
+          className={clsx(isDateButton === 1 && styles['button-focus'])}
+        >
+          오늘
+        </Button>
+        <Button
+          type="button"
+          onClick={clickWeekButtonHandler}
+          className={clsx(isDateButton === 2 && styles['button-focus'])}
+        >
+          이번 주
+        </Button>
+        <Button
+          type="button"
+          onClick={clickMonthButtonHandler}
+          className={clsx(isDateButton === 3 && styles['button-focus'])}
+        >
+          이번 달
+        </Button>
+        <Button
+          type="button"
+          onClick={clickDateButtonHandler}
+          className={clsx(isDateButton === 4 && styles['button-focus'])}
         >
           날짜 선택
         </Button>
+        <Button type="button" onClick={clickResetButtonHandler}>
+          초기화
+        </Button>
       </div>
-      <div className={clsx(styles['order-check-list-Date-box'], isDateBox && styles['active'])}>
+      <div className={clsx(styles['order-check-list-Date-box'], isDateButton === 4 && styles['active'])}>
         <input type="date" name="" id="" />
         <span>~</span>
         <input type="date" name="" id="" />
