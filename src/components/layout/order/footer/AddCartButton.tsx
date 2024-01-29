@@ -17,7 +17,7 @@ const AddCartButton = ({ menu }: { menu: MenuItemWithOption | null }) => {
   const optionSwiperRef = useKioskState(state => state.optionSwiperRef);
   const selectedOptions = useKioskState(state => state.selectedOptions);
   const amount = useKioskState(state => state.amount);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { MagicModal } = useModal();
 
   const itemList: MenuItemWithOption[] = new Array(amount).fill(true).map(() => {
@@ -48,7 +48,7 @@ const AddCartButton = ({ menu }: { menu: MenuItemWithOption | null }) => {
   return (
     <button className={styles.button} onClick={handleClickAddCart}>
       <span>
-        {convertNumberToWon(totalPrice)} <BiSolidCircle size={2} /> {t('footer.add')}
+        {convertNumberToWon(totalPrice, i18n.language === 'ko')} <BiSolidCircle size={2} /> {t('footer.add')}
       </span>
     </button>
   );

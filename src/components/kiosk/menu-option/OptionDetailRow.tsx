@@ -4,6 +4,7 @@ import useToast from '@/hooks/service/ui/useToast';
 import { convertNumberToWon } from '@/shared/helper';
 import styles from './styles/OptionDetailRow.module.css';
 import Checkbox from '@/components/common/Checkbox';
+import { useTranslation } from 'next-i18next';
 
 /**
  * -- 로직 설명
@@ -28,6 +29,7 @@ const OptionDetailRow = ({
   setSelectedDetail: React.Dispatch<React.SetStateAction<Tables<'menu_option_detail'>[]>>;
 }) => {
   const { toast } = useToast();
+  const { i18n } = useTranslation();
 
   const onClickCheckOption = (e: React.MouseEvent<HTMLInputElement>) => {
     const checked = e.currentTarget.checked;
@@ -60,7 +62,7 @@ const OptionDetailRow = ({
         <span>{detail.name}</span>
       </div>
       <div>
-        <span>{convertNumberToWon(detail.price)}</span>
+        <span>{convertNumberToWon(detail.price, i18n.language === 'ko')}</span>
       </div>
     </div>
   );
