@@ -23,7 +23,7 @@ export const addSales = async (sales: TablesInsert<'sales'>[]) => {
 
 // const TIME_FORMAT = 'YYYY-MM-DD 00:00';
 // today.format(TIME_FORMAT) = 2024-01-25 00:00
-const TIME_FORMAT = 'YYYY-MM-DD 00:00';
+const TIME_FORMAT = 'YYYY-MM-DD HH:00';
 
 /** const today = moment().hour(0).subtract(9, 'hour');
  * .gte(...,  momentToString(today.clone().subtract(6,'day')))

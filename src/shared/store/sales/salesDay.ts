@@ -7,7 +7,7 @@ interface DayState {
 }
 const today = moment();
 const selectedDate = moment();
-const utcStandardDate = moment().hour(0).add(9, 'hour');
+const utcStandardDate = moment().hour(0).subtract(9, 'hour');
 
 const useDayState = create<DayState>()(() => ({
   today,
