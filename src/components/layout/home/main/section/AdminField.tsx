@@ -1,7 +1,6 @@
 import { MenuOptionShot, MenuShot, OrderCheckShot, ProdShot } from '@/data/screenshot-export';
-import { adminDescription } from '@/data/scroll-props';
 import { useRef } from 'react';
-import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
+import { MdArrowForwardIos as NextArrow, MdArrowBackIos as PrevArrow } from 'react-icons/md';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -36,31 +35,15 @@ const AdminField = () => {
           loop={true}
           ref={swiperRef}
         >
-          {ADMIN_INFO.map(info => {
-            const matchedInfo = adminDescription.find(item => item.id === info.id);
-            return (
-              <SwiperSlide key={info.id}>
-                <div className={styles.slideScreen}>
-                  {info.svg}
-                  {matchedInfo && (
-                    <div className={styles.info}>
-                      <h1 className={styles.infoId}>{matchedInfo.id}</h1>
-                      <h3 className={styles.infoTitle}>{matchedInfo.title}</h3>
-                      <div className={styles.infoText}>
-                        <p>{matchedInfo.desc}</p>
-                        <p>{matchedInfo.caption}</p>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </SwiperSlide>
-            );
-          })}
+          {ADMIN_INFO.map(info => (
+            <SwiperSlide key={info.id}>
+              <div className={styles.slideScreen}>{info.svg}</div>
+            </SwiperSlide>
+          ))}
         </Swiper>
-
         <div className={styles.actionButton}>
-          <MdArrowBackIos className={styles.arrow} size={70} onClick={goPrev} />
-          <MdArrowForwardIos className={styles.arrow} size={70} onClick={goNext} />
+          <PrevArrow className={styles.arrow} size={70} onClick={goPrev} />
+          <NextArrow className={styles.arrow} size={70} onClick={goNext} />
         </div>
       </div>
     </section>
