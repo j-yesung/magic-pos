@@ -11,11 +11,8 @@ import { ChangeEvent } from 'react';
 import styles from './styles/imgForm.module.css';
 import CloseButton from '/public/icons/close.svg';
 import Pencil from '/public/icons/pencil.svg';
-const ImgForm = ({ mode }: { mode: boolean }) => {
-  // 사진이 있을 때, onMouesOver 하면 x 표시가 보이고, onMouseleave 하면 x 표시가 안보이고 preImage && styles.hasDeleteButton
-  // 사진이 없을 때는 onMouseOver || onMouseleave 안보이고
-  const DEFAULT_IMG = '/logo.svg';
 
+const ImgForm = ({ mode }: { mode: boolean }) => {
   const prevImg = usePlatFormState(state => state.prevImg);
   const changePreview = (e: ChangeEvent<HTMLInputElement>) => {
     const fileList = e.target.files || [];
@@ -46,13 +43,13 @@ const ImgForm = ({ mode }: { mode: boolean }) => {
         >
           <CloseButton />
         </button>
-        <Image
-          className={clsx(prevImg ? styles.img : styles.defaultImg)}
-          src={prevImg ?? DEFAULT_IMG}
-          alt="default image"
-          width={1000}
-          height={1000}
-        />
+        {prevImg ? (
+          <Image className={styles.img} src={prevImg} alt="prev-image" width={1000} height={1000} />
+        ) : (
+          <div className={styles.defaultTextContainer}>
+            <p className={styles.defaultText}>이미지를 등록해주세요</p>
+          </div>
+        )}
         <div className={styles.editIconWrapper}>
           <Pencil />
         </div>

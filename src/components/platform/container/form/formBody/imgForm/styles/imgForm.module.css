@@ -23,12 +23,6 @@
   object-fit: cover;
 }
 
-.default-img {
-  width: 100%;
-  height: 100%;
-  vertical-align: top;
-}
-
 .default-delete-button {
   all: unset;
   display: none;
@@ -40,6 +34,28 @@
   padding: 1rem;
   top: -1.8rem;
   cursor: pointer;
+}
+.default-text-container {
+  display: flex;
+  width: 20.4rem;
+  height: 11.7rem;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+  border-radius: 0.5rem;
+  background: #f7f7f7;
+}
+
+.default-text {
+  color: var(--text1);
+  text-align: center;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.4rem; /* 100% */
+  letter-spacing: -0.028rem;
 }
 
 .default-delete-button svg {
