@@ -37,14 +37,22 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? (page => page);
 
   useEffect(() => {
+    // 로딩이 길어질 때만 로딩창이 뜨도록 변경
+    let timer: ReturnType<typeof setTimeout>;
     const handleRouteStart = () => {
-      setIsPageLoading(true);
+      if (!timer) {
+        timer = setTimeout(() => {
+          setIsPageLoading(true);
+        }, 150);
+      }
     };
     const handleRouteComplete = () => {
+      if (timer) clearTimeout(timer);
       setIsPageLoading(false);
     };
 
     const handleRouteChangeError = () => {
+      if (timer) clearTimeout(timer);
       setIsPageLoading(false);
     };
 
@@ -53,6 +61,7 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
     router.events.on('routeChangeComplete', handleRouteComplete);
 
     return () => {
+      if (timer) clearTimeout(timer);
       router.events.off('routeChangeStart', handleRouteStart);
       router.events.off('routeChangeComplete', handleRouteComplete);
       router.events.off('routeChangeError', handleRouteChangeError);

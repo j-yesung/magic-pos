@@ -1,0 +1,41 @@
+{
+  "order-type": {
+    "title-1": "매장식사 또는",
+    "title-2": "포장을 선택해 주세요.",
+    "store": "먹고 갈게요",
+    "togo": "포장 할게요",
+    "store-short": "매장",
+    "togo-short": "포장"
+  },
+  "price": "가격",
+  "amount": "수량",
+  "won": "원",
+  "sold-out": "이 품절 되었습니다.",
+  "add-more": "더 담으러 가기",
+  "order-more": "더 주문하러 가기",
+  "total-price": "총 결제 금액",
+  "total-order-price": "총 주문 금액",
+  "max": "최대",
+  "max-available-option": "개 선택 가능",
+  "order-number": "주문 번호",
+  "order-success": "주문이 완료되었어요",
+  "order-time": "주문 시간",
+  "prepare": "준비중",
+  "complete": "완료",
+  "recommended": "추천 메뉴",
+  "modal": {
+    "add-cart-success": "상품을 장바구니에 담았어요"
+  },
+  "header": {
+    "cart": "장바구니",
+    "payment": "결제 하기",
+    "success": "주문 완료",
+    "receipt": "주문 확인"
+  },
+  "footer": {
+    "add": "담기",
+    "payment": "결제 하기",
+    "check-order": "주문 확인하기",
+    "no-item": "담은 상품이 없습니다."
+  }
+}

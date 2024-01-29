@@ -27,7 +27,7 @@ const useTableStore = create<TableStoreType>(set => ({
   maxGuest: 0,
   isDisabled: 0,
   isClick: false,
-  isUseTable: false,
+  isUseTable: true,
 
   // setState함수 영역
   TableItemClick: value =>
@@ -46,14 +46,14 @@ const useTableStore = create<TableStoreType>(set => ({
     set(() => ({
       isDisabled: value,
     })),
-  resetTableState: ()=>
-    set(()=>({
+  resetTableState: () =>
+    set(() => ({
       tableId: '',
       tableNumber: 0,
       maxGuest: 0,
       isDisabled: 0,
       isClick: false,
-    }))
+    })),
 }));
 
 export const setIsUseTable = (value: boolean) => useTableStore.setState({ isUseTable: value });

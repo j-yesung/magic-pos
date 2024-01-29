@@ -58,6 +58,6 @@ export const useStoreSetQuery = () => {
     newOrderNumber: incrementResult?.orderNumber,
     incrementOrderNumber: incrementOrderNumberMutation,
     updateStoreTimeSet: updateStoreTimeSetMutation.mutate,
-    updateStoreUseTable: updateStoreUseTableMutation.mutate,
+    updateStoreUseTable: updateStoreUseTableMutation.mutateAsync,
   };
 };
