@@ -259,13 +259,13 @@ export const resetPlatFormFile = (mode: boolean) => {
 export const resetAddPlatForm = () =>
   usePlatFormState.setState(state => ({
     ...state,
-    addPlatForm: initialAddPlatform,
+    addPlatForm: { ...state.addPlatForm, name: '', link_url: '', file: null, metaImage: null },
   }));
 
 export const resetEditPlatForm = () =>
   usePlatFormState.setState(state => ({
     ...state,
-    editPlatForm: initialEditPlatForm,
+    editPlatForm: { ...state.editPlatForm, name: '', link_url: '', file: null },
   }));
 
 export const resetIsEditMode = () =>

@@ -65,7 +65,6 @@ const usePlatForm = () => {
       setIsValidUrl(false);
       resetAddPlatForm();
       e.currentTarget['link_url'].value = '';
-
       const nameValue = e.currentTarget.elements.namedItem('name') as HTMLInputElement;
       nameValue.value = '';
       return false;
@@ -78,6 +77,7 @@ const usePlatForm = () => {
     e.preventDefault();
 
     const isValidUrl = validateUrl(e, addPlatForm.link_url);
+    console.log(addPlatForm);
     if (!isValidUrl) return;
 
     if (!addPlatForm.name.trim() || !addPlatForm.link_url.trim()) {
