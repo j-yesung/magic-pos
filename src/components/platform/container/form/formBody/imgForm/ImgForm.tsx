@@ -51,7 +51,7 @@ const ImgForm = ({ mode }: { mode: boolean }) => {
           </div>
         )}
         <div className={styles.editIconWrapper}>
-          <Pencil />
+          <Pencil width={26} height={26} />
         </div>
       </label>
 

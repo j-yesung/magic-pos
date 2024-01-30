@@ -27,7 +27,7 @@ const FormHeader = ({ mode }: { mode: boolean }) => {
     <div className={styles.formHeader}>
       <p className={styles.formHeaderTitle}>{!mode ? ADD_MODE : EDIT_MODE}</p>
       <button type="button" className={styles.closeButton} onClick={() => closePlatFormModal(mode)}>
-        <CloseButton />
+        <CloseButton width={26} height={26} />
       </button>
     </div>
   );
