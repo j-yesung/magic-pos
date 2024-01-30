@@ -3,7 +3,6 @@
 import { supabase } from '@/shared/supabase';
 import { AddPlatFormType, EditPlatFormType } from '@/types/platform';
 import { TablesInsert } from '@/types/supabase';
-import dayjs from 'dayjs';
 
 /**
  *
@@ -67,10 +66,9 @@ export const addPlatForm = async (param: TablesInsert<'platform'>) => {
 };
 
 export const uploadPlatFormImage = async (param: AddPlatFormType | EditPlatFormType) => {
-  const storage_path = dayjs().toISOString();
   const { data, error } = await supabase.storage
     .from('images')
-    .upload(`platform/${param.store_id}/${storage_path}`, param.file!);
+    .upload(`platform/${param.store_id}/${param.createdAt}`, param.file!);
 
   if (error) throw error;
   return { data, error };
@@ -128,11 +126,12 @@ export const removePlatFormImage = async (param: EditPlatFormType) => {
  * @param param
  * @returns update 성공하면 data는 null 값이기에 [] 배열로 넣었씁니다.
  */
-export const updatePlatFormData = async (param: TablesInsert<'platform'>) => {
+export const updatePlatFormData = async (param: EditPlatFormType) => {
+  const { store_id, metaImage, file, createdAt, ...editForm } = param;
   const { error } = await supabase
     .from('platform')
     .update({
-      ...param,
+      ...editForm,
     })
     .eq('id', param.id!);
 

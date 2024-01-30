@@ -21,8 +21,8 @@ import usePlatFormState, {
   setIsValidUrl,
 } from '@/shared/store/platform';
 import { AddPlatFormType, EditPlatFormType } from '@/types/platform';
-import { TablesInsert } from '@/types/supabase';
-import { checkHttp, checkValidUrl } from '@/utils/validate';
+import { checkValidUrl } from '@/utils/validate';
+import dayjs from 'dayjs';
 import { FormEvent } from 'react';
 import useToast from '../service/ui/useToast';
 const SUPABASE_STORAGE_URL = 'https://lajnysuklrkrhdyqhotr.supabase.co';
@@ -40,6 +40,7 @@ const usePlatForm = () => {
 
   const handleImageUpload = async (data: AddPlatFormType | EditPlatFormType) => {
     if (data.file) {
+      data.createdAt = dayjs().toISOString();
       await uploadPlatFormImage(data);
       const { publicUrl } = downloadPlatFormImageUrl(data);
       data.image_url = publicUrl;
@@ -59,9 +60,7 @@ const usePlatForm = () => {
   };
 
   const validateUrl = (e: FormEvent<HTMLFormElement>, url: string): boolean => {
-    const validHttpUrl = checkHttp(url);
-    const isValidUrl = checkValidUrl(validHttpUrl!);
-
+    const isValidUrl = checkValidUrl(url);
     if (!isValidUrl) {
       setIsValidUrl(false);
       e.currentTarget['link_url'].value = '';
@@ -81,15 +80,23 @@ const usePlatForm = () => {
     if (!addPlatForm.name.trim() || !addPlatForm.link_url.trim()) {
       return showCompleteToast(ALERT_TOAST);
     }
-
     const form = await handleImageUpload(addPlatForm);
-
-    // addPlatForm.image_url = imageUrl;
     const { data: platformData } = await insertPlatFormRow(form);
     setAddDataToFetchPlatForm(platformData!);
     resetAddPlatForm();
     setIsRegist(false);
     resetMeta();
+    resetPrevImg();
+  };
+
+  const isPlatFormCardValueChange = (preValue: EditPlatFormType, editValue: EditPlatFormType) => {
+    const isChangeValue = Object.entries(editValue).reduce((acc, [key, value]) => {
+      if (preValue[key as keyof EditPlatFormType] !== value) {
+        acc[key as keyof EditPlatFormType] = value;
+      }
+      return acc;
+    }, new Object() as EditPlatFormType);
+    return isChangeValue;
   };
 
   const prevImageRemove = async (prevData: EditPlatFormType) => {
@@ -101,36 +108,32 @@ const usePlatForm = () => {
 
   const submitEditCard = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const isValidUrl = validateUrl(e, editPlatForm.link_url);
+    if (!isValidUrl) return showCompleteToast(ALERT_TOAST);
 
-    const comparedData = Object.entries(editPlatForm).reduce((acc, [key, value]) => {
-      if (prevData[key as keyof EditPlatFormType] !== value) {
-        acc[key as keyof EditPlatFormType] = value;
-      }
-      return acc;
-    }, new Object() as EditPlatFormType);
+    const comparedData = isPlatFormCardValueChange(prevData, editPlatForm);
 
     if (isEmptyObject(comparedData) && prevData.image_url === prevImg) {
       resetIsRegist();
       resetEditPlatForm();
       resetPrevData();
+      resetPrevImg();
       return;
     }
 
     comparedData.id = editPlatForm.id;
     comparedData.store_id = editPlatForm.store_id;
-    // const isValidUrl = validateUrl(e, comparedData.link_url);
 
-    // if (!isValidUrl) return;
     await prevImageRemove(prevData);
     const form = await handleImageUpload(comparedData);
 
-    const { store_id, metaImage, file, createdAt, ...editTarget } = form;
-    await updatePlatFormData(editTarget as TablesInsert<'platform'>);
-    const { platform } = await fetchPlatForm(store_id!);
+    await updatePlatFormData(form as EditPlatFormType);
+    const { platform } = await fetchPlatForm(form.store_id!);
     setFetchPlatFormData(platform);
     resetIsRegist();
     resetEditPlatForm();
     resetPrevData();
+    resetPrevImg();
     showCompleteToast(EDIT_TOAST);
   };
 
