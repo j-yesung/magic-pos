@@ -1,31 +1,10 @@
-import { useFetchQuery } from '@/hooks/query/store/useFetchQuery';
-import useAuthState from '@/shared/store/session';
-import useToggleState, { changeToggle } from '@/shared/store/toggle';
-import { useRouter } from 'next/router';
+import { useToggle } from '@/hooks/service/ui/useToggle';
+import useToggleState from '@/shared/store/toggle';
 import styles from '../styles/AdminLayout.module.css';
 
 const HeaderToggleButton = () => {
-  const storeId = useAuthState(state => state.storeId);
-  const { storeInfo } = useFetchQuery({ storeId: storeId ?? '' });
-  const isUseTable = storeInfo?.use_table;
   const isChecked = useToggleState(state => state.isChecked);
-  const router = useRouter();
-
-  const changeToggleHandler = () => {
-    const currentPath = router.asPath;
-    const tablePath = '/admin/table';
-    const managementPath = '/admin/management';
-    const orderCheckPath = '/admin/order-check-list';
-
-    if (!isChecked && currentPath !== managementPath) {
-      router.push(managementPath);
-    } else if (isUseTable && isChecked && currentPath === managementPath) {
-      router.push(tablePath);
-    } else if (!isUseTable && isChecked && currentPath === managementPath) {
-      router.push(orderCheckPath);
-    }
-    changeToggle();
-  };
+  const { changeToggleHandler } = useToggle();
 
   return (
     <>

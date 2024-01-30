@@ -1,5 +1,6 @@
 import { useFetchQuery } from '@/hooks/query/store/useFetchQuery';
 import useAuthState from '@/shared/store/session';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styles from '../styles/AdminLayout.module.css';
 
@@ -22,6 +23,8 @@ const SidebarList = ({ navList, clickFn }: NavList) => {
   const { storeInfo } = useFetchQuery({ storeId: storeId ?? '' });
   const isUseTable = storeInfo?.use_table;
   const [filteredNavList, setFilteredNavList] = useState(navList);
+  const router = useRouter();
+  const currentPath = router.asPath;
 
   useEffect(() => {
     if (isUseTable) {
@@ -34,7 +37,11 @@ const SidebarList = ({ navList, clickFn }: NavList) => {
   return (
     <>
       {filteredNavList.map(list => (
-        <li className={list.active ? styles.active : ''} key={list.id} onClick={() => clickFn(list.id, list.url)}>
+        <li
+          className={currentPath === list.url ? styles.active : ''}
+          key={list.id}
+          onClick={() => clickFn(list.id, list.url)}
+        >
           {list.name}
         </li>
       ))}

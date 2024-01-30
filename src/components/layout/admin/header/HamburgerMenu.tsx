@@ -1,10 +1,12 @@
+import { useToggle } from '@/hooks/service/ui/useToggle';
 import { toggleIsSideBarOpen } from '@/shared/store/sidebar';
-import useToggleState, { changeToggle } from '@/shared/store/toggle';
+import useToggleState from '@/shared/store/toggle';
 import styles from '../styles/AdminLayout.module.css';
 import Hamburger from '/public/icons/hamburger.svg';
 
 const HamburgerMenu = () => {
   const isChecked = useToggleState(state => state.isChecked);
+  const { changeToggleHandler } = useToggle();
 
   const clickSideBarOpenHandler = () => {
     toggleIsSideBarOpen();
@@ -12,7 +14,7 @@ const HamburgerMenu = () => {
     if (!isChecked) {
       return;
     } else {
-      changeToggle();
+      changeToggleHandler();
     }
   };
 
