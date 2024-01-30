@@ -26,6 +26,7 @@ import { checkHttp, checkValidUrl } from '@/utils/validate';
 import moment from 'moment';
 import { FormEvent } from 'react';
 import useToast from '../service/ui/useToast';
+const SUPABASE_STORAGE_URL = 'https://lajnysuklrkrhdyqhotr.supabase.co';
 
 const usePlatForm = () => {
   const { addPlatForm, editPlatForm, prevData, prevImg, store_id, meta } = usePlatFormState();
@@ -35,6 +36,7 @@ const usePlatForm = () => {
 
   const handleImageUpload = async (data: AddPlatFormType | EditPlatFormType) => {
     if (data.file) {
+      data.createdAt = moment().toISOString();
       await uploadPlatFormImage(data);
       const { publicUrl } = downloadPlatFormImageUrl(data);
       return publicUrl;
@@ -71,9 +73,6 @@ const usePlatForm = () => {
 
     if (!isValidUrl) return;
 
-    // image 경로로 사용하기 위해 createdAt를 넣었습니다.
-    let updateData: AddPlatFormType = { ...addPlatForm, createdAt: moment().toISOString() };
-
     if (!addPlatForm.name.trim() || !addPlatForm.link_url.trim()) {
       return toast('내용을 다 채워주세요', {
         type: 'info',
@@ -83,13 +82,11 @@ const usePlatForm = () => {
       });
     }
 
-    const imageUrl = await handleImageUpload(updateData);
+    const imageUrl = await handleImageUpload(addPlatForm);
 
-    updateData = { ...updateData, image_url: imageUrl };
-    console.log(updateData);
-    const { data: platformData } = await insertPlatFormRow(updateData);
+    addPlatForm.image_url = imageUrl;
+    const { data: platformData } = await insertPlatFormRow(addPlatForm);
     setAddDataToFetchPlatForm(platformData!);
-
     resetAddPlatForm();
     setIsRegist(false);
     resetMeta();
@@ -114,6 +111,7 @@ const usePlatForm = () => {
       return;
     }
 
+    comparedData.id = editPlatForm.id;
     // const isValidUrl = validateUrl(e, comparedData.link_url);
 
     // if (!isValidUrl) return;
@@ -123,11 +121,9 @@ const usePlatForm = () => {
       ...comparedData,
       image_url: imageUrl ?? null,
       store_id: editPlatForm.store_id,
-      id: editPlatForm.id,
     };
 
-    console.log('comparedData', comparedData);
-    const { store_id, ...editTarget } = comparedData;
+    const { store_id, metaImage, file, createdAt, ...editTarget } = comparedData;
     await updatePlatFormData(editTarget as TablesInsert<'platform'>);
     const { platform } = await fetchPlatForm(comparedData.store_id!);
     setFetchPlatFormData(platform);
@@ -260,7 +256,7 @@ const usePlatForm = () => {
   const clickRemoveData = async () => {
     console.log(editPlatForm);
     await removePlatFormData(editPlatForm.id);
-    if (editPlatForm.image_url?.includes(process.env.NEXT_PUBLIC_SUPABASE_URL!)) {
+    if (editPlatForm.image_url?.includes(SUPABASE_STORAGE_URL)) {
       await removePlatFormImage(editPlatForm);
     }
     const { platform } = await fetchPlatForm(editPlatForm.store_id!);
