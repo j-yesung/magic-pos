@@ -1,31 +1,44 @@
+import useFetchOrderCheckList from '@/hooks/order-check-list/useFetchOrderCheckList';
 import useOrderCheckListStore from '@/shared/store/order-check-list';
 import clsx from 'clsx';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import Button from '../common/Button';
 import styles from './styles/orderCheckListFilterButtonBox.module.css';
 
 const OrderCheckListFilterButtonBox = () => {
   const [isDateButton, setIsDateButton] = useState(0);
-  const { setListTYpe } = useOrderCheckListStore();
+  const { startDate, endDate, setListType, setStartTime, setEndTime } = useOrderCheckListStore();
+  const { refetch } = useFetchOrderCheckList();
 
   const clickDayButtonHandler = () => {
-    setListTYpe('day');
+    setListType('day');
     setIsDateButton(1);
   };
   const clickWeekButtonHandler = () => {
-    setListTYpe('week');
+    setListType('week');
     setIsDateButton(2);
   };
   const clickMonthButtonHandler = () => {
-    setListTYpe('month');
+    setListType('month');
     setIsDateButton(3);
   };
   const clickDateButtonHandler = () => {
     setIsDateButton(4);
   };
   const clickResetButtonHandler = () => {
-    setListTYpe('default');
+    setListType('default');
     setIsDateButton(0);
+  };
+
+  const clickSelectDateButtonHandler = () => {
+    refetch();
+    setListType('selectDate');
+  };
+  const changeStartTimeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setStartTime(e.target.value);
+  };
+  const changeEndTimeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setEndTime(e.target.value);
   };
 
   return (
@@ -64,10 +77,12 @@ const OrderCheckListFilterButtonBox = () => {
         </Button>
       </div>
       <div className={clsx(styles['order-check-list-Date-box'], isDateButton === 4 && styles['active'])}>
-        <input type="date" name="" id="" />
+        <input type="date" value={startDate} onChange={changeStartTimeHandler} />
         <span>~</span>
-        <input type="date" name="" id="" />
-        <Button type="button">완료</Button>
+        <input type="date" value={endDate} onChange={changeEndTimeHandler} />
+        <Button type="button" onClick={clickSelectDateButtonHandler}>
+          완료
+        </Button>
       </div>
     </>
   );
