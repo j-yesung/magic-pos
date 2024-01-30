@@ -38,7 +38,7 @@ const AdminField = () => {
           {ADMIN_INFO.map(info => (
             <SwiperSlide key={info.id}>
               <div className={styles.slideScreen}>
-                <Image src={info.src} width={1000} height={700} alt={info.alt} priority />
+                <Image src={info.src} width={1000} height={700} alt={info.alt} layout="responsive" />
               </div>
             </SwiperSlide>
           ))}
