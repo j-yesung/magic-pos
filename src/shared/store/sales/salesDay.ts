@@ -1,13 +1,21 @@
-import moment, { Moment } from 'moment';
+import dayjs, { Dayjs } from 'dayjs';
+import week from 'dayjs/plugin/weekOfYear';
+import 'dayjs/plugin/weekday';
 import { create } from 'zustand';
-interface DayState {
-  today: Moment;
-  utcStandardDate: Moment;
-  selectedDate: Moment;
+dayjs.extend(week);
+
+export function useDayjs(date: Parameters<typeof dayjs>[0]) {
+  return dayjs(date);
 }
-const today = moment();
-const selectedDate = moment();
-const utcStandardDate = moment().hour(0).subtract(9, 'hour');
+
+interface DayState {
+  today: Dayjs;
+  utcStandardDate: Dayjs;
+  selectedDate: Dayjs;
+}
+const today = dayjs();
+const selectedDate = dayjs();
+const utcStandardDate = dayjs().hour(0).subtract(9, 'hour');
 
 const useDayState = create<DayState>()(() => ({
   today,
@@ -17,7 +25,7 @@ const useDayState = create<DayState>()(() => ({
 
 export default useDayState;
 
-export const setSelectedDate = (day: Moment) =>
+export const setSelectedDate = (day: Dayjs) =>
   useDayState.setState(state => ({
     ...state,
     selectedDate: day,

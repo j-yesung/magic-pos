@@ -2,13 +2,13 @@ import LoadingSpinner from '@/components/common/LoadingSpinner';
 import useSetManagement from '@/hooks/management/useSetManagement';
 import { useUserTokenFetchQuery } from '@/hooks/query/user-token/useUserTokenFetchQuery';
 import { useModal } from '@/hooks/service/ui/useModal';
+import useToast from '@/hooks/service/ui/useToast';
 import useSendPush from '@/hooks/service/useSendPush';
 import { groupByKey } from '@/shared/helper';
 import { MenuItemWithOption, OrderDataWithStoreName } from '@/types/supabase';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { IoCheckmark } from 'react-icons/io5';
 import styles from './styles/OrderItem.module.css';
-import useToast from '@/hooks/service/ui/useToast';
 
 const OrderItem = ({ orderData }: { orderData: OrderDataWithStoreName }) => {
   const { id, order_number, order_id, order_time, menu_list, is_togo } = orderData;
@@ -58,7 +58,7 @@ const OrderItem = ({ orderData }: { orderData: OrderDataWithStoreName }) => {
     <li className={styles['order-list-item']}>
       <div className={styles['item-title']}>
         <span className={styles['order-number']}>주문 번호 {order_number}</span>
-        <span className={styles['order-time']}>{moment(order_time).format('HH:mm')}</span>
+        <span className={styles['order-time']}>{dayjs(order_time).format('HH:mm')}</span>
       </div>
       <ul className={styles['menu-list']}>
         {[...group]?.map(([key, item]) => {

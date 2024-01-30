@@ -1,25 +1,24 @@
-import moment, { Moment } from 'moment';
+import dayjs, { Dayjs } from 'dayjs';
 import { create } from 'zustand';
-
 interface CalendarStore {
-  currentDate: Moment;
+  currentDate: Dayjs;
 }
 
 /**
  * Value
  */
 const useCalendarState = create<CalendarStore>()(() => ({
-  currentDate: moment(),
+  currentDate: dayjs(),
 }));
 
 /**
  * Action
  */
-export const setCalendarCurrentDate = (currentDate: Moment) =>
+export const setCalendarCurrentDate = (currentDate: Dayjs) =>
   useCalendarState.setState(state => ({
     ...state,
     currentDate,
   }));
 
-export const resetCurrentDate = () => useCalendarState.setState(state => ({ ...state, currentDate: moment() }));
+export const resetCurrentDate = () => useCalendarState.setState(state => ({ ...state, currentDate: dayjs() }));
 export default useCalendarState;

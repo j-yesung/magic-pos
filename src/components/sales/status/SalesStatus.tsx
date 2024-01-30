@@ -5,7 +5,7 @@ import useDayState, { resetSelectedDate } from '@/shared/store/sales/salesDay';
 import { resetRecordData, setRecordData } from '@/shared/store/sales/salesRecord';
 import useAuthState from '@/shared/store/session';
 import { Tables } from '@/types/supabase';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { useEffect } from 'react';
 import { formatData } from '../calendarUtility/formatData';
 import ChartBar from './chart/ChartBar';
@@ -20,7 +20,7 @@ const SalesStatus = () => {
         const { result, recordData } = formatData(
           data.sales as Tables<'sales'>[],
           data.dateType,
-          moment(),
+          dayjs(),
           data.formatType!,
         );
         if (result) {

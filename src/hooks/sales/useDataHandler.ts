@@ -6,7 +6,7 @@ import useDayState, { setSelectedDate } from '@/shared/store/sales/salesDay';
 import { setRecordData } from '@/shared/store/sales/salesRecord';
 import { setIsShow } from '@/shared/store/sales/salesToggle';
 import useAuthState from '@/shared/store/session';
-import { Moment } from 'moment';
+import { Dayjs } from 'dayjs';
 
 export const useDataHandler = () => {
   const storeId = useAuthState(state => state.storeId);
@@ -37,7 +37,7 @@ export const useDataHandler = () => {
    * @param day 날짜가 들어오면 그 날짜 기준으로 1주일치 매출을 가져옵니다.
    * @returns salesStore의 state값 변경으로 void 입니다.
    */
-  const clickShowDataOfDateHandler = (day: Moment) => async () => {
+  const clickShowDataOfDateHandler = (day: Dayjs) => async () => {
     const { sales, dateType, formatType } = await getDaySales(day.clone().hour(0).subtract(9, 'hour'), storeId!);
     if (sales.length !== 0) {
       const { result, recordData } = formatData(sales, dateType, day.clone(), formatType!);

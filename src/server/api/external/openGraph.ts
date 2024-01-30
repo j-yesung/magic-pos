@@ -6,7 +6,7 @@ import axios from 'axios';
  * @param link_string  https:// url
  * @returns null 또는 metaImage를 return 합니다.
  */
-const HTTPS = 'https://';
+
 export const getOpenGraphMetaImage = async (link_string: string) => {
   try {
     const data = { url: link_string };

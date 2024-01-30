@@ -10,7 +10,7 @@ import useSalesDataState, {
 import useSalesToggle from '@/shared/store/sales/salesToggle';
 import useAuthState from '@/shared/store/session';
 import { Tables } from '@/types/supabase';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { useEffect } from 'react';
 import { FORMAT_CELL_DATE_TYPE, getMinMaxSalesType } from '../../calendarUtility/cellItemType';
 import { formatToCalendarData, sortMinMaxData } from '../../calendarUtility/formatData';
@@ -35,7 +35,7 @@ const Cell = () => {
           const group = groupByKey<Tables<'sales'>>(
             result.sales.map(data => ({
               ...data,
-              sales_date: moment(data.sales_date).format(FORMAT_CELL_DATE_TYPE),
+              sales_date: dayjs(data.sales_date).format(FORMAT_CELL_DATE_TYPE),
             })),
             'sales_date',
           );
