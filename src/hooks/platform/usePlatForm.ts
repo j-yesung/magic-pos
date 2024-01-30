@@ -23,11 +23,15 @@ import usePlatFormState, {
 import { AddPlatFormType, EditPlatFormType } from '@/types/platform';
 import { TablesInsert } from '@/types/supabase';
 import { checkHttp, checkValidUrl } from '@/utils/validate';
-import moment from 'moment';
 import { FormEvent } from 'react';
 import useToast from '../service/ui/useToast';
 const SUPABASE_STORAGE_URL = 'https://lajnysuklrkrhdyqhotr.supabase.co';
-
+interface PlatformToast {
+  content: string;
+  type: 'info' | 'warn';
+}
+const EDIT_TOAST = { content: '수정이 완료 되었습니다.', type: 'info' } as const;
+const ALERT_TOAST = { content: '내용을 다 채워주세요', type: 'warn' } as const;
 const usePlatForm = () => {
   const { addPlatForm, editPlatForm, prevData, prevImg } = usePlatFormState();
 
@@ -36,20 +40,21 @@ const usePlatForm = () => {
 
   const handleImageUpload = async (data: AddPlatFormType | EditPlatFormType) => {
     if (data.file) {
-      data.createdAt = moment().toISOString();
       await uploadPlatFormImage(data);
       const { publicUrl } = downloadPlatFormImageUrl(data);
-      return publicUrl;
+      data.image_url = publicUrl;
+      return data;
     }
-    return data.metaImage ?? undefined;
+    data.image_url = data.metaImage ?? null;
+    return data;
   };
 
-  const showEditCompleteToast = () => {
-    toast('수정이 완료 되었습니다.', {
-      type: 'info',
+  const showCompleteToast = (alert: PlatformToast) => {
+    toast(alert.content, {
+      type: alert.type,
       position: 'top-center',
       showCloseButton: true,
-      autoClose: 300,
+      autoClose: 2000,
     });
   };
 
@@ -74,18 +79,13 @@ const usePlatForm = () => {
     if (!isValidUrl) return;
 
     if (!addPlatForm.name.trim() || !addPlatForm.link_url.trim()) {
-      return toast('내용을 다 채워주세요', {
-        type: 'info',
-        position: 'top-center',
-        showCloseButton: false,
-        autoClose: 3000,
-      });
+      return showCompleteToast(ALERT_TOAST);
     }
 
-    const imageUrl = await handleImageUpload(addPlatForm);
+    const form = await handleImageUpload(addPlatForm);
 
-    addPlatForm.image_url = imageUrl;
-    const { data: platformData } = await insertPlatFormRow(addPlatForm);
+    // addPlatForm.image_url = imageUrl;
+    const { data: platformData } = await insertPlatFormRow(form);
     setAddDataToFetchPlatForm(platformData!);
     resetAddPlatForm();
     setIsRegist(false);
@@ -102,12 +102,10 @@ const usePlatForm = () => {
   const submitEditCard = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    let comparedData = Object.entries(editPlatForm).reduce((acc, [key, value]) => {
+    const comparedData = Object.entries(editPlatForm).reduce((acc, [key, value]) => {
       if (prevData[key as keyof EditPlatFormType] !== value) {
         acc[key as keyof EditPlatFormType] = value;
       }
-      // 튜터님께 여쭤볼 주석
-      // if (prevData.image_url) acc['image_url'] = prevData.image_url;
       return acc;
     }, new Object() as EditPlatFormType);
 
@@ -124,20 +122,16 @@ const usePlatForm = () => {
 
     // if (!isValidUrl) return;
     await prevImageRemove(prevData);
-    const imageUrl = await handleImageUpload(comparedData);
-    comparedData = {
-      ...comparedData,
-      image_url: imageUrl ?? null,
-    };
+    const form = await handleImageUpload(comparedData);
 
-    const { store_id, metaImage, file, createdAt, ...editTarget } = comparedData;
+    const { store_id, metaImage, file, createdAt, ...editTarget } = form;
     await updatePlatFormData(editTarget as TablesInsert<'platform'>);
     const { platform } = await fetchPlatForm(store_id!);
     setFetchPlatFormData(platform);
     resetIsRegist();
     resetEditPlatForm();
     resetPrevData();
-    showEditCompleteToast();
+    showCompleteToast(EDIT_TOAST);
   };
 
   const clickRemoveData = async () => {

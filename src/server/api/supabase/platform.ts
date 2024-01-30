@@ -3,6 +3,7 @@
 import { supabase } from '@/shared/supabase';
 import { AddPlatFormType, EditPlatFormType } from '@/types/platform';
 import { TablesInsert } from '@/types/supabase';
+import dayjs from 'dayjs';
 
 /**
  *
@@ -66,9 +67,10 @@ export const addPlatForm = async (param: TablesInsert<'platform'>) => {
 };
 
 export const uploadPlatFormImage = async (param: AddPlatFormType | EditPlatFormType) => {
+  const storage_path = dayjs().toISOString();
   const { data, error } = await supabase.storage
     .from('images')
-    .upload(`platform/${param.store_id}/${param.createdAt}`, param.file!);
+    .upload(`platform/${param.store_id}/${storage_path}`, param.file!);
 
   if (error) throw error;
   return { data, error };
