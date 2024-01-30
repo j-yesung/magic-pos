@@ -13,7 +13,7 @@ type SortMinMaxDataReturnType = (target: CalendarDataType[]) => CalendarDataType
 
 type FormatDateParamType = 'YYYY-MM-DD' | 'YYYY년 MM월' | 'YYYY-MM';
 
-type SalesCommonType = TablesInsert<'sales'> & { moment?: Dayjs; original_date: Dayjs };
+type SalesCommonType = TablesInsert<'sales'> & { dayjs?: Dayjs; original_date: Dayjs };
 
 export const formatToCalendarData: FormatCalendarReturnType = data => {
   const refinedData = [...data.entries()].map(([key, value]) => {
@@ -101,7 +101,7 @@ export const formatData = (
   const result = [...groupBybindingData.entries()]
     .map(([key, value]) => {
       return {
-        moment: value[0] ? value[0].original_date : dayjs(key).hour(0).minute(0).second(0).add(9, 'hours'),
+        dayjs: value[0] ? value[0].original_date : dayjs(key).hour(0).minute(0).second(0).add(9, 'hours'),
         x: key,
         y: value.reduce((acc, cur) => acc + cur.product_price! * cur.product_ea!, 0),
       };
