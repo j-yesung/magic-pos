@@ -44,8 +44,8 @@ const OrderTypeContainer = () => {
 
   useEffect(() => {
     if (step === ORDER_STEP.CHOOSE_ORDER_TYPE && menuData && menuData.length > 0) {
-      if (menuData[0].store.use_table && !tableId) {
-        setOrderType({ type: 'store' });
+      if (menuData[0].store.use_table) {
+        setOrderType({ type: tableId ? 'store' : 'togo' });
         goNextStep();
         swiper.slideNext(SLIDE_MOVE_SPEED);
         setIsOnlyTable(true);
