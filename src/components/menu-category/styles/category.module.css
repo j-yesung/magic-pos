@@ -54,6 +54,7 @@
   padding: 1.5rem 2rem;
   position: relative;
   transition: all 0.3s;
+  cursor: grab;
 }
 
 .wrap > ul li button.dragging {

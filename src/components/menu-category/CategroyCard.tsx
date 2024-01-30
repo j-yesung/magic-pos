@@ -3,7 +3,7 @@ import { useModal } from '@/hooks/service/ui/useModal';
 import useCategoriesStore, { setCategory, setIsEdit } from '@/shared/store/menu/menu-category';
 import { Tables } from '@/types/supabase';
 import clsx from 'clsx';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import MenuCategoryModal from './modal/MenuCategoryModal';
 import styles from './styles/category.module.css';
 import CloseButton from '/public/icons/close.svg';
@@ -47,6 +47,10 @@ const CategroyCardPage = ({ item, idx, dropNum, setDropNum }: PropsType) => {
   const dragItemRef = useRef(0); // 드래그할 아이템의 인덱스
   const dragOverRef = useRef(0); // 드랍할 위치의 아이템의 인덱스
 
+  useEffect(() => {
+    setIsDragging(false);
+  }, [idx]);
+
   // 드래그 시작될 때 실행
   const dragStartHandler = (e: React.DragEvent<HTMLButtonElement>, index: number) => {
     dragItemRef.current = index;
@@ -56,10 +60,12 @@ const CategroyCardPage = ({ item, idx, dropNum, setDropNum }: PropsType) => {
   const dragEnterHandler = (e: React.DragEvent<HTMLButtonElement>, index: number) => {
     dragOverRef.current = index;
     setDropNum(index);
+    setIsDragging(true);
   };
 
   // 드래그 중인 요소 위로 이동할 때 스타일 변경
-  const handleDragOver = () => {
+  const handleDragOver = (e: React.DragEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     setIsDragging(true);
   };
 
@@ -70,7 +76,6 @@ const CategroyCardPage = ({ item, idx, dropNum, setDropNum }: PropsType) => {
 
   // 드랍 (커서 뗐을 때)
   const dropHandler = async () => {
-    setIsDragging(false);
     const newList = [...categories];
     const dragItemValue = newList[dragItemRef.current];
     const dragOverValue = newList[dropNum];

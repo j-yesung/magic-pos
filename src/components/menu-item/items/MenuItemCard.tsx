@@ -11,7 +11,7 @@ import useMenuOptionStore from '@/shared/store/menu/menu-option';
 import { Tables } from '@/types/supabase';
 import clsx from 'clsx';
 import Image from 'next/image';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import styles from '../styles/menu-item-card.module.css';
 import MenuItemModal from './MenuItemModal';
@@ -66,6 +66,10 @@ const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
   const dragItemRef = useRef(0); // 드래그할 아이템의 인덱스
   const dragOverRef = useRef(0); // 드랍할 위치의 아이템의 인덱스
 
+  useEffect(() => {
+    setIsDragging(false);
+  }, [idx]);
+
   // 드래그 시작될 때 실행
   const dragStartHandler = (e: React.DragEvent<HTMLButtonElement>, index: number) => {
     dragItemRef.current = index;
@@ -75,10 +79,12 @@ const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
   const dragEnterHandler = (e: React.DragEvent<HTMLButtonElement>, index: number) => {
     dragOverRef.current = index;
     setDropNum(index);
+    setIsDragging(true);
   };
 
   // 드래그 중인 요소 위로 이동할 때 스타일 변경
-  const handleDragOver = () => {
+  const handleDragOver = (e: React.DragEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     setIsDragging(true);
   };
 
@@ -89,7 +95,6 @@ const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
 
   // 드랍 (커서 뗐을 때)
   const dropHandler = async () => {
-    setIsDragging(false);
     const filterIndex: number = categoryWithMenuItemList.findIndex(list => list.id === categoryWithMenuItem.id);
     const newList = [...categoryWithMenuItemList[filterIndex].menu_item];
     const dragItemValue = newList[dragItemRef.current];
