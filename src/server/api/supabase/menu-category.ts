@@ -77,7 +77,7 @@ export const updateCategoryPosition = async (dragGroup: DragGroupType) => {
 export const fetchCategoriesWithMenuItemByStoreId = async (store_id: string) => {
   const { data, error } = await supabase
     .from('menu_category')
-    .select('*, menu_item(*, menu_option(*, menu_option_detail(*))), store(business_name)')
+    .select('*, menu_item(*, menu_option(*, menu_option_detail(*))), store(business_name, use_table)')
     .eq('store_id', store_id)
     .order('position', { ascending: true })
     .returns<CategoryWithMenuItem[]>();

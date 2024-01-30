@@ -37,6 +37,7 @@ interface OrderState {
   isOptionPage: boolean;
   selectedLanguage: string;
   isWidgetRendering: boolean;
+  isOnlyTable: boolean;
 }
 
 export const useKioskState = create<OrderState>()(
@@ -76,6 +77,8 @@ export const useKioskState = create<OrderState>()(
       selectedLanguage: 'lang-ko',
       // 토스 위젯 렌더링 여부
       isWidgetRendering: true,
+      // 테이블 주문만 가능한 경우
+      isOnlyTable: false,
     }),
     {
       name: 'order-storage',
@@ -192,5 +195,6 @@ export const resetSelectedMenu = () => {
   setIsOptionPage(false);
 };
 export const setIsWidgetRendering = (isWidgetRendering: boolean) => useKioskState.setState({ isWidgetRendering });
+export const setIsOnlyTable = (isOnlyTable: boolean) => useKioskState.setState({ isOnlyTable });
 
 export default useKioskState;
