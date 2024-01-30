@@ -69,7 +69,11 @@ const Input = ({ value, onChangeHandler, onKeyDownHandler }: InputProps) => {
                 minLength={input.minLength}
                 maxLength={input.maxLength}
                 placeholder={input.placeholder}
-                onKeyDown={input.name === 'password' && path === '/auth/login' ? onKeyDownHandler : undefined}
+                onKeyDown={
+                  (input.name === 'password' || input.name === 'email') && path === '/auth/login'
+                    ? onKeyDownHandler
+                    : undefined
+                }
                 disabled={input.disabled}
                 required
               />
