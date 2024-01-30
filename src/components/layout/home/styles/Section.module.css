@@ -254,7 +254,7 @@
 
 /* swiper button */
 .action-button {
-  top: 50px;
+  top: 0;
   right: 0;
   display: flex;
   position: absolute;
