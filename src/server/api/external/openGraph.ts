@@ -1,3 +1,4 @@
+import { checkHttp } from '@/utils/validate';
 import axios from 'axios';
 
 /**
@@ -18,8 +19,4 @@ export const getOpenGraphMetaImage = async (link_string: string) => {
     // 기존 default image로 대체하기 위해 return null
     return null;
   }
-};
-const checkHttp = (url: string) => {
-  if (url.includes('https://')) return url;
-  if (!url.includes('https://')) return HTTPS + url;
 };
