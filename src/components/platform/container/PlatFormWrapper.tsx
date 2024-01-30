@@ -17,13 +17,7 @@ const PlatFormWrapper = () => {
   setPlatFormStoreId(storeId!);
   const isRegist = usePlatFormState(state => state.isRegist);
   const clickCloseForm = () => setIsRegist(false);
-  useEffect(() => {
-    try {
-      console.log(new URL('https://www.naver.c'));
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
+
   useEffect(() => {
     return () => {
       resetIsRegist();

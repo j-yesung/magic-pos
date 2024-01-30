@@ -1,14 +1,25 @@
 const HTTPS = 'https://';
 const WWW = 'www.';
 
+const isValidUrl = (url: string) => {
+  try {
+    new URL(url);
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
+
 export const checkValidUrl = (url: string) => {
   try {
-    const ensureValidUrlEx = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
     const checkedWwwUrl = addWwwIfNeeded(url);
     const checkedHttpUrl = checkHttp(checkedWwwUrl);
 
-    new URL(checkedHttpUrl);
-    return ensureValidUrlEx.test(checkedHttpUrl);
+    if (isValidUrl(checkedHttpUrl)) {
+      return true;
+    } else {
+      return false;
+    }
   } catch (error) {
     return false;
   }
@@ -24,6 +35,8 @@ const checkHttp = (url: string) => {
 };
 
 const addWwwIfNeeded = (url: string) => {
-  if (url.includes(WWW)) return url;
-  return WWW + url;
+  if (isValidUrl(url) && !url.includes(WWW)) {
+    return WWW + url;
+  }
+  return url;
 };

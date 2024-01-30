@@ -6,6 +6,7 @@ import styles from './styles/input.module.css';
 const Input = ({ mode }: { mode: boolean }) => {
   const { editPlatForm, isValidUrl } = usePlatFormState();
   const { toast } = useToast();
+
   useEffect(() => {
     if (!isValidUrl)
       toast('url 형식에 맞지 않습니다.', {
