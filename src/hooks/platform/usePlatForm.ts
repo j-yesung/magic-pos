@@ -29,7 +29,7 @@ import useToast from '../service/ui/useToast';
 const SUPABASE_STORAGE_URL = 'https://lajnysuklrkrhdyqhotr.supabase.co';
 
 const usePlatForm = () => {
-  const { addPlatForm, editPlatForm, prevData, prevImg, store_id, meta } = usePlatFormState();
+  const { addPlatForm, editPlatForm, prevData, prevImg } = usePlatFormState();
 
   const { toast } = useToast();
   // 링크 유효성 검사
@@ -92,6 +92,13 @@ const usePlatForm = () => {
     resetMeta();
   };
 
+  const prevImageRemove = async (prevData: EditPlatFormType) => {
+    if (prevData.image_url?.includes(SUPABASE_STORAGE_URL)) {
+      await removePlatFormImage(prevData);
+    }
+    return;
+  };
+
   const submitEditCard = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -112,149 +119,28 @@ const usePlatForm = () => {
     }
 
     comparedData.id = editPlatForm.id;
+    comparedData.store_id = editPlatForm.store_id;
     // const isValidUrl = validateUrl(e, comparedData.link_url);
 
     // if (!isValidUrl) return;
-
+    await prevImageRemove(prevData);
     const imageUrl = await handleImageUpload(comparedData);
     comparedData = {
       ...comparedData,
       image_url: imageUrl ?? null,
-      store_id: editPlatForm.store_id,
     };
 
     const { store_id, metaImage, file, createdAt, ...editTarget } = comparedData;
     await updatePlatFormData(editTarget as TablesInsert<'platform'>);
-    const { platform } = await fetchPlatForm(comparedData.store_id!);
+    const { platform } = await fetchPlatForm(store_id!);
     setFetchPlatFormData(platform);
     resetIsRegist();
     resetEditPlatForm();
     resetPrevData();
     showEditCompleteToast();
-
-    // if (meta) {
-    //   // 기존 이미지가 있고 이미지 변경 했을 때
-    //   if (prevData.image_url) {
-    //     if (prevData.image_url.includes(SUPABASE_STORAGE_URL)) {
-    //       //  opengraph 이미지가 아니면 삭제
-    //       await removePlatFormImage(prevData);
-    //     }
-    //     const { file, createdAt, metaImage, ...updateTarget } = comparedData;
-    //     const data = { ...updateTarget, image_url: metaImage };
-    //     await updatePlatFormData(data as TablesInsert<'platform'>);
-    //     const { platform } = await fetchPlatForm(store_id!);
-    //     setFetchPlatFormData(platform);
-    //     resetIsRegist();
-    //     resetEditPlatForm();
-    //     resetPrevData();
-    //     showEditCompleteToast();
-    //     return;
-    //   }
-    //   //기존 이미지가 없고 meta이미지만을 등록 할 때
-    //   if (!prevData.image_url) {
-    //     const { file, createdAt, metaImage, ...updateTarget } = comparedData;
-
-    //     const data = { ...updateTarget, image_url: metaImage };
-    //     await updatePlatFormData(data as TablesInsert<'platform'>);
-    //     const { platform } = await fetchPlatForm(store_id!);
-    //     setFetchPlatFormData(platform);
-    //     resetIsRegist();
-    //     resetEditPlatForm();
-    //     resetPrevData();
-    //     showEditCompleteToast();
-
-    //     return;
-    //   }
-    // }
-    // if (!meta) {
-    //   // 기존이미지가 있고 이미지 변경 했을 때
-    //   if (prevData.image_url && comparedData.file) {
-    //     comparedData.createdAt = moment().toISOString();
-
-    //     if (prevData.image_url.includes(SUPABASE_STORAGE_URL)) {
-    //       //  opengraph 이미지가 아니면 삭제
-    //       await removePlatFormImage(prevData);
-    //     }
-
-    //     // 새로운 이미지 업로드
-    //     await uploadPlatFormImage(comparedData);
-    //     const { publicUrl: image_url } = downloadPlatFormImageUrl(comparedData);
-    //     comparedData = {
-    //       ...comparedData,
-    //       image_url,
-    //     };
-
-    //     const { file, createdAt, ...updateTarget } = comparedData;
-    //     await updatePlatFormData(updateTarget as TablesInsert<'platform'>);
-    //     const { platform } = await fetchPlatForm(store_id!);
-    //     setFetchPlatFormData(platform);
-    //     resetIsRegist();
-    //     resetEditPlatForm();
-    //     resetPrevData();
-    //     showEditCompleteToast();
-
-    //     return;
-    //   }
-
-    //   // 기존데이터에 이미지가 없을 때 이미지 등록을 할 때
-    //   if (!prevData.image_url && comparedData.file) {
-    //     console.log('여기에 오니?');
-    //     comparedData.createdAt = moment().toISOString();
-    //     await uploadPlatFormImage(comparedData);
-    //     const { publicUrl: image_url } = downloadPlatFormImageUrl(comparedData);
-    //     comparedData = {
-    //       ...comparedData,
-    //       image_url,
-    //     };
-    //     const { file, createdAt, ...updateTarget } = comparedData;
-    //     await updatePlatFormData(updateTarget as TablesInsert<'platform'>);
-    //   }
-
-    //   // 수정할 때 이미지만 삭제 할 때 실행 되는 조건문
-    //   if (!prevImg && !comparedData.link_url && !comparedData.name) {
-    //     // 수정할 이미지가 meta이미지이면
-    //     if (!prevData?.image_url?.includes(SUPABASE_STORAGE_URL)) {
-    //       const { file, createdAt, ...updateTarget } = comparedData;
-    //       console.log(updateTarget);
-    //       await updatePlatFormData({ ...updateTarget, image_url: null } as TablesInsert<'platform'>);
-    //       const { platform, error } = await fetchPlatForm(store_id!);
-    //       setFetchPlatFormData(platform);
-    //       resetIsRegist();
-    //       resetEditPlatForm();
-    //       resetPrevData();
-    //       showEditCompleteToast();
-
-    //       return;
-    //     }
-    //     // 수정할 이미지가 storage 이미지 이면
-    //     if (prevData?.image_url!.includes(SUPABASE_STORAGE_URL)) {
-    //       await removePlatFormImage(comparedData);
-    //       const { file, createdAt, ...updateTarget } = comparedData;
-    //       await updatePlatFormData({ ...updateTarget, image_url: null } as TablesInsert<'platform'>);
-    //       const { platform, error } = await fetchPlatForm(store_id!);
-    //       setFetchPlatFormData(platform);
-    //       resetIsRegist();
-    //       resetEditPlatForm();
-    //       resetPrevData();
-    //       showEditCompleteToast();
-
-    //       return;
-    //     }
-    //   }
-    // }
-
-    // const { file, createdAt, ...updateTarget } = comparedData;
-    // await updatePlatFormData(updateTarget as TablesInsert<'platform'>);
-    // const { platform } = await fetchPlatForm(store_id!);
-    // setFetchPlatFormData(platform);
-    // resetIsRegist();
-    // resetEditPlatForm();
-    // resetPrevData();
-    // showEditCompleteToast();
   };
 
   const clickRemoveData = async () => {
-    console.log(editPlatForm);
     await removePlatFormData(editPlatForm.id);
     if (editPlatForm.image_url?.includes(SUPABASE_STORAGE_URL)) {
       await removePlatFormImage(editPlatForm);
