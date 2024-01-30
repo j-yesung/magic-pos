@@ -1,12 +1,10 @@
-import useOrderCheckList from '@/hooks/order-check-list/useOrderCheckList';
-import useAuthState from '@/shared/store/session';
+import useFetchOrderCheckList from '@/hooks/order-check-list/useFetchOrderCheckList';
 import { useInView } from 'react-intersection-observer';
 import OrderCheckListItem from './OrderCheckListItem';
 import styles from './styles/OrderCheckListContentList.module.css';
 
 const OrderCheckListContentList = () => {
-  const storeId = useAuthState(state => state.storeId);
-  const { data, hasNextPage, fetchNextPage, isFetchingNextPage } = useOrderCheckList(storeId!);
+  const { data, hasNextPage, fetchNextPage, isFetchingNextPage } = useFetchOrderCheckList();
 
   const { ref } = useInView({
     threshold: 0.5,
