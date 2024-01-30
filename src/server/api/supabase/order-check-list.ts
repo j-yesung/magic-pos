@@ -1,6 +1,6 @@
-import { momentToString } from '@/components/sales/calendarUtility/dateCalculator';
+import { dayJsToString } from '@/components/sales/calendarUtility/dateCalculator';
 import { supabase } from '@/shared/supabase';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 export const fetchOrderCheckList = async (
   pageParam: number,
@@ -9,22 +9,24 @@ export const fetchOrderCheckList = async (
   startDate?: string,
   endDate?: string,
 ) => {
-  switch (listType) {
-    case 'day':
-      return await fetchDayOrderData(pageParam, id);
-      break;
-    case 'week':
-      return await fetchWeekOrderData(pageParam, id);
-      break;
-    case 'month':
-      return await fetchMonthOrderData(pageParam, id);
-      break;
-    case 'selectDate':
-      return await fetchSelectDateOrderData(pageParam, id, startDate!, endDate!);
-      break;
-    default:
-      return await fetchDefaultOrderData(pageParam, id);
-      break;
+  if (id) {
+    switch (listType) {
+      case 'day':
+        return await fetchDayOrderData(pageParam, id);
+        break;
+      case 'week':
+        return await fetchWeekOrderData(pageParam, id);
+        break;
+      case 'month':
+        return await fetchMonthOrderData(pageParam, id);
+        break;
+      case 'selectDate':
+        return await fetchSelectDateOrderData(pageParam, id, startDate!, endDate!);
+        break;
+      default:
+        return await fetchDefaultOrderData(pageParam, id);
+        break;
+    }
   }
 };
 
@@ -37,7 +39,7 @@ const TIME_FORMAT_MONTH = 'YYYY-MM-01 HH:mm:SS';
 
 // 오늘
 const fetchDayOrderData = async (pageParam: number, id?: string) => {
-  const todayStart = momentToString(moment(moment().format('YYYY-MM-DD 00:00:00')).utc().clone(), TIME_FORMAT);
+  const todayStart = dayJsToString(dayjs(dayjs().format('YYYY-MM-DD 00:00:00')).utc().clone(), TIME_FORMAT);
   const { data: order_store, error: storeError } = await supabase
     .from('order_store')
     .select('*')
@@ -65,9 +67,9 @@ const fetchDayOrderData = async (pageParam: number, id?: string) => {
 
 // 이번 주
 const fetchWeekOrderData = async (pageParam: number, id: string) => {
-  const dayOfTheWeek = moment().day(); // 현재 요일
-  const weekStart = momentToString(
-    moment(moment().format('YYYY-MM-DD 00:00:00')).subtract(dayOfTheWeek, 'day').utc().clone(),
+  const dayOfTheWeek = dayjs().day(); // 현재 요일
+  const weekStart = dayJsToString(
+    dayjs(dayjs().format('YYYY-MM-DD 00:00:00')).subtract(dayOfTheWeek, 'day').utc().clone(),
     TIME_FORMAT,
   );
   const { data: order_store, error: storeError } = await supabase
@@ -97,7 +99,7 @@ const fetchWeekOrderData = async (pageParam: number, id: string) => {
 
 // 이번달
 const fetchMonthOrderData = async (pageParam: number, id: string) => {
-  const monthStart = momentToString(moment(moment().format('YYYY-MM-DD 00:00:00')).utc().clone(), TIME_FORMAT_MONTH);
+  const monthStart = dayJsToString(dayjs(dayjs().format('YYYY-MM-DD 00:00:00')).utc().clone(), TIME_FORMAT_MONTH);
 
   const { data: order_store, error: storeError } = await supabase
     .from('order_store')
@@ -126,14 +128,14 @@ const fetchMonthOrderData = async (pageParam: number, id: string) => {
 
 // 날짜선택
 const fetchSelectDateOrderData = async (pageParam: number, id: string, startDate: string, endDate: string) => {
-  const startSelectDate = momentToString(
-    moment(moment().format(`${startDate} 00:00:00`))
+  const startSelectDate = dayJsToString(
+    dayjs(dayjs().format(`${startDate} 00:00:00`))
       .utc()
       .clone(),
     TIME_FORMAT,
   );
-  const endSelectDate = momentToString(
-    moment(moment().format(`${endDate} 00:00:00`))
+  const endSelectDate = dayJsToString(
+    dayjs(dayjs().format(`${endDate} 00:00:00`))
       .add(1, 'day')
       .utc()
       .clone(),

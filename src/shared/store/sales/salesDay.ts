@@ -1,9 +1,12 @@
 import dayjs, { Dayjs } from 'dayjs';
+import timezone from 'dayjs/plugin/timezone';
+import utc from 'dayjs/plugin/utc';
 import week from 'dayjs/plugin/weekOfYear';
 import 'dayjs/plugin/weekday';
 import { create } from 'zustand';
 dayjs.extend(week);
-
+dayjs.extend(utc);
+dayjs.extend(timezone);
 export function useDayjs(date: Parameters<typeof dayjs>[0]) {
   return dayjs(date);
 }
