@@ -52,3 +52,21 @@ export interface IsTakeOutType {
 export interface CloseModalType {
   clickCloseModal: () => void;
 }
+
+/**
+ * SSG
+ */
+/**
+ *  dateKind: '01';
+  dateName: '1월1일';
+  isHoliday: 'Y';
+  locdate: 20230101;
+  seq: 1;
+ */
+export interface HolidayType {
+  dateKind: string;
+  dateName: string;
+  isHoliday: string;
+  locdate: number;
+  seq: number;
+}

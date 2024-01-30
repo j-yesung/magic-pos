@@ -1,6 +1,6 @@
 import { CalendarDataType, DateFormatType, FormatType, IsTakeOutType, SalesRecordType } from '@/types/sales';
 import { Tables, TablesInsert } from '@/types/supabase';
-import moment, { Moment } from 'moment';
+import dayjs, { Dayjs } from 'dayjs';
 import { getStartWeeks } from './dateCalculator';
 
 type OrderType = 'togo' | 'store';
@@ -13,10 +13,9 @@ type SortMinMaxDataReturnType = (target: CalendarDataType[]) => CalendarDataType
 
 type FormatDateParamType = 'YYYY-MM-DD' | 'YYYY년 MM월' | 'YYYY-MM';
 
-type SalesCommonType = TablesInsert<'sales'> & { moment?: Moment; original_date: Moment };
+type SalesCommonType = TablesInsert<'sales'> & { dayjs?: Dayjs; original_date: Dayjs };
 
 export const formatToCalendarData: FormatCalendarReturnType = data => {
-  console.log(data);
   const refinedData = [...data.entries()].map(([key, value]) => {
     const data = {
       sales: value.reduce((acc, cur) => acc + cur.product_ea * cur.product_price, 0),
@@ -81,7 +80,7 @@ export const sortMinMaxData: SortMinMaxDataReturnType = target => {
  *
  * @param salesData supabase에서 받아온 데이터
  * @param dateType   요일, 주, 월
- * @param selectedDateType  moment.Moment -나중에 다시한번더 refactoring
+ * @param selectedDateType  dayjs.Dayjs -나중에 다시한번더 refactoring
  * @param formatType chart의 x축에 보일 년,월,일을 표시해줄 타입
  * @returns
  */
@@ -89,7 +88,7 @@ export const sortMinMaxData: SortMinMaxDataReturnType = target => {
 export const formatData = (
   salesData: Tables<'sales'>[],
   dateType: DateFormatType,
-  selectedDateType: Moment,
+  selectedDateType: Dayjs,
   formatType: FormatType,
 ) => {
   const dateContainer = getDates(dateType, selectedDateType, formatType);
@@ -102,24 +101,25 @@ export const formatData = (
   const result = [...groupBybindingData.entries()]
     .map(([key, value]) => {
       return {
-        moment: value[0] ? value[0].original_date : moment(key).hour(0).minute(0).second(0).add(9, 'hours'),
+        dayjs: value[0] ? value[0].original_date : dayjs(key).hour(0).minute(0).second(0).add(9, 'hours'),
         x: key,
         y: value.reduce((acc, cur) => acc + cur.product_price! * cur.product_ea!, 0),
       };
     })
-    .toSorted((a, b) => (moment(a.x).isAfter(moment(b.x)) ? 1 : -1));
+    .toSorted((a, b) => (dayjs(a.x).isAfter(dayjs(b.x)) ? 1 : -1));
 
   return { result, recordData };
 };
 
-const getDates = (dateType: DateFormatType, selectedDateType: Moment, formatType: FormatDateParamType) => {
+const getDates = (dateType: DateFormatType, selectedDateType: Dayjs, formatType: FormatDateParamType) => {
   const dateContainer = [];
   if (dateType === 'week') {
     for (let i = 0; i < 7; i++) {
-      const month = selectedDateType!.clone().subtract(i, dateType);
+      const month = selectedDateType.clone().subtract(i, dateType);
       const weeksInfoByYear = getStartWeeks(month.year());
-      const weeksNumber = +month.format('W');
+      const weeksNumber = month.week();
       const whatMonth = month.month();
+
       const startWeeksNumber = weeksInfoByYear[whatMonth];
       dateContainer.push(month.format(`${formatType} ${weeksNumber - startWeeksNumber + 1} 주차`));
     }
@@ -142,26 +142,26 @@ const getDataWithFormatingDate = (
   let DataWithFormattedDate;
   if (dateType === 'week') {
     DataWithFormattedDate = originalData.map(data => {
-      const momentDate = moment(data.sales_date).hour(0).minute(0).second(0).add(9, 'hours'); // sales_date는 utc기준시간이므로  우리나라 시간으로 바꾸려면 // 9를 더해준다.
-      const weeksInfoByYear = getStartWeeks(momentDate.year()); // 전년도 이번년도에서 시작하는 주차가 다르니까
-      const weeksNumber = +momentDate.format('W'); // w는 일요일기준, W는 월요일기준으로 주차를 결정한다.
-
-      const month = momentDate.month(); // 몇월인지
+      const dayjsDate = dayjs(data.sales_date).hour(0).minute(0).second(0).add(9, 'hours'); // sales_date는 utc기준시간이므로  우리나라 시간으로 바꾸려면 // 9를 더해준다.
+      const weeksInfoByYear = getStartWeeks(dayjsDate.year()); // 전년도 이번년도에서 시작하는 주차가 다르니까
+      const weeksNumber = dayjsDate.week(); // w는 일요일기준, W는 월요일기준으로 주차를 결정한다.
+      const month = dayjsDate.month(); // 몇월인지
       const startWeeksNumber = weeksInfoByYear[month]; // 각 년도별 월별 주차시작이 들어있는 배열입니다.
 
       return {
         ...data,
-        original_date: momentDate,
-        sales_date: momentDate.format(`${formatType} ${weeksNumber - startWeeksNumber + 1} 주차`),
+        original_date: dayjsDate,
+        sales_date: dayjsDate.format(`${formatType} ${weeksNumber - startWeeksNumber + 1} 주차`),
       };
     });
   } else {
     DataWithFormattedDate = originalData.map(data => ({
       ...data,
-      original_date: moment(data.sales_date),
-      sales_date: moment(data.sales_date).format(formatType),
+      original_date: dayjs(data.sales_date),
+      sales_date: dayjs(data.sales_date).format(formatType),
     }));
   }
+
   return DataWithFormattedDate;
 };
 
@@ -189,7 +189,7 @@ const insertDataGroupByDate = (formattedTarget: SalesCommonType[], groupMap: Map
 const getRecordData = (
   toExtracted: Map<string, SalesCommonType[]>,
   dateType: DateFormatType,
-  selectedDateType: Moment,
+  selectedDateType: Dayjs,
 ): SalesRecordType => {
   const extractedData: SalesRecordType = {
     currentSales: 0,

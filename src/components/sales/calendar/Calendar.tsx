@@ -1,5 +1,4 @@
 import useSalesToggle from '@/shared/store/sales/salesToggle';
-import 'moment/locale/ko';
 import Cell from './cell/Cell';
 import Days from './days/Days';
 import Header from './header/Header';

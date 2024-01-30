@@ -1,7 +1,7 @@
-import styles from './styles/ReceiptOrderHeader.module.css';
 import clsx from 'clsx';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { useTranslation } from 'next-i18next';
+import styles from './styles/ReceiptOrderHeader.module.css';
 
 interface ReceiptHeaderProps {
   orderNumber: number;
@@ -29,7 +29,7 @@ const ReceiptOrderHeader = ({ isTogo, orderNumber, isDone, orderTime }: ReceiptH
 
       <div className={styles.timeWrapper}>
         <span className={styles.orderTime}>
-          {t('order-time')} {moment(orderTime).format('HH:mm')}
+          {t('order-time')} {dayjs(orderTime).format('HH:mm')}
         </span>
         <span className={styles.orderType}>{isTogo ? t('order-type.store-short') : t('order-type.togo-short')}</span>
       </div>

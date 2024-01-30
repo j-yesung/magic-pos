@@ -1,12 +1,12 @@
-import moment from 'moment';
+import dayjs, { Dayjs } from 'dayjs';
 
 /**
  *
- * @param date moment객체
+ * @param date dayjs객체
  * @param format 변형하고싶은 년도,월,일
  * @returns
  */
-export const momentToString = (date: moment.Moment, format: string) => {
+export const dayJsToString = (date: Dayjs, format: string) => {
   return date.format(format);
 };
 
@@ -16,5 +16,5 @@ export const momentToString = (date: moment.Moment, format: string) => {
  * @returns
  */
 export const getStartWeeks = (year: number) => {
-  return new Array(12).fill(false).map((_, index) => moment().year(year).month(index).startOf('months').week());
+  return new Array(12).fill(false).map((_, index) => dayjs().year(year).month(index).startOf('months').week());
 };

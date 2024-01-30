@@ -4,6 +4,15 @@ import { makeTitle } from '@/shared/helper';
 import Head from 'next/head';
 import { ReactNode } from 'react';
 
+// export const getServerSideProps: GetServerSideProps = async () => {
+//   const API_KEY = process.env.NEXT_PUBLIC_HOLIDAY_API_KEY;
+//   const url = `${process.env.NEXT_PUBLIC_HOLIDAY_URL}?serviceKey=${API_KEY}&solYear=2024&numOfRows=30&_type=json`;
+
+//   const { data } = await axios.get(url!);
+//   const holidayList = data.response.body.items.item;
+//   return { props: { item: holidayList } };
+// };
+
 const SalesPage = () => {
   return (
     <>
@@ -19,4 +28,5 @@ const SalesPage = () => {
   );
 };
 SalesPage.getLayout = (page: ReactNode) => <AdminLayout>{page}</AdminLayout>;
+
 export default SalesPage;

@@ -1,12 +1,12 @@
 import { convertNumberToWon } from '@/shared/helper';
 import useSalesToggle from '@/shared/store/sales/salesToggle';
 import { cva } from 'class-variance-authority';
-import moment, { Moment } from 'moment';
 
 import { useModal } from '@/hooks/service/ui/useModal';
 import useCalendarState from '@/shared/store/sales/salesCalendar';
 import useDayState from '@/shared/store/sales/salesDay';
 import { CalendarDataType, GetMinMaxSalesReturnType } from '@/types/sales';
+import { Dayjs } from 'dayjs';
 import {
   FORMAT_CELL_DATE_TYPE,
   getCalendarDateType,
@@ -20,10 +20,10 @@ import SalesModal from '../../modal/SalesModal';
 import styles from './styles/cellItem.module.css';
 
 interface CellItemProps {
-  day: Moment;
+  day: Dayjs;
   salesData?: CalendarDataType;
   getMinMaxSalesType?: (param: CalendarDataType) => GetMinMaxSalesReturnType;
-  clickShowDataOfDateHandler?: (day: moment.Moment) => () => Promise<void>;
+  clickShowDataOfDateHandler?: (day: Dayjs) => () => Promise<void>;
 }
 
 type Cell = (param: CellItemProps) => JSX.Element;
