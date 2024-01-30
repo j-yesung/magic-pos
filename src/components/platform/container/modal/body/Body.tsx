@@ -4,7 +4,7 @@ const Body = () => {
   return (
     <div className={styles.body}>
       <div>
-        <Alert width={26} height={26} />
+        <Alert width={48} height={48} />
       </div>
       <div>
         <p className={styles.bodyText}>플랫폼을 삭제할까요?</p>
