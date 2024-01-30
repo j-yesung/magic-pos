@@ -26,7 +26,6 @@ import { checkHttp, checkValidUrl } from '@/utils/validate';
 import moment from 'moment';
 import { FormEvent } from 'react';
 import useToast from '../service/ui/useToast';
-const SUPABASE_STORAGE_URL = 'https://lajnysuklrkrhdyqhotr.supabase.co';
 
 const usePlatForm = () => {
   const { addPlatForm, editPlatForm, prevData, prevImg, store_id, meta } = usePlatFormState();
@@ -261,7 +260,7 @@ const usePlatForm = () => {
   const clickRemoveData = async () => {
     console.log(editPlatForm);
     await removePlatFormData(editPlatForm.id);
-    if (editPlatForm.image_url?.includes(SUPABASE_STORAGE_URL)) {
+    if (editPlatForm.image_url?.includes(process.env.NEXT_PUBLIC_SUPABASE_URL!)) {
       await removePlatFormImage(editPlatForm);
     }
     const { platform } = await fetchPlatForm(editPlatForm.store_id!);

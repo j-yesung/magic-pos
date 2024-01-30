@@ -177,7 +177,7 @@ const getGroupByDate = (container: string[]) => {
 
 const insertDataGroupByDate = (formattedTarget: SalesCommonType[], groupMap: Map<string, SalesCommonType[]>) => {
   formattedTarget.forEach(data => {
-    for (const [key, _] of groupMap) {
+    for (const [key] of groupMap) {
       if (key === data.sales_date) {
         groupMap.get(key)?.push(data);
       }
@@ -195,7 +195,7 @@ const getRecordData = (
     currentSales: 0,
     dateType: 'day',
   };
-  for (const [_, value] of toExtracted) {
+  for (const [, value] of toExtracted) {
     if (value.length >= 1) {
       if (selectedDateType.isSame(value[0].original_date, dateType)) {
         extractedData.currentSales = value.reduce((acc, cur) => acc + cur.product_ea! * cur.product_price!, 0);

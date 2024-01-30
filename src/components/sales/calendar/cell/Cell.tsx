@@ -19,7 +19,7 @@ import styles from './styles/cell.module.css';
 
 const Cell = () => {
   const isChangeView = useSalesToggle(state => state.isChangeView);
-  const { calendarBindingData, salesSum } = useSalesDataState();
+  const { calendarBindingData } = useSalesDataState();
 
   const currentDate = useCalendarState(state => state.currentDate);
   const { clickShowDataOfDateHandler } = useDataHandler();

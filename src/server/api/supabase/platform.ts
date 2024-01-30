@@ -118,7 +118,7 @@ export const fetchPlatForm = async (store_id: string) => {
 export const removePlatFormImage = async (param: EditPlatFormType) => {
   if (!param.image_url) return;
   const imagePath = param?.image_url?.split('/').slice(-1)[0];
-  const { error, data } = await supabase.storage.from('images').remove([`platform/${param.store_id}/${imagePath}`]);
+  await supabase.storage.from('images').remove([`platform/${param.store_id}/${imagePath}`]);
 };
 
 /**
@@ -127,7 +127,7 @@ export const removePlatFormImage = async (param: EditPlatFormType) => {
  * @returns update 성공하면 data는 null 값이기에 [] 배열로 넣었씁니다.
  */
 export const updatePlatFormData = async (param: TablesInsert<'platform'>) => {
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from('platform')
     .update({
       ...param,

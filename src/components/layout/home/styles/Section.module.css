@@ -268,8 +268,3 @@
   color: var(--main-color);
 }
 /* 관리자 @media-query */
-@media screen and (min-width: 1800px) {
-  .admin-box {
-    /* top: 10rem; */
-  }
-}
