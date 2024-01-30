@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './styles/OrderLayout.module.css';
 import Footer from '@/components/layout/order/footer/Footer';
 import { SwiperRef } from 'swiper/react';
@@ -16,8 +16,18 @@ const DONT_RENDER_FOOTER_PATH_LIST = ['/kiosk/success', '/kiosk/receipt', '/kios
 const OrderLayout = ({ children }: { children: React.ReactNode }) => {
   // slide에 사용될 컴포넌트를 담습니다.
   const step = useKioskState(state => state.step);
+  const isOnlyTable = useKioskState(state => state.isOnlyTable);
   const sliderRef = useRef<SwiperRef>(null);
+  const [condition, setCondition] = useState<boolean[]>([]);
   const { pathname } = useRouter();
+
+  useEffect(() => {
+    setCondition([
+      step < ORDER_STEP.CHOOSE_ORDER_TYPE,
+      step > ORDER_STEP.SUCCESS,
+      step === ORDER_STEP.SELECT_MENU && isOnlyTable,
+    ]);
+  }, [step]);
 
   useEffect(() => {
     setSwiperRef(sliderRef);
@@ -30,7 +40,7 @@ const OrderLayout = ({ children }: { children: React.ReactNode }) => {
       </Head>
       <section className={styles.container}>
         <article className={styles.children}>
-          {step > ORDER_STEP.CHOOSE_ORDER_TYPE && step < ORDER_STEP.SUCCESS && <OrderPrevButton />}
+          {!condition.some(c => c) && <OrderPrevButton />}
           {children}
         </article>
         {!DONT_RENDER_FOOTER_PATH_LIST.includes(pathname) && <Footer />}

@@ -575,7 +575,7 @@ interface CategoryWithMenuItem extends Tables<'menu_category'> {
 }
 
 interface CategoryWithMenuItemWithStore extends CategoryWithMenuItem {
-  store: Pick<Tables<'store'>, 'business_name'>;
+  store: Pick<Tables<'store'>, 'business_name', 'use_table'>;
 }
 
 type StoreOrderWithStoreName = Tables<'order_store'>['Row'] & {
