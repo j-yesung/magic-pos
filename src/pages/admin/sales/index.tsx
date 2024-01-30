@@ -1,7 +1,6 @@
 import AdminLayout from '@/components/layout/admin/AdminLayout';
 import Sales from '@/components/sales/Sales';
 import { makeTitle } from '@/shared/helper';
-import { HolidayType } from '@/types/sales';
 import Head from 'next/head';
 import { ReactNode } from 'react';
 
@@ -14,7 +13,7 @@ import { ReactNode } from 'react';
 //   return { props: { item: holidayList } };
 // };
 
-const SalesPage = ({ item }: { item: HolidayType[] }) => {
+const SalesPage = () => {
   return (
     <>
       <Head>
@@ -24,7 +23,7 @@ const SalesPage = ({ item }: { item: HolidayType[] }) => {
         <meta name="keywords" content="magic pos,매직 포스, 키오스크, 메출관리, 달력으로메출 관리, 차트로 메출관리" />
         <meta name="description" content="magic pos의 메출 관리 페이지 입니다. " />
       </Head>
-      <Sales holiday={item} />
+      <Sales />
     </>
   );
 };

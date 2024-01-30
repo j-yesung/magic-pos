@@ -19,6 +19,7 @@
     "chartjs-plugin-datalabels": "^2.2.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "dayjs": "^1.11.10",
     "deepl-node": "^1.11.0",
     "dom-to-image": "^2.6.0",
     "file-loader": "^6.2.0",
