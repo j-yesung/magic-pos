@@ -9,24 +9,22 @@ export const fetchOrderCheckList = async (
   startDate?: string,
   endDate?: string,
 ) => {
-  if (id) {
-    switch (listType) {
-      case 'day':
-        return await fetchDayOrderData(pageParam, id);
-        break;
-      case 'week':
-        return await fetchWeekOrderData(pageParam, id);
-        break;
-      case 'month':
-        return await fetchMonthOrderData(pageParam, id);
-        break;
-      case 'selectDate':
-        return await fetchSelectDateOrderData(pageParam, id, startDate!, endDate!);
-        break;
-      default:
-        return await fetchDefaultOrderData(pageParam, id);
-        break;
-    }
+  switch (listType) {
+    case 'day':
+      return await fetchDayOrderData(pageParam, id);
+      break;
+    case 'week':
+      return await fetchWeekOrderData(pageParam, id);
+      break;
+    case 'month':
+      return await fetchMonthOrderData(pageParam, id);
+      break;
+    case 'selectDate':
+      return await fetchSelectDateOrderData(pageParam, id, startDate!, endDate!);
+      break;
+    default:
+      return await fetchDefaultOrderData(pageParam, id);
+      break;
   }
 };
 
@@ -38,7 +36,7 @@ const TIME_FORMAT = 'YYYY-MM-DD HH:mm:SS';
 const TIME_FORMAT_MONTH = 'YYYY-MM-01 HH:mm:SS';
 
 // 오늘
-const fetchDayOrderData = async (pageParam: number, id?: string) => {
+const fetchDayOrderData = async (pageParam: number, id: string) => {
   const todayStart = dayJsToString(dayjs(dayjs().format('YYYY-MM-DD 00:00:00')).utc().clone(), TIME_FORMAT);
   const { data: order_store, error: storeError } = await supabase
     .from('order_store')
