@@ -1,10 +1,12 @@
 import { dayJsToString } from '@/components/sales/calendarUtility/dateCalculator';
 import { supabase } from '@/shared/supabase';
-import { SalesDataReturnType } from '@/types/sales';
+import { EnOrderType, SalesAllReturnType, SalesDataReturnType } from '@/types/sales';
 import { TablesInsert } from '@/types/supabase';
 import { Dayjs } from 'dayjs';
 
 type getSalesReturnType = (date: Dayjs, store_id: string) => Promise<SalesDataReturnType>;
+
+type getAllSalesReurnType = (date: Dayjs, store_id: string, order_type: EnOrderType) => Promise<SalesAllReturnType>;
 
 export const addSales = async (sales: TablesInsert<'sales'>[]) => {
   const { error } = await supabase.from('sales').insert(sales).select();
@@ -110,4 +112,18 @@ export const getMonthSales: getSalesReturnType = async (month, store_id) => {
   }
 
   return { sales, dateType: 'month', formatType: 'YYYY년 MM월' };
+};
+
+export const getAllSales: getAllSalesReurnType = async (date, store_id, order_type) => {
+  const { data: sales, error } = await supabase
+    .from('sales')
+    .select('*')
+    .lte('sales_date', dayJsToString(date, TIME_FORMAT))
+    .eq('store_id', store_id)
+    .eq('order_type', order_type);
+  if (error) {
+    return { sales: [], orderType: order_type === 'togo' ? '포장' : '매장', error };
+  }
+
+  return { sales, orderType: order_type === 'togo' ? '포장' : '매장' };
 };

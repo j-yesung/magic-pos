@@ -70,3 +70,24 @@ export interface HolidayType {
   locdate: number;
   seq: number;
 }
+
+/**
+ * EXCEL 데이터 객체
+ */
+export interface ExcelData {
+  order_type: string;
+  product_name: string;
+  product_price: number;
+  product_ea: number;
+  sum: number;
+  sales_date: string;
+}
+
+export interface SalesAllReturnType {
+  sales: Tables<'sales'>[];
+  error?: PostgrestError;
+  orderType: KoOrderType;
+}
+
+export type KoOrderType = '매장' | '포장';
+export type EnOrderType = 'togo' | 'store';

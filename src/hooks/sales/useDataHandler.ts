@@ -1,11 +1,13 @@
 import { formatData } from '@/components/sales/calendarUtility/formatData';
-import { getDaySales, getMonthsSales, getWeekSales } from '@/server/api/supabase/sales';
+import { formattedDatabyExcel } from '@/components/sales/excel/utility/formatExcel';
+import { getAllSales, getDaySales, getMonthsSales, getWeekSales } from '@/server/api/supabase/sales';
 import { setCalendarCurrentDate } from '@/shared/store/sales/salesCalendar';
 import { setChartData } from '@/shared/store/sales/salesChart';
 import useDayState, { setSelectedDate } from '@/shared/store/sales/salesDay';
 import { setRecordData } from '@/shared/store/sales/salesRecord';
 import { setIsShow } from '@/shared/store/sales/salesToggle';
 import useAuthState from '@/shared/store/session';
+import { EnOrderType } from '@/types/sales';
 import { Dayjs } from 'dayjs';
 
 export const useDataHandler = () => {
@@ -95,6 +97,21 @@ export const useDataHandler = () => {
     }
     setCalendarCurrentDate(today);
     setSelectedDate(today);
+  };
+
+  /**
+   *
+   * @param order_type 'togo' || 'store'
+   */
+  const clickGetAllDataHandler = async (order_type: EnOrderType) => {
+    try {
+      const { sales, orderType } = await getAllSales(today, storeId!, order_type);
+      const formattedExcelData = formattedDatabyExcel(sales, orderType);
+      return formattedExcelData;
+    } catch (error) {
+      console.log(error);
+      return [];
+    }
   };
 
   return { clickMoveTodayHandler, clickShowDataOfDateHandler, clickWeeksChartHandler, clickMonthsChartHandler };
