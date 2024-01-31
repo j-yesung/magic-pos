@@ -1,15 +1,17 @@
 import useAuthState from '@/shared/store/session';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import AdminLayoutWrapper from './AdminLayoutWrapper';
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   const session = useAuthState(state => state.session);
   const router = useRouter();
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    if (!session) router.push('/');
-  }, [router, session]);
+    if (isLoaded && !session) router.push('/');
+    setIsLoaded(true);
+  }, [isLoaded, router, session]);
 
   return (
     <>
@@ -20,7 +22,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
           }
         }
       `}</style>
-      <AdminLayoutWrapper>{children}</AdminLayoutWrapper>
+      {isLoaded && <AdminLayoutWrapper>{children}</AdminLayoutWrapper>}
     </>
   );
 };
