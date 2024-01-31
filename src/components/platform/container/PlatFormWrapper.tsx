@@ -1,6 +1,8 @@
 import usePlatFormState, {
   resetIsEditMode,
   resetIsRegist,
+  resetPrevData,
+  resetPrevImg,
   setIsRegist,
   setPlatFormStoreId,
 } from '@/shared/store/platform';
@@ -19,6 +21,9 @@ const PlatFormWrapper = () => {
   useEffect(() => {
     return () => {
       resetIsRegist();
+      resetIsEditMode();
+      resetPrevData();
+      resetPrevImg();
       resetIsEditMode();
     };
   }, []);

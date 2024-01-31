@@ -51,7 +51,7 @@ const Item = ({ link, title, id, imgUrl }: ItemProps) => {
           <Image src={imgUrl} width={1000} height={1000} alt={title} />
         ) : (
           <div className={styles.defaultImg}>
-            <Default />
+            <Default width={100} height={100} />
           </div>
         )}
 
@@ -59,12 +59,12 @@ const Item = ({ link, title, id, imgUrl }: ItemProps) => {
           <span className={styles.itemTitle}>{title}</span>
         </div>
         <div className={styles.externalLink} ref={linkRef}>
-          <LuExternalLink />
+          <LuExternalLink width={100} height={100} />
           <span>이동하기</span>
         </div>
       </Link>
       <button onClick={clickShowEditPlatFormMode} type="button" className={styles.editWrapper} ref={editRef}>
-        <Pencil />
+        <Pencil width={1000} height={1000} />
       </button>
     </div>
   );

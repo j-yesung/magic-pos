@@ -8,9 +8,11 @@ import { ReactNode } from 'react';
 //   const API_KEY = process.env.NEXT_PUBLIC_HOLIDAY_API_KEY;
 //   const url = `${process.env.NEXT_PUBLIC_HOLIDAY_URL}?serviceKey=${API_KEY}&solYear=2024&numOfRows=30&_type=json`;
 
-//   const { data } = await axios.get(url!);
-//   const holidayList = data.response.body.items.item;
-//   return { props: { item: holidayList } };
+//   const { data } = await axios.get('https://superkts.com/day/holiday/2023');
+//   const holidayList = data;
+//   console.log(data);
+//   // return { props: { item: holidayList } };
+//   return { props: {} };
 // };
 
 const SalesPage = () => {
