@@ -5,6 +5,13 @@ export default function Document() {
     <Html lang="ko">
       <Head />
       <link rel="manifest" href="/manifest.json" />
+      <meta name="author" content="매직 포스" />
+      <meta
+        name="keywords"
+        content="magic pos,매직포스, 키오스크, 웹 키오스크, 키스크, 주문관리, 간편한 결제, QR코드로 결제, 편리함의 시작, 세상의 모든 키오스크가 내손안에,  "
+      />
+      <meta name="naver-site-verification" content="d5e1c3d67cbe79eb4ae8f67027850163356f3196" />
+      <meta name="description" content="편리함의 시작 magic pos" />
       <link rel="apple-touch-icon" sizes="57x57" href="/icons/favicon/apple-icon-57x57.png" />
       <link rel="apple-touch-icon" sizes="60x60" href="/icons/favicon/apple-icon-60x60.png" />
       <link rel="apple-touch-icon" sizes="72x72" href="/icons/favicon/apple-icon-72x72.png" />
