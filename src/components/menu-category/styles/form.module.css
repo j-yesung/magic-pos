@@ -46,21 +46,21 @@
   color: var(--input-placeholder-color);
 }
 
-.wrap .btn-wrap {
+.btn-wrap {
   margin-top: auto;
   display: flex;
   gap: 1rem;
 }
-.wrap .btn-wrap button {
+.btn-wrap button {
   border-radius: 1rem;
   height: 5.6rem;
   cursor: pointer;
   flex: 1;
 }
-.wrap .btn-wrap button.update-btn {
+.btn-wrap button.update-btn {
   background-color: var(--point1-80);
   color: var(--text5);
 }
-.wrap .btn-wrap button.delete-btn {
+.btn-wrap button.delete-btn {
   background-color: var(--bg-g);
 }

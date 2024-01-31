@@ -1,6 +1,12 @@
 import { useModal } from '@/hooks/service/ui/useModal';
 import useMenuItemStore from '@/shared/store/menu/menu-item';
-import useMenuOptionStore, { NewMenuOptionWithDetail } from '@/shared/store/menu/menu-option';
+import useMenuOptionStore, {
+  NewMenuOptionWithDetail,
+  setMenuOption,
+  setMenuOptionDetailList,
+  setMenuOptionIndex,
+  setMenuOptions,
+} from '@/shared/store/menu/menu-option';
 import { MenuOptionWithDetail } from '@/types/supabase';
 import MenuOptionModal from '../options/MenuOptionModal';
 import styles from '../styles/menu-item-form.module.css';
@@ -12,8 +18,8 @@ import PlusButton from '/public/icons/plus.svg';
 const MenuItemFormOption = () => {
   const { MagicModal } = useModal();
   const menuItem = useMenuItemStore(state => state.menuItem);
-  const { menuOption, setMenuOption, menuOptions, setMenuOptions, setMenuOptionDetailList, setMenuOptionIndex } =
-    useMenuOptionStore();
+  const menuOption = useMenuOptionStore(state => state.menuOption);
+  const menuOptions = useMenuOptionStore(state => state.menuOptions);
 
   // 옵션 수정
   const clickUpdateOptionHandler = (item: NewMenuOptionWithDetail, index: number) => {

@@ -1,11 +1,11 @@
+import styles from '@/components/menu-item/styles/menu-item-form.module.css';
 import useToast from '@/hooks/service/ui/useToast';
 import useMenuItemStore, { setMenuItem, setMenuItemImgFile, setMenuItemSampleImg } from '@/shared/store/menu/menu-item';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { ChangeEvent } from 'react';
 import { FaCheck } from 'react-icons/fa6';
-import MenuItemFormOption from '../options/MenuItemFormOption';
-import styles from '../styles/menu-item-form.module.css';
+import MenuItemFormOption from '../../options/MenuItemFormOption';
 import CloseButton from '/public/icons/close.svg';
 import EditButton from '/public/icons/pencil.svg';
 

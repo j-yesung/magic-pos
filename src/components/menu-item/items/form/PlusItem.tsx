@@ -1,3 +1,5 @@
+import MenuItemModal from '@/components/menu-item/items/modal/MenuItemModal';
+import styles from '@/components/menu-item/styles/menu-item-card.module.css';
 import { useModal } from '@/hooks/service/ui/useModal';
 import useMenuItemStore, {
   setIsEdit,
@@ -5,24 +7,15 @@ import useMenuItemStore, {
   setMenuItemImgFile,
   setMenuItemSampleImg,
 } from '@/shared/store/menu/menu-item';
-import useMenuOptionStore from '@/shared/store/menu/menu-option';
+import { setMenuOptions } from '@/shared/store/menu/menu-option';
 import { Tables } from '@/types/supabase';
-import clsx from 'clsx';
-import { useState } from 'react';
-import MenuItemCard from '../items/MenuItemCard';
-import styles from '../styles/menu-item-card.module.css';
-import MenuItemModal from './MenuItemModal';
 import PlusButton from '/public/icons/plus.svg';
 
-const MenuItemPage = () => {
+const PlusItemComponent = () => {
   const { MagicModal } = useModal();
   const sampleImage = useMenuItemStore(state => state.sampleImage);
-  const menuItem = useMenuItemStore(state => state.menuItem);
-  const categoryWithMenuItem = useMenuItemStore(state => state.categoryWithMenuItem);
   const categoryWithMenuItemList = useMenuItemStore(state => state.categoryWithMenuItemList);
-  const { setMenuOptions } = useMenuOptionStore();
-
-  const [dropNum, setDropNum] = useState(0);
+  const categoryWithMenuItem = useMenuItemStore(state => state.categoryWithMenuItem);
 
   // 메뉴 플러스
   const clickAddMenuItemHandler = async () => {
@@ -46,23 +39,10 @@ const MenuItemPage = () => {
     setMenuItemImgFile(null);
   };
   return (
-    <div className={clsx(styles.wrap, { [styles.active]: menuItem.id !== '' })}>
-      <ul>
-        {categoryWithMenuItemList
-          .filter(list => list.id === categoryWithMenuItem.id)
-          .map(categoryWithMenu =>
-            categoryWithMenu.menu_item.map((item, idx) => (
-              <MenuItemCard dropNum={dropNum} setDropNum={setDropNum} key={item.id} item={item} idx={idx} />
-            )),
-          )}
-        <li>
-          <button className={styles['plus']} type="button" onClick={clickAddMenuItemHandler}>
-            <PlusButton width={22} height={22} />
-          </button>
-        </li>
-      </ul>
-    </div>
+    <button className={styles['plus']} type="button" onClick={clickAddMenuItemHandler}>
+      <PlusButton width={22} height={22} />
+    </button>
   );
 };
 
-export default MenuItemPage;
+export default PlusItemComponent;

@@ -1,7 +1,7 @@
+import styles from '@/components/menu-item/styles/modal.module.css';
 import { useModal } from '@/hooks/service/ui/useModal';
 import useMenuItemStore from '@/shared/store/menu/menu-item';
-import styles from '../styles/modal.module.css';
-import MenuItemFormPage from './MenuItemForm';
+import MenuItemFormPage from '../form/FormItem';
 import CloseButton from '/public/icons/close.svg';
 
 const MenuItemModal = ({ modalId }: { modalId?: string }) => {

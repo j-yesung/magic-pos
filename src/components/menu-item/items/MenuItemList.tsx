@@ -1,5 +1,5 @@
-import MenuItemPage from './MenuItem';
-import MenuItemCategoryPage from './MenuItemCategory';
+import MenuItemCategoryPage from './card/Category';
+import MenuItemPage from './card/MenuItem';
 
 const MenuItemListPage = () => {
   return (
