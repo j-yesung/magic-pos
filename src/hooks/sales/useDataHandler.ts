@@ -114,5 +114,11 @@ export const useDataHandler = () => {
     }
   };
 
-  return { clickMoveTodayHandler, clickShowDataOfDateHandler, clickWeeksChartHandler, clickMonthsChartHandler };
+  return {
+    clickMoveTodayHandler,
+    clickShowDataOfDateHandler,
+    clickWeeksChartHandler,
+    clickMonthsChartHandler,
+    clickGetAllDataHandler,
+  };
 };

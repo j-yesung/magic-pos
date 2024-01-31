@@ -118,7 +118,7 @@ export const getMonthSales: getSalesReturnType = async (month, store_id) => {
  *
  * @param date 오늘 날짜 기준
  * @param store_id
- * @param order_type
+ * @param order_type 'store' | 'togo' , 매장 | 포장
  * @returns
  */
 export const getAllSales: getAllSalesReurnType = async (date, store_id, order_type) => {
