@@ -43,8 +43,6 @@ const TIME_FORMAT_MONTH = 'YYYY-MM-01 HH:mm:ss';
 // 오늘
 const fetchDayOrderData = async (pageParam: number, id: string) => {
   const todayStart = dayJsToString(dayjs(dayjs().format('YYYY-MM-DD 00:00:00')).utc().clone(), TIME_FORMAT);
-  console.log('asdf');
-  console.log(todayStart);
   const { data: order_store, error: storeError } = await supabase
     .from('order_store')
     .select('*')
