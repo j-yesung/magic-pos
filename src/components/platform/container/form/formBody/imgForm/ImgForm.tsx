@@ -1,5 +1,4 @@
 import usePlatFormState, {
-  resetMeta,
   resetPlatFormFile,
   resetPrevImg,
   setPlatFormFile,
@@ -19,17 +18,14 @@ const ImgForm = ({ mode }: { mode: boolean }) => {
     if (fileList?.length !== 0) {
       const file = fileList[0];
       const currentImgUrl = URL.createObjectURL(file);
-
       setPrevImg(currentImgUrl);
       setPlatFormFile(file, mode);
-      resetMeta();
     }
   };
 
   const removeImage = () => {
     resetPrevImg();
     resetPlatFormFile(mode);
-    resetMeta();
   };
 
   return (

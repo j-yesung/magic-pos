@@ -13,7 +13,6 @@ import usePlatFormState, {
   resetAddPlatForm,
   resetEditPlatForm,
   resetIsRegist,
-  resetMeta,
   resetPrevData,
   resetPrevImg,
   setAddDataToFetchPlatForm,
@@ -71,7 +70,6 @@ const usePlatForm = () => {
     setAddDataToFetchPlatForm(platformData!);
     resetAddPlatForm();
     setIsRegist(false);
-    resetMeta();
     resetPrevImg();
   };
 
@@ -142,7 +140,6 @@ const usePlatForm = () => {
     }
 
     resetPrevImg();
-    resetMeta();
     resetIsRegist();
   };
 

@@ -15,7 +15,6 @@ interface PlatformStore {
   isEdit: boolean;
   fetchPlatFormData: Tables<'platform'>[];
   prevImg: string | null;
-  meta: boolean;
 }
 
 interface PrevDataType {
@@ -59,8 +58,6 @@ const initialPrevImg = null;
 
 const initialFetchPlatForm: Tables<'platform'>[] = [];
 
-const initialMeta = false;
-
 const usePlatFormState = create<PlatformStore>()(() => ({
   store_id: null,
   isRegist: false,
@@ -70,7 +67,6 @@ const usePlatFormState = create<PlatformStore>()(() => ({
   prevData: initialPrevData,
   fetchPlatFormData: initialFetchPlatForm,
   prevImg: initialPrevImg,
-  meta: initialMeta,
 }));
 
 export default usePlatFormState;
@@ -120,10 +116,9 @@ export const setAddPlatForm = debounce(async (e: ChangeEvent<HTMLInputElement>) 
           metaImage: confirmedImageUrl,
         },
       }));
-      setMeta(true);
+
       setPrevImg(confirmedImageUrl);
     } else {
-      setMeta(false);
       resetPrevImg();
     }
   }
@@ -150,10 +145,8 @@ export const setEditPlatForm = debounce(async (e: ChangeEvent<HTMLInputElement>)
           metaImage: confirmedImageUrl,
         },
       }));
-      setMeta(true);
       setPrevImg(confirmedImageUrl);
     } else {
-      setMeta(false);
       resetPrevImg();
     }
   }
@@ -200,12 +193,6 @@ export const setPrevImg = (url: string) =>
   usePlatFormState.setState(state => ({
     ...state,
     prevImg: url ?? null,
-  }));
-
-export const setMeta = (type: boolean) =>
-  usePlatFormState.setState(state => ({
-    ...state,
-    meta: type,
   }));
 
 /**
@@ -283,14 +270,4 @@ export const resetPrevData = () =>
   usePlatFormState.setState(state => ({
     ...state,
     prevData: initialPrevData,
-  }));
-
-export const resetMeta = () =>
-  usePlatFormState.setState(state => ({
-    ...state,
-    addPlatForm: {
-      ...state.addPlatForm,
-      metaImage: null,
-    },
-    meta: initialMeta,
   }));
