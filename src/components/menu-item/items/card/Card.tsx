@@ -16,6 +16,7 @@ import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import EditButton from '/public/icons/pencil.svg';
+import Default from '/public/whiteLogo.svg';
 
 interface PropsType {
   item: Tables<'menu_item'>;
@@ -27,7 +28,6 @@ interface PropsType {
 const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
   const { MagicModal } = useModal();
   const { updatePositionMutate } = useSetMenuItem();
-  const sampleImage = useMenuItemStore(state => state.sampleImage);
   const menuItem = useMenuItemStore(state => state.menuItem);
   const categoryWithMenuItem = useMenuItemStore(state => state.categoryWithMenuItem);
   const categoryWithMenuItemList = useMenuItemStore(state => state.categoryWithMenuItemList);
@@ -132,7 +132,11 @@ const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
         })}
       >
         <span className={styles['img']}>
-          <Image src={item.image_url ?? sampleImage} alt={item.name ?? 'Sample Image'} width={100} height={100} />
+          {item.image_url ? (
+            <Image src={item.image_url} alt={item.name ?? 'Sample Image'} width={100} height={100} />
+          ) : (
+            <Default width={80} height={30} />
+          )}
         </span>
         <span className={styles['txt']}>
           <span className={styles['name']}>{item.name}</span>
