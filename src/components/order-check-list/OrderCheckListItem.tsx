@@ -1,7 +1,7 @@
 import { groupByKey } from '@/shared/helper';
 import { MenuItemWithOption, StoreOrderWithStoreName, Tables } from '@/types/supabase';
 import clsx from 'clsx';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import styles from './styles/OrderCheckListItem.module.css';
 
 const OrderCheckListItem = ({ orderData }: { orderData?: Tables<'order_store'> | Tables<'order_number'> }) => {
@@ -18,8 +18,8 @@ const OrderCheckListItem = ({ orderData }: { orderData?: Tables<'order_store'> |
         <span>{order_number}</span>
       </div>
       <div className={styles['item-time']}>
-        <span>{moment(order_time).format('YYYY-MM-DD')}</span>
-        <span>{moment(order_time).format('HH:mm:ss')}</span>
+        <span>{dayjs(order_time).format('YYYY-MM-DD')}</span>
+        <span>{dayjs(order_time).format('HH:mm:ss')}</span>
       </div>
       <div className={styles['item-content']}>
         {[...group].map(([key, menuList]) => {
