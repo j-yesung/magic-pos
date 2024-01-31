@@ -1,66 +1,78 @@
-.order-check-list-filter-wrapper {
-  width: 100%;
-  height: auto;
-}
 .order-check-list-filter-box {
   width: 100%;
   height: auto;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   padding: 2rem 0;
-  gap: 3rem;
+  gap: 2rem;
 }
-.order-check-list-filter-box > button {
-  width: 15rem;
-  color: var(--text2);
-  background-color: var(--bg-g);
-  font-weight: 600;
-  padding: 1rem 2rem;
-}
-.order-check-list-filter-box > button > p {
+
+.order-check-list-filter-box button > p {
   font-size: 1.5rem;
 }
-button.button-focus {
-  background-color: var(--point1-80);
-  color: #fff;
-}
-/* date box */
-.order-check-list-Date-box {
-  width: 100%;
-  height: 0;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 3rem;
-  transition: 0.2s;
-  transform: scaleY(0);
-}
-.order-check-list-Date-box.active {
+
+.choice-date-button-wrapper {
+  width: auto;
   height: auto;
-  padding-bottom: 4rem;
-  transform: scaleY(1);
-}
-.order-check-list-Date-box > input {
   display: flex;
-  height: 4.4rem;
-  padding: 1.3rem 1.5rem;
+}
+.choice-date-button-wrapper > button {
+  color: var(--text2);
+  background-color: #fff;
+  font-weight: 500;
+  padding: 1.2rem 2rem;
+  letter-spacing: -0.3px;
+  border-radius: 0;
+  border: 1px solid var(--line);
+}
+.choice-date-button-wrapper > button:first-child {
+  border-radius: 0.5rem 0 0 0.5rem;
+  border-right: 0;
+}
+.choice-date-button-wrapper > button:last-child {
+  border-radius: 0 0.5rem 0.5rem 0;
+  border-left: 0;
+}
+
+.select-date-button-wrapper {
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.select-date-button-wrapper > input {
+  display: flex;
+  padding: 1rem 1.5rem;
+  font-size: 1.5rem;
   align-items: center;
   gap: 5rem;
   border-radius: 0.5rem;
-  border: 1px solid var(--line, #ededed);
+  border: 1px solid var(--line);
   background: #fff;
   cursor: pointer;
 }
-.order-check-list-Date-box > span {
-  font-size: 3.5rem;
-}
-.order-check-list-Date-box > button {
-  width: 15rem;
+.select-date-button-wrapper > span {
   color: var(--text2);
-  background-color: var(--bg-g);
-  font-weight: 600;
-  padding: 1.4xrem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: -0.3px;
 }
-.order-check-list-Date-box > button > p {
-  font-size: 1.6rem;
+
+.select-date-button-wrapper > button {
+  color: var(--text2);
+  background-color: #fff;
+  font-weight: 500;
+  padding: 1.3rem 2rem;
+  letter-spacing: -0.3px;
+  background-color: var(--bg-g);
+  border-radius: 0.5rem;
+}
+
+button.button-focus {
+  background-color: var(--point1-80);
+  color: #fff;
 }
