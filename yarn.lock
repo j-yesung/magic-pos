@@ -3505,7 +3505,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/prop-types@npm:*":
+"@types/prop-types@npm:*, @types/prop-types@npm:^15":
   version: 15.7.11
   resolution: "@types/prop-types@npm:15.7.11"
   checksum: e53423cf9d510515ef8b47ff42f4f1b65a7b7b37c8704e2dbfcb9a60defe0c0e1f3cb1acfdeb466bad44ca938d7c79bffdd51b48ffb659df2432169d0b27a132
@@ -3523,6 +3523,15 @@ __metadata:
   version: 1.2.7
   resolution: "@types/range-parser@npm:1.2.7"
   checksum: 361bb3e964ec5133fa40644a0b942279ed5df1949f21321d77de79f48b728d39253e5ce0408c9c17e4e0fd95ca7899da36841686393b9f7a1e209916e9381a3c
+  languageName: node
+  linkType: hard
+
+"@types/react-csv@npm:^1.1.10":
+  version: 1.1.10
+  resolution: "@types/react-csv@npm:1.1.10"
+  dependencies:
+    "@types/react": "npm:*"
+  checksum: 58d300aacccc70c67d2df538726983b4483f3b446db67687baa0026bd4d562cbb956a47eab49516bbe22b9bf8e9b92d1e28f608361a77b2ffa36825bd9c72295
   languageName: node
   linkType: hard
 
@@ -7612,7 +7621,9 @@ __metadata:
     "@types/next-pwa": "npm:^5"
     "@types/node": "npm:^20.11.5"
     "@types/open-graph-scraper": "npm:^4.8.5"
+    "@types/prop-types": "npm:^15"
     "@types/react": "npm:^18"
+    "@types/react-csv": "npm:^1.1.10"
     "@types/react-dom": "npm:^18"
     "@typescript-eslint/eslint-plugin": "npm:^6.18.1"
     "@typescript-eslint/parser": "npm:^6.18.1"
@@ -7654,9 +7665,11 @@ __metadata:
     open-graph-scraper: "npm:^6.3.3"
     postcss: "npm:^8"
     prettier: "npm:^3.2.2"
+    prop-types: "npm:^15.8.1"
     qrcode.react: "npm:^3.1.0"
     react: "npm:^18"
     react-chartjs-2: "npm:^5.2.0"
+    react-csv: "npm:^2.2.2"
     react-dom: "npm:^18"
     react-i18next: "npm:^14.0.1"
     react-icons: "npm:^5.0.1"
@@ -8732,6 +8745,13 @@ __metadata:
     chart.js: ^4.1.1
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
   checksum: 437e443a268b7eebab3f1a6f0f5d936e58caf650fca55f568a612a46c563d22af683a64185eac8005aa644e4960a5a72cc1075a2574b89ec46c7653aaf4025e2
+  languageName: node
+  linkType: hard
+
+"react-csv@npm:^2.2.2":
+  version: 2.2.2
+  resolution: "react-csv@npm:2.2.2"
+  checksum: 287e7ba2085a32a0e65d7a19b9e063e43f06f75ab6ebc18bb52b518007a1d6ec5f5ce33fc7c4e290e3ea41cfb251657b6e62aadadc8d7ffcef7e53d43bf3eb69
   languageName: node
   linkType: hard
 

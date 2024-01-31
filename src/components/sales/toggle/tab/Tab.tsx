@@ -2,6 +2,7 @@ import { useCalendar } from '@/hooks/sales/useCalendar';
 import useSalesToggle from '@/shared/store/sales/salesToggle';
 import { Fragment, useEffect } from 'react';
 import Calendar from '../../calendar/Calendar';
+import Excel from '../../excel/Excel';
 import CalendarToggle from './calendarToggle/CalendarToggle';
 import styles from './styles/tab.module.css';
 import TabButton from './tabButton/TabButton';
@@ -26,6 +27,7 @@ const Tab = () => {
           <Calendar />
         </Fragment>
       )}
+      {isChangeView && <Excel />}
     </div>
   );
 };
