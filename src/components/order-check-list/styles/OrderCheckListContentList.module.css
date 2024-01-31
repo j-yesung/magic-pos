@@ -1,6 +1,6 @@
 .order-check-list-content-list {
   width: 100%;
-  height: 100%;
+  height: calc(68.9% - 5rem);
   overflow-y: scroll;
 }
 

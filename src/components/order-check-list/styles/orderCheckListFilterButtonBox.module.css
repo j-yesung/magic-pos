@@ -1,3 +1,7 @@
+.order-check-list-filter-wrapper {
+  width: 100%;
+  height: auto;
+}
 .order-check-list-filter-box {
   width: 100%;
   height: auto;
@@ -11,9 +15,10 @@
   color: var(--text2);
   background-color: var(--bg-g);
   font-weight: 600;
+  padding: 1rem 2rem;
 }
 .order-check-list-filter-box > button > p {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
 }
 button.button-focus {
   background-color: var(--point1-80);

@@ -1,5 +1,5 @@
 .order-check-list-wrapper {
   width: 100%;
-  height: calc(100% - 6rem);
+  height: 100%;
   color: var(--text1);
 }
