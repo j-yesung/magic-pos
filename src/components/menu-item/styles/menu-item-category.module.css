@@ -43,10 +43,10 @@
 }
 
 .slide {
-  width: auto;
-  height: 5.6rem;
+  width: auto !important;
+  height: 5.6rem !important;
   padding: 1.9rem 1.5rem;
-  display: flex;
+  display: flex !important;
   justify-content: center;
   align-items: center;
   transition: all 0.3s;
