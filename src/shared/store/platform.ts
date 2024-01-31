@@ -1,3 +1,4 @@
+import { handleMetaImageException } from '@/components/platform/utility/platformHelper';
 import { getOpenGraphMetaImage } from '@/server/api/external/openGraph';
 import { AddPlatFormType, EditPlatFormType } from '@/types/platform';
 import { Tables } from '@/types/supabase';
@@ -117,17 +118,18 @@ export const setIsValidUrl = (param: boolean) =>
 export const setAddPlatForm = debounce(async (e: ChangeEvent<HTMLInputElement>) => {
   const { name, value } = e.target;
   if (name === 'link_url') {
-    const metaImage = await getOpenGraphMetaImage(value);
-    if (metaImage) {
+    const extractedImage = await getOpenGraphMetaImage(value);
+    if (extractedImage) {
+      const confirmedImageUrl = handleMetaImageException(extractedImage);
       usePlatFormState.setState(state => ({
         ...state,
         addPlatForm: {
           ...state.addPlatForm,
-          metaImage,
+          metaImage: confirmedImageUrl,
         },
       }));
       setMeta(true);
-      setPrevImg(metaImage);
+      setPrevImg(confirmedImageUrl);
     } else {
       setMeta(false);
       resetPrevImg();
