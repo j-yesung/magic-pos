@@ -20,5 +20,8 @@ export const TAKE_OUT_HEADER = [
  */
 export const NOT_DATA = '데이터가 없습니다.';
 
+/**
+ * csv 파일 이름
+ */
 export const STORE_FILE_NAME = '매장매출내역.csv';
 export const TAKE_OUT_FILE_NAME = '포장매출내역.csv';
