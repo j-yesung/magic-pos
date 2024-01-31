@@ -16,7 +16,6 @@ interface PlatformStore {
   fetchPlatFormData: Tables<'platform'>[];
   prevImg: string | null;
   meta: boolean;
-  isValidUrl: boolean;
 }
 
 interface PrevDataType {
@@ -72,7 +71,6 @@ const usePlatFormState = create<PlatformStore>()(() => ({
   fetchPlatFormData: initialFetchPlatForm,
   prevImg: initialPrevImg,
   meta: initialMeta,
-  isValidUrl: true,
 }));
 
 export default usePlatFormState;
@@ -105,12 +103,6 @@ export const setPlatFormStoreId = (store_id: string) =>
     },
   }));
 
-export const setIsValidUrl = (param: boolean) =>
-  usePlatFormState.setState(state => ({
-    ...state,
-    isValidUrl: param,
-  }));
-
 /**
  *
  * @param e AddForm
@@ -136,7 +128,6 @@ export const setAddPlatForm = debounce(async (e: ChangeEvent<HTMLInputElement>) 
     }
   }
 
-  if (!usePlatFormState.getState().isValidUrl) setIsValidUrl(true);
   usePlatFormState.setState(state => ({
     ...state,
     addPlatForm: { ...state.addPlatForm, [name]: value },
@@ -149,17 +140,18 @@ export const setAddPlatForm = debounce(async (e: ChangeEvent<HTMLInputElement>) 
 export const setEditPlatForm = debounce(async (e: ChangeEvent<HTMLInputElement>) => {
   const { name, value } = e.target;
   if (name === 'link_url') {
-    const metaImage = await getOpenGraphMetaImage(value);
-    if (metaImage) {
+    const extractedImage = await getOpenGraphMetaImage(value);
+    if (extractedImage) {
+      const confirmedImageUrl = handleMetaImageException(extractedImage);
       usePlatFormState.setState(state => ({
         ...state,
         editPlatForm: {
           ...state.editPlatForm,
-          metaImage,
+          metaImage: confirmedImageUrl,
         },
       }));
       setMeta(true);
-      setPrevImg(metaImage);
+      setPrevImg(confirmedImageUrl);
     } else {
       setMeta(false);
       resetPrevImg();
@@ -301,10 +293,4 @@ export const resetMeta = () =>
       metaImage: null,
     },
     meta: initialMeta,
-  }));
-
-export const resetIsValidUrl = () =>
-  usePlatFormState.setState(state => ({
-    ...state,
-    isValidUrl: true,
   }));
