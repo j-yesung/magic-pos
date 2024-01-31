@@ -2,7 +2,7 @@ import { useFetchCategories } from '@/hooks/menu/menu-category/useFetchCategorie
 import useCategoriesStore, { setCategories, setCategory } from '@/shared/store/menu/menu-category';
 import useAuthState from '@/shared/store/session';
 import { useEffect } from 'react';
-import CategoryComponentPage from './Category';
+import CategoryComponentPage from './container/card/Category';
 
 const CategoriesComponentPage = () => {
   const storeId = useAuthState(state => state.storeId);

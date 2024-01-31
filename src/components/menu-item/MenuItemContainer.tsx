@@ -6,7 +6,7 @@ import useMenuItemStore, {
   setCategoryWithMenuItemList,
   setMenuItemList,
 } from '@/shared/store/menu/menu-item';
-import useMenuOptionStore from '@/shared/store/menu/menu-option';
+import useMenuOptionStore, { setOrigineMenuOptions } from '@/shared/store/menu/menu-option';
 import useAuthState from '@/shared/store/session';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
@@ -23,7 +23,7 @@ const MenuItemsComponentPage = () => {
 
   const categoryWithMenuItem = useMenuItemStore(state => state.categoryWithMenuItem);
   const categoryWithMenuItemList = useMenuItemStore(state => state.categoryWithMenuItemList);
-  const { changeMenuOptions, setOrigineMenuOptions } = useMenuOptionStore();
+  const changeMenuOptions = useMenuOptionStore(state => state.changeMenuOptions);
 
   const [choiceFetchData, setChoiceFetchData] = useState(false);
 

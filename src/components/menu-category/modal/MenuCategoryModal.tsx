@@ -1,6 +1,6 @@
 import { useModal } from '@/hooks/service/ui/useModal';
 import useCategoriesStore from '@/shared/store/menu/menu-category';
-import CategoryFormPage from '../Form';
+import CategoryFormPage from '../container/form/FormCategory';
 import styles from '../styles/modal.module.css';
 import CloseButton from '/public/icons/close.svg';
 

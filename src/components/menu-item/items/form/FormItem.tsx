@@ -1,13 +1,18 @@
+import styles from '@/components/menu-item/styles/menu-item-form.module.css';
 import useSetMenuItem from '@/hooks/menu/menu-item/useSetMenuItems';
 import useSetMenuOption from '@/hooks/menu/menu-item/useSetMenuOption';
 import useSetMenuOptionDetail from '@/hooks/menu/menu-item/useSetMenuOptionDetail';
 import useMenuItemStore, { setMenuItem, setMenuItemImgFile } from '@/shared/store/menu/menu-item';
-import useMenuOptionStore, { NewMenuOptionWithDetail, NewOptionDetailType } from '@/shared/store/menu/menu-option';
+import useMenuOptionStore, {
+  NewMenuOptionWithDetail,
+  NewOptionDetailType,
+  setChangeMenuOptions,
+  setMenuOptions,
+} from '@/shared/store/menu/menu-option';
 import { Tables, TablesInsert } from '@/types/supabase';
 import moment from 'moment';
-import styles from '../styles/menu-item-form.module.css';
-import MenuItemFormButton from './MenuItemFormButton';
-import MenuItemFormInput from './MenuItemFormInput';
+import MenuItemFormInput from './InputItem';
+import MenuItemFormButton from './RemoveItem';
 
 interface MenuItemModal {
   clickItemModalHide: () => void;
@@ -23,8 +28,9 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
   const menuItemSampleImg = useMenuItemStore(state => state.menuItemSampleImg);
   const menuItemImgFile = useMenuItemStore(state => state.menuItemImgFile);
 
-  const { menuOptions, setMenuOptions, origineMenuOptions, changeMenuOptions, setChangeMenuOptions } =
-    useMenuOptionStore();
+  const menuOptions = useMenuOptionStore(state => state.menuOptions);
+  const origineMenuOptions = useMenuOptionStore(state => state.origineMenuOptions);
+  const changeMenuOptions = useMenuOptionStore(state => state.changeMenuOptions);
 
   // 메뉴 추가 and 수정
   const submitupdateMenuItemHandler = async (e: React.FormEvent<HTMLFormElement>) => {

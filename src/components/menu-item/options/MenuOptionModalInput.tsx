@@ -1,5 +1,9 @@
 import useToast from '@/hooks/service/ui/useToast';
-import useMenuOptionStore, { NewOptionDetailType } from '@/shared/store/menu/menu-option';
+import useMenuOptionStore, {
+  NewOptionDetailType,
+  setMenuOption,
+  setMenuOptionDetailList,
+} from '@/shared/store/menu/menu-option';
 import clsx from 'clsx';
 import React, { useEffect } from 'react';
 import { FaCheck } from 'react-icons/fa6';
@@ -9,14 +13,10 @@ import PlusButton from '/public/icons/plus.svg';
 const MenuOptionModalInput = () => {
   const { toast } = useToast();
 
-  const {
-    menuOption,
-    setMenuOption,
-    menuOptionDetail,
-    menuOptionDetailList,
-    setMenuOptionDetailList,
-    menuOptionIndex,
-  } = useMenuOptionStore();
+  const menuOption = useMenuOptionStore(state => state.menuOption);
+  const menuOptionDetail = useMenuOptionStore(state => state.menuOptionDetail);
+  const menuOptionDetailList = useMenuOptionStore(state => state.menuOptionDetailList);
+  const menuOptionIndex = useMenuOptionStore(state => state.menuOptionIndex);
 
   useEffect(() => {
     if (menuOptionIndex === -1) addOptionDetailInputHandler();

@@ -61,10 +61,9 @@
   background-color: var(--text3);
 }
 
-/* 추가 버튼 */
-.wrap > ul li button.plus-btn {
-  text-align: center;
+.wrap > ul li:last-child button {
   cursor: pointer;
+  text-align: center;
 }
 
 /* 버튼 수정 삭제 */
@@ -91,15 +90,16 @@
   cursor: pointer;
 }
 
-.wrap > ul li button .btn-wrap .edit-btn {
+/* 수정 삭제 버튼 */
+.edit-btn {
   background: var(--bg-p, #f3edff);
 }
 
-.wrap > ul li button .btn-wrap .remove-btn {
+.remove-btn {
   background: var(--text3, #bfbfbf);
 }
 
-.wrap > ul li button .btn-wrap .remove-btn path {
+.remove-btn path {
   stroke: #fff;
 }
 

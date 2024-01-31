@@ -1,3 +1,5 @@
+import MenuItemModal from '@/components/menu-item/items/modal/MenuItemModal';
+import styles from '@/components/menu-item/styles/menu-item-card.module.css';
 import useSetMenuItem from '@/hooks/menu/menu-item/useSetMenuItems';
 import { useModal } from '@/hooks/service/ui/useModal';
 import { convertNumberToWon } from '@/shared/helper';
@@ -7,14 +9,12 @@ import useMenuItemStore, {
   setMenuItemImgFile,
   setMenuItemSampleImg,
 } from '@/shared/store/menu/menu-item';
-import useMenuOptionStore from '@/shared/store/menu/menu-option';
+import useMenuOptionStore, { setMenuOption, setMenuOptions } from '@/shared/store/menu/menu-option';
 import { Tables } from '@/types/supabase';
 import clsx from 'clsx';
 import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 import { FaStar } from 'react-icons/fa';
-import styles from '../styles/menu-item-card.module.css';
-import MenuItemModal from './MenuItemModal';
 import EditButton from '/public/icons/pencil.svg';
 
 interface PropsType {
@@ -31,7 +31,8 @@ const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
   const menuItem = useMenuItemStore(state => state.menuItem);
   const categoryWithMenuItem = useMenuItemStore(state => state.categoryWithMenuItem);
   const categoryWithMenuItemList = useMenuItemStore(state => state.categoryWithMenuItemList);
-  const { menuOption, setMenuOption, setMenuOptions, origineMenuOptions } = useMenuOptionStore();
+  const menuOption = useMenuOptionStore(state => state.menuOption);
+  const origineMenuOptions = useMenuOptionStore(state => state.origineMenuOptions);
 
   const [isDragging, setIsDragging] = useState(false);
 

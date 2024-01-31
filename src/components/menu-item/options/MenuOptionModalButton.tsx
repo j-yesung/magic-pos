@@ -1,6 +1,10 @@
 import { useModal } from '@/hooks/service/ui/useModal';
 import useToast from '@/hooks/service/ui/useToast';
-import useMenuOptionStore, { NewMenuOptionWithDetail } from '@/shared/store/menu/menu-option';
+import useMenuOptionStore, {
+  NewMenuOptionWithDetail,
+  setMenuOptions,
+  updateMenuOptionsStore,
+} from '@/shared/store/menu/menu-option';
 import { TablesUpdate } from '@/types/supabase';
 import styles from '../styles/menu-option-modal.module.css';
 
@@ -8,8 +12,11 @@ const MenuOptionModalButton = ({ modalId }: { modalId?: string }) => {
   const { MagicModal } = useModal();
   const { toast } = useToast();
 
-  const { menuOption, menuOptions, setMenuOptions, updateMenuOptionsStore, menuOptionDetailList, menuOptionIndex } =
-    useMenuOptionStore();
+  const menuOption = useMenuOptionStore(state => state.menuOption);
+  const menuOptions = useMenuOptionStore(state => state.menuOptions);
+  const menuOptionDetailList = useMenuOptionStore(state => state.menuOptionDetailList);
+  const menuOptionIndex = useMenuOptionStore(state => state.menuOptionIndex);
+
   // 옵션 수정
   const updateOptionDetailHandler = async (menuOption: TablesUpdate<'menu_option'>) => {
     if (menuOption.name === '') {

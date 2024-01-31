@@ -1,14 +1,11 @@
+import styles from '@/components/menu-category/styles/category.module.css';
 import useSetCategories from '@/hooks/menu/menu-category/useSetCategories';
-import { useModal } from '@/hooks/service/ui/useModal';
-import useCategoriesStore, { setCategory, setIsEdit } from '@/shared/store/menu/menu-category';
+import useCategoriesStore from '@/shared/store/menu/menu-category';
 import { Tables } from '@/types/supabase';
 import clsx from 'clsx';
 import { useEffect, useRef, useState } from 'react';
-import MenuCategoryModal from './modal/MenuCategoryModal';
-import styles from './styles/category.module.css';
-import CloseButton from '/public/icons/close.svg';
-import ExclamationMark from '/public/icons/exclamation-mark.svg';
-import EditButton from '/public/icons/pencil.svg';
+import EditCategoryComponent from '../form/EditCategory';
+import RemoveCategoryComponent from '../form/RemoveCategory';
 
 interface PropsType {
   item: Tables<'menu_category'>;
@@ -18,30 +15,9 @@ interface PropsType {
 }
 
 const CategroyCardPage = ({ item, idx, dropNum, setDropNum }: PropsType) => {
-  const { MagicModal } = useModal();
-  const { updatePositionMutate, deleteMutate } = useSetCategories();
-  const category = useCategoriesStore(state => state.category);
+  const { updatePositionMutate } = useSetCategories();
   const categories = useCategoriesStore(state => state.categories);
   const [isDragging, setIsDragging] = useState(false);
-
-  // 카테고리 수정
-  const clickChoiceCategoryHandler = (item: Tables<'menu_category'>) => {
-    MagicModal.fire(<MenuCategoryModal />);
-    setIsEdit(true);
-    setCategory({ id: item.id, name: item.name, store_id: item.store_id, position: item.position });
-  };
-
-  // 카테고리 삭제
-  const clickRemoveCategoryHandler = (item: Tables<'menu_category'>) => {
-    MagicModal.confirm({
-      icon: <ExclamationMark width={50} height={50} />,
-      content: '카테고리를 삭제할까요?',
-      confirmButtonCallback: () => {
-        deleteMutate(item.id);
-        setCategory({ ...category, id: '', name: '' });
-      },
-    });
-  };
 
   // 드래그 이벤트
   const dragItemRef = useRef(0); // 드래그할 아이템의 인덱스
@@ -104,12 +80,8 @@ const CategroyCardPage = ({ item, idx, dropNum, setDropNum }: PropsType) => {
       >
         {item.name}
         <span className={styles['btn-wrap']}>
-          <span className={styles['edit-btn']} onClick={() => clickChoiceCategoryHandler(item)}>
-            <EditButton width={16} height={16} />
-          </span>
-          <span className={styles['remove-btn']} onClick={() => clickRemoveCategoryHandler(item)}>
-            <CloseButton width={15} height={15} />
-          </span>
+          <EditCategoryComponent item={item} />
+          <RemoveCategoryComponent item={item} />
         </span>
       </button>
     </li>
