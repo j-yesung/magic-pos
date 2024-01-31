@@ -24,8 +24,3 @@ export const formattedDatabyExcel = (allSales: Tables<'sales'>[], order_type: Ko
 
   return formattedExcelData;
 };
-
-/**
- * 토스트 알람에 쓰일 enum
- */
-export const NOT_DATA = '데이터가 없습니다.';
