@@ -1,5 +1,5 @@
 import { ExcelData } from '@/types/sales';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import { useEffect, useRef, useState } from 'react';
 import { CSVLink } from 'react-csv';
 const headers = [
@@ -16,7 +16,7 @@ const data = [
   { order_type: 'asdf', product_name: '순댓국', product_price: 12, product_ea: 4, sum: 48, sales_date: dayjs() },
   { order_type: 'asdf', product_name: '순댓국', product_price: 12, product_ea: 4, sum: 48, sales_date: dayjs() },
 ];
-const StoreExcel = ({ today, storeId }: { today: Dayjs; storeId: string }) => {
+const StoreExcel = () => {
   const [excelData, setExcelData] = useState<ExcelData[]>([]);
   const csvLink = useRef<CSVLink & HTMLAnchorElement & { link: HTMLAnchorElement }>(null);
 

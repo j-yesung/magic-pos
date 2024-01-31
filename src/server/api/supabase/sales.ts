@@ -114,11 +114,18 @@ export const getMonthSales: getSalesReturnType = async (month, store_id) => {
   return { sales, dateType: 'month', formatType: 'YYYY년 MM월' };
 };
 
+/**
+ *
+ * @param date 오늘 날짜 기준
+ * @param store_id
+ * @param order_type
+ * @returns
+ */
 export const getAllSales: getAllSalesReurnType = async (date, store_id, order_type) => {
   const { data: sales, error } = await supabase
     .from('sales')
     .select('*')
-    .lte('sales_date', dayJsToString(date, TIME_FORMAT))
+    .lt('sales_date', dayJsToString(date.add(1, 'day'), TIME_FORMAT))
     .eq('store_id', store_id)
     .eq('order_type', order_type);
   if (error) {

@@ -1,4 +1,4 @@
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import { CSVLink } from 'react-csv';
 const headers = [
   { label: '매장', key: 'store' },
@@ -14,7 +14,7 @@ const data = [
   { store: '매장', product_name: '순댓국', prodcut_price: 12, product_ea: 4, sum: 48, sales_date: dayjs() },
   { store: '매장', product_name: '순댓국', prodcut_price: 12, product_ea: 4, sum: 48, sales_date: dayjs() },
 ];
-const TakeOutExcel = ({ today, storeId }: { today: Dayjs; storeId: string }) => {
+const TakeOutExcel = () => {
   return (
     <div>
       <button>매장 다운로드</button>
