@@ -7,6 +7,7 @@ import useKioskState from '@/shared/store/kiosk';
 import Waiting from '@/components/kiosk/success/Waiting';
 import OrderLayout from '@/components/layout/order/OrderLayout';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { setErrorState } from '@/shared/store/error';
 
 /**
  * 결제 성공 페이지
@@ -29,6 +30,13 @@ const OrderSuccessPage = ({ payment, isError }: { payment: Payment; isError: boo
       return;
     } else if (isError) {
       // 에러만 있다면 에러 화면을 보여줍니다.
+      setErrorState({
+        title: '결제 실패',
+        message: '주문에 실패하였습니다.',
+        subMessage: '다시 결제 시도를 해주세요',
+        code: 500,
+        link: '/',
+      });
       router.push('/error');
       return;
     }
