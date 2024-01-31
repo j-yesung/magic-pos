@@ -1,4 +1,3 @@
-import { checkHttp } from '@/utils/validate';
 import axios from 'axios';
 
 /**
@@ -14,7 +13,7 @@ export const getOpenGraphMetaImage = async (link_string: string) => {
     //NEXT_PUBLIC_META_API_KEY=http://localhost:3000/api/open-graph 이거 안써두 된다
     const { data: openGraphInfo } = await axios.post(window?.location?.origin + '/api/open-graph', data);
 
-    return checkHttp(openGraphInfo);
+    return openGraphInfo;
   } catch (error) {
     // 기존 default image로 대체하기 위해 return null
     return null;
