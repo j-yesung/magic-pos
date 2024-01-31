@@ -22,7 +22,7 @@ export const IPHONES = [
 export const ADMIN_INFO = [
   {
     id: 1,
-    src: 'images/admin-shot/admin-prod.svg',
+    src: '/images/admin-shot/admin-prod.svg',
     alt: 'admin-prod',
     title: '한 눈에 들어오는 직관적인 UI',
     desc: '우리 매장에 들어온 주문을 한 화면에서 전부 관리할 수 있어요.',
@@ -30,7 +30,7 @@ export const ADMIN_INFO = [
   },
   {
     id: 2,
-    src: 'images/admin-shot/admin-order-check.svg',
+    src: '/images/admin-shot/admin-order-check.svg',
     alt: 'admin-order-check',
     title: '누가 먼저 주문하셨어요?',
     desc: '바쁜 매장, 어떤 주문을 먼저 처리해야 할까요?',
@@ -38,7 +38,7 @@ export const ADMIN_INFO = [
   },
   {
     id: 3,
-    src: 'images/admin-shot/admin-menu.svg',
+    src: '/images/admin-shot/admin-menu.svg',
     alt: 'admin-menu',
     title: '매직포스는 눈 보다 빠르지',
     desc: '메뉴의 이름과 가격 설정은 물론, 수량과 다양한 옵션까지 추가해 보세요.',
@@ -46,7 +46,7 @@ export const ADMIN_INFO = [
   },
   {
     id: 4,
-    src: 'images/admin-shot/admin-menu-option.svg',
+    src: '/images/admin-shot/admin-menu-option.svg',
     alt: 'admin-menu-option',
     title: '따듯한 아이스 아메리카노는 이제 안녕',
     desc: '메뉴의 옵션을 다양하게 설정할 수 있어요.',
