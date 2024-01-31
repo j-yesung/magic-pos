@@ -1,3 +1,4 @@
+import { ensureHttpsUrl } from '@/components/platform/utility/platformHelper';
 import {
   downloadPlatFormImageUrl,
   fetchPlatForm,
@@ -18,10 +19,8 @@ import usePlatFormState, {
   setAddDataToFetchPlatForm,
   setFetchPlatFormData,
   setIsRegist,
-  setIsValidUrl,
 } from '@/shared/store/platform';
 import { AddPlatFormType, EditPlatFormType } from '@/types/platform';
-import { checkValidUrl } from '@/utils/validate';
 import dayjs from 'dayjs';
 import { FormEvent } from 'react';
 import useToast from '../service/ui/useToast';
@@ -32,6 +31,7 @@ interface PlatformToast {
 }
 const EDIT_TOAST = { content: '수정이 완료 되었습니다.', type: 'info' } as const;
 const ALERT_TOAST = { content: '내용을 다 채워주세요', type: 'warn' } as const;
+
 const usePlatForm = () => {
   const { addPlatForm, editPlatForm, prevData, prevImg } = usePlatFormState();
 
@@ -59,31 +59,14 @@ const usePlatForm = () => {
     });
   };
 
-  const validateUrl = (e: FormEvent<HTMLFormElement>, url: string): boolean => {
-    const isValidUrl = checkValidUrl(url);
-    if (!isValidUrl) {
-      setIsValidUrl(false);
-      resetAddPlatForm();
-      e.currentTarget['link_url'].value = '';
-      const nameValue = e.currentTarget.elements.namedItem('name') as HTMLInputElement;
-      nameValue.value = '';
-      return false;
-    }
-
-    return true;
-  };
-
   const submitAddCard = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const isValidUrl = validateUrl(e, addPlatForm.link_url);
-    console.log(addPlatForm);
-    if (!isValidUrl) return;
 
     if (!addPlatForm.name.trim() || !addPlatForm.link_url.trim()) {
       return showCompleteToast(ALERT_TOAST);
     }
-    const form = await handleImageUpload(addPlatForm);
+    const ensureHttpsUrlData = ensureHttpsUrl(addPlatForm);
+    const form = await handleImageUpload(ensureHttpsUrlData);
     const { data: platformData } = await insertPlatFormRow(form);
     setAddDataToFetchPlatForm(platformData!);
     resetAddPlatForm();
@@ -111,8 +94,6 @@ const usePlatForm = () => {
 
   const submitEditCard = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const isValidUrl = validateUrl(e, editPlatForm.link_url);
-    if (!isValidUrl) return showCompleteToast(ALERT_TOAST);
 
     const comparedData = isPlatFormCardValueChange(prevData, editPlatForm);
 
@@ -128,7 +109,8 @@ const usePlatForm = () => {
     comparedData.store_id = editPlatForm.store_id;
 
     await prevImageRemove(prevData);
-    const form = await handleImageUpload(comparedData);
+    const ensureHttpsUrlData = ensureHttpsUrl(comparedData);
+    const form = await handleImageUpload(ensureHttpsUrlData);
 
     await updatePlatFormData(form as EditPlatFormType);
     const { platform } = await fetchPlatForm(form.store_id!);
