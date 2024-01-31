@@ -9,7 +9,7 @@
 }
 .sticky-box {
   padding: 5%;
-  top: -10rem;
+  top: 5rem;
   gap: 20rem;
   height: 100vh;
   display: flex;
@@ -20,10 +20,14 @@
   align-items: center;
   filter: drop-shadow(rgba(47, 47, 47, 0.34) 0px 28px 40px);
 }
+.iphone-img {
+  width: auto;
+  height: 100%;
+}
 .title-box {
   gap: 7rem;
   width: 60em;
-  height: 60rem;
+  height: 45rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
@@ -33,7 +37,7 @@
 /* 키오스크 @media-query */
 @media screen and (max-height: 965px) {
   .sticky-box {
-    top: 6rem;
+    top: -1rem;
   }
   .title-box {
     height: 45rem;
@@ -44,7 +48,7 @@
 }
 @media screen and (max-height: 770px) {
   .sticky-box {
-    top: 10rem;
+    top: -3rem;
   }
   .title-box {
     height: 35rem;
@@ -55,7 +59,7 @@
 }
 @media screen and (max-height: 690px) {
   .sticky-box {
-    top: 10rem;
+    top: -5rem;
   }
   .title-box {
     height: 30rem;
@@ -156,27 +160,56 @@
     border-radius: 2rem;
   }
 }
-/* 관리자 */
-.admin-box {
+
+/* swiper */
+.admin-field {
   gap: 3rem;
   width: 100%;
   display: flex;
-  margin-top: 20rem;
-  background: var(--bg-g);
   padding: 2rem;
+  margin-top: 0;
   flex-direction: row;
+  background: var(--bg-g);
 }
 .wrapper {
-  width: 60%;
+  width: 70%;
+  display: flex;
+}
+.images {
+  width: 100%;
+  height: auto;
+}
+.info {
+  gap: 1rem;
   height: 100%;
   display: flex;
-  position: relative;
-  align-items: center;
-  flex-direction: row;
+  padding-bottom: 1rem;
+  flex-direction: column;
 }
+.info-id {
+  font-size: 7rem;
+  font-weight: 100;
+  color: var(--main-color);
+}
+.info-text {
+  gap: 1rem;
+  display: flex;
+  padding-top: 2rem;
+  flex-direction: column;
+}
+.info-title {
+  padding-top: 3rem;
+  font-size: 5rem;
+  font-weight: 300;
+}
+.info p {
+  font-size: 2rem;
+  font-weight: 300;
+}
+/* swiper description */
 .description {
   gap: 1rem;
-  width: 100%;
+  width: 30%;
   display: flex;
   position: relative;
   padding-bottom: 4rem;
@@ -207,51 +240,6 @@
   font-size: 1.6rem;
   font-weight: 400;
 }
-
-/* swiper */
-.swiper-wrapper {
-  height: 100%;
-  display: flex;
-  align-items: flex-end;
-}
-.slider-item {
-  justify-content: center;
-  align-items: center;
-}
-.slide-screen {
-  gap: 5rem;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-}
-.info {
-  gap: 1rem;
-  height: 100%;
-  display: flex;
-  padding-bottom: 1rem;
-  flex-direction: column;
-}
-.info-id {
-  font-size: 7rem;
-  font-weight: 100;
-  color: var(--main-color);
-}
-.info-text {
-  gap: 1rem;
-  display: flex;
-  padding-top: 2rem;
-  flex-direction: column;
-}
-.info-title {
-  padding-top: 3rem;
-  font-size: 5rem;
-  font-weight: 300;
-}
-.info p {
-  font-size: 2rem;
-  font-weight: 300;
-}
-
 /* swiper button */
 .action-button {
   top: 0;
@@ -267,4 +255,3 @@
   cursor: pointer;
   color: var(--main-color);
 }
-/* 관리자 @media-query */

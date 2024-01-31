@@ -21,7 +21,7 @@ const TransitionBox = (props: Props) => {
           exit={{ opacity: 0 }}
           transition={{ duration: 1 }}
         >
-          {i === index && <Image src={iphone.src} width={370} height={1000} alt={iphone.alt} />}
+          {i === index && <Image className={styles.iphoneImg} src={iphone.src} width={0} height={0} alt={iphone.alt} />}
         </motion.div>
       ))}
     </motion.div>

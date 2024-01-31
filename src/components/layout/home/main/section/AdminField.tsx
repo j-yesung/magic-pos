@@ -20,30 +20,26 @@ const AdminField = () => {
   const changeSlideHandler = (swiper: SwiperType) => setActiveIndex(swiper.realIndex);
 
   return (
-    <section className={styles.adminBox}>
-      <div className={styles.wrapper}>
-        <Swiper
-          className={styles.swiperWrapper}
-          modules={[Navigation, Pagination, Autoplay]}
-          spaceBetween={50}
-          slidesPerView={1}
-          autoplay={{
-            delay: 5000,
-            disableOnInteraction: false,
-          }}
-          loop={true}
-          ref={swiperRef}
-          onSlideChange={changeSlideHandler}
-        >
-          {ADMIN_INFO.map(info => (
-            <SwiperSlide key={info.id}>
-              <div className={styles.slideScreen}>
-                <Image src={info.src} width={1000} height={700} alt={info.alt} layout="responsive" />
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
+    <section className={styles.adminField}>
+      <Swiper
+        className={styles.wrapper}
+        modules={[Navigation, Pagination, Autoplay]}
+        spaceBetween={50}
+        slidesPerView={1}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+        }}
+        loop={true}
+        ref={swiperRef}
+        onSlideChange={changeSlideHandler}
+      >
+        {ADMIN_INFO.map(info => (
+          <SwiperSlide key={info.id}>
+            <Image className={styles.images} src={info.src} width={0} height={0} alt={info.alt} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
       {/* 현재 활성화된 슬라이드에 해당하는 설명만 보여줌 */}
       <div className={styles.description}>
         <AdminFieldItem activeIndex={activeIndex} />
