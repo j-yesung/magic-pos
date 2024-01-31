@@ -7657,6 +7657,7 @@ __metadata:
     qrcode.react: "npm:^3.1.0"
     react: "npm:^18"
     react-chartjs-2: "npm:^5.2.0"
+    react-csv: "npm:^2.2.2"
     react-dom: "npm:^18"
     react-i18next: "npm:^14.0.1"
     react-icons: "npm:^5.0.1"
@@ -8732,6 +8733,13 @@ __metadata:
     chart.js: ^4.1.1
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
   checksum: 437e443a268b7eebab3f1a6f0f5d936e58caf650fca55f568a612a46c563d22af683a64185eac8005aa644e4960a5a72cc1075a2574b89ec46c7653aaf4025e2
+  languageName: node
+  linkType: hard
+
+"react-csv@npm:^2.2.2":
+  version: 2.2.2
+  resolution: "react-csv@npm:2.2.2"
+  checksum: 287e7ba2085a32a0e65d7a19b9e063e43f06f75ab6ebc18bb52b518007a1d6ec5f5ce33fc7c4e290e3ea41cfb251657b6e62aadadc8d7ffcef7e53d43bf3eb69
   languageName: node
   linkType: hard
 
