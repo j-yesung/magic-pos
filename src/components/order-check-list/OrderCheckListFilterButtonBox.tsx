@@ -42,7 +42,7 @@ const OrderCheckListFilterButtonBox = () => {
   };
 
   return (
-    <>
+    <div className={styles['order-check-list-filter-wrapper']}>
       <div className={styles['order-check-list-filter-box']}>
         <Button
           type="button"
@@ -84,7 +84,7 @@ const OrderCheckListFilterButtonBox = () => {
           완료
         </Button>
       </div>
-    </>
+    </div>
   );
 };
 

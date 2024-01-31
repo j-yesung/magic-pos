@@ -1,6 +1,11 @@
 import { dayJsToString } from '@/components/sales/calendarUtility/dateCalculator';
 import { supabase } from '@/shared/supabase';
 import dayjs from 'dayjs';
+import timezone from 'dayjs/plugin/timezone';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export const fetchOrderCheckList = async (
   pageParam: number,
@@ -32,8 +37,8 @@ export const fetchOrderCheckList = async (
 //
 //
 //
-const TIME_FORMAT = 'YYYY-MM-DD HH:mm:SS';
-const TIME_FORMAT_MONTH = 'YYYY-MM-01 HH:mm:SS';
+const TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss';
+const TIME_FORMAT_MONTH = 'YYYY-MM-01 HH:mm:ss';
 
 // 오늘
 const fetchDayOrderData = async (pageParam: number, id: string) => {
