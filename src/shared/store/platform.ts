@@ -127,7 +127,7 @@ export const setAddPlatForm = debounce(async (e: ChangeEvent<HTMLInputElement>) 
     ...state,
     addPlatForm: { ...state.addPlatForm, [name]: value },
   }));
-}, 500);
+}, 300);
 
 /**
  *  수정할 데이터
@@ -155,7 +155,7 @@ export const setEditPlatForm = debounce(async (e: ChangeEvent<HTMLInputElement>)
     ...state,
     editPlatForm: { ...state.editPlatForm, [name]: value },
   }));
-}, 500);
+}, 300);
 
 /**
  *
