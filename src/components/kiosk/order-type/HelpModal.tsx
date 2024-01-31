@@ -10,6 +10,7 @@ import Image from 'next/image';
 import { MdOutlineNavigateBefore, MdOutlineNavigateNext } from 'react-icons/md';
 import CloseButton from '/public/icons/close.svg';
 import { useModal } from '@/hooks/service/ui/useModal';
+import clsx from 'clsx';
 
 const HelpModal = ({ modalId }: { modalId?: string }) => {
   const helpSwiperRef = useRef<SwiperRef>(null);
@@ -40,19 +41,22 @@ const HelpModal = ({ modalId }: { modalId?: string }) => {
           <CloseButton width={26} height={26} />
         </button>
       </div>
-      {helpStep < 3 && (
-        <button className={styles.nextButton} onClick={handleClickNext}>
-          <MdOutlineNavigateNext size={30} />
-        </button>
-      )}
+      <div>
+        {helpStep < 3 && (
+          <button className={clsx(styles.sliderButtons, styles.nextButton)} onClick={handleClickNext}>
+            <MdOutlineNavigateNext size={30} />
+          </button>
+        )}
 
-      {helpStep > 1 && (
-        <button className={styles.prevButton} onClick={handleClickPrev}>
-          <MdOutlineNavigateBefore size={30} />
-        </button>
-      )}
+        {helpStep > 1 && (
+          <button className={clsx(styles.sliderButtons, styles.prevButton)} onClick={handleClickPrev}>
+            <MdOutlineNavigateBefore size={30} />
+          </button>
+        )}
+      </div>
+
       <h1>{helpStep} 단계</h1>
-      <Swiper spaceBetween={50} slidesPerView={1} ref={helpSwiperRef}>
+      <Swiper spaceBetween={50} slidesPerView={1} ref={helpSwiperRef} className={styles.slideContainer}>
         <SwiperSlide className={styles.slideContent}>
           <Image src={step1} width={400} height={800} alt={'1단계'} />
         </SwiperSlide>
