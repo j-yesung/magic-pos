@@ -22,18 +22,16 @@ const OrderCheckListFilterButtonBox = () => {
     setListType('month');
     setIsDateButton(3);
   };
-  const clickDateButtonHandler = () => {
-    setIsDateButton(4);
+  const clickSelectDateButtonHandler = () => {
+    refetch();
+    setListType('selectDate');
+    setIsDateButton(0);
   };
   const clickResetButtonHandler = () => {
     setListType('default');
     setIsDateButton(0);
   };
 
-  const clickSelectDateButtonHandler = () => {
-    refetch();
-    setListType('selectDate');
-  };
   const changeStartTimeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setStartTime(e.target.value);
   };
@@ -42,8 +40,8 @@ const OrderCheckListFilterButtonBox = () => {
   };
 
   return (
-    <div className={styles['order-check-list-filter-wrapper']}>
-      <div className={styles['order-check-list-filter-box']}>
+    <div className={styles['order-check-list-filter-box']}>
+      <div className={styles['choice-date-button-wrapper']}>
         <Button
           type="button"
           onClick={clickDayButtonHandler}
@@ -65,23 +63,16 @@ const OrderCheckListFilterButtonBox = () => {
         >
           이번 달
         </Button>
-        <Button
-          type="button"
-          onClick={clickDateButtonHandler}
-          className={clsx(isDateButton === 4 && styles['button-focus'])}
-        >
-          날짜 선택
-        </Button>
-        <Button type="button" onClick={clickResetButtonHandler}>
-          초기화
-        </Button>
       </div>
-      <div className={clsx(styles['order-check-list-Date-box'], isDateButton === 4 && styles['active'])}>
+      <div className={clsx(styles['select-date-button-wrapper'])}>
         <input type="date" value={startDate} onChange={changeStartTimeHandler} />
         <span>~</span>
         <input type="date" value={endDate} onChange={changeEndTimeHandler} />
-        <Button type="button" onClick={clickSelectDateButtonHandler}>
-          완료
+        <Button type="button" onClick={clickSelectDateButtonHandler} className={styles['button-focus']}>
+          조회
+        </Button>
+        <Button type="button" onClick={clickResetButtonHandler}>
+          초기화
         </Button>
       </div>
     </div>
