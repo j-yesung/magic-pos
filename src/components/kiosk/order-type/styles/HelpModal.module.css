@@ -1,13 +1,12 @@
 .container {
+    display: flex;
+    flex-direction: column;
     position: relative;
     width: 90vw;
     height: 90vh;
     padding: 2rem;
 }
 
-.container div {
-    height: fit-content;
-}
 
 .container h1:not(.header h1) {
     color: var(--text1);
@@ -34,37 +33,53 @@
     letter-spacing: -0.026rem;
 }
 
-
+.slide-container {
+    width: 100%;
+}
 
 .slide-content {
     display: flex !important;
     flex-direction: column;
     justify-content: center;
     height: 100%;
+
 }
 
 
 
 .slide-content img {
     width: 100%;
-    height: fit-content;
-    border-radius: 1rem;
+    height: inherit;
+    object-fit: contain;
+    border-radius: 2rem;
 }
 
-.container button:not(.header button) {
+.slider-buttons {
+    display: flex;
+    justify-content: center;
+    align-content: center;
     position: absolute;
     z-index: var(--level-1-z-index);
-    background: var(--point1-80);
+    background: var(--point1-50);
     color: var(--white);
     border-radius: 50%;
+    height: 10vw;
+    width: 10vw;
+}
+
+.slider-buttons svg {
+    height: 10vw;
+    width: 10vw;
 }
 
 .next-button {
     right: 0;
     top: 50%;
+    transform: translateY(-50%);
 }
 
 .prev-button {
     left: 0;
     top: 50%;
+    transform: translateY(-50%);
 }
