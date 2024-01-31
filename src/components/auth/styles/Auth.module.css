@@ -1,4 +1,5 @@
 .wrapper {
+  /* gap: 5rem; */
   width: 100%;
   height: 100vh;
   display: flex;
@@ -8,12 +9,11 @@
 }
 
 .title-wrapper {
-  gap: 0.8rem;
+  padding-bottom: 5rem;
   display: flex;
   cursor: pointer;
   align-items: center;
   flex-direction: row;
-  margin-bottom: 5rem;
 }
 .title {
   font-size: 3.7rem;
@@ -25,17 +25,21 @@
 }
 .sub-title {
   font-size: 3.7rem;
-  font-weight: 700;
+  font-weight: 600;
 }
+.black {
+  font-weight: 600;
+  color: var(--text1);
+}
+
 .description {
   gap: 0.5rem;
   display: flex;
   font-size: 1.7rem;
-  margin-bottom: 2rem;
+  margin: 0 15rem 2rem 0;
   color: var(--text1);
-  align-items: center;
+  align-items: flex-start;
   flex-direction: column;
-  justify-content: center;
 }
 
 .form-wrapper {
@@ -72,7 +76,7 @@
 }
 
 .form-button-wrapper {
-  gap: 1rem;
+  gap: 3rem;
   width: 100%;
   margin-top: 1rem;
   display: flex;
@@ -111,6 +115,8 @@
 }
 .disabledButton p {
   font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--white);
 }
 .find-password-button {
   margin-top: 2rem;
