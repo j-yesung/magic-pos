@@ -84,3 +84,27 @@ export const loginInput = [
     validation: {},
   },
 ];
+
+export const resetPasswordInput = [
+  {
+    id: 1,
+    type: 'password',
+    placeholder: '비밀번호',
+    minLegth: 8,
+    maxLength: 16,
+    name: 'password',
+    validation: {},
+  },
+  {
+    id: 2,
+    type: 'password',
+    placeholder: '비밀번호 확인',
+    minLegth: 8,
+    maxLength: 16,
+    name: 'confirmPassword',
+    validation: {},
+    validateFunc: (password: string) => ({
+      validate: (value: string) => value === password || '비밀번호가 일치하지 않습니다.',
+    }),
+  },
+];
