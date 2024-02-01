@@ -1,7 +1,7 @@
 import useFetchOrderCheckList from '@/hooks/order-check-list/useFetchOrderCheckList';
 import useOrderCheckListStore from '@/shared/store/order-check-list';
 import clsx from 'clsx';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import Button from '../common/Button';
 import styles from './styles/orderCheckListFilterButtonBox.module.css';
 
@@ -39,6 +39,13 @@ const OrderCheckListFilterButtonBox = () => {
     setEndTime(e.target.value);
   };
 
+  useEffect(() => {
+    if (startDate > endDate) {
+      setEndTime(startDate);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [startDate]);
+
   return (
     <div className={styles['order-check-list-filter-box']}>
       <div className={styles['choice-date-button-wrapper']}>
@@ -67,7 +74,7 @@ const OrderCheckListFilterButtonBox = () => {
       <div className={clsx(styles['select-date-button-wrapper'])}>
         <input type="date" value={startDate} onChange={changeStartTimeHandler} />
         <span>~</span>
-        <input type="date" value={endDate} onChange={changeEndTimeHandler} />
+        <input type="date" min={startDate} value={endDate} onChange={changeEndTimeHandler} />
         <Button type="button" onClick={clickSelectDateButtonHandler} className={styles['button-focus']}>
           조회
         </Button>

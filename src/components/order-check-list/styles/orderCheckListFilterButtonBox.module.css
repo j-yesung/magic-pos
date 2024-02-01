@@ -24,6 +24,7 @@
   padding: 1.2rem 2rem;
   letter-spacing: -0.3px;
   border-radius: 0;
+  transition: 0.2s;
   border: 1px solid var(--line);
 }
 .choice-date-button-wrapper > button:first-child {
@@ -52,6 +53,8 @@
   border-radius: 0.5rem;
   border: 1px solid var(--line);
   background: #fff;
+}
+.select-date-button-wrapper > input::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 .select-date-button-wrapper > span {
