@@ -1,7 +1,7 @@
 import { addAlert, addChildElem, addConfirm, hideAlert, hideConfirm, hideModal } from '@/shared/store/modal';
-import { ReactElement } from 'react';
 import { ModalAlertTypeOption, ModalConfirmTypeOption } from '@/types/common';
 import { nanoid } from 'nanoid';
+import { ReactElement } from 'react';
 
 export const useModal = () => {
   class MagicModal {
