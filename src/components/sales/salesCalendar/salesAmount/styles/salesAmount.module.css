@@ -49,5 +49,6 @@
 .sumSales {
   display: flex;
   gap: 1rem;
+  flex-wrap: wrap;
   font-size: 1.8rem;
 }

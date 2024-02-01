@@ -32,12 +32,15 @@
 
 /*sales-calendar 일 때 css*/
 .sales-calendar-days {
-  display: flex;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1rem;
+  width: 100%;
 }
 .sales-calendar-day {
   display: flex;
-  width: 15rem;
+  width: 100%;
+  max-width: 15rem;
   padding-bottom: 2rem;
   flex-direction: column;
   align-items: flex-start;
