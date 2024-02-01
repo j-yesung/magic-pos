@@ -26,6 +26,7 @@ const OrderLayout = ({ children }: { children: React.ReactNode }) => {
       step < ORDER_STEP.CHOOSE_ORDER_TYPE,
       step > ORDER_STEP.SUCCESS,
       step === ORDER_STEP.SELECT_MENU && isOnlyTable,
+      pathname === '/kiosk/fail',
     ]);
   }, [step]);
 

@@ -1,4 +1,4 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { create } from 'zustand';
 
 interface OrderCheckListType {
@@ -10,7 +10,7 @@ interface OrderCheckListType {
   setEndTime: (value: string) => void;
 }
 
-const today = moment().format('YYYY-MM-DD');
+const today = dayjs().format('YYYY-MM-DD');
 const useOrderCheckListStore = create<OrderCheckListType>(set => ({
   listType: 'default',
   startDate: today,

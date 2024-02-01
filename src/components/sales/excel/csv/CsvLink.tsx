@@ -3,6 +3,13 @@ import useToast from '@/hooks/service/ui/useToast';
 import { EnOrderType, ExcelData } from '@/types/sales';
 import { useEffect, useRef, useState } from 'react';
 import { CSVLink } from 'react-csv';
+import styles from './styles/csvLink.module.css';
+
+interface CsvLinkPropsType {
+  order_type: EnOrderType;
+  children: string;
+  clickHiddenModal: () => void;
+}
 
 const STORE_HEADER = [
   { label: '매장', key: 'order_type' },
@@ -28,11 +35,13 @@ const TAKE_OUT_HEADER = [
 const STORE_FILE_NAME = '매장매출내역.csv';
 const TAKE_OUT_FILE_NAME = '포장매출내역.csv';
 const NOT_DATA = '데이터가 없습니다.';
-const CsvLink = ({ order_type, children }: { order_type: EnOrderType; children: string }) => {
+
+const CsvLink = ({ order_type, children, clickHiddenModal }: CsvLinkPropsType) => {
   const { clickGetAllDataHandler } = useDataHandler();
   const [excelData, setExcelData] = useState<ExcelData[]>([]);
   const { toast } = useToast();
   const csvLink = useRef<CSVLink & HTMLAnchorElement & { link: HTMLAnchorElement }>(null);
+
   const clickDownloadExcelData = async () => {
     const excelDataList = await clickGetAllDataHandler(order_type);
     if (excelDataList.length === 0)
@@ -42,12 +51,12 @@ const CsvLink = ({ order_type, children }: { order_type: EnOrderType; children: 
         showCloseButton: false,
         autoClose: 2000,
       });
-
     setExcelData(excelDataList);
   };
   useEffect(() => {
     if (excelData.length !== 0) {
       csvLink.current?.link.click();
+      clickHiddenModal();
     }
   }, [excelData]);
 
@@ -55,8 +64,10 @@ const CsvLink = ({ order_type, children }: { order_type: EnOrderType; children: 
     return setExcelData([]);
   }, []);
   return (
-    <div>
-      <button onClick={clickDownloadExcelData}>{children}</button>
+    <div className={styles.container}>
+      <button type="button" onClick={clickDownloadExcelData} className={styles.csvButton}>
+        {children}
+      </button>
       <CSVLink
         headers={order_type === 'store' ? STORE_HEADER : TAKE_OUT_HEADER}
         data={excelData}

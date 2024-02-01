@@ -3,6 +3,7 @@ import { useErrorMessage } from '@/hooks/service/auth/useErrorMessage';
 import { useInput } from '@/hooks/service/auth/useInput';
 import { useValid } from '@/hooks/service/auth/useValid';
 import useToggleState, { defaultCheckBox } from '@/shared/store/toggle';
+import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { FaCheck } from 'react-icons/fa6';
@@ -69,7 +70,7 @@ const AuthForm = ({ data }: FormProps) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.titleWrapper} onClick={() => router.push('/')}>
-        <h1 className={styles.title}>{title}</h1>
+        <h1 className={clsx(styles.title, { [styles.black]: path !== '/auth/login' })}>{title}</h1>
       </div>
       {path === '/auth/success' && (
         <div className={styles.successImage}>
@@ -95,7 +96,7 @@ const AuthForm = ({ data }: FormProps) => {
                     type="text"
                     id="businessNumber"
                     name="businessNumber"
-                    placeholder="사업자등록번호 (10자리)"
+                    placeholder="사업자 번호"
                     value={value.businessNumber}
                     minLength={10}
                     maxLength={10}

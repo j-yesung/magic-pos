@@ -1,7 +1,7 @@
 import { groupByKey } from '@/shared/helper';
 import useManagementStore from '@/shared/store/management';
 import { MenuItemWithOption, Tables } from '@/types/supabase';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import styles from './styles/ShopIsNotTableListItem.module.css';
 
 const ShopIsNotTableListItem = ({ shopData }: { shopData: Tables<'order_number'> }) => {
@@ -27,7 +27,7 @@ const ShopIsNotTableListItem = ({ shopData }: { shopData: Tables<'order_number'>
           </div>
         ))}
       </div>
-      <div className={styles['item-time']}>{moment(shopData.order_time).format('HH:mm')}</div>
+      <div className={styles['item-time']}>{dayjs(shopData.order_time).format('HH:mm')}</div>
     </div>
   );
 };

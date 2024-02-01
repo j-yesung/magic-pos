@@ -14,18 +14,18 @@ const MenuItemFormButton: React.FC<MenuItemModal> = props => {
 
   const isEdit = useMenuItemStore(state => state.isEdit);
   const menuItem = useMenuItemStore(state => state.menuItem);
-  const sampleImage = useMenuItemStore(state => state.sampleImage);
   const menuItemSampleImg = useMenuItemStore(state => state.menuItemSampleImg);
   const menuItemImgFile = useMenuItemStore(state => state.menuItemImgFile);
 
   // 메뉴 삭제
   const clickRemoveCategoryHandler = async () => {
+    console.log(menuItemSampleImg);
     MagicModal.confirm({
       icon: <ExclamationMark width={50} height={50} />,
       content: '메뉴를 삭제할까요?',
       confirmButtonCallback: () => {
         deleteMutate(menuItem.id);
-        if (menuItemSampleImg !== sampleImage) {
+        if (menuItemSampleImg !== '') {
           const uploadImageGroup = {
             menuId: menuItem.id,
             categoryId: menuItem.category_id,

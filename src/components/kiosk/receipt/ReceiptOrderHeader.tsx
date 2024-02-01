@@ -17,7 +17,7 @@ const ReceiptOrderHeader = ({ isTogo, orderNumber, isDone, orderTime }: ReceiptH
     <div className={styles.container}>
       <div className={styles.orderNumberWrapper}>
         {isDone ? (
-          <div className={clsx(styles.ready, styles.readyBox)}>{t('complete')}</div>
+          <div className={clsx(styles.readyBox, styles.ready)}>{t('complete')}</div>
         ) : (
           <div className={clsx(styles.readyBox, styles.notReady)}>{t('prepare')}</div>
         )}

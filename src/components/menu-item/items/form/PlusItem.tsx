@@ -13,7 +13,6 @@ import PlusButton from '/public/icons/plus.svg';
 
 const PlusItemComponent = () => {
   const { MagicModal } = useModal();
-  const sampleImage = useMenuItemStore(state => state.sampleImage);
   const categoryWithMenuItemList = useMenuItemStore(state => state.categoryWithMenuItemList);
   const categoryWithMenuItem = useMenuItemStore(state => state.categoryWithMenuItem);
 
@@ -27,7 +26,7 @@ const PlusItemComponent = () => {
       id: '',
       name: '',
       category_id: categoryWithMenuItem.id,
-      image_url: sampleImage,
+      image_url: '',
       price: 0,
       remain_ea: 0,
       recommended: false,

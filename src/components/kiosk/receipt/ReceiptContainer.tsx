@@ -45,9 +45,6 @@ const ReceiptContainer = () => {
   useEffect(() => {
     setStep(ORDER_STEP.RECEIPT);
     i18n.changeLanguage(selectedLanguage.split('-')[1]);
-  }, []);
-
-  useEffect(() => {
     if (orderIdList.length === 0) router.push(`/kiosk/`);
   }, []);
 

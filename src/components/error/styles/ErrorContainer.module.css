@@ -1,0 +1,50 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap: 6.775rem;
+}
+
+.header {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.header h1 {
+    color: var(--point1);
+    font-size: 5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 5rem; /* 100% */
+}
+
+.container svg {
+    cursor: pointer;
+}
+
+.message-container {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+}
+
+.message-container h2 {
+    color: var(--text1);
+    font-size: 3rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 3rem; /* 100% */
+}
+
+.message-container p {
+    color: var(--text2);
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 2rem; /* 100% */
+}
