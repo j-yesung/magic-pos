@@ -11,7 +11,6 @@ import EditButton from '/public/icons/pencil.svg';
 
 const MenuItemFormInput = () => {
   const { toast } = useToast();
-  const sampleImage = useMenuItemStore(state => state.sampleImage);
   const menuItem = useMenuItemStore(state => state.menuItem);
   const categoryWithMenuItem = useMenuItemStore(state => state.categoryWithMenuItem);
   const categoryWithMenuItemList = useMenuItemStore(state => state.categoryWithMenuItemList);
@@ -85,12 +84,14 @@ const MenuItemFormInput = () => {
               <EditButton width={26} height={26} />
             </span>
           </label>
-          <Image
-            src={menuItemSampleImg === '' ? sampleImage : menuItemSampleImg}
-            alt={menuItem.name ?? 'Sample Image'}
-            width={123}
-            height={123}
-          />
+          {menuItemSampleImg === '' ? (
+            <p className={styles['default-text']}>
+              이미지를 <br />
+              등록해 주세요
+            </p>
+          ) : (
+            <Image src={menuItemSampleImg} alt={menuItem.name ?? 'Sample Image'} width={123} height={123} />
+          )}
           <input
             type="file"
             accept="image/png, image/jpeg, image/jpg"

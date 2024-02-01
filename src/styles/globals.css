@@ -43,7 +43,7 @@
   --line: #ededed;
 
   /* gradlient */
-  --signature-color: linear-gradient(to right, var(--main-color), var(--point2));
+  --signature-color: linear-gradient(90deg, #8f00ff 20.57%, #ffa800 95.16%);
 
   /* z-index level */
   --level-1-z-index: 100;

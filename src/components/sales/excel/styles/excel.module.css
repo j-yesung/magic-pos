@@ -3,3 +3,25 @@
   align-items: flex-start;
   gap: 1rem;
 }
+
+.button {
+  display: flex;
+  height: 4.4rem;
+  padding: 1.5rem 2rem;
+  align-items: center;
+  gap: 1rem;
+
+  border-radius: 0.5rem;
+  background: #f7f7f7;
+}
+
+.button p {
+  color: var(--text2, #5c5c5c);
+  text-align: center;
+
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem; /* 100% */
+  letter-spacing: -0.03rem;
+}

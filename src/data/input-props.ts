@@ -21,7 +21,7 @@ export const passwordSignUpInput = {
   type: 'password',
   minLength: 8,
   maxLength: 16,
-  placeholder: '비밀번호 (대소문자/특수문자 포함 8 ~ 16자리 영문)',
+  placeholder: '비밀번호 (대소문자/특수문자 포함 8 ~16자리 영문)',
 };
 
 export const passwordConfirmInput = {

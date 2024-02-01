@@ -1,4 +1,3 @@
-import styles from '@/components/menu-item/styles/menu-item-category.module.css';
 import useMenuItemStore, { setCategoryWithMenuItem, setMenuItemList } from '@/shared/store/menu/menu-item';
 import { CategoryWithMenuItem } from '@/types/supabase';
 import clsx from 'clsx';
@@ -7,6 +6,7 @@ import 'swiper/css';
 import { Virtual } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Swiper as swipers } from 'swiper/types';
+import styles from '../../styles/menu-item-category.module.css';
 
 const MenuItemCategoryPage = () => {
   const categoryWithMenuItem = useMenuItemStore(state => state.categoryWithMenuItem);

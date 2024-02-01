@@ -135,7 +135,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--bg-g);
+  background-color: var(--text3);
 }
 
 .wrap li button > span.img img {

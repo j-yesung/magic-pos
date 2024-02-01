@@ -9,7 +9,6 @@ import { create } from 'zustand';
  * STATE
  */
 interface MenuItemStoreType {
-  sampleImage: string;
   isEdit: boolean;
   menuItem: Tables<'menu_item'>;
   menuItemList: Tables<'menu_item'>[];
@@ -23,7 +22,6 @@ interface MenuItemStoreType {
  * VALUE
  */
 const useMenuItemStore = create<MenuItemStoreType>()(() => ({
-  sampleImage: '/images/menu_samle.png',
   isEdit: false,
   categories: [],
   menuItem: {
