@@ -57,11 +57,11 @@ export const useSetMenuItem = () => {
   });
 
   return {
-    addMutate,
+    addMutate: addMutate.mutateAsync,
     updateNameMutate: updateNameMutate.mutate,
     updatePositionMutate: updatePositionMutate.mutate,
     deleteMutate: deleteMutate.mutate,
-    uploadImageMutate,
+    uploadImageMutate: uploadImageMutate.mutateAsync,
     removeImageMutate: removeImageMutate.mutate,
   };
 };

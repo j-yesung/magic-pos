@@ -67,7 +67,7 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
 
   // 메뉴 추가 handler
   const addMenuItemHandler = async (newMenuItemData: TablesInsert<'menu_item'>) => {
-    const addData = await addMutate.mutateAsync(newMenuItemData);
+    const addData = await addMutate(newMenuItemData);
     menuItemRef.current = { ...menuItemRef.current, id: addData[0].id };
     const newMenuOptions = menuOptions.map(option => (option.menu_id = addData[0].id));
     setMenuOptions([...menuOptions, newMenuOptions] as NewMenuOptionWithDetail[]);
@@ -88,7 +88,7 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
       menuItemRef.current = { ...menuItemRef.current, image_url: null };
     }
     if (menuItemImgFile !== null) {
-      uploadedMenuImage = await uploadImageMutate.mutateAsync(uploadImageGroup);
+      uploadedMenuImage = await uploadImageMutate(uploadImageGroup);
       menuItemRef.current = { ...menuItemRef.current, image_url: uploadedMenuImage };
     }
   };
@@ -124,7 +124,7 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
           max_detail_count: item.max_detail_count,
           menu_id: item.menu_id,
         };
-        const { data: optionData } = await addOptionMutate.mutateAsync(newOption);
+        const { data: optionData } = await addOptionMutate(newOption);
 
         // 해당 data 받아서 그 option_id로 detail들 추가
         item.menu_option_detail.map(async option => {
