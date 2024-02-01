@@ -99,25 +99,27 @@ export const setPlatFormStoreId = (store_id: string) =>
  * @param e AddForm
  */
 export const setAddPlatForm = debounce(async (e: ChangeEvent<HTMLInputElement>) => {
+  const notHasPrevImg = !usePlatFormState.getState().prevImg;
   const { name, value } = e.target;
   if (name === 'link_url') {
-    const extractedImage = await getOpenGraphMetaImage(value);
-    if (extractedImage) {
-      const confirmedImageUrl = handleMetaImageException(extractedImage);
-      usePlatFormState.setState(state => ({
-        ...state,
-        addPlatForm: {
-          ...state.addPlatForm,
-          metaImage: confirmedImageUrl,
-        },
-      }));
+    if (notHasPrevImg) {
+      const extractedImage = await getOpenGraphMetaImage(value);
+      if (extractedImage && notHasPrevImg) {
+        const confirmedImageUrl = handleMetaImageException(extractedImage);
+        usePlatFormState.setState(state => ({
+          ...state,
+          addPlatForm: {
+            ...state.addPlatForm,
+            metaImage: confirmedImageUrl,
+          },
+        }));
 
-      setPrevImg(confirmedImageUrl);
-    } else {
-      resetPrevImg();
+        setPrevImg(confirmedImageUrl);
+      } else if (notHasPrevImg) {
+        resetPrevImg();
+      }
     }
   }
-
   usePlatFormState.setState(state => ({
     ...state,
     addPlatForm: { ...state.addPlatForm, [name]: value },
@@ -128,21 +130,25 @@ export const setAddPlatForm = debounce(async (e: ChangeEvent<HTMLInputElement>) 
  *  수정할 데이터
  */
 export const setEditPlatForm = debounce(async (e: ChangeEvent<HTMLInputElement>) => {
+  const notHasPrevImg = !usePlatFormState.getState().prevImg;
   const { name, value } = e.target;
   if (name === 'link_url') {
-    const extractedImage = await getOpenGraphMetaImage(value);
-    if (extractedImage) {
-      const confirmedImageUrl = handleMetaImageException(extractedImage);
-      usePlatFormState.setState(state => ({
-        ...state,
-        editPlatForm: {
-          ...state.editPlatForm,
-          metaImage: confirmedImageUrl,
-        },
-      }));
-      setPrevImg(confirmedImageUrl);
-    } else {
-      resetPrevImg();
+    if (notHasPrevImg) {
+      const extractedImage = await getOpenGraphMetaImage(value);
+
+      if (extractedImage && notHasPrevImg) {
+        const confirmedImageUrl = handleMetaImageException(extractedImage);
+        usePlatFormState.setState(state => ({
+          ...state,
+          editPlatForm: {
+            ...state.editPlatForm,
+            metaImage: confirmedImageUrl,
+          },
+        }));
+        setPrevImg(confirmedImageUrl);
+      } else if (notHasPrevImg) {
+        resetPrevImg();
+      }
     }
   }
 

@@ -40,6 +40,7 @@ const usePlatForm = () => {
     }
     const ensureHttpsUrlData = ensureHttpsUrl(addPlatForm);
     const form = await handleImageUpload(ensureHttpsUrlData);
+    // react-query mutation
     addCardToPlatForm(form);
 
     handleResetStateAfterAction(isEdit);
@@ -75,6 +76,7 @@ const usePlatForm = () => {
     prevImageRemove(editPlatForm);
     // react-query mutation
     removeCardPlatForm(editPlatForm.id);
+    // reset state
     handleResetStateAfterRemoveData();
   };
 
