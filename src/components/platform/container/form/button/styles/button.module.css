@@ -9,6 +9,7 @@
   padding: 1.5rem 4rem;
   align-items: flex-start;
   gap: 1rem;
+  width: auto;
   border-radius: 0.5rem;
   background: var(--point1-80, #7433ff);
 }
