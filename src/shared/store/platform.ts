@@ -243,6 +243,7 @@ export const handleResetStateAfterAction = (mode: boolean) => {
       isRegist: false,
       prevImg: initialPrevImg,
       prevData: initialPrevData,
+      isEdit: false,
     }));
   }
 };

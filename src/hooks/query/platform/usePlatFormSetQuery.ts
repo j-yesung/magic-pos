@@ -41,6 +41,7 @@ const usePlatFormSetQuery = () => {
   return {
     addCardToPlatForm: addPlatFormCardMutation.mutate,
     editCardPlatForm: editPlatFormCardMutation.mutate,
+    editPending: editPlatFormCardMutation.isPending,
     removeCardPlatForm: removePlatFormCardMutation.mutate,
   };
 };

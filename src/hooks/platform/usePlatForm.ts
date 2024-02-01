@@ -5,7 +5,7 @@ import usePlatFormState, {
   handleResetStateAfterRemoveData,
 } from '@/shared/store/platform';
 import { EditPlatFormType } from '@/types/platform';
-import { FormEvent } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import usePlatFormSetQuery from '../query/platform/usePlatFormSetQuery';
 import useToast from '../service/ui/useToast';
 import { handleImageUpload, isPlatFormCardValueChange, prevImageRemove } from './usePlatFormHelper';
@@ -19,8 +19,8 @@ const ALERT_TOAST = { content: '내용을 다 채워주세요', type: 'warn' } a
 
 const usePlatForm = () => {
   const { addPlatForm, editPlatForm, prevData, prevImg, isEdit } = usePlatFormState();
-  const { addCardToPlatForm, editCardPlatForm, removeCardPlatForm } = usePlatFormSetQuery();
-
+  const { addCardToPlatForm, editCardPlatForm, removeCardPlatForm, editPending } = usePlatFormSetQuery();
+  const [pending, setPending] = useState<boolean>(false);
   const { toast } = useToast();
 
   const showCompleteToast = (alert: PlatformToast) => {
@@ -48,28 +48,19 @@ const usePlatForm = () => {
 
   const submitEditCard = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const comparedData = isPlatFormCardValueChange(prevData, editPlatForm);
-
     if (isEmptyObject(comparedData) && prevData.image_url === prevImg) {
       handleResetStateAfterAction(isEdit);
       return;
     }
-
     comparedData.id = editPlatForm.id;
     comparedData.store_id = editPlatForm.store_id;
-
     await prevImageRemove(prevData);
     const ensureHttpsUrlData = ensureHttpsUrl(comparedData);
     const form = await handleImageUpload(ensureHttpsUrlData);
     // react-query mutation
     editCardPlatForm(form as EditPlatFormType);
-
-    // platform state 초기
-    handleResetStateAfterAction(isEdit);
-
-    // toast
-    showCompleteToast(EDIT_TOAST);
+    setPending(true);
   };
 
   const clickRemoveData = async () => {
@@ -84,11 +75,24 @@ const usePlatForm = () => {
     handleResetStateAfterAction(mode);
   };
 
+  useEffect(() => {
+    if (!editPending && pending) {
+      // platform state 초기
+      handleResetStateAfterAction(isEdit);
+      // toast
+      showCompleteToast(EDIT_TOAST);
+      setPending(false);
+    }
+  }, [editPending]);
+
   return {
     submitAddCard,
     closePlatFormModal,
     clickRemoveData,
     submitEditCard,
+    showCompleteToast,
+    editCardPlatForm,
+    editPending,
   };
 };
 
