@@ -5,7 +5,7 @@ import styles from './styles/card.module.css';
 
 const Card = () => {
   const storeId = useAuthState(state => state.storeId);
-  const { data, isLoading } = usePlatFormQuery({ storeId: storeId! });
+  const { data } = usePlatFormQuery({ storeId: storeId! });
 
   return (
     <div className={styles.cardContainer}>

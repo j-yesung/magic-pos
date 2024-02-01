@@ -97,3 +97,19 @@
   background: var(--bg-p, #f3edff);
   cursor: pointer;
 }
+
+@media screen and (max-width: 1520px) {
+  .item-wrapper {
+    width: 33.5rem;
+  }
+}
+@media screen and (max-width: 1366px) {
+  .item-wrapper {
+    width: 27.5rem;
+  }
+}
+@media screen and (max-width: 1080px) {
+  .item-wrapper {
+    width: 33.5rem;
+  }
+}
