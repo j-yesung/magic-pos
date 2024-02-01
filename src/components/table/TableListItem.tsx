@@ -12,10 +12,10 @@ import EditButton from '/public/icons/pencil.svg';
 
 const TableListItem = ({
   storeTableData,
-  tableIdinOrderStore,
+  tableIdInOrderStore,
 }: {
   storeTableData: Tables<'store_table'>;
-  tableIdinOrderStore: string[];
+  tableIdInOrderStore: string[];
 }) => {
   const { deleteMutate } = useSetTable();
   const { TableItemClick } = useTableStore();
@@ -33,7 +33,7 @@ const TableListItem = ({
   };
 
   const clickDeleteTableHandler = () => {
-    if (tableIdinOrderStore.includes(storeTableData.id)) {
+    if (tableIdInOrderStore.includes(storeTableData.id)) {
       toast('주문이 있는 테이블은 삭제할 수 없습니다', {
         type: 'danger',
         position: 'top-center',
@@ -50,6 +50,7 @@ const TableListItem = ({
       });
     }
   };
+
   return (
     <div className={clsx(styles['table-list-item'])}>
       <div className={styles['close-button']} onClick={clickDeleteTableHandler}>

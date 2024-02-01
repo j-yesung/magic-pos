@@ -3,10 +3,11 @@ import { TablesInsert, TablesUpdate } from '@/types/supabase';
 
 export const fetchStoreTable = async (id?: string) => {
   if (id) {
-    const { data: store, error } = await supabase.from('store')
-    .select('*, store_table(*), order_store(*)')
-    .eq('business_id', id)
-    .eq('order_store.is_done', false);
+    const { data: store, error } = await supabase
+      .from('store')
+      .select('*, store_table(*), order_store(*)')
+      .eq('business_id', id)
+      .eq('order_store.is_done', false);
     if (error) throw new Error(error.message);
     return store;
   }
@@ -14,7 +15,6 @@ export const fetchStoreTable = async (id?: string) => {
 
 export const addStoreTable = async (storeTableData: TablesInsert<'store_table'>) => {
   const { error } = await supabase.from('store_table').insert([storeTableData]).select();
-  console.log(error)
   if (error) throw new Error(error.message);
 };
 
