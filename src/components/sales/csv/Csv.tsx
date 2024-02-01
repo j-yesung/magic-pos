@@ -3,7 +3,7 @@ import { useModal } from '@/hooks/service/ui/useModal';
 import CsvModal from './modal/CsvModal';
 import styles from './styles/excel.module.css';
 
-const Excel = () => {
+const Csv = () => {
   const { MagicModal } = useModal();
   const clickShowMagicModal = () => MagicModal.fire(<CsvModal />);
   return (
@@ -15,4 +15,4 @@ const Excel = () => {
   );
 };
 
-export default Excel;
+export default Csv;

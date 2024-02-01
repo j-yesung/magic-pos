@@ -1,5 +1,5 @@
 import { formatData } from '@/components/sales/calendarUtility/formatData';
-import { formattedDatabyExcel } from '@/components/sales/excel/utility/formatExcel';
+import { formattedDatabyExcel } from '@/components/sales/csv/utility/formatExcel';
 import { getAllSales, getDaySales, getMonthsSales, getWeekSales } from '@/server/api/supabase/sales';
 import { setCalendarCurrentDate } from '@/shared/store/sales/salesCalendar';
 import { setChartData } from '@/shared/store/sales/salesChart';

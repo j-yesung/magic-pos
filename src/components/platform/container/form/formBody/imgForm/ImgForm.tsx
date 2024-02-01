@@ -1,5 +1,4 @@
 import usePlatFormState, {
-  resetMeta,
   resetPlatFormFile,
   resetPrevImg,
   setPlatFormFile,
@@ -7,31 +6,34 @@ import usePlatFormState, {
 } from '@/shared/store/platform';
 import clsx from 'clsx';
 import Image from 'next/image';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useEffect, useRef } from 'react';
 import styles from './styles/imgForm.module.css';
 import CloseButton from '/public/icons/close.svg';
 import Pencil from '/public/icons/pencil.svg';
 
 const ImgForm = ({ mode }: { mode: boolean }) => {
   const prevImg = usePlatFormState(state => state.prevImg);
+  const imgRef = useRef<HTMLInputElement | null>(null);
   const changePreview = (e: ChangeEvent<HTMLInputElement>) => {
     const fileList = e.target.files || [];
     if (fileList?.length !== 0) {
       const file = fileList[0];
       const currentImgUrl = URL.createObjectURL(file);
-
       setPrevImg(currentImgUrl);
       setPlatFormFile(file, mode);
-      resetMeta();
     }
   };
 
   const removeImage = () => {
     resetPrevImg();
     resetPlatFormFile(mode);
-    resetMeta();
   };
 
+  useEffect(() => {
+    if (!prevImg && imgRef.current?.value) {
+      imgRef.current.value = '';
+    }
+  }, [prevImg]);
   return (
     <div className={styles.imgWrapper}>
       <label htmlFor="file" className={styles.imgLabel}>
@@ -55,7 +57,7 @@ const ImgForm = ({ mode }: { mode: boolean }) => {
         </div>
       </label>
 
-      <input type="file" id="file" name="file" className={styles.file} onChange={changePreview} />
+      <input type="file" id="file" name="file" className={styles.file} onChange={changePreview} ref={imgRef} />
     </div>
   );
 };

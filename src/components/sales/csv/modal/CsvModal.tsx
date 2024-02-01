@@ -1,7 +1,7 @@
 import { useModal } from '@/hooks/service/ui/useModal';
 import { EnOrderType } from '@/types/sales';
 import { useState } from 'react';
-import CsvLink from '../csv/CsvLink';
+import CsvLink from '../csvLink/CsvLink';
 import Body from './body/Body';
 import Header from './header/Header';
 import styles from './styles/csvModal.module.css';

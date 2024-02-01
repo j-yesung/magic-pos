@@ -16,6 +16,7 @@ const Item = ({ link, title, id, imgUrl }: ItemProps) => {
   const editRef = useRef<HTMLButtonElement>(null);
   const linkRef = useRef<HTMLDivElement>(null);
   const store_id = usePlatFormState(state => state.store_id);
+
   const mouseEnterShowEditButton = () => {
     if (editRef.current && linkRef.current) {
       linkRef.current.style.display = 'flex';

@@ -1,5 +1,5 @@
 import usePlatForm from '@/hooks/platform/usePlatForm';
-import { resetAddPlatForm, resetIsEditMode, resetPrevData, resetPrevImg } from '@/shared/store/platform';
+import { handleResetStateAfterAction } from '@/shared/store/platform';
 import { useEffect } from 'react';
 import styles from './styles/formHeader.module.css';
 import CloseButton from '/public/icons/close.svg';
@@ -10,17 +10,7 @@ const FormHeader = ({ mode }: { mode: boolean }) => {
   const { closePlatFormModal } = usePlatForm();
 
   useEffect(() => {
-    return () => {
-      if (mode) {
-        resetIsEditMode();
-        resetPrevData();
-        resetPrevImg();
-      }
-      if (!mode) {
-        resetPrevImg();
-        resetAddPlatForm();
-      }
-    };
+    return () => handleResetStateAfterAction(mode);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (

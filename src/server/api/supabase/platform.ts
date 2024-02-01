@@ -122,7 +122,7 @@ export const removePlatFormImage = async (param: EditPlatFormType) => {
 };
 
 /**
- *
+ * spread를 사용하여 update 되는 것만 하도록 했습니다.
  * @param param
  * @returns update 성공하면 data는 null 값이기에 [] 배열로 넣었씁니다.
  */

@@ -20,3 +20,7 @@
   line-height: 1.8rem; /* 100% */
   letter-spacing: -0.036rem;
 }
+
+.button {
+  cursor: pointer;
+}
