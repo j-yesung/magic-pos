@@ -84,7 +84,7 @@
 .calendar-base {
   font-size: 2rem;
   display: flex;
-  height: 10rem;
+  height: 13rem;
   flex-direction: column;
   align-items: flex-start;
   gap: 2rem;
