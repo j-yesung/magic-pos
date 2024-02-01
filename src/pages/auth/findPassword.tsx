@@ -1,4 +1,4 @@
-import User from '@/components/auth/User';
+import FindPassword from '@/components/auth/form/FindPassword';
 import { makeTitle } from '@/shared/helper';
 import Head from 'next/head';
 
@@ -9,7 +9,7 @@ const FindPasswordPage = () => {
         <title>{makeTitle('비밀번호 찾기')}</title>
         <meta name="description" content="find a password" />
       </Head>
-      <User />
+      <FindPassword />
     </>
   );
 };

@@ -1,6 +1,6 @@
-import User from '@/components/auth/User';
-import Head from 'next/head';
+import SignupSuccess from '@/components/auth/form/SignupSuccess';
 import { makeTitle } from '@/shared/helper';
+import Head from 'next/head';
 
 const SingupSuccessPage = () => {
   return (
@@ -9,7 +9,7 @@ const SingupSuccessPage = () => {
         <title>{makeTitle('회원가입')}</title>
         <meta name="description" content="signupSuccess" />
       </Head>
-      <User />
+      <SignupSuccess />
     </>
   );
 };

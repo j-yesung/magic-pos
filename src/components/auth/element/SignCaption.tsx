@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import styles from '../styles/Auth.module.css';
 
-const URL = '/auth/resetPassword';
+const URL = '/auth/findPassword';
 
 interface SignCaptionProps {
   email: string;

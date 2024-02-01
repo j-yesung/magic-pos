@@ -41,6 +41,15 @@
   align-items: flex-start;
   flex-direction: column;
 }
+.center {
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.7rem;
+  color: var(--text1);
+  align-items: center;
+  justify-content: center;
+}
 
 .form-wrapper {
   display: flex;
@@ -196,7 +205,10 @@
 }
 
 .success-image {
+  display: flex;
+  align-items: center;
   padding: 3rem 0 5rem 0;
+  justify-content: center;
 }
 
 .start-button {
