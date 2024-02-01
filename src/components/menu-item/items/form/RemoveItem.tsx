@@ -2,7 +2,7 @@ import styles from '@/components/menu-item/styles/menu-item-form.module.css';
 import useSetMenuItem from '@/hooks/menu/menu-item/useSetMenuItems';
 import { useModal } from '@/hooks/service/ui/useModal';
 import useMenuItemStore from '@/shared/store/menu/menu-item';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import ExclamationMark from '/public/icons/exclamation-mark.svg';
 
 interface MenuItemModal {
@@ -29,7 +29,7 @@ const MenuItemFormButton: React.FC<MenuItemModal> = props => {
           const uploadImageGroup = {
             menuId: menuItem.id,
             categoryId: menuItem.category_id,
-            createAt: moment().toISOString(),
+            createAt: dayjs().toISOString(),
             selectedFile: menuItemImgFile!,
           };
           removeImageMutate(uploadImageGroup);
