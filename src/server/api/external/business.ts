@@ -15,5 +15,4 @@ export const businessNumberCheckHandler = async (bno: string) => {
   return response.status === 200 && response.data.data[0].tax_type_cd === '01'
     ? '사업자등록번호가 인증되었습니다.'
     : '사업자등록번호를 다시 입력해 주세요.';
-  // : response.data.data[0].tax_type;
 };

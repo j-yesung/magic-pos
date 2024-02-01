@@ -7671,6 +7671,7 @@ __metadata:
     react-chartjs-2: "npm:^5.2.0"
     react-csv: "npm:^2.2.2"
     react-dom: "npm:^18"
+    react-hook-form: "npm:^7.49.3"
     react-i18next: "npm:^14.0.1"
     react-icons: "npm:^5.0.1"
     react-intersection-observer: "npm:^9.5.3"
@@ -8764,6 +8765,15 @@ __metadata:
   peerDependencies:
     react: ^18.2.0
   checksum: 66dfc5f93e13d0674e78ef41f92ed21dfb80f9c4ac4ac25a4b51046d41d4d2186abc915b897f69d3d0ebbffe6184e7c5876f2af26bfa956f179225d921be713a
+  languageName: node
+  linkType: hard
+
+"react-hook-form@npm:^7.49.3":
+  version: 7.49.3
+  resolution: "react-hook-form@npm:7.49.3"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18
+  checksum: f8e5b2dcc3d97c820b4fbac262d7e914d74f385f26f34da31b8efc6c0f32ba995f2a2330bdfd3d8b7c8b56a52349a0cbc0c0dbe9053b3971e5e0c78003dfb7f0
   languageName: node
   linkType: hard
 
