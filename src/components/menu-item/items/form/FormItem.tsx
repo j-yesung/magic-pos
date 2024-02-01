@@ -33,13 +33,13 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
   const origineMenuOptions = useMenuOptionStore(state => state.origineMenuOptions);
   const changeMenuOptions = useMenuOptionStore(state => state.changeMenuOptions);
 
-  const testRef = useRef<TablesInsert<'menu_item'> & { id?: string }>(null!);
+  const menuItemRef = useRef<TablesInsert<'menu_item'> & { id?: string }>(null!);
 
   // 메뉴 등록 form
   const submitupdateMenuItemHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      testRef.current = {
+      menuItemRef.current = {
         category_id: menuItem.category_id,
         name: menuItem.name,
         position: menuItem.position,
@@ -50,10 +50,12 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
       };
 
       // 메뉴 추가 or 수정
-      !isEdit ? await addMenuItemHandler(testRef.current) : (testRef.current = { ...testRef.current, id: menuItem.id });
+      !isEdit
+        ? await addMenuItemHandler(menuItemRef.current)
+        : (menuItemRef.current = { ...menuItemRef.current, id: menuItem.id });
 
       await uploadMenuItemImageHandler(); // 사진 업로드
-      updateNameMutate(testRef.current); // 업데이트
+      updateNameMutate(menuItemRef.current); // 업데이트
       removerOptionHandler(); // 옵션 업데이트 부분(삭제 필터링)
       filterOptionHandler(); // 옵션 업데이트 부분(비교 필터링)
       setMenuOptions([]); // 옵션 초기화
@@ -66,7 +68,7 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
   // 메뉴 추가 handler
   const addMenuItemHandler = async (newMenuItemData: TablesInsert<'menu_item'>) => {
     const addData = await addMutate.mutateAsync(newMenuItemData);
-    testRef.current = { ...testRef.current, id: addData[0].id };
+    menuItemRef.current = { ...menuItemRef.current, id: addData[0].id };
     const newMenuOptions = menuOptions.map(option => (option.menu_id = addData[0].id));
     setMenuOptions([...menuOptions, newMenuOptions] as NewMenuOptionWithDetail[]);
   };
@@ -76,18 +78,18 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
     let uploadedMenuImage = '';
     const formattedDate = dayjs().toISOString();
     const uploadImageGroup = {
-      menuId: testRef.current.id!,
+      menuId: menuItemRef.current.id!,
       categoryId: menuItem.category_id,
       createAt: formattedDate,
       selectedFile: menuItemImgFile!,
     };
     if (isEdit && menuItemSampleImg === '' && menuItemSampleImg !== menuItem.image_url) {
       removeImageMutate(uploadImageGroup);
-      testRef.current = { ...testRef.current, image_url: null };
+      menuItemRef.current = { ...menuItemRef.current, image_url: null };
     }
     if (menuItemImgFile !== null) {
       uploadedMenuImage = await uploadImageMutate.mutateAsync(uploadImageGroup);
-      testRef.current = { ...testRef.current, image_url: uploadedMenuImage };
+      menuItemRef.current = { ...menuItemRef.current, image_url: uploadedMenuImage };
     }
   };
 
