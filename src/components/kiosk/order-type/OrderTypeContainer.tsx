@@ -12,6 +12,7 @@ import HelpModal from '@/components/kiosk/order-type/HelpModal';
 import TranslateLoading from '@/components/kiosk/order-type/TranslateLoading';
 import clsx from 'clsx';
 import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButton';
+import OrderTypeHeader from '@/components/kiosk/order-type/OrderTypeHeader';
 
 /**
  * STEP1: 포장 / 매장 선택
@@ -23,7 +24,7 @@ const OrderTypeContainer = () => {
   const tableId = useKioskState(state => state.tableId);
   const step = useKioskState(state => state.step);
   const menuData = useKioskState(state => state.menuData);
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const languageRef = useRef<HTMLDivElement>(null);
   const [isListenAlert, setIsListenAlert] = useState(false);
   const { MagicModal } = useModal();
@@ -89,10 +90,7 @@ const OrderTypeContainer = () => {
           [styles.blur]: isTranslating,
         })}
       >
-        <h1>
-          {t('order-type.title-1')} <br />
-          {t('order-type.title-2')}
-        </h1>
+        <OrderTypeHeader />
         <ButtonContainer />
         <div className={styles.languageWrapper} ref={languageRef}>
           {showLanguageList && (
