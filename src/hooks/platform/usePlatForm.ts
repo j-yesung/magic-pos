@@ -1,13 +1,4 @@
 import { ensureHttpsUrl } from '@/components/platform/utility/platformHelper';
-import {
-  downloadPlatFormImageUrl,
-  fetchPlatForm,
-  insertPlatFormRow,
-  removePlatFormData,
-  removePlatFormImage,
-  updatePlatFormData,
-  uploadPlatFormImage,
-} from '@/server/api/supabase/platform';
 import { isEmptyObject } from '@/shared/helper';
 import usePlatFormState, {
   resetAddPlatForm,
@@ -15,14 +6,13 @@ import usePlatFormState, {
   resetIsRegist,
   resetPrevData,
   resetPrevImg,
-  setAddDataToFetchPlatForm,
-  setFetchPlatFormData,
   setIsRegist,
 } from '@/shared/store/platform';
-import { AddPlatFormType, EditPlatFormType } from '@/types/platform';
-import dayjs from 'dayjs';
+import { EditPlatFormType } from '@/types/platform';
 import { FormEvent } from 'react';
+import usePlatFormSetQuery from '../query/platform/usePlatFormSetQuery';
 import useToast from '../service/ui/useToast';
+import { handleImageUpload, isPlatFormCardValueChange, prevImageRemove } from './usePlatFormHelper';
 const SUPABASE_STORAGE_URL = 'https://lajnysuklrkrhdyqhotr.supabase.co';
 interface PlatformToast {
   content: string;
@@ -33,21 +23,9 @@ const ALERT_TOAST = { content: '내용을 다 채워주세요', type: 'warn' } a
 
 const usePlatForm = () => {
   const { addPlatForm, editPlatForm, prevData, prevImg } = usePlatFormState();
+  const { addCardToPlatForm, editCardPlatForm, removeCardPlatForm } = usePlatFormSetQuery();
 
   const { toast } = useToast();
-  // 링크 유효성 검사
-
-  const handleImageUpload = async (data: AddPlatFormType | EditPlatFormType) => {
-    if (data.file) {
-      data.createdAt = dayjs().toISOString();
-      await uploadPlatFormImage(data);
-      const { publicUrl } = downloadPlatFormImageUrl(data);
-      data.image_url = publicUrl;
-      return data;
-    }
-    data.image_url = data.metaImage ?? null;
-    return data;
-  };
 
   const showCompleteToast = (alert: PlatformToast) => {
     toast(alert.content, {
@@ -66,28 +44,11 @@ const usePlatForm = () => {
     }
     const ensureHttpsUrlData = ensureHttpsUrl(addPlatForm);
     const form = await handleImageUpload(ensureHttpsUrlData);
-    const { data: platformData } = await insertPlatFormRow(form);
-    setAddDataToFetchPlatForm(platformData!);
+    addCardToPlatForm(form);
+
     resetAddPlatForm();
     setIsRegist(false);
     resetPrevImg();
-  };
-
-  const isPlatFormCardValueChange = (preValue: EditPlatFormType, editValue: EditPlatFormType) => {
-    const isChangeValue = Object.entries(editValue).reduce((acc, [key, value]) => {
-      if (preValue[key as keyof EditPlatFormType] !== value) {
-        acc[key as keyof EditPlatFormType] = value;
-      }
-      return acc;
-    }, new Object() as EditPlatFormType);
-    return isChangeValue;
-  };
-
-  const prevImageRemove = async (prevData: EditPlatFormType) => {
-    if (prevData.image_url?.includes(SUPABASE_STORAGE_URL)) {
-      await removePlatFormImage(prevData);
-    }
-    return;
   };
 
   const submitEditCard = async (e: FormEvent<HTMLFormElement>) => {
@@ -109,10 +70,8 @@ const usePlatForm = () => {
     await prevImageRemove(prevData);
     const ensureHttpsUrlData = ensureHttpsUrl(comparedData);
     const form = await handleImageUpload(ensureHttpsUrlData);
+    editCardPlatForm(form as EditPlatFormType);
 
-    await updatePlatFormData(form as EditPlatFormType);
-    const { platform } = await fetchPlatForm(form.store_id!);
-    setFetchPlatFormData(platform);
     resetIsRegist();
     resetEditPlatForm();
     resetPrevData();
@@ -121,12 +80,8 @@ const usePlatForm = () => {
   };
 
   const clickRemoveData = async () => {
-    await removePlatFormData(editPlatForm.id);
-    if (editPlatForm.image_url?.includes(SUPABASE_STORAGE_URL)) {
-      await removePlatFormImage(editPlatForm);
-    }
-    const { platform } = await fetchPlatForm(editPlatForm.store_id!);
-    setFetchPlatFormData(platform);
+    prevImageRemove(editPlatForm);
+    removeCardPlatForm(editPlatForm.id);
     resetIsRegist();
     resetEditPlatForm();
   };
