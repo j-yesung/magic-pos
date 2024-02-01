@@ -1,5 +1,4 @@
 .wrapper {
-  /* gap: 5rem; */
   width: 100%;
   height: 100vh;
   display: flex;
@@ -251,7 +250,7 @@
   color: var(--text2);
 }
 
-/* hook-form */
+/* 회원가입 hook-form*/
 .form-container {
   height: 100vh;
   position: relative;
@@ -357,4 +356,12 @@
 }
 .signup-button {
   margin-top: 5rem;
+}
+
+/* 로그인 hook-form */
+.button-box {
+  gap: 2rem;
+  display: flex;
+  padding-top: 1.5rem;
+  flex-direction: column;
 }

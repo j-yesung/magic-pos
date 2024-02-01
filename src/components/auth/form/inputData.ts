@@ -18,12 +18,13 @@ export const signupInput = [
     type: 'password',
     placeholder: '비밀번호',
     name: 'password',
+    minLenght: 8,
     maxLength: 16,
     validation: {
       required: '비밀번호는 필수 항목입니다.',
       minLength: {
         value: 6,
-        message: '비밀번호는 최소 6자리 이상이어야 합니다.',
+        message: '비밀번호는 최소 8자리 이상이어야 합니다.',
       },
       pattern: {
         value: /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/g,
@@ -35,6 +36,8 @@ export const signupInput = [
     id: 3,
     type: 'password',
     placeholder: '비밀번호 확인',
+    minLegth: 8,
+    maxLength: 16,
     name: 'confirmPassword',
     validation: {},
     validateFunc: (password: string) => ({
@@ -60,5 +63,24 @@ export const signupInput = [
     validation: {
       pattern: /^\d{10}$/,
     },
+  },
+];
+
+export const loginInput = [
+  {
+    id: 1,
+    type: 'text',
+    placeholder: '이메일',
+    name: 'email',
+    validation: {},
+  },
+  {
+    id: 2,
+    type: 'password',
+    placeholder: '비밀번호',
+    minLegth: 8,
+    maxLength: 16,
+    name: 'password',
+    validation: {},
   },
 ];

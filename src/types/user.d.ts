@@ -11,4 +11,5 @@ interface InputProps {
   validation?: RegisterOptions;
   error?: FieldError;
   isSuccessful?: boolean;
+  keyDownLoginHandler?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
