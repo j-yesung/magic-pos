@@ -264,6 +264,7 @@
   padding: 5rem 0;
   width: 100%;
   max-width: 1520px;
+
   border-radius: 2rem;
   margin: 0 auto;
   height: calc(100vh - 12rem);
@@ -303,7 +304,7 @@
   margin-bottom: 1rem;
   align-items: center;
 }
-@media only all and (max-width: 1520px) {
+@media only all and (max-width: 1600px) {
   .header-wrapper {
     padding-left: 5%;
     padding-right: 5%;
