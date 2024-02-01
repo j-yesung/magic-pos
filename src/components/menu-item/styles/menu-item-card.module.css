@@ -32,12 +32,6 @@
   align-items: center;
   background: var(--text5);
 
-  @media screen and (max-width: 1800px) {
-    width: calc(33% - 1rem);
-  }
-  @media screen and (max-width: 1520px) {
-    width: calc(25% - 1.5rem);
-  }
   @media screen and (max-width: 1250px) {
     width: calc(33% - 1rem);
   }
