@@ -31,10 +31,15 @@
 /*sales/calendar 일 때*/
 .show-calendar {
   display: flex;
+  width: 100%;
   align-items: flex-start;
+  gap: clamp(2%, 4rem, 4rem);
   margin-top: 2rem;
   padding-bottom: 5rem;
 }
 .calendar-header-wrapper {
+  /* width: 23%;
+  max-width: ;
+  height: 100%; */
   /**/
 }
