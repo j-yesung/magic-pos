@@ -6,9 +6,10 @@ import { PlatFormQueryKey } from './platformQueryKey';
 const usePlatFormSetQuery = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
+
   const addPlatFormCardMutation = useMutation({
     mutationFn: insertPlatFormRow,
-    onSuccess: data => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [PlatFormQueryKey.PLATFORM] });
     },
     onError: error => {

@@ -1,19 +1,15 @@
-import { ensureHttpsUrl } from '@/components/platform/utility/platformHelper';
+import { ensureHttpsUrl } from '@/components/platform/utility/usePlatformHelper';
 import { isEmptyObject } from '@/shared/helper';
 import usePlatFormState, {
-  resetAddPlatForm,
-  resetEditPlatForm,
-  resetIsRegist,
-  resetPrevData,
-  resetPrevImg,
-  setIsRegist,
+  handleResetStateAfterAction,
+  handleResetStateAfterRemoveData,
 } from '@/shared/store/platform';
 import { EditPlatFormType } from '@/types/platform';
 import { FormEvent } from 'react';
 import usePlatFormSetQuery from '../query/platform/usePlatFormSetQuery';
 import useToast from '../service/ui/useToast';
 import { handleImageUpload, isPlatFormCardValueChange, prevImageRemove } from './usePlatFormHelper';
-const SUPABASE_STORAGE_URL = 'https://lajnysuklrkrhdyqhotr.supabase.co';
+
 interface PlatformToast {
   content: string;
   type: 'info' | 'warn';
@@ -22,7 +18,7 @@ const EDIT_TOAST = { content: '수정이 완료 되었습니다.', type: 'info' 
 const ALERT_TOAST = { content: '내용을 다 채워주세요', type: 'warn' } as const;
 
 const usePlatForm = () => {
-  const { addPlatForm, editPlatForm, prevData, prevImg } = usePlatFormState();
+  const { addPlatForm, editPlatForm, prevData, prevImg, isEdit } = usePlatFormState();
   const { addCardToPlatForm, editCardPlatForm, removeCardPlatForm } = usePlatFormSetQuery();
 
   const { toast } = useToast();
@@ -46,9 +42,7 @@ const usePlatForm = () => {
     const form = await handleImageUpload(ensureHttpsUrlData);
     addCardToPlatForm(form);
 
-    resetAddPlatForm();
-    setIsRegist(false);
-    resetPrevImg();
+    handleResetStateAfterAction(isEdit);
   };
 
   const submitEditCard = async (e: FormEvent<HTMLFormElement>) => {
@@ -57,10 +51,7 @@ const usePlatForm = () => {
     const comparedData = isPlatFormCardValueChange(prevData, editPlatForm);
 
     if (isEmptyObject(comparedData) && prevData.image_url === prevImg) {
-      resetIsRegist();
-      resetEditPlatForm();
-      resetPrevData();
-      resetPrevImg();
+      handleResetStateAfterAction(isEdit);
       return;
     }
 
@@ -70,32 +61,25 @@ const usePlatForm = () => {
     await prevImageRemove(prevData);
     const ensureHttpsUrlData = ensureHttpsUrl(comparedData);
     const form = await handleImageUpload(ensureHttpsUrlData);
+    // react-query mutation
     editCardPlatForm(form as EditPlatFormType);
 
-    resetIsRegist();
-    resetEditPlatForm();
-    resetPrevData();
-    resetPrevImg();
+    // platform state 초기
+    handleResetStateAfterAction(isEdit);
+
+    // toast
     showCompleteToast(EDIT_TOAST);
   };
 
   const clickRemoveData = async () => {
     prevImageRemove(editPlatForm);
+    // react-query mutation
     removeCardPlatForm(editPlatForm.id);
-    resetIsRegist();
-    resetEditPlatForm();
+    handleResetStateAfterRemoveData();
   };
 
   const closePlatFormModal = (mode: boolean) => {
-    if (!mode) {
-      resetAddPlatForm();
-    }
-    if (mode) {
-      resetEditPlatForm();
-    }
-
-    resetPrevImg();
-    resetIsRegist();
+    handleResetStateAfterAction(mode);
   };
 
   return {

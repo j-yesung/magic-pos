@@ -1,11 +1,4 @@
-import usePlatFormState, {
-  resetIsEditMode,
-  resetIsRegist,
-  resetPrevData,
-  resetPrevImg,
-  setIsRegist,
-  setPlatFormStoreId,
-} from '@/shared/store/platform';
+import usePlatFormState, { allResetPlatFormState, setIsRegist, setPlatFormStoreId } from '@/shared/store/platform';
 import useAuthState from '@/shared/store/session';
 import { useEffect } from 'react';
 import Card from './card/Card';
@@ -20,11 +13,7 @@ const PlatFormWrapper = () => {
 
   useEffect(() => {
     return () => {
-      resetIsRegist();
-      resetIsEditMode();
-      resetPrevData();
-      resetPrevImg();
-      resetIsEditMode();
+      allResetPlatFormState();
     };
   }, []);
   return (

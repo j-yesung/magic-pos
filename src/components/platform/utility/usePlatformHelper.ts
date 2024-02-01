@@ -12,6 +12,7 @@ export const ensureHttpsUrl = (data: AddPlatFormType | EditPlatFormType) => {
     const validatedUrlData = prependHttpsIfNeeded(data);
     return validatedUrlData;
   }
+
   return data;
 };
 

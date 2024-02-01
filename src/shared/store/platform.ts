@@ -1,7 +1,6 @@
-import { handleMetaImageException } from '@/components/platform/utility/platformHelper';
+import { handleMetaImageException } from '@/components/platform/utility/usePlatformHelper';
 import { getOpenGraphMetaImage } from '@/server/api/external/openGraph';
 import { AddPlatFormType, EditPlatFormType } from '@/types/platform';
-import { Tables } from '@/types/supabase';
 import { debounce } from 'lodash';
 import { ChangeEvent } from 'react';
 import { create } from 'zustand';
@@ -13,7 +12,6 @@ interface PlatformStore {
   editPlatForm: EditPlatFormType;
   prevData: EditPlatFormType;
   isEdit: boolean;
-  fetchPlatFormData: Tables<'platform'>[];
   prevImg: string | null;
 }
 
@@ -56,8 +54,6 @@ const initialPrevData = {
 
 const initialPrevImg = null;
 
-const initialFetchPlatForm: Tables<'platform'>[] = [];
-
 const usePlatFormState = create<PlatformStore>()(() => ({
   store_id: null,
   isRegist: false,
@@ -65,7 +61,6 @@ const usePlatFormState = create<PlatformStore>()(() => ({
   addPlatForm: initialAddPlatform,
   editPlatForm: initialEditPlatForm,
   prevData: initialPrevData,
-  fetchPlatFormData: initialFetchPlatForm,
   prevImg: initialPrevImg,
 }));
 
@@ -186,7 +181,7 @@ export const setPrevData = (param: PrevDataType) =>
     ...state,
     prevData: { ...state.prevData, ...param },
     editPlatForm: { ...state.editPlatForm, ...param },
-    prevImg: param.image_url,
+    prevImg: param.image_url ?? null,
   }));
 
 export const setPrevImg = (url: string) =>
@@ -194,29 +189,6 @@ export const setPrevImg = (url: string) =>
     ...state,
     prevImg: url ?? null,
   }));
-
-/**
- *
- * @param data initial data저장 할 state
- * @returns
- */
-export const setFetchPlatFormData = (data: Tables<'platform'>[]) =>
-  usePlatFormState.setState(state => ({
-    ...state,
-    fetchPlatFormData: data,
-  }));
-
-/**
- *
- * @param data platform카드 추가해서 supabase에서 불러온 데이터
- * @returns
- */
-export const setAddDataToFetchPlatForm = (data: Tables<'platform'>[]) => {
-  usePlatFormState.setState(state => ({
-    ...state,
-    fetchPlatFormData: [...state.fetchPlatFormData, ...data],
-  }));
-};
 
 /**
  *
@@ -237,37 +209,59 @@ export const resetPlatFormFile = (mode: boolean) => {
   }
 };
 
-export const resetAddPlatForm = () =>
-  usePlatFormState.setState(state => ({
-    ...state,
-    addPlatForm: { ...state.addPlatForm, name: '', link_url: '', file: null, metaImage: null },
-  }));
-
-export const resetEditPlatForm = () =>
-  usePlatFormState.setState(state => ({
-    ...state,
-    editPlatForm: { ...state.editPlatForm, name: '', link_url: '', file: null },
-  }));
-
-export const resetIsEditMode = () =>
-  usePlatFormState.setState(state => ({
-    ...state,
-    isEdit: false,
-  }));
-export const resetIsRegist = () =>
-  usePlatFormState.setState(state => ({
-    ...state,
-    isRegist: false,
-  }));
-
 export const resetPrevImg = () =>
   usePlatFormState.setState(state => ({
     ...state,
     prevImg: null,
   }));
 
-export const resetPrevData = () =>
+/**
+ * 모달을 닫을 때, platFormCard를 Add, Edit할 때 사용
+ * @param mode isEdit 값입니다.
+ */
+export const handleResetStateAfterAction = (mode: boolean) => {
+  // edit이 아닐 때
+  if (!mode) {
+    usePlatFormState.setState(state => ({
+      ...state,
+      addPlatForm: { ...state.addPlatForm, name: '', link_url: '', file: null, metaImage: null },
+      prevImg: initialPrevImg,
+      isRegist: false,
+    }));
+  }
+  // edit일 때
+  if (mode) {
+    usePlatFormState.setState(state => ({
+      ...state,
+      editPlatForm: { ...state.editPlatForm, name: '', link_url: '', file: null },
+      isRegist: false,
+      prevImg: initialPrevImg,
+      prevData: initialPrevData,
+    }));
+  }
+};
+
+/**
+ * 데이터 삭제 후 호출되는 reset 함수
+ */
+export const handleResetStateAfterRemoveData = () =>
   usePlatFormState.setState(state => ({
     ...state,
+    isRegist: false,
+    editPlatForm: { ...state.editPlatForm, name: '', link_url: '', file: null },
+  }));
+
+/**
+ * PlatFormWrapper에서 사용되는 것
+ */
+export const allResetPlatFormState = () =>
+  usePlatFormState.setState(state => ({
+    ...state,
+    addPlatForm: initialAddPlatform,
+    editPlatForm: initialEditPlatForm,
+    isEdit: false,
+    isRegist: false,
     prevData: initialPrevData,
+    prevImg: initialPrevImg,
+    store_id: null,
   }));
