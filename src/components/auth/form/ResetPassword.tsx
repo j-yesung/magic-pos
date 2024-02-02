@@ -2,9 +2,9 @@ import Button from '@/components/common/Button';
 import { useAuthSetQuery } from '@/hooks/query/auth/useAuthSetQuery';
 import { Fragment } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { resetPasswordInput } from '../../../data/inputData';
+import { resetPasswordInput } from '../../../data/input-props';
+import Input from '../../common/Input';
 import styles from '../styles/Auth.module.css';
-import Input from './Input';
 
 const ResetPassword = () => {
   const { register, handleSubmit } = useForm<Inputs>({ mode: 'onSubmit' });

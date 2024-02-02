@@ -1,7 +1,7 @@
-import { FIND_PASSWORD_DATA, LOGIN_DATA, SIGNUP_DATA, SIGNUP_SUCCESS_DATA, UPDATE_PASSWORD_DATA } from '@/data/auth';
 import useAuthState from '@/shared/store/session';
 import { useRouter } from 'next/router';
 import AuthForm from './AuthForm';
+import { FIND_PASSWORD_DATA, LOGIN_DATA, SIGNUP_DATA, SIGNUP_SUCCESS_DATA, UPDATE_PASSWORD_DATA } from './auth';
 
 type AuthObjectType = Record<string, string>;
 
