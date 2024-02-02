@@ -2,6 +2,7 @@ import styles from '@/components/menu-item/styles/menu-item-form.module.css';
 import useSetMenuItem from '@/hooks/menu/menu-item/useSetMenuItems';
 import useSetMenuOption from '@/hooks/menu/menu-item/useSetMenuOption';
 import useSetMenuOptionDetail from '@/hooks/menu/menu-item/useSetMenuOptionDetail';
+import useToast from '@/hooks/service/ui/useToast';
 import useMenuItemStore from '@/shared/store/menu/menu-item';
 import useMenuOptionStore, {
   NewMenuOptionWithDetail,
@@ -20,7 +21,16 @@ interface MenuItemModal {
 }
 
 const MenuItemFormPage: React.FC<MenuItemModal> = props => {
-  const { addMutate, updateNameMutate, uploadImageMutate, removeImageMutate } = useSetMenuItem();
+  const { toast } = useToast();
+  const {
+    addMutate,
+    addPending,
+    updateNameMutate,
+    updatePending,
+    uploadImageMutate,
+    uploadImagePending,
+    removeImageMutate,
+  } = useSetMenuItem();
   const { addOptionMutate, updateOptionMutate, removeOptionMutate } = useSetMenuOption();
   const { addUpsertOptionDetailMutate } = useSetMenuOptionDetail();
 
@@ -55,11 +65,18 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
         : (menuItemRef.current = { ...menuItemRef.current, id: menuItem.id });
 
       await uploadMenuItemImageHandler(); // 사진 업로드
-      updateNameMutate(menuItemRef.current); // 업데이트
+      await updateNameMutate(menuItemRef.current); // 업데이트
       removerOptionHandler(); // 옵션 업데이트 부분(삭제 필터링)
       filterOptionHandler(); // 옵션 업데이트 부분(비교 필터링)
-      setMenuOptions([]); // 옵션 초기화
-      props.clickItemModalHide();
+      if (!addPending && !updatePending && !uploadImagePending) {
+        toast(!isEdit ? '메뉴 등록 성공' : '메뉴 수정 성공', {
+          type: 'success',
+          position: 'top-center',
+          showCloseButton: false,
+          autoClose: 2000,
+        });
+        props.clickItemModalHide();
+      }
     } catch (error) {
       console.error(error);
     }
@@ -69,8 +86,10 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
   const addMenuItemHandler = async (newMenuItemData: TablesInsert<'menu_item'>) => {
     const addData = await addMutate(newMenuItemData);
     menuItemRef.current = { ...menuItemRef.current, id: addData[0].id };
-    const newMenuOptions = menuOptions.map(option => (option.menu_id = addData[0].id));
-    setMenuOptions([...menuOptions, newMenuOptions] as NewMenuOptionWithDetail[]);
+    if (menuOptions.length > 0) {
+      const newMenuOptions = menuOptions.map(option => (option.menu_id = addData[0].id));
+      setMenuOptions([...menuOptions, newMenuOptions] as NewMenuOptionWithDetail[]);
+    }
   };
 
   // 이미지 업로드 handler
@@ -210,7 +229,12 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
   return (
     <form onSubmit={submitupdateMenuItemHandler} className={styles['wrap']}>
       <MenuItemFormInput />
-      <MenuItemFormButton clickItemModalHide={props.clickItemModalHide} />
+      <MenuItemFormButton
+        clickItemModalHide={props.clickItemModalHide}
+        addPending={addPending}
+        updatePending={updatePending}
+        uploadImagePending={uploadImagePending}
+      />
     </form>
   );
 };
