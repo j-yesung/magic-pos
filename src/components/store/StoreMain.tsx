@@ -1,9 +1,8 @@
-import { useInput } from '@/hooks/service/auth/useInput';
 import useAuthState from '@/shared/store/session';
 import { useEffect, useState } from 'react';
-import Input from '../auth/Input';
 import styles from './styles/StoreContents.module.css';
 import ConfirmTable from './sub-component/ConfirmTable';
+import StoreInfo from './sub-component/StoreInfo';
 import StoreTimeSet from './sub-component/StoreTimeSet';
 
 const StoreContents = () => {
@@ -11,11 +10,12 @@ const StoreContents = () => {
   const { session, storeName, storeBno } = useAuthState();
   const userId = session?.user.id || '';
   const email = session?.user.email || '';
-  const { value, changeHandler } = useInput({
-    storeEmail: email,
-    bnoNumber: storeBno || '',
-    storeName: storeName || '',
-  });
+
+  const storeInfo = [
+    { id: 1, label: '이메일', htmlFor: 'email', name: email },
+    { id: 2, label: '상호명', htmlFor: 'storeName', name: storeName },
+    { id: 3, label: '사업자등록번호', htmlFor: 'businessNumber', name: storeBno },
+  ];
 
   useEffect(() => {
     setIsLoaded(true);
@@ -25,7 +25,7 @@ const StoreContents = () => {
     <section className={styles.wrapper}>
       {isLoaded && session && (
         <>
-          <Input value={value} onChangeHandler={changeHandler} />
+          <StoreInfo storeInfo={storeInfo} />
           <ConfirmTable />
           <StoreTimeSet userId={userId} />
         </>
