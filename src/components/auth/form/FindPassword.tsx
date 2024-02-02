@@ -1,7 +1,7 @@
 import Button from '@/components/common/Button';
 import { useAuthSetQuery } from '@/hooks/query/auth/useAuthSetQuery';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import Input from '../../common/Input';
+import Input from '../element/Input';
 import styles from '../styles/Auth.module.css';
 
 const FindPassword = () => {

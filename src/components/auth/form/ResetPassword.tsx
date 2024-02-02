@@ -3,7 +3,7 @@ import { useAuthSetQuery } from '@/hooks/query/auth/useAuthSetQuery';
 import { Fragment } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { resetPasswordInput } from '../../../data/input-props';
-import Input from '../../common/Input';
+import Input from '../element/Input';
 import styles from '../styles/Auth.module.css';
 
 const ResetPassword = () => {

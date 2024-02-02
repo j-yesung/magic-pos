@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { Fragment, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { loginInput } from '../../../data/input-props';
-import Input from '../../common/Input';
+import Input from '../element/Input';
 import SignCaption from '../element/SignCaption';
 import styles from '../styles/Auth.module.css';
 
