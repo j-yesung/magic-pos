@@ -9,7 +9,7 @@ import { QUERY_KEY } from './useFetchTable';
 import useSetTable from './useSetTable';
 
 const useClickCUDHandler = () => {
-  const { addMutate, updateMutate, deleteMutate } = useSetTable();
+  const { addMutate, updateMutate, deleteMutate, addIsPending, updateIsPending } = useSetTable();
   const { session } = useAuthState();
   const { MagicModal } = useModal();
   const { toast } = useToast();
@@ -149,6 +149,8 @@ const useClickCUDHandler = () => {
     clickDeleteTableHandler,
     clickOpenEditModalHandler,
     clickCloseModalHandler,
+    addIsPending,
+    updateIsPending,
   };
 };
 

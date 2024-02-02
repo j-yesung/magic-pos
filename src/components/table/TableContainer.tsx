@@ -1,11 +1,12 @@
 import useClickCUDHandler from '@/hooks/table/useClickCUDHandler';
 import { StoreWithStoreTable, Tables } from '@/types/supabase';
+import LoadingSpinner from '../common/LoadingSpinner';
 import TableListItem from './TableListItem';
 import styles from './styles/TableContainer.module.css';
 import PlusButton from '/public/icons/plus.svg';
 
 const TableContainer = ({ storeData }: { storeData: StoreWithStoreTable[] }) => {
-  const { clickAddStoreTableHandler } = useClickCUDHandler();
+  const { clickAddStoreTableHandler, addIsPending } = useClickCUDHandler();
 
   return (
     <div className={styles['table-container']}>
@@ -20,7 +21,11 @@ const TableContainer = ({ storeData }: { storeData: StoreWithStoreTable[] }) => 
           return <TableListItem key={item.id} storeTableData={item} />;
         })}
       <div className={styles['table-list-button']} onClick={clickAddStoreTableHandler}>
-        <PlusButton width="41" height="41" />
+        {addIsPending ? (
+          <LoadingSpinner boxSize={4} ballSize={0.5} color="#888" />
+        ) : (
+          <PlusButton width="41" height="41" />
+        )}
       </div>
     </div>
   );
