@@ -2,7 +2,7 @@ import { useInput } from '@/hooks/service/auth/useInput';
 import useAuthState from '@/shared/store/session';
 import { useEffect, useState } from 'react';
 import Input from '../auth/Input';
-import styles from './styles/StroeContents.module.css';
+import styles from './styles/StoreContents.module.css';
 import ConfirmTable from './sub-component/ConfirmTable';
 import StoreTimeSet from './sub-component/StoreTimeSet';
 
