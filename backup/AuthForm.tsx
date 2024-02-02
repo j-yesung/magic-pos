@@ -7,10 +7,9 @@ import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { FaCheck } from 'react-icons/fa6';
-import Button from '../common/Button';
+import Button from '../src/components/common/Button';
 import Input from './Input';
 import FormButton from './button/FormButton';
-import SignCaption from './element/SignCaption';
 import styles from './styles/Auth.module.css';
 import Success from '/public/icons/success.svg';
 
@@ -119,9 +118,9 @@ const AuthForm = ({ data }: FormProps) => {
               </div>
             )}
           </div>
-          {path === '/auth/login' && (
+          {/* {path === '/auth/login' && (
             <SignCaption subUrl={subUrl} subName={subName} value={value} isCheckbox={isCheckbox} />
-          )}
+          )} */}
           <div className={styles.formButtonWrapper}>
             {path === '/auth/signup' && (
               <FormButton

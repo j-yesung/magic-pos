@@ -1,3 +1,7 @@
+import { useErrorMessage } from '@/hooks/service/auth/useErrorMessage';
+import clsx from 'clsx';
+import { useRouter } from 'next/router';
+import { FaCheck } from 'react-icons/fa6';
 import {
   bnoNumberInput,
   businessNameInput,
@@ -7,11 +11,7 @@ import {
   passwordSignUpInput,
   storeBusineesNameInput,
   storeEmailInput,
-} from '@/data/input-props';
-import { useErrorMessage } from '@/hooks/service/auth/useErrorMessage';
-import clsx from 'clsx';
-import { useRouter } from 'next/router';
-import { FaCheck } from 'react-icons/fa6';
+} from './input-props';
 import styles from './styles/Auth.module.css';
 
 interface InputProps {

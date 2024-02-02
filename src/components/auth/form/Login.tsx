@@ -4,10 +4,10 @@ import useToggleState, { defaultCheckBox } from '@/shared/store/toggle';
 import { useRouter } from 'next/router';
 import { Fragment, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { loginInput } from '../../../data/inputData';
+import { loginInput } from '../../../data/input-props';
+import Input from '../../common/Input';
 import SignCaption from '../element/SignCaption';
 import styles from '../styles/Auth.module.css';
-import Input from './Input';
 
 const Login = () => {
   const { getValues, setValue, register, handleSubmit, watch } = useForm<Inputs>();
@@ -40,7 +40,7 @@ const Login = () => {
   return (
     <div className={styles.formContainer}>
       <form onSubmit={handleSubmit(clickLoginHandler)}>
-        <div className={styles.titleWrapper}>
+        <div className={styles.titleWrapper} onClick={() => router.push('/')}>
           <h1 className={styles.title}>편리함의 시작</h1>
         </div>
         <div className={styles.fieldContainer}>

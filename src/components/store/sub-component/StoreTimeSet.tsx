@@ -1,7 +1,7 @@
 import { useFetchQuery } from '@/hooks/query/store/useFetchQuery';
 import { Fragment, useEffect, useState } from 'react';
 import { convertTimeFormat, timeSet } from '../../../utils/time-format';
-import styles from '../styles/StroeContents.module.css';
+import styles from '../styles/StoreContents.module.css';
 import StoreSelectBox from './StoreSelectBox';
 import StoreSetButton from './StoreSetButton';
 
