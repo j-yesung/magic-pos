@@ -58,10 +58,14 @@ export const useSetMenuItem = () => {
 
   return {
     addMutate: addMutate.mutateAsync,
-    updateNameMutate: updateNameMutate.mutate,
+    addPending: addMutate.isPending,
+    updateNameMutate: updateNameMutate.mutateAsync,
+    updatePending: updateNameMutate.isPending,
     updatePositionMutate: updatePositionMutate.mutate,
-    deleteMutate: deleteMutate.mutate,
+    deleteMutate: deleteMutate.mutateAsync,
+    deletePending: deleteMutate.isPending,
     uploadImageMutate: uploadImageMutate.mutateAsync,
+    uploadImagePending: uploadImageMutate.isPending,
     removeImageMutate: removeImageMutate.mutate,
   };
 };
