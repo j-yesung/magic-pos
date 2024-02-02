@@ -10,22 +10,20 @@ import SignCaption from '../element/SignCaption';
 import styles from '../styles/Auth.module.css';
 
 const Login = () => {
-  const { getValues, setValue, register, handleSubmit, watch } = useForm<Inputs>();
+  const { setValue, register, handleSubmit, watch } = useForm<Inputs>();
   const { login } = useAuthSetQuery();
   const isCheckbox = useToggleState(state => state.isCheckbox);
-  const value = getValues();
   const email = watch('email');
+  const password = watch('password');
   const router = useRouter();
   const path = router.pathname;
 
-  const clickLoginHandler: SubmitHandler<Inputs> = data => {
-    login(data);
-  };
-
+  const clickLoginHandler: SubmitHandler<Inputs> = data => login(data);
   const keyDownLoginHandler = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const values = { email, password };
     if (e.key === 'Enter') {
       e.preventDefault();
-      login(value);
+      login(values);
     }
   };
 
