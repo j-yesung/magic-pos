@@ -57,11 +57,15 @@ export const useSetMenuItem = () => {
   });
 
   return {
-    addMutate,
-    updateNameMutate: updateNameMutate.mutate,
+    addMutate: addMutate.mutateAsync,
+    addPending: addMutate.isPending,
+    updateNameMutate: updateNameMutate.mutateAsync,
+    updatePending: updateNameMutate.isPending,
     updatePositionMutate: updatePositionMutate.mutate,
-    deleteMutate: deleteMutate.mutate,
-    uploadImageMutate,
+    deleteMutate: deleteMutate.mutateAsync,
+    deletePending: deleteMutate.isPending,
+    uploadImageMutate: uploadImageMutate.mutateAsync,
+    uploadImagePending: uploadImageMutate.isPending,
     removeImageMutate: removeImageMutate.mutate,
   };
 };

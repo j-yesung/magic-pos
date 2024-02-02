@@ -84,8 +84,7 @@
 .calendar-base {
   font-size: 2rem;
   display: flex;
-  min-width: 12rem;
-  min-height: 12rem;
+  height: 13rem;
   flex-direction: column;
   align-items: flex-start;
   gap: 2rem;
@@ -224,4 +223,10 @@
   height: 1rem;
   border-radius: 50%;
   background-color: #2382f1;
+}
+
+@media screen and (max-width: 1520px) {
+  .calendar-base {
+    height: 10vh;
+  }
 }

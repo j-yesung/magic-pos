@@ -2,7 +2,7 @@ import { useFetchQuery } from '@/hooks/query/store/useFetchQuery';
 import { useStoreSetQuery } from '@/hooks/query/store/useStoreSetQuery';
 import useAuthState from '@/shared/store/session';
 import Select from 'react-select';
-import styles from '../styles/StroeContents.module.css';
+import styles from '../styles/StoreContents.module.css';
 import { customStyles } from './StoreSelectBox';
 
 const OPTION_TRUE = { value: 'true', label: '사용' };

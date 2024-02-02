@@ -8,12 +8,13 @@ import useToggleState from '@/shared/store/toggle';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { IoClose, IoLogOutOutline, IoMailOutline, IoQrCodeOutline } from 'react-icons/io5';
+import { IoLogOutOutline, IoMailOutline, IoQrCodeOutline } from 'react-icons/io5';
 import HeaderToggleButton from '../header/HeaderToggleButton';
 import styles from '../styles/AdminLayout.module.css';
 import SendMail from './SendMail';
 import SidebarList from './SidebarList';
 import Ellipse from '/public/icons/ellipse.svg';
+import CloseButton from '/public/icons/x-button.svg';
 
 const Sidebar = (adminInfo: AdminCategories) => {
   const [navList, setNavList] = useState(adminInfo.adminCategories);
@@ -74,8 +75,8 @@ const Sidebar = (adminInfo: AdminCategories) => {
     <aside className={sidebarClass} ref={targetRef}>
       <div className={styles.contents}>
         <div className={styles.closeButton}>
+          <CloseButton size={40} width={'4rem'} height={'4rem'} onClick={() => setIsSideBarOpen(false)} />
           <HeaderToggleButton />
-          <IoClose size={40} width={'4rem'} height={'4rem'} onClick={() => setIsSideBarOpen(false)} />
         </div>
         <div className={styles.notification}>
           <Ellipse width={8} height={8} />

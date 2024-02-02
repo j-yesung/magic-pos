@@ -4,21 +4,20 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import styles from '../styles/Auth.module.css';
 
+const URL = '/auth/findPassword';
+
 interface SignCaptionProps {
-  subUrl: string;
-  subName: string;
+  email: string;
   isCheckbox: boolean;
-  value: Record<string, string>;
 }
 
 const SignCaption = (props: SignCaptionProps) => {
-  const { subUrl, subName, isCheckbox, value } = props;
-  const { email } = value;
+  const { email, isCheckbox } = props;
   const [isLoading, setIsLoading] = useState(false);
 
   const clickStorageSaveHandler = () => {
-    changeCheckBox();
     isCheckbox ? localStorage.removeItem('email') : localStorage.setItem('email', email);
+    changeCheckBox();
   };
 
   useEffect(() => {
@@ -34,8 +33,8 @@ const SignCaption = (props: SignCaptionProps) => {
             <p>이메일 저장</p>
           </div>
           <div className={styles.findPasswordBox}>
-            <Link className={styles.caption} href={subUrl}>
-              {subName}
+            <Link className={styles.caption} href={URL}>
+              비밀번호를 잊으셨나요?
             </Link>
           </div>
         </div>

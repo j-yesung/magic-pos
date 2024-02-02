@@ -1,9 +1,16 @@
 .bar-wrapper {
-  margin-top: 12rem;
+  margin-top: 5rem;
   padding: 1rem;
 }
 
 .bar-wrapper canvas {
   width: 100% !important;
   max-height: 60rem;
+}
+
+@media screen and (max-width: 1520px) {
+  .bar-wrapper {
+    margin-top: 1rem;
+    padding: 1rem;
+  }
 }

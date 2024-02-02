@@ -1,12 +1,14 @@
+import LoadingSpinner from '@/components/common/LoadingSpinner';
 import usePlatForm from '@/hooks/platform/usePlatForm';
 import { useModal } from '@/hooks/service/ui/useModal';
 import clsx from 'clsx';
 import ConfirmModal from '../../modal/ConfirmModal';
 import styles from './styles/formButton.module.css';
-const FormButton = ({ mode }: { mode: boolean }) => {
-  const CANCEL_MODE = '취소';
-  const REMOVE_MODE = '삭제';
 
+const CANCEL_MODE = '취소';
+const REMOVE_MODE = '삭제';
+
+const FormButton = ({ mode, isPending }: { mode: boolean; isPending: boolean }) => {
   const { MagicModal } = useModal();
   const { closePlatFormModal } = usePlatForm();
 
@@ -23,7 +25,7 @@ const FormButton = ({ mode }: { mode: boolean }) => {
         {!mode ? CANCEL_MODE : REMOVE_MODE}
       </button>
       <button type="submit" className={clsx(styles.button, styles.addButton)}>
-        확인
+        {isPending ? <LoadingSpinner boxSize={2.8} ballSize={0.4} /> : '확인'}
       </button>
     </div>
   );

@@ -1,31 +1,16 @@
-import { fetchPlatForm } from '@/server/api/supabase/platform';
-import usePlatFormState, { setFetchPlatFormData } from '@/shared/store/platform';
-import { useEffect } from 'react';
+import usePlatFormQuery from '@/hooks/query/platform/useFetchQuery';
+import useAuthState from '@/shared/store/session';
 import Item from './item/Item';
 import styles from './styles/card.module.css';
 
 const Card = () => {
-  const {
-    addPlatForm: { store_id },
-    fetchPlatFormData,
-  } = usePlatFormState();
+  const storeId = useAuthState(state => state.storeId);
+  const { data } = usePlatFormQuery({ storeId: storeId! });
 
-  const getPlatFormDataFromSupabase = async () => {
-    const { platform, error } = await fetchPlatForm(store_id!);
-    if (error) throw error;
-    return platform;
-  };
-  useEffect(() => {
-    getPlatFormDataFromSupabase().then(result => {
-      if (result) {
-        setFetchPlatFormData(result);
-      }
-    });
-  }, []);
   return (
     <div className={styles.cardContainer}>
-      {fetchPlatFormData &&
-        fetchPlatFormData.map(card => {
+      {data &&
+        data.platform.map(card => {
           return (
             <Item
               key={`${card.created_at + card.name}`}

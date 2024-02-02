@@ -15,8 +15,7 @@ const Button = (props: ButtonProps) => {
 
   return (
     <button
-      className={clsx(styles.button, {
-        [className]: !disabled,
+      className={clsx(styles.button, className, {
         [styles.disabledButton]: disabled,
       })}
       type={type}

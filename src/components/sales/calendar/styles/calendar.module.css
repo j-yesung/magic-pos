@@ -22,8 +22,8 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 2rem;
-  max-width: 152rem;
-  margin: 0 auto;
+  width: 78%;
+  max-width: 1260px;
   padding: 3rem;
   border-radius: 2rem;
   border: 1px solid var(--line, #ededed);
@@ -31,10 +31,10 @@
 /*sales/calendar 일 때*/
 .show-calendar {
   display: flex;
+  width: 100%;
   align-items: flex-start;
+  gap: clamp(2%, 4rem, 4rem);
+  justify-content: space-between;
   margin-top: 2rem;
   padding-bottom: 5rem;
-}
-.calendar-header-wrapper {
-  /**/
 }

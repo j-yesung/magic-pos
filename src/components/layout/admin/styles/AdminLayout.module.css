@@ -7,7 +7,10 @@
 /* 헤더 영역입니다. */
 .header-wrapper {
   position: relative;
-  padding: 4rem 20rem;
+  padding: 4rem 0;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1520px;
   display: flex;
   justify-content: space-between;
   background-color: #ffffff;
@@ -152,6 +155,7 @@
   display: flex;
   cursor: pointer;
   margin-bottom: 4rem;
+  align-items: center;
   justify-content: space-between;
 }
 
@@ -258,8 +262,12 @@
 /* 메인 영역입니다. */
 .main-wrapper {
   position: relative;
-  padding: 5rem 20rem 5rem 20rem;
+  padding: 5rem 0;
+  width: 100%;
+  max-width: 1520px;
+
   border-radius: 2rem;
+  margin: 0 auto;
   height: calc(100vh - 12rem);
   transition: all 0.4s;
   overflow: hidden;
@@ -297,7 +305,7 @@
   margin-bottom: 1rem;
   align-items: center;
 }
-@media only all and (max-width: 1520px) {
+@media only all and (max-width: 1600px) {
   .header-wrapper {
     padding-left: 5%;
     padding-right: 5%;

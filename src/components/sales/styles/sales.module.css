@@ -1,11 +1,7 @@
-/* 
-view port의 vh가 낮은 모니터 화면때문에 scroll을 넣었고 
-scroll을 숨겼습니다.
-*/
-
 .sales-container {
+  width: 100%;
   height: 100%;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 
 .sales-container::-webkit-scrollbar {

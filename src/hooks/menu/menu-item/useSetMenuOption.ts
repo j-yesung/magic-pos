@@ -33,7 +33,7 @@ export const useSetMenuOption = () => {
   });
 
   return {
-    addOptionMutate: addMutate,
+    addOptionMutate: addMutate.mutateAsync,
     updateOptionMutate: updateMutate.mutate,
     removeOptionMutate: removeMutate.mutate,
   };

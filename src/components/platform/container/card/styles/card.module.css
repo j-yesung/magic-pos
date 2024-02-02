@@ -5,3 +5,9 @@
   gap: 4rem;
   margin-top: 5rem;
 }
+
+@media screen and (max-width: 1520px) {
+  .card-container {
+    gap: 3.8rem;
+  }
+}
