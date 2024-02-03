@@ -28,7 +28,6 @@ const useClickCUDHandler = () => {
    */
 
   const maxPosition = tablePosition.length === 0 ? 0 : Math.max(...tablePosition);
-  console.log(maxPosition);
 
   /**
    * 테이블 추가
