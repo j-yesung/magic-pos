@@ -33,6 +33,7 @@ interface OrderState {
   orderIdList: string[];
   selectedOptions: MenuOptionWithDetail[];
   amount: number;
+  maxAmount: number;
   selectedMenu: MenuItemWithOption | null;
   isOptionPage: boolean;
   selectedLanguage: string;
@@ -71,6 +72,8 @@ export const useKioskState = create<OrderState>()(
       selectedOptions: [],
       // 메뉴 하나 수량
       amount: 1,
+      // 메뉴를 담을 수 있는 최대 수량
+      maxAmount: 0,
       // 현재 페이지가 옵션 페이지인지 (옵션페이지 안에 Swiper가 하나 더 있어 구분하기 위함)
       isOptionPage: false,
       // 선택 언어
@@ -196,5 +199,6 @@ export const resetSelectedMenu = () => {
 };
 export const setIsWidgetRendering = (isWidgetRendering: boolean) => useKioskState.setState({ isWidgetRendering });
 export const setIsOnlyTable = (isOnlyTable: boolean) => useKioskState.setState({ isOnlyTable });
+export const setMaxAmount = (maxAmount: number) => useKioskState.setState({ maxAmount });
 
 export default useKioskState;
