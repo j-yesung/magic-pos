@@ -2,7 +2,7 @@ import { fetchStoreTable, fetchTableInfoById } from '@/server/api/supabase/store
 import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 
-const enum QUERY_KEY {
+export const enum QUERY_KEY {
   TABLE = 'table',
 }
 

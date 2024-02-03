@@ -12,6 +12,9 @@
   height: 5.6rem;
   border-radius: 0.5rem;
   margin: 3rem 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .modal-button-box > button.close-button {
   color: var(--text2);

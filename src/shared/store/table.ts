@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-type valueType = {
+export type TableItemType = {
   tableId?: string;
   tableNumber: number | null;
   maxGuest: number | null;
@@ -13,7 +13,7 @@ interface TableStoreType {
   maxGuest: number | null;
   isDisabled: number | null;
   isClick: boolean;
-  TableItemClick: (value: valueType) => void;
+  TableItemClick: (value: TableItemType) => void;
   setMaxGuest: (value: number) => void;
   setIsDisabled: (value: number) => void;
   resetTableState: () => void;

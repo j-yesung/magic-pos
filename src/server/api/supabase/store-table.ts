@@ -18,7 +18,7 @@ export const addStoreTable = async (storeTableData: TablesInsert<'store_table'>)
   if (error) throw new Error(error.message);
 };
 
-type StoreTableOmit = Omit<TablesUpdate<'store_table'>, 'store_id | position'>;
+export type StoreTableOmit = Omit<TablesUpdate<'store_table'>, 'store_id | position'>;
 export const updateStoreTable = async (storeTableData: StoreTableOmit) => {
   const { id, is_disabled, max_guest } = storeTableData;
   if (id) {

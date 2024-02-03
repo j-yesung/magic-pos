@@ -8,6 +8,7 @@ export const useSetTable = () => {
     mutate: addMutate,
     isError: addIsError,
     error: addError,
+    isPending: addIsPending,
   } = useMutation({
     mutationFn: addStoreTable,
     onSuccess: () => {
@@ -19,6 +20,7 @@ export const useSetTable = () => {
     mutate: updateMutate,
     isError: updateIsError,
     error: updateError,
+    isPending: updateIsPending,
   } = useMutation({
     mutationFn: updateStoreTable,
     onSuccess: () => {
@@ -37,21 +39,13 @@ export const useSetTable = () => {
     },
   });
 
-  // useEffect(() => {
-  //   if (didMount.current) {
-  //     console.log(addIsPending)
-  //   } else {
-  //     didMount.current = true;
-  //   }
-  // }, [addIsPending, deleteIsPending, updateIsPending]);
-
   useEffect(() => {
     if (addIsError) {
       console.error(addError.message || updateError?.message || deleteError?.message);
     }
   }, [addIsError, updateIsError, deleteIsError, addError, updateError, deleteError]);
 
-  return { addMutate, updateMutate, deleteMutate };
+  return { addMutate, updateMutate, deleteMutate, addIsPending, updateIsPending };
 };
 
 export default useSetTable;
