@@ -1,7 +1,7 @@
 import styles from '@/components/menu-item/styles/menu-item-form.module.css';
-import useSetMenuItem from '@/hooks/menu/menu-item/useSetMenuItems';
-import useSetMenuOption from '@/hooks/menu/menu-item/useSetMenuOption';
-import useSetMenuOptionDetail from '@/hooks/menu/menu-item/useSetMenuOptionDetail';
+import useSetMenuItem from '@/hooks/query/menu/menu-item/useSetMenuItems';
+import useSetMenuOption from '@/hooks/query/menu/menu-item/useSetMenuOption';
+import useSetMenuOptionDetail from '@/hooks/query/menu/menu-item/useSetMenuOptionDetail';
 import useToast from '@/hooks/service/ui/useToast';
 import useMenuItemStore from '@/shared/store/menu/menu-item';
 import useMenuOptionStore, {
@@ -53,7 +53,7 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
         category_id: menuItem.category_id,
         name: menuItem.name,
         position: menuItem.position,
-        price: menuItem.price,
+        price: menuItem.price!,
         recommended: menuItem.recommended,
         remain_ea: menuItem.remain_ea,
         image_url: menuItem.image_url,

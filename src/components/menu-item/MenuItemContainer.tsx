@@ -1,5 +1,5 @@
-import useFetchMenuItems from '@/hooks/menu/menu-item/useFetchMenuItems';
-import useFetchMenuOptions from '@/hooks/menu/menu-item/useFetchMenuOption';
+import useFetchMenuItems from '@/hooks/query/menu/menu-item/useFetchMenuItems';
+import useFetchMenuOptions from '@/hooks/query/menu/menu-item/useFetchMenuOption';
 import { fetchMenuOptions } from '@/server/api/supabase/menu-item';
 import useMenuItemStore, {
   setCategoryWithMenuItem,

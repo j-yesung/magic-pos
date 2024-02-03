@@ -4,13 +4,26 @@ import { create } from 'zustand';
 /**
  * 관리자 메뉴 추가를 위한 물품 관리 store
  */
+export interface NewMenuItemType {
+  category_id: string;
+  id: string;
+  image_url: string | null;
+  name: string | null;
+  position: number;
+  price: number | null;
+  recommended: boolean;
+  remain_ea: number | null;
+}
+export interface NewCategoryWithMenuItem extends NewMenuItemType {
+  menu_item: NewMenuItemType[];
+}
 
 /**
  * STATE
  */
 interface MenuItemStoreType {
   isEdit: boolean;
-  menuItem: Tables<'menu_item'>;
+  menuItem: NewMenuItemType;
   menuItemList: Tables<'menu_item'>[];
   categoryWithMenuItem: CategoryWithMenuItem;
   categoryWithMenuItemList: CategoryWithMenuItem[];
@@ -29,8 +42,8 @@ const useMenuItemStore = create<MenuItemStoreType>()(() => ({
     category_id: '',
     image_url: '',
     name: '',
-    price: 0,
-    remain_ea: 0,
+    price: null,
+    remain_ea: null,
     recommended: false,
     position: 0,
   },
@@ -51,7 +64,7 @@ const useMenuItemStore = create<MenuItemStoreType>()(() => ({
  * ACTIONS
  */
 export const setIsEdit = (isEdit: boolean) => useMenuItemStore.setState(() => ({ isEdit }));
-export const setMenuItem = (item: Tables<'menu_item'>) =>
+export const setMenuItem = (item: NewMenuItemType) =>
   useMenuItemStore.setState(prev => ({ menuItem: { ...prev.menuItem, ...item } }));
 export const setMenuItemList = (item: Tables<'menu_item'>[]) => useMenuItemStore.setState({ menuItemList: item });
 export const setCategoryWithMenuItem = (item: CategoryWithMenuItem) =>
