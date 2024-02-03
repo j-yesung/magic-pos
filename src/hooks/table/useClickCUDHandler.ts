@@ -19,19 +19,16 @@ const useClickCUDHandler = () => {
   const data = queryClient.getQueryData<StoreWithStoreTable[]>([QUERY_KEY.TABLE, session?.user.id]);
   const storeData = data![0];
   const storeId = storeData.id;
-  const tablePosition = storeData.store_table.map(table => table.position);
+  const tablePosition = storeData.store_table.map(table => table.position as number);
   const tableIdInOrderStore = storeData.order_store.map(order => order.table_id);
   const tableData = storeData.store_table.filter(x => x.id === tableId);
 
   /**
    * position값중 가장 큰수 추출
    */
-  const maxPosition =
-    tablePosition.length === 0
-      ? 0
-      : tablePosition.reduce((prev, value) => {
-          return prev! >= value! ? prev : value;
-        });
+
+  const maxPosition = tablePosition.length === 0 ? 0 : Math.max(...tablePosition);
+  console.log(maxPosition);
 
   /**
    * 테이블 추가
@@ -53,7 +50,7 @@ const useClickCUDHandler = () => {
     const newStoreTableData: TablesInsert<'store_table'> = {
       is_disabled: 0,
       max_guest: 4,
-      position: maxPosition === 0 ? 1 : notTable.length !== 0 ? notTable[0] : maxPosition! + 1,
+      position: notTable.length !== 0 ? notTable[0] : maxPosition! + 1,
       store_id: storeId,
     };
 
