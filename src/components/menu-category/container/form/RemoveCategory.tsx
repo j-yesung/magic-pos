@@ -1,5 +1,5 @@
 import styles from '@/components/menu-category/styles/category.module.css';
-import useSetCategories from '@/hooks/menu/menu-category/useSetCategories';
+import useSetCategories from '@/hooks/query/menu/menu-category/useSetCategories';
 import { useModal } from '@/hooks/service/ui/useModal';
 import useCategoriesStore, { setCategory } from '@/shared/store/menu/menu-category';
 import { Tables } from '@/types/supabase';

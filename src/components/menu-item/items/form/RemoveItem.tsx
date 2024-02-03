@@ -1,6 +1,6 @@
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import styles from '@/components/menu-item/styles/menu-item-form.module.css';
-import useSetMenuItem from '@/hooks/menu/menu-item/useSetMenuItems';
+import useSetMenuItem from '@/hooks/query/menu/menu-item/useSetMenuItems';
 import { useModal } from '@/hooks/service/ui/useModal';
 import useToast from '@/hooks/service/ui/useToast';
 import useMenuItemStore from '@/shared/store/menu/menu-item';

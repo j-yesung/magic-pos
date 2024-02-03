@@ -1,4 +1,4 @@
-import { useFetchCategories } from '@/hooks/menu/menu-category/useFetchCategories';
+import { useFetchCategories } from '@/hooks/query/menu/menu-category/useFetchCategories';
 import useCategoriesStore, { setCategories, setCategory } from '@/shared/store/menu/menu-category';
 import useAuthState from '@/shared/store/session';
 import { useEffect } from 'react';

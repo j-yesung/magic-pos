@@ -1,6 +1,6 @@
 import MenuItemModal from '@/components/menu-item/items/modal/MenuItemModal';
 import styles from '@/components/menu-item/styles/menu-item-card.module.css';
-import useSetMenuItem from '@/hooks/menu/menu-item/useSetMenuItems';
+import useSetMenuItem from '@/hooks/query/menu/menu-item/useSetMenuItems';
 import { useModal } from '@/hooks/service/ui/useModal';
 import { convertNumberToWon } from '@/shared/helper';
 import useMenuItemStore, {
