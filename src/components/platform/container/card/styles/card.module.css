@@ -1,6 +1,7 @@
 /*card관련*/
 .card-container {
   display: flex;
+  width: 100%;
   flex-wrap: wrap;
   gap: 4rem;
   margin-top: 5rem;
