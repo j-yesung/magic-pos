@@ -14,7 +14,9 @@ const MenuOptionContainer = () => {
         <section className={styles.container}>
           <Image src={selectedMenu?.image_url ?? ''} alt={selectedMenu?.name ?? ''} width={375} height={375} />
           <MenuInfo />
-          {selectedMenu?.menu_option.map(option => <OptionRow key={option.id} option={option} />)}
+          {selectedMenu?.menu_option
+            .filter(option => option.is_use)
+            .map(option => <OptionRow key={option.id} option={option} />)}
           <div className={styles.emptyRow}>&nbsp;</div>
           <Amount />
         </section>
