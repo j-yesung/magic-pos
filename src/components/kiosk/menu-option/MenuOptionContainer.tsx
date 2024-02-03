@@ -1,12 +1,17 @@
-import useKioskState from '@/shared/store/kiosk';
+import useKioskState, { setMaxAmount } from '@/shared/store/kiosk';
 import Image from 'next/image';
 import styles from './styles/MenuOptionContainer.module.css';
 import MenuInfo from '@/components/kiosk/menu-option/MenuInfo';
 import OptionRow from '@/components/kiosk/menu-option/OptionRow';
 import Amount from '@/components/kiosk/menu-option/Amount';
+import { useEffect } from 'react';
 
 const MenuOptionContainer = () => {
   const selectedMenu = useKioskState(state => state.selectedMenu);
+
+  useEffect(() => {
+    setMaxAmount(selectedMenu?.remain_ea ?? 0);
+  }, [selectedMenu]);
 
   return (
     <>

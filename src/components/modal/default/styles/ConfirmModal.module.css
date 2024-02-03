@@ -6,6 +6,10 @@
   height: fit-content;
   padding: 2rem;
   align-items: flex-end;
+
+  @media screen and (max-width: 960px) {
+    width: 90vw;
+  }
 }
 
 .container header svg {
