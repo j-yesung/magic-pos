@@ -53,7 +53,7 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
         category_id: menuItem.category_id,
         name: menuItem.name,
         position: menuItem.position,
-        price: menuItem.price,
+        price: menuItem.price!,
         recommended: menuItem.recommended,
         remain_ea: menuItem.remain_ea,
         image_url: menuItem.image_url,

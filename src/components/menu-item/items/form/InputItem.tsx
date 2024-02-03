@@ -36,7 +36,7 @@ const MenuItemFormInput = () => {
 
   // 메뉴 input handler
   const changeMenuItemHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, maxLength, name, type } = e.target;
+    const { value, maxLength, name } = e.target;
     if (name === 'recommended') {
       const recommendedList = categoryWithMenuItemList.filter(list => list.id === categoryWithMenuItem.id);
       const recommendedNum = recommendedList[0].menu_item.filter(item => item.recommended).length;
@@ -63,7 +63,7 @@ const MenuItemFormInput = () => {
       }
 
       setMenuItem({ ...menuItem, recommended: !menuItem.recommended });
-    } else if (type === 'number') {
+    } else if (name === 'price' || name === 'remain_ea') {
       const newValue = value.replace(/[^0-9e]/gi, '');
       setMenuItem({ ...menuItem, [name]: newValue.slice(0, maxLength) });
     } else {
@@ -125,7 +125,7 @@ const MenuItemFormInput = () => {
                 value={menuItem.name ?? ''}
                 minLength={1}
                 maxLength={20}
-                placeholder="메뉴명을 입력해주세요."
+                placeholder="메뉴 이름"
                 required
               />
             </p>
@@ -136,15 +136,15 @@ const MenuItemFormInput = () => {
                 가격
               </label>
               <input
-                type="number"
+                type="text"
                 className={styles['input']}
                 onChange={changeMenuItemHandler}
                 id="price"
                 name="price"
-                value={menuItem.price}
+                value={menuItem.price!}
                 minLength={1}
                 maxLength={20}
-                placeholder="가격을 입력해주세요."
+                placeholder="메뉴 가격"
                 required
               />
             </p>
@@ -153,14 +153,14 @@ const MenuItemFormInput = () => {
                 수량
               </label>
               <input
-                type="number"
+                type="text"
                 className={styles['input']}
                 onChange={changeMenuItemHandler}
                 name="remain_ea"
-                value={menuItem.remain_ea ?? 0}
+                value={menuItem.remain_ea!}
                 minLength={1}
                 maxLength={20}
-                placeholder="수량을 입력해주세요."
+                placeholder="메뉴 수량"
                 required
               />
             </p>
