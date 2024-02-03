@@ -17,6 +17,7 @@ const OrderLayout = ({ children }: { children: React.ReactNode }) => {
   // slide에 사용될 컴포넌트를 담습니다.
   const step = useKioskState(state => state.step);
   const isOnlyTable = useKioskState(state => state.isOnlyTable);
+  const isOptionPage = useKioskState(state => state.isOptionPage);
   const sliderRef = useRef<SwiperRef>(null);
   const [condition, setCondition] = useState<boolean[]>([]);
   const { pathname } = useRouter();
@@ -25,10 +26,10 @@ const OrderLayout = ({ children }: { children: React.ReactNode }) => {
     setCondition([
       step < ORDER_STEP.CHOOSE_ORDER_TYPE,
       step > ORDER_STEP.SUCCESS,
-      step === ORDER_STEP.SELECT_MENU && isOnlyTable,
+      step === ORDER_STEP.SELECT_MENU && isOnlyTable && !isOptionPage,
       pathname === '/kiosk/fail',
     ]);
-  }, [step]);
+  }, [step, isOptionPage]);
 
   useEffect(() => {
     setSwiperRef(sliderRef);
