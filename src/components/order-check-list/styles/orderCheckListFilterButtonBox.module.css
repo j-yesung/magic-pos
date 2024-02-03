@@ -25,6 +25,7 @@
   letter-spacing: -0.3px;
   border-radius: 0;
   transition: 0.2s;
+  white-space: nowrap;
   border: 1px solid var(--line);
 }
 .choice-date-button-wrapper > button:first-child {
@@ -44,12 +45,11 @@
   gap: 0.5rem;
 }
 
-.select-date-button-wrapper > input {
+.select-date-button-wrapper > input[type='date'] {
   display: flex;
   padding: 1rem 1.5rem;
   font-size: 1.5rem;
   align-items: center;
-  gap: 5rem;
   border-radius: 0.5rem;
   border: 1px solid var(--line);
   background: #fff;
@@ -66,6 +66,7 @@
 }
 
 .select-date-button-wrapper > button {
+  width: auto;
   color: var(--text2);
   background-color: #fff;
   font-weight: 500;
