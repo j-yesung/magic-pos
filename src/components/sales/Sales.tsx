@@ -6,7 +6,6 @@ import Toggle from './toggle/Toggle';
 
 const Sales = () => {
   const isChangeView = useSalesToggle(state => state.isChangeView);
-
   return (
     <div className={styles.salesContainer}>
       <Toggle />
