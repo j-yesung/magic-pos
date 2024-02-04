@@ -6,7 +6,6 @@ import { setSelectedLanguage, useKioskState } from '@/shared/store/kiosk';
 import { useRouter } from 'next/router';
 
 interface LanguageListProps {
-  setIsTranslating: Dispatch<SetStateAction<boolean>>;
   setShowLanguageList: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -29,7 +28,7 @@ const LANGUAGE_LIST = [
   },
 ];
 
-const LanguageList = ({ setShowLanguageList, setIsTranslating }: LanguageListProps) => {
+const LanguageList = ({ setShowLanguageList }: LanguageListProps) => {
   const { i18n } = useTranslation();
   const selectedLanguage = useKioskState(state => state.selectedLanguage);
   const storeId = useKioskState(state => state.storeId);
@@ -52,7 +51,6 @@ const LanguageList = ({ setShowLanguageList, setIsTranslating }: LanguageListPro
       }
 
       router.push(newURL);
-      setIsTranslating(true);
     }
   };
 
