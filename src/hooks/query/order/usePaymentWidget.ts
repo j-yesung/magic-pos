@@ -2,7 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { ANONYMOUS, loadPaymentWidget } from '@tosspayments/payment-widget-sdk';
 import { Tables } from '@/types/supabase';
 import { nanoid } from 'nanoid';
-import useKioskState from '@/shared/store/kiosk';
+import useKioskState, { ORDER_STEP } from '@/shared/store/kiosk';
+import { PAYMENT_FAIL_PATH, PAYMENT_SUCCESS_PATH } from '@/data/url-list';
 
 /**
  * toss widget을 렌더링 하기 위한 비동기 함수를 호출한다.
@@ -16,8 +17,10 @@ export const TOSS_WIDGET_CLIENT_KEY = process.env.NEXT_PUBLIC_TOSS_WIDGET_CLIENT
 
 export const usePaymentWidget = () => {
   const selectedLanguage = useKioskState(state => state.selectedLanguage);
+  const step = useKioskState(state => state.step);
   const { data: paymentWidget } = useQuery({
     queryKey: ['payment-widget', TOSS_WIDGET_CLIENT_KEY, ANONYMOUS],
+    enabled: step === ORDER_STEP.PAYMENT,
     queryFn: () => {
       return loadPaymentWidget(TOSS_WIDGET_CLIENT_KEY, ANONYMOUS);
     },
@@ -30,8 +33,8 @@ export const usePaymentWidget = () => {
       await paymentWidget?.requestPayment({
         orderId: nanoid(),
         orderName: orderList.length > 1 ? `${orderList[0].name} 외 ${orderList.length - 1}개` : `${orderList[0].name}`,
-        successUrl: `${window.location.origin}/kiosk/success`,
-        failUrl: `${window.location.origin}/kiosk/fail`,
+        successUrl: `${window.location.origin + PAYMENT_SUCCESS_PATH}`,
+        failUrl: `${window.location.origin + PAYMENT_FAIL_PATH}`,
         useInternationalCardOnly: selectedLanguage !== 'lang-ko',
       });
     } catch (error) {

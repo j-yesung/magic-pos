@@ -17,6 +17,7 @@ import Success from '/public/icons/order-success.svg';
 import { motion } from 'framer-motion';
 import useToast from '@/hooks/service/ui/useToast';
 import { useModal } from '@/hooks/service/ui/useModal';
+import { RECEIPT_PATH } from '@/data/url-list';
 
 const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const orderList = useKioskState(state => state.orderList);
@@ -40,7 +41,7 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const { MagicModal } = useModal();
 
   const clickCheckOrderHandler = () => {
-    router.push('/kiosk/receipt');
+    router.push(RECEIPT_PATH);
   };
 
   useEffect(() => {
