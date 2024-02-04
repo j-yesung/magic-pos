@@ -26,7 +26,7 @@
   background: var(--red);
   margin-left: 1rem;
 }
-.shop-list-wrap{
+.shop-list-wrap {
   width: 100%;
   height: 100%;
   overflow-y: scroll;
@@ -45,7 +45,6 @@
 .shop-list {
   gap: 2rem;
   width: 100%;
-  height: calc(100% - 10rem);
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
