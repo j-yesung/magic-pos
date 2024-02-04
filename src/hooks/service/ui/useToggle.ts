@@ -1,3 +1,4 @@
+import { MANAGEMENT_PATH, ORDER_CHECK_LIST_PATH, TABLE_PATH } from '@/data/url-list';
 import { useFetchQuery } from '@/hooks/query/store/useFetchQuery';
 import useAuthState from '@/shared/store/session';
 import useToggleState, { changeToggle } from '@/shared/store/toggle';
@@ -12,16 +13,13 @@ export const useToggle = () => {
 
   const changeToggleHandler = () => {
     const currentPath = router.asPath;
-    const tablePath = '/admin/table';
-    const managementPath = '/admin/management';
-    const orderCheckPath = '/admin/order-check-list';
 
-    if (!isChecked && currentPath !== managementPath) {
-      router.push(managementPath);
-    } else if (isUseTable && isChecked && currentPath === managementPath) {
-      router.push(tablePath);
-    } else if (!isUseTable && isChecked && currentPath === managementPath) {
-      router.push(orderCheckPath);
+    if (!isChecked && currentPath !== MANAGEMENT_PATH) {
+      router.push(MANAGEMENT_PATH);
+    } else if (isUseTable && isChecked && currentPath === MANAGEMENT_PATH) {
+      router.push(TABLE_PATH);
+    } else if (!isUseTable && isChecked && currentPath === MANAGEMENT_PATH) {
+      router.push(ORDER_CHECK_LIST_PATH);
     }
     changeToggle();
   };

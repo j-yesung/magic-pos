@@ -1,3 +1,4 @@
+import { MANAGEMENT_PATH } from '@/data/url-list';
 import { supabase } from '@/shared/supabase';
 import { OrderConfirmType, ToastTypeOption } from '@/types/common';
 import { StoreWithOrderInfo } from '@/types/supabase';
@@ -84,6 +85,6 @@ const payloadFunction = (
     body: `주문번호${orderNumber}번이 요청되었습니다.`,
   });
   notification.onclick = () => {
-    window.open(`${process.env.NEXT_PUBLIC_SUPACE_REDIRECT_TO}/admin/management`);
+    window.open(`${process.env.NEXT_PUBLIC_SUPACE_REDIRECT_TO}${MANAGEMENT_PATH}`);
   };
 };

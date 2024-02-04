@@ -1,4 +1,5 @@
 import LoadingSpinner from '@/components/common/LoadingSpinner';
+import { HOME_PATH } from '@/data/url-list';
 import useSetManagement from '@/hooks/management/useSetManagement';
 import { useUserTokenFetchQuery } from '@/hooks/query/user-token/useUserTokenFetchQuery';
 import { useModal } from '@/hooks/service/ui/useModal';
@@ -32,7 +33,7 @@ const OrderItem = ({ orderData }: { orderData: OrderDataWithStoreName }) => {
             title: `${order_number}번 주문이 완료되었습니다.`,
             body: `${menuName} 외 ${otherMenuNum}개`,
             token: userToken?.token || '',
-            click_action: '/',
+            click_action: HOME_PATH,
           });
         } else {
           toast('토큰을 발급받을 수 없습니다. 관리자에게 문의해주세요', {

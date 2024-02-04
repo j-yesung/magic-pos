@@ -1,3 +1,4 @@
+import { HOME_PATH, LOGIN_PATH, SIGNUP_SUCCESS_PATH } from '@/data/url-list';
 import { businessNumberCheckHandler } from '@/server/api/external/business';
 import {
   checkEmailHandler,
@@ -38,7 +39,7 @@ export const useAuthSetQuery = () => {
     mutationFn: signUpHandler,
     onSuccess: async () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.SIGNUP] });
-      router.push('/auth/success');
+      router.push(SIGNUP_SUCCESS_PATH);
     },
     onError: error => {
       console.error(error);
@@ -59,7 +60,7 @@ export const useAuthSetQuery = () => {
       setStoreBno(storeBno);
       setStoreName(storeName);
       storeId.length !== 0 ? setStoreId(storeId[0].id) : setStoreId(null!);
-      router.push('/');
+      router.push(HOME_PATH);
       toast(`${storeName} 사장님 반갑습니다.`, {
         type: 'success',
         position: 'top-center',
@@ -83,7 +84,7 @@ export const useAuthSetQuery = () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.LOGOUT] });
       setSession(null);
       useAuthState.persist.clearStorage();
-      router.push('/');
+      router.push(HOME_PATH);
     },
     onError: error => {
       console.error(error);
@@ -124,7 +125,7 @@ export const useAuthSetQuery = () => {
           autoClose: 2000,
         });
       }
-      router.push('/auth/login');
+      router.push(LOGIN_PATH);
     },
     onError: error => {
       console.error(error);

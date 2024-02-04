@@ -1,3 +1,4 @@
+import { HOME_PATH, MANAGEMENT_PATH } from '@/data/url-list';
 import useAuthState from '@/shared/store/session';
 import { defaultToggle } from '@/shared/store/toggle';
 import { useRouter } from 'next/router';
@@ -11,8 +12,8 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    if (isLoaded && !session) router.push('/');
-    if (path !== '/admin/management') defaultToggle();
+    if (isLoaded && !session) router.push(HOME_PATH);
+    if (path !== MANAGEMENT_PATH) defaultToggle();
     setIsLoaded(true);
   }, [isLoaded, path, router, session]);
 

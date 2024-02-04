@@ -1,4 +1,5 @@
 import Button from '@/components/common/Button';
+import { LOGIN_PATH } from '@/data/url-list';
 import { useRouter } from 'next/router';
 import styles from '../styles/Auth.module.css';
 import Success from '/public/icons/success.svg';
@@ -21,7 +22,7 @@ const SignupSuccess = () => {
         </div>
         <div className={styles.fieldContainer}>
           <div className={styles.buttonBox}>
-            <Button type="button" className={styles.submitButton} onClick={() => router.push('/auth/login')}>
+            <Button type="button" className={styles.submitButton} onClick={() => router.push(LOGIN_PATH)}>
               시작하기
             </Button>
           </div>

@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
 import style from '@/components/error/styles/ErrorContainer.module.css';
-import { motion } from 'framer-motion';
-import ErrorImage from '/public/images/error.svg';
-import useErrorState, { setErrorLink, setErrorMessage, setErrorSubMessage } from '@/shared/store/error';
-import { useRouter } from 'next/router';
-import useKioskState from '@/shared/store/kiosk';
+import { HOME_PATH } from '@/data/url-list';
 import useToast from '@/hooks/service/ui/useToast';
+import useErrorState, { setErrorLink, setErrorMessage, setErrorSubMessage } from '@/shared/store/error';
+import useKioskState from '@/shared/store/kiosk';
+import { motion } from 'framer-motion';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import ErrorImage from '/public/images/error.svg';
 
 const ErrorContainer = () => {
   const { title, message, subMessage, link } = useErrorState();
@@ -17,7 +18,7 @@ const ErrorContainer = () => {
 
   const onClickImage = () => {
     if (link) router.push(link);
-    else router.push('/');
+    else router.push(HOME_PATH);
   };
 
   const getBackLink = () => {
