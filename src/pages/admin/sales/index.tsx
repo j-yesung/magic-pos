@@ -1,21 +1,34 @@
 import AdminLayout from '@/components/layout/admin/AdminLayout';
 import Sales from '@/components/sales/Sales';
+import { processHoldayList } from '@/components/sales/calendarUtility/formatHoliday';
 import { makeTitle } from '@/shared/helper';
+import { setHolidayState } from '@/shared/store/sales/salesHoliday';
+import { HolidayType, HolidaysType } from '@/types/sales';
+import axios from 'axios';
+import dayjs from 'dayjs';
+import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import { ReactNode } from 'react';
 
-// export const getServerSideProps: GetServerSideProps = async () => {
-//   const API_KEY = process.env.NEXT_PUBLIC_HOLIDAY_API_KEY;
-//   const url = `${process.env.NEXT_PUBLIC_HOLIDAY_URL}?serviceKey=${API_KEY}&solYear=2024&numOfRows=30&_type=json`;
+export const getStaticProps = (async () => {
+  const startYearOfHoliday = 2000;
+  const holidayObject: { [key: string]: HolidayType[] } = {};
 
-//   const { data } = await axios.get('https://superkts.com/day/holiday/2023');
-//   const holidayList = data;
-//   console.log(data);
-//   // return { props: { item: holidayList } };
-//   return { props: {} };
-// };
+  // 2000년부터 2030년까지
+  for (let i = 0; i <= 30; i++) {
+    const holidayYear = dayjs().year(startYearOfHoliday).add(i, 'year').format('YYYY');
+    const { data } = await axios.get(`https://superkts.com/day/holiday/${holidayYear}`);
+    const holidayList = processHoldayList(data, holidayYear);
+    holidayObject[holidayYear] = holidayList;
+  }
 
-const SalesPage = () => {
+  return { props: { holidays: holidayObject } };
+}) satisfies GetStaticProps<{
+  holidays: HolidaysType;
+}>;
+
+const SalesPage = ({ holidays }: { holidays: HolidaysType }) => {
+  setHolidayState(holidays);
   return (
     <>
       <Head>

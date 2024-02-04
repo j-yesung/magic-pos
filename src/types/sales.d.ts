@@ -55,20 +55,23 @@ export interface CloseModalType {
 
 /**
  * SSG
- */
-/**
- *  dateKind: '01';
-  dateName: '1월1일';
-  isHoliday: 'Y';
-  locdate: 20230101;
-  seq: 1;
+ *   "holidayNumber": "2",
+  "date": "01월 21일(토)",
+  "name": "설날 연휴",
+  "anniversary": ""
  */
 export interface HolidayType {
-  dateKind: string;
-  dateName: string;
-  isHoliday: string;
-  locdate: number;
-  seq: number;
+  holidayNumber: string;
+  date: string;
+  name: string;
+  anniversary: string;
+}
+
+/**
+ * 각 해 휴일을 담는 객체
+ */
+export interface HolidaysType {
+  [key: string]: HolidayType[];
 }
 
 /**
