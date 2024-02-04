@@ -27,13 +27,14 @@ const Cell = () => {
   const currentDate = useCalendarState(state => state.currentDate);
   const { clickShowDataOfDateHandler } = useDataHandler();
 
-  const startDay = currentDate.clone().startOf('month').startOf('week'); // monthStart가 속한 주의 시작 주
-  const endDay = currentDate.clone().endOf('month').endOf('week'); // monthStart가 속한 마지막 주
+  const startDay = currentDate.startOf('month').startOf('week'); // monthStart가 속한 주의 시작 주
+  const endDay = currentDate.endOf('month').endOf('week'); // monthStart가 속한 마지막 주
 
   const storeId = useAuthState(state => state.storeId);
+
   useEffect(() => {
     if (!isChangeView) {
-      getMonthSales(currentDate.clone(), storeId!).then(result => {
+      getMonthSales(currentDate, storeId!).then(result => {
         if (result.sales.length !== 0) {
           const group = groupByKey<Tables<'sales'>>(
             result.sales.map(data => ({
@@ -78,7 +79,7 @@ const Cell = () => {
           holiday={holidayDate}
         />,
       );
-      day = day.clone().add(1, 'day');
+      day = day.add(1, 'day');
     }
     row.push(
       <div key={days[0].key} className={styles.calendarRow}>

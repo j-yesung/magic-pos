@@ -115,7 +115,7 @@ const getDates = (dateType: DateFormatType, selectedDateType: Dayjs, formatType:
   const dateContainer = [];
   if (dateType === 'week') {
     for (let i = 0; i < 7; i++) {
-      const month = selectedDateType.clone().subtract(i, dateType);
+      const month = selectedDateType.subtract(i, dateType);
       const weeksInfoByYear = getStartWeeks(month.year());
       const weeksNumber = month.week();
       const whatMonth = month.month();
@@ -127,7 +127,7 @@ const getDates = (dateType: DateFormatType, selectedDateType: Dayjs, formatType:
     return dateContainer;
   } else {
     for (let i = 0; i < 7; i++) {
-      dateContainer.push(selectedDateType!.clone().subtract(i, dateType).format(formatType));
+      dateContainer.push(selectedDateType!.subtract(i, dateType).format(formatType));
     }
 
     return dateContainer;

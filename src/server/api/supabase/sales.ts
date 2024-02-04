@@ -27,8 +27,8 @@ export const addSales = async (sales: TablesInsert<'sales'>[]) => {
 const TIME_FORMAT = 'YYYY-MM-DD HH:00';
 
 /** const today = dayjs().hour(0).subtract(9, 'hour');
- * .gte(...,  dayJSToString(today.clone().subtract(6,'day')))
- * .lt(..., dayJsToString(today.clone().add(1,'day')))
+ * .gte(...,  dayJSToString(today.subtract(6,'day')))
+ * .lt(..., dayJsToString(today.add(1,'day')))
  * 를 하면 오늘 기준 7일치 꺼를 가져옵니다.
  *
  * @param day .hour(0).subtract(9,'hour)를 해준 dayjs()입니다.
@@ -39,8 +39,8 @@ export const getDaySales: getSalesReturnType = async (day, store_id) => {
   const { data: sales, error } = await supabase
     .from('sales')
     .select('*')
-    .gte('sales_date', dayJsToString(day.clone().subtract(5, 'day'), TIME_FORMAT))
-    .lt('sales_date', dayJsToString(day.clone().add(1, 'day'), TIME_FORMAT))
+    .gte('sales_date', dayJsToString(day.subtract(5, 'day'), TIME_FORMAT))
+    .lt('sales_date', dayJsToString(day.add(1, 'day'), TIME_FORMAT))
     .eq('store_id', store_id);
   if (error) {
     return { sales: [], dateType: 'day', error };
@@ -51,8 +51,8 @@ export const getDaySales: getSalesReturnType = async (day, store_id) => {
 
 /**
  * const today = dayjs().hour(0).subtract(9, 'hour')
- * .gte(...,  dayJsToString(today.clone().subtract(6, 'week'),TIME_FORMAT))
- * .lte('sales_date', dayJsToString(today.clone(), TIME_FORMAT));
+ * .gte(...,  dayJsToString(today.subtract(6, 'week'),TIME_FORMAT))
+ * .lte('sales_date', dayJsToString(today, TIME_FORMAT));
  * 요번주를 기점으로 7주치 거를 가져옵니다.
  * @param week .hour(0).subtract(9,'hour)를 해준 dayjs()입니다.
  * @returns
@@ -62,8 +62,8 @@ export const getWeekSales: getSalesReturnType = async (week, store_id) => {
   const { data: sales, error } = await supabase
     .from('sales')
     .select('*')
-    .gte('sales_date', dayJsToString(week.clone().subtract(6, 'week'), TIME_FORMAT))
-    .lt('sales_date', dayJsToString(week.clone().add(1, 'day'), TIME_FORMAT))
+    .gte('sales_date', dayJsToString(week.subtract(6, 'week'), TIME_FORMAT))
+    .lt('sales_date', dayJsToString(week.add(1, 'day'), TIME_FORMAT))
     .eq('store_id', store_id);
 
   if (error) {
@@ -74,19 +74,19 @@ export const getWeekSales: getSalesReturnType = async (week, store_id) => {
 
 /**
  * const today = dayjs().hour(0).subtract(9, 'hour');
- * .gte('sales_date', dayJsToString(today.clone().startOf('month').subtract(6, 'month'), TIME_FORMAT))
- * .lte('sales_date',dayJsToString(today.clone,TIME_FORMAT))
+ * .gte('sales_date', dayJsToString(today.startOf('month').subtract(6, 'month'), TIME_FORMAT))
+ * .lte('sales_date',dayJsToString(today,TIME_FORMAT))
  * 을 하면 요번 달 기준으로 6달 치를 가져옵ㄴ디ㅏ.
  * @param day .hour(0).subtract(9,'hour)를 해준 dayjs()입니다.
  * @returns
  */
 
-export const getMonthsSales: getSalesReturnType = async (month, store_id) => {
+export const getMonthsSales: getSalesReturnType = async (months, store_id) => {
   const { data: sales, error } = await supabase
     .from('sales')
     .select('*')
-    .gte('sales_date', dayJsToString(month.clone().startOf('month').subtract(6, 'month'), TIME_FORMAT))
-    .lte('sales_date', dayJsToString(month.clone().endOf('month'), TIME_FORMAT))
+    .gte('sales_date', dayJsToString(months.startOf('month').subtract(6, 'month'), TIME_FORMAT))
+    .lte('sales_date', dayJsToString(months.endOf('month'), TIME_FORMAT))
     .eq('store_id', store_id);
   if (error) {
     return { sales: [], dateType: 'month', error };
@@ -104,8 +104,8 @@ export const getMonthSales: getSalesReturnType = async (month, store_id) => {
   const { data: sales, error } = await supabase
     .from('sales')
     .select('*')
-    .gte('sales_date', dayJsToString(month.clone().startOf('month'), TIME_FORMAT))
-    .lte('sales_date', dayJsToString(month.clone().endOf('month'), TIME_FORMAT))
+    .gte('sales_date', dayJsToString(month.startOf('month'), TIME_FORMAT))
+    .lte('sales_date', dayJsToString(month.endOf('month'), TIME_FORMAT))
     .eq('store_id', store_id);
   if (error) {
     return { sales: [], dateType: 'month', error };

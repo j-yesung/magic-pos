@@ -90,7 +90,6 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
         NONE: styles.salesNone,
         HAVE: styles.salesHave,
       },
-      holidayType: { HOLIDAY: styles.holiday },
     },
   });
   /**
@@ -106,7 +105,7 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
     },
   });
 
-  const formatDate = day.clone().format('YY MM D').substring(6);
+  const formatDate = day.format('YY MM D').substring(6);
   return (
     <>
       {/* sales/Status일 때 보여줄 날 css */}
@@ -119,7 +118,7 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
             holidayType: holiday?.[0]?.name ? HOLIDAY : null,
           })}
           {...((day.isSame(today, 'D') || day.isBefore(today, 'D')) && {
-            onClick: clickShowDataOfDateHandler?.(day.clone()),
+            onClick: clickShowDataOfDateHandler?.(day),
           })}
         >
           <span
@@ -140,7 +139,6 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
             monthType: getCalendarMonthType(day, currentDate),
             dateType: getCalendarDateType(day),
             salesType: salesData ? SALES_HAVE : SALES_NONE,
-            holidayType: holiday?.[0]?.name ? HOLIDAY : null,
           })}
           {...(day.format(FORMAT_CELL_DATE_TYPE) === salesData?.date && {
             onClick: () => {
@@ -158,7 +156,7 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
 
           {/* sales/calendar에서 보여줄 날짜별 매출과 최저 최고 매출 CSS class입니다. */}
           <span>{salesData?.sales ? convertNumberToWon(salesData.sales) : '-'}</span>
-          <p>{holiday?.[0]?.name ?? null}</p>
+          <p className={styles.holiday}>{holiday?.[0]?.name ?? null}</p>
         </div>
       )}
     </>

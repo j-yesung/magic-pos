@@ -13,8 +13,9 @@ import { Dayjs } from 'dayjs';
 export const useDataHandler = () => {
   const storeId = useAuthState(state => state.storeId);
   const { utcStandardDate, today } = useDayState();
+
   const clickMoveTodayHandler = async () => {
-    const { sales, dateType, formatType } = await getDaySales(utcStandardDate.clone(), storeId!);
+    const { sales, dateType, formatType } = await getDaySales(utcStandardDate, storeId!);
     if (sales.length !== 0) {
       const { result, recordData } = formatData(sales, dateType, today, formatType!);
       if (result && recordData) {
@@ -40,9 +41,9 @@ export const useDataHandler = () => {
    * @returns salesStore의 state값 변경으로 void 입니다.
    */
   const clickShowDataOfDateHandler = (day: Dayjs) => async () => {
-    const { sales, dateType, formatType } = await getDaySales(day.clone().hour(0).subtract(9, 'hour'), storeId!);
+    const { sales, dateType, formatType } = await getDaySales(day.hour(0).subtract(9, 'hour'), storeId!);
     if (sales.length !== 0) {
-      const { result, recordData } = formatData(sales, dateType, day.clone(), formatType!);
+      const { result, recordData } = formatData(sales, dateType, day, formatType!);
       if (result && recordData) {
         setRecordData(recordData);
         setChartData(result);
@@ -55,12 +56,12 @@ export const useDataHandler = () => {
       });
     }
     setIsShow(false);
-    setSelectedDate(day.clone());
-    setCalendarCurrentDate(day.clone());
+    setSelectedDate(day);
+    setCalendarCurrentDate(day);
   };
 
   const clickWeeksChartHandler = async () => {
-    const { sales, dateType, formatType } = await getWeekSales(utcStandardDate.clone(), storeId!);
+    const { sales, dateType, formatType } = await getWeekSales(utcStandardDate, storeId!);
     if (sales.length !== 0) {
       const { result, recordData } = formatData(sales, dateType, today, formatType!);
       if (result && recordData) {
@@ -80,7 +81,7 @@ export const useDataHandler = () => {
   };
 
   const clickMonthsChartHandler = async () => {
-    const { sales, dateType, formatType } = await getMonthsSales(utcStandardDate.clone(), storeId!);
+    const { sales, dateType, formatType } = await getMonthsSales(utcStandardDate, storeId!);
     if (sales.length !== 0) {
       const { result, recordData } = formatData(sales, dateType, today, formatType!);
 
