@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { ReactElement } from 'react';
 import { ModalAlertTypeOption, ModalConfirmTypeOption } from '@/types/common';
+import { animate } from 'framer-motion';
 
 /**
  * 모달의 상태를 관리합니다.
@@ -40,15 +41,24 @@ export const addConfirm = (elem: ModalConfirmTypeOption) => {
 };
 
 export const hideModal = (id: string) => {
-  useModalState.setState(state => ({ modalList: state.modalList?.filter(modal => modal.id !== id) }));
+  setTimeout(() => {
+    useModalState.setState(state => ({ modalList: state.modalList?.filter(modal => modal.id !== id) }));
+  }, 150);
+  animate(document.getElementById(id)!, { scale: [1, 0], opacity: [1, 0] }, { duration: 0.15 });
 };
 
 export const hideConfirm = (id: string) => {
-  useModalState.setState(state => ({ confirmList: state.confirmList?.filter(confirm => confirm.id !== id) }));
+  setTimeout(() => {
+    useModalState.setState(state => ({ confirmList: state.confirmList?.filter(confirm => confirm.id !== id) }));
+  }, 150);
+  animate(document.getElementById(id)!, { scale: [1, 0], opacity: [1, 0] }, { duration: 0.15 });
 };
 
 export const hideAlert = (id: string) => {
-  useModalState.setState(state => ({ alertList: state.alertList?.filter(alert => alert.id !== id) }));
+  setTimeout(() => {
+    useModalState.setState(state => ({ alertList: state.alertList?.filter(alert => alert.id !== id) }));
+  }, 150);
+  animate(document.getElementById(id)!, { scale: [1, 0], opacity: [1, 0] }, { duration: 0.15 });
 };
 
 export default useModalState;
