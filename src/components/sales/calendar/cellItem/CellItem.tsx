@@ -105,7 +105,7 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
     },
   });
 
-  const formatDate = day.clone().format('YY MM D').substring(6);
+  const formatDate = day.format('YY MM D').substring(6);
   return (
     <>
       {/* sales/Status일 때 보여줄 날 css */}
@@ -118,7 +118,7 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
             holidayType: holiday?.[0]?.name ? HOLIDAY : null,
           })}
           {...((day.isSame(today, 'D') || day.isBefore(today, 'D')) && {
-            onClick: clickShowDataOfDateHandler?.(day.clone()),
+            onClick: clickShowDataOfDateHandler?.(day),
           })}
         >
           <span

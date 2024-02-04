@@ -15,7 +15,7 @@ const SalesStatus = () => {
   const { utcStandardDate, today } = useDayState();
   const storeId = useAuthState(state => state.storeId);
   useEffect(() => {
-    getDaySales(utcStandardDate.clone(), storeId!).then(data => {
+    getDaySales(utcStandardDate, storeId!).then(data => {
       if (data.sales.length !== 0) {
         const { result, recordData } = formatData(
           data.sales as Tables<'sales'>[],

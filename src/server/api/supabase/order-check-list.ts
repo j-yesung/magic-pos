@@ -42,7 +42,7 @@ const TIME_FORMAT_MONTH = 'YYYY-MM-01 HH:mm:ss';
 
 // 오늘
 const fetchDayOrderData = async (pageParam: number, id: string) => {
-  const todayStart = dayJsToString(dayjs(dayjs().format('YYYY-MM-DD 00:00:00')).utc().clone(), TIME_FORMAT);
+  const todayStart = dayJsToString(dayjs(dayjs().format('YYYY-MM-DD 00:00:00')).utc(), TIME_FORMAT);
   const { data: order_store, error: storeError } = await supabase
     .from('order_store')
     .select('*')
@@ -72,7 +72,7 @@ const fetchDayOrderData = async (pageParam: number, id: string) => {
 const fetchWeekOrderData = async (pageParam: number, id: string) => {
   const dayOfTheWeek = dayjs().day(); // 현재 요일
   const weekStart = dayJsToString(
-    dayjs(dayjs().format('YYYY-MM-DD 00:00:00')).subtract(dayOfTheWeek, 'day').utc().clone(),
+    dayjs(dayjs().format('YYYY-MM-DD 00:00:00')).subtract(dayOfTheWeek, 'day').utc(),
     TIME_FORMAT,
   );
   const { data: order_store, error: storeError } = await supabase
@@ -102,7 +102,7 @@ const fetchWeekOrderData = async (pageParam: number, id: string) => {
 
 // 이번달
 const fetchMonthOrderData = async (pageParam: number, id: string) => {
-  const monthStart = dayJsToString(dayjs(dayjs().format('YYYY-MM-DD 00:00:00')).utc().clone(), TIME_FORMAT_MONTH);
+  const monthStart = dayJsToString(dayjs(dayjs().format('YYYY-MM-DD 00:00:00')).utc(), TIME_FORMAT_MONTH);
 
   const { data: order_store, error: storeError } = await supabase
     .from('order_store')
@@ -131,17 +131,11 @@ const fetchMonthOrderData = async (pageParam: number, id: string) => {
 
 // 날짜선택
 const fetchSelectDateOrderData = async (pageParam: number, id: string, startDate: string, endDate: string) => {
-  const startSelectDate = dayJsToString(
-    dayjs(dayjs().format(`${startDate} 00:00:00`))
-      .utc()
-      .clone(),
-    TIME_FORMAT,
-  );
+  const startSelectDate = dayJsToString(dayjs(dayjs().format(`${startDate} 00:00:00`)).utc(), TIME_FORMAT);
   const endSelectDate = dayJsToString(
     dayjs(dayjs().format(`${endDate} 00:00:00`))
       .add(1, 'day')
-      .utc()
-      .clone(),
+      .utc(),
     TIME_FORMAT,
   );
   const { data: order_store, error: storeError } = await supabase
