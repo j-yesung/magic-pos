@@ -3,7 +3,7 @@ import styles from './styles/Modal.module.css';
 import useModalState, { hideAlert, hideConfirm, hideModal } from '@/shared/store/modal';
 import AlertModal from '@/components/modal/default/AlertModal';
 import ConfirmModal from '@/components/modal/default/ConfirmModal';
-import { animate, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import ModalContent from '@/components/modal/ModalContent';
 
 /**
