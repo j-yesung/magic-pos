@@ -29,7 +29,8 @@ const prependHttpsIfNeeded = (target: AddPlatFormType | EditPlatFormType) => {
  * @param imageUrl openGraph에서 이미지 추출시 https:// 가 없는 image url도 있기에 검사 합니다.
  * @returns
  */
-export const handleMetaImageException = (imageUrl: string) => {
+export const handleMetaImageException = (imageUrl: string | null) => {
+  if (!imageUrl) return null;
   if (imageUrl.startsWith(EXCEPTION_IMAGE_ERROR)) {
     const sliceImageUrl = imageUrl.substring(2);
     return HTTPS + sliceImageUrl;
