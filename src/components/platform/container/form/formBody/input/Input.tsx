@@ -1,8 +1,10 @@
+import useOgImgDebounce from '@/hooks/platform/useOgImgDebounce';
 import usePlatFormState, { setAddPlatForm, setEditPlatForm } from '@/shared/store/platform';
 import styles from './styles/input.module.css';
 
 const Input = ({ mode }: { mode: boolean }) => {
   const editPlatForm = usePlatFormState(state => state.editPlatForm);
+  useOgImgDebounce({ mode });
 
   return (
     <div className={styles.inputWrapper}>
