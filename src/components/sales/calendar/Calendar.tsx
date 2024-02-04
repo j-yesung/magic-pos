@@ -1,4 +1,5 @@
 import useSalesToggle from '@/shared/store/sales/salesToggle';
+import React from 'react';
 import Cell from './cell/Cell';
 import Days from './days/Days';
 import Header from './header/Header';
@@ -22,4 +23,4 @@ const Calendar = ({ children }: { children?: React.ReactNode }) => {
   );
 };
 
-export default Calendar;
+export default React.memo(Calendar);

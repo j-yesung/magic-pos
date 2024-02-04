@@ -1,6 +1,7 @@
 import { useCalendar } from '@/hooks/sales/useCalendar';
 import { useDataHandler } from '@/hooks/sales/useDataHandler';
 import useDayState from '@/shared/store/sales/salesDay';
+import React from 'react';
 import Select, { StylesConfig } from 'react-select';
 import styles from './styles/tabButton.module.css';
 
@@ -71,4 +72,4 @@ const TabButton = () => {
   );
 };
 
-export default TabButton;
+export default React.memo(TabButton);
