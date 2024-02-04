@@ -3,7 +3,7 @@ import styles from './styles/Modal.module.css';
 import useModalState, { hideAlert, hideConfirm, hideModal } from '@/shared/store/modal';
 import AlertModal from '@/components/modal/default/AlertModal';
 import ConfirmModal from '@/components/modal/default/ConfirmModal';
-import { animate, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import ModalContent from '@/components/modal/ModalContent';
 
 /**
@@ -21,22 +21,13 @@ const Modal = () => {
       let id = '';
       if (alertList && alertList?.length > 0) {
         id = alertList.pop()?.id ?? '';
-        setTimeout(() => {
-          hideAlert(id);
-        }, 150);
+        hideAlert(id);
       } else if (confirmList && confirmList?.length > 0) {
         id = confirmList.pop()?.id ?? '';
-        setTimeout(() => {
-          hideConfirm(id);
-        }, 150);
+        hideConfirm(id);
       } else if (modalList && modalList?.length > 0) {
         id = modalList.pop()?.id ?? '';
-        setTimeout(() => {
-          hideModal(id);
-        }, 150);
-      }
-      if (id !== '') {
-        animate(document.getElementById(id)!, { scale: [1, 0], opacity: [1, 0] }, { duration: 0.15 });
+        hideModal(id);
       }
     }
   };
