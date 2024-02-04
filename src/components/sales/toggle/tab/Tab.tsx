@@ -24,7 +24,7 @@ const Tab = () => {
       {isShow && (
         <Fragment>
           <div className={styles.calendarBg} onClick={clickHiddenCalendarHandler} />
-          <Calendar />
+          <Calendar mode={'mini'} />
         </Fragment>
       )}
       {isChangeView && <Csv />}

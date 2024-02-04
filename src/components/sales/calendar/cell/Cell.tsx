@@ -8,7 +8,6 @@ import useSalesDataState, {
   setSalesSum,
 } from '@/shared/store/sales/salesData';
 import useHolidayState from '@/shared/store/sales/salesHoliday';
-import useSalesToggle from '@/shared/store/sales/salesToggle';
 import useAuthState from '@/shared/store/session';
 import { Tables } from '@/types/supabase';
 import dayjs from 'dayjs';
@@ -18,8 +17,7 @@ import { formatToCalendarData, sortMinMaxData } from '../../calendarUtility/form
 import CellItem from '../cellItem/CellItem';
 import styles from './styles/cell.module.css';
 
-const Cell = () => {
-  const isChangeView = useSalesToggle(state => state.isChangeView);
+const Cell = ({ mode }: { mode: 'mini' | 'big' }) => {
   const holidays = useHolidayState(state => state.holidays);
 
   const calendarBindingData = useSalesDataState(state => state.calendarBindingData);
@@ -33,7 +31,7 @@ const Cell = () => {
   const storeId = useAuthState(state => state.storeId);
 
   useEffect(() => {
-    if (!isChangeView) {
+    if (mode === 'big') {
       getMonthSales(currentDate, storeId!).then(result => {
         if (result.sales.length !== 0) {
           const group = groupByKey<Tables<'sales'>>(
@@ -70,12 +68,12 @@ const Cell = () => {
       const holidayDate = holiday.filter(date => date.date === itemKey);
       days.push(
         <CellItem
-          key={itemKey}
+          mode={mode}
           day={day}
           salesData={salesData ? salesData[0] : undefined}
           // ... spreadOperator
-          {...(!isChangeView && { getMinMaxSalesType: getMinMaxSalesType })}
-          {...(isChangeView && { clickShowDataOfDateHandler: clickShowDataOfDateHandler })}
+          {...(mode === 'big' && { getMinMaxSalesType: getMinMaxSalesType })}
+          {...(mode === 'mini' && { clickShowDataOfDateHandler: clickShowDataOfDateHandler })}
           holiday={holidayDate}
         />,
       );

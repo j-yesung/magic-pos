@@ -2,7 +2,6 @@ import { useModal } from '@/hooks/service/ui/useModal';
 import { convertNumberToWon } from '@/shared/helper';
 import useCalendarState from '@/shared/store/sales/salesCalendar';
 import useDayState from '@/shared/store/sales/salesDay';
-import useSalesToggle from '@/shared/store/sales/salesToggle';
 import { CalendarDataType, GetMinMaxSalesReturnType, HolidayType } from '@/types/sales';
 import { cva } from 'class-variance-authority';
 import { Dayjs } from 'dayjs';
@@ -24,16 +23,16 @@ interface CellItemProps {
   getMinMaxSalesType?: (param: CalendarDataType) => GetMinMaxSalesReturnType;
   clickShowDataOfDateHandler?: (day: Dayjs) => () => Promise<void>;
   holiday: HolidayType[];
+  mode: 'mini' | 'big';
 }
 
 type Cell = (param: CellItemProps) => JSX.Element;
 
-const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDateHandler, holiday }) => {
+const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDateHandler, holiday, mode }) => {
   const SELECTED_DAY = 'SELECTEDTYPE';
   const SALES_NONE = 'NONE';
   const SALES_HAVE = 'HAVE';
   const HOLIDAY = 'HOLIDAY';
-  const isChangeView = useSalesToggle(state => state.isChangeView);
   const currentDate = useCalendarState(staet => staet.currentDate);
   const { selectedDate, today } = useDayState();
 
@@ -109,7 +108,7 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
   return (
     <>
       {/* sales/Status일 때 보여줄 날 css */}
-      {isChangeView && (
+      {mode === 'mini' && (
         <div
           className={statusVariant({
             calendarType: getStatusCalendarType(day, currentDate),
@@ -133,7 +132,7 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
       )}
 
       {/* sales/Calendar일 때 보여줄 날 css */}
-      {!isChangeView && (
+      {mode === 'big' && (
         <div
           className={calendarVariant({
             monthType: getCalendarMonthType(day, currentDate),

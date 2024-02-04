@@ -3,7 +3,7 @@ import SalesAmount from './salesAmount/SalesAmount';
 
 const SalesCalendar = () => {
   return (
-    <Calendar>
+    <Calendar mode={'big'}>
       <SalesAmount />
     </Calendar>
   );

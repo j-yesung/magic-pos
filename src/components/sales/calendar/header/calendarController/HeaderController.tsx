@@ -6,14 +6,16 @@ import React from 'react';
 import styles from './styles/headerController.module.css';
 import ArrowLeft from '/public/icons/calendar-arrow-left.svg';
 import ArrowRight from '/public/icons/calendar-arrow-right.svg';
-const HeaderController = () => {
+const HeaderController = ({ mode }: { mode: 'mini' | 'big' }) => {
   const isChangeView = useSalesToggle(state => state.isChangeView);
   const { clickPreMonthHandler, clickNextMonthHandler } = useCalendar();
   return (
-    <div className={clsx(!isChangeView && styles.salesCalendarGroup)}>
+    <div className={clsx(mode === 'big' && styles.salesCalendarGroup)}>
       <Button
         type="button"
-        className={clsx(styles.statusBtn, styles.statusBtnLeft, !isChangeView && styles.calendarBtn)}
+        className={clsx(styles.statusBtn, styles.statusBtnLeft, {
+          [styles.calendarBtn]: mode === 'big',
+        })}
         onClick={clickPreMonthHandler}
       >
         <ArrowLeft />
@@ -21,7 +23,9 @@ const HeaderController = () => {
 
       <Button
         type="button"
-        className={clsx(styles.statusBtn, styles.statusBtnRight, !isChangeView && styles.calendarBtn)}
+        className={clsx(styles.statusBtn, styles.statusBtnRight, {
+          [styles.calendarBtn]: mode === 'big',
+        })}
         onClick={clickNextMonthHandler}
       >
         <ArrowRight />
