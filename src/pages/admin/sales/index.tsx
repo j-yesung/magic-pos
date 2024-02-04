@@ -17,7 +17,7 @@ export const getStaticProps = (async () => {
   // 2000년부터 2030년까지
   for (let i = 0; i <= 30; i++) {
     const holidayYear = dayjs().year(startYearOfHoliday).add(i, 'year').format('YYYY');
-    const { data } = await axios.get(`https://superkts.com/day/holiday/${holidayYear}`);
+    const { data } = await axios.get(`${process.env.NEXT_PUBLIC_HOLIDAY_URL}/${holidayYear}`);
     const holidayList = processHoldayList(data, holidayYear);
     holidayObject[holidayYear] = holidayList;
   }
