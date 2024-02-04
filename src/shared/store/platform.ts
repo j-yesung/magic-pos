@@ -1,7 +1,6 @@
 import { handleMetaImageException } from '@/components/platform/utility/usePlatformHelper';
 import { getOpenGraphMetaImage } from '@/server/api/external/openGraph';
 import { AddPlatFormType, EditPlatFormType } from '@/types/platform';
-import { debounce } from 'lodash';
 import { ChangeEvent } from 'react';
 import { create } from 'zustand';
 
@@ -98,7 +97,7 @@ export const setPlatFormStoreId = (store_id: string) =>
  *
  * @param e AddForm
  */
-export const setAddPlatForm = debounce(async (e: ChangeEvent<HTMLInputElement>) => {
+export const setAddPlatForm = async (e: ChangeEvent<HTMLInputElement>) => {
   const notHasPrevImg = !usePlatFormState.getState().prevImg;
   const { name, value } = e.target;
   if (name === 'link_url') {
@@ -116,7 +115,7 @@ export const setAddPlatForm = debounce(async (e: ChangeEvent<HTMLInputElement>) 
 
         setPrevImg(confirmedImageUrl);
       } else if (notHasPrevImg) {
-        resetPrevImg();
+        resetPrevImg(usePlatFormState.getState().isEdit);
       }
     }
   }
@@ -124,12 +123,12 @@ export const setAddPlatForm = debounce(async (e: ChangeEvent<HTMLInputElement>) 
     ...state,
     addPlatForm: { ...state.addPlatForm, [name]: value },
   }));
-}, 300);
+};
 
 /**
  *  수정할 데이터
  */
-export const setEditPlatForm = debounce(async (e: ChangeEvent<HTMLInputElement>) => {
+export const setEditPlatForm = async (e: ChangeEvent<HTMLInputElement>) => {
   const notHasPrevImg = !usePlatFormState.getState().prevImg;
   const { name, value } = e.target;
   if (name === 'link_url') {
@@ -138,6 +137,7 @@ export const setEditPlatForm = debounce(async (e: ChangeEvent<HTMLInputElement>)
 
       if (extractedImage && notHasPrevImg) {
         const confirmedImageUrl = handleMetaImageException(extractedImage);
+        console.log(confirmedImageUrl);
         usePlatFormState.setState(state => ({
           ...state,
           editPlatForm: {
@@ -147,7 +147,7 @@ export const setEditPlatForm = debounce(async (e: ChangeEvent<HTMLInputElement>)
         }));
         setPrevImg(confirmedImageUrl);
       } else if (notHasPrevImg) {
-        resetPrevImg();
+        resetPrevImg(usePlatFormState.getState().isEdit);
       }
     }
   }
@@ -156,7 +156,7 @@ export const setEditPlatForm = debounce(async (e: ChangeEvent<HTMLInputElement>)
     ...state,
     editPlatForm: { ...state.editPlatForm, [name]: value },
   }));
-}, 300);
+};
 
 /**
  *
@@ -215,11 +215,24 @@ export const resetPlatFormFile = (mode: boolean) => {
   }
 };
 
-export const resetPrevImg = () =>
+export const resetPrevImg = (mode: boolean) => {
+  if (!mode) {
+    usePlatFormState.setState(state => ({
+      ...state,
+      addPlatForm: { ...state.addPlatForm, metaImage: null },
+    }));
+  }
+  if (mode) {
+    usePlatFormState.setState(state => ({
+      ...state,
+      editPlatForm: { ...state.editPlatForm, metaImage: null },
+    }));
+  }
   usePlatFormState.setState(state => ({
     ...state,
     prevImg: null,
   }));
+};
 
 /**
  * 모달을 닫을 때, platFormCard를 Add, Edit할 때 사용
