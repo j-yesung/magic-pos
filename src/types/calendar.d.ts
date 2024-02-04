@@ -5,12 +5,12 @@ type CalendarPageType = 'STATUS_PAGE' | 'CALENDAR_PAGE' | 'ORDER_PAGE';
 interface CalendarType {
   children?: React.ReactNode;
   mode: CalendarModeType;
-  page?: CalendarPageType;
+  page: CalendarPageType;
 }
 
 interface CalendarCellType {
   mode: CalendarModeType;
-  page?: CalendarPageType;
+  page: CalendarPageType;
 }
 
 /**
@@ -25,5 +25,5 @@ interface CellItemProps {
   clickShowDataOfDateHandler?: (day: Dayjs) => () => Promise<void>;
   holiday: HolidayType[];
   mode: CalendarModeType;
-  page?: CalendarPageType;
+  page: CalendarPageType;
 }

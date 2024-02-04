@@ -6,9 +6,9 @@ import styles from './styles/header.module.css';
 const Header = ({ mode }: { mode: CalendarModeType }) => {
   return (
     <div
-      className={clsx(styles.headerContainer, {
-        [styles.statusHeader]: mode === MINI_MODE,
-        [styles.calendarHeader]: mode === BIG_MODE,
+      className={clsx(styles.baseHeader, {
+        [styles.miniHeader]: mode === MINI_MODE,
+        [styles.bigHeader]: mode === BIG_MODE,
       })}
     >
       <HeaderDate mode={mode} />

@@ -15,19 +15,16 @@ import styles from './styles/calendar.module.css';
  * @returns
  */
 const Calendar = ({ children, mode, page }: CalendarType) => {
-  // ischangeView = false  => mini
-
   return (
     <div
       className={clsx({
-        [styles.salesStatus]: mode === MINI_MODE,
-        [styles.showCalendar]: mode === BIG_MODE,
+        [styles.miniCalendar]: mode === MINI_MODE,
+        [styles.bigCalendar]: mode === BIG_MODE,
       })}
     >
       <div
         className={clsx({
-          [styles.statusHeaderWrapper]: mode === MINI_MODE,
-          [styles.calendarHeaderWrapper]: mode === BIG_MODE,
+          [styles.miniCalendarHeaderWrapper]: mode === MINI_MODE,
         })}
       >
         <Header mode={mode} />
@@ -36,7 +33,7 @@ const Calendar = ({ children, mode, page }: CalendarType) => {
 
       <div
         className={clsx({
-          [styles.calendarBodyWrapper]: mode === BIG_MODE,
+          [styles.bigBodyWrapper]: mode === BIG_MODE,
         })}
       >
         <Days mode={mode} />

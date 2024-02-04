@@ -1,4 +1,4 @@
-.header-container {
+.base-header {
   display: flex;
   width: 100%;
   align-items: center;
@@ -8,13 +8,13 @@
 }
 
 /*매출현황일 때*/
-.status-header {
+.mini-header {
   position: relative;
   justify-content: center;
 }
 
 /*매출 달력 일 때*/
-.calendar-header {
+.big-header {
   width: 16rem;
   gap: 2rem;
   flex-direction: column;

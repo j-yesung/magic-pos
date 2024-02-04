@@ -7,21 +7,21 @@ const Days = ({ mode }: { mode: CalendarModeType }) => {
   return (
     <div
       className={clsx({
-        [styles.statusDays]: mode === MINI_MODE,
-        [styles.salesCalendarDays]: mode === BIG_MODE,
+        [styles.miniDays]: mode === MINI_MODE,
+        [styles.bigCalendarDays]: mode === BIG_MODE,
       })}
     >
       {DAYS.map((day, idx) => (
         <span
           key={day + idx}
           className={clsx({
-            [styles.statusDay]: mode === MINI_MODE,
-            [styles.salesCalendarDay]: mode === BIG_MODE,
+            [styles.miniDay]: mode === MINI_MODE,
+            [styles.bigCalendarDay]: mode === BIG_MODE,
           })}
         >
           <span
             className={clsx({
-              [styles.statusDayText]: mode === MINI_MODE,
+              [styles.miniDayText]: mode === MINI_MODE,
             })}
           >
             {day}
