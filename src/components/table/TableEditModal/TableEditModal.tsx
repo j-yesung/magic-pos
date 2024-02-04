@@ -26,7 +26,7 @@ const TableEditModal = ({ modalId }: { modalId?: string }) => {
             clickCloseModalHandler(modalId);
           }}
         >
-          <CloseButton className={styles['close-button-svg']} width={26} height={26} />
+          <CloseButton className={styles['close-button-svg']} width={26} height={26} fill={'#121416'} />
         </span>
       </div>
       <TableEditModalContainer />
