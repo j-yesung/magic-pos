@@ -18,6 +18,7 @@ import { motion } from 'framer-motion';
 import useToast from '@/hooks/service/ui/useToast';
 import { useModal } from '@/hooks/service/ui/useModal';
 import { RECEIPT_PATH } from '@/data/url-list';
+import { MdOutlineAddHome } from 'react-icons/md';
 
 const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const orderList = useKioskState(state => state.orderList);
@@ -135,6 +136,7 @@ const SuccessContainer = ({ payment }: { payment?: Payment }) => {
                     }
                   });
                 },
+                icon: <MdOutlineAddHome size={60} />,
               });
             }
           } catch (err) {

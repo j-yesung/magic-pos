@@ -20,6 +20,7 @@ import 'swiper/css/virtual';
 import { translateMenuData } from '@/server/service/translate';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { RECEIPT_PATH } from '@/data/url-list';
+import { IoBagHandleOutline } from 'react-icons/io5';
 
 interface OrderIndexPageProps {
   menuData: CategoryWithMenuItemWithStore[];
@@ -49,6 +50,7 @@ const OrderIndexPage = ({ menuData, storeId, tableId }: OrderIndexPageProps) => 
         cancelButtonCallback: () => {
           router.push(RECEIPT_PATH);
         },
+        icon: <IoBagHandleOutline size={60} />,
       });
     }
   }, [isOrderAllReady]);
