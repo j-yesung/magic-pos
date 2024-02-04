@@ -10,6 +10,7 @@ import { MenuItemWithOption, OrderDataWithStoreName } from '@/types/supabase';
 import dayjs from 'dayjs';
 import { IoCheckmark } from 'react-icons/io5';
 import styles from './styles/OrderItem.module.css';
+import ExclamationMark from '/public/icons/exclamation-mark.svg';
 
 const OrderItem = ({ orderData }: { orderData: OrderDataWithStoreName }) => {
   const { id, order_number, order_id, order_time, menu_list, is_togo } = orderData;
@@ -26,6 +27,7 @@ const OrderItem = ({ orderData }: { orderData: OrderDataWithStoreName }) => {
 
   const clickOrderConfirmHandler = () => {
     MagicModal.confirm({
+      icon: <ExclamationMark width={50} height={50} />,
       content: '주문을 완료할까요?',
       confirmButtonCallback: () => {
         if (userToken) {
