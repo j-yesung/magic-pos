@@ -1,8 +1,10 @@
 import Button from '@/components/common/Button';
 import { LOGIN_PATH } from '@/data/url-list';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import styles from '../styles/Auth.module.css';
-import Success from '/public/icons/success.svg';
+
+const SUCCESS_IMAGE_PATH = '/icons/success.svg';
 
 const SignupSuccess = () => {
   const router = useRouter();
@@ -14,7 +16,7 @@ const SignupSuccess = () => {
           <h1 className={`${styles.title} ${styles.black}`}>회원가입 완료</h1>
         </div>
         <div className={styles.successImage}>
-          <Success size={200} className={styles.signupSuccess} />
+          <Image src={SUCCESS_IMAGE_PATH} alt="success-img" width={200} height={200} />
         </div>
         <div className={styles.center}>
           <p>회원가입을 환영합니다!</p>

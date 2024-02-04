@@ -44,6 +44,7 @@
 .center {
   gap: 0.5rem;
   display: flex;
+  padding-bottom: 2rem;
   flex-direction: column;
   font-size: 1.7rem;
   color: var(--text1);
