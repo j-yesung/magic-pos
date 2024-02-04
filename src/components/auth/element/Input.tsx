@@ -1,6 +1,6 @@
+import { LOGIN_PATH } from '@/data/url-list';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
-import { LOGIN_PATH } from '../form/Login';
 import styles from '../styles/Auth.module.css';
 
 const Input = (props: InputProps) => {
