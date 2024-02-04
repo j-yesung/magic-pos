@@ -10,18 +10,11 @@ import styles from './styles/calendar.module.css';
  *
  * @param children ReactNode
  * @param mode mini , big
- * @param page page는 조건부 props로 기능을 주고 싶을 때 사용합니다. Cell.tsx에 주석처리로 기능 예시를 써놓았습니다.
+ * @param page page는 조건부 props로 기능을 주고 싶을 때 사용합니다. Cell.tsx, CellItem.tsx에 주석처리로 기능 예시를 써놓았습니다.
+ * 물론 page에 따른 CellItem.tsx에서 style을 할 수 있게끔 주석과 예시? 써놓았습니다.
  * @returns
  */
-const Calendar = ({
-  children,
-  mode,
-  page,
-}: {
-  children?: React.ReactNode;
-  mode: CalendarModeType;
-  page?: CalendarPageType;
-}) => {
+const Calendar = ({ children, mode, page }: CalendarType) => {
   // ischangeView = false  => mini
 
   return (
