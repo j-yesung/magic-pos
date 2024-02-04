@@ -1,6 +1,7 @@
 import styles from '@/components/menu-category/styles/category.module.css';
 import useSetCategories from '@/hooks/query/menu/menu-category/useSetCategories';
 import { useModal } from '@/hooks/service/ui/useModal';
+import useToast from '@/hooks/service/ui/useToast';
 import useCategoriesStore, { setCategory } from '@/shared/store/menu/menu-category';
 import { Tables } from '@/types/supabase';
 import CloseButton from '/public/icons/close.svg';
@@ -11,6 +12,7 @@ interface PropsType {
 }
 
 const RemoveCategoryComponent = ({ item }: PropsType) => {
+  const { toast } = useToast();
   const { MagicModal } = useModal();
   const { deleteMutate } = useSetCategories();
   const category = useCategoriesStore(state => state.category);
@@ -23,6 +25,12 @@ const RemoveCategoryComponent = ({ item }: PropsType) => {
       confirmButtonCallback: () => {
         deleteMutate(item.id);
         setCategory({ ...category, id: '', name: '' });
+        toast('카테고리 삭제 완료', {
+          type: 'success',
+          position: 'top-center',
+          showCloseButton: false,
+          autoClose: 2000,
+        });
       },
     });
   };

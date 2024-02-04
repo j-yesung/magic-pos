@@ -7,11 +7,11 @@ import AddButton from './form/button/Button';
 import styles from './styles/container.module.css';
 const PlatFormWrapper = () => {
   const storeId = useAuthState(state => state.storeId);
-  setPlatFormStoreId(storeId!);
   const isRegist = usePlatFormState(state => state.isRegist);
   const clickCloseForm = () => setIsRegist(false);
 
   useEffect(() => {
+    setPlatFormStoreId(storeId!);
     return () => {
       allResetPlatFormState();
     };

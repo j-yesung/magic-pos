@@ -48,16 +48,20 @@ const usePlatForm = () => {
 
   const submitEditCard = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const comparedData = isPlatFormCardValueChange(prevData, editPlatForm);
     if (isEmptyObject(comparedData) && prevData.image_url === prevImg) {
       handleResetStateAfterAction(isEdit);
       return;
     }
+
     comparedData.id = editPlatForm.id;
     comparedData.store_id = editPlatForm.store_id;
     await prevImageRemove(prevData);
     const ensureHttpsUrlData = ensureHttpsUrl(comparedData);
+
     const form = await handleImageUpload(ensureHttpsUrlData);
+
     // react-query mutation
     editCardPlatForm(form as EditPlatFormType);
     setPending(true);

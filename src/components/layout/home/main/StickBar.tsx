@@ -1,3 +1,4 @@
+import { HOME_PATH } from '@/data/url-list';
 import { useAuthSetQuery } from '@/hooks/query/auth/useAuthSetQuery';
 import useAuthState from '@/shared/store/session';
 import Link from 'next/link';
@@ -21,7 +22,7 @@ const StickBar = () => {
     <>
       {isLoaded && (
         <div className={styles.wrapper}>
-          <Logo width={200} height={23} onClick={() => router.push('/')} />
+          <Logo width={200} height={23} onClick={() => router.push(HOME_PATH)} />
           <div className={styles.tabArea}>
             <div>
               {session === null ? (

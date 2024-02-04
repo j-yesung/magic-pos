@@ -1,6 +1,7 @@
 import { useCalendar } from '@/hooks/sales/useCalendar';
 import useDayState from '@/shared/store/sales/salesDay';
 import useSalesToggle from '@/shared/store/sales/salesToggle';
+import React from 'react';
 import { IoCalendarClearOutline } from 'react-icons/io5';
 import styles from './styles/calendarToggle.module.css';
 
@@ -17,4 +18,4 @@ const CalendarToggle = () => {
   );
 };
 
-export default CalendarToggle;
+export default React.memo(CalendarToggle);

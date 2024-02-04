@@ -1,13 +1,14 @@
 import { useEffect, useRef } from 'react';
+import dynamic from 'next/dynamic';
 import OrderTypeContainer from '@/components/kiosk/order-type/OrderTypeContainer';
 import MenuContainer from '@/components/kiosk/menu/MenuContainer';
-import CartContainer from '@/components/kiosk/cart/CartContainer';
-import PaymentContainer from '@/components/kiosk/payment/PaymentContainer';
-import SuccessContainer from '@/components/kiosk/success/SuccessContainer';
 import { Swiper, SwiperSlide, SwiperRef } from 'swiper/react';
 import { Virtual } from 'swiper/modules';
 import useKioskState, { setOptionSwiperRef } from '@/shared/store/kiosk';
-import MenuOptionContainer from '@/components/kiosk/menu-option/MenuOptionContainer';
+
+const CartContainer = dynamic(() => import('@/components/kiosk/cart/CartContainer'));
+const MenuOptionContainer = dynamic(() => import('@/components/kiosk/menu-option/MenuOptionContainer'));
+const PaymentContainer = dynamic(() => import('@/components/kiosk/payment/PaymentContainer'));
 
 /**
  * 키오스크 화면을 전반적으로 감싸는 Container
@@ -48,9 +49,6 @@ const KioskContainer = () => {
       </SwiperSlide>
       <SwiperSlide>
         <PaymentContainer />
-      </SwiperSlide>
-      <SwiperSlide>
-        <SuccessContainer />
       </SwiperSlide>
     </Swiper>
   );

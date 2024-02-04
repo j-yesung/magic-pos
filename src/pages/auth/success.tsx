@@ -6,7 +6,7 @@ const SingupSuccessPage = () => {
   return (
     <>
       <Head>
-        <title>{makeTitle('회원가입')}</title>
+        <title>{makeTitle('회원가입 완료')}</title>
         <meta name="description" content="signupSuccess" />
       </Head>
       <SignupSuccess />

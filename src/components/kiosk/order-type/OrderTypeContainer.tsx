@@ -9,8 +9,6 @@ import useKioskState, { goNextStep, ORDER_STEP, setIsOnlyTable, setOrderType } f
 import { useModal } from '@/hooks/service/ui/useModal';
 import { IoInformationCircleOutline } from 'react-icons/io5';
 import HelpModal from '@/components/kiosk/order-type/HelpModal';
-import TranslateLoading from '@/components/kiosk/order-type/TranslateLoading';
-import clsx from 'clsx';
 import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButton';
 import OrderTypeHeader from '@/components/kiosk/order-type/OrderTypeHeader';
 
@@ -28,7 +26,6 @@ const OrderTypeContainer = () => {
   const languageRef = useRef<HTMLDivElement>(null);
   const [isListenAlert, setIsListenAlert] = useState(false);
   const { MagicModal } = useModal();
-  const [isTranslating, setIsTranslating] = useState(false);
   const swiper = useSwiper();
 
   const handleClickLanguage = () => {
@@ -38,10 +35,6 @@ const OrderTypeContainer = () => {
   const handleClickHelp = () => {
     MagicModal.fire(<HelpModal />);
   };
-
-  useEffect(() => {
-    setIsTranslating(false);
-  }, [menuData]);
 
   useEffect(() => {
     if (step === ORDER_STEP.CHOOSE_ORDER_TYPE && menuData && menuData.length > 0) {
@@ -83,32 +76,23 @@ const OrderTypeContainer = () => {
   }, []);
 
   return (
-    <>
-      {isTranslating && <TranslateLoading />}
-      <div
-        className={clsx(styles.container, {
-          [styles.blur]: isTranslating,
-        })}
-      >
-        <OrderTypeHeader />
-        <ButtonContainer />
-        <div className={styles.languageWrapper} ref={languageRef}>
-          {showLanguageList && (
-            <LanguageList setShowLanguageList={setShowLanguageList} setIsTranslating={setIsTranslating} />
+    <div className={styles.container}>
+      <OrderTypeHeader />
+      <ButtonContainer />
+      <div className={styles.languageWrapper} ref={languageRef}>
+        {showLanguageList && <LanguageList setShowLanguageList={setShowLanguageList} />}
+        <MdOutlineLanguage size={20} onClick={handleClickLanguage} />
+        <div className={styles.buttonContainer}>
+          <button onClick={handleClickLanguage}>Language</button>
+          {!isListenAlert && (
+            <div onClick={handleClickHelp}>
+              <div className={styles.balloon}>홈 화면에 등록하여 알림을 받아보세요.</div>
+              <IoInformationCircleOutline size={8} />
+            </div>
           )}
-          <MdOutlineLanguage size={20} onClick={handleClickLanguage} />
-          <div className={styles.buttonContainer}>
-            <button onClick={handleClickLanguage}>Language</button>
-            {!isListenAlert && (
-              <div onClick={handleClickHelp}>
-                <div className={styles.balloon}>홈 화면에 등록하여 알림을 받아보세요.</div>
-                <IoInformationCircleOutline size={8} />
-              </div>
-            )}
-          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

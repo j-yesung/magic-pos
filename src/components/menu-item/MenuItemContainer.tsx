@@ -1,3 +1,4 @@
+import { MENU_CATEGORY_PATH } from '@/data/url-list';
 import useFetchMenuItems from '@/hooks/query/menu/menu-item/useFetchMenuItems';
 import useFetchMenuOptions from '@/hooks/query/menu/menu-item/useFetchMenuOption';
 import { fetchMenuOptions } from '@/server/api/supabase/menu-item';
@@ -86,7 +87,7 @@ const MenuItemsComponentPage = () => {
           <div>
             <ExclamationMark width={121} height={121} />
             <h4>메뉴의 카테고리를 먼저 추가해주세요.</h4>
-            <button type="button" onClick={() => router.push('/admin/menu-category')}>
+            <button type="button" onClick={() => router.push(MENU_CATEGORY_PATH)}>
               카테고리 페이지로 이동
             </button>
           </div>

@@ -1,6 +1,7 @@
 import Button from '@/components/common/Button';
 import useSalesToggle, { setIsChangeView } from '@/shared/store/sales/salesToggle';
 import clsx from 'clsx';
+import React from 'react';
 import styles from './styles/toggleButton.module.css';
 
 const ToggleButton = () => {
@@ -29,4 +30,4 @@ const ToggleButton = () => {
   );
 };
 
-export default ToggleButton;
+export default React.memo(ToggleButton);

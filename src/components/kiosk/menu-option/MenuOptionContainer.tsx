@@ -17,7 +17,14 @@ const MenuOptionContainer = () => {
     <>
       {selectedMenu && (
         <section className={styles.container}>
-          <Image src={selectedMenu?.image_url ?? ''} alt={selectedMenu?.name ?? ''} width={375} height={375} />
+          <Image
+            src={selectedMenu?.image_url ?? ''}
+            alt={selectedMenu?.name ?? ''}
+            width={375}
+            height={375}
+            objectFit={'cover'}
+            priority={true}
+          />
           <MenuInfo />
           {selectedMenu?.menu_option
             .filter(option => option.is_use)

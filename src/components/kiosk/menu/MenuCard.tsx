@@ -23,7 +23,15 @@ const MenuCard = ({ menu }: MenuCardProps) => {
 
   return (
     <div className={styles.card} onClick={handleClickCard}>
-      <Image src={menu.image_url ?? ''} alt={menu.name ?? ''} width={123} height={125} priority={true} />
+      <Image
+        src={menu.image_url ?? ''}
+        alt={menu.name ?? ''}
+        width={123}
+        height={123}
+        priority={true}
+        objectFit={'cover'}
+      />
+
       <div className={styles.menuInfo}>
         <span>{menu.name}</span>
         <span>{convertNumberToWon(menu.price, i18n.language === 'ko')}</span>

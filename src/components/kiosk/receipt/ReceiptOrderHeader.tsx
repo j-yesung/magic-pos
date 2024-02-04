@@ -31,7 +31,7 @@ const ReceiptOrderHeader = ({ isTogo, orderNumber, isDone, orderTime }: ReceiptH
         <span className={styles.orderTime}>
           {t('order-time')} {dayjs(orderTime).format('HH:mm')}
         </span>
-        <span className={styles.orderType}>{isTogo ? t('order-type.store-short') : t('order-type.togo-short')}</span>
+        <span className={styles.orderType}>{isTogo ? t('order-type.togo-short') : t('order-type.store-short')}</span>
       </div>
     </div>
   );

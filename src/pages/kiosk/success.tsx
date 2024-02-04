@@ -8,6 +8,7 @@ import Waiting from '@/components/kiosk/success/Waiting';
 import OrderLayout from '@/components/layout/order/OrderLayout';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { setErrorState } from '@/shared/store/error';
+import { PAYMENT_FAIL_PATH, RECEIPT_PATH } from '@/data/url-list';
 
 /**
  * 결제 성공 페이지
@@ -26,7 +27,7 @@ const OrderSuccessPage = ({ payment, isError }: { payment: Payment; isError: boo
   useEffect(() => {
     // 에러이면서 주문번호가 있으면 주문 내역 화면을 보여줍니다.
     if (isError && orderNumber) {
-      router.push(`/kiosk/receipt`);
+      router.push(RECEIPT_PATH);
       return;
     } else if (isError) {
       // 에러만 있다면 에러 화면을 보여줍니다.
@@ -109,7 +110,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
         ...(await serverSideTranslations(lang ? lang.toString() : 'ko', ['common'])),
       },
       redirect: {
-        destination: `/kiosk/fail?code=${error.response.data.code}&message=${encodeURIComponent(
+        destination: `${PAYMENT_FAIL_PATH}?code=${error.response.data.code}&message=${encodeURIComponent(
           error.response.data.message,
         )}`,
         permanent: false,

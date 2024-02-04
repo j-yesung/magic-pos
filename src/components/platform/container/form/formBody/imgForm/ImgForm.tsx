@@ -25,7 +25,7 @@ const ImgForm = ({ mode }: { mode: boolean }) => {
   };
 
   const removeImage = () => {
-    resetPrevImg();
+    resetPrevImg(mode);
     resetPlatFormFile(mode);
   };
 

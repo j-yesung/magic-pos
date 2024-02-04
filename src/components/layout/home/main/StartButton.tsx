@@ -1,3 +1,4 @@
+import { LOGIN_PATH, MANAGEMENT_PATH } from '@/data/url-list';
 import useToast from '@/hooks/service/ui/useToast';
 import useAuthState from '@/shared/store/session';
 import { useRouter } from 'next/router';
@@ -10,7 +11,7 @@ const StartButton = () => {
 
   const clickStartHandler = () => {
     if (session) {
-      router.push('/admin/management');
+      router.push(MANAGEMENT_PATH);
     } else {
       toast('로그인 후 이용해 주세요.', {
         type: 'warn',
@@ -18,7 +19,7 @@ const StartButton = () => {
         showCloseButton: false,
         autoClose: 2000,
       });
-      router.push('/auth/login');
+      router.push(LOGIN_PATH);
     }
   };
 

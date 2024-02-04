@@ -7,6 +7,7 @@ import useSalesDataState, {
   setCalendarBindingData,
   setSalesSum,
 } from '@/shared/store/sales/salesData';
+import useHolidayState from '@/shared/store/sales/salesHoliday';
 import useSalesToggle from '@/shared/store/sales/salesToggle';
 import useAuthState from '@/shared/store/session';
 import { Tables } from '@/types/supabase';
@@ -19,18 +20,21 @@ import styles from './styles/cell.module.css';
 
 const Cell = () => {
   const isChangeView = useSalesToggle(state => state.isChangeView);
-  const { calendarBindingData } = useSalesDataState();
+  const holidays = useHolidayState(state => state.holidays);
+
+  const calendarBindingData = useSalesDataState(state => state.calendarBindingData);
 
   const currentDate = useCalendarState(state => state.currentDate);
   const { clickShowDataOfDateHandler } = useDataHandler();
 
-  const startDay = currentDate.clone().startOf('month').startOf('week'); // monthStart가 속한 주의 시작 주
-  const endDay = currentDate.clone().endOf('month').endOf('week'); // monthStart가 속한 마지막 주
+  const startDay = currentDate.startOf('month').startOf('week'); // monthStart가 속한 주의 시작 주
+  const endDay = currentDate.endOf('month').endOf('week'); // monthStart가 속한 마지막 주
 
   const storeId = useAuthState(state => state.storeId);
+
   useEffect(() => {
     if (!isChangeView) {
-      getMonthSales(currentDate.clone(), storeId!).then(result => {
+      getMonthSales(currentDate, storeId!).then(result => {
         if (result.sales.length !== 0) {
           const group = groupByKey<Tables<'sales'>>(
             result.sales.map(data => ({
@@ -54,15 +58,16 @@ const Cell = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentDate]);
-
+  const holiday = holidays[currentDate.format('YYYY')];
   const row = [];
   let days = [];
   let day = startDay;
   while (day <= endDay) {
     for (let i = 0; i < 7; i++) {
-      const itemKey = day.clone().format(FORMAT_CELL_DATE_TYPE);
+      const itemKey = day.format(FORMAT_CELL_DATE_TYPE);
       const salesData = calendarBindingData?.filter(target => target.date === itemKey);
 
+      const holidayDate = holiday.filter(date => date.date === itemKey);
       days.push(
         <CellItem
           key={itemKey}
@@ -71,9 +76,10 @@ const Cell = () => {
           // ... spreadOperator
           {...(!isChangeView && { getMinMaxSalesType: getMinMaxSalesType })}
           {...(isChangeView && { clickShowDataOfDateHandler: clickShowDataOfDateHandler })}
+          holiday={holidayDate}
         />,
       );
-      day = day.clone().add(1, 'day');
+      day = day.add(1, 'day');
     }
     row.push(
       <div key={days[0].key} className={styles.calendarRow}>

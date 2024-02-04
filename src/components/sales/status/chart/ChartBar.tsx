@@ -7,12 +7,6 @@ import styles from './styles/ChartBar.module.css';
 // Chart.js를 사용하려면 먼저 library 등록을 해야합니다.
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels);
 
-/**
- *  chat.js의 plugin객체인데, chart component의 option의 plugin에 id 값을 입력하면 사용가능합니다
- *
- * chart component의 어디서든 재사용 가능하도록 하는것이 plugin 같습니다.
- */
-
 const ChartBar = () => {
   const { data, options } = useChartData();
   return (

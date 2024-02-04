@@ -1,5 +1,4 @@
 .card {
-    --image-height: 12.5rem;
     --span-height: 3rem  /* 30/10 */;
     position: relative;
     display: flex;
@@ -15,15 +14,11 @@
     cursor: pointer;
 
     @media screen and (min-width: 960px) {
-        --image-height: 15rem;
         --span-height: 3rem;
     }
 }
 
 .card img {
-    object-fit: cover;
-    width: 12.3rem;
-    height: var(--image-height);
     border-radius: .5rem;
     @media screen and (min-width: 960px) {
         width: 16rem;

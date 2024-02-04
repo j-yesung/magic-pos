@@ -1,6 +1,7 @@
 export const signupInput = [
   {
-    id: 1,
+    unique: 1,
+    id: 'email',
     label: '사용하실 이메일과 비밀번호를 입력해 주세요.',
     type: 'text',
     placeholder: '이메일',
@@ -14,7 +15,8 @@ export const signupInput = [
     },
   },
   {
-    id: 2,
+    unique: 2,
+    id: 'password',
     type: 'password',
     placeholder: '비밀번호',
     name: 'password',
@@ -33,7 +35,8 @@ export const signupInput = [
     },
   },
   {
-    id: 3,
+    unique: 3,
+    id: 'confirmPassword',
     type: 'password',
     placeholder: '비밀번호 확인',
     minLegth: 8,
@@ -45,7 +48,8 @@ export const signupInput = [
     }),
   },
   {
-    id: 4,
+    unique: 4,
+    id: 'storeName',
     label: '상호명을 입력해 주세요.',
     type: 'text',
     placeholder: '상호명',
@@ -53,7 +57,8 @@ export const signupInput = [
     validation: {},
   },
   {
-    id: 5,
+    unique: 5,
+    id: 'businessNumber',
     label: '사업자등록번호를 인증해 주세요.',
     type: 'text',
     placeholder: '사업자등록번호',
@@ -68,14 +73,16 @@ export const signupInput = [
 
 export const loginInput = [
   {
-    id: 1,
+    unique: 1,
+    id: 'email',
     type: 'text',
     placeholder: '이메일',
     name: 'email',
     validation: {},
   },
   {
-    id: 2,
+    unique: 2,
+    id: 'password',
     type: 'password',
     placeholder: '비밀번호',
     minLegth: 8,
@@ -87,7 +94,8 @@ export const loginInput = [
 
 export const resetPasswordInput = [
   {
-    id: 1,
+    unique: 1,
+    id: 'password',
     type: 'password',
     placeholder: '비밀번호',
     minLegth: 8,
@@ -96,7 +104,8 @@ export const resetPasswordInput = [
     validation: {},
   },
   {
-    id: 2,
+    unique: 2,
+    id: 'confirmPassword',
     type: 'password',
     placeholder: '비밀번호 확인',
     minLegth: 8,
@@ -106,5 +115,24 @@ export const resetPasswordInput = [
     validateFunc: (password: string) => ({
       validate: (value: string) => value === password || '비밀번호가 일치하지 않습니다.',
     }),
+  },
+];
+
+export const sendEmailInput = [
+  {
+    unique: 1,
+    id: 'to_name',
+    label: '상호명',
+    type: 'text',
+    name: 'to_name',
+    validation: {},
+  },
+  {
+    unique: 2,
+    id: 'user_email',
+    label: '답변 받으실 이메일 주소',
+    type: 'text',
+    name: 'user_email',
+    validation: {},
   },
 ];

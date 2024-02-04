@@ -10,9 +10,9 @@ const HeaderDate = () => {
     <Fragment>
       <span className={clsx(styles.headerText, !isChangeView && styles.calendarHeaderText)}>
         <span className={clsx(styles.textYear, !isChangeView && styles.calendarTextYear)}>
-          {currentDate.clone().format('YYYY년')}
+          {currentDate.format('YYYY년')}
         </span>
-        {currentDate.clone().format('MM월')}
+        {currentDate.format('MM월')}
       </span>
     </Fragment>
   );

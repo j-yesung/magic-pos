@@ -1,3 +1,4 @@
+import { MANAGEMENT_PATH } from '@/data/url-list';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -10,7 +11,7 @@ const CategoryTitle = (adminInfo: AdminCategories) => {
   const [isManagementPathName, setIsManagementPathName] = useState(false);
 
   useEffect(() => {
-    if (path === '/admin/management') {
+    if (path === MANAGEMENT_PATH) {
       setIsManagementPathName(true);
     } else {
       setIsManagementPathName(false);
