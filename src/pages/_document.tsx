@@ -1,10 +1,12 @@
 import { Head, Html, Main, NextScript } from 'next/document';
+import * as process from 'process';
 
 export default function Document() {
   return (
     <Html lang="ko">
       <Head />
       <link rel="manifest" href="/manifest.json" />
+      <link rel="preconnect" href={process.env.NEXT_PUBLIC_SUPABASE_URL} />
       <meta name="author" content="매직 포스" />
       <meta
         name="keywords"

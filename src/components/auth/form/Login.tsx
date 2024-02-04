@@ -1,4 +1,5 @@
 import Button from '@/components/common/Button';
+import { HOME_PATH, LOGIN_PATH, SIGNUP_PATH } from '@/data/url-list';
 import { useAuthSetQuery } from '@/hooks/query/auth/useAuthSetQuery';
 import useToggleState, { defaultCheckBox } from '@/shared/store/toggle';
 import { useRouter } from 'next/router';
@@ -29,7 +30,7 @@ const Login = () => {
 
   useEffect(() => {
     const email = localStorage.getItem('email');
-    if (email && path === '/auth/login') {
+    if (email && path === LOGIN_PATH) {
       setValue('email', email);
       defaultCheckBox();
     }
@@ -38,15 +39,16 @@ const Login = () => {
   return (
     <div className={styles.formContainer}>
       <form onSubmit={handleSubmit(clickLoginHandler)}>
-        <div className={styles.titleWrapper} onClick={() => router.push('/')}>
+        <div className={styles.titleWrapper} onClick={() => router.push(HOME_PATH)}>
           <h1 className={styles.title}>편리함의 시작</h1>
         </div>
         <div className={styles.fieldContainer}>
           {loginInput.map(field => {
             return (
-              <Fragment key={field.id}>
+              <Fragment key={field.unique}>
                 <div className={styles.inputContanier} id={field.name}>
                   <Input
+                    id={field.id}
                     type={field.type}
                     maxLength={field.maxLength}
                     placeholder={field.placeholder}
@@ -64,7 +66,7 @@ const Login = () => {
             <Button type="submit" className={styles.submitButton}>
               로그인
             </Button>
-            <Button type="button" className={styles.pushButton} onClick={() => router.push('/auth/signup')}>
+            <Button type="button" className={styles.pushButton} onClick={() => router.push(SIGNUP_PATH)}>
               회원가입
             </Button>
           </div>

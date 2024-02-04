@@ -7,8 +7,9 @@ import useKioskState, { ORDER_STEP, setSwiperRef } from '@/shared/store/kiosk';
 import { useRouter } from 'next/router';
 import OrderPrevButton from '@/components/layout/order/OrderPrevButton';
 import { makeTitle } from '@/shared/helper';
+import { PAYMENT_FAIL_PATH, PAYMENT_SUCCESS_PATH, RECEIPT_PATH } from '@/data/url-list';
 
-const DONT_RENDER_FOOTER_PATH_LIST = ['/kiosk/success', '/kiosk/receipt', '/kiosk/fail'];
+const DONT_RENDER_FOOTER_PATH_LIST = [PAYMENT_FAIL_PATH, RECEIPT_PATH, PAYMENT_SUCCESS_PATH];
 /**
  * 일반인 KIOSK 레이아웃
  * @constructor
@@ -27,7 +28,7 @@ const OrderLayout = ({ children }: { children: React.ReactNode }) => {
       step < ORDER_STEP.CHOOSE_ORDER_TYPE,
       step > ORDER_STEP.SUCCESS,
       step === ORDER_STEP.SELECT_MENU && isOnlyTable && !isOptionPage,
-      pathname === '/kiosk/fail',
+      pathname === PAYMENT_FAIL_PATH,
     ]);
   }, [step, isOptionPage]);
 

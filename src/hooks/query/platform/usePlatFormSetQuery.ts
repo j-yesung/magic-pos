@@ -1,3 +1,4 @@
+import { PLATFORM_PATH } from '@/data/url-list';
 import { insertPlatFormRow, removePlatFormData, updatePlatFormData } from '@/server/api/supabase/platform';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
@@ -14,7 +15,7 @@ const usePlatFormSetQuery = () => {
     },
     onError: error => {
       console.log(error);
-      router.push('/admin/platform');
+      router.push(PLATFORM_PATH);
     },
   });
 
@@ -23,7 +24,7 @@ const usePlatFormSetQuery = () => {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: [PlatFormQueryKey.PLATFORM] }),
     onError: error => {
       console.log(error);
-      router.push('/admin/platform');
+      router.push(PLATFORM_PATH);
     },
   });
 
@@ -34,7 +35,7 @@ const usePlatFormSetQuery = () => {
     },
     onError: error => {
       console.log('platform 삭제시 오류', error);
-      router.push('/admin/platForm');
+      router.push(PLATFORM_PATH);
     },
   });
 

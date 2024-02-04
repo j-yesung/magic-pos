@@ -1,14 +1,14 @@
-import React from 'react';
-import NotFoundImage from '/public/images/404.svg';
-import style from './styles/NotFoundContainer.module.css';
+import { HOME_PATH } from '@/data/url-list';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
+import style from './styles/NotFoundContainer.module.css';
+import NotFoundImage from '/public/images/404.svg';
 
 const NotFoundContainer = () => {
   const router = useRouter();
 
   const handleClickImage = () => {
-    router.push('/');
+    router.push(HOME_PATH);
   };
 
   return (

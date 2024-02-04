@@ -21,7 +21,7 @@ const FindPassword = () => {
         </div>
         <div className={styles.fieldContainer}>
           <div className={styles.inputContanier} id="email">
-            <Input type="text" placeholder="이메일" register={register} name="email" />
+            <Input type="text" placeholder="이메일" register={register} id="email" name="email" />
           </div>
           <div className={styles.buttonBox}>
             <Button type="submit" className={styles.submitButton}>

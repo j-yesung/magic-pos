@@ -48,11 +48,12 @@ const Signup = () => {
             const isPwdMatch = pwd !== '' && confirmPwd !== '' && pwd === confirmPwd;
 
             return (
-              <Fragment key={field.id}>
+              <Fragment key={field.unique}>
                 {field.name === 'businessNumber' ? (
                   <div className={styles.businessNumberContainer}>
                     <div className={styles.businessInputContainer} id={field.name}>
                       <Input
+                        id={field.id}
                         label={field.label}
                         type={field.type}
                         minLength={field.minLength}
@@ -77,6 +78,7 @@ const Signup = () => {
                 ) : (
                   <div className={styles.inputContanier} id={field.name}>
                     <Input
+                      id={field.id}
                       label={field.label}
                       type={field.type}
                       minLength={field.minLength}

@@ -27,9 +27,10 @@ const ResetPassword = () => {
         <div className={styles.fieldContainer}>
           {resetPasswordInput.map(field => {
             return (
-              <Fragment key={field.id}>
+              <Fragment key={field.unique}>
                 <div className={styles.inputContanier} id={field.name}>
                   <Input
+                    id={field.id}
                     type={field.type}
                     placeholder={field.placeholder}
                     register={register}

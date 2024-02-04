@@ -1,43 +1,13 @@
-import useFetchOrderCheckList from '@/hooks/order-check-list/useFetchOrderCheckList';
+import useFilterButton from '@/hooks/order-check-list/useFilterButton';
 import useOrderCheckListStore from '@/shared/store/order-check-list';
 import clsx from 'clsx';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Button from '../common/Button';
 import styles from './styles/orderCheckListFilterButtonBox.module.css';
 
 const OrderCheckListFilterButtonBox = () => {
-  const [isDateButton, setIsDateButton] = useState(0);
-  const { startDate, endDate, setListType, setStartTime, setEndTime } = useOrderCheckListStore();
-  const { refetch } = useFetchOrderCheckList();
-
-  const clickDayButtonHandler = () => {
-    setListType('day');
-    setIsDateButton(1);
-  };
-  const clickWeekButtonHandler = () => {
-    setListType('week');
-    setIsDateButton(2);
-  };
-  const clickMonthButtonHandler = () => {
-    setListType('month');
-    setIsDateButton(3);
-  };
-  const clickSelectDateButtonHandler = () => {
-    refetch();
-    setListType('selectDate');
-    setIsDateButton(0);
-  };
-  const clickResetButtonHandler = () => {
-    setListType('default');
-    setIsDateButton(0);
-  };
-
-  const changeStartTimeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setStartTime(e.target.value);
-  };
-  const changeEndTimeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setEndTime(e.target.value);
-  };
+  const { startDate, endDate, setEndTime } = useOrderCheckListStore();
+  const { isDateButton, clickFilterButtonHandler, changeStartTimeHandler, changeEndTimeHandler } = useFilterButton();
 
   useEffect(() => {
     if (startDate > endDate) {
@@ -51,34 +21,64 @@ const OrderCheckListFilterButtonBox = () => {
       <div className={styles['choice-date-button-wrapper']}>
         <Button
           type="button"
-          onClick={clickDayButtonHandler}
+          onClick={() => {
+            clickFilterButtonHandler('day', 1, false);
+          }}
           className={clsx(isDateButton === 1 && styles['button-focus'])}
         >
           오늘
         </Button>
         <Button
           type="button"
-          onClick={clickWeekButtonHandler}
+          onClick={() => {
+            clickFilterButtonHandler('week', 2, false);
+          }}
           className={clsx(isDateButton === 2 && styles['button-focus'])}
         >
           이번 주
         </Button>
         <Button
           type="button"
-          onClick={clickMonthButtonHandler}
+          onClick={() => {
+            clickFilterButtonHandler('month', 3, false);
+          }}
           className={clsx(isDateButton === 3 && styles['button-focus'])}
         >
           이번 달
         </Button>
       </div>
       <div className={clsx(styles['select-date-button-wrapper'])}>
-        <input type="date" value={startDate} onChange={changeStartTimeHandler} />
+        <input
+          type="date"
+          value={startDate}
+          onChange={e => {
+            changeStartTimeHandler(e);
+          }}
+        />
         <span>~</span>
-        <input type="date" min={startDate} value={endDate} onChange={changeEndTimeHandler} />
-        <Button type="button" onClick={clickSelectDateButtonHandler} className={styles['button-focus']}>
+        <input
+          type="date"
+          min={startDate}
+          value={endDate}
+          onChange={e => {
+            changeEndTimeHandler(e);
+          }}
+        />
+        <Button
+          type="button"
+          onClick={() => {
+            clickFilterButtonHandler('selectDate', 0, true);
+          }}
+          className={styles['button-focus']}
+        >
           조회
         </Button>
-        <Button type="button" onClick={clickResetButtonHandler}>
+        <Button
+          type="button"
+          onClick={() => {
+            clickFilterButtonHandler('default', 0, false);
+          }}
+        >
           초기화
         </Button>
       </div>

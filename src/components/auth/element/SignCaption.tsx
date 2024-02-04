@@ -1,10 +1,9 @@
 import Checkbox from '@/components/common/Checkbox';
+import { FIND_PASSWORD_PATH } from '@/data/url-list';
 import { changeCheckBox } from '@/shared/store/toggle';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import styles from '../styles/Auth.module.css';
-
-const URL = '/auth/findPassword';
 
 interface SignCaptionProps {
   email: string;
@@ -33,7 +32,7 @@ const SignCaption = (props: SignCaptionProps) => {
             <p>이메일 저장</p>
           </div>
           <div className={styles.findPasswordBox}>
-            <Link className={styles.caption} href={URL}>
+            <Link className={styles.caption} href={FIND_PASSWORD_PATH}>
               비밀번호를 잊으셨나요?
             </Link>
           </div>
