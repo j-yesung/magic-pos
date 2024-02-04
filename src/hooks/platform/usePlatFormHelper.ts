@@ -1,7 +1,6 @@
 import { downloadPlatFormImageUrl, removePlatFormImage, uploadPlatFormImage } from '@/server/api/supabase/platform';
 import { AddPlatFormType, EditPlatFormType } from '@/types/platform';
 import dayjs from 'dayjs';
-const SUPABASE_STORAGE_URL = 'https://lajnysuklrkrhdyqhotr.supabase.co';
 
 /**
  * 카드 편집할 때 supabase storage에 올린 이미지이면 삭제
@@ -9,7 +8,7 @@ const SUPABASE_STORAGE_URL = 'https://lajnysuklrkrhdyqhotr.supabase.co';
  * @returns
  */
 export const prevImageRemove = async (data: EditPlatFormType) => {
-  if (data.image_url?.includes(SUPABASE_STORAGE_URL)) {
+  if (data.image_url?.includes(`${process.env.NEXT_PUBLIC_SUPABASE_URL}`)) {
     await removePlatFormImage(data);
   }
   return;

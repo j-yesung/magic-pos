@@ -10,7 +10,6 @@ interface Info {
 }
 
 const ModalBody = ({ sales }: Info) => {
-  console.log(sales);
   const modalType = useSalesModal(state => state.modalType);
   const clickChangeModalType = (param: boolean) => setSalesModalType(param);
   return (

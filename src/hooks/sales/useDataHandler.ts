@@ -13,6 +13,7 @@ import { Dayjs } from 'dayjs';
 export const useDataHandler = () => {
   const storeId = useAuthState(state => state.storeId);
   const { utcStandardDate, today } = useDayState();
+
   const clickMoveTodayHandler = async () => {
     const { sales, dateType, formatType } = await getDaySales(utcStandardDate, storeId!);
     if (sales.length !== 0) {
