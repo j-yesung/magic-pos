@@ -27,6 +27,7 @@ const Input = (props: InputProps) => {
       {label && <label htmlFor={name}>{label}</label>}
       <input
         className={clsx(inputStyle, { [styles.inputError]: error }, { [styles.inputSuccess]: isSuccessful })}
+        id={id}
         type={type}
         minLength={minLength}
         maxLength={maxLength}

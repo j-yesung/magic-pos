@@ -117,3 +117,22 @@ export const resetPasswordInput = [
     }),
   },
 ];
+
+export const sendEmailInput = [
+  {
+    unique: 1,
+    id: 'to_name',
+    label: '상호명',
+    type: 'text',
+    name: 'to_name',
+    validation: {},
+  },
+  {
+    unique: 2,
+    id: 'user_email',
+    label: '답변 받으실 이메일 주소',
+    type: 'text',
+    name: 'user_email',
+    validation: {},
+  },
+];
