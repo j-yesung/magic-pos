@@ -237,3 +237,14 @@
     transform: translateX(50%);
   }
 }
+
+.progress-bar {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+  position: fixed;
+  transform-origin: 0%;
+  background: var(--point1-50);
+  z-index: var(--level-5-z-index);
+}
