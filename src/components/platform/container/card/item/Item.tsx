@@ -41,6 +41,7 @@ const Item = ({ link, title, id, imgUrl }: ItemProps) => {
     setIsRegist(true);
     setIsEdit(true);
   };
+
   return (
     <div
       className={styles.itemWrapper}
