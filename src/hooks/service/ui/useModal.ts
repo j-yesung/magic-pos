@@ -2,6 +2,7 @@ import { addAlert, addChildElem, addConfirm, hideAlert, hideConfirm, hideModal }
 import { ModalAlertTypeOption, ModalConfirmTypeOption } from '@/types/common';
 import { nanoid } from 'nanoid';
 import { ReactElement } from 'react';
+import { animate } from 'framer-motion';
 
 export const useModal = () => {
   class MagicModal {
