@@ -19,18 +19,17 @@ import { BIG_MODE, CALENDAR_PAGE, STATUS_PAGE } from '../calendarType/calendarTy
 import CellItem from '../cellItem/CellItem';
 import styles from './styles/cell.module.css';
 
-const Cell = ({ mode, page }: { mode: CalendarModeType; page: CalendarPageType }) => {
+const Cell = ({ mode, page }: { mode: CalendarModeType; page?: CalendarPageType }) => {
+  const storeId = useAuthState(state => state.storeId);
   const holidays = useHolidayState(state => state.holidays);
-
   const calendarBindingData = useSalesDataState(state => state.calendarBindingData);
 
   const currentDate = useCalendarState(state => state.currentDate);
   const { clickShowDataOfDateHandler } = useDataHandler();
-
-  const startDay = currentDate.startOf('month').startOf('week'); // monthStart가 속한 주의 시작 주
-  const endDay = currentDate.endOf('month').endOf('week'); // monthStart가 속한 마지막 주
-
-  const storeId = useAuthState(state => state.storeId);
+  // monthStart가 속한 주의 시작 주
+  const startDay = currentDate.startOf('month').startOf('week');
+  // monthStart가 속한 마지막 주
+  const endDay = currentDate.endOf('month').endOf('week');
 
   useEffect(() => {
     if (mode === BIG_MODE) {
@@ -66,11 +65,12 @@ const Cell = ({ mode, page }: { mode: CalendarModeType; page: CalendarPageType }
     for (let i = 0; i < 7; i++) {
       const itemKey = day.format(FORMAT_CELL_DATE_TYPE);
       const salesData = calendarBindingData?.filter(target => target.date === itemKey);
-
       const holidayDate = holiday.filter(date => date.date === itemKey);
+
       days.push(
         <CellItem
           key={itemKey}
+          page={page}
           mode={mode}
           day={day}
           salesData={salesData ? salesData[0] : undefined}

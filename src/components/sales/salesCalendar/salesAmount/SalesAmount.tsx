@@ -17,7 +17,7 @@ const SalesAmount = () => {
     <div className={styles.container}>
       <div className={styles.sumSales}>
         <span> 총 매출금액 </span>
-        <span>{salesSum ? convertNumberToWon(salesSum) : '없네용 ㅜㅜ'}</span>
+        <span>{salesSum ? convertNumberToWon(salesSum) : '없습니다.'}</span>
       </div>
       <div className={styles.salesGrade}>
         <span className={clsx(styles.gradeColor, styles.gradeMax)}>최고 매출일</span>

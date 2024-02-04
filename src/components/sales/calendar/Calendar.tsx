@@ -6,6 +6,13 @@ import Days from './days/Days';
 import Header from './header/Header';
 import styles from './styles/calendar.module.css';
 
+/**
+ *
+ * @param children ReactNode
+ * @param mode mini , big
+ * @param page page는 조건부 props로 기능을 주고 싶을 때 사용합니다. Cell.tsx에 주석처리로 기능 예시를 써놓았습니다.
+ * @returns
+ */
 const Calendar = ({
   children,
   mode,
@@ -13,7 +20,7 @@ const Calendar = ({
 }: {
   children?: React.ReactNode;
   mode: CalendarModeType;
-  page: CalendarPageType;
+  page?: CalendarPageType;
 }) => {
   // ischangeView = false  => mini
 
