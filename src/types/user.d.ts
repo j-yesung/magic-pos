@@ -1,6 +1,7 @@
 type Inputs = Record<string, string>;
 
 interface InputProps {
+  id: string;
   label?: string;
   type: string;
   placeholder?: string;

@@ -9,6 +9,8 @@ import Input from '../element/Input';
 import SignCaption from '../element/SignCaption';
 import styles from '../styles/Auth.module.css';
 
+export const LOGIN_PATH = '/auth/login';
+
 const Login = () => {
   const { setValue, register, handleSubmit, watch } = useForm<Inputs>();
   const { login } = useAuthSetQuery();
@@ -29,7 +31,7 @@ const Login = () => {
 
   useEffect(() => {
     const email = localStorage.getItem('email');
-    if (email && path === '/auth/login') {
+    if (email && path === LOGIN_PATH) {
       setValue('email', email);
       defaultCheckBox();
     }
@@ -44,9 +46,10 @@ const Login = () => {
         <div className={styles.fieldContainer}>
           {loginInput.map(field => {
             return (
-              <Fragment key={field.id}>
+              <Fragment key={field.unique}>
                 <div className={styles.inputContanier} id={field.name}>
                   <Input
+                    id={field.id}
                     type={field.type}
                     maxLength={field.maxLength}
                     placeholder={field.placeholder}

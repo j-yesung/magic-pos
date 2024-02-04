@@ -1,9 +1,11 @@
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
+import { LOGIN_PATH } from '../form/Login';
 import styles from '../styles/Auth.module.css';
 
 const Input = (props: InputProps) => {
   const {
+    id,
     label,
     type,
     placeholder,
@@ -18,7 +20,7 @@ const Input = (props: InputProps) => {
   } = props;
   const path = useRouter().pathname;
   const inputStyle = name === 'businessNumber' ? styles.otherStyle : styles.defaultStyle;
-  const isKeyDown = (name === 'password' || name === 'email') && path === '/auth/login';
+  const isKeyDown = (name === 'password' || name === 'email') && path === LOGIN_PATH;
 
   return (
     <>
