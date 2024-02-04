@@ -1,5 +1,5 @@
-import useFetchManagement from '@/hooks/management/useFetchManagement';
-import { useModal } from '@/hooks/service/ui/useModal';
+import useCustomModalHide from '@/hooks/common/useCustomModalHide';
+import useFetchTableInQRCode from '@/hooks/qrCode/useFetchTableInQRCode';
 import useAuthState from '@/shared/store/session';
 import clsx from 'clsx';
 import { useState } from 'react';
@@ -15,26 +15,26 @@ type QrCodeModalProps = 'shop' | 'packaging' | null;
 const QrCodeModal = ({ modalId }: { modalId?: string }) => {
   const { session } = useAuthState();
   const userId = session?.user.id;
-  const { data } = useFetchManagement(userId);
-  const { MagicModal } = useModal();
+  const { data } = useFetchTableInQRCode(userId!);
+  const { clickModalCloseHandler } = useCustomModalHide();
   const [selectedComponent, setSelectedComponent] = useState<QrCodeModalProps>(
     data?.[0]?.use_table ? 'shop' : 'packaging',
   );
-
   const clickComponentHandler = (component: 'shop' | 'packaging') => {
     if (component === selectedComponent) return;
     setSelectedComponent(prevComponent => (prevComponent === component ? null : component));
   };
 
-  const clickModalCloseHandler = () => {
-    MagicModal.hide(modalId ?? '');
-  };
   return (
     <div className={styles.qrCodeModalBox}>
       {/* QR코드 타이틀 */}
       <div className={styles.qrTitleContainer}>
         <div className={styles.qrCodeTitle}>QR코드 출력하기</div>
-        <span onClick={clickModalCloseHandler}>
+        <span
+          onClick={() => {
+            clickModalCloseHandler(modalId);
+          }}
+        >
           <CloseButton className={styles.closeButton} width={20} height={20} />
         </span>
       </div>
