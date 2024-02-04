@@ -19,6 +19,7 @@ import 'swiper/css';
 import 'swiper/css/virtual';
 import { translateMenuData } from '@/server/service/translate';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { RECEIPT_PATH } from '@/data/url-list';
 
 interface OrderIndexPageProps {
   menuData: CategoryWithMenuItemWithStore[];
@@ -46,7 +47,7 @@ const OrderIndexPage = ({ menuData, storeId, tableId }: OrderIndexPageProps) => 
         },
         cancelButtonText: '주문 확인 하기',
         cancelButtonCallback: () => {
-          router.push('/kiosk/receipt');
+          router.push(RECEIPT_PATH);
         },
       });
     }
@@ -66,7 +67,7 @@ const OrderIndexPage = ({ menuData, storeId, tableId }: OrderIndexPageProps) => 
 
     if (storeId) {
       // 이전에 저장된 storeId가 현재 storeId와 다르면 다른 가게로 온것이므로 주문 목록 초기화 시킴
-      if (prevStoreId && prevStoreId !== storeId) {
+      if (prevStoreId !== storeId) {
         resetOrderList();
       }
       setStoreId(storeId);

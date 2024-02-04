@@ -15,5 +15,10 @@ export const FIND_PASSWORD_PATH = '/auth/findPassword';
 export const RESET_PASSWORD_PATH = '/auth/reset';
 export const SIGNUP_SUCCESS_PATH = '/auth/success';
 
+// 키오스크 페이지
+export const RECEIPT_PATH = '/kiosk/receipt';
+export const PAYMENT_SUCCESS_PATH = '/kiosk/success';
+export const PAYMENT_FAIL_PATH = '/kiosk/fail';
+
 // 메인 페이지
 export const HOME_PATH = '/';
