@@ -81,12 +81,12 @@ export const getWeekSales: getSalesReturnType = async (week, store_id) => {
  * @returns
  */
 
-export const getMonthsSales: getSalesReturnType = async (month, store_id) => {
+export const getMonthsSales: getSalesReturnType = async (months, store_id) => {
   const { data: sales, error } = await supabase
     .from('sales')
     .select('*')
-    .gte('sales_date', dayJsToString(month.startOf('month').subtract(6, 'month'), TIME_FORMAT))
-    .lte('sales_date', dayJsToString(month.endOf('month'), TIME_FORMAT))
+    .gte('sales_date', dayJsToString(months.startOf('month').subtract(6, 'month'), TIME_FORMAT))
+    .lte('sales_date', dayJsToString(months.endOf('month'), TIME_FORMAT))
     .eq('store_id', store_id);
   if (error) {
     return { sales: [], dateType: 'month', error };

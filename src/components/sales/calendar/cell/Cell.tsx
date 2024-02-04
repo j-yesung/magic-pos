@@ -31,6 +31,7 @@ const Cell = () => {
   const endDay = currentDate.endOf('month').endOf('week'); // monthStart가 속한 마지막 주
 
   const storeId = useAuthState(state => state.storeId);
+
   useEffect(() => {
     if (!isChangeView) {
       getMonthSales(currentDate, storeId!).then(result => {
