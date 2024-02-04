@@ -14,10 +14,12 @@ import dayjs from 'dayjs';
 import { useEffect } from 'react';
 import { FORMAT_CELL_DATE_TYPE, getMinMaxSalesType } from '../../calendarUtility/cellItemType';
 import { formatToCalendarData, sortMinMaxData } from '../../calendarUtility/formatData';
+
+import { BIG_MODE, CALENDAR_PAGE, STATUS_PAGE } from '../calendarType/calendarType';
 import CellItem from '../cellItem/CellItem';
 import styles from './styles/cell.module.css';
 
-const Cell = ({ mode }: { mode: 'mini' | 'big' }) => {
+const Cell = ({ mode, page }: { mode: CalendarModeType; page: CalendarPageType }) => {
   const holidays = useHolidayState(state => state.holidays);
 
   const calendarBindingData = useSalesDataState(state => state.calendarBindingData);
@@ -31,7 +33,7 @@ const Cell = ({ mode }: { mode: 'mini' | 'big' }) => {
   const storeId = useAuthState(state => state.storeId);
 
   useEffect(() => {
-    if (mode === 'big') {
+    if (mode === BIG_MODE) {
       getMonthSales(currentDate, storeId!).then(result => {
         if (result.sales.length !== 0) {
           const group = groupByKey<Tables<'sales'>>(
@@ -68,12 +70,13 @@ const Cell = ({ mode }: { mode: 'mini' | 'big' }) => {
       const holidayDate = holiday.filter(date => date.date === itemKey);
       days.push(
         <CellItem
+          key={itemKey}
           mode={mode}
           day={day}
           salesData={salesData ? salesData[0] : undefined}
           // ... spreadOperator
-          {...(mode === 'big' && { getMinMaxSalesType: getMinMaxSalesType })}
-          {...(mode === 'mini' && { clickShowDataOfDateHandler: clickShowDataOfDateHandler })}
+          {...(page === CALENDAR_PAGE && { getMinMaxSalesType: getMinMaxSalesType })}
+          {...(page === STATUS_PAGE && { clickShowDataOfDateHandler: clickShowDataOfDateHandler })}
           holiday={holidayDate}
         />,
       );

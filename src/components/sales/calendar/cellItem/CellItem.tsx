@@ -15,6 +15,8 @@ import {
   getStatusMonthType,
 } from '../../calendarUtility/cellItemType';
 import SalesModal from '../../modal/SalesModal';
+
+import { BIG_MODE, MINI_MODE } from '../calendarType/calendarType';
 import styles from './styles/cellItem.module.css';
 
 interface CellItemProps {
@@ -23,7 +25,7 @@ interface CellItemProps {
   getMinMaxSalesType?: (param: CalendarDataType) => GetMinMaxSalesReturnType;
   clickShowDataOfDateHandler?: (day: Dayjs) => () => Promise<void>;
   holiday: HolidayType[];
-  mode: 'mini' | 'big';
+  mode: CalendarModeType;
 }
 
 type Cell = (param: CellItemProps) => JSX.Element;
@@ -108,7 +110,7 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
   return (
     <>
       {/* sales/Status일 때 보여줄 날 css */}
-      {mode === 'mini' && (
+      {mode === MINI_MODE && (
         <div
           className={statusVariant({
             calendarType: getStatusCalendarType(day, currentDate),
@@ -132,7 +134,7 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
       )}
 
       {/* sales/Calendar일 때 보여줄 날 css */}
-      {mode === 'big' && (
+      {mode === BIG_MODE && (
         <div
           className={calendarVariant({
             monthType: getCalendarMonthType(day, currentDate),
