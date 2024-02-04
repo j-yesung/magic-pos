@@ -1,5 +1,6 @@
 import Button from '@/components/common/Button';
 import { useModal } from '@/hooks/service/ui/useModal';
+import React from 'react';
 import CsvModal from './modal/CsvModal';
 import styles from './styles/excel.module.css';
 
@@ -15,4 +16,4 @@ const Csv = () => {
   );
 };
 
-export default Csv;
+export default React.memo(Csv);

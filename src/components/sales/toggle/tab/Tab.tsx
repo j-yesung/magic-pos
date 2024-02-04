@@ -1,6 +1,6 @@
 import { useCalendar } from '@/hooks/sales/useCalendar';
 import useSalesToggle from '@/shared/store/sales/salesToggle';
-import { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import Calendar from '../../calendar/Calendar';
 import Csv from '../../csv/Csv';
 import CalendarToggle from './calendarToggle/CalendarToggle';
@@ -32,4 +32,4 @@ const Tab = () => {
   );
 };
 
-export default Tab;
+export default React.memo(Tab);

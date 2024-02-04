@@ -2,6 +2,7 @@ import Button from '@/components/common/Button';
 import { useCalendar } from '@/hooks/sales/useCalendar';
 import useSalesToggle from '@/shared/store/sales/salesToggle';
 import clsx from 'clsx';
+import React from 'react';
 import styles from './styles/headerController.module.css';
 import ArrowLeft from '/public/icons/calendar-arrow-left.svg';
 import ArrowRight from '/public/icons/calendar-arrow-right.svg';
@@ -29,4 +30,4 @@ const HeaderController = () => {
   );
 };
 
-export default HeaderController;
+export default React.memo(HeaderController);

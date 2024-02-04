@@ -1,11 +1,10 @@
 .table-container {
-  gap: 2.1%;  
+  gap: 2.1%;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   overflow-y: scroll;
 }
-
 
 .table-container::-webkit-scrollbar {
   width: 0.5rem;
@@ -30,6 +29,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 @media only all and (max-width: 1520px) {

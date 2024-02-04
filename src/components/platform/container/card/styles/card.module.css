@@ -1,14 +1,13 @@
 /*card관련*/
 .card-container {
-  display: flex;
-  width: 100%;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 4rem;
   margin-top: 5rem;
 }
 
-@media screen and (max-width: 1520px) {
+@media screen and (max-width: 1020px) {
   .card-container {
-    gap: 3.8rem;
+    grid-template-columns: repeat(3, 1fr);
   }
 }
