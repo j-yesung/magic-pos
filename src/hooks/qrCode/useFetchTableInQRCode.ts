@@ -1,7 +1,7 @@
 import { fetchTableInQRCode } from '@/server/api/supabase/qrCode';
 import { useQuery } from '@tanstack/react-query';
 
-const enum QUERY_KEY {
+export const enum QUERY_KEY {
   QR_CODE = 'qrCode',
 }
 

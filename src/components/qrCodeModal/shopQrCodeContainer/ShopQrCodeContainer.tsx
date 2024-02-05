@@ -8,7 +8,6 @@ const ShopQrCodeContainer = ({ data }: { data: StoreTableInQRCode[] }) => {
 
   return (
     <div className={styles['shop-qr-code-container']}>
-      {/* <div className={styles['shop-qr-code-title']}>매장용 QR코드</div> */}
       <div
         className={clsx(
           styles['shop-qr-code-list-box'],

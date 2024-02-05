@@ -14,8 +14,6 @@ const OrderCheckListFilterButtonBox = () => {
   const [isStartCalender, setIsStartCalender] = useState(false);
   const [isEndCalender, setIsEndCalender] = useState(false);
 
-  console.log('startDate =>', startDate);
-  console.log('endDate =>', endDate);
   useEffect(() => {
     if (startDate > endDate) {
       setEndTime(startDate);
