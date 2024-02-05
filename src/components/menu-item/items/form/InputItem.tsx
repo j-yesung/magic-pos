@@ -1,6 +1,6 @@
 import styles from '@/components/menu-item/styles/menu-item-form.module.css';
+import { MENU_ITEM, MENU_TOAST } from '@/data/menu-item';
 import useMenuToast from '@/hooks/service/menu/useMenuToast';
-import { MENU_ITEM, MENU_TOAST } from '@/hooks/service/menu/useText';
 import useMenuItemStore, { setMenuItem, setMenuItemImgFile, setMenuItemSampleImg } from '@/shared/store/menu/menu-item';
 import clsx from 'clsx';
 import Image from 'next/image';

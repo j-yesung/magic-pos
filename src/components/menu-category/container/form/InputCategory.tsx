@@ -1,5 +1,5 @@
 import styles from '@/components/menu-category/styles/form.module.css';
-import { MENU_CATEGORY } from '@/hooks/service/menu/useText';
+import { MENU_CATEGORY } from '@/data/menu-item';
 import useCategoriesStore, { setCategory } from '@/shared/store/menu/menu-category';
 import React from 'react';
 

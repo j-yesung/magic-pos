@@ -1,6 +1,6 @@
 import styles from '@/components/menu-category/styles/category.module.css';
+import { MENU_DRAG } from '@/data/menu-item';
 import useDragDrop from '@/hooks/service/menu/useDragDrop';
-import { MENU_DRAG } from '@/hooks/service/menu/useText';
 import { Tables } from '@/types/supabase';
 import clsx from 'clsx';
 import { useEffect } from 'react';

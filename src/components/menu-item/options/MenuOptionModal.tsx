@@ -1,4 +1,4 @@
-import { MENU_TITLE } from '@/hooks/service/menu/useText';
+import { MENU_TITLE } from '@/data/menu-item';
 import { useModal } from '@/hooks/service/ui/useModal';
 import styles from '../styles/modal.module.css';
 import MenuOptionModalButton from './MenuOptionModalButton';

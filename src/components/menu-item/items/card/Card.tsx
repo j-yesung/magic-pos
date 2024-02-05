@@ -1,8 +1,8 @@
 import MenuItemModal from '@/components/menu-item/items/modal/MenuItemModal';
 import styles from '@/components/menu-item/styles/menu-item-card.module.css';
+import { MENU_DRAG } from '@/data/menu-item';
 import useDragDrop from '@/hooks/service/menu/useDragDrop';
 import useOptionFiltering from '@/hooks/service/menu/useOptionFiltering';
-import { MENU_DRAG } from '@/hooks/service/menu/useText';
 import { useModal } from '@/hooks/service/ui/useModal';
 import { convertNumberToWon } from '@/shared/helper';
 import useMenuItemStore, {

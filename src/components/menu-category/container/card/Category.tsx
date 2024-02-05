@@ -1,5 +1,5 @@
 import styles from '@/components/menu-category/styles/category.module.css';
-import { DRAG_INFO } from '@/hooks/service/menu/useText';
+import { DRAG_INFO } from '@/data/menu-item';
 import useCategoriesStore from '@/shared/store/menu/menu-category';
 import { useState } from 'react';
 import PlusCategoryComponent from '../form/PlusCategory';

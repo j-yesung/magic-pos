@@ -1,5 +1,5 @@
 import styles from '@/components/menu-category/styles/form.module.css';
-import { MENU_CONFIRM } from '@/hooks/service/menu/useText';
+import { MENU_CONFIRM } from '@/data/menu-item';
 
 interface MenuCategoryModal {
   clickCategoryModalHide: () => void;

@@ -1,7 +1,7 @@
+import { EMPTY_MENU_ITEM } from '@/data/menu-item';
 import { MENU_CATEGORY_PATH } from '@/data/url-list';
 import useFetchMenuItems from '@/hooks/query/menu/menu-item/useFetchMenuItems';
 import useFetchMenuOptions from '@/hooks/query/menu/menu-item/useFetchMenuOption';
-import { EMPTY_MENU_ITEM } from '@/hooks/service/menu/useText';
 import { fetchMenuOptions } from '@/server/api/supabase/menu-item';
 import useMenuItemStore, {
   setCategoryWithMenuItem,

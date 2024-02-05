@@ -1,6 +1,6 @@
+import { MENU_DRAG } from '@/data/menu-item';
 import useSetCategories from '@/hooks/query/menu/menu-category/useSetCategories';
 import useSetMenuItem from '@/hooks/query/menu/menu-item/useSetMenuItems';
-import { MENU_DRAG } from '@/hooks/service/menu/useText';
 import useCategoriesStore from '@/shared/store/menu/menu-category';
 import useMenuItemStore from '@/shared/store/menu/menu-item';
 import { useRef, useState } from 'react';

@@ -1,8 +1,8 @@
 import styles from '@/components/menu-item/styles/menu-item-form.module.css';
+import { MENU_TOAST } from '@/data/menu-item';
 import useSetMenuItem from '@/hooks/query/menu/menu-item/useSetMenuItems';
 import useMenuToast from '@/hooks/service/menu/useMenuToast';
 import useOptionFiltering from '@/hooks/service/menu/useOptionFiltering';
-import { MENU_TOAST } from '@/hooks/service/menu/useText';
 import useMenuItemStore from '@/shared/store/menu/menu-item';
 import useMenuOptionStore, { NewMenuOptionWithDetail, setMenuOptions } from '@/shared/store/menu/menu-option';
 import { TablesInsert } from '@/types/supabase';

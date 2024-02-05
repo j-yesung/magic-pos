@@ -1,8 +1,8 @@
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import styles from '@/components/menu-item/styles/menu-item-form.module.css';
+import { MENU_CONFIRM, MENU_TOAST } from '@/data/menu-item';
 import useSetMenuItem from '@/hooks/query/menu/menu-item/useSetMenuItems';
 import useMenuToast from '@/hooks/service/menu/useMenuToast';
-import { MENU_CONFIRM, MENU_TOAST } from '@/hooks/service/menu/useText';
 import { useModal } from '@/hooks/service/ui/useModal';
 import useMenuItemStore from '@/shared/store/menu/menu-item';
 import dayjs from 'dayjs';

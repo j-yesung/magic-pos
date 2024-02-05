@@ -1,7 +1,7 @@
 import styles from '@/components/menu-category/styles/form.module.css';
+import { MENU_TOAST } from '@/data/menu-item';
 import useSetCategories from '@/hooks/query/menu/menu-category/useSetCategories';
 import useMenuToast from '@/hooks/service/menu/useMenuToast';
-import { MENU_TOAST } from '@/hooks/service/menu/useText';
 import useCategoriesStore from '@/shared/store/menu/menu-category';
 import { TablesInsert } from '@/types/supabase';
 import AddCategoryComponent from './AddCategory';

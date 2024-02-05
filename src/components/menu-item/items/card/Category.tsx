@@ -1,4 +1,4 @@
-import { DRAG_INFO } from '@/hooks/service/menu/useText';
+import { DRAG_INFO } from '@/data/menu-item';
 import useMenuItemStore, { setCategoryWithMenuItem, setMenuItemList } from '@/shared/store/menu/menu-item';
 import { CategoryWithMenuItem } from '@/types/supabase';
 import clsx from 'clsx';

@@ -1,4 +1,4 @@
-import { MENU_TITLE } from '@/hooks/service/menu/useText';
+import { MENU_TITLE } from '@/data/menu-item';
 import { useModal } from '@/hooks/service/ui/useModal';
 import useCategoriesStore from '@/shared/store/menu/menu-category';
 import CategoryFormPage from '../container/form/FormCategory';

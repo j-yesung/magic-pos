@@ -1,4 +1,4 @@
-import { MENU_ITEM, MENU_TOAST } from '@/hooks/service/menu/useText';
+import { MENU_ITEM, MENU_TOAST } from '@/data/menu-item';
 import { useModal } from '@/hooks/service/ui/useModal';
 import useMenuItemStore from '@/shared/store/menu/menu-item';
 import useMenuOptionStore, {

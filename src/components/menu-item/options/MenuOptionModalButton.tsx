@@ -1,5 +1,5 @@
+import { MENU_CONFIRM, MENU_TOAST } from '@/data/menu-item';
 import useMenuToast from '@/hooks/service/menu/useMenuToast';
-import { MENU_CONFIRM, MENU_TOAST } from '@/hooks/service/menu/useText';
 import { useModal } from '@/hooks/service/ui/useModal';
 import useMenuOptionStore, {
   NewMenuOptionWithDetail,

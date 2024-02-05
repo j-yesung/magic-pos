@@ -1,5 +1,5 @@
 import styles from '@/components/menu-item/styles/modal.module.css';
-import { MENU_TITLE } from '@/hooks/service/menu/useText';
+import { MENU_TITLE } from '@/data/menu-item';
 import { useModal } from '@/hooks/service/ui/useModal';
 import useMenuItemStore from '@/shared/store/menu/menu-item';
 import MenuItemFormPage from '../form/FormItem';
