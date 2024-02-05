@@ -3,6 +3,7 @@ import styles from './styles/QrReaderContainer.module.css';
 import { useRouter } from 'next/router';
 import { QrScanner } from '@yudiel/react-qr-scanner';
 import useToast from '@/hooks/service/ui/useToast';
+import QrReaderViewBox from '@/components/kiosk/index/QrReaderViewBox';
 
 const QrReaderContainer = () => {
   const router = useRouter();
@@ -30,6 +31,7 @@ const QrReaderContainer = () => {
                 }
               }
             }}
+            viewFinder={() => <QrReaderViewBox />}
             onError={error => {
               console.error(error);
               toast(error.name, {
