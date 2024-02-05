@@ -1,7 +1,7 @@
 import { useSwiper } from 'swiper/react';
 import { goNextStep, setOrderType } from '@/shared/store/kiosk';
 import styles from './styles/OrderTypeButton.module.css';
-import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButton';
+import { SLIDE_MOVE_SPEED } from '@/components/layout/kiosk/footer/StepButton';
 import { MdOutlineTableBar } from 'react-icons/md';
 import { TbPaperBag } from 'react-icons/tb';
 import { useTranslation } from 'next-i18next';

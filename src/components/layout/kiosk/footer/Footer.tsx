@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from './styles/Footer.module.css';
-import StepButton from '@/components/layout/order/footer/StepButton';
+import StepButton from '@/components/layout/kiosk/footer/StepButton';
 import useKioskState, { ORDER_STEP } from '@/shared/store/kiosk';
 
 const Footer = () => {

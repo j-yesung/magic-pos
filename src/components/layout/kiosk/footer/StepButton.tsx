@@ -1,4 +1,4 @@
-import AddCartButton from '@/components/layout/order/footer/AddCartButton';
+import AddCartButton from '@/components/layout/kiosk/footer/AddCartButton';
 import { usePaymentWidget } from '@/hooks/query/order/usePaymentWidget';
 import { useModal } from '@/hooks/service/ui/useModal';
 import { readRemainEaByMenuId } from '@/server/api/supabase/menu-item';
@@ -83,7 +83,7 @@ const StepButton = () => {
     <>
       {step > ORDER_STEP.CHOOSE_ORDER_TYPE && step < ORDER_STEP.SUCCESS && (
         <div className={styles.container}>
-          {optionSwiperRef?.current!.swiper?.realIndex !== 1 ? (
+          {optionSwiperRef?.current && optionSwiperRef?.current!.swiper?.realIndex !== 1 ? (
             <button
               className={styles.button}
               onClick={nextClickHandler}

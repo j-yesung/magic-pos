@@ -5,11 +5,11 @@ import { MdOutlineLanguage } from 'react-icons/md';
 import { useTranslation } from 'next-i18next';
 import LanguageList from '@/components/kiosk/order-type/LanguageList';
 import React, { useEffect, useRef, useState } from 'react';
-import useKioskState, { goNextStep, ORDER_STEP, setIsOnlyTable, setOrderType } from '@/shared/store/kiosk';
+import useKioskState, { goNextStep, ORDER_STEP, setIsOnlyTable, setOrderType, setStep } from '@/shared/store/kiosk';
 import { useModal } from '@/hooks/service/ui/useModal';
 import { IoInformationCircleOutline } from 'react-icons/io5';
 import HelpModal from '@/components/kiosk/order-type/HelpModal';
-import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButton';
+import { SLIDE_MOVE_SPEED } from '@/components/layout/kiosk/footer/StepButton';
 import OrderTypeHeader from '@/components/kiosk/order-type/OrderTypeHeader';
 
 /**
@@ -37,13 +37,18 @@ const OrderTypeContainer = () => {
   };
 
   useEffect(() => {
-    if (step === ORDER_STEP.CHOOSE_ORDER_TYPE && menuData && menuData.length > 0) {
+    if (menuData && menuData.length > 0) {
       if (menuData[0].store.use_table) {
         setOrderType({ type: tableId ? 'store' : 'togo' });
         goNextStep();
         swiper.slideNext(SLIDE_MOVE_SPEED);
         setIsOnlyTable(true);
       }
+    }
+
+    if (step !== ORDER_STEP.CHOOSE_ORDER_TYPE) {
+      swiper.slideTo(ORDER_STEP.SELECT_MENU);
+      setStep(ORDER_STEP.SELECT_MENU);
     }
   }, []);
 

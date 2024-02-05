@@ -22,7 +22,6 @@ const MenuOptionContainer = () => {
             alt={selectedMenu?.name ?? ''}
             width={375}
             height={375}
-            objectFit={'cover'}
             priority={true}
           />
           <MenuInfo />

@@ -1,0 +1,33 @@
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 50%;
+    width: 50%;
+
+    z-index: var(--level-4-z-index);
+
+    --b: 0.5rem;   /* thickness of the border */
+    --c: var(--point-80);   /* color of the border */
+    --w: 2rem;  /* width of border */
+
+
+    border: var(--b) solid #0000; /* space for the border */
+    --_g: #0000 90deg,var(--c) 0;
+    --_p: var(--w) var(--w) border-box no-repeat;
+    background:
+            conic-gradient(from 90deg  at top    var(--b) left  var(--b),var(--_g)) 0    0    / var(--_p),
+            conic-gradient(from 180deg at top    var(--b) right var(--b),var(--_g)) 100% 0    / var(--_p),
+            conic-gradient(from 0deg   at bottom var(--b) left  var(--b),var(--_g)) 0    100% / var(--_p),
+            conic-gradient(from -90deg at bottom var(--b) right var(--b),var(--_g)) 100% 100% / var(--_p);
+
+    /*Irrelevant code*/
+    box-sizing:border-box;
+    margin:0.5rem;
+    display:inline-flex;
+    font-size:3rem;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
