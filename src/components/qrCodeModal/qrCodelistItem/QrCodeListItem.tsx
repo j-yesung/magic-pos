@@ -1,10 +1,12 @@
-import useQRCodeDownLoad from '@/hooks/qrCode/useQRCodeDownLoad';
+import { QUERY_KEY } from '@/hooks/qrCode/useFetchTableInQRCode';
+import useQRDownLoadHandler from '@/hooks/qrCode/useQRDownLoadHandler';
 import useManagementStore from '@/shared/store/management';
-import { StoreWithOrderInfo, Tables } from '@/types/supabase';
+import useAuthState from '@/shared/store/session';
+import { StoreTableInQRCode, Tables } from '@/types/supabase';
 import { useQueryClient } from '@tanstack/react-query';
 import clsx from 'clsx';
 import { QRCodeSVG } from 'qrcode.react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { IoPrintOutline } from 'react-icons/io5';
 import styles from './styles/QrCodeListitem.module.css';
 
@@ -15,19 +17,17 @@ interface propsType {
 
 const QrCodeListItem = ({ storeTable, orderType }: propsType) => {
   const queryClient = useQueryClient();
-  const data = queryClient.getQueryData<StoreWithOrderInfo[]>(['management']);
-  const storeId = data && data[0].id;
+  const data = queryClient.getQueryData<StoreTableInQRCode[]>([QUERY_KEY.QR_CODE]);
+  const { storeId } = useAuthState();
   const tableCount = data && data[0].store_table;
-  const [isQrClick, setIsQrClick] = useState(false);
+  const { clickOneQrDownLoadHandler, isQrClick } = useQRDownLoadHandler();
   const QRImage = useRef<HTMLDivElement[]>([]);
+  const { setQrData, qrData } = useManagementStore();
+  // qr code url
   const qrUrl = storeTable
     ? `${process.env.NEXT_PUBLIC_SUPACE_REDIRECT_TO}/kiosk/${storeId}?tableId=${storeTable.id}`
     : `${process.env.NEXT_PUBLIC_SUPACE_REDIRECT_TO}/kiosk/${storeId}`;
-  const { setQrData, qrData } = useManagementStore();
-  const { oneMutate } = useQRCodeDownLoad();
-  const clickQrDownLoadHandler = () => {
-    setIsQrClick(true);
-  };
+
   useEffect(() => {
     if (tableCount) {
       if (QRImage && qrUrl && storeId && tableCount.length + 1 > qrData.length) {
@@ -40,22 +40,14 @@ const QrCodeListItem = ({ storeTable, orderType }: propsType) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [QRImage, qrUrl, storeId]);
-  useEffect(() => {
-    if (isQrClick) {
-      oneMutate({
-        qrRef: QRImage.current[0],
-        orderType,
-      });
-    }
-    setIsQrClick(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isQrClick]);
 
   return (
     <div
       className={styles['qr-code-svg-box']}
       ref={el => (QRImage.current[0] = el as HTMLDivElement)}
-      onClick={clickQrDownLoadHandler}
+      onClick={() => {
+        clickOneQrDownLoadHandler(QRImage.current[0], orderType);
+      }}
     >
       <div className={clsx(styles['qr-code'], isQrClick && styles['active'], !storeTable && styles['order-type-togo'])}>
         {storeTable && <div className={styles['table-number']}>{storeTable.position}번 테이블</div>}

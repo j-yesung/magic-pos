@@ -9,13 +9,11 @@ import { MINI_MODE } from '../sales/calendar/calendarType/calendarType';
 import styles from './styles/orderCheckListFilterButtonBox.module.css';
 
 const OrderCheckListFilterButtonBox = () => {
-  const { startDate, endDate, setEndTime } = useOrderCheckListStore();
-  const { isDateButton, clickFilterButtonHandler } = useFilterButton();
+  const { startDate, endDate, setEndTime, isShowStartCalender, isShowEndCalender } = useOrderCheckListStore();
+  const { isDateButton, clickFilterButtonHandler, clickIsShowCalenderHandler } = useFilterButton();
   const [isStartCalender, setIsStartCalender] = useState(false);
   const [isEndCalender, setIsEndCalender] = useState(false);
 
-  console.log('startDate =>', startDate);
-  console.log('endDate =>', endDate);
   useEffect(() => {
     if (startDate > endDate) {
       setEndTime(startDate);
@@ -55,27 +53,25 @@ const OrderCheckListFilterButtonBox = () => {
         </Button>
       </div>
       <div className={clsx(styles['select-date-button-wrapper'])}>
+        {(isShowStartCalender || isShowEndCalender) && (
+          <div
+            className={styles['calendar-BG']}
+            onClick={() => {
+              clickIsShowCalenderHandler(false, false);
+            }}
+          ></div>
+        )}
         <div>
-          {isStartCalender && (
-            <div
-              className={styles['calendar-BG']}
-              onClick={() => {
-                setIsStartCalender(false);
-                setIsEndCalender(false);
-              }}
-            ></div>
-          )}
           <div
             className={styles['date-calender']}
             onClick={() => {
-              setIsStartCalender(true);
-              setIsEndCalender(false);
+              clickIsShowCalenderHandler(true, false);
             }}
           >
             <span>{startDate}</span>
             <IoCalendarClearOutline className={styles.calendarIcon} width={26} height={26} />
           </div>
-          {isStartCalender && (
+          {isShowStartCalender && (
             <div className={styles['calendar']}>
               <Calendar mode={MINI_MODE} page={'ORDER_START_PAGE'} />
             </div>
@@ -83,26 +79,16 @@ const OrderCheckListFilterButtonBox = () => {
         </div>
         <span>~</span>
         <div>
-          {isEndCalender && (
-            <div
-              className={styles['calendar-BG']}
-              onClick={() => {
-                setIsStartCalender(false);
-                setIsEndCalender(false);
-              }}
-            ></div>
-          )}
           <div
             className={styles['date-calender']}
             onClick={() => {
-              setIsStartCalender(false);
-              setIsEndCalender(true);
+              clickIsShowCalenderHandler(false, true);
             }}
           >
             <span>{endDate}</span>
             <IoCalendarClearOutline className={styles.calendarIcon} width={26} height={26} />
           </div>
-          {isEndCalender && (
+          {isShowEndCalender && (
             <div className={styles['calendar']}>
               <Calendar mode={MINI_MODE} page={'ORDER_END_PAGE'} />
             </div>

@@ -45,12 +45,7 @@
   gap: 0.5rem;
 }
 
-.select-date-button-wrapper > div {
-  width: auto;
-  height: auto;
-}
-
-.select-date-button-wrapper > div > .calendar-BG {
+.select-date-button-wrapper > .calendar-BG {
   position: fixed;
   top: 0;
   left: 0;
@@ -58,6 +53,11 @@
   height: 100vh;
 }
 
+.select-date-button-wrapper > div {
+  width: auto;
+  height: auto;
+  z-index: 0;
+}
 .select-date-button-wrapper > div > .date-calender {
   display: flex;
   padding: 1rem 1.5rem;
@@ -76,6 +76,9 @@
 .select-date-button-wrapper > div > .calendar > div {
   top: 0.5rem;
   left: 0;
+}
+.select-date-button-wrapper > div > .calendar > div > div:nth-child(2) > div:nth-child(2) span {
+  cursor: pointer;
 }
 
 .select-date-button-wrapper > span {
