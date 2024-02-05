@@ -593,3 +593,5 @@ interface MenuOptionWithDetail extends Tables<'menu_option'> {
 }
 
 type MenuItemWithOption = Tables<'menu_item'> & { menu_option: MenuOptionWithDetail[]; unique: string };
+
+type StoreTableInQRCode = Pick<StoreWithStoreTable, 'store_table'>;

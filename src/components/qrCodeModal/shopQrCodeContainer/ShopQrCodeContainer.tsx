@@ -1,9 +1,9 @@
-import { StoreWithOrderInfo } from '@/types/supabase';
+import { StoreTableInQRCode } from '@/types/supabase';
 import clsx from 'clsx';
 import QrCodeListItem from '../qrCodelistItem/QrCodeListItem';
 import styles from './styles/ShopQrCodeContainer.module.css';
 
-const ShopQrCodeContainer = ({ data }: { data?: StoreWithOrderInfo[] }) => {
+const ShopQrCodeContainer = ({ data }: { data: StoreTableInQRCode[] }) => {
   const storeTable = data && data[0].store_table;
 
   return (

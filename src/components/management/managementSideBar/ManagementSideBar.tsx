@@ -24,7 +24,7 @@ const ManagementSideBar = ({ managementData }: { managementData?: StoreWithOrder
             {orderStatus} {tableNumber}
           </span>
           <span className={styles['close-button']} onClick={clickCloseSideBarHandler}>
-            <CloseButton width={40} height={40} />
+            <CloseButton width={'4rem'} height={'4rem'} />
           </span>
         </div>
         <SideBarContainer managementData={managementData} />

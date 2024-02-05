@@ -240,7 +240,7 @@
 @media screen and (max-height: 960px) {
   .nav-wrapper .media-scroll {
     overflow-y: auto;
-    height: calc(100% - 50rem);
+    height: calc(100% - 45rem);
   }
 }
 

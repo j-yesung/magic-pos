@@ -1,23 +1,43 @@
-import useSalesToggle from '@/shared/store/sales/salesToggle';
+import clsx from 'clsx';
 import React from 'react';
+import { BIG_MODE, MINI_MODE } from './calendarType/calendarType';
 import Cell from './cell/Cell';
 import Days from './days/Days';
 import Header from './header/Header';
 import styles from './styles/calendar.module.css';
 
-const Calendar = ({ children }: { children?: React.ReactNode }) => {
-  const isChangeView = useSalesToggle(state => state.isChangeView);
-
+/**
+ *
+ * @param children ReactNode
+ * @param mode mini , big
+ * @param page page는 조건부 props로 기능을 주고 싶을 때 사용합니다. Cell.tsx, CellItem.tsx에 주석처리로 기능 예시를 써놓았습니다.
+ * 물론 page에 따른 CellItem.tsx에서 style을 할 수 있게끔 주석과 예시? 써놓았습니다.
+ * @returns
+ */
+const Calendar = ({ children, mode, page }: CalendarType) => {
   return (
-    <div className={isChangeView ? styles.salesStatus : styles.showCalendar}>
-      <div className={isChangeView ? styles.statusHeaderWrapper : styles.calendarHeaderWrapper}>
-        <Header />
+    <div
+      className={clsx({
+        [styles.miniCalendar]: mode === MINI_MODE,
+        [styles.bigCalendar]: mode === BIG_MODE,
+      })}
+    >
+      <div
+        className={clsx({
+          [styles.miniCalendarHeaderWrapper]: mode === MINI_MODE,
+        })}
+      >
+        <Header mode={mode} />
         {children}
       </div>
 
-      <div className={!isChangeView ? styles.calendarBodyWrapper : ''}>
-        <Days />
-        <Cell />
+      <div
+        className={clsx({
+          [styles.bigBodyWrapper]: mode === BIG_MODE,
+        })}
+      >
+        <Days mode={mode} />
+        <Cell mode={mode} page={page} />
       </div>
     </div>
   );

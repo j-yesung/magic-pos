@@ -7,6 +7,8 @@
   display: none;
   z-index: 99;
   cursor: pointer;
+  background-color: #000;
+  opacity: 0.05;
 }
 .side-bar-background.show-side-bar-bg {
   display: block;
@@ -15,13 +17,13 @@
   position: fixed;
   top: 0;
   right: -48.5%;
-  width: 48.5%;
+  width: calc(48.5% - 20rem);
   height: 100vh;
   transition: all 0.4s;
-  padding: 5rem 2rem;
-  padding-right: 20rem;
-  z-index: 600;
+  padding: 5rem 4rem;
+  /* padding-right: 20rem; */
   z-index: 99;
+  box-shadow: 0px 0px 20px 0px rgba(68, 9, 194, 0.1);
   background-color: #fff;
 }
 
@@ -41,10 +43,4 @@
 
 .close-button {
   cursor: pointer;
-}
-
-@media only all and (max-width: 1520px) {
-  .side-bar-wrapper{
-    padding-right: 0;
-  }
 }

@@ -2,6 +2,7 @@ import useToggleState, { resetToggle } from '@/shared/store/toggle';
 import { useEffect } from 'react';
 import Footer from './footer/Footer';
 import Contents from './main/Contents';
+import ProgressBar from './main/animation/ProgressBar';
 import styles from './styles/Home.module.css';
 
 const HomeLayout = ({ children }: { children: React.ReactNode }) => {
@@ -23,6 +24,7 @@ const HomeLayout = ({ children }: { children: React.ReactNode }) => {
         }
       `}</style>
       <div className={styles.wrapper}>
+        <ProgressBar />
         <main className={styles.mainWrapper}>
           <Contents />
           {children}
