@@ -2,7 +2,7 @@ import styles from './styles/MenuCard.module.css';
 import { MenuItemWithOption } from '@/types/supabase';
 import Image from 'next/image';
 import useKioskState, { setIsOptionPage, setSelectedMenu } from '@/shared/store/kiosk';
-import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButton';
+import { SLIDE_MOVE_SPEED } from '@/components/layout/kiosk/footer/StepButton';
 import { convertNumberToWon } from '@/shared/helper';
 import { useTranslation } from 'next-i18next';
 

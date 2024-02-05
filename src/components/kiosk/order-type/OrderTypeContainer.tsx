@@ -9,7 +9,7 @@ import useKioskState, { goNextStep, ORDER_STEP, setIsOnlyTable, setOrderType } f
 import { useModal } from '@/hooks/service/ui/useModal';
 import { IoInformationCircleOutline } from 'react-icons/io5';
 import HelpModal from '@/components/kiosk/order-type/HelpModal';
-import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButton';
+import { SLIDE_MOVE_SPEED } from '@/components/layout/kiosk/footer/StepButton';
 import OrderTypeHeader from '@/components/kiosk/order-type/OrderTypeHeader';
 
 /**

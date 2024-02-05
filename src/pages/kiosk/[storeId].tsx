@@ -1,5 +1,5 @@
 import KioskContainer from '@/components/kiosk/KioskContainer';
-import OrderLayout from '@/components/layout/order/OrderLayout';
+import OrderLayout from '@/components/layout/kiosk/OrderLayout';
 import { useModal } from '@/hooks/service/ui/useModal';
 import { useIsOrderAllReady, useIsValidURL, useMakeMenuData } from '@/hooks/service/useKiosk';
 import { fetchCategoriesWithMenuItemByStoreId } from '@/server/api/supabase/menu-category';

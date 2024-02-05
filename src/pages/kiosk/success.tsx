@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import useKioskState from '@/shared/store/kiosk';
 import Waiting from '@/components/kiosk/success/Waiting';
-import OrderLayout from '@/components/layout/order/OrderLayout';
+import OrderLayout from '@/components/layout/kiosk/OrderLayout';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { setErrorState } from '@/shared/store/error';
 import { PAYMENT_FAIL_PATH, RECEIPT_PATH } from '@/data/url-list';

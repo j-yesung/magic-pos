@@ -1,4 +1,4 @@
-import AddCartButton from '@/components/layout/order/footer/AddCartButton';
+import AddCartButton from '@/components/layout/kiosk/footer/AddCartButton';
 import { usePaymentWidget } from '@/hooks/query/order/usePaymentWidget';
 import { useModal } from '@/hooks/service/ui/useModal';
 import { readRemainEaByMenuId } from '@/server/api/supabase/menu-item';

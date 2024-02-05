@@ -1,11 +1,11 @@
 import Head from 'next/head';
 import { useEffect, useRef, useState } from 'react';
 import styles from './styles/OrderLayout.module.css';
-import Footer from '@/components/layout/order/footer/Footer';
+import Footer from '@/components/layout/kiosk/footer/Footer';
 import { SwiperRef } from 'swiper/react';
 import useKioskState, { ORDER_STEP, setSwiperRef } from '@/shared/store/kiosk';
 import { useRouter } from 'next/router';
-import OrderPrevButton from '@/components/layout/order/OrderPrevButton';
+import OrderPrevButton from '@/components/layout/kiosk/OrderPrevButton';
 import { makeTitle } from '@/shared/helper';
 import { PAYMENT_FAIL_PATH, PAYMENT_SUCCESS_PATH, RECEIPT_PATH } from '@/data/url-list';
 
