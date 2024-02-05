@@ -2,10 +2,7 @@ import { useModal } from '@/hooks/service/ui/useModal';
 import { convertNumberToWon } from '@/shared/helper';
 import useCalendarState from '@/shared/store/sales/salesCalendar';
 import useDayState from '@/shared/store/sales/salesDay';
-import useSalesToggle from '@/shared/store/sales/salesToggle';
-import { CalendarDataType, GetMinMaxSalesReturnType, HolidayType } from '@/types/sales';
 import { cva } from 'class-variance-authority';
-import { Dayjs } from 'dayjs';
 import {
   FORMAT_CELL_DATE_TYPE,
   getCalendarDateType,
@@ -16,24 +13,18 @@ import {
   getStatusMonthType,
 } from '../../calendarUtility/cellItemType';
 import SalesModal from '../../modal/SalesModal';
-import styles from './styles/cellItem.module.css';
 
-interface CellItemProps {
-  day: Dayjs;
-  salesData?: CalendarDataType;
-  getMinMaxSalesType?: (param: CalendarDataType) => GetMinMaxSalesReturnType;
-  clickShowDataOfDateHandler?: (day: Dayjs) => () => Promise<void>;
-  holiday: HolidayType[];
-}
+import clsx from 'clsx';
+import { BIG_MODE, CALENDAR_PAGE, MINI_MODE, STATUS_PAGE } from '../calendarType/calendarType';
+import styles from './styles/cellItem.module.css';
 
 type Cell = (param: CellItemProps) => JSX.Element;
 
-const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDateHandler, holiday }) => {
+const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDateHandler, holiday, mode, page }) => {
   const SELECTED_DAY = 'SELECTEDTYPE';
   const SALES_NONE = 'NONE';
   const SALES_HAVE = 'HAVE';
   const HOLIDAY = 'HOLIDAY';
-  const isChangeView = useSalesToggle(state => state.isChangeView);
   const currentDate = useCalendarState(staet => staet.currentDate);
   const { selectedDate, today } = useDayState();
 
@@ -109,17 +100,25 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
   return (
     <>
       {/* sales/Status일 때 보여줄 날 css */}
-      {isChangeView && (
+      {mode === MINI_MODE && (
         <div
-          className={statusVariant({
-            calendarType: getStatusCalendarType(day, currentDate),
-            monthType: getStatusMonthType(currentDate, day),
-            dateType: getStatusDateType(day),
-            holidayType: holiday?.[0]?.name ? HOLIDAY : null,
+          className={clsx({
+            [statusVariant({
+              calendarType: getStatusCalendarType(day, currentDate),
+              monthType: getStatusMonthType(currentDate, day),
+              dateType: getStatusDateType(day),
+              holidayType: holiday?.[0]?.name ? HOLIDAY : null,
+            })]: page === STATUS_PAGE,
+
+            // [styles.페이지가 주문내역이면 사용하는 style] : PAGE === ORDER_PAGE
           })}
-          {...((day.isSame(today, 'D') || day.isBefore(today, 'D')) && {
+          {...(((page === STATUS_PAGE && day.isSame(today, 'D')) || day.isBefore(today, 'D')) && {
             onClick: clickShowDataOfDateHandler?.(day),
           })}
+
+          /** 페이지가 주문내역 확인이면 아래와 같이 하면 됩니다.
+           *{...((page===ORDER && {onClick: clickHandler}))}
+           */
         >
           <span
             className={statusDayVariant({
@@ -133,13 +132,16 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
       )}
 
       {/* sales/Calendar일 때 보여줄 날 css */}
-      {!isChangeView && (
+      {mode === BIG_MODE && (
         <div
-          className={calendarVariant({
-            monthType: getCalendarMonthType(day, currentDate),
-            dateType: getCalendarDateType(day),
-            salesType: salesData ? SALES_HAVE : SALES_NONE,
-          })}
+          className={clsx(
+            page === CALENDAR_PAGE &&
+              calendarVariant({
+                monthType: getCalendarMonthType(day, currentDate),
+                dateType: getCalendarDateType(day),
+                salesType: salesData ? SALES_HAVE : SALES_NONE,
+              }),
+          )}
           {...(day.format(FORMAT_CELL_DATE_TYPE) === salesData?.date && {
             onClick: () => {
               MagicModal.fire(<SalesModal specificData={salesData!} />);

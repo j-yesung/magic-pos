@@ -1,15 +1,18 @@
-import useSalesToggle from '@/shared/store/sales/salesToggle';
 import clsx from 'clsx';
+import { BIG_MODE, MINI_MODE } from '../calendarType/calendarType';
 import HeaderController from './calendarController/HeaderController';
 import HeaderDate from './headerDate/HeaderDate';
 import styles from './styles/header.module.css';
-const Header = () => {
-  const isChangeView = useSalesToggle(state => state.isChangeView);
-
+const Header = ({ mode }: { mode: CalendarModeType }) => {
   return (
-    <div className={clsx(styles.headerContainer, isChangeView ? styles.statusHeader : styles.calendarHeader)}>
-      <HeaderDate />
-      <HeaderController />
+    <div
+      className={clsx(styles.baseHeader, {
+        [styles.miniHeader]: mode === MINI_MODE,
+        [styles.bigHeader]: mode === BIG_MODE,
+      })}
+    >
+      <HeaderDate mode={mode} />
+      <HeaderController mode={mode} />
     </div>
   );
 };
