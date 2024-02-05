@@ -4,7 +4,7 @@ import usePlatFormState, { setAddPlatForm, setEditPlatForm, setPrevImg } from '@
 import { ChangeEvent, useEffect, useRef } from 'react';
 
 const usePlatFormInputWithDebounce = ({ mode }: { mode: boolean }) => {
-  const { addPlatForm, editPlatForm } = usePlatFormState();
+  const { addPlatForm, editPlatForm, prevImg } = usePlatFormState();
   const initialEditDebounce = useRef<boolean>(false);
   const changePlatFormCardText = (e: ChangeEvent<HTMLInputElement>) => {
     if (!mode) {
@@ -19,7 +19,7 @@ const usePlatFormInputWithDebounce = ({ mode }: { mode: boolean }) => {
     let debounce: NodeJS.Timeout;
     if (mode) return;
 
-    if (!addPlatForm.file && addPlatForm.link_url.length >= 1) {
+    if (!addPlatForm.file && addPlatForm.link_url.length >= 1 && !prevImg) {
       debounce = setTimeout(async () => {
         const extractedImage = await getOpenGraphMetaImage(addPlatForm?.link_url);
         const confirmedImageUrl = handleMetaImageException(extractedImage);
@@ -44,7 +44,7 @@ const usePlatFormInputWithDebounce = ({ mode }: { mode: boolean }) => {
       initialEditDebounce.current = true;
       return;
     }
-    if (!editPlatForm.file && editPlatForm.link_url.length >= 1) {
+    if (!editPlatForm.file && editPlatForm.link_url.length >= 1 && !prevImg) {
       debounce = setTimeout(async () => {
         const extractedImage = await getOpenGraphMetaImage(editPlatForm.link_url);
         const confirmedImageUrl = handleMetaImageException(extractedImage);
