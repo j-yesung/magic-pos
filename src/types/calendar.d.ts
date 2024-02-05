@@ -1,5 +1,5 @@
 type CalendarModeType = 'MINI_MODE' | 'BIG_MODE';
-type CalendarPageType = 'STATUS_PAGE' | 'CALENDAR_PAGE' | 'ORDER_PAGE';
+type CalendarPageType = 'STATUS_PAGE' | 'CALENDAR_PAGE' | 'ORDER_START_PAGE' | 'ORDER_END_PAGE';
 
 // Calendar Component
 interface CalendarType {
