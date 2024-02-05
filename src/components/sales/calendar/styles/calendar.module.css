@@ -1,4 +1,19 @@
-.sales-status {
+.big-body-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  width: 78%;
+  max-width: 1260px;
+  padding: 3rem;
+  border-radius: 2rem;
+  border: 1px solid var(--line, #ededed);
+}
+
+/*
+미니 캘린더일 때
+*/
+.mini-calendar {
   position: absolute;
   top: 5rem;
   left: 22rem;
@@ -11,25 +26,15 @@
   border: 1px solid var(--line, #ededed);
   background: #fff;
 }
-.status-header-wrapper {
+.mini-calendar-header-wrapper {
   display: flex;
   width: 100%;
   justify-content: space-between;
   align-items: center;
 }
-.calendar-body-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2rem;
-  width: 78%;
-  max-width: 1260px;
-  padding: 3rem;
-  border-radius: 2rem;
-  border: 1px solid var(--line, #ededed);
-}
-/*sales/calendar 일 때*/
-.show-calendar {
+
+/*big Calendar 일 때*/
+.big-calendar {
   display: flex;
   width: 100%;
   align-items: flex-start;

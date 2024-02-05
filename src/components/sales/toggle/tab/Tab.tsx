@@ -1,7 +1,9 @@
 import { useCalendar } from '@/hooks/sales/useCalendar';
 import useSalesToggle from '@/shared/store/sales/salesToggle';
+
 import React, { Fragment, useEffect } from 'react';
 import Calendar from '../../calendar/Calendar';
+import { MINI_MODE, STATUS_PAGE } from '../../calendar/calendarType/calendarType';
 import Csv from '../../csv/Csv';
 import CalendarToggle from './calendarToggle/CalendarToggle';
 import styles from './styles/tab.module.css';
@@ -24,7 +26,7 @@ const Tab = () => {
       {isShow && (
         <Fragment>
           <div className={styles.calendarBg} onClick={clickHiddenCalendarHandler} />
-          <Calendar />
+          <Calendar mode={MINI_MODE} page={STATUS_PAGE} />
         </Fragment>
       )}
       {isChangeView && <Csv />}

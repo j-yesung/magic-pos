@@ -1,12 +1,12 @@
 /*status Days*/
 
-.status-days {
+.mini-days {
   display: flex;
   align-items: flex-start;
   gap: 1rem;
 }
 
-.status-day {
+.mini-day {
   display: flex;
   width: 3rem;
   height: 4.4rem;
@@ -16,7 +16,7 @@
   gap: 0.5rem;
 }
 
-.status-day-text {
+.mini-day-text {
   display: flex;
   width: 2.3rem;
   height: 2.3rem;
@@ -31,13 +31,13 @@
 }
 
 /*sales-calendar 일 때 css*/
-.sales-calendar-days {
+.big-calendar-days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 1rem;
   width: 100%;
 }
-.sales-calendar-day {
+.big-calendar-day {
   display: flex;
   width: 100%;
   max-width: 15rem;
