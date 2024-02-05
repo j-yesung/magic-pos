@@ -25,6 +25,12 @@
   border-radius: 0.5rem;
   border: 1px solid var(--line, #ededed);
   background: #fff;
+  @media screen and (max-width: 1520px) {
+    left: 20rem;
+  }
+  @media screen and (max-width: 1220px) {
+    left: 19rem;
+  }
 }
 .mini-calendar-header-wrapper {
   display: flex;
