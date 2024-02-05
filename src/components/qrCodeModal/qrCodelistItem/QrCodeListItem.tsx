@@ -1,6 +1,6 @@
 import { QUERY_KEY } from '@/hooks/qrCode/useFetchTableInQRCode';
 import useQRDownLoadHandler from '@/hooks/qrCode/useQRDownLoadHandler';
-import useManagementStore from '@/shared/store/management';
+import useQRCodeStore from '@/shared/store/qrCode';
 import useAuthState from '@/shared/store/session';
 import { StoreTableInQRCode, Tables } from '@/types/supabase';
 import { useQueryClient } from '@tanstack/react-query';
@@ -19,27 +19,22 @@ const QrCodeListItem = ({ storeTable, orderType }: propsType) => {
   const queryClient = useQueryClient();
   const data = queryClient.getQueryData<StoreTableInQRCode[]>([QUERY_KEY.QR_CODE]);
   const { storeId } = useAuthState();
-  const tableCount = data && data[0].store_table;
+  const tableCount = data && data[0].store_table.length;
   const { clickOneQrDownLoadHandler, isQrClick } = useQRDownLoadHandler();
   const QRImage = useRef<HTMLDivElement[]>([]);
-  const { setQrData, qrData } = useManagementStore();
+  const { setQrData, qrData } = useQRCodeStore();
   // qr code url
   const qrUrl = storeTable
     ? `${process.env.NEXT_PUBLIC_SUPACE_REDIRECT_TO}/kiosk/${storeId}?tableId=${storeTable.id}`
     : `${process.env.NEXT_PUBLIC_SUPACE_REDIRECT_TO}/kiosk/${storeId}`;
-
+  console.log(qrData);
   useEffect(() => {
-    if (tableCount) {
-      if (QRImage && qrUrl && storeId && tableCount.length + 1 > qrData.length) {
-        setQrData({
-          qrRef: QRImage.current[0],
-          qrUrl,
-          orderType,
-        });
-      }
-    }
+    setQrData({
+      qrRef: QRImage.current[0],
+      orderType,
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [QRImage, qrUrl, storeId]);
+  }, []);
 
   return (
     <div
