@@ -29,12 +29,12 @@ const Login = () => {
   };
 
   useEffect(() => {
-    const email = localStorage.getItem('email');
-    if (email && path === LOGIN_PATH) {
-      setValue('email', email);
+    const localEmail = localStorage.getItem('email');
+    if (localEmail && path === LOGIN_PATH) {
+      setValue('email', localEmail);
       defaultCheckBox();
     }
-  }, [path]);
+  }, [path, setValue]);
 
   return (
     <div className={styles.formContainer}>

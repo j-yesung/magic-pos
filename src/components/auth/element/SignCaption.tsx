@@ -23,6 +23,10 @@ const SignCaption = (props: SignCaptionProps) => {
     setIsLoading(true);
   }, []);
 
+  useEffect(() => {
+    if (isCheckbox && email) localStorage.setItem('email', email);
+  }, [email, isCheckbox]);
+
   return (
     <>
       {isLoading && (
