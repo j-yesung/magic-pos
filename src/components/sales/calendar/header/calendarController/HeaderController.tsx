@@ -1,5 +1,5 @@
 import Button from '@/components/common/Button';
-import { useCalendar } from '@/hooks/sales/useCalendar';
+import { useCalendar } from '@/hooks/service/sales/useCalendar';
 
 import { CalendarModeType } from '@/types/calendar';
 import clsx from 'clsx';

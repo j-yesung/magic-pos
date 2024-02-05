@@ -1,24 +1,24 @@
+import { RECEIPT_PATH } from '@/data/url-list';
 import { useNumberOrderSetQuery } from '@/hooks/query/order/useNumberOrderSetQuery';
 import { useStoreOrderSetQuery } from '@/hooks/query/order/useStoreOrderSetQuery';
 import { useStoreSetQuery } from '@/hooks/query/store/useStoreSetQuery';
-import { useSalesQuery } from '@/hooks/sales/useSalesQuery';
+import { useUserTokenSetQuery } from '@/hooks/query/user-token/useUserTokenSetQuery';
+import { useSalesQuery } from '@/hooks/service/sales/useSalesQuery';
+import { useModal } from '@/hooks/service/ui/useModal';
+import useToast from '@/hooks/service/ui/useToast';
 import { decrementRemainEaByMenuId } from '@/server/api/supabase/menu-item';
+import { getTokenHandler } from '@/shared/firebase';
 import { groupByKey } from '@/shared/helper';
 import useKioskState, { ORDER_STEP, addOrderId, getTotalPrice, setOrderNumber, setStep } from '@/shared/store/kiosk';
 import { Tables, TablesInsert } from '@/types/supabase';
+import { motion } from 'framer-motion';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { MdOutlineAddHome } from 'react-icons/md';
 import MenuHeader from '../common/MenuHeader';
 import styles from './styles/SuccessContainer.module.css';
-import { useTranslation } from 'next-i18next';
-import { getTokenHandler } from '@/shared/firebase';
-import { useUserTokenSetQuery } from '@/hooks/query/user-token/useUserTokenSetQuery';
 import Success from '/public/icons/order-success.svg';
-import { motion } from 'framer-motion';
-import useToast from '@/hooks/service/ui/useToast';
-import { useModal } from '@/hooks/service/ui/useModal';
-import { RECEIPT_PATH } from '@/data/url-list';
-import { MdOutlineAddHome } from 'react-icons/md';
 
 const SuccessContainer = ({ payment }: { payment?: Payment }) => {
   const orderList = useKioskState(state => state.orderList);

@@ -1,4 +1,4 @@
-import { useDataHandler } from '@/hooks/sales/useDataHandler';
+import { useDataHandler } from '@/hooks/service/sales/useDataHandler';
 import useDayState from '@/shared/store/sales/salesDay';
 import { setIsShow } from '@/shared/store/sales/salesToggle';
 import React, { useCallback } from 'react';

@@ -1,4 +1,4 @@
-import { useDataHandler } from '@/hooks/sales/useDataHandler';
+import { useDataHandler } from '@/hooks/service/sales/useDataHandler';
 import { getMonthSales } from '@/server/api/supabase/sales';
 import { groupByKey } from '@/shared/helper';
 import useCalendarState from '@/shared/store/sales/salesCalendar';
