@@ -1,4 +1,6 @@
 import clsx from 'clsx';
+
+import { CalendarModeType } from '@/types/calendar';
 import { BIG_MODE, MINI_MODE } from '../calendarType/calendarType';
 import HeaderController from './calendarController/HeaderController';
 import HeaderDate from './headerDate/HeaderDate';
