@@ -35,6 +35,8 @@ export const MENU_TOAST = {
   ITEM_REMOVE: '메뉴 삭제 완료',
   ITEM_REMOVE_ALERT: '메뉴를 삭제할까요?',
   ITEM_RECOMMENDED: '추천 메뉴는 최대 5개입니다.',
+  OPTION_ADD: '메뉴 옵션 등록 성공',
+  OPTION_REMOVE: '메뉴 옵션 삭제 성공',
   OPTION_ADD_NAME_ALERT: '옵션명은 필수입니다.',
   OPTION_REMOVE_ALERT: '옵션을 삭제할까요?',
   OPTION_ADD_DETAIL_ALERT: '옵션 항목 내용과 가격을 모두 입력해주세요.',

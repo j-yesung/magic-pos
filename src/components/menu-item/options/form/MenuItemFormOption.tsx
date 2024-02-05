@@ -1,4 +1,6 @@
+import styles from '@/components/menu-item/styles/menu-item-form.module.css';
 import { MENU_ITEM, MENU_TOAST } from '@/data/menu-item';
+import useMenuToast from '@/hooks/service/menu/useMenuToast';
 import { useModal } from '@/hooks/service/ui/useModal';
 import useMenuItemStore from '@/shared/store/menu/menu-item';
 import useMenuOptionStore, {
@@ -9,8 +11,7 @@ import useMenuOptionStore, {
   setMenuOptions,
 } from '@/shared/store/menu/menu-option';
 import { MenuOptionWithDetail } from '@/types/supabase';
-import MenuOptionModal from '../options/MenuOptionModal';
-import styles from '../styles/menu-item-form.module.css';
+import MenuOptionModal from '../modal/MenuOptionModal';
 import CloseButton from '/public/icons/close.svg';
 import ExclamationMark from '/public/icons/exclamation-mark.svg';
 import EditButton from '/public/icons/pencil.svg';
@@ -18,6 +19,7 @@ import PlusButton from '/public/icons/plus.svg';
 
 const MenuItemFormOption = () => {
   const { MagicModal } = useModal();
+  const { showCompleteToast } = useMenuToast();
   const menuItem = useMenuItemStore(state => state.menuItem);
   const menuOptions = useMenuOptionStore(state => state.menuOptions);
 
@@ -54,6 +56,7 @@ const MenuItemFormOption = () => {
       confirmButtonCallback: () => {
         const removedItemList = menuOptions.filter((_, index) => index !== menuOptionIndex);
         setMenuOptions(removedItemList);
+        showCompleteToast(MENU_TOAST.OPTION_REMOVE, 'success');
       },
     });
   };

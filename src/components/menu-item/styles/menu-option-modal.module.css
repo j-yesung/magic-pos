@@ -184,22 +184,22 @@
   letter-spacing: -0.028rem;
 }
 /* option input 3개 짜리 */
-.option-detail-wrap .option-three-wrap {
+.option-three-wrap {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
-.option-detail-wrap .option-three-wrap .input-wrap {
+.option-three-wrap .input-wrap {
   display: flex;
   flex-direction: row;
 }
-.option-detail-wrap .option-three-wrap .input-wrap .input:nth-child(1) {
+.option-three-wrap .input-wrap .input:nth-child(1) {
   flex: 1;
 }
-.option-detail-wrap .option-three-wrap .input-wrap .input:nth-child(2) {
+.option-three-wrap .input-wrap .input:nth-child(2) {
   width: 14rem;
 }
-.option-detail-wrap .option-three-wrap .input-wrap button {
+.option-three-wrap .input-wrap button {
   display: flex;
   width: 5rem;
   height: 5.4rem;

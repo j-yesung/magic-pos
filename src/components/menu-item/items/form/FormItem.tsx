@@ -8,8 +8,8 @@ import useMenuOptionStore, { NewMenuOptionWithDetail, setMenuOptions } from '@/s
 import { TablesInsert } from '@/types/supabase';
 import dayjs from 'dayjs';
 import { useRef } from 'react';
+import MenuItemFormButton from './ButtonWrapItem';
 import MenuItemFormInput from './InputItem';
-import MenuItemFormButton from './RemoveItem';
 
 interface MenuItemModal {
   clickItemModalHide: () => void;

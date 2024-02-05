@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import { ChangeEvent } from 'react';
 import { FaCheck } from 'react-icons/fa6';
-import MenuItemFormOption from '../../options/MenuItemFormOption';
+import MenuItemFormOption from '../../options/form/MenuItemFormOption';
 import CloseButton from '/public/icons/close.svg';
 import EditButton from '/public/icons/pencil.svg';
 

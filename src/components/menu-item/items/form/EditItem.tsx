@@ -10,16 +10,14 @@ import ExclamationMark from '/public/icons/exclamation-mark.svg';
 
 interface MenuItemModal {
   clickItemModalHide: () => void;
-  addPending: boolean;
   updatePending: boolean;
   uploadImagePending: boolean;
 }
-const MenuItemFormButton = ({ clickItemModalHide, addPending, updatePending, uploadImagePending }: MenuItemModal) => {
+
+const EditItemButtonComponent = ({ clickItemModalHide, updatePending, uploadImagePending }: MenuItemModal) => {
   const { MagicModal } = useModal();
   const { showCompleteToast } = useMenuToast();
   const { deleteMutate, deletePending, removeImageMutate } = useSetMenuItem();
-
-  const isEdit = useMenuItemStore(state => state.isEdit);
   const menuItem = useMenuItemStore(state => state.menuItem);
   const menuItemSampleImg = useMenuItemStore(state => state.menuItemSampleImg);
   const menuItemImgFile = useMenuItemStore(state => state.menuItemImgFile);
@@ -47,34 +45,16 @@ const MenuItemFormButton = ({ clickItemModalHide, addPending, updatePending, upl
       },
     });
   };
-
   return (
-    <div className={styles['wrap']}>
-      {isEdit ? (
-        <div className={styles['btn-wrap']}>
-          <button className={styles['delete-btn']} type="button" onClick={clickRemoveCategoryHandler}>
-            {deletePending ? <LoadingSpinner boxSize={2.8} ballSize={0.4} /> : MENU_CONFIRM.ITEM_REMOVE}
-          </button>
-          <button className={styles['update-btn']} type="submit">
-            {updatePending || uploadImagePending ? (
-              <LoadingSpinner boxSize={2.8} ballSize={0.4} />
-            ) : (
-              MENU_CONFIRM.ITEM_EDIT
-            )}
-          </button>
-        </div>
-      ) : (
-        <div className={styles['btn-wrap']}>
-          <button className={styles['basic-btn']} type="button" onClick={clickItemModalHide}>
-            {MENU_CONFIRM.CANCEL}
-          </button>
-          <button className={styles['update-btn']} type="submit">
-            {addPending || uploadImagePending ? <LoadingSpinner boxSize={2.8} ballSize={0.4} /> : MENU_CONFIRM.CHECK}
-          </button>
-        </div>
-      )}
+    <div className={styles['btn-wrap']}>
+      <button className={styles['delete-btn']} type="button" onClick={clickRemoveCategoryHandler}>
+        {deletePending ? <LoadingSpinner boxSize={2.8} ballSize={0.4} /> : MENU_CONFIRM.ITEM_REMOVE}
+      </button>
+      <button className={styles['update-btn']} type="submit">
+        {updatePending || uploadImagePending ? <LoadingSpinner boxSize={2.8} ballSize={0.4} /> : MENU_CONFIRM.ITEM_EDIT}
+      </button>
     </div>
   );
 };
 
-export default MenuItemFormButton;
+export default EditItemButtonComponent;
