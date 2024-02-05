@@ -1,4 +1,5 @@
-import useToast from '@/hooks/service/ui/useToast';
+import { MENU_OPTION, MENU_TOAST } from '@/data/menu-item';
+import useMenuToast from '@/hooks/service/menu/useMenuToast';
 import useMenuOptionStore, {
   NewOptionDetailType,
   setMenuOption,
@@ -11,7 +12,7 @@ import styles from '../styles/menu-option-modal.module.css';
 import PlusButton from '/public/icons/plus.svg';
 
 const MenuOptionModalInput = () => {
-  const { toast } = useToast();
+  const { showCompleteToast } = useMenuToast();
 
   const menuOption = useMenuOptionStore(state => state.menuOption);
   const menuOptionDetail = useMenuOptionStore(state => state.menuOptionDetail);
@@ -26,12 +27,7 @@ const MenuOptionModalInput = () => {
   // 옵션 디테일추가
   const addOptionDetailInputHandler = () => {
     if (menuOptionDetailList.length > 4) {
-      toast('옵션 항목은 최대 5개입니다.', {
-        type: 'warn',
-        position: 'top-center',
-        showCloseButton: false,
-        autoClose: 2000,
-      });
+      showCompleteToast(MENU_TOAST.OPTION_ADD_DETAIL_BUTTON_ALERT, 'warn');
       return;
     }
     setMenuOptionDetailList([...menuOptionDetailList, { ...menuOptionDetail, price: '' }]);
@@ -77,14 +73,14 @@ const MenuOptionModalInput = () => {
     <div className={styles['wrap']}>
       <p className={styles['input-wrap']}>
         <label className={styles['input-name']} htmlFor="name">
-          옵션명
+          {MENU_OPTION.NAME_LABEL}
         </label>
         <input
           type="text"
           id="name"
           name="name"
           className={styles['input']}
-          placeholder="옵션이름"
+          placeholder={MENU_OPTION.NAME_PLACEHOLDER}
           value={menuOption.name ?? ''}
           onChange={changeMenuOptionHandler}
           minLength={1}
@@ -93,12 +89,12 @@ const MenuOptionModalInput = () => {
       </p>
       <div className={styles['option-detail-wrap']}>
         <div className={styles['top']}>
-          <p className={styles['input-name']}>옵션 추가</p>
+          <p className={styles['input-name']}>{MENU_OPTION.DETAIL_LABEL}</p>
           <button className={styles['plus-btn']} onClick={addOptionDetailInputHandler}>
             <span className={styles['img']}>
               <PlusButton width={14} height={14} />
             </span>
-            <span className={styles['txt']}>항목 추가하기</span>
+            <span className={styles['txt']}>{MENU_OPTION.DETAIL_BUTTON}</span>
           </button>
         </div>
         <div className={styles['option-three-wrap']}>
@@ -110,7 +106,7 @@ const MenuOptionModalInput = () => {
                 className={styles['input']}
                 onChange={e => changeMenuOptionItemHandler(e, index)}
                 value={item.name}
-                placeholder="옵션 내용"
+                placeholder={MENU_OPTION.DETAIL_NAME_PLACEHOLDER}
               />
               <input
                 name="detailPrice"
@@ -118,7 +114,7 @@ const MenuOptionModalInput = () => {
                 className={styles['input']}
                 onChange={e => changeMenuOptionItemHandler(e, index)}
                 value={item.price}
-                placeholder="옵션 가격"
+                placeholder={MENU_OPTION.DETAIL_PRICE_PLACEHOLDER}
               />
               <button onClick={() => removeOptionDetailhandler(index)}>삭제</button>
             </div>
@@ -128,14 +124,14 @@ const MenuOptionModalInput = () => {
       <div>
         <div className={styles['max-count-wrap']}>
           <label className={styles['input-name']} htmlFor="name">
-            옵션 최대 선택 갯수
+            {MENU_OPTION.MAX_DETAIL_COUNT}
           </label>
           <input
             type="number"
             name="max_detail_count"
             className={clsx(styles['input'], styles['max-count'])}
             value={menuOption.max_detail_count}
-            placeholder="옵션 최대 선택 갯수"
+            placeholder={MENU_OPTION.MAX_DETAIL_COUNT}
             onChange={e => changeMenuOptionHandler(e)}
           />
         </div>
@@ -161,7 +157,7 @@ const MenuOptionModalInput = () => {
             />
           </p>
           <label className={styles['checkbox-info']} htmlFor="is_use">
-            이 옵션을 노출합니다.{' '}
+            {MENU_OPTION.IS_USE}
           </label>
         </div>
       </div>

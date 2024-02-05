@@ -1,3 +1,4 @@
+import { MENU_DRAG } from '@/data/menu-item';
 import useSetCategories from '@/hooks/query/menu/menu-category/useSetCategories';
 import useSetMenuItem from '@/hooks/query/menu/menu-item/useSetMenuItems';
 import useCategoriesStore from '@/shared/store/menu/menu-category';
@@ -45,7 +46,7 @@ const useDragDrop = () => {
   // 드랍 (커서 뗐을 때)
   const dropHandler = async (dropNum: number, dragTitle: string) => {
     let newList = [];
-    if (dragTitle === 'category') {
+    if (dragTitle === MENU_DRAG.CATEGORY) {
       // 카테고리일 때
       newList = [...categories];
       const dragItemValue = newList[dragItemRef.current];

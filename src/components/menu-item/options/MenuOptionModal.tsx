@@ -1,3 +1,4 @@
+import { MENU_TITLE } from '@/data/menu-item';
 import { useModal } from '@/hooks/service/ui/useModal';
 import styles from '../styles/modal.module.css';
 import MenuOptionModalButton from './MenuOptionModalButton';
@@ -14,7 +15,7 @@ const MenuOptionModal = ({ modalId }: { modalId?: string }) => {
   return (
     <div className={styles['menu-option-modal-wrap']}>
       <div className={styles['menu-modal-top']}>
-        <h3 className={styles['title']}>옵션 상세 설정</h3>
+        <h3 className={styles['title']}>{MENU_TITLE.OPTION_ADD}</h3>
 
         <div className={styles['close-button']}>
           <CloseButton width={26} height={26} onClick={clickItemModalHide} />
