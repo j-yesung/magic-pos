@@ -1,3 +1,5 @@
+import { Dayjs } from 'dayjs';
+
 type CalendarModeType = 'MINI_MODE' | 'BIG_MODE';
 type CalendarPageType = 'STATUS_PAGE' | 'CALENDAR_PAGE' | 'ORDER_START_PAGE' | 'ORDER_END_PAGE';
 
@@ -26,4 +28,7 @@ interface CellItemProps {
   holiday: HolidayType[];
   mode: CalendarModeType;
   page: CalendarPageType;
+  // order-check-list 에서 사용하는 함수
+  clickStartTimeHandler?: (day: Dayjs) => () => void;
+  clickEndTimeHandler?: (day: Dayjs) => () => void;
 }

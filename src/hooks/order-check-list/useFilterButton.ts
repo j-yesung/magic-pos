@@ -1,5 +1,6 @@
 import useOrderCheckListStore from '@/shared/store/order-check-list';
-import { ChangeEvent, useState } from 'react';
+import { Dayjs } from 'dayjs';
+import { useState } from 'react';
 import useFetchOrderCheckList from './useFetchOrderCheckList';
 
 const useFilterButton = () => {
@@ -15,14 +16,16 @@ const useFilterButton = () => {
     }
   };
 
-  const changeStartTimeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setStartTime(e.target.value);
+  const clickStartTimeHandler = (day: Dayjs) => () => {
+    const startDay = day.format('YYYY-MM-DD');
+    setStartTime(startDay);
   };
-  const changeEndTimeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setEndTime(e.target.value);
+  const clickEndTimeHandler = (day: Dayjs) => () => {
+    const endDay = day.format('YYYY-MM-DD');
+    setEndTime(endDay);
   };
 
-  return { isDateButton, clickFilterButtonHandler, changeStartTimeHandler, changeEndTimeHandler };
+  return { isDateButton, clickFilterButtonHandler, clickStartTimeHandler, clickEndTimeHandler };
 };
 
 export default useFilterButton;

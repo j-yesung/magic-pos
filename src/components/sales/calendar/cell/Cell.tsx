@@ -15,6 +15,8 @@ import { useEffect } from 'react';
 import { FORMAT_CELL_DATE_TYPE, getMinMaxSalesType } from '../../calendarUtility/cellItemType';
 import { formatToCalendarData, sortMinMaxData } from '../../calendarUtility/formatData';
 
+import useFilterButton from '@/hooks/order-check-list/useFilterButton';
+import { CalendarCellType } from '@/types/calendar';
 import { BIG_MODE, CALENDAR_PAGE, STATUS_PAGE } from '../calendarType/calendarType';
 import CellItem from '../cellItem/CellItem';
 import styles from './styles/cell.module.css';
@@ -40,7 +42,7 @@ const Cell = ({ mode, page }: CalendarCellType) => {
   /**
    * 다른 페이지에서 호출 되는 공간 입니다. 아래에서 hook으로 써주면 아리가또우
    */
-
+  const { clickStartTimeHandler, clickEndTimeHandler } = useFilterButton();
   useEffect(() => {
     if (mode === BIG_MODE) {
       getMonthSales(currentDate, storeId!).then(result => {
@@ -75,7 +77,7 @@ const Cell = ({ mode, page }: CalendarCellType) => {
     for (let i = 0; i < 7; i++) {
       const itemKey = day.format(FORMAT_CELL_DATE_TYPE);
       const salesData = calendarBindingData?.filter(target => target.date === itemKey);
-      const holidayDate = holiday.filter(date => date.date === itemKey);
+      const holidayDate = holiday?.filter(date => date.date === itemKey);
 
       days.push(
         <CellItem
@@ -89,10 +91,11 @@ const Cell = ({ mode, page }: CalendarCellType) => {
           {...(page === CALENDAR_PAGE && { getMinMaxSalesType: getMinMaxSalesType })}
           {...(page === STATUS_PAGE && { clickShowDataOfDateHandler: clickShowDataOfDateHandler })}
           holiday={holidayDate}
-
           /** 페이지가 주문내역 확인이면 아래와 같이 하면 됩니다.
-           *{...((page===ORDER && {onClick: clickHandler}))}
+           *{...((page===ORDER && {clickHandler: clickHandler}))}
            */
+          {...(page === 'ORDER_START_PAGE' && { clickStartTimeHandler: clickStartTimeHandler })}
+          {...(page === 'ORDER_END_PAGE' && { clickEndTimeHandler: clickEndTimeHandler })}
         />,
       );
       day = day.add(1, 'day');
