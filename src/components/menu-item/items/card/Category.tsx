@@ -1,3 +1,4 @@
+import { DRAG_INFO } from '@/hooks/service/menu/useText';
 import useMenuItemStore, { setCategoryWithMenuItem, setMenuItemList } from '@/shared/store/menu/menu-item';
 import { CategoryWithMenuItem } from '@/types/supabase';
 import clsx from 'clsx';
@@ -15,18 +16,13 @@ const MenuItemCategoryPage = () => {
 
   // 카테고리 선택
   const clickChoiceCategoryHandler = (item: CategoryWithMenuItem) => {
-    setCategoryWithMenuItem({
-      ...categoryWithMenuItem,
-      id: item.id,
-      menu_item: item.menu_item,
-    });
+    setCategoryWithMenuItem(item);
     setMenuItemList(item.menu_item);
   };
 
+  // 슬라이드 위치 확인
   const handleSlideChange = (swiper: swipers) => {
-    // 슬라이드 변경 후에 호출됩니다.
     setOnSwiperIndex(swiper.activeIndex);
-    // 마지막 슬라이드에 도달했을 때
     if (swiper.isEnd) {
       setOnSwiperIndex(-1);
     }
@@ -34,7 +30,7 @@ const MenuItemCategoryPage = () => {
 
   return (
     <div className={styles['wrap']}>
-      <div className={styles['drag-info']}>※ 드래그 앤 드롭으로 메뉴 순서를 변경해보세요.</div>
+      <div className={styles['drag-info']}>{DRAG_INFO.MENU_ITEM}</div>
       <Swiper
         modules={[Virtual]}
         spaceBetween={15}
@@ -52,7 +48,6 @@ const MenuItemCategoryPage = () => {
             className={item.id === categoryWithMenuItem.id ? clsx(styles['slide'], styles['active']) : styles['slide']}
             onClick={() => clickChoiceCategoryHandler(item)}
           >
-            {/* 버튼으로 하면 슬라이드 기능이 에러 발생해서 p태그로 대체 */}
             <p>{item.name}</p>
           </SwiperSlide>
         ))}

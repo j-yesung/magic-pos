@@ -16,7 +16,7 @@ const EditCategoryComponent = ({ item }: PropsType) => {
   const clickChoiceCategoryHandler = (item: Tables<'menu_category'>) => {
     MagicModal.fire(<MenuCategoryModal />);
     setIsEdit(true);
-    setCategory({ id: item.id, name: item.name, store_id: item.store_id, position: item.position });
+    setCategory(item);
   };
 
   return (

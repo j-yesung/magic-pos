@@ -1,4 +1,5 @@
 import styles from '@/components/menu-category/styles/form.module.css';
+import { MENU_CATEGORY } from '@/hooks/service/menu/useText';
 import useCategoriesStore, { setCategory } from '@/shared/store/menu/menu-category';
 import React from 'react';
 
@@ -13,7 +14,7 @@ const InputCategoryComponent = () => {
   return (
     <div className={styles['input-wrap']}>
       <label className={styles['input-name']} htmlFor="name">
-        카테고리명
+        {MENU_CATEGORY.NAME_LABEL}
       </label>
       <input
         type="text"
@@ -22,7 +23,7 @@ const InputCategoryComponent = () => {
         id="name"
         name="name"
         value={category.name ?? ''}
-        placeholder="카테고리명을 입력하세요."
+        placeholder={MENU_CATEGORY.NAME_PLACEHOLDER}
         required
         minLength={1}
         maxLength={10}

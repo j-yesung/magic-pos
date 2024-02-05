@@ -1,4 +1,5 @@
 import styles from '@/components/menu-item/styles/modal.module.css';
+import { MENU_TITLE } from '@/hooks/service/menu/useText';
 import { useModal } from '@/hooks/service/ui/useModal';
 import useMenuItemStore from '@/shared/store/menu/menu-item';
 import MenuItemFormPage from '../form/FormItem';
@@ -15,7 +16,11 @@ const MenuItemModal = ({ modalId }: { modalId?: string }) => {
   return (
     <div className={styles['menu-modal-wrap']}>
       <div className={styles['menu-modal-top']}>
-        {isEdit ? <h3 className={styles['title']}>메뉴 수정</h3> : <h3 className={styles['title']}>메뉴 등록</h3>}
+        {isEdit ? (
+          <h3 className={styles['title']}>{MENU_TITLE.ITEM_EDIT}</h3>
+        ) : (
+          <h3 className={styles['title']}>{MENU_TITLE.ITEM_ADD}</h3>
+        )}
 
         <div className={styles['close-button']}>
           <CloseButton width={26} height={26} onClick={clickItemModalHide} />

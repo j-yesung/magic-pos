@@ -1,7 +1,8 @@
 import styles from '@/components/menu-item/styles/menu-item-form.module.css';
 import useSetMenuItem from '@/hooks/query/menu/menu-item/useSetMenuItems';
+import useMenuToast from '@/hooks/service/menu/useMenuToast';
 import useOptionFiltering from '@/hooks/service/menu/useOptionFiltering';
-import useToast from '@/hooks/service/ui/useToast';
+import { MENU_TOAST } from '@/hooks/service/menu/useText';
 import useMenuItemStore from '@/shared/store/menu/menu-item';
 import useMenuOptionStore, { NewMenuOptionWithDetail, setMenuOptions } from '@/shared/store/menu/menu-option';
 import { TablesInsert } from '@/types/supabase';
@@ -15,7 +16,7 @@ interface MenuItemModal {
 }
 
 const MenuItemFormPage: React.FC<MenuItemModal> = props => {
-  const { toast } = useToast();
+  const { showCompleteToast } = useMenuToast();
   const {
     addMutate,
     addPending,
@@ -59,12 +60,7 @@ const MenuItemFormPage: React.FC<MenuItemModal> = props => {
       removerOptionHandler(); // 옵션 업데이트 부분(삭제 필터링)
       filterOptionHandler(); // 옵션 업데이트 부분(비교 필터링)
       if (!addPending && !updatePending && !uploadImagePending) {
-        toast(!isEdit ? '메뉴 등록 성공' : '메뉴 수정 성공', {
-          type: 'success',
-          position: 'top-center',
-          showCloseButton: false,
-          autoClose: 2000,
-        });
+        showCompleteToast(!isEdit ? MENU_TOAST.ITEM_ADD : MENU_TOAST.ITEM_EDIT, 'success');
         props.clickItemModalHide();
       }
     } catch (error) {

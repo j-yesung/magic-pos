@@ -1,6 +1,7 @@
 import { MENU_CATEGORY_PATH } from '@/data/url-list';
 import useFetchMenuItems from '@/hooks/query/menu/menu-item/useFetchMenuItems';
 import useFetchMenuOptions from '@/hooks/query/menu/menu-item/useFetchMenuOption';
+import { EMPTY_MENU_ITEM } from '@/hooks/service/menu/useText';
 import { fetchMenuOptions } from '@/server/api/supabase/menu-item';
 import useMenuItemStore, {
   setCategoryWithMenuItem,
@@ -86,9 +87,9 @@ const MenuItemsComponentPage = () => {
         {categoryWithMenuItemList.length === 0 ? (
           <div>
             <ExclamationMark width={121} height={121} />
-            <h4>메뉴의 카테고리를 먼저 추가해주세요.</h4>
+            <h4>{EMPTY_MENU_ITEM.TITLE}</h4>
             <button type="button" onClick={() => router.push(MENU_CATEGORY_PATH)}>
-              카테고리 페이지로 이동
+              {EMPTY_MENU_ITEM.BUTTON}
             </button>
           </div>
         ) : (

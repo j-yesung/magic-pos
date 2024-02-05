@@ -1,6 +1,8 @@
 import MenuItemModal from '@/components/menu-item/items/modal/MenuItemModal';
 import styles from '@/components/menu-item/styles/menu-item-card.module.css';
 import useDragDrop from '@/hooks/service/menu/useDragDrop';
+import useOptionFiltering from '@/hooks/service/menu/useOptionFiltering';
+import { MENU_DRAG } from '@/hooks/service/menu/useText';
 import { useModal } from '@/hooks/service/ui/useModal';
 import { convertNumberToWon } from '@/shared/helper';
 import useMenuItemStore, {
@@ -9,7 +11,7 @@ import useMenuItemStore, {
   setMenuItemImgFile,
   setMenuItemSampleImg,
 } from '@/shared/store/menu/menu-item';
-import useMenuOptionStore, { setMenuOption, setMenuOptions } from '@/shared/store/menu/menu-option';
+import useMenuOptionStore, { setMenuOption } from '@/shared/store/menu/menu-option';
 import { Tables } from '@/types/supabase';
 import clsx from 'clsx';
 import Image from 'next/image';
@@ -25,13 +27,12 @@ interface PropsType {
   setDropNum: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const DRAG_TITLE = 'menu-item';
-
 const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
   const { MagicModal } = useModal();
   const menuItem = useMenuItemStore(state => state.menuItem);
   const menuOption = useMenuOptionStore(state => state.menuOption);
   const origineMenuOptions = useMenuOptionStore(state => state.origineMenuOptions);
+  const { fetchMenuOptionData } = useOptionFiltering();
   const {
     isDragging,
     setIsDragging,
@@ -46,27 +47,11 @@ const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
   const clickChoiceCategoryHandler = (item: Tables<'menu_item'>) => {
     setIsEdit(true);
     MagicModal.fire(<MenuItemModal />);
-    setMenuItem({
-      ...menuItem,
-      id: item.id,
-      name: item.name,
-      category_id: item.category_id,
-      image_url: item.image_url,
-      position: item.position,
-      price: item.price,
-      recommended: item.recommended,
-      remain_ea: item.remain_ea,
-    });
+    setMenuItem(item);
     setMenuItemSampleImg(item.image_url ?? '');
     fetchMenuOptionData(item.id);
     setMenuOption({ ...menuOption, menu_id: item.id });
     setMenuItemImgFile(null);
-  };
-
-  // 메뉴 옵션 ID 필터링 이벤트
-  const fetchMenuOptionData = (menuId: string) => {
-    const filterMenuOptionList = origineMenuOptions.filter(item => item.menu_id === menuId);
-    setMenuOptions(filterMenuOptionList);
   };
 
   useEffect(() => {
@@ -90,7 +75,7 @@ const MenuItemCard = ({ item, idx, dropNum, setDropNum }: PropsType) => {
         onDragEnter={e => dragEnterHandler(e, idx, setDropNum)}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
-        onDragEnd={() => dropHandler(dropNum, DRAG_TITLE)}
+        onDragEnd={() => dropHandler(dropNum, MENU_DRAG.ITEM)}
         onClick={() => clickChoiceCategoryHandler(item)}
         className={clsx(styles.draggable, {
           [styles.dragging]: isDragging,

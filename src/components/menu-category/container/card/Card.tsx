@@ -1,5 +1,6 @@
 import styles from '@/components/menu-category/styles/category.module.css';
 import useDragDrop from '@/hooks/service/menu/useDragDrop';
+import { MENU_DRAG } from '@/hooks/service/menu/useText';
 import { Tables } from '@/types/supabase';
 import clsx from 'clsx';
 import { useEffect } from 'react';
@@ -12,8 +13,6 @@ interface PropsType {
   dropNum: number;
   setDropNum: React.Dispatch<React.SetStateAction<number>>;
 }
-
-const DRAG_TITLE = 'category';
 
 const CategroyCardPage = ({ item, idx, dropNum, setDropNum }: PropsType) => {
   const {
@@ -40,7 +39,7 @@ const CategroyCardPage = ({ item, idx, dropNum, setDropNum }: PropsType) => {
         onDragEnter={e => dragEnterHandler(e, idx, setDropNum)}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
-        onDragEnd={() => dropHandler(dropNum, DRAG_TITLE)}
+        onDragEnd={() => dropHandler(dropNum, MENU_DRAG.CATEGORY)}
         className={clsx(styles.draggable, {
           [styles.dragging]: isDragging,
         })}

@@ -5,6 +5,7 @@ import useMenuOptionStore, {
   NewMenuOptionWithDetail,
   NewOptionDetailType,
   setChangeMenuOptions,
+  setMenuOptions,
 } from '@/shared/store/menu/menu-option';
 import { Tables } from '@/types/supabase';
 
@@ -15,6 +16,12 @@ const useOptionFiltering = () => {
   const menuOptions = useMenuOptionStore(state => state.menuOptions);
   const origineMenuOptions = useMenuOptionStore(state => state.origineMenuOptions);
   const changeMenuOptions = useMenuOptionStore(state => state.changeMenuOptions);
+
+  // 메뉴 옵션 ID 필터링 이벤트
+  const fetchMenuOptionData = (menuId: string) => {
+    const filterMenuOptionList = origineMenuOptions.filter(item => item.menu_id === menuId);
+    setMenuOptions(filterMenuOptionList);
+  };
 
   // 옵션 삭제시 필터링
   const removerOptionHandler = () => {
@@ -132,6 +139,7 @@ const useOptionFiltering = () => {
   };
 
   return {
+    fetchMenuOptionData,
     removerOptionHandler,
     filterOptionHandler,
   };

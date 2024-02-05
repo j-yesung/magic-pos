@@ -1,8 +1,9 @@
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import styles from '@/components/menu-item/styles/menu-item-form.module.css';
 import useSetMenuItem from '@/hooks/query/menu/menu-item/useSetMenuItems';
+import useMenuToast from '@/hooks/service/menu/useMenuToast';
+import { MENU_CONFIRM, MENU_TOAST } from '@/hooks/service/menu/useText';
 import { useModal } from '@/hooks/service/ui/useModal';
-import useToast from '@/hooks/service/ui/useToast';
 import useMenuItemStore from '@/shared/store/menu/menu-item';
 import dayjs from 'dayjs';
 import ExclamationMark from '/public/icons/exclamation-mark.svg';
@@ -15,7 +16,7 @@ interface MenuItemModal {
 }
 const MenuItemFormButton = ({ clickItemModalHide, addPending, updatePending, uploadImagePending }: MenuItemModal) => {
   const { MagicModal } = useModal();
-  const { toast } = useToast();
+  const { showCompleteToast } = useMenuToast();
   const { deleteMutate, deletePending, removeImageMutate } = useSetMenuItem();
 
   const isEdit = useMenuItemStore(state => state.isEdit);
@@ -27,7 +28,7 @@ const MenuItemFormButton = ({ clickItemModalHide, addPending, updatePending, upl
   const clickRemoveCategoryHandler = () => {
     MagicModal.confirm({
       icon: <ExclamationMark width={50} height={50} />,
-      content: '메뉴를 삭제할까요?',
+      content: MENU_TOAST.ITEM_REMOVE_ALERT,
       confirmButtonCallback: async () => {
         await deleteMutate(menuItem.id);
         if (menuItemSampleImg !== '') {
@@ -40,12 +41,7 @@ const MenuItemFormButton = ({ clickItemModalHide, addPending, updatePending, upl
           removeImageMutate(uploadImageGroup);
         }
         if (!deletePending) {
-          toast('메뉴 삭제 완료', {
-            type: 'success',
-            position: 'top-center',
-            showCloseButton: false,
-            autoClose: 2000,
-          });
+          showCompleteToast(MENU_TOAST.ITEM_REMOVE, 'success');
           clickItemModalHide();
         }
       },
@@ -57,19 +53,23 @@ const MenuItemFormButton = ({ clickItemModalHide, addPending, updatePending, upl
       {isEdit ? (
         <div className={styles['btn-wrap']}>
           <button className={styles['delete-btn']} type="button" onClick={clickRemoveCategoryHandler}>
-            {deletePending ? <LoadingSpinner boxSize={2.8} ballSize={0.4} /> : '메뉴 삭제'}
+            {deletePending ? <LoadingSpinner boxSize={2.8} ballSize={0.4} /> : MENU_CONFIRM.ITEM_REMOVE}
           </button>
           <button className={styles['update-btn']} type="submit">
-            {updatePending || uploadImagePending ? <LoadingSpinner boxSize={2.8} ballSize={0.4} /> : '수정하기'}
+            {updatePending || uploadImagePending ? (
+              <LoadingSpinner boxSize={2.8} ballSize={0.4} />
+            ) : (
+              MENU_CONFIRM.ITEM_EDIT
+            )}
           </button>
         </div>
       ) : (
         <div className={styles['btn-wrap']}>
           <button className={styles['basic-btn']} type="button" onClick={clickItemModalHide}>
-            취소
+            {MENU_CONFIRM.CANCEL}
           </button>
           <button className={styles['update-btn']} type="submit">
-            {addPending || uploadImagePending ? <LoadingSpinner boxSize={2.8} ballSize={0.4} /> : '확인'}
+            {addPending || uploadImagePending ? <LoadingSpinner boxSize={2.8} ballSize={0.4} /> : MENU_CONFIRM.CHECK}
           </button>
         </div>
       )}
