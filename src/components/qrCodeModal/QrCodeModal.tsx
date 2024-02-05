@@ -2,7 +2,7 @@ import useCustomModalHide from '@/hooks/common/useCustomModalHide';
 import useFetchTableInQRCode from '@/hooks/qrCode/useFetchTableInQRCode';
 import useAuthState from '@/shared/store/session';
 import clsx from 'clsx';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import QrCodeButtonBox from './QrCodeButtonBox';
 import QrCodeTabButton from './QrCodeTabButton';
 import PackagingQrCodeContainer from './packagingQrCodeContainer/PackagingQrCodeContainer';
@@ -24,6 +24,10 @@ const QrCodeModal = ({ modalId }: { modalId?: string }) => {
     if (component === selectedComponent) return;
     setSelectedComponent(prevComponent => (prevComponent === component ? null : component));
   };
+
+  useEffect(() => {
+    return () => {};
+  }, []);
 
   return (
     <div className={styles.qrCodeModalBox}>

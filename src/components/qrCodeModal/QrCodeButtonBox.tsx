@@ -1,14 +1,14 @@
 import useQRCodeDownLoad from '@/hooks/qrCode/useQRCodeDownLoad';
 import useQRDownLoadHandler from '@/hooks/qrCode/useQRDownLoadHandler';
-import useManagementStore from '@/shared/store/management';
+import useQRCodeStore from '@/shared/store/qrCode';
 import Image from 'next/image';
 import Button from '../common/Button';
 import styles from './styles/QrCodeModal.module.css';
 import loading from '/public/images/loadingSpinner.gif';
 
 const QrCodeButtonBox = () => {
-  const { qrData } = useManagementStore();
-  const { AllMutate, AllIsPending } = useQRCodeDownLoad();
+  const { qrData } = useQRCodeStore();
+  const { AllIsPending } = useQRCodeDownLoad();
   const { clickAllQrDownLoadHandler } = useQRDownLoadHandler();
 
   return (

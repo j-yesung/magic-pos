@@ -5,16 +5,16 @@ import styles from './styles/ShopQrCodeContainer.module.css';
 
 const ShopQrCodeContainer = ({ data }: { data: StoreTableInQRCode[] }) => {
   const storeTable = data && data[0].store_table;
-
+  const totalTable = storeTable.length;
   return (
     <div className={styles['shop-qr-code-container']}>
       <div
         className={clsx(
           styles['shop-qr-code-list-box'],
           styles['qr-code-svg-box'],
-          storeTable?.length === 1 && styles['grid-row-1'],
-          storeTable?.length === 2 && styles['grid-row-2'],
-          storeTable?.length === 3 && styles['grid-row-3'],
+          totalTable === 1 && styles['grid-row-1'],
+          totalTable === 2 && styles['grid-row-2'],
+          totalTable === 3 && styles['grid-row-3'],
         )}
       >
         {storeTable

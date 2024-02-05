@@ -1,4 +1,4 @@
-import { QRdataType } from '@/shared/store/management';
+import { QRdataType } from '@/shared/store/qrCode';
 import { useEffect, useState } from 'react';
 import useQRCodeDownLoad from './useQRCodeDownLoad';
 
