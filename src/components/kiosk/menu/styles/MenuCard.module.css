@@ -19,6 +19,7 @@
 }
 
 .card img {
+    object-fit: cover;
     border-radius: .5rem;
     @media screen and (min-width: 960px) {
         width: 16rem;

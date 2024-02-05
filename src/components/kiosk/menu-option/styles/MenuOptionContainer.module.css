@@ -12,6 +12,7 @@
     max-height: 37.5rem;
     margin: 0 auto;
     background: var(--bg-g);
+    object-fit: cover;
 
     @media screen and (min-width: 960px) {
         max-width: 40rem;
