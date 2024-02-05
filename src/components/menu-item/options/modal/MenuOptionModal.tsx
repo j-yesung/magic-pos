@@ -1,8 +1,8 @@
+import styles from '@/components/menu-item/styles/modal.module.css';
 import { MENU_TITLE } from '@/data/menu-item';
 import { useModal } from '@/hooks/service/ui/useModal';
-import styles from '../styles/modal.module.css';
-import MenuOptionModalButton from './MenuOptionModalButton';
-import MenuOptionModalInput from './MenuOptionModalInput';
+import MenuOptionModalButton from '../form/MenuOptionModalButton';
+import MenuOptionModalInput from '../form/MenuOptionModalInput';
 import CloseButton from '/public/icons/close.svg';
 
 const MenuOptionModal = ({ modalId }: { modalId?: string }) => {

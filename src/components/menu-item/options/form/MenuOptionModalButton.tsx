@@ -1,3 +1,4 @@
+import styles from '@/components/menu-item/styles/menu-option-modal.module.css';
 import { MENU_CONFIRM, MENU_TOAST } from '@/data/menu-item';
 import useMenuToast from '@/hooks/service/menu/useMenuToast';
 import { useModal } from '@/hooks/service/ui/useModal';
@@ -7,7 +8,6 @@ import useMenuOptionStore, {
   updateMenuOptionsStore,
 } from '@/shared/store/menu/menu-option';
 import { TablesUpdate } from '@/types/supabase';
-import styles from '../styles/menu-option-modal.module.css';
 
 const MenuOptionModalButton = ({ modalId }: { modalId?: string }) => {
   const { MagicModal } = useModal();
@@ -57,6 +57,7 @@ const MenuOptionModalButton = ({ modalId }: { modalId?: string }) => {
         ),
       );
     }
+    showCompleteToast(MENU_TOAST.OPTION_ADD, 'success');
     MagicModal.hide(modalId ?? '');
   };
 
