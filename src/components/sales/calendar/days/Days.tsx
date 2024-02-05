@@ -1,3 +1,4 @@
+import { CalendarModeType } from '@/types/calendar';
 import clsx from 'clsx';
 import { BIG_MODE, MINI_MODE } from '../calendarType/calendarType';
 import styles from './styles/days.module.css';
