@@ -14,6 +14,7 @@ const usePlatFormInputWithDebounce = ({ mode }: { mode: boolean }) => {
       setEditPlatForm(e);
     }
   };
+
   useEffect(() => {
     let debounce: NodeJS.Timeout;
     if (mode) return;
