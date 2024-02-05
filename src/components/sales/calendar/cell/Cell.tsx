@@ -91,7 +91,7 @@ const Cell = ({ mode, page }: CalendarCellType) => {
           holiday={holidayDate}
 
           /** 페이지가 주문내역 확인이면 아래와 같이 하면 됩니다.
-           *{...((page===ORDER && {onClick: clickHandler}))}
+           *{...((page===ORDER && {clickHandler: clickHandler}))}
            */
         />,
       );
