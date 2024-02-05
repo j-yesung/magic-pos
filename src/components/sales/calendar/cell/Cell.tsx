@@ -61,7 +61,6 @@ const Cell = ({ mode, page }: CalendarCellType) => {
           setSalesSum(formattedData);
           setCalendarBindingData(minMaxData);
         } else {
-          // 불필요한 렌더링임... 최적화 필요!!
           setSalesSum(null);
           resetCalendarBindingData();
         }
