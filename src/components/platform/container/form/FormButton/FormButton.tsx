@@ -1,10 +1,10 @@
 import LoadingSpinner from '@/components/common/LoadingSpinner';
-import usePlatForm from '@/hooks/platform/usePlatForm';
+import usePlatForm from '@/hooks/service/platform/usePlatForm';
 import { useModal } from '@/hooks/service/ui/useModal';
-import clsx from 'clsx';
-import Alert from '/public/icons/alert-circle.svg';
-import styles from './styles/formButton.module.css';
 import useToast from '@/hooks/service/ui/useToast';
+import clsx from 'clsx';
+import styles from './styles/formButton.module.css';
+import Alert from '/public/icons/alert-circle.svg';
 
 const CANCEL_MODE = '취소';
 const REMOVE_MODE = '삭제';

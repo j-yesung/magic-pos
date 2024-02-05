@@ -1,4 +1,4 @@
-import usePlatFormInputWithDebounce from '@/hooks/platform/usePlatFormInputWithDebounce';
+import usePlatFormInputWithDebounce from '@/hooks/service/platform/usePlatFormInputWithDebounce';
 import usePlatFormState from '@/shared/store/platform';
 import styles from './styles/input.module.css';
 

@@ -1,4 +1,4 @@
-import usePlatForm from '@/hooks/platform/usePlatForm';
+import usePlatForm from '@/hooks/service/platform/usePlatForm';
 import { handleResetStateAfterAction } from '@/shared/store/platform';
 import { useEffect } from 'react';
 import styles from './styles/formHeader.module.css';

@@ -1,4 +1,4 @@
-import usePlatForm from '@/hooks/platform/usePlatForm';
+import usePlatForm from '@/hooks/service/platform/usePlatForm';
 import usePlatFormState from '@/shared/store/platform';
 import FormButton from './FormButton/FormButton';
 import FormBody from './formBody/FormBody';
