@@ -2,7 +2,7 @@ import React, { ReactNode, useEffect, useState } from 'react';
 import useKioskState from '@/shared/store/kiosk';
 import { useRouter } from 'next/router';
 import ReceiptContainer from '@/components/kiosk/receipt/ReceiptContainer';
-import OrderLayout from '@/components/layout/order/OrderLayout';
+import OrderLayout from '@/components/layout/kiosk/OrderLayout';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetServerSideProps } from 'next';
 

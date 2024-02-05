@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import OrderLayout from '@/components/layout/order/OrderLayout';
+import OrderLayout from '@/components/layout/kiosk/OrderLayout';
 import ErrorContainer from '@/components/error/ErrorContainer';
 
 /**

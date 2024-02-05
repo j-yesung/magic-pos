@@ -1,12 +1,14 @@
 import KioskContainer from '@/components/kiosk/KioskContainer';
-import OrderLayout from '@/components/layout/order/OrderLayout';
+import OrderLayout from '@/components/layout/kiosk/OrderLayout';
 import { useModal } from '@/hooks/service/ui/useModal';
 import { useIsOrderAllReady, useIsValidURL, useMakeMenuData } from '@/hooks/service/useKiosk';
 import { fetchCategoriesWithMenuItemByStoreId } from '@/server/api/supabase/menu-category';
 import useKioskState, {
+  ORDER_STEP,
   resetOrderList,
   setMenuData,
   setSelectedLanguage,
+  setStep,
   setStoreId,
   setStoreName,
   setTableId,
@@ -30,7 +32,8 @@ interface OrderIndexPageProps {
 
 const OrderIndexPage = ({ menuData, storeId, tableId }: OrderIndexPageProps) => {
   const orderIdList = useKioskState(state => state.orderIdList);
-  const prevStoreId = useKioskState(state => state.storeId);
+  const prevStoreId = useKioskState(state => state.prevStoreId);
+  const orderList = useKioskState(state => state.orderList);
   const [isLoaded, setIsLoaded] = useState(false);
   const isValidURL = useIsValidURL({ storeId, tableId });
   const isOrderAllReady = useIsOrderAllReady(orderIdList, storeId);
@@ -67,16 +70,6 @@ const OrderIndexPage = ({ menuData, storeId, tableId }: OrderIndexPageProps) => 
       setStoreName(menuData[0].store?.business_name ?? '');
     }
 
-    if (storeId) {
-      // 이전에 저장된 storeId가 현재 storeId와 다르면 다른 가게로 온것이므로 주문 목록 초기화 시킴
-      if (prevStoreId !== storeId) {
-        resetOrderList();
-      }
-      setStoreId(storeId);
-    }
-    if (tableId) setTableId(tableId);
-    else setTableId('');
-
     if (router.query.lang) {
       setSelectedLanguage(`lang-${router.query.lang}`);
     } else {
@@ -85,6 +78,19 @@ const OrderIndexPage = ({ menuData, storeId, tableId }: OrderIndexPageProps) => 
 
     setIsLoaded(true);
   }, []);
+
+  useEffect(() => {
+    if (storeId) {
+      // 이전에 저장된 storeId가 현재 storeId와 다르면 다른 가게로 온것이므로 주문 목록 초기화 시킴
+      if (orderList.length > 0 && prevStoreId !== storeId) {
+        resetOrderList();
+        setStep(ORDER_STEP.CHOOSE_ORDER_TYPE);
+      }
+      setStoreId(storeId);
+    }
+    if (tableId) setTableId(tableId);
+    else setTableId('');
+  }, [prevStoreId]);
 
   return (
     <>

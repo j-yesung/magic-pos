@@ -1,3 +1,4 @@
+import { MENU_TITLE } from '@/data/menu-item';
 import { useModal } from '@/hooks/service/ui/useModal';
 import useCategoriesStore from '@/shared/store/menu/menu-category';
 import CategoryFormPage from '../container/form/FormCategory';
@@ -16,9 +17,9 @@ const MenuCategoryModal = ({ modalId }: { modalId?: string }) => {
     <div className={styles['menu-category-modal']}>
       <div className={styles['menu-modal-top']}>
         {isEdit ? (
-          <h3 className={styles['title']}>카테고리 수정</h3>
+          <h3 className={styles['title']}>{MENU_TITLE.CATEGORY_EDIT}</h3>
         ) : (
-          <h3 className={styles['title']}>카테고리 등록</h3>
+          <h3 className={styles['title']}>{MENU_TITLE.CATEGORY_ADD}</h3>
         )}
         <div className={styles['close-button']}>
           <CloseButton width={26} height={26} onClick={clickCategoryModalHide} />

@@ -1,4 +1,5 @@
 import styles from '@/components/menu-category/styles/category.module.css';
+import { DRAG_INFO } from '@/data/menu-item';
 import useCategoriesStore from '@/shared/store/menu/menu-category';
 import { useState } from 'react';
 import PlusCategoryComponent from '../form/PlusCategory';
@@ -11,7 +12,7 @@ const CategoryComponentPage = () => {
   return (
     <div className={styles['wrap-container']}>
       <div className={styles['wrap']}>
-        <div className={styles['drag-info']}>※ 드래그 앤 드롭으로 카테고리 순서를 변경해보세요.</div>
+        <div className={styles['drag-info']}>{DRAG_INFO.MENU_CATEGORY}</div>
         <ul>
           {categories.map((category, idx) => {
             return (

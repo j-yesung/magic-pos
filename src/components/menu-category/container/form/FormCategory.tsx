@@ -1,7 +1,8 @@
 import styles from '@/components/menu-category/styles/form.module.css';
+import { MENU_TOAST } from '@/data/menu-item';
 import useSetCategories from '@/hooks/query/menu/menu-category/useSetCategories';
-import useToast from '@/hooks/service/ui/useToast';
-import useCategoriesStore, { setCategory } from '@/shared/store/menu/menu-category';
+import useMenuToast from '@/hooks/service/menu/useMenuToast';
+import useCategoriesStore from '@/shared/store/menu/menu-category';
 import { TablesInsert } from '@/types/supabase';
 import AddCategoryComponent from './AddCategory';
 import InputCategoryComponent from './InputCategory';
@@ -11,7 +12,7 @@ interface MenuCategoryModal {
 }
 
 const CategoryFormPage: React.FC<MenuCategoryModal> = props => {
-  const { toast } = useToast();
+  const { showCompleteToast } = useMenuToast();
   const isEdit = useCategoriesStore(state => state.isEdit);
   const category = useCategoriesStore(state => state.category);
   const categories = useCategoriesStore(state => state.categories);
@@ -28,14 +29,8 @@ const CategoryFormPage: React.FC<MenuCategoryModal> = props => {
   const submitupdateCategoryNameHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     isEdit ? updateNameMutate(category) : addMutate(newCategoryData);
-    setCategory({ ...category, id: '', name: '' });
+    showCompleteToast(!isEdit ? MENU_TOAST.CATEGORY_ADD : MENU_TOAST.CATEGORY_EDIT, 'success');
     props.clickCategoryModalHide();
-    toast(!isEdit ? '카테고리 등록 성공' : '카테고리 수정 성공', {
-      type: 'success',
-      position: 'top-center',
-      showCloseButton: false,
-      autoClose: 2000,
-    });
   };
 
   return (

@@ -1,5 +1,6 @@
 import useCalendarState from '@/shared/store/sales/salesCalendar';
 
+import { CalendarModeType } from '@/types/calendar';
 import clsx from 'clsx';
 import { BIG_MODE, MONTH_FORMAT_TYPE, YEAR_FORMAT_TYPE } from '../../calendarType/calendarType';
 import styles from './styles/headerDate.module.css';

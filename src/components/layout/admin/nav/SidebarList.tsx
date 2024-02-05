@@ -1,7 +1,7 @@
 import { useFetchQuery } from '@/hooks/query/store/useFetchQuery';
 import useAuthState from '@/shared/store/session';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../styles/AdminLayout.module.css';
 
 const TABLE_MANAGEMENT_NUMBER = 4;
@@ -49,4 +49,4 @@ const SidebarList = ({ navList, clickFn }: NavList) => {
   );
 };
 
-export default SidebarList;
+export default React.memo(SidebarList);

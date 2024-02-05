@@ -1,10 +1,13 @@
 import { useToggle } from '@/hooks/service/ui/useToggle';
 import useToggleState from '@/shared/store/toggle';
+import React from 'react';
 import styles from '../styles/AdminLayout.module.css';
 
 const HeaderToggleButton = () => {
   const isChecked = useToggleState(state => state.isChecked);
   const { changeToggleHandler } = useToggle();
+
+  console.log('HeaderToggleButton rendered');
 
   return (
     <>
@@ -14,4 +17,4 @@ const HeaderToggleButton = () => {
   );
 };
 
-export default HeaderToggleButton;
+export default React.memo(HeaderToggleButton);

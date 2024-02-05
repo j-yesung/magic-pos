@@ -1,16 +1,17 @@
 import styles from '@/components/menu-item/styles/menu-item-form.module.css';
-import useToast from '@/hooks/service/ui/useToast';
+import { MENU_ITEM, MENU_TOAST } from '@/data/menu-item';
+import useMenuToast from '@/hooks/service/menu/useMenuToast';
 import useMenuItemStore, { setMenuItem, setMenuItemImgFile, setMenuItemSampleImg } from '@/shared/store/menu/menu-item';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { ChangeEvent } from 'react';
 import { FaCheck } from 'react-icons/fa6';
-import MenuItemFormOption from '../../options/MenuItemFormOption';
+import MenuItemFormOption from '../../options/form/MenuItemFormOption';
 import CloseButton from '/public/icons/close.svg';
 import EditButton from '/public/icons/pencil.svg';
 
 const MenuItemFormInput = () => {
-  const { toast } = useToast();
+  const { showCompleteToast } = useMenuToast();
   const menuItem = useMenuItemStore(state => state.menuItem);
   const categoryWithMenuItem = useMenuItemStore(state => state.categoryWithMenuItem);
   const categoryWithMenuItemList = useMenuItemStore(state => state.categoryWithMenuItemList);
@@ -44,21 +45,11 @@ const MenuItemFormInput = () => {
 
       if (recommendedItem.length > 0) {
         if (recommendedNum > 4 && !recommendedItem[0].recommended) {
-          toast('추천 메뉴는 최대 5개입니다.', {
-            type: 'warn',
-            position: 'top-center',
-            showCloseButton: false,
-            autoClose: 2000,
-          });
+          showCompleteToast(MENU_TOAST.ITEM_RECOMMENDED, 'warn');
           return;
         }
       } else if (recommendedNum > 4 && !menuItem.recommended) {
-        toast('추천 메뉴는 최대 5개입니다.', {
-          type: 'warn',
-          position: 'top-center',
-          showCloseButton: false,
-          autoClose: 2000,
-        });
+        showCompleteToast(MENU_TOAST.ITEM_RECOMMENDED, 'warn');
         return;
       }
 
@@ -86,8 +77,9 @@ const MenuItemFormInput = () => {
           </label>
           {menuItemSampleImg === '' ? (
             <p className={styles['default-text']}>
-              이미지를 <br />
-              등록해 주세요
+              {MENU_ITEM.IMAGE_LABEL1}
+              <br />
+              {MENU_ITEM.IMAGE_LABEL2}
             </p>
           ) : (
             <Image src={menuItemSampleImg} alt={menuItem.name ?? 'Sample Image'} width={123} height={123} />
@@ -114,7 +106,7 @@ const MenuItemFormInput = () => {
           <div className={clsx(styles['input-wrap'], styles['bottom'])}>
             <p>
               <label className={styles['input-name']} htmlFor="name">
-                메뉴명
+                {MENU_ITEM.NAME_LABEL}
               </label>
               <input
                 type="text"
@@ -125,7 +117,7 @@ const MenuItemFormInput = () => {
                 value={menuItem.name ?? ''}
                 minLength={1}
                 maxLength={20}
-                placeholder="메뉴 이름"
+                placeholder={MENU_ITEM.NAME_PLACEHOLDER}
                 required
               />
             </p>
@@ -133,7 +125,7 @@ const MenuItemFormInput = () => {
           <div className={clsx(styles['input-wrap'], styles['top'])}>
             <p>
               <label className={styles['input-name']} htmlFor="price">
-                가격
+                {MENU_ITEM.PRICE_LABEL}
               </label>
               <input
                 type="text"
@@ -144,13 +136,13 @@ const MenuItemFormInput = () => {
                 value={menuItem.price!}
                 minLength={1}
                 maxLength={20}
-                placeholder="메뉴 가격"
+                placeholder={MENU_ITEM.PRICE_PLACEHOLDER}
                 required
               />
             </p>
             <p>
               <label className={styles['input-name']} htmlFor="remain_ea">
-                수량
+                {MENU_ITEM.REMAIN_EA_LABEL}
               </label>
               <input
                 type="text"
@@ -160,7 +152,7 @@ const MenuItemFormInput = () => {
                 value={menuItem.remain_ea!}
                 minLength={1}
                 maxLength={20}
-                placeholder="메뉴 수량"
+                placeholder={MENU_ITEM.REMAIN_EA_PLACEHOLDER}
                 required
               />
             </p>
@@ -168,7 +160,7 @@ const MenuItemFormInput = () => {
         </div>
       </div>
       <div className={styles['checkbox-wrap']}>
-        <span className={styles['input-name']}>추천메뉴</span>
+        <span className={styles['input-name']}>{MENU_ITEM.RECOMMENDED_LABEL}</span>
         <p>
           <label
             className={clsx(styles['checkbox-label'], {
@@ -187,7 +179,7 @@ const MenuItemFormInput = () => {
           />
         </p>
         <label className={styles['checkbox-info']} htmlFor="recommended">
-          이 메뉴를 추천 메뉴로 설정합니다.{' '}
+          {MENU_ITEM.RECOMMENDED_PLACEHOLDER}
         </label>
       </div>
       <div className={styles['line-wrap']}></div>

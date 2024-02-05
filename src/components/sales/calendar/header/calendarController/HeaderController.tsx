@@ -1,6 +1,7 @@
 import Button from '@/components/common/Button';
 import { useCalendar } from '@/hooks/sales/useCalendar';
 
+import { CalendarModeType } from '@/types/calendar';
 import clsx from 'clsx';
 import React from 'react';
 import { BIG_MODE, MINI_MODE } from '../../calendarType/calendarType';

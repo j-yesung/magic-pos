@@ -2,7 +2,7 @@ import styles from './styles/CartMoreButton.module.css';
 import { HiOutlinePlus } from 'react-icons/hi2';
 import { useTranslation } from 'next-i18next';
 import useKioskState, { goPrevStep } from '@/shared/store/kiosk';
-import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButton';
+import { SLIDE_MOVE_SPEED } from '@/components/layout/kiosk/footer/StepButton';
 
 const CartMoreButton = () => {
   const { t } = useTranslation();

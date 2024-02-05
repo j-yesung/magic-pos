@@ -1,10 +1,10 @@
-import useOgImgDebounce from '@/hooks/platform/useOgImgDebounce';
-import usePlatFormState, { setAddPlatForm, setEditPlatForm } from '@/shared/store/platform';
+import usePlatFormInputWithDebounce from '@/hooks/platform/usePlatFormInputWithDebounce';
+import usePlatFormState from '@/shared/store/platform';
 import styles from './styles/input.module.css';
 
 const Input = ({ mode }: { mode: boolean }) => {
   const editPlatForm = usePlatFormState(state => state.editPlatForm);
-  useOgImgDebounce({ mode });
+  const { changePlatFormCardText } = usePlatFormInputWithDebounce({ mode });
 
   return (
     <div className={styles.inputWrapper}>
@@ -13,7 +13,7 @@ const Input = ({ mode }: { mode: boolean }) => {
         type="text"
         placeholder={'link를 넣어주세요'}
         className={styles.input}
-        onChange={!mode ? setAddPlatForm : setEditPlatForm}
+        onChange={changePlatFormCardText}
         {...(mode && { defaultValue: editPlatForm.link_url })}
       />
 
@@ -22,7 +22,7 @@ const Input = ({ mode }: { mode: boolean }) => {
         name="name"
         type="text"
         placeholder="사이트 주소"
-        onChange={!mode ? setAddPlatForm : setEditPlatForm}
+        onChange={changePlatFormCardText}
         {...(mode && { defaultValue: editPlatForm.name })}
       />
     </div>

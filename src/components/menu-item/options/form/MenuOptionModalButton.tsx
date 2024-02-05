@@ -1,17 +1,17 @@
+import styles from '@/components/menu-item/styles/menu-option-modal.module.css';
+import { MENU_CONFIRM, MENU_TOAST } from '@/data/menu-item';
+import useMenuToast from '@/hooks/service/menu/useMenuToast';
 import { useModal } from '@/hooks/service/ui/useModal';
-import useToast from '@/hooks/service/ui/useToast';
 import useMenuOptionStore, {
   NewMenuOptionWithDetail,
   setMenuOptions,
   updateMenuOptionsStore,
 } from '@/shared/store/menu/menu-option';
 import { TablesUpdate } from '@/types/supabase';
-import styles from '../styles/menu-option-modal.module.css';
 
 const MenuOptionModalButton = ({ modalId }: { modalId?: string }) => {
   const { MagicModal } = useModal();
-  const { toast } = useToast();
-
+  const { showCompleteToast } = useMenuToast();
   const menuOption = useMenuOptionStore(state => state.menuOption);
   const menuOptions = useMenuOptionStore(state => state.menuOptions);
   const menuOptionDetailList = useMenuOptionStore(state => state.menuOptionDetailList);
@@ -20,12 +20,7 @@ const MenuOptionModalButton = ({ modalId }: { modalId?: string }) => {
   // 옵션 수정
   const updateOptionDetailHandler = async (menuOption: TablesUpdate<'menu_option'>) => {
     if (menuOption.name === '') {
-      toast('옵션명은 필수입니다.', {
-        type: 'warn',
-        position: 'top-center',
-        showCloseButton: false,
-        autoClose: 2000,
-      });
+      showCompleteToast(MENU_TOAST.OPTION_ADD_NAME_ALERT, 'warn');
       return;
     }
 
@@ -33,12 +28,7 @@ const MenuOptionModalButton = ({ modalId }: { modalId?: string }) => {
     const emptyOptionDetailName = menuOptionDetailList.filter(item => item.name === '');
     const emptyOptionDetailPrice = menuOptionDetailList.filter(item => item.price === '');
     if (emptyOptionDetailName.length > 0 || emptyOptionDetailPrice.length > 0) {
-      toast('옵션 항목 내용과 가격을 모두 입력해주세요.', {
-        type: 'warn',
-        position: 'top-center',
-        showCloseButton: false,
-        autoClose: 2000,
-      });
+      showCompleteToast(MENU_TOAST.OPTION_ADD_DETAIL_ALERT, 'warn');
       return;
     }
 
@@ -67,16 +57,17 @@ const MenuOptionModalButton = ({ modalId }: { modalId?: string }) => {
         ),
       );
     }
+    showCompleteToast(MENU_TOAST.OPTION_ADD, 'success');
     MagicModal.hide(modalId ?? '');
   };
 
   return (
     <div className={styles['btn-wrap']}>
       <button className={styles['basic-btn']} onClick={() => MagicModal.hide(modalId ?? '')}>
-        취소
+        {MENU_CONFIRM.CANCEL}
       </button>
       <button className={styles['update-btn']} onClick={() => updateOptionDetailHandler(menuOption)}>
-        확인
+        {MENU_CONFIRM.CHECK}
       </button>
     </div>
   );

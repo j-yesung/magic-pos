@@ -1,4 +1,4 @@
-import styles from '@/components/layout/order/styles/OrderLayout.module.css';
+import styles from '@/components/layout/kiosk/styles/OrderLayout.module.css';
 import useKioskState, {
   goPrevStep,
   ORDER_STEP,
@@ -6,7 +6,7 @@ import useKioskState, {
   setIsOptionPage,
   setSelectedMenu,
 } from '@/shared/store/kiosk';
-import { SLIDE_MOVE_SPEED } from '@/components/layout/order/footer/StepButton';
+import { SLIDE_MOVE_SPEED } from '@/components/layout/kiosk/footer/StepButton';
 import { PiCaretLeft } from 'react-icons/pi';
 import clsx from 'clsx';
 

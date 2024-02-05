@@ -17,13 +17,14 @@ export enum ORDER_STEP {
  * 일반고객의 주문과 관련된 전역 상태를 관리하는 store 입니다.
  */
 
-interface OrderState {
+interface KioskState {
   // state
   step: number;
   readonly maxStep: number;
   menuData: CategoryWithMenuItemWithStore[] | null;
   orderList: MenuItemWithOption[];
   storeId: string | null;
+  prevStoreId: string | null;
   orderNumber: number;
   tableId: string | null;
   orderType: OrderType;
@@ -41,7 +42,7 @@ interface OrderState {
   isOnlyTable: boolean;
 }
 
-export const useKioskState = create<OrderState>()(
+export const useKioskState = create<KioskState>()(
   persist(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     get => ({
@@ -53,7 +54,8 @@ export const useKioskState = create<OrderState>()(
       // 주문에 담은 메뉴 목록을 나타냅니다.
       orderList: [],
       // 가게 ID
-      storeId: null as string | null,
+      storeId: null,
+      prevStoreId: null,
       // 주문 번호
       orderNumber: 0,
       // 테이블 아이디
@@ -90,12 +92,14 @@ export const useKioskState = create<OrderState>()(
         orderIdList: state.orderIdList,
         orderType: state.orderType,
         storeId: state.storeId,
+        prevStoreId: state.prevStoreId,
         orderNumber: state.orderNumber,
         orderList: state.orderList,
         tableId: state.tableId,
         storeName: state.storeName,
         selectedLanguage: state.selectedLanguage,
         menuData: state.menuData,
+        step: state.step,
       }),
     },
   ),
@@ -116,7 +120,7 @@ export const setMenuData = (menuData: CategoryWithMenuItemWithStore[]) =>
   });
 export const resetOrderList = () => useKioskState.setState({ orderList: [] });
 export const addOrderList = (menu: MenuItemWithOption[]) =>
-  useKioskState.setState(state => ({ orderList: [...state.orderList, ...menu] }));
+  useKioskState.setState(state => ({ orderList: [...state.orderList, ...menu], prevStoreId: state.storeId }));
 export const subtractOrderList = (menuId: string) =>
   useKioskState.setState(state => {
     const findIndex = state.orderList.findLastIndex(o => o.id === menuId);
