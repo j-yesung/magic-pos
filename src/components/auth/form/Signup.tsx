@@ -45,7 +45,7 @@ const Signup = () => {
               : field.validation;
             const pwd = watch('password');
             const confirmPwd = watch('confirmPassword');
-            const isPwdMatch = pwd !== '' && confirmPwd !== '' && pwd === confirmPwd;
+            const isPwdMatch = pwd && confirmPwd && pwd === confirmPwd;
 
             return (
               <Fragment key={field.unique}>
