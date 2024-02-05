@@ -14,13 +14,24 @@ import {
 } from '../../calendarUtility/cellItemType';
 import SalesModal from '../../modal/SalesModal';
 
+import { CellItemProps } from '@/types/calendar';
 import clsx from 'clsx';
 import { BIG_MODE, CALENDAR_PAGE, MINI_MODE, STATUS_PAGE } from '../calendarType/calendarType';
 import styles from './styles/cellItem.module.css';
 
 type Cell = (param: CellItemProps) => JSX.Element;
 
-const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDateHandler, holiday, mode, page }) => {
+const CellItem: Cell = ({
+  day,
+  salesData,
+  getMinMaxSalesType,
+  clickShowDataOfDateHandler,
+  holiday,
+  mode,
+  page,
+  clickStartTimeHandler,
+  clickEndTimeHandler,
+}) => {
   const SELECTED_DAY = 'SELECTEDTYPE';
   const SALES_NONE = 'NONE';
   const SALES_HAVE = 'HAVE';
@@ -115,10 +126,12 @@ const CellItem: Cell = ({ day, salesData, getMinMaxSalesType, clickShowDataOfDat
           {...(((page === STATUS_PAGE && day.isSame(today, 'D')) || day.isBefore(today, 'D')) && {
             onClick: clickShowDataOfDateHandler?.(day),
           })}
-
           /** 페이지가 주문내역 확인이면 아래와 같이 하면 됩니다.
            *{...((page===ORDER && {onClick: clickHandler}))}
            */
+
+          {...(page === 'ORDER_START_PAGE' && { onClick: clickStartTimeHandler?.(day) })}
+          {...(page === 'ORDER_END_PAGE' && { onClick: clickEndTimeHandler?.(day) })}
         >
           <span
             className={statusDayVariant({
