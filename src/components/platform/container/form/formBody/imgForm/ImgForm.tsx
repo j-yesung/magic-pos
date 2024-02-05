@@ -57,7 +57,15 @@ const ImgForm = ({ mode }: { mode: boolean }) => {
         </div>
       </label>
 
-      <input type="file" id="file" name="file" className={styles.file} onChange={changePreview} ref={imgRef} />
+      <input
+        type="file"
+        id="file"
+        name="file"
+        className={styles.file}
+        onChange={changePreview}
+        ref={imgRef}
+        accept="png, .jpg , .gif"
+      />
     </div>
   );
 };

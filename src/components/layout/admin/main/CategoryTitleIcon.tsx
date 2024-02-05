@@ -8,6 +8,7 @@ import {
   TABLE_PATH,
 } from '@/data/url-list';
 import { useRouter } from 'next/router';
+import React from 'react';
 import { AiOutlineShop } from 'react-icons/ai';
 import { BiCategory } from 'react-icons/bi';
 import { GrMoney } from 'react-icons/gr';
@@ -32,4 +33,4 @@ const CategoryTitleIcon = () => {
   return <>{icon}</>;
 };
 
-export default CategoryTitleIcon;
+export default React.memo(CategoryTitleIcon);

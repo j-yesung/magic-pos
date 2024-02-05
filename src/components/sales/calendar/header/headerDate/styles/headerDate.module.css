@@ -10,11 +10,11 @@
   line-height: 1.8rem; /* 100% */
   letter-spacing: -0.036rem;
 }
-.text-year {
+.base-text-year {
   line-height: 1.8rem;
   font-size: 1.8rem;
   font-weight: bold;
 }
-.calendar-text-year {
+.big-text-year {
   font-size: 2rem;
 }

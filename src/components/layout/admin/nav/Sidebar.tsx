@@ -7,7 +7,7 @@ import useSideBar, { setIsSideBarOpen } from '@/shared/store/sidebar';
 import useToggleState from '@/shared/store/toggle';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { IoLogOutOutline, IoMailOutline, IoQrCodeOutline } from 'react-icons/io5';
 import HeaderToggleButton from '../header/HeaderToggleButton';
 import styles from '../styles/AdminLayout.module.css';
@@ -47,6 +47,10 @@ const Sidebar = (adminInfo: AdminCategories) => {
     setIsSideBarOpen(false);
     MagicModal.fire(<SendMail />);
   };
+
+  const clickLogoutHandler = useCallback(() => {
+    logout();
+  }, [logout]);
 
   useEffect(() => {
     const closeSideBar = (e: MouseEvent) => {
@@ -102,7 +106,7 @@ const Sidebar = (adminInfo: AdminCategories) => {
         </div>
         <p>|</p>
         <div className={styles.actionButtonWrapper}>
-          <Button type="button" onClick={() => logout()}>
+          <Button type="button" onClick={clickLogoutHandler}>
             <IoLogOutOutline size={25} /> 로그아웃
           </Button>
         </div>
@@ -111,4 +115,4 @@ const Sidebar = (adminInfo: AdminCategories) => {
   );
 };
 
-export default Sidebar;
+export default React.memo(Sidebar);
