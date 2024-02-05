@@ -16,9 +16,6 @@ export const useCalendar = () => {
     setCalendarCurrentDate(currentDate.add(1, 'month'));
   }, [currentDate]);
 
-  // sales/stauts에서 click하면 calendar를 보여주는 함수
-  const clickShowCalendarHandler = useCallback(() => setIsShow(true), []);
-
   // 달력 달을 바꾸고 선택을 안했을 때 닫았다가 다시 열면 현재 적혀있는 날짜와 다른 달을 보이기에 조건문 추가 함
   const clickHiddenCalendarHandler = useCallback(() => {
     if (!currentDate.isSame(selectedDate)) {
@@ -30,7 +27,6 @@ export const useCalendar = () => {
   return {
     clickPreMonthHandler,
     clickNextMonthHandler,
-    clickShowCalendarHandler,
     clickHiddenCalendarHandler,
   };
 };

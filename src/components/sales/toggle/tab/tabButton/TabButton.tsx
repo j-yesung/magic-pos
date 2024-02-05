@@ -1,5 +1,6 @@
 import { useDataHandler } from '@/hooks/sales/useDataHandler';
 import useDayState from '@/shared/store/sales/salesDay';
+import { setIsShow } from '@/shared/store/sales/salesToggle';
 import React, { useCallback } from 'react';
 import Select, { StylesConfig } from 'react-select';
 import styles from './styles/tabButton.module.css';
@@ -40,9 +41,12 @@ const customStyles: StylesConfig<OptionType, false> = {
   }),
 };
 
-const TabButton = ({ clickShowCalendarHandler }: { clickShowCalendarHandler: () => void }) => {
+const TabButton = () => {
   const { clickMoveTodayHandler, clickWeeksChartHandler, clickMonthsChartHandler } = useDataHandler();
   const { selectedDate, today } = useDayState();
+  const clickShowCalendarHandler = useCallback(() => {
+    setIsShow(true);
+  }, []);
 
   const changeOptionDataHandler = useCallback(
     async (type: string) => {
@@ -51,7 +55,7 @@ const TabButton = ({ clickShowCalendarHandler }: { clickShowCalendarHandler: () 
       if (type === MONTH) await clickMonthsChartHandler();
       if (type === SELECT) clickShowCalendarHandler();
     },
-    [clickMonthsChartHandler, clickMoveTodayHandler, clickWeeksChartHandler],
+    [clickMonthsChartHandler, clickMoveTodayHandler, clickWeeksChartHandler, clickShowCalendarHandler],
   );
 
   const SELECT_DAY = {

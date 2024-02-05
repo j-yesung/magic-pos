@@ -1,14 +1,14 @@
 import Button from '@/components/common/Button';
 import useSalesToggle, { setIsChangeView } from '@/shared/store/sales/salesToggle';
 import clsx from 'clsx';
-import React from 'react';
+import React, { useCallback } from 'react';
 import styles from './styles/toggleButton.module.css';
 
 const ToggleButton = () => {
   const isChangeView = useSalesToggle(state => state.isChangeView);
 
-  const clickShowChart = () => setIsChangeView(true);
-  const clickShowCalendar = () => setIsChangeView(false);
+  const clickShowChart = useCallback(() => setIsChangeView(true), []);
+  const clickShowCalendar = useCallback(() => setIsChangeView(false), []);
   return (
     <div className={styles.toggleBtnWrapper}>
       <Button

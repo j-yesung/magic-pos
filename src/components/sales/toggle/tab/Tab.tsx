@@ -10,7 +10,7 @@ import styles from './styles/tab.module.css';
 import TabButton from './tabButton/TabButton';
 const Tab = () => {
   const isShow = useSalesToggle(state => state.isShow);
-  const { clickHiddenCalendarHandler, clickShowCalendarHandler } = useCalendar();
+  const { clickHiddenCalendarHandler } = useCalendar();
   const isChangeView = useSalesToggle(state => state.isChangeView);
   useEffect(() => {
     /*reset*/
@@ -21,7 +21,7 @@ const Tab = () => {
 
   return (
     <div className={styles.wrapper}>
-      {isChangeView && <TabButton clickShowCalendarHandler={clickShowCalendarHandler} />}
+      {isChangeView && <TabButton />}
       <CalendarToggle />
       {isShow && (
         <Fragment>
