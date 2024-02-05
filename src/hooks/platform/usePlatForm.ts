@@ -38,6 +38,7 @@ const usePlatForm = () => {
     if (!addPlatForm.name.trim() || !addPlatForm.link_url.trim()) {
       return showCompleteToast(ALERT_TOAST);
     }
+    console.log(addPlatForm);
     const ensureHttpsUrlData = ensureHttpsUrl(addPlatForm);
     const form = await handleImageUpload(ensureHttpsUrlData);
     // react-query mutation

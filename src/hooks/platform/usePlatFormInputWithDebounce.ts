@@ -24,7 +24,7 @@ const usePlatFormInputWithDebounce = ({ mode }: { mode: boolean }) => {
         const confirmedImageUrl = handleMetaImageException(extractedImage);
         usePlatFormState.setState(state => ({
           ...state,
-          cardForm: {
+          addPlatForm: {
             ...state.addPlatForm,
             metaImage: confirmedImageUrl,
           },
