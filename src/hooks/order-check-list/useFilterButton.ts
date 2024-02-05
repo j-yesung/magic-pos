@@ -5,7 +5,8 @@ import useFetchOrderCheckList from './useFetchOrderCheckList';
 
 const useFilterButton = () => {
   const [isDateButton, setIsDateButton] = useState(0);
-  const { setListType, setStartTime, setEndTime } = useOrderCheckListStore();
+  const { setListType, setStartTime, setEndTime, setIsShowStartCalender, setIsShowEndCalender } =
+    useOrderCheckListStore();
   const { refetch } = useFetchOrderCheckList();
 
   const clickFilterButtonHandler = (listType: string, styleType: number, isRefetch: boolean) => {
@@ -19,13 +20,26 @@ const useFilterButton = () => {
   const clickStartTimeHandler = (day: Dayjs) => () => {
     const startDay = day.format('YYYY-MM-DD');
     setStartTime(startDay);
+    clickIsShowCalenderHandler(false, false);
   };
   const clickEndTimeHandler = (day: Dayjs) => () => {
     const endDay = day.format('YYYY-MM-DD');
     setEndTime(endDay);
+    clickIsShowCalenderHandler(false, false);
   };
 
-  return { isDateButton, clickFilterButtonHandler, clickStartTimeHandler, clickEndTimeHandler };
+  const clickIsShowCalenderHandler = (isStart: boolean, isEnd: boolean) => {
+    setIsShowStartCalender(isStart);
+    setIsShowEndCalender(isEnd);
+  };
+
+  return {
+    isDateButton,
+    clickFilterButtonHandler,
+    clickStartTimeHandler,
+    clickEndTimeHandler,
+    clickIsShowCalenderHandler,
+  };
 };
 
 export default useFilterButton;
