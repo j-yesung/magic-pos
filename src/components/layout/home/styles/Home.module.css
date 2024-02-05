@@ -117,17 +117,12 @@
 }
 
 .main-watemark {
-  opacity: 0.1;
   display: flex;
-  font-size: 30rem;
-  font-weight: 900;
-  text-indent: 10rem;
-  line-height: 17rem;
-  align-items: center;
-  letter-spacing: 10rem;
   justify-content: center;
-  color: var(--main-color);
-  z-index: var(--level-1-z-index);
+}
+.main-watemark img {
+  width: 120rem;
+  height: auto;
 }
 
 /* 카드 영역 */

@@ -1,6 +1,7 @@
 import { useToggle } from '@/hooks/service/ui/useToggle';
 import { toggleIsSideBarOpen } from '@/shared/store/sidebar';
 import useToggleState from '@/shared/store/toggle';
+import React from 'react';
 import styles from '../styles/AdminLayout.module.css';
 import Hamburger from '/public/icons/hamburger.svg';
 
@@ -25,4 +26,4 @@ const HamburgerMenu = () => {
   );
 };
 
-export default HamburgerMenu;
+export default React.memo(HamburgerMenu);
