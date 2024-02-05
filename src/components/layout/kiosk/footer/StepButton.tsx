@@ -83,7 +83,7 @@ const StepButton = () => {
     <>
       {step > ORDER_STEP.CHOOSE_ORDER_TYPE && step < ORDER_STEP.SUCCESS && (
         <div className={styles.container}>
-          {optionSwiperRef?.current!.swiper?.realIndex !== 1 ? (
+          {optionSwiperRef?.current && optionSwiperRef?.current!.swiper?.realIndex !== 1 ? (
             <button
               className={styles.button}
               onClick={nextClickHandler}
