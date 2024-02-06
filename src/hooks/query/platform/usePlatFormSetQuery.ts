@@ -28,9 +28,7 @@ const usePlatFormSetQuery = () => {
 
   const removePlatFormCardMutation = useMutation({
     mutationFn: removePlatFormData,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [PlatFormQueryKey.PLATFORM] });
-    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: [PlatFormQueryKey.PLATFORM] }),
     onError: error => {
       console.log('platform 삭제시 오류', error);
       router.push(PLATFORM_PATH);

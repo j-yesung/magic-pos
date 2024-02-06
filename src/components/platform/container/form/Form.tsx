@@ -9,9 +9,6 @@ import styles from './styles/form.module.css';
 const Form = () => {
   const isEdit = usePlatFormState(state => state.isEdit);
   const { submitAddCard, submitEditCard, editPending, addPending } = usePlatForm();
-  // console.log('🚀 ~ Form ~ editPending:', editPending);
-  console.log('🚀 ~ Form ~ addPending:', addPending);
-  // console.log('🚀 ~ Form ~ editPending:', addPending);
 
   return (
     <form onSubmit={!isEdit ? submitAddCard : submitEditCard} className={styles.formContainer}>
