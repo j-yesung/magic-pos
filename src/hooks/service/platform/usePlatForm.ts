@@ -19,55 +19,66 @@ const ALERT_TOAST = { content: '내용을 다 채워주세요', type: 'warn' } a
 
 const usePlatForm = () => {
   const { addPlatForm, editPlatForm, prevData, prevImg, isEdit } = usePlatFormState();
+  // react-mutaion 호출
   const { addCardToPlatForm, editCardPlatForm, removeCardPlatForm, editPending, addPending } = usePlatFormSetQuery();
-  // console.log('🚀 ~ usePlatForm ~ addPending:', addPending);
 
   const [pending, setPending] = useState<boolean>(false);
   const { toast } = useToast();
 
-  const showCompleteToast = (alert: PlatformToast) => {
-    toast(alert.content, {
-      type: alert.type,
-      position: 'top-center',
-      showCloseButton: true,
-      autoClose: 2000,
-    });
-  };
+  const showCompleteToast = useCallback(
+    (toastAlert: PlatformToast) => {
+      toast(toastAlert.content, {
+        type: toastAlert.type,
+        position: 'top-center',
+        showCloseButton: true,
+        autoClose: 2000,
+      });
+    },
+    [toast],
+  );
 
-  const submitAddCard = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const submitAddCard = useCallback(
+    async (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
 
-    if (!addPlatForm.name.trim() || !addPlatForm.link_url.trim()) {
-      return showCompleteToast(ALERT_TOAST);
-    }
-    const ensureHttpsUrlData = ensureHttpsUrl(addPlatForm);
-    const form = await handleImageUpload(ensureHttpsUrlData);
-    // react-query mutation
-    addCardToPlatForm(form);
+      if (!addPlatForm.name.trim() || !addPlatForm.link_url.trim()) {
+        return showCompleteToast(ALERT_TOAST);
+      }
+      const ensureHttpsUrlData = ensureHttpsUrl(addPlatForm);
+      const form = await handleImageUpload(ensureHttpsUrlData);
+      // react-query mutation
+      addCardToPlatForm(form);
 
-    handleResetStateAfterAction(isEdit);
-  };
-
-  const submitEditCard = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const comparedData = isPlatFormCardValueChange(prevData, editPlatForm);
-    if (isEmptyObject(comparedData) && prevData.image_url === prevImg) {
       handleResetStateAfterAction(isEdit);
-      return;
-    }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [addPlatForm],
+  );
 
-    comparedData.id = editPlatForm.id;
-    comparedData.store_id = editPlatForm.store_id;
-    await prevImageRemove(prevData);
-    const ensureHttpsUrlData = ensureHttpsUrl(comparedData);
+  const submitEditCard = useCallback(
+    async (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
 
-    const form = await handleImageUpload(ensureHttpsUrlData);
+      const comparedData = isPlatFormCardValueChange(prevData, editPlatForm);
+      if (isEmptyObject(comparedData) && prevData.image_url === prevImg) {
+        handleResetStateAfterAction(isEdit);
+        return;
+      }
 
-    // react-query mutation
-    editCardPlatForm(form as EditPlatFormType);
-    setPending(true);
-  };
+      comparedData.id = editPlatForm.id;
+      comparedData.store_id = editPlatForm.store_id;
+      await prevImageRemove(prevData);
+      const ensureHttpsUrlData = ensureHttpsUrl(comparedData);
+
+      const form = await handleImageUpload(ensureHttpsUrlData);
+
+      // react-query mutation
+      editCardPlatForm(form as EditPlatFormType);
+      setPending(true);
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [editPlatForm, prevData, prevImg],
+  );
 
   const clickRemoveData = useCallback(async () => {
     prevImageRemove(editPlatForm);
@@ -77,9 +88,9 @@ const usePlatForm = () => {
     handleResetStateAfterRemoveData();
   }, [editPlatForm, removeCardPlatForm]);
 
-  const closePlatFormModal = (mode: boolean) => {
+  const closePlatFormModal = useCallback((mode: boolean) => {
     handleResetStateAfterAction(mode);
-  };
+  }, []);
 
   useEffect(() => {
     if (!editPending && pending) {

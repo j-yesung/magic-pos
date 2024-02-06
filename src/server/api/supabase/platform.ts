@@ -35,7 +35,6 @@ export const insertPlatFormRow = async (param: AddPlatFormType | EditPlatFormTyp
       },
     ])
     .select();
-
   if (error) return { data: null, error };
 
   return { data, error };
