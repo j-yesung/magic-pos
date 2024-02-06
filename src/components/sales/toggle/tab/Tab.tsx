@@ -1,4 +1,4 @@
-import { useCalendar } from '@/hooks/sales/useCalendar';
+import { useCalendar } from '@/hooks/service/sales/useCalendar';
 import useSalesToggle from '@/shared/store/sales/salesToggle';
 
 import React, { Fragment, useEffect } from 'react';

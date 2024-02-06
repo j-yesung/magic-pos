@@ -1,7 +1,7 @@
-import { useCalendar } from '@/hooks/sales/useCalendar';
-import { useDataHandler } from '@/hooks/sales/useDataHandler';
+import { useDataHandler } from '@/hooks/service/sales/useDataHandler';
 import useDayState from '@/shared/store/sales/salesDay';
-import React from 'react';
+import { setIsShow } from '@/shared/store/sales/salesToggle';
+import React, { useCallback } from 'react';
 import Select, { StylesConfig } from 'react-select';
 import styles from './styles/tabButton.module.css';
 
@@ -43,15 +43,20 @@ const customStyles: StylesConfig<OptionType, false> = {
 
 const TabButton = () => {
   const { clickMoveTodayHandler, clickWeeksChartHandler, clickMonthsChartHandler } = useDataHandler();
-  const { clickShowCalendarHandler } = useCalendar();
   const { selectedDate, today } = useDayState();
+  const clickShowCalendarHandler = useCallback(() => {
+    setIsShow(true);
+  }, []);
 
-  const changeOptionDataHandler = async (type: string) => {
-    if (type === TODAY) await clickMoveTodayHandler();
-    if (type === WEEK) await clickWeeksChartHandler();
-    if (type === MONTH) await clickMonthsChartHandler();
-    if (type === SELECT) clickShowCalendarHandler();
-  };
+  const changeOptionDataHandler = useCallback(
+    async (type: string) => {
+      if (type === TODAY) await clickMoveTodayHandler();
+      if (type === WEEK) await clickWeeksChartHandler();
+      if (type === MONTH) await clickMonthsChartHandler();
+      if (type === SELECT) clickShowCalendarHandler();
+    },
+    [clickMonthsChartHandler, clickMoveTodayHandler, clickWeeksChartHandler, clickShowCalendarHandler],
+  );
 
   const SELECT_DAY = {
     value: 'select',

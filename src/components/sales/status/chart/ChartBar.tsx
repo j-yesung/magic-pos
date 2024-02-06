@@ -1,4 +1,4 @@
-import useChartData from '@/hooks/sales/uesChartData';
+import useChartData from '@/hooks/service/sales/uesChartData';
 import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';

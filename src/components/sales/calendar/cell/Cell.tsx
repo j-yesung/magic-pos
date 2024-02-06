@@ -1,4 +1,4 @@
-import { useDataHandler } from '@/hooks/sales/useDataHandler';
+import { useDataHandler } from '@/hooks/service/sales/useDataHandler';
 import { getMonthSales } from '@/server/api/supabase/sales';
 import { groupByKey } from '@/shared/helper';
 import useCalendarState from '@/shared/store/sales/salesCalendar';
@@ -61,7 +61,6 @@ const Cell = ({ mode, page }: CalendarCellType) => {
           setSalesSum(formattedData);
           setCalendarBindingData(minMaxData);
         } else {
-          // 불필요한 렌더링임... 최적화 필요!!
           setSalesSum(null);
           resetCalendarBindingData();
         }

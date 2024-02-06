@@ -7,32 +7,38 @@ import useDayState, { setSelectedDate } from '@/shared/store/sales/salesDay';
 import { setRecordData } from '@/shared/store/sales/salesRecord';
 import { setIsShow } from '@/shared/store/sales/salesToggle';
 import useAuthState from '@/shared/store/session';
-import { EnOrderType } from '@/types/sales';
+import { DateFormatType, EnOrderType, FormatType } from '@/types/sales';
+import { Tables } from '@/types/supabase';
 import { Dayjs } from 'dayjs';
 
 export const useDataHandler = () => {
   const storeId = useAuthState(state => state.storeId);
   const { utcStandardDate, today } = useDayState();
 
-  const clickMoveTodayHandler = async () => {
-    const { sales, dateType, formatType } = await getDaySales(utcStandardDate, storeId!);
-    if (sales.length !== 0) {
-      const { result, recordData } = formatData(sales, dateType, today, formatType!);
-      if (result && recordData) {
-        setChartData(result);
-        setRecordData(recordData);
-      }
-    }
-    if (sales.length === 0) {
+  const handleSalesData = (
+    salesData: Tables<'sales'>[],
+    dateType: DateFormatType,
+    formatType: FormatType,
+    day: Dayjs,
+  ) => {
+    if (salesData.length !== 0) {
+      const { result, recordData } = formatData(salesData, dateType, day, formatType);
+      setChartData(result);
+      setRecordData(recordData);
+    } else {
       setChartData([]);
       setRecordData({
         currentSales: 0,
         dateType: 'day',
       });
     }
+    setCalendarCurrentDate(day);
+    setSelectedDate(day);
+  };
 
-    setCalendarCurrentDate(today);
-    setSelectedDate(today);
+  const clickMoveTodayHandler = async () => {
+    const { sales, dateType, formatType } = await getDaySales(utcStandardDate, storeId!);
+    handleSalesData(sales, dateType, formatType!, today);
   };
   //sales/status에 있는 calendar에서 날짜를 클릭하면 그 날 기준 7일 데이터를 받아옵니다.
   /**
@@ -42,62 +48,18 @@ export const useDataHandler = () => {
    */
   const clickShowDataOfDateHandler = (day: Dayjs) => async () => {
     const { sales, dateType, formatType } = await getDaySales(day.hour(0).subtract(9, 'hour'), storeId!);
-    if (sales.length !== 0) {
-      const { result, recordData } = formatData(sales, dateType, day, formatType!);
-      if (result && recordData) {
-        setRecordData(recordData);
-        setChartData(result);
-      }
-    } else {
-      setChartData([]);
-      setRecordData({
-        currentSales: 0,
-        dateType: 'day',
-      });
-    }
+    handleSalesData(sales, dateType, formatType!, day);
     setIsShow(false);
-    setSelectedDate(day);
-    setCalendarCurrentDate(day);
   };
 
   const clickWeeksChartHandler = async () => {
     const { sales, dateType, formatType } = await getWeekSales(utcStandardDate, storeId!);
-    if (sales.length !== 0) {
-      const { result, recordData } = formatData(sales, dateType, today, formatType!);
-      if (result && recordData) {
-        setChartData(result);
-        setRecordData(recordData);
-      }
-    }
-
-    if (sales.length === 0) {
-      setRecordData({
-        currentSales: 0,
-        dateType: 'week',
-      });
-    }
-    setCalendarCurrentDate(today);
-    setSelectedDate(today);
+    handleSalesData(sales, dateType, formatType!, today);
   };
 
   const clickMonthsChartHandler = async () => {
     const { sales, dateType, formatType } = await getMonthsSales(utcStandardDate, storeId!);
-    if (sales.length !== 0) {
-      const { result, recordData } = formatData(sales, dateType, today, formatType!);
-
-      if (result && recordData) {
-        setChartData(result);
-        setRecordData(recordData);
-      }
-    }
-    if (sales.length === 0) {
-      setRecordData({
-        currentSales: 0,
-        dateType: 'month',
-      });
-    }
-    setCalendarCurrentDate(today);
-    setSelectedDate(today);
+    handleSalesData(sales, dateType, formatType!, today);
   };
 
   /**
