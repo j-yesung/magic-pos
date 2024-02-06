@@ -6,7 +6,7 @@ import usePlatFormState, {
 } from '@/shared/store/platform';
 import clsx from 'clsx';
 import Image from 'next/image';
-import { ChangeEvent, useEffect, useRef } from 'react';
+import React, { ChangeEvent, useCallback, useEffect, useRef } from 'react';
 import styles from './styles/imgForm.module.css';
 import CloseButton from '/public/icons/close.svg';
 import Pencil from '/public/icons/pencil.svg';
@@ -14,20 +14,24 @@ import Pencil from '/public/icons/pencil.svg';
 const ImgForm = ({ mode }: { mode: boolean }) => {
   const prevImg = usePlatFormState(state => state.prevImg);
   const imgRef = useRef<HTMLInputElement | null>(null);
-  const changePreview = (e: ChangeEvent<HTMLInputElement>) => {
-    const fileList = e.target.files || [];
-    if (fileList?.length !== 0) {
-      const file = fileList[0];
-      const currentImgUrl = URL.createObjectURL(file);
-      setPrevImg(currentImgUrl);
-      setPlatFormFile(file, mode);
-    }
-  };
 
-  const removeImage = () => {
+  const changePreview = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const fileList = e.target.files || [];
+      if (fileList?.length !== 0) {
+        const file = fileList[0];
+        const currentImgUrl = URL.createObjectURL(file);
+        setPrevImg(currentImgUrl);
+        setPlatFormFile(file, mode);
+      }
+    },
+    [mode],
+  );
+
+  const removeImage = useCallback(() => {
     resetPrevImg(mode);
     resetPlatFormFile(mode);
-  };
+  }, [mode]);
 
   useEffect(() => {
     if (!prevImg && imgRef.current?.value) {
@@ -70,4 +74,4 @@ const ImgForm = ({ mode }: { mode: boolean }) => {
   );
 };
 
-export default ImgForm;
+export default React.memo(ImgForm);

@@ -10,9 +10,7 @@ const usePlatFormSetQuery = () => {
 
   const addPlatFormCardMutation = useMutation({
     mutationFn: insertPlatFormRow,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [PlatFormQueryKey.PLATFORM] });
-    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: [PlatFormQueryKey.PLATFORM] }),
     onError: error => {
       console.log(error);
       router.push(PLATFORM_PATH);
@@ -30,9 +28,7 @@ const usePlatFormSetQuery = () => {
 
   const removePlatFormCardMutation = useMutation({
     mutationFn: removePlatFormData,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [PlatFormQueryKey.PLATFORM] });
-    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: [PlatFormQueryKey.PLATFORM] }),
     onError: error => {
       console.log('platform 삭제시 오류', error);
       router.push(PLATFORM_PATH);
@@ -43,6 +39,7 @@ const usePlatFormSetQuery = () => {
     addCardToPlatForm: addPlatFormCardMutation.mutate,
     editCardPlatForm: editPlatFormCardMutation.mutate,
     editPending: editPlatFormCardMutation.isPending,
+    addPending: addPlatFormCardMutation.isPending,
     removeCardPlatForm: removePlatFormCardMutation.mutate,
   };
 };

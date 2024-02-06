@@ -4,7 +4,7 @@ import { PlatFormQueryKey } from './platformQueryKey';
 
 const usePlatFormQuery = ({ storeId }: { storeId: string }) => {
   const { data, isLoading } = useQuery({
-    queryKey: [PlatFormQueryKey.PLATFORM, storeId],
+    queryKey: [PlatFormQueryKey.PLATFORM],
     queryFn: async () => fetchPlatForm(storeId),
   });
 

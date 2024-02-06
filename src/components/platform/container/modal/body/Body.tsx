@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from '../styles/confirmModal.module.css';
 import Alert from '/public/icons/alert-circle.svg';
 const Body = () => {
@@ -13,4 +14,4 @@ const Body = () => {
   );
 };
 
-export default Body;
+export default React.memo(Body);

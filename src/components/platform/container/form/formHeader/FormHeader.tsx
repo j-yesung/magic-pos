@@ -1,6 +1,6 @@
 import usePlatForm from '@/hooks/service/platform/usePlatForm';
 import { handleResetStateAfterAction } from '@/shared/store/platform';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styles from './styles/formHeader.module.css';
 import CloseButton from '/public/icons/close.svg';
 
@@ -23,4 +23,4 @@ const FormHeader = ({ mode }: { mode: boolean }) => {
   );
 };
 
-export default FormHeader;
+export default React.memo(FormHeader);

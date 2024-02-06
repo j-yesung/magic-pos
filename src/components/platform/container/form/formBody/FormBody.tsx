@@ -1,3 +1,4 @@
+import React from 'react';
 import ImgForm from './imgForm/ImgForm';
 import Input from './input/Input';
 import styles from './styles/formBody.module.css';
@@ -10,4 +11,4 @@ const FormBody = ({ mode }: { mode: boolean }) => {
   );
 };
 
-export default FormBody;
+export default React.memo(FormBody);

@@ -1,8 +1,9 @@
 import Button from '@/components/common/Button';
 import { setIsRegist } from '@/shared/store/platform';
+import React, { useCallback } from 'react';
 import styles from './styles/button.module.css';
 const AddButton = () => {
-  const clickShowAddForm = () => setIsRegist(true);
+  const clickShowAddForm = useCallback(() => setIsRegist(true), []);
   return (
     <div className={styles.buttonContainer}>
       <Button type="button" className={styles.button} onClick={clickShowAddForm}>
@@ -12,4 +13,4 @@ const AddButton = () => {
   );
 };
 
-export default AddButton;
+export default React.memo(AddButton);
