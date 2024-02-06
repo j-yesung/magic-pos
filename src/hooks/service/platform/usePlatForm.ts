@@ -24,7 +24,7 @@ const usePlatForm = () => {
 
   const [pending, setPending] = useState<boolean>(false);
   const { toast } = useToast();
-
+  const [isDisabled, setIsDisable] = useState<boolean>(false);
   const showCompleteToast = useCallback(
     (toastAlert: PlatformToast) => {
       toast(toastAlert.content, {
@@ -40,7 +40,7 @@ const usePlatForm = () => {
   const submitAddCard = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-
+      setIsDisable(true);
       if (!addPlatForm.name.trim() || !addPlatForm.link_url.trim()) {
         return showCompleteToast(ALERT_TOAST);
       }
@@ -50,6 +50,7 @@ const usePlatForm = () => {
       addCardToPlatForm(form);
 
       handleResetStateAfterAction(isEdit);
+      setIsDisable(false);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [addPlatForm],
@@ -111,7 +112,7 @@ const usePlatForm = () => {
     showCompleteToast,
     editCardPlatForm,
     editPending,
-    addPending,
+    addPending: isDisabled,
   };
 };
 
