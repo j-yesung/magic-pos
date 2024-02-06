@@ -20,6 +20,7 @@ const ALERT_TOAST = { content: '내용을 다 채워주세요', type: 'warn' } a
 const usePlatForm = () => {
   const { addPlatForm, editPlatForm, prevData, prevImg, isEdit } = usePlatFormState();
   const { addCardToPlatForm, editCardPlatForm, removeCardPlatForm, editPending, addPending } = usePlatFormSetQuery();
+  // console.log('🚀 ~ usePlatForm ~ addPending:', addPending);
 
   const [pending, setPending] = useState<boolean>(false);
   const { toast } = useToast();
