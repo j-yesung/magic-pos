@@ -2,6 +2,7 @@ import Button from '@/components/common/Button';
 import usePlatForm from '@/hooks/service/platform/usePlatForm';
 import useToast from '@/hooks/service/ui/useToast';
 import clsx from 'clsx';
+import React from 'react';
 import styles from '../styles/confirmModal.module.css';
 const ModalButton = ({ hiddenModal }: { hiddenModal: () => void }) => {
   const { clickRemoveData } = usePlatForm();
@@ -32,4 +33,4 @@ const ModalButton = ({ hiddenModal }: { hiddenModal: () => void }) => {
   );
 };
 
-export default ModalButton;
+export default React.memo(ModalButton);

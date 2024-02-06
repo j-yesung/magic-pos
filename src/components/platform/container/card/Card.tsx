@@ -1,5 +1,6 @@
 import usePlatFormQuery from '@/hooks/query/platform/useFetchQuery';
 import useAuthState from '@/shared/store/session';
+import React from 'react';
 import Item from './item/Item';
 import styles from './styles/card.module.css';
 
@@ -25,4 +26,4 @@ const Card = () => {
   );
 };
 
-export default Card;
+export default React.memo(Card);

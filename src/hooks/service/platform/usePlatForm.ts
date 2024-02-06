@@ -5,7 +5,7 @@ import usePlatFormState, {
   handleResetStateAfterRemoveData,
 } from '@/shared/store/platform';
 import { EditPlatFormType } from '@/types/platform';
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useCallback, useEffect, useState } from 'react';
 import usePlatFormSetQuery from '../../query/platform/usePlatFormSetQuery';
 import useToast from '../ui/useToast';
 import { handleImageUpload, isPlatFormCardValueChange, prevImageRemove } from './usePlatFormHelper';
@@ -19,7 +19,8 @@ const ALERT_TOAST = { content: '내용을 다 채워주세요', type: 'warn' } a
 
 const usePlatForm = () => {
   const { addPlatForm, editPlatForm, prevData, prevImg, isEdit } = usePlatFormState();
-  const { addCardToPlatForm, editCardPlatForm, removeCardPlatForm, editPending } = usePlatFormSetQuery();
+  const { addCardToPlatForm, editCardPlatForm, removeCardPlatForm, editPending, addPending } = usePlatFormSetQuery();
+
   const [pending, setPending] = useState<boolean>(false);
   const { toast } = useToast();
 
@@ -67,13 +68,13 @@ const usePlatForm = () => {
     setPending(true);
   };
 
-  const clickRemoveData = async () => {
+  const clickRemoveData = useCallback(async () => {
     prevImageRemove(editPlatForm);
     // react-query mutation
     removeCardPlatForm(editPlatForm.id);
     // reset state
     handleResetStateAfterRemoveData();
-  };
+  }, [editPlatForm, removeCardPlatForm]);
 
   const closePlatFormModal = (mode: boolean) => {
     handleResetStateAfterAction(mode);
@@ -97,6 +98,7 @@ const usePlatForm = () => {
     showCompleteToast,
     editCardPlatForm,
     editPending,
+    addPending,
   };
 };
 

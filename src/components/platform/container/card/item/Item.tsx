@@ -1,7 +1,7 @@
 import usePlatFormState, { setIsEdit, setIsRegist, setPrevData } from '@/shared/store/platform';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { LuExternalLink } from 'react-icons/lu';
 import styles from './styles/item.module.css';
 import Pencil from '/public/icons/pencil.svg';
@@ -17,20 +17,20 @@ const Item = ({ link, title, id, imgUrl }: ItemProps) => {
   const linkRef = useRef<HTMLDivElement>(null);
   const store_id = usePlatFormState(state => state.store_id);
 
-  const mouseEnterShowEditButton = () => {
+  const mouseEnterShowEditButton = useCallback(() => {
     if (editRef.current && linkRef.current) {
       linkRef.current.style.display = 'flex';
       editRef.current.style.display = 'flex';
     }
-  };
-  const mouseLeaveHiddenEditButton = () => {
+  }, []);
+  const mouseLeaveHiddenEditButton = useCallback(() => {
     if (editRef.current && linkRef.current) {
       linkRef.current.style.display = 'none';
       editRef.current.style.display = 'none';
     }
-  };
+  }, []);
 
-  const clickShowEditPlatFormMode = () => {
+  const clickShowEditPlatFormMode = useCallback(() => {
     setPrevData({
       id,
       link_url: link,
@@ -40,7 +40,7 @@ const Item = ({ link, title, id, imgUrl }: ItemProps) => {
     });
     setIsRegist(true);
     setIsEdit(true);
-  };
+  }, [id, imgUrl, link, store_id, title]);
 
   return (
     <div
@@ -72,4 +72,4 @@ const Item = ({ link, title, id, imgUrl }: ItemProps) => {
   );
 };
 
-export default Item;
+export default React.memo(Item);

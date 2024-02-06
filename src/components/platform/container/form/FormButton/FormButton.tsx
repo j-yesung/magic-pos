@@ -3,6 +3,7 @@ import usePlatForm from '@/hooks/service/platform/usePlatForm';
 import { useModal } from '@/hooks/service/ui/useModal';
 import useToast from '@/hooks/service/ui/useToast';
 import clsx from 'clsx';
+import React from 'react';
 import styles from './styles/formButton.module.css';
 import Alert from '/public/icons/alert-circle.svg';
 
@@ -52,4 +53,4 @@ const FormButton = ({ mode, isPending }: { mode: boolean; isPending: boolean }) 
   );
 };
 
-export default FormButton;
+export default React.memo(FormButton);

@@ -31,7 +31,7 @@ const usePlatFormInputWithDebounce = ({ mode }: { mode: boolean }) => {
           },
         }));
         setPrevImg(confirmedImageUrl);
-      }, 300);
+      }, 150);
     }
     return () => clearTimeout(debounce);
   }, [addPlatForm.link_url]);

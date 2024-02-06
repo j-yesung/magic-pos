@@ -21,7 +21,7 @@ const Input = ({ mode }: { mode: boolean }) => {
         className={styles.input}
         name="name"
         type="text"
-        placeholder="사이트 주소"
+        placeholder="사이트 이름을 넣어주세요"
         onChange={changePlatFormCardText}
         {...(mode && { defaultValue: editPlatForm.name })}
       />
