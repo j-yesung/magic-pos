@@ -1,4 +1,4 @@
-import { useModal } from '../service/ui/useModal';
+import { useModal } from '../ui/useModal';
 
 const useCustomModalHide = () => {
   const { MagicModal } = useModal();
