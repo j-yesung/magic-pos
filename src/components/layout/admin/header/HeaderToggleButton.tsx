@@ -7,8 +7,6 @@ const HeaderToggleButton = () => {
   const isChecked = useToggleState(state => state.isChecked);
   const { changeToggleHandler } = useToggle();
 
-  console.log('HeaderToggleButton rendered');
-
   return (
     <>
       <input className={styles.toggle} type="checkbox" id="toggle" checked={isChecked} onChange={changeToggleHandler} />

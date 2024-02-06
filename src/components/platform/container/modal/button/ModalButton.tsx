@@ -1,5 +1,5 @@
 import Button from '@/components/common/Button';
-import usePlatForm from '@/hooks/platform/usePlatForm';
+import usePlatForm from '@/hooks/service/platform/usePlatForm';
 import useToast from '@/hooks/service/ui/useToast';
 import clsx from 'clsx';
 import styles from '../styles/confirmModal.module.css';

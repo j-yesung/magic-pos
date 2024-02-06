@@ -6,8 +6,8 @@ import usePlatFormState, {
 } from '@/shared/store/platform';
 import { EditPlatFormType } from '@/types/platform';
 import { FormEvent, useEffect, useState } from 'react';
-import usePlatFormSetQuery from '../query/platform/usePlatFormSetQuery';
-import useToast from '../service/ui/useToast';
+import usePlatFormSetQuery from '../../query/platform/usePlatFormSetQuery';
+import useToast from '../ui/useToast';
 import { handleImageUpload, isPlatFormCardValueChange, prevImageRemove } from './usePlatFormHelper';
 
 interface PlatformToast {
