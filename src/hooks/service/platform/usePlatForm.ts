@@ -20,7 +20,7 @@ const ALERT_TOAST = { content: '내용을 다 채워주세요', type: 'warn' } a
 const usePlatForm = () => {
   const { addPlatForm, editPlatForm, prevData, prevImg, isEdit } = usePlatFormState();
   // react-mutaion 호출
-  const { addCardToPlatForm, editCardPlatForm, removeCardPlatForm, editPending, addPending } = usePlatFormSetQuery();
+  const { addCardToPlatForm, editCardPlatForm, removeCardPlatForm, editPending } = usePlatFormSetQuery();
 
   const [pending, setPending] = useState<boolean>(false);
   const { toast } = useToast();
