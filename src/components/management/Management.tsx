@@ -1,4 +1,4 @@
-import useFetchManagement from '@/hooks/management/useFetchManagement';
+import useFetchManagement from '@/hooks/query/management/useFetchManagement';
 import useToast from '@/hooks/service/ui/useToast';
 import { submitDetectedOrder } from '@/server/api/supabase/management';
 import useAuthState from '@/shared/store/session';

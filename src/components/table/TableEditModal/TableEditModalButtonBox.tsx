@@ -1,6 +1,6 @@
 import Button from '@/components/common/Button';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
-import useClickCUDHandler from '@/hooks/table/useClickCUDHandler';
+import useClickCUDHandler from '@/hooks/service/table/useClickCUDHandler';
 import { useEffect, useRef } from 'react';
 import styles from './styles/TableEditModalButtonBox.module.css';
 

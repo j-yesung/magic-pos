@@ -1,6 +1,6 @@
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { HOME_PATH } from '@/data/url-list';
-import useSetManagement from '@/hooks/management/useSetManagement';
+import useSetManagement from '@/hooks/query/management/useSetManagement';
 import { useUserTokenFetchQuery } from '@/hooks/query/user-token/useUserTokenFetchQuery';
 import { useModal } from '@/hooks/service/ui/useModal';
 import useToast from '@/hooks/service/ui/useToast';

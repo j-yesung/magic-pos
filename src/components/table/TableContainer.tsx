@@ -1,4 +1,4 @@
-import useClickCUDHandler from '@/hooks/table/useClickCUDHandler';
+import useClickCUDHandler from '@/hooks/service/table/useClickCUDHandler';
 import { StoreWithStoreTable, Tables } from '@/types/supabase';
 import LoadingSpinner from '../common/LoadingSpinner';
 import TableListItem from './TableListItem';

@@ -3,10 +3,10 @@ import useTableStore, { TableItemType } from '@/shared/store/table';
 import { StoreWithStoreTable, TablesInsert } from '@/types/supabase';
 import { useQueryClient } from '@tanstack/react-query';
 import { ReactElement } from 'react';
-import { useModal } from '../service/ui/useModal';
-import useToast from '../service/ui/useToast';
-import { QUERY_KEY } from './useFetchTable';
-import useSetTable from './useSetTable';
+import { QUERY_KEY } from '../../query/table/useFetchTable';
+import useSetTable from '../../query/table/useSetTable';
+import { useModal } from '../ui/useModal';
+import useToast from '../ui/useToast';
 
 const useClickCUDHandler = () => {
   const { addMutate, updateMutate, deleteMutate, addIsPending, updateIsPending } = useSetTable();

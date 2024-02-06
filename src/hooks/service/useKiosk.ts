@@ -1,12 +1,11 @@
 import { useNumberOrderFetchQuery } from '@/hooks/query/order/useNumberOrderFetchQuery';
 import { useStoreOrderFetchQuery } from '@/hooks/query/order/useStoreOrderFetchQuery';
 import { useFetchQuery } from '@/hooks/query/store/useFetchQuery';
-import useFetchTable from '@/hooks/table/useFetchTable';
-import { MenuItemWithOption } from '@/types/supabase';
-import { useEffect, useState } from 'react';
-import { CategoryWithMenuItemWithStore } from '@/types/supabase';
+import useFetchTable from '@/hooks/query/table/useFetchTable';
 import { isEmptyObject } from '@/shared/helper';
+import { CategoryWithMenuItemWithStore, MenuItemWithOption } from '@/types/supabase';
 import { useTranslation } from 'next-i18next';
+import { useEffect, useState } from 'react';
 
 export const useIsOrderAllReady = (orderIdList: string[], storeId: string) => {
   // numberOrderData: 번호표 주문 (포장, 테이블 번호가 없는 매장 주문)
