@@ -1,23 +1,22 @@
+import useManagementClickHandler from '@/hooks/service/management/useManagementClickHandler';
 import { groupByKey } from '@/shared/helper';
-import useManagementStore from '@/shared/store/management';
 import { MenuItemWithOption, Tables } from '@/types/supabase';
 import dayjs from 'dayjs';
 import styles from './styles/PackagingListItem.module.css';
 
 const PackagingListItem = ({ packagingData }: { packagingData: Tables<'order_number'> }) => {
-  const { setIsSideBar, setOrderId } = useManagementStore();
   const { menu_list } = packagingData;
   const menuList: MenuItemWithOption[] = JSON.parse(JSON.stringify(menu_list));
-
+  const { clickPackagingOrderDataHandler } = useManagementClickHandler();
   const group = groupByKey<MenuItemWithOption>(menuList, 'unique');
 
-  const clickOrderDataReFetchHandler = () => {
-    setOrderId({ id: [packagingData.id], status: '포장', number: '' });
-    setIsSideBar();
-  };
-
   return (
-    <div className={styles['packaging-list-item']} onClick={clickOrderDataReFetchHandler}>
+    <div
+      className={styles['packaging-list-item']}
+      onClick={() => {
+        clickPackagingOrderDataHandler(packagingData.id);
+      }}
+    >
       <div className={styles['item-order-number']}>{packagingData.order_number}</div>
       <div className={styles['item-menu-list']}>
         {[...group].map(([key, item]) => (

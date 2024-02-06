@@ -1,11 +1,10 @@
 import useManagementStore from '@/shared/store/management';
 import { OrderDataWithStoreName, StoreWithOrderInfo } from '@/types/supabase';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import OrderItem from './OrderItem';
 import styles from './styles/SideBarContainer.module.css';
 
 const SideBarContainer = ({ managementData }: { managementData?: StoreWithOrderInfo[] }) => {
-  const [, setTotalPrice] = useState(0);
   const { orderData, orderId, setOrderData } = useManagementStore();
 
   useEffect(() => {
@@ -15,11 +14,6 @@ const SideBarContainer = ({ managementData }: { managementData?: StoreWithOrderI
       const resultOrderData =
         orderStoreFilterData?.length === 0 ? orderNumberFilterData : (orderStoreFilterData as OrderDataWithStoreName[]);
       setOrderData(resultOrderData);
-      let total = 0;
-      for (let i = 0; i < resultOrderData?.length; i++) {
-        total += resultOrderData[i].total_price;
-        setTotalPrice(total);
-      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderId]);

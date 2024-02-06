@@ -1,3 +1,4 @@
+import useManagementClickHandler from '@/hooks/service/management/useManagementClickHandler';
 import useManagementStore from '@/shared/store/management';
 import { StoreWithOrderInfo } from '@/types/supabase';
 import clsx from 'clsx';
@@ -6,11 +7,8 @@ import styles from './styles/ManagementSideBar.module.css';
 import CloseButton from '/public/icons/close.svg';
 
 const ManagementSideBar = ({ managementData }: { managementData?: StoreWithOrderInfo[] }) => {
-  const { isSideBar, orderStatus, tableNumber, setIsSideBar } = useManagementStore();
-
-  const clickCloseSideBarHandler = () => {
-    setIsSideBar();
-  };
+  const { isSideBar, orderStatus, tableNumber } = useManagementStore();
+  const { clickCloseSideBarHandler } = useManagementClickHandler();
 
   return (
     <>
