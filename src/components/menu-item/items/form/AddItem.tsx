@@ -14,7 +14,7 @@ const AddItemButtonComponent = ({ clickItemModalHide, addPending, uploadImagePen
       <button className={styles['basic-btn']} type="button" onClick={clickItemModalHide}>
         {MENU_CONFIRM.CANCEL}
       </button>
-      <button className={styles['update-btn']} type="submit">
+      <button className={styles['update-btn']} disabled={addPending || uploadImagePending} type="submit">
         {addPending || uploadImagePending ? <LoadingSpinner boxSize={2.8} ballSize={0.4} /> : MENU_CONFIRM.CHECK}
       </button>
     </div>
