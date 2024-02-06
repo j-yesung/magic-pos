@@ -1,4 +1,4 @@
-import useFetchOrderCheckList from '@/hooks/order-check-list/useFetchOrderCheckList';
+import useFetchOrderCheckList from '@/hooks/query/order-check-list/useFetchOrderCheckList';
 import { useInView } from 'react-intersection-observer';
 import OrderCheckListItem from './OrderCheckListItem';
 import styles from './styles/OrderCheckListContentList.module.css';

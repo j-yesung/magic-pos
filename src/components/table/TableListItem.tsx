@@ -1,4 +1,4 @@
-import useClickCUDHandler from '@/hooks/table/useClickCUDHandler';
+import useClickCUDHandler from '@/hooks/service/table/useClickCUDHandler';
 import { Tables } from '@/types/supabase';
 import clsx from 'clsx';
 import TableEditModal from './TableEditModal/TableEditModal';

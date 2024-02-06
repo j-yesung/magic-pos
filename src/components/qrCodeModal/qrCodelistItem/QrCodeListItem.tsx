@@ -1,5 +1,5 @@
-import { QUERY_KEY } from '@/hooks/qrCode/useFetchTableInQRCode';
-import useQRDownLoadHandler from '@/hooks/qrCode/useQRDownLoadHandler';
+import { QUERY_KEY } from '@/hooks/query/qr-code/useFetchTableInQRCode';
+import useQRDownLoadHandler from '@/hooks/service/qr-code/useQRDownLoadHandler';
 import useQRCodeStore from '@/shared/store/qrCode';
 import useAuthState from '@/shared/store/session';
 import { StoreTableInQRCode, Tables } from '@/types/supabase';

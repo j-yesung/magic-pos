@@ -1,5 +1,5 @@
-import useQRCodeDownLoad from '@/hooks/qrCode/useQRCodeDownLoad';
-import useQRDownLoadHandler from '@/hooks/qrCode/useQRDownLoadHandler';
+import useQRCodeDownLoad from '@/hooks/service/qr-code/useQRCodeDownLoad';
+import useQRDownLoadHandler from '@/hooks/service/qr-code/useQRDownLoadHandler';
 import useQRCodeStore from '@/shared/store/qrCode';
 import Image from 'next/image';
 import Button from '../common/Button';

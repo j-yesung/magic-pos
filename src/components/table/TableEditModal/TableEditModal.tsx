@@ -1,4 +1,4 @@
-import useClickCUDHandler from '@/hooks/table/useClickCUDHandler';
+import useClickCUDHandler from '@/hooks/service/table/useClickCUDHandler';
 import useTableStore from '@/shared/store/table';
 import { useEffect } from 'react';
 import TableEditModalButtonBox from './TableEditModalButtonBox';

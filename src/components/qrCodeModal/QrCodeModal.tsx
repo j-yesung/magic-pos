@@ -1,5 +1,5 @@
 import useCustomModalHide from '@/hooks/common/useCustomModalHide';
-import useFetchTableInQRCode from '@/hooks/qrCode/useFetchTableInQRCode';
+import useFetchTableInQRCode from '@/hooks/query/qr-code/useFetchTableInQRCode';
 import useAuthState from '@/shared/store/session';
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';

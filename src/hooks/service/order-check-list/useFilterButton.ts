@@ -1,7 +1,7 @@
 import useOrderCheckListStore from '@/shared/store/order-check-list';
 import { Dayjs } from 'dayjs';
 import { useState } from 'react';
-import useFetchOrderCheckList from './useFetchOrderCheckList';
+import useFetchOrderCheckList from '../../query/order-check-list/useFetchOrderCheckList';
 
 const useFilterButton = () => {
   const [isDateButton, setIsDateButton] = useState(0);

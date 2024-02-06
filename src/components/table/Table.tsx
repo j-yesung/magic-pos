@@ -1,4 +1,4 @@
-import useFetchTable from '@/hooks/table/useFetchTable';
+import useFetchTable from '@/hooks/query/table/useFetchTable';
 import useAuthState from '@/shared/store/session';
 import TableContainer from './TableContainer';
 import styles from './styles/Table.module.css';
