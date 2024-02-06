@@ -25,8 +25,8 @@ const OrderLayout = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     setCondition([
-      step < ORDER_STEP.CHOOSE_ORDER_TYPE,
-      step > ORDER_STEP.SUCCESS,
+      step <= ORDER_STEP.CHOOSE_ORDER_TYPE,
+      step >= ORDER_STEP.SUCCESS,
       step === ORDER_STEP.SELECT_MENU && isOnlyTable && !isOptionPage,
       pathname === PAYMENT_FAIL_PATH,
     ]);
