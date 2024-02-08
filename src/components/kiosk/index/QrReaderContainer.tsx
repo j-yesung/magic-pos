@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import { QrScanner } from '@yudiel/react-qr-scanner';
 import useToast from '@/hooks/service/ui/useToast';
 import QrReaderViewBox from '@/components/kiosk/index/QrReaderViewBox';
-import Loading from '@/components/common/Loading';
 
 const QrReaderContainer = () => {
   const router = useRouter();
@@ -14,13 +13,14 @@ const QrReaderContainer = () => {
 
   useEffect(() => {
     setIsPageLoading(false);
+    setIsScanning(true);
   }, []);
 
   return (
     <>
       {!isPageLoading && (
         <div className={styles.container}>
-          {isScanning ? (
+          {
             <QrScanner
               onResult={result => {
                 if (result) {
@@ -44,12 +44,11 @@ const QrReaderContainer = () => {
                   autoClose: 3000,
                 });
               }}
+              stopDecoding={!isScanning}
               viewFinderBorder={120}
               constraints={{ facingMode: 'environment' }}
             />
-          ) : (
-            <Loading />
-          )}
+          }
         </div>
       )}
     </>
