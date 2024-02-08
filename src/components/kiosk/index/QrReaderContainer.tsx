@@ -20,7 +20,7 @@ const QrReaderContainer = () => {
     <>
       {!isPageLoading && (
         <div className={styles.container}>
-          {isScanning && (
+          {
             <QrScanner
               onResult={result => {
                 if (result) {
@@ -44,10 +44,11 @@ const QrReaderContainer = () => {
                   autoClose: 3000,
                 });
               }}
+              stopDecoding={!isScanning}
               viewFinderBorder={120}
               constraints={{ facingMode: 'environment' }}
             />
-          )}
+          }
         </div>
       )}
     </>
