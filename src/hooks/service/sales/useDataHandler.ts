@@ -9,7 +9,8 @@ import { setIsShow } from '@/shared/store/sales/salesToggle';
 import useAuthState from '@/shared/store/session';
 import { DateFormatType, EnOrderType, FormatType } from '@/types/sales';
 import { Tables } from '@/types/supabase';
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
+import { MouseEvent } from 'react';
 
 export const useDataHandler = () => {
   const storeId = useAuthState(state => state.storeId);
@@ -32,6 +33,7 @@ export const useDataHandler = () => {
         dateType: 'day',
       });
     }
+
     setCalendarCurrentDate(day);
     setSelectedDate(day);
   };
@@ -46,9 +48,19 @@ export const useDataHandler = () => {
    * @param day 날짜가 들어오면 그 날짜 기준으로 1주일치 매출을 가져옵니다.
    * @returns salesStore의 state값 변경으로 void 입니다.
    */
-  const clickShowDataOfDateHandler = (day: Dayjs) => async () => {
-    const { sales, dateType, formatType } = await getDaySales(day.hour(0).subtract(9, 'hour'), storeId!);
-    handleSalesData(sales, dateType, formatType!, day);
+  const clickShowDataOfDateHandler = async (event: MouseEvent<HTMLDivElement>) => {
+    const targetDiv = (event.target as Element).closest('div');
+    if (targetDiv) {
+      const spanElement = targetDiv.querySelector('span');
+      if (spanElement) {
+        // dayjs에 Number로 바꿔서 인자값으로 들어가야 정확한 날짜가 나옵니다.
+        const day = dayjs(Number(spanElement.dataset.dayjs));
+        if (day.isAfter(today, 'day')) return;
+        const { sales, dateType, formatType } = await getDaySales(day.hour(0).subtract(9, 'hour'), storeId!);
+        handleSalesData(sales, dateType, formatType!, day);
+      }
+    }
+
     setIsShow(false);
   };
 

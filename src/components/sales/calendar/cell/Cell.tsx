@@ -1,4 +1,3 @@
-import { useDataHandler } from '@/hooks/service/sales/useDataHandler';
 import { getMonthSales } from '@/server/api/supabase/sales';
 import { groupByKey } from '@/shared/helper';
 import useCalendarState from '@/shared/store/sales/salesCalendar';
@@ -17,11 +16,11 @@ import { formatToCalendarData, sortMinMaxData } from '../../calendarUtility/form
 
 import useFilterButton from '@/hooks/service/order-check-list/useFilterButton';
 import { CalendarCellType } from '@/types/calendar';
-import { BIG_MODE, CALENDAR_PAGE, STATUS_PAGE } from '../calendarType/calendarType';
+import { BIG_MODE, CALENDAR_PAGE } from '../calendarType/calendarType';
 import CellItem from '../cellItem/CellItem';
 import styles from './styles/cell.module.css';
 
-const Cell = ({ mode, page }: CalendarCellType) => {
+const Cell = ({ mode, page, clickShowDataOfDateHandler }: CalendarCellType) => {
   /**
    * 캘린더에 사용되는 state입니다 건들지 마십쇼
    */
@@ -30,14 +29,13 @@ const Cell = ({ mode, page }: CalendarCellType) => {
   const startDay = currentDate.startOf('month').startOf('week');
   // monthStart가 속한 마지막 주
   const endDay = currentDate.endOf('month').endOf('week');
-
   /**
    * Sales Page에서 사용하는 state
    */
   const storeId = useAuthState(state => state.storeId);
   const holidays = useHolidayState(state => state.holidays);
   const calendarBindingData = useSalesDataState(state => state.calendarBindingData);
-  const { clickShowDataOfDateHandler } = useDataHandler();
+  // const { clickShowDataOfDateHandler } = useDataHandler();
   const holiday = holidays[currentDate.format('YYYY')];
   /**
    * 다른 페이지에서 호출 되는 공간 입니다. 아래에서 hook으로 써주면 아리가또우
@@ -88,7 +86,6 @@ const Cell = ({ mode, page }: CalendarCellType) => {
           // ... spreadOperator
           // 아래 조건부 함수는 Sales page에서 사용하는 props 입니다.
           {...(page === CALENDAR_PAGE && { getMinMaxSalesType: getMinMaxSalesType })}
-          {...(page === STATUS_PAGE && { clickShowDataOfDateHandler: clickShowDataOfDateHandler })}
           holiday={holidayDate}
           /** 페이지가 주문내역 확인이면 아래와 같이 하면 됩니다.
            *{...((page===ORDER && {clickHandler: clickHandler}))}
@@ -106,7 +103,11 @@ const Cell = ({ mode, page }: CalendarCellType) => {
     );
     days = [];
   }
-  return <div className={styles.calendarBody}>{row}</div>;
+  return (
+    <div className={styles.calendarBody} onClick={clickShowDataOfDateHandler}>
+      {row}
+    </div>
+  );
 };
 
 export default Cell;

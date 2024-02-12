@@ -13,6 +13,7 @@ interface CalendarType {
 interface CalendarCellType {
   mode: CalendarModeType;
   page: CalendarPageType;
+  clickShowDataOfDateHandler?: (e: MouseEvent<HTMLDivElement>) => Promise<void>;
 }
 
 /**
@@ -24,7 +25,6 @@ interface CellItemProps {
   day: Dayjs;
   salesData?: CalendarDataType;
   getMinMaxSalesType?: (param: CalendarDataType) => GetMinMaxSalesReturnType;
-  clickShowDataOfDateHandler?: (day: Dayjs) => () => Promise<void>;
   holiday: HolidayType[];
   mode: CalendarModeType;
   page: CalendarPageType;
