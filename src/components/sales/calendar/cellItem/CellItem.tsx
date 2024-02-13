@@ -16,6 +16,7 @@ import SalesModal from '../../modal/SalesModal';
 
 import { CellItemProps } from '@/types/calendar';
 import clsx from 'clsx';
+import dayjs from 'dayjs';
 import { BIG_MODE, CALENDAR_PAGE, MINI_MODE, STATUS_PAGE } from '../calendarType/calendarType';
 import styles from './styles/cellItem.module.css';
 
@@ -25,7 +26,6 @@ const CellItem: Cell = ({
   day,
   salesData,
   getMinMaxSalesType,
-  clickShowDataOfDateHandler,
   holiday,
   mode,
   page,
@@ -37,7 +37,7 @@ const CellItem: Cell = ({
   const SALES_HAVE = 'HAVE';
   const HOLIDAY = 'HOLIDAY';
   const currentDate = useCalendarState(staet => staet.currentDate);
-  const { selectedDate, today } = useDayState();
+  const selectedDate = useDayState(state => state.selectedDate);
 
   const { MagicModal } = useModal();
 
@@ -106,7 +106,7 @@ const CellItem: Cell = ({
       },
     },
   });
-
+  console.log(dayjs(day).format('YY MM DD'));
   const formatDate = day.format('YY MM D').substring(6);
   return (
     <>
@@ -123,9 +123,6 @@ const CellItem: Cell = ({
 
             // [styles.페이지가 주문내역이면 사용하는 style] : PAGE === ORDER_PAGE
           })}
-          {...(((page === STATUS_PAGE && day.isSame(today, 'D')) || day.isBefore(today, 'D')) && {
-            onClick: clickShowDataOfDateHandler?.(day),
-          })}
           /** 페이지가 주문내역 확인이면 아래와 같이 하면 됩니다.
            *{...((page===ORDER && {onClick: clickHandler}))}
            */
@@ -138,6 +135,7 @@ const CellItem: Cell = ({
               dayType: getStatusDayType(day),
               seletedDayType: day.isSame(selectedDate, 'day') ? SELECTED_DAY : null,
             })}
+            data-dayjs={day}
           >
             {formatDate}
           </span>

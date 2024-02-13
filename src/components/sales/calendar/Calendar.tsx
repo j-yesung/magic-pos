@@ -1,7 +1,8 @@
+import { useDataHandler } from '@/hooks/service/sales/useDataHandler';
 import { CalendarType } from '@/types/calendar';
 import clsx from 'clsx';
 import React from 'react';
-import { BIG_MODE, MINI_MODE } from './calendarType/calendarType';
+import { BIG_MODE, MINI_MODE, STATUS_PAGE } from './calendarType/calendarType';
 import Cell from './cell/Cell';
 import Days from './days/Days';
 import Header from './header/Header';
@@ -16,6 +17,7 @@ import styles from './styles/calendar.module.css';
  * @returns
  */
 const Calendar = ({ children, mode, page }: CalendarType) => {
+  const { clickShowDataOfDateHandler } = useDataHandler();
   return (
     <div
       className={clsx({
@@ -38,7 +40,13 @@ const Calendar = ({ children, mode, page }: CalendarType) => {
         })}
       >
         <Days mode={mode} />
-        <Cell mode={mode} page={page} />
+        <Cell
+          mode={mode}
+          page={page}
+          {...(page === STATUS_PAGE && {
+            clickShowDataOfDateHandler: clickShowDataOfDateHandler,
+          })}
+        />
       </div>
     </div>
   );
