@@ -16,7 +16,6 @@ import SalesModal from '../../modal/SalesModal';
 
 import { CellItemProps } from '@/types/calendar';
 import clsx from 'clsx';
-import dayjs from 'dayjs';
 import { BIG_MODE, CALENDAR_PAGE, MINI_MODE, STATUS_PAGE } from '../calendarType/calendarType';
 import styles from './styles/cellItem.module.css';
 
@@ -106,7 +105,6 @@ const CellItem: Cell = ({
       },
     },
   });
-  console.log(dayjs(day).format('YY MM DD'));
   const formatDate = day.format('YY MM D').substring(6);
   return (
     <>
