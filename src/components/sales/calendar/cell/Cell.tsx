@@ -15,12 +15,14 @@ import { FORMAT_CELL_DATE_TYPE, getMinMaxSalesType } from '../../calendarUtility
 import { formatToCalendarData, sortMinMaxData } from '../../calendarUtility/formatData';
 
 import useFilterButton from '@/hooks/service/order-check-list/useFilterButton';
+import { useModal } from '@/hooks/service/ui/useModal';
 import { CalendarCellType } from '@/types/calendar';
-import { BIG_MODE, CALENDAR_PAGE } from '../calendarType/calendarType';
+import SalesModal from '../../modal/SalesModal';
+import { BIG_MODE, CALENDAR_PAGE, STATUS_PAGE } from '../calendarType/calendarType';
 import CellItem from '../cellItem/CellItem';
 import styles from './styles/cell.module.css';
 
-const Cell = ({ mode, page, clickShowDataOfDateHandler }: CalendarCellType) => {
+const Cell = ({ mode, page, clickShowDataOfDateHandler, clickShowSalesModal }: CalendarCellType) => {
   /**
    * 캘린더에 사용되는 state입니다 건들지 마십쇼
    */
@@ -35,7 +37,8 @@ const Cell = ({ mode, page, clickShowDataOfDateHandler }: CalendarCellType) => {
   const storeId = useAuthState(state => state.storeId);
   const holidays = useHolidayState(state => state.holidays);
   const calendarBindingData = useSalesDataState(state => state.calendarBindingData);
-  // const { clickShowDataOfDateHandler } = useDataHandler();
+  const { MagicModal } = useModal();
+
   const holiday = holidays[currentDate.format('YYYY')];
   /**
    * 다른 페이지에서 호출 되는 공간 입니다. 아래에서 hook으로 써주면 아리가또우
@@ -79,6 +82,7 @@ const Cell = ({ mode, page, clickShowDataOfDateHandler }: CalendarCellType) => {
       days.push(
         <CellItem
           key={itemKey}
+          id={itemKey}
           page={page}
           mode={mode}
           day={day}
@@ -104,7 +108,17 @@ const Cell = ({ mode, page, clickShowDataOfDateHandler }: CalendarCellType) => {
     days = [];
   }
   return (
-    <div className={styles.calendarBody} onClick={clickShowDataOfDateHandler}>
+    <div
+      className={styles.calendarBody}
+      {...(page === STATUS_PAGE && { onClick: clickShowDataOfDateHandler })}
+      {...(page === CALENDAR_PAGE && {
+        onClick: e => {
+          const data = clickShowSalesModal?.(e);
+          if (!data) return;
+          MagicModal.fire(<SalesModal specificData={data} />);
+        },
+      })}
+    >
       {row}
     </div>
   );

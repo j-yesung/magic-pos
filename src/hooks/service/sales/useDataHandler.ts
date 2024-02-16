@@ -3,6 +3,7 @@ import { formattedDatabyExcel } from '@/components/sales/csv/utility/formatExcel
 import { getAllSales, getDaySales, getMonthsSales, getWeekSales } from '@/server/api/supabase/sales';
 import { setCalendarCurrentDate } from '@/shared/store/sales/salesCalendar';
 import { setChartData } from '@/shared/store/sales/salesChart';
+import useSalesDataState from '@/shared/store/sales/salesData';
 import useDayState, { setSelectedDate } from '@/shared/store/sales/salesDay';
 import { setRecordData } from '@/shared/store/sales/salesRecord';
 import { setIsShow } from '@/shared/store/sales/salesToggle';
@@ -15,6 +16,7 @@ import { MouseEvent } from 'react';
 export const useDataHandler = () => {
   const storeId = useAuthState(state => state.storeId);
   const { utcStandardDate, today } = useDayState();
+  const calendarBindingData = useSalesDataState(state => state.calendarBindingData);
 
   const handleSalesData = (
     salesData: Tables<'sales'>[],
@@ -48,8 +50,8 @@ export const useDataHandler = () => {
    * @param day 날짜가 들어오면 그 날짜 기준으로 1주일치 매출을 가져옵니다.
    * @returns salesStore의 state값 변경으로 void 입니다.
    */
-  const clickShowDataOfDateHandler = async (event: MouseEvent<HTMLDivElement>) => {
-    const targetDiv = (event.target as Element).closest('div');
+  const clickShowDataOfDateHandler = async (e: MouseEvent<HTMLDivElement>) => {
+    const targetDiv = (e.target as Element).closest('div');
     if (targetDiv) {
       const spanElement = targetDiv.querySelector('span');
       if (spanElement) {
@@ -89,11 +91,22 @@ export const useDataHandler = () => {
     }
   };
 
+  const clickShowSalesModal = (e: MouseEvent<HTMLDivElement>) => {
+    const targetDiv = (e.target as Element).closest('div');
+
+    if (!targetDiv) return null;
+    const targeDate = targetDiv.id;
+    const salesData = calendarBindingData.filter(target => target.date === targeDate);
+    if (!salesData) return null;
+    return salesData[0];
+  };
+
   return {
     clickMoveTodayHandler,
     clickShowDataOfDateHandler,
     clickWeeksChartHandler,
     clickMonthsChartHandler,
     clickGetAllDataHandler,
+    clickShowSalesModal,
   };
 };

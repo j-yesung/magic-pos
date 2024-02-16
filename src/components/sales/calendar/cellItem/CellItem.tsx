@@ -1,10 +1,8 @@
-import { useModal } from '@/hooks/service/ui/useModal';
 import { convertNumberToWon } from '@/shared/helper';
 import useCalendarState from '@/shared/store/sales/salesCalendar';
 import useDayState from '@/shared/store/sales/salesDay';
 import { cva } from 'class-variance-authority';
 import {
-  FORMAT_CELL_DATE_TYPE,
   getCalendarDateType,
   getCalendarMonthType,
   getStatusCalendarType,
@@ -12,7 +10,6 @@ import {
   getStatusDayType,
   getStatusMonthType,
 } from '../../calendarUtility/cellItemType';
-import SalesModal from '../../modal/SalesModal';
 
 import { CellItemProps } from '@/types/calendar';
 import clsx from 'clsx';
@@ -30,6 +27,7 @@ const CellItem: Cell = ({
   page,
   clickStartTimeHandler,
   clickEndTimeHandler,
+  id,
 }) => {
   const SELECTED_DAY = 'SELECTEDTYPE';
   const SALES_NONE = 'NONE';
@@ -37,8 +35,6 @@ const CellItem: Cell = ({
   const HOLIDAY = 'HOLIDAY';
   const currentDate = useCalendarState(staet => staet.currentDate);
   const selectedDate = useDayState(state => state.selectedDate);
-
-  const { MagicModal } = useModal();
 
   const statusVariant = cva([styles.statusCalendarBase], {
     variants: {
@@ -143,6 +139,7 @@ const CellItem: Cell = ({
       {/* sales/Calendar일 때 보여줄 날 css */}
       {mode === BIG_MODE && (
         <div
+          id={id}
           className={clsx(
             page === CALENDAR_PAGE &&
               calendarVariant({
@@ -151,11 +148,6 @@ const CellItem: Cell = ({
                 salesType: salesData ? SALES_HAVE : SALES_NONE,
               }),
           )}
-          {...(day.format(FORMAT_CELL_DATE_TYPE) === salesData?.date && {
-            onClick: () => {
-              MagicModal.fire(<SalesModal specificData={salesData!} />);
-            },
-          })}
         >
           <span
             className={salesVariant({
