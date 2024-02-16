@@ -1,4 +1,5 @@
 import { Dayjs } from 'dayjs';
+import { CalendarDataType } from './sales';
 
 type CalendarModeType = 'MINI_MODE' | 'BIG_MODE';
 type CalendarPageType = 'STATUS_PAGE' | 'CALENDAR_PAGE' | 'ORDER_START_PAGE' | 'ORDER_END_PAGE';
@@ -14,6 +15,7 @@ interface CalendarCellType {
   mode: CalendarModeType;
   page: CalendarPageType;
   clickShowDataOfDateHandler?: (e: MouseEvent<HTMLDivElement>) => Promise<void>;
+  clickShowSalesModal?: (e: MouseEvent<HTMLDivElement>) => CalendarDataType | null;
 }
 
 /**
@@ -28,6 +30,7 @@ interface CellItemProps {
   holiday: HolidayType[];
   mode: CalendarModeType;
   page: CalendarPageType;
+  id: string;
   // order-check-list 에서 사용하는 함수
   clickStartTimeHandler?: (day: Dayjs) => () => void;
   clickEndTimeHandler?: (day: Dayjs) => () => void;
