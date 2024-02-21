@@ -34,21 +34,22 @@ export const submitDetectedOrder = (
   ) => Promise<QueryObserverResult<StoreWithOrderInfo[] | undefined, Error>>,
   toast: (content: string, option: Omit<ToastTypeOption, 'id' | 'content' | 'animation'>) => void,
   soundButtonRef: RefObject<HTMLDivElement>,
+  synth: SpeechSynthesis,
 ) => {
-  const orderChannel = supabase
-    .channel('order_store')
+  supabase
+    .channel('order')
     .on(
       'postgres_changes',
       { event: 'INSERT', schema: 'public', table: 'order_store', filter: `store_id=eq.${storeId}` },
       payload => {
-        payloadFunction(payload.new.order_number, toast, refetch, soundButtonRef);
+        payloadFunction(payload.new.order_number, toast, refetch, soundButtonRef, synth);
       },
     )
     .on(
       'postgres_changes',
       { event: 'INSERT', schema: 'public', table: 'order_number', filter: `store_id=eq.${storeId}` },
       payload => {
-        payloadFunction(payload.new.order_number, toast, refetch, soundButtonRef);
+        payloadFunction(payload.new.order_number, toast, refetch, soundButtonRef, synth);
       },
     )
     .subscribe();
@@ -62,6 +63,7 @@ const payloadFunction = (
     options?: RefetchOptions | undefined,
   ) => Promise<QueryObserverResult<StoreWithOrderInfo[] | undefined, Error>>,
   soundButtonRef: RefObject<HTMLDivElement>,
+  synth: SpeechSynthesis,
 ) => {
   // toast모달창
   toast(`주문번호${orderNumber}번이 요청되었습니다.`, {
@@ -77,19 +79,15 @@ const payloadFunction = (
   // 효과음
   soundButtonRef?.current?.click();
   // TTS 음성알림
-  const timer = setTimeout(() => {
-    const synth = window.speechSynthesis;
-    const text = `주문번호 ${orderNumber}번 주문이 요청되었습니다`;
-    const utterThis = new SpeechSynthesisUtterance(text);
-    utterThis.lang = 'ko-KR';
-    utterThis.rate = 1.1;
-    const voices = synth.getVoices();
-    utterThis.voice = voices.filter(voice => {
-      return voice.voiceURI === 'Google 한국의';
-    })[0];
-    synth.speak(utterThis);
-    clearTimeout(timer);
-  }, 900);
+  const voices = synth.getVoices();
+  const text = `주문번호 ${orderNumber}번 주문이 요청되었습니다`;
+  const utterThis = new SpeechSynthesisUtterance(text);
+  utterThis.voice = voices.filter(voice => {
+    return voice.voiceURI === 'Google 한국의';
+  })[0];
+  utterThis.lang = 'ko-KR';
+  utterThis.rate = 1.1;
+  synth.speak(utterThis);
 
   // 주문현황 refetch
   refetch();

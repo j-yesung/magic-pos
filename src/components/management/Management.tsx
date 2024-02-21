@@ -18,8 +18,8 @@ const Management = () => {
   typeof window !== 'undefined' && Notification.requestPermission();
 
   useEffect(() => {
-    submitDetectedOrder(storeId!, refetch, toast, soundButtonRef);
-
+    const synth = window.speechSynthesis;
+    submitDetectedOrder(storeId!, refetch, toast, soundButtonRef, synth);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
