@@ -70,10 +70,14 @@ const payloadFunction = (
 
   // TTS 음성알림
   const synth = window.speechSynthesis;
-  const text = `주문번호 ${orderNumber} .번 주문이 요청되었습니다`;
+  const text = `주문번호 22번 주문이 요청되었습니다`;
   const utterThis = new SpeechSynthesisUtterance(text);
-  utterThis.lang = 'ko-KR';
-  utterThis.rate = 1.6;
+  // utterThis.lang = 'ko-KR';
+  utterThis.rate = 1.1;
+  const voices = synth.getVoices();
+  utterThis.voice = voices.filter(voice => {
+    return voice.voiceURI === 'Google 한국의';
+  })[0];
   synth.speak(utterThis);
 
   // 주문현황 refetch
