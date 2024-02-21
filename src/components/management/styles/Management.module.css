@@ -1,5 +1,13 @@
 .managementWrapper {
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
+.MP3-button {
+  position: absolute;
+  top: -1000000000000000000px;
+  left: -1000000000000000000px;
+  width: 10px;
+  height: 10px;
+}

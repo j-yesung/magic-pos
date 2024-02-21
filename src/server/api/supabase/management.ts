@@ -3,6 +3,7 @@ import { supabase } from '@/shared/supabase';
 import { OrderConfirmType, ToastTypeOption } from '@/types/common';
 import { StoreWithOrderInfo } from '@/types/supabase';
 import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
+import { RefObject } from 'react';
 
 export const fetchManagement = async (id?: string) => {
   if (id) {
@@ -32,21 +33,22 @@ export const submitDetectedOrder = (
     options?: RefetchOptions | undefined,
   ) => Promise<QueryObserverResult<StoreWithOrderInfo[] | undefined, Error>>,
   toast: (content: string, option: Omit<ToastTypeOption, 'id' | 'content' | 'animation'>) => void,
+  soundButtonRef: RefObject<HTMLDivElement>,
 ) => {
-  supabase
+  const orderChannel = supabase
     .channel('order_store')
     .on(
       'postgres_changes',
       { event: 'INSERT', schema: 'public', table: 'order_store', filter: `store_id=eq.${storeId}` },
       payload => {
-        payloadFunction(payload.new.order_number, toast, refetch);
+        payloadFunction(payload.new.order_number, toast, refetch, soundButtonRef);
       },
     )
     .on(
       'postgres_changes',
       { event: 'INSERT', schema: 'public', table: 'order_number', filter: `store_id=eq.${storeId}` },
       payload => {
-        payloadFunction(payload.new.order_number, toast, refetch);
+        payloadFunction(payload.new.order_number, toast, refetch, soundButtonRef);
       },
     )
     .subscribe();
@@ -59,6 +61,7 @@ const payloadFunction = (
   refetch: (
     options?: RefetchOptions | undefined,
   ) => Promise<QueryObserverResult<StoreWithOrderInfo[] | undefined, Error>>,
+  soundButtonRef: RefObject<HTMLDivElement>,
 ) => {
   // toast모달창
   toast(`주문번호${orderNumber}번이 요청되었습니다.`, {
@@ -68,17 +71,25 @@ const payloadFunction = (
     autoClose: 5000,
   });
 
+  /**
+   * 효과음이 울린다음 TTS알림이 울림
+   */
+  // 효과음
+  soundButtonRef?.current?.click();
   // TTS 음성알림
-  const synth = window.speechSynthesis;
-  const text = `주문번호 22번 주문이 요청되었습니다`;
-  const utterThis = new SpeechSynthesisUtterance(text);
-  // utterThis.lang = 'ko-KR';
-  utterThis.rate = 1.1;
-  const voices = synth.getVoices();
-  utterThis.voice = voices.filter(voice => {
-    return voice.voiceURI === 'Google 한국의';
-  })[0];
-  synth.speak(utterThis);
+  const timer = setTimeout(() => {
+    const synth = window.speechSynthesis;
+    const text = `주문번호 ${orderNumber}번 주문이 요청되었습니다`;
+    const utterThis = new SpeechSynthesisUtterance(text);
+    utterThis.lang = 'ko-KR';
+    utterThis.rate = 1.1;
+    const voices = synth.getVoices();
+    utterThis.voice = voices.filter(voice => {
+      return voice.voiceURI === 'Google 한국의';
+    })[0];
+    synth.speak(utterThis);
+    clearTimeout(timer);
+  }, 900);
 
   // 주문현황 refetch
   refetch();
