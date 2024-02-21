@@ -83,8 +83,8 @@ const payloadFunction = (
   const text = `주문번호 ${orderNumber}번 주문이 요청되었습니다`;
   const utterThis = new SpeechSynthesisUtterance(text);
   utterThis.voice = voices.filter(voice => {
-    return voice.voiceURI === 'Google 한국의';
-  })[0];
+    return voice.lang.includes('ko');
+  })[1];
   utterThis.lang = 'ko-KR';
   utterThis.rate = 1.1;
   synth.speak(utterThis);
