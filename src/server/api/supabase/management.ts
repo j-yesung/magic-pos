@@ -3,6 +3,7 @@ import { supabase } from '@/shared/supabase';
 import { OrderConfirmType, ToastTypeOption } from '@/types/common';
 import { StoreWithOrderInfo } from '@/types/supabase';
 import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
+import { RefObject } from 'react';
 
 export const fetchManagement = async (id?: string) => {
   if (id) {
@@ -32,21 +33,23 @@ export const submitDetectedOrder = (
     options?: RefetchOptions | undefined,
   ) => Promise<QueryObserverResult<StoreWithOrderInfo[] | undefined, Error>>,
   toast: (content: string, option: Omit<ToastTypeOption, 'id' | 'content' | 'animation'>) => void,
+  soundButtonRef: RefObject<HTMLDivElement>,
+  synth: SpeechSynthesis,
 ) => {
   supabase
-    .channel('order_store')
+    .channel('order')
     .on(
       'postgres_changes',
       { event: 'INSERT', schema: 'public', table: 'order_store', filter: `store_id=eq.${storeId}` },
       payload => {
-        payloadFunction(payload.new.order_number, toast, refetch);
+        payloadFunction(payload.new.order_number, toast, refetch, soundButtonRef, synth);
       },
     )
     .on(
       'postgres_changes',
       { event: 'INSERT', schema: 'public', table: 'order_number', filter: `store_id=eq.${storeId}` },
       payload => {
-        payloadFunction(payload.new.order_number, toast, refetch);
+        payloadFunction(payload.new.order_number, toast, refetch, soundButtonRef, synth);
       },
     )
     .subscribe();
@@ -59,6 +62,8 @@ const payloadFunction = (
   refetch: (
     options?: RefetchOptions | undefined,
   ) => Promise<QueryObserverResult<StoreWithOrderInfo[] | undefined, Error>>,
+  soundButtonRef: RefObject<HTMLDivElement>,
+  synth: SpeechSynthesis,
 ) => {
   // toast모달창
   toast(`주문번호${orderNumber}번이 요청되었습니다.`, {
@@ -68,12 +73,20 @@ const payloadFunction = (
     autoClose: 5000,
   });
 
+  /**
+   * 효과음이 울린다음 TTS알림이 울림
+   */
+  // 효과음
+  soundButtonRef?.current?.click();
   // TTS 음성알림
-  const synth = window.speechSynthesis;
-  const text = `주문번호 ${orderNumber} .번 주문이 요청되었습니다`;
+  const voices = synth.getVoices();
+  const text = `주문번호 ${orderNumber}번 주문이 요청되었습니다`;
   const utterThis = new SpeechSynthesisUtterance(text);
+  utterThis.voice = voices.filter(voice => {
+    return voice.lang.includes('ko');
+  })[1];
   utterThis.lang = 'ko-KR';
-  utterThis.rate = 1.6;
+  utterThis.rate = 1.1;
   synth.speak(utterThis);
 
   // 주문현황 refetch

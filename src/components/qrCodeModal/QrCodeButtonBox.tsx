@@ -1,4 +1,3 @@
-import useQRCodeDownLoad from '@/hooks/service/qr-code/useQRCodeDownLoad';
 import useQRDownLoadHandler from '@/hooks/service/qr-code/useQRDownLoadHandler';
 import useQRCodeStore from '@/shared/store/qrCode';
 import Image from 'next/image';
@@ -8,8 +7,7 @@ import loading from '/public/images/loadingSpinner.gif';
 
 const QrCodeButtonBox = () => {
   const { qrData } = useQRCodeStore();
-  const { AllIsPending } = useQRCodeDownLoad();
-  const { clickAllQrDownLoadHandler } = useQRDownLoadHandler();
+  const { clickAllQrDownLoadHandler, AllIsPending } = useQRDownLoadHandler();
 
   return (
     <div className={styles.qrCodeButtonBox}>

@@ -1,7 +1,7 @@
 import useFilterButton from '@/hooks/service/order-check-list/useFilterButton';
 import useOrderCheckListStore from '@/shared/store/order-check-list';
 import clsx from 'clsx';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { IoCalendarClearOutline } from 'react-icons/io5';
 import Button from '../common/Button';
 import Calendar from '../sales/calendar/Calendar';
@@ -11,8 +11,6 @@ import styles from './styles/orderCheckListFilterButtonBox.module.css';
 const OrderCheckListFilterButtonBox = () => {
   const { startDate, endDate, setEndTime, isShowStartCalender, isShowEndCalender } = useOrderCheckListStore();
   const { isDateButton, clickFilterButtonHandler, clickIsShowCalenderHandler } = useFilterButton();
-  const [isStartCalender, setIsStartCalender] = useState(false);
-  const [isEndCalender, setIsEndCalender] = useState(false);
 
   useEffect(() => {
     if (startDate > endDate) {
