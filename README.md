@@ -1,5 +1,16 @@
 # Magic POS
-운영: [magic-pos.com](http://magic-pos.com)
+**- 운영 주소 :** [magic-pos.com](http://magic-pos.com)
+
+**- 프로젝트의 사용된 기술 :**<br>
+  - [FrontEnd] Next.js, React, TypeScript, JavaScript, Zustand, React-Query
+  - [BackEnd] (BasS) Supabase
+
+**- 테스트 ID / PW <br>**
+  - ID: alcohol@test.com
+  - PW: testtest1!
+
+#### - QR 코드 이미지
+![qr1](https://github.com/j-yesung/magic-pos/assets/113418610/f674dd43-32d7-4c33-851b-4b41b7af4510)
 
 ## 프로젝트 소개
 ![image](https://github.com/j-yesung/magic-pos/assets/113418610/6fb24bee-3c16-41bd-9903-173b7ef01d9d)
