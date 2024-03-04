@@ -1,5 +1,6 @@
 # Magic POS
-**- 운영 주소 :** [magic-pos.com](http://magic-pos.com)
+- POS 관리자 주소 : [magic-pos.com](http://magic-pos.com)
+- 모바일 키오스크 주소 : [magic-pos.com/kiosk](http://magic-pos.com/kiosk)
 
 **- 프로젝트의 사용된 기술 :**<br>
   - [FrontEnd] Next.js, React, TypeScript, JavaScript, Zustand, React-Query
@@ -9,7 +10,14 @@
   - ID: alcohol@test.com
   - PW: testtest1!
 
-#### - QR 코드 이미지
+### 메뉴 주문 및 확인 테스트 가이드
+1. 테스트 아이디로 로그인 후 POS 관리자 페이지 접속 (메인 페이지에 `시작하기` 버튼 클릭)
+2. 모바일로 키오스크 사이트 접속 후 하단 `QR 코드 이미지` 스캔하여 메뉴 주문
+3. 관리자 페이지 POS 운영모드에서 주문된 내역 클릭 후 `주문완료하기` 버튼 클릭
+4. 모바일 푸시 알림 확인
+
+
+### QR 코드 이미지
 ![qr1](https://github.com/j-yesung/magic-pos/assets/113418610/f674dd43-32d7-4c33-851b-4b41b7af4510)
 
 ## 프로젝트 소개
